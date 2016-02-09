@@ -29,7 +29,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	    				<h1><?php echo $lang['194']; ?></h1>
 	    				<h2><?php echo $lang['195']; ?></h2>
 	    				<h4>
-	    					<?php echo $lang['196']; ?><a href="<?php echo $link['help']; ?>"><?php echo $lang['198']; ?></a>
+	    					<?php echo $lang['196']; ?><a href="<?php echo $link['help']; ?>">
+	    					<br/>
+	    					<br/>
+	    					<br/>
+	    					<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>" class="btn btn_green"><?php echo $lang['198']; ?></a>
 	    				</h4>
 	    			</div>
 	    	</div>

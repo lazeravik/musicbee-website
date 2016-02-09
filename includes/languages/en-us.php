@@ -116,29 +116,29 @@ $lang['177'] = "Get MusicBee and enhance your music experience";
 $lang['178'] = "Submit";
 
 /*footer*/
-$lang['179'] = "Get the latest MusicBee";
-$lang['180'] = "Get";
-$lang['181'] = "Version:";
-$lang['182'] = "Released on";
-$lang['183'] = "More";
-$lang['184'] = "Subscribe to our RSS feed";
-$lang['185'] = "<i class=\"fa fa-code\"></i>&nbsp;&nbsp;Developer API";
-$lang['186'] = "Want to get notified of new releases?";
-$lang['187'] = "<i class=\"fa fa-bug\"></i>&nbsp;&nbsp;Report a bug";
-$lang['188'] = "Add-ons for MusicBee";
-$lang['189'] = "Support MusicBee with a voluntary donation";
-$lang['190'] = "&nbsp;Donate with Paypal";
-$lang['191'] = "<i class=\"fa fa-heartbeat\"></i>&nbsp;&nbsp;Add a new feature to the Wishlist";
-$lang['192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
-$lang['193'] = "Copyright &copy; Steven Mayall 2008-".date('Y').", All Rights Reserved";
-$lang['231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press";
+$lang['footer_179'] = "Get the latest MusicBee";
+$lang['footer_180'] = "Get";
+$lang['footer_181'] = "Version:";
+$lang['footer_182'] = "Released on";
+$lang['footer_183'] = "More";
+$lang['footer_184'] = "Subscribe to our RSS feed";
+$lang['footer_185'] = "<i class=\"fa fa-code\"></i>&nbsp;&nbsp;Developer API";
+$lang['footer_186'] = "Want to get notified of new releases?";
+$lang['footer_187'] = "<i class=\"fa fa-bug\"></i>&nbsp;&nbsp;Report a bug";
+$lang['footer_188'] = "Add-ons for MusicBee";
+$lang['footer_189'] = "Support MusicBee with a voluntary donation";
+$lang['footer_190'] = "&nbsp;Donate with Paypal";
+$lang['footer_191'] = "<i class=\"fa fa-heartbeat\"></i>&nbsp;&nbsp;Add a new feature to the Wishlist";
+$lang['footer_192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
+$lang['footer_193'] = "Copyright &copy; Steven Mayall 2008-".date('Y').", All Rights Reserved";
+$lang['footer_231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press & Media";
 
 /*404 page */
 $lang['194'] = "404";
 $lang['195'] = "Hey there! Are you lost?";
 $lang['196'] = "The requested page does not exist. Make sure you typed the URL correctly";
 $lang['197'] = "404 - Page not found!";
-$lang['198'] = "<br/><br/><br/><a href=\"http://".$_SERVER['HTTP_HOST']."\" class=\"btn btn_green\">Go to home &nbsp;<i class=\"fa fa-arrow-right\"></i></a>";
+$lang['198'] = "Go to home &nbsp;<i class=\"fa fa-arrow-right\"></i>";
 
 
 
