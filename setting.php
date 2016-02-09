@@ -63,6 +63,7 @@
 
 	/* Define permissions and controls */
 	define('IMGUR_UPLOAD_ON', 'true');
+	define('MEDIAFIRE_UPLOAD_ON', 'true');
 
 
 	/*Client IDs and Secrets*/
