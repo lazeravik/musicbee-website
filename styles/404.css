@@ -1,0 +1,14 @@
+#main {
+    display: table;
+}
+.sub_content{
+    margin-top:100px;
+    margin-bottom:150px;
+    text-align:center;
+}
+.sub_content h1{
+    font-size:100px;
+}
+.sub_content h2{
+    margin:0px;
+}
