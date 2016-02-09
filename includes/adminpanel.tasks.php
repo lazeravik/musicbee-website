@@ -7,8 +7,7 @@
 
 $admin_only = true; //only for admins
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
-
-require_once $siteRoot.'classes/Manager.php'; // Save and update the data on the database and json file
+require_once $siteRoot.'classes/Manager.php'; // Save and update the data on the database 
 require_once $siteRoot.'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 require_once $siteRoot.'includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
 include_once $siteRoot.'includes/parsedown/Parsedown.php';

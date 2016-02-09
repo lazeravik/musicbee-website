@@ -2,8 +2,12 @@
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-if (!isset($_POST['id']))
+if (!isset($_POST['id'])){
 	die('Not Available!');
+}
+
+
+
 $inputId = $_POST['id'];
 ?>
 <style>
@@ -19,19 +23,7 @@ $inputId = $_POST['id'];
 		float:right;
 	}
 
-	.dropzone {
-		border: 3px dashed #ccc;
-		height: 220px;
-		border-radius: 5px;
-		margin: 40px 80px 0px 80px;
-		position: relative;
-		width: auto;
-		text-align: center;
-		cursor:pointer;
-		-webkit-user-select:none;
-		-moz-user-select:none;
-		user-select:none;
-	}
+
 
 	.dropzone h2 {
 		font-weight: bold;
@@ -114,24 +106,32 @@ $inputId = $_POST['id'];
 		height: 40px;
 		position: relative;
 	}
+
 </style>
 <div class="main_imgur_upload_body">
+<?php if (IMGUR_UPLOAD_ON): ?>
 	<div class="infocard_header green_color">
-		<h3>Upload Image using &nbsp;<img src="<?php echo $siteUrl."/img/logo-light.png"; ?>"></h3>
+		<h3><?php echo $lang['406']; ?><img src="<?php echo $siteUrl."/img/logo-light.png"; ?>"></h3>
 	</div>
 	<div class="infocard_header dark_grey">
-		<p>Add-ons are licensed under <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
+		<p><?php echo $lang['407']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
 	</div>
 	<div class="img-drop-wrap">
-		<div class="dropzone"><h2>Drag and drop or click here</h2><p>Maximum image size is 2MB</p>
+		<div class="dropzone"><h2><?php echo $lang['408']; ?></h2><p><?php echo $lang['409']; ?></p>
 			<form action="../includes/upload.tasks.php" method="POST" enctype="multipart/form-data" id="uploadform">
 				<input type="file" id="img_input" accept="image/*" name="img">
 				<input type="hidden" name="target" value="imgur">
 			</form>
 		</div>
 	</div>
+<?php else: ?>
+<div class="infocard_header darkred_color">
+	<h3><?php echo $lang['410']; ?></h3>
+	<p><?php echo $lang['411']; ?></p>
 </div>
-<div id="bottom_bar_imgur" class="bottom_panel_img"></div>
+<?php exit(); endif; ?>
+
+</div>
 <div class="busy_overlay fadeIn animated">
 	<div class="sk-circle">
 		<div class="sk-circle1 sk-child"></div>

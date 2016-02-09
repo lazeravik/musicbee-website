@@ -280,4 +280,43 @@ $lang['279'] = "";
 $lang['280'] = "";
 
 
+/************************************************
+*****
+*****	Mediafire, imgur upload 
+*****
+*************************************************/
+//upload.mediafire.php
+$lang['400'] = "Upload using";
+$lang['401'] = "Only supports <code>.rar, .zip, .7z, .tgz</code>. Add-ons are licensed under";
+$lang['402'] = "Drag and drop or click here";
+$lang['403'] = "Maximum file size is 4MB";
+$lang['404'] = "Mediafire upload is currently disabled!";
+$lang['405'] = "Please use any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)";
+//upload.imgur.php
+$lang['406'] = "Upload Image using &nbsp;";
+$lang['407'] = "Images are licensed under";
+$lang['408'] = "Drag and drop or click here";
+$lang['409'] = "Maximum image size is 2MB";
+$lang['410'] = "Imgur upload is currently disabled!";
+$lang['411'] = "Please go to imgur website to upload images";
+//upload.tasks.php
+$lang['412'] = "<b>ERROR:</b> You are not allowed!";
+$lang['413'] = "<b>ERROR:</b> Imgur upload is currently disabled! <br/>Please go to imgur website to upload images";
+$lang['414'] = "<b>ERROR:</b> An valid image required!";
+$lang['415'] = "<b>ERROR:</b> Maximum image size is 2MB!";
+$lang['416'] = "<b>SUCCESSFUL:</b> Image successfully uploaded to Imgur";
+$lang['417'] = "<b>ERROR:</b> There\'s a Problem<br/>";
+$lang['418'] = "<b>ERROR:</b> Mediafire upload is currently disabled! <br/>Please any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)";
+$lang['419'] = "<b>ERROR:</b> Mediafire upload is not configured correctly, please edit the setting file with correct credentials and try again.";
+$lang['420'] = "<b>ERROR:</b> An valid file required!";
+$lang['421'] = "<b>ERROR:</b> Maximum file size is 4MB!";
+$lang['422'] = "<b>ERROR:</b> Only supports <code>.rar, .zip, .7z, .tgz</code>";
+$lang['423'] = "<b>SUCCESSFUL:</b> Add-on successfully added to our repository";
+$lang['424'] = "<b>ERROR:</b> The file maybe uploaded but we can\'t get the download link. <br/>ERR_MSG: ";
+$lang['425'] = "<b>ERROR:</b> ";
+$lang['426'] = "<b>ERROR:</b> There\'s a Problem<br/>";
+$lang['427'] = "";
+$lang['428'] = "";
+$lang['429'] = "";
+$lang['430'] = "";
 ?>

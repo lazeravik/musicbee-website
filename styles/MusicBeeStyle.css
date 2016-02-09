@@ -467,16 +467,15 @@ label p.chkbox_text {
     border: 0px;
 }
 
-.btn:disabled {
-    background: #969696;
-    cursor: auto;
-    box-shadow: none;
+.btn:disabled, .btn[disabled] {
+    background: #B9B9B9 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
 }
 
-.btn:disabled:hover {
-    background: #969696;
-    cursor: auto;
-    box-shadow: none;
+.btn:disabled:hover, .btn[disabled]:hover {
+    background: #B9B9B9 !important;
+    box-shadow: none !important;
 }
 
 .btn_green {
@@ -1088,6 +1087,11 @@ button.closeNotify:hover {
     background: none;
     color: #FFC107;
     outline: none;
+}
+.infocard_header{
+    background: #3F51B5;
+    padding: 5px 20px;
+    color:#fff;
 }
 
 .teal_color{
