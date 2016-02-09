@@ -270,14 +270,30 @@ select#multipleVer option {
     padding: 10px;
 }
 
-.main_imgur_upload_body {
+.main_imgur_upload_body, .main_mediafire_upload_body {
     background: #fff;
-    height: 400px;
 }
 
-.main_mediafire_upload_body {
-    background: #fff;
-    height: 400px;
+.dropzone {
+    border: 3px dashed #ccc;
+    height: 220px;
+    border-radius: 5px;
+    margin: 40px 80px;
+    position: relative;
+    width: auto;
+    text-align: center;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    user-select:none;
+}
+
+#upView {
+    overflow: hidden;
+}
+
+.img-drop-wrap {
+    padding: 1px;
 }
 .main_mediafire_upload_body h3 img {
     height: 25px;
@@ -534,10 +550,10 @@ input#color:checked {
 }
 
 .addon_list_box li .addon_list_box_wrapper {
- margin: 10px;
- padding: 10px;
- transition: all linear .1s;
- outline: 1px solid rgba(255, 255, 255, 0);
+   margin: 10px;
+   padding: 10px;
+   transition: all linear .1s;
+   outline: 1px solid rgba(255, 255, 255, 0);
 }
 
 .addon_list_box li .addon_list_box_wrapper a {

@@ -116,29 +116,29 @@ $lang['177'] = "Get MusicBee and enhance your music experience";
 $lang['178'] = "Submit";
 
 /*footer*/
-$lang['179'] = "Get the latest MusicBee";
-$lang['180'] = "Get";
-$lang['181'] = "Version:";
-$lang['182'] = "Released on";
-$lang['183'] = "More";
-$lang['184'] = "Subscribe to our RSS feed";
-$lang['185'] = "<i class=\"fa fa-code\"></i>&nbsp;&nbsp;Developer API";
-$lang['186'] = "Want to get notified of new releases?";
-$lang['187'] = "<i class=\"fa fa-bug\"></i>&nbsp;&nbsp;Report a bug";
-$lang['188'] = "Add-ons for MusicBee";
-$lang['189'] = "Support MusicBee with a voluntary donation";
-$lang['190'] = "&nbsp;Donate with Paypal";
-$lang['191'] = "<i class=\"fa fa-heartbeat\"></i>&nbsp;&nbsp;Add a new feature to the Wishlist";
-$lang['192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
-$lang['193'] = "Copyright &copy; Steven Mayall 2008-".date('Y').", All Rights Reserved";
-$lang['231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press";
+$lang['footer_179'] = "Get the latest MusicBee";
+$lang['footer_180'] = "Get";
+$lang['footer_181'] = "Version:";
+$lang['footer_182'] = "Released on";
+$lang['footer_183'] = "More";
+$lang['footer_184'] = "Subscribe to our RSS feed";
+$lang['footer_185'] = "<i class=\"fa fa-code\"></i>&nbsp;&nbsp;Developer API";
+$lang['footer_186'] = "Want to get notified of new releases?";
+$lang['footer_187'] = "<i class=\"fa fa-bug\"></i>&nbsp;&nbsp;Report a bug";
+$lang['footer_188'] = "Add-ons for MusicBee";
+$lang['footer_189'] = "Support MusicBee with a voluntary donation";
+$lang['footer_190'] = "&nbsp;Donate with Paypal";
+$lang['footer_191'] = "<i class=\"fa fa-heartbeat\"></i>&nbsp;&nbsp;Add a new feature to the Wishlist";
+$lang['footer_192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
+$lang['footer_193'] = "Copyright &copy; Steven Mayall 2008-".date('Y').", All Rights Reserved";
+$lang['footer_231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press & Media";
 
 /*404 page */
 $lang['194'] = "404";
 $lang['195'] = "Hey there! Are you lost?";
 $lang['196'] = "The requested page does not exist. Make sure you typed the URL correctly";
 $lang['197'] = "404 - Page not found!";
-$lang['198'] = "<br/><br/><br/><a href=\"http://".$_SERVER['HTTP_HOST']."\" class=\"btn btn_green\">Go to home &nbsp;<i class=\"fa fa-arrow-right\"></i></a>";
+$lang['198'] = "Go to home &nbsp;<i class=\"fa fa-arrow-right\"></i>";
 
 
 
@@ -280,4 +280,43 @@ $lang['279'] = "";
 $lang['280'] = "";
 
 
+/************************************************
+*****
+*****	Mediafire, imgur upload 
+*****
+*************************************************/
+//upload.mediafire.php
+$lang['400'] = "Upload using";
+$lang['401'] = "Only supports <code>.rar, .zip, .7z, .tgz</code>. Add-ons are licensed under";
+$lang['402'] = "Drag and drop or click here";
+$lang['403'] = "Maximum file size is 4MB";
+$lang['404'] = "Mediafire upload is currently disabled!";
+$lang['405'] = "Please use any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)";
+//upload.imgur.php
+$lang['406'] = "Upload Image using &nbsp;";
+$lang['407'] = "Images are licensed under";
+$lang['408'] = "Drag and drop or click here";
+$lang['409'] = "Maximum image size is 2MB";
+$lang['410'] = "Imgur upload is currently disabled!";
+$lang['411'] = "Please go to imgur website to upload images";
+//upload.tasks.php
+$lang['412'] = "<b>ERROR:</b> You are not allowed!";
+$lang['413'] = "<b>ERROR:</b> Imgur upload is currently disabled! <br/>Please go to imgur website to upload images";
+$lang['414'] = "<b>ERROR:</b> An valid image required!";
+$lang['415'] = "<b>ERROR:</b> Maximum image size is 2MB!";
+$lang['416'] = "<b>SUCCESSFUL:</b> Image successfully uploaded to Imgur";
+$lang['417'] = "<b>ERROR:</b> There's a Problem<br/>";
+$lang['418'] = "<b>ERROR:</b> Mediafire upload is currently disabled! <br/>Please any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)";
+$lang['419'] = "<b>ERROR:</b> Mediafire upload is not configured correctly, please edit the setting file with correct credentials and try again.";
+$lang['420'] = "<b>ERROR:</b> An valid file required!";
+$lang['421'] = "<b>ERROR:</b> Maximum file size is 4MB!";
+$lang['422'] = "<b>ERROR:</b> Only supports <code>.rar, .zip, .7z, .tgz</code>";
+$lang['423'] = "<b>SUCCESSFUL:</b> Add-on successfully added to our repository";
+$lang['424'] = "<b>ERROR:</b> The file maybe uploaded but we can't get the download link. <br/>ERR_MSG: ";
+$lang['425'] = "<b>ERROR:</b> ";
+$lang['426'] = "";
+$lang['427'] = "";
+$lang['428'] = "";
+$lang['429'] = "";
+$lang['430'] = "";
 ?>

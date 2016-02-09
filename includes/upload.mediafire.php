@@ -18,21 +18,6 @@ $inputId = $_POST['id'];
 		margin:0px;
 		float:right;
 	}
-
-	.dropzone {
-		border: 3px dashed #ccc;
-		height: 220px;
-		border-radius: 5px;
-		margin: 40px 80px 0px 80px;
-		position: relative;
-		width: auto;
-		text-align: center;
-		cursor:pointer;
-		-webkit-user-select:none;
-		-moz-user-select:none;
-		user-select:none;
-	}
-
 	.dropzone h2 {
 		font-weight: bold;
 		color: #6C7984;
@@ -116,20 +101,27 @@ $inputId = $_POST['id'];
 	}
 </style>
 <div class="main_mediafire_upload_body">
+<?php if (IMGUR_UPLOAD_ON): ?>
 	<div class="infocard_header grey_color">
-		<h3>Upload using <img src="<?php echo $siteUrl."/img/mf-logo-dark-bg.png"; ?>"></h3>
+		<h3><?php echo $lang['400']; ?> <img src="<?php echo $siteUrl."/img/mf-logo-dark-bg.png"; ?>"></h3>
 	</div>
 	<div class="infocard_header dark_grey">
-		<p>Only supports <code>.rar, .zip, .7z, .tgz</code>. Add-ons are licensed under <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
+		<p><?php echo $lang['401']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
 	</div>
 	<div class="img-drop-wrap">
-		<div class="dropzone"><h2>Drag and drop or click here</h2><p>Maximum file size is 4MB</p>
+		<div class="dropzone"><h2><?php echo $lang['402']; ?></h2><p><?php echo $lang['403']; ?></p>
 			<form action="../includes/upload.tasks.php" method="POST" enctype="multipart/form-data" id="uploadform">
 				<input type="file" id="file_input" accept=".rar, .zip, .7z, .tgz" name="file">
 				<input type="hidden" name="target" value="mediafire">
 			</form>
 		</div>
 	</div>
+<?php else: ?>
+<div class="infocard_header darkred_color">
+	<h3><?php echo $lang['404']; ?></h3>
+	<p><?php echo $lang['405']; ?></p>
+</div>
+<?php exit(); endif; ?>
 
 </div>
 <div id="bottom_bar_imgur" class="bottom_panel_img"></div>

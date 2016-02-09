@@ -1,21 +1,25 @@
 <?php
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
-
+require_once $siteRoot.'setting.php';
 if(!@$_SERVER['HTTP_REFERER']) die('No direct Access');
 //var_dump($_POST);
-if(!isset($_POST['target'])) die('{"status": "0", "data": "<b>ERROR:</b> You are not allowed!"}');
+if(!isset($_POST['target'])) die('{"status": "0", "data": "'.$lang['412'].'"}');
 
 
 if ($_POST['target']=="imgur") {
-	$img = $_FILES['img'];
 
+	if (!IMGUR_UPLOAD_ON) {
+		die('{"status": "0", "data": "'.$lang['413'].'"}');
+	}
+
+	$img = $_FILES['img'];
 	if($img['name']=='' || $img['size'] <= 2){  
-		echo '{"status": "0", "data": "<b>ERROR:</b> An valid image required!"}';
+		echo '{"status": "0", "data": "'.$lang['414'].'"}';
 		exit();
 	}
 	if ($img['size'] > 2097152) {
-		echo '{"status": "0", "data": "<b>ERROR:</b> Maximum image size is 2MB!"}';
+		echo '{"status": "0", "data": "'.$lang['415'].'"}';
 		exit();
 	}
 
@@ -46,18 +50,21 @@ if ($_POST['target']=="imgur") {
 	$url=$pms['data']['link'];
 
 	if($url!=""){
-		echo '{"status": "1", "url": "'.$url.'", "data": "<b>SUCCESSFUL:</b> Image successfully uploaded to Imgur"}';
+		echo '{"status": "1", "url": "'.$url.'", "data": "'.$lang['416'].'"}';
 	}else{
-		echo '{"status": "0", "data": "<b>ERROR:</b> There\'s a Problem<br/>'.$pms['data']['error'].'"}';
+		echo '{"status": "0", "data": "'.$lang['417'].$pms['data']['error'].'"}';
 		exit();
 	} 
 
 } elseif ($_POST['target']=="mediafire") {
+	if (!MEDIAFIRE_UPLOAD_ON) {
+		die('{"status": "0", "data": "'.$lang['418'].'"}');
+	}
 	if (MF_APP_ID == "" || MF_API_KEY == "" || MF_EMAIL == "" || MF_PASS == "")
 	{
 		die('{
 			"status": "0", 
-			"data": "<b>ERROR:</b> Mediafire upload is not configured correctly, please edit the setting file with correct credentials and try again."
+			"data": "'.$lang['419'].'"
 		}');
 	}
 
@@ -67,19 +74,19 @@ if ($_POST['target']=="imgur") {
 
 	//check file validity by it's name and size
 	if($file['name']=='' || $file['size'] <= 1){  
-		echo '{"status": "0", "data": "<b>ERROR:</b> An valid file required!"}';
+		echo '{"status": "0", "data": "'.$lang['420'].'"}';
 		exit();
 	}
 
 	//maximum 4MB file allowed!
 	if ($file['size'] > 4194304) {
-		echo '{"status": "0", "data": "<b>ERROR:</b> Maximum file size is 4MB!"}';
+		echo '{"status": "0", "data": "'.$lang['421'].'"}';
 		exit();
 	}
 	
 	//is the file extension valid
 	if (!in_array($file_parts['extension'], $supported_ext)){
-		echo '{"status": "0", "data": "<b>ERROR:</b> Only supports <code>.rar, .zip, .7z, .tgz</code>"}';
+		echo '{"status": "0", "data": "'.$lang['422'].'"}';
 		exit();
 	}
 	  /*
@@ -128,18 +135,18 @@ if ($_POST['target']=="imgur") {
 					"url": "http://www.mediafire.com/download/'.$result["quickkey"].'/'.$result["filename"].'", 
 					"size": "'.$result["size"].'", 
 					"quickkey": "'.$result["quickkey"].'", 
-					"data": "<b>SUCCESSFUL:</b> Add-on successfully added to our repository"
+					"data": "'.$lang['423'].'"
 				}';
 			} elseif ($result['status']=="5") {
 				echo '{
 					"status": "0", 
-					"data": "<b>ERROR:</b> The file maybe uploaded but we can\'t get the download link. <br/>ERR_MSG: '.$result["description"].'"
+					"data": "'.$lang['424'].$result["description"].'"
 				}';
 				exit();
 			} else {
 				echo '{
 					"status": "0", 
-					"data": "<b>ERROR:</b> '.$result["description"].'"
+					"data": "'.$lang['425'].$result["description"].'"
 				}';
 				exit();
 			}
@@ -147,7 +154,7 @@ if ($_POST['target']=="imgur") {
 		} else {
 			echo '{
 				"status": "0", 
-				"data": "<b>ERROR:</b> There\'s a Problem<br/>'.$result["fileerror_messagefileerror_message"].'"
+				"data": "'.$lang['417'].$result["fileerror_messagefileerror_message"].'"
 			}';
 			exit();
 		}
