@@ -61,6 +61,9 @@
 	/*addon center*/
 	define('MAX_SUBMIT_WO_APPROVAL', '10');
 
+	/* Define permissions and controls */
+	define('IMGUR_UPLOAD_ON', 'true');
+
 
 	/*Client IDs and Secrets*/
 	//Imgur setting
