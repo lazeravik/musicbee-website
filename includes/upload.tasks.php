@@ -154,7 +154,7 @@ if ($_POST['target']=="imgur") {
 		} else {
 			echo '{
 				"status": "0", 
-				"data": "'.$lang['426'].$result["fileerror_messagefileerror_message"].'"
+				"data": "'.$lang['417'].$result["fileerror_messagefileerror_message"].'"
 			}';
 			exit();
 		}
