@@ -76,5 +76,6 @@
 	define('MF_PASS', 'bwLJvprnT4iH7erexAdu');
 	define('MF_API_KEY', 'qbircy2842yu1ybz0m89wx2yu9iadg7hucb11z55');
 	define('MF_APP_ID', '50098');
+	
 
 ?>
