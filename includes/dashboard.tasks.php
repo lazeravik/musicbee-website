@@ -8,9 +8,11 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 require_once $siteRoot.'classes/Dashboard.php';
+require_once $siteRoot.'classes/Validation.php';
 require_once $siteRoot.'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 require_once $siteRoot.'includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
 include_once $siteRoot.'includes/parsedown/Parsedown.php';
+
 
 //enable and disable downloads
 if (isset($_POST['submit'])) {
@@ -34,17 +36,17 @@ if (isset($_POST['submit'])) {
 			if (!$dashboard->checkMbVersions($_POST['mbSupportedVer'])){
 				die('{"status": "0", "data": "'.$lang['202'].'"}');
 			}
-			if (!charLimit($_POST['description'], 600)){
+			if (!Validation::charLimit($_POST['description'], 600)){
 				die('{"status": "0", "data": "'.$lang['203'].'"}');
 			}
-			if (!arrayLimit($_POST['tag'], 10)) {
+			if (!Validation::arrayLimit($_POST['tag'], 10)) {
 				die('{"status": "0", "data": "'.$lang['204'].'"}');
 			}
 			if (!array_key_exists($_POST['color'], $color_codes)) {
 				die('{"status": "0", "data": "'.$lang['223'].'"}');
 			}
 			if (isset($_POST['readme'])){
-				if (!charLimit($_POST['readme'], 5000))
+				if (!Validation::charLimit($_POST['readme'], 5000))
 					die('{"status": "0", "data": "'.$lang['205'].'"}');
 			}
 			//die, if the user alreay submitted more than X numbers of addon that needed aproval!
@@ -94,10 +96,10 @@ if (isset($_POST['submit'])) {
 		if (!$dashboard->checkMbVersions($_POST['mbSupportedVer'])){
 			die('{"status": "0", "data": "'.$lang['202'].'"}');
 		}
-		if (!charLimit($_POST['description'], 600)){
+		if (!Validation::charLimit($_POST['description'], 600)){
 			die('{"status": "0", "data": "'.$lang['203'].'"}');
 		}
-		if (!arrayLimit($_POST['tag'], 10)) {
+		if (!Validation::arrayLimit($_POST['tag'], 10)) {
 			die('{"status": "0", "data": "'.$lang['204'].'"}');
 		}
 		if (isset($_POST['color'])) {
@@ -106,7 +108,7 @@ if (isset($_POST['submit'])) {
 			}
 		}
 		if (isset($_POST['readme'])){
-			if (!charLimit($_POST['readme'], 5000)){
+			if (!Validation::charLimit($_POST['readme'], 5000)){
 				die('{"status": "0", "data": "'.$lang['205'].'"}');
 			}
 		}
@@ -121,7 +123,7 @@ if (isset($_POST['submit'])) {
 		$readme_raw = $Parsedown->text($readme);
 		//load and use html purifier for the readme notes.
 		$config = HTMLPurifier_Config::createDefault();
-		$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a');
+		$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a,hr');
 		$def = $config->getHTMLDefinition(true);
 		$def->addAttribute('code', 'lang-rel', 'Text');
 		$purifier = new HTMLPurifier($config);
