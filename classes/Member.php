@@ -1,0 +1,56 @@
+<?php
+/**
+* Handles user related stuff
+* @author : AvikB;
+*/
+
+class Member
+{
+//Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
+public function memberInfo($user_id)
+{
+	global $connection;
+	if (databaseConnection()) {
+		try {
+			$sql = "SELECT * FROM ".SITE_MEMBER_TBL." WHERE ID_MEMBER = :user_id";
+			$statement = $connection->prepare($sql);
+			$statement->bindValue(':user_id', $user_id);
+			$statement->execute();
+			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			if (count($result) > 0)
+			{
+				return $result[0];
+			}else{
+				return null;
+			}
+		} catch (Exception $e) {
+
+		}
+	}
+	return null;
+}
+
+public function rankName($rankid)
+{
+	switch ($rankid) {
+		case 1:
+		$rankname = "Admin";
+		break;
+		case 2:
+		$rankname = "Mod";
+		break;
+		case 5:
+		$rankname = "Elite";
+		break;
+		case 10:
+		$rankname = "Newbie";
+		break;
+		default:
+		$rankname = "Unknown";
+		break;
+	}
+	return $rankname;
+}
+
+}
+?>
