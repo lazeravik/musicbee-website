@@ -37,6 +37,7 @@ if (!$user_info['is_admin'] && !empty($admin_only)) {
 	}
 }
 
+//setting file contains setting variables, mysql database credentials, api ids, passwords etc
 require_once $siteRoot.'setting.php';
 
 
@@ -61,9 +62,6 @@ $link['logout'] 				= $link['forum'] . 'index.php?action=logout;' . $context['se
 $link['press'] 					= $siteUrl.'/press/';
 $link['devapi']					= $siteUrl.'/api/';
 $link['bugreport']				= $siteUrl.'/bug/';
-
-
-$addons = array('skins','plugins','visualizer','equalizer','theater mode');
 
 //get the MusicBee info from json api
 $releaseData = json_decode(file_get_contents($siteUrl .'/api.get.php?type=json&action=release-info'));
@@ -195,6 +193,7 @@ $main_menu = array(
 		),
 	);
 
+/** @var addon color $color_codes */
 $color_codes = array(
 	"default" => array(
 		"name" => "Default",
@@ -238,66 +237,56 @@ $color_codes = array(
 		),
 	);
 
-/**
-* Checks if database connection is opened. If not, then this method tries to open it.
-* @return bool Success status of the database connecting process
-*/
-	$connection = null;
-	function databaseConnection()
-	{
-		global $connection;
-	// if connection already exists
-		if ($connection != null) {
-			return true;
-		} else {
-			try {
-				$connection = new PDO('mysql:host='. DB_HOST .';dbname='. SITE_DB_NAME . ';charset=utf8', SITE_DB_USER, SITE_DB_PASS);
-				return true;
-			} catch (PDOException $e) {}
-		}
-	// default return
-		return false;
-	}
+/** @var database connection $connection */
+$connection = null;
 
-//get memeber info by their unique userID
-function getMemberInfo($member_id)
+/**
+ * @return bool
+ * Checks and creates database connection.
+ */
+function databaseConnection()
 {
+	global $connection;
+// if connection already exists
+	if ($connection != null) {
+		return true;
+	} else {
+		try {
+			$connection = new PDO('mysql:host='. DB_HOST .';dbname='. SITE_DB_NAME . ';charset=utf8', SITE_DB_USER, SITE_DB_PASS);
+			return true;
+		} catch (PDOException $e) {}
+	}
+// default return
+	return false;
+}
+
+
+/**
+ * @param $value
+ * @param $type
+ * @return null|string
+ * MusicBee stable and beta release Info
+ */
+function getVersionInfo($value, $type) {
 	global $connection, $lang;
 	if (databaseConnection()) {
 		try {
-			$sql = "SELECT * FROM ".SITE_MEMBER_TBL." WHERE ID_MEMBER = :id";
+			if($type=="byId") {
+				$sql = "SELECT * FROM " . SITE_MB_ALL_VERSION_TBL . " WHERE ID_ALLVERSIONS=:value";
+			} elseif($type=="byVersion") {
+				$sql = "SELECT * FROM " . SITE_MB_ALL_VERSION_TBL . " WHERE version=:value";
+			} elseif($type=="byCurrentVersion") {
+				$sql = "SELECT * FROM " . SITE_MB_CURRENT_VERSION_TBL . " WHERE ID_VERSION=:value";
+			} elseif($type=="byAllReleases") {
+				$sql = "SELECT * FROM " . SITE_MB_ALL_VERSION_TBL . " ORDER BY version DESC";
+			}
 			$statement = $connection->prepare($sql);
-			$statement->bindValue(':id', $member_id);
+			if($type!="byAllReleases") {
+				$statement->bindValue(':value', $value);
+			}
 			$statement->execute();
 			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-			if (count($result)>0)
-				return $result[0]; //since the returned result should ALWAYS contain 1 array
-			else
-				return $lang['AD_NO_USER'];
-		} catch (Exception $e) {
-			return "Something went wrong. ".$e; //store the error message in the variable
-		}
-	}
-}
-
-	function getVersionInfo($value, $type) {
-		global $connection, $lang;
-		if (databaseConnection()) {
-			try {
-				if($type=="byId")
-					$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." WHERE ID_ALLVERSIONS=:value";
-				elseif($type=="byVersion")
-					$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." WHERE version=:value";
-				elseif($type=="byCurrentVersion")
-					$sql = "SELECT * FROM ".SITE_MB_CURRENT_VERSION_TBL." WHERE ID_VERSION=:value";
-				elseif($type=="byAllReleases")
-					$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." ORDER BY version DESC";
-				$statement = $connection->prepare($sql);
-				if($type!="byAllReleases")
-					$statement->bindValue(':value', $value);
-				$statement->execute();
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-				if (count($result) > 0) {
+			if (count($result) > 0) {
 				return $result; //Get the availablity first 1= available, 0=already disabled
 			} else {
 				if($type=="byId")
@@ -311,74 +300,39 @@ function getMemberInfo($member_id)
 	}
 }
 
-//generate slug url
+/**
+ * @param $string
+ * @return string
+ * generate slug url
+ */
 function Slug($string)
 {
-    return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+	return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
 }
 
 //unslug text... sort of
 function UnslugTxt($string)
 {
-    return ucfirst(str_replace("-", " ", $string));
-}
-
-//check if the file/image exists in remote location
-function checkRemoteFile($url)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$url);
-    // don't download content
-    curl_setopt($ch, CURLOPT_NOBODY, 1);
-    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    if(curl_exec($ch)!==FALSE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//Character limit validation, used for description and readme validation
-function charLimit($input, $limit)
-{
-	if (strlen($input) <= $limit) {
-		return true;
-	} else {
-		return false;
-	}
-}
-//array limit validation, used for screenshot and tag limit validation
-function arrayLimit($input, $limit)
-{
-	$inputArray = explode(",", $input);
-	if (count($inputArray) <= $limit) {
-		return true;
-	} else {
-		return false;
-	}
+	return ucfirst(str_replace("-", " ", $string));
 }
 
 //adds k,m,b after making a long number short for better presentation
 function number_format_suffix($input) {
-        $suffixes = array('', 'k', 'm', 'g', 't');
-        $suffixIndex = 0;
-    
-        while(abs($input) >= 1000 && $suffixIndex < sizeof($suffixes))
-        {
-            $suffixIndex++;
-            $input /= 1000;
-        }
-    
-        return (
-            $input > 0
+	$suffixes = array('', 'k', 'm', 'g', 't');
+	$suffixIndex = 0;
+	
+	while(abs($input) >= 1000 && $suffixIndex < sizeof($suffixes))
+	{
+		$suffixIndex++;
+		$input /= 1000;
+	}
+	
+	return (
+		$input > 0
                 // precision of 3 decimal places
-                ? floor($input * 10) / 10
-                : ceil($input * 10) / 10
-            )
-            . $suffixes[$suffixIndex];
+		? floor($input * 10) / 10
+		: ceil($input * 10) / 10
+		)
+	. $suffixes[$suffixIndex];
 }
 ?>

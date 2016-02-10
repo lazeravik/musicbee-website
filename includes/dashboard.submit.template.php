@@ -132,7 +132,7 @@ if (isset($_GET['view'])) {
 						<p class="show_info info_yellow">
 							<?php echo $lang['114']; ?>
 						</p>
-						<input id="tag" maxlength="150" name="tag" type="text" required="required" placeholder="eg. metro, modern, elegant"
+						<input id="tag" maxlength="150" name="tag" type="text" placeholder="eg. metro, modern, elegant"
 						value="<?php if ($viewType == 2) echo $data['tags']; ?>"/>
 					</label>
 				</li>

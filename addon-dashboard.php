@@ -3,10 +3,11 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 include $siteRoot . 'classes/Dashboard.php';
+include $siteRoot . 'classes/Member.php';
 $dashboard = new Dashboard(); //create an instance of the addondashboard class
-
+$memberData = new Member();
 //check if the user has a rank or not, if not, then there is no addon account created for the user
-if ($dashboard->memberRank($user_info['id']) == null) {
+if ($memberData->memberInfo($user_info['id'])['rank'] == null) {
     $permission = 10;
     if ($user_info['is_admin']) {
         $permission = 1; //permission level 1 means the member is admin
@@ -18,19 +19,19 @@ if ($dashboard->memberRank($user_info['id']) == null) {
     //header('Location: '.$_SERVER['PHP_SELF']); //reload the page to set the session properly
 } else {
     //If the memebr has an account but the permission session is not set, this is the time to do so...
-    $_SESSION['dashboard_permission'] = $dashboard->memberRank($user_info['id']);
+    $_SESSION['dashboard_permission'] = $memberData->memberInfo($user_info['id'])['rank'];
 }
 
 
 //Addon Account Related Session Initialize
-$getmemberinfo = $dashboard->memberInfo($user_info['id']); //Gets all member info from the DB
+$getmemberinfo = $memberData->memberInfo($user_info['id']); //Gets all member info from the DB
 
 /* We will use an arra to store all the member data. the data contains:
 name, id, rank(rank name), raw rank(rank id)                    */
-$memberinfoArray['membername'] = $getmemberinfo[0]['membername'];
-$memberinfoArray['memberid'] = $getmemberinfo[0]['ID_MEMBER'];
-$memberinfoArray['rank'] = $dashboard->rankName($getmemberinfo[0]['rank']);
-$memberinfoArray['rank_raw'] = $getmemberinfo[0]['rank'];
+$memberinfoArray['membername'] = $getmemberinfo['membername'];
+$memberinfoArray['memberid'] = $getmemberinfo['ID_MEMBER'];
+$memberinfoArray['rank'] = $memberData->rankName($getmemberinfo['rank']);
+$memberinfoArray['rank_raw'] = $getmemberinfo['rank'];
 
 /*store memberinfoArray in the session. Now we can get the value anytime
 eg. $_SESSION['memberinfo']['rank'] or $_SESSION['memberinfo']['rawrank']   */
@@ -84,6 +85,7 @@ $_SESSION['memberinfo'] = $memberinfoArray;
                             <a class="btn btn_green addon_panel_btn" href="#submit" data-href="submit" data-load-page="dashboard.submit"><?php echo $lang['227']; ?>
                             </a>
                         </li>
+
                         <li>
                             <div id="loading_icon" class="spinner fadeIn animated" style="display:none;">
                                 <div class="double-bounce1"></div>
@@ -94,7 +96,7 @@ $_SESSION['memberinfo'] = $memberinfoArray;
                     </ul>
                     <ul class="right">
                         <li>
-                            <a class="btn addon_panel_btn" href="#" title="Your rank is <?php echo $_SESSION['memberinfo']['rank']; ?>">
+                            <a class="btn addon_panel_btn" href="javascript:void(0)" title="Your rank is <?php echo $_SESSION['memberinfo']['rank']; ?>">
                                 <i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $_SESSION['memberinfo']['rank']; ?>
                             </a>
                         </li>

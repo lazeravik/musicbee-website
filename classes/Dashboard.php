@@ -46,28 +46,6 @@ public function createAddonAccount($ID, $permission, $name)
 	}
 }
 
-//Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
-public function memberRank($ID)
-{
-	global $connection;
-	if (databaseConnection()) {
-		try {
-			$sql = "SELECT * FROM ".SITE_MEMBER_TBL." WHERE ID_MEMBER = :id";
-			$statement = $connection->prepare($sql);
-			$statement->bindValue(':id', $ID);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-			if (count($result) == 1)
-			{
-				return $result[0]['rank'];
-			}else{
-				return null;
-			}
-		} catch (Exception $e) {
-
-		}
-	}
-}
 
 public function verifyAuthor($member_id, $addon_id)
 {
@@ -95,7 +73,12 @@ public function verifyAuthor($member_id, $addon_id)
 	}
 }
 
-public function deleteAddon($addon_id)
+	/**
+	 * @param $addon_id
+	 * @return bool
+	 * deletes an addon from database
+     */
+	public function deleteAddon($addon_id)
 {
 	global $connection;
 	if (databaseConnection()) {
@@ -121,54 +104,6 @@ public function deleteAddon($addon_id)
 
 		}
 	}
-}
-
-//Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
-public function memberInfo($ID)
-{
-	global $connection;
-	if (databaseConnection()) {
-		try {
-			$sql = "SELECT * FROM ".SITE_MEMBER_TBL." WHERE ID_MEMBER = :id";
-			$statement = $connection->prepare($sql);
-			$statement->bindValue(':id', $ID);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-			if (count($result) == 1)
-			{
-				return $result;
-			}else{
-				return null;
-			}
-		} catch (Exception $e) {
-
-		}
-	}
-}
-
-
-/* We also want to get rank name ny rank id. Highest rank is 1, and lowest is 10*/
-public function rankName($rankid)
-{
-	$rankname;
-	switch ($rankid) {
-		case 1:
-		$rankname = "Admin";
-		break;
-		case 2:
-		$rankname = "Mod";
-		break;
-		case 5:
-		$rankname = "Elite";
-		break;
-		case 10:
-		$rankname = "Newbie";
-		break;
-		default:
-		$rankname = "Unknown";
-		break;
-	}
-	return $rankname;
 }
 
 public function checkMbVersions($val)
