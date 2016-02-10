@@ -16,7 +16,6 @@ if ($memberData->memberInfo($user_info['id'])['rank'] == null) {
     }
     //Create an Addon dashboard account for the user
     $dashboard->createAddonAccount($user_info['id'], $permission, $user_info['name']);
-    //header('Location: '.$_SERVER['PHP_SELF']); //reload the page to set the session properly
 } else {
     //If the memebr has an account but the permission session is not set, this is the time to do so...
     $_SESSION['dashboard_permission'] = $memberData->memberInfo($user_info['id'])['rank'];
@@ -32,11 +31,8 @@ $memberinfoArray['membername'] = $getmemberinfo['membername'];
 $memberinfoArray['memberid'] = $getmemberinfo['ID_MEMBER'];
 $memberinfoArray['rank'] = $memberData->rankName($getmemberinfo['rank']);
 $memberinfoArray['rank_raw'] = $getmemberinfo['rank'];
-
-/*store memberinfoArray in the session. Now we can get the value anytime
-eg. $_SESSION['memberinfo']['rank'] or $_SESSION['memberinfo']['rawrank']   */
+/*store memberinfoArray in the session. Now we can get the value anytime*/
 $_SESSION['memberinfo'] = $memberinfoArray;
-//var_dump($_SESSION['memberinfo'] );
 
 ?>
 <!DOCTYPE html>
