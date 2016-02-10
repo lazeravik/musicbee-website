@@ -33,7 +33,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                 <?php
                 include($mainmenu);
                 ?>
-
                 <!-- BODY CONTENT -->
                 <div id="main">
                     <div id="main_panel">
