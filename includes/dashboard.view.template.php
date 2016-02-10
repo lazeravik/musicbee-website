@@ -3,10 +3,12 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 include $siteRoot.'classes/Addon.php';
+include $siteRoot.'classes/Member.php';
 $addon = new addon(); //create an instance of the addondashboard class
+$memberData = new Member(); //member class instance init
 $addonInfo = $addon->getAddonListbyMember($_SESSION['memberinfo']['memberid'],100);
 //Get all the info about the user at the begining
-$info = getMemberInfo($_SESSION['memberinfo']['memberid']);
+$info = $memberData->memberInfo($_SESSION['memberinfo']['memberid']); //get info about the user
 $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberinfo']['memberid'],100,0);
 ?>
 
@@ -80,7 +82,7 @@ $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberin
 			</div>
 		</div>
 	</div>
-<div id="clear"></div>
+	<div id="clear"></div>
 </div>
 <div class="sub_panel_width">
 	<div class="wide_bar_wrap">
@@ -89,9 +91,9 @@ $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberin
 				<h3>
 					<?php echo $lang['137']; ?>
 				</h3>
-				<p><?php echo $lang['138']; ?></b></p>
+				<p><?php echo $lang['138']; ?></p>
 			</div>
-			<ul>
+			<ul id="dashboard_sidebar_link">
 				<li>
 					<a href="">
 						<?php echo $lang['139']; ?>
@@ -111,7 +113,7 @@ $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberin
 					<hr class="line" />
 				</li>
 				<li>
-					<a href="">
+					<a href="#submit" data-href="submit" data-load-page="dashboard.submit">
 						<?php echo $lang['142']; ?>
 					</a>
 				</li>
@@ -141,3 +143,12 @@ $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberin
 	</div>
 </div>
 <div id="clear"></div>
+<script type="text/javascript">
+//sidebar link redirect and ajax load
+	$('ul#dashboard_sidebar_link > li > a[data-load-page]').on('click', function(e) {
+		e.preventDefault();
+		/* Act on the event */
+		loadPageGet(generateUrl($(this).attr('data-load-page')), (!! $(this).attr('data-get-req'))? $(this).attr('data-get-req'): "");
+		window.location.hash = $(this).attr('data-href');
+	});
+</script>
