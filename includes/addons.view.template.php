@@ -9,16 +9,6 @@
 
         <!--include common meta tags and stylesheets -->
         <?php include $siteRoot . 'includes/meta&styles.php'; ?>
-
-        <!--Social network tags for facebook and twitter -->
-        <meta property="og:title" content="">
-        <meta property="og:image" content="<?php echo $siteUrl; ?>/img/mb_big.png">
-        <meta property="og:description" content="<?php echo $meta_description; ?>">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@MusicBeePlayer"> 
-        <meta name="twitter:title" content="MusicBee - Music Manager and Player">
-        <meta name="twitter:description" content="<?php echo $meta_description; ?>">
-
         <!--Use OWL carousel for image screenshot slider -->
         <link rel="stylesheet" href="<?php echo $siteUrl; ?>/styles/magnific-popup.css">
         <!-- Used for slider animation -->
