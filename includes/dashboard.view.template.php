@@ -9,7 +9,7 @@ $memberData = new Member(); //member class instance init
 $addonInfo = $addon->getAddonListbyMember($_SESSION['memberinfo']['memberid'],100);
 //Get all the info about the user at the begining
 $info = $memberData->memberInfo($_SESSION['memberinfo']['memberid']); //get info about the user
-$unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberinfo']['memberid'],100,0);
+$unapprovedAddonInfo = $addon->getUnApprovedAddonsbyMember($_SESSION['memberinfo']['memberid'],100,0);
 ?>
 
 
@@ -31,7 +31,7 @@ $unapproved_addon_info = $addon->getUnApprovedAddonsbyMember($_SESSION['memberin
 				</li>
 				<li class="yellow_bottombar">
 					<h1>
-						<?php echo count($unapproved_addon_info); ?>
+						<?php echo count($unapprovedAddonInfo); ?>
 					</h1>
 					<p>
 						<?php echo $lang['132']; ?>
