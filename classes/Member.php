@@ -20,7 +20,7 @@ public function memberInfo($user_id)
 			if (count($result) > 0)
 			{
 				return $result[0];
-			}else{
+			} else {
 				return null;
 			}
 		} catch (Exception $e) {
@@ -30,7 +30,12 @@ public function memberInfo($user_id)
 	return null;
 }
 
-public function rankName($rankid)
+	/**
+	 * @param $rankid
+	 * @return string
+	 * @todo improve it by using array with foreach switch, it will make it more feature rich and flexible
+     */
+	public function rankName($rankid)
 {
 	switch ($rankid) {
 		case 1:
