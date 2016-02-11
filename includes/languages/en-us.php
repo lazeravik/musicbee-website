@@ -86,12 +86,12 @@
 
 
 	/* Addon descriptions*/
-	$lang['30'] = "Make MusicBee look the way you want";
-	$lang['31'] = "Add features/functionality to MusicBee";
-	$lang['32'] = "Get colorful visualizers for an eye pleasing experience";
-	$lang['33'] = "Equaliser presets are great way to make your music sound fresh";
-	$lang['34'] = "Get a full theater mode experience for MusicBee";
-	$lang['35'] = "Other useful add-ons for enhancing your MusicBee experience";
+	$lang['description_1'] = "Make MusicBee look the way you want";
+	$lang['description_2'] = "Add features/functionality to MusicBee";
+	$lang['description_3'] = "Get colorful visualizers for an eye pleasing experience";
+	$lang['description_4'] = "Equaliser presets are great way to make your music sound fresh";
+	$lang['description_5'] = "Get a full theater mode experience for MusicBee";
+	$lang['description_6'] = "Other useful add-ons for enhancing your MusicBee experience";
 
 	/* Index.php lang */
 	$lang['home_1'] = "MusicBee";
