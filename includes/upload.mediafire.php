@@ -24,10 +24,6 @@ $inputId = $_POST['id'];
 		box-sizing: border-box;
 		padding: 10px;
 	}
-	.add_btn_upload{
-		margin:0px;
-		float:right;
-	}
 	.dropzone h2 {
 		font-weight: bold;
 		color: #6C7984;

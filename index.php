@@ -50,22 +50,22 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             <div class="overlay">
                                 <div class="shadow_wrap">
                                     <div class="sub_content text_left" style="">
-                                        <h1 class="hero_title"><?php echo $lang['149']; ?></h1>
+                                        <h1 class="hero_title"><?php echo $lang['home_1']; ?></h1>
                                         <div class="intro">
-                                            <h2><?php echo $lang['150']; ?></h2>
-                                            <!-- <h4><?php echo $lang['151']; ?></h4> -->
+                                            <h2><?php echo $lang['home_2']; ?></h2>
+                                            <!-- <h4><?php echo $lang['home_3']; ?></h4> -->
                                         </div>
                                     </div>
                                     <div class="content mb_message_top">
                                         <div class="sub_content top_download_option text_left">
-                                            <h4><?php echo $lang['152']; ?></h4>
+                                            <h4><?php echo $lang['home_4']; ?></h4>
                                             <a href="<?php echo $link['download']; ?>" class="yellow_btn_big">
-                                                <h3><?php echo $lang['153']; ?></h3>
-                                                <p class="second_line"><?php echo $lang['156']; ?> <?php echo $release['stable']['os']; ?></p>
+                                                <h3><?php echo $lang['home_5']; ?></h3>
+                                                <p class="second_line"><?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?></p>
                                             </a>
                                             <a class="blue_btn_big" onclick="$('html,body').animate({scrollTop: $('#simple_powerful').offset().top});" href="javascript:void(0)">
-                                                <h3><?php echo $lang['154']; ?></h3>
-                                                <p class="second_line"><?php echo $lang['155']; ?></p>
+                                                <h3><?php echo $lang['home_6']; ?></h3>
+                                                <p class="second_line"><?php echo $lang['home_7']; ?></p>
                                             </a>
                                         </div>
                                     </div>
@@ -76,16 +76,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
                         <div class="content mb_feature_top" >
                             <div class="sub_content" id="simple_powerful">
-                                <h2 data-sr="enter top"><?php echo $lang['157']; ?></h2>
-                                <h4 data-sr="enter bottom"><?php echo $lang['158']; ?></h4>
+                                <h2 data-sr="enter top"><?php echo $lang['home_9']; ?></h2>
+                                <h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>
                                 <img src="./img/mb_default_feature.jpg" data-sr="vFactor 0.2">
                             </div>
                         </div>
                         <div class="content mb_quality_top">
                             <div class="overlay_grad_quality_top">
                                 <div class="sub_content">
-                                    <h2 data-sr='move 24px'><?php echo $lang['159']; ?></h2>
-                                    <h4 data-sr="enter bottom"><?php echo $lang['160']; ?></h4>
+                                    <h2 data-sr='move 24px'><?php echo $lang['home_11']; ?></h2>
+                                    <h4 data-sr="enter bottom"><?php echo $lang['home_12']; ?></h4>
 
                                     <ul class="feature_box">
                                         <li>
@@ -94,7 +94,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                                     <i class="fa fa-sliders"></i>
                                                 </p>
                                                 <p>
-                                                    <?php echo $lang['161']; ?>
+                                                    <?php echo $lang['home_13']; ?>
                                                 </p>
                                             </div>
                                         </li>
@@ -103,7 +103,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                                 <p class="feature_ico">
                                                     <i class="fa fa-headphones"></i>
                                                 </p>
-                                                <p><?php echo $lang['162']; ?></p>
+                                                <p><?php echo $lang['home_14']; ?></p>
                                             </div>
                                         </li>
                                         <li>
@@ -111,7 +111,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                                 <p class="feature_ico">
                                                     <i class="fa fa-play"></i>
                                                 </p>
-                                                <p><?php echo $lang['163']; ?></p>
+                                                <p><?php echo $lang['home_15']; ?></p>
                                             </div>
                                         </li>
                                         <div id="clear"></div>
@@ -119,9 +119,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                 </div>
                                 <div class="content mb_message_top">
                                     <div class="sub_content top_download_option">
-                                        <h4><?php echo $lang['164']; ?></h4>
+                                        <h4><?php echo $lang['home_16']; ?></h4>
                                         <a class="blue_btn_big" href="#">
-                                            <h4><?php echo $lang['165']; ?></h4>
+                                            <h4><?php echo $lang['home_17']; ?></h4>
                                         </a>
                                     </div>
                                 </div>
@@ -129,21 +129,21 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                         </div>
                         <div class="content mb_skin_top">
                             <div class="sub_content" >
-                                <h2 data-sr="enter top"><?php echo $lang['166']; ?></h2>
-                                <h4 data-sr="enter bottom"><?php echo $lang['167']; ?></h4>
+                                <h2 data-sr="enter top"><?php echo $lang['home_18']; ?></h2>
+                                <h4 data-sr="enter bottom"><?php echo $lang['home_19']; ?></h4>
                                 <img src="./img/mb_skin_feature.jpg" data-sr="vFactor 0.2">
                             </div>
                         </div>
                         <div class="content mb_sync_top">
                             <div class="sub_content" data-sr='move 24px'>
-                                <h2><?php echo $lang['168']; ?></h2>
-                                <h4><?php echo $lang['169']; ?></h4>
+                                <h2><?php echo $lang['home_20']; ?></h2>
+                                <h4><?php echo $lang['home_21']; ?></h4>
                             </div>
                         </div>
                         <div class="content mb_tag_top">
                             <div class="sub_content">
-                                <h2 data-sr="enter top"><?php echo $lang['170']; ?></h2>
-                                <h4 data-sr="enter bottom"><?php echo $lang['171']; ?>
+                                <h2 data-sr="enter top"><?php echo $lang['home_22']; ?></h2>
+                                <h4 data-sr="enter bottom"><?php echo $lang['home_23']; ?>
                                 </h4>
                                 <img src="./img/mb_tag_feature.jpg" data-sr="vFactor 0.2">
                             </div>
@@ -151,15 +151,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                         <div class="content mb_more_top">
                             <div class="overlay_grad_more_top">
                                 <div class="sub_content">
-                                    <h2 data-sr='move 24px'><?php echo $lang['172']; ?></h2>
-                                    <h4 data-sr="enter bottom"><?php echo $lang['173']; ?></h4>
+                                    <h2 data-sr='move 24px'><?php echo $lang['home_24']; ?></h2>
+                                    <h4 data-sr="enter bottom"><?php echo $lang['home_25']; ?></h4>
                                     <ul class="feature_box">
                                         <li>
                                             <div data-sr="vFactor 0.2">
                                                 <p class="feature_ico">
                                                     <i class="fa fa-lastfm"></i>
                                                 </p>
-                                                <p><?php echo $lang['174']; ?>
+                                                <p><?php echo $lang['home_26']; ?>
                                                 </p>
                                             </div>
                                         </li>
@@ -168,7 +168,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                                 <p class="feature_ico">
                                                     <i class="fa fa-puzzle-piece"></i>
                                                 </p>
-                                                <p><?php echo $lang['175']; ?>
+                                                <p><?php echo $lang['home_27']; ?>
                                                 </p>
                                             </div>
                                         </li>
@@ -177,7 +177,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                                 <p class="feature_ico">
                                                     <i class="fa fa-circle-o-notch"></i>
                                                 </p>
-                                                <p><?php echo $lang['176']; ?>
+                                                <p><?php echo $lang['home_28']; ?>
                                                 </p>
                                             </div>
                                         </li>
@@ -186,10 +186,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                 </div>
                                 <div class="content mb_message_top">
                                     <div class="sub_content top_download_option">
-                                        <h4><?php echo $lang['177']; ?></h4>
+                                        <h4><?php echo $lang['home_29']; ?></h4>
                                         <a href="<?php echo $link['download']; ?>" class="yellow_btn_big">
-                                            <h3><?php echo $lang['153']; ?></h3>
-                                            <p class="second_line"><?php echo $lang['156']; ?> <?php echo $release['stable']['os']; ?></p>
+                                            <h3><?php echo $lang['home_5']; ?></h3>
+                                            <p class="second_line"><?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?></p>
                                         </a>
                                     </div>
                                 </div>

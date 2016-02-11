@@ -40,4 +40,3 @@ if (ctype_digit($_POST['id'])) {
 } else {
 	die('{"status": "0", "data": "'.$lang['264'].'"}');
 }
-?>

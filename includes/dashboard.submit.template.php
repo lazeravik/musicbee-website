@@ -292,7 +292,7 @@ if (isset($_GET['view'])) {
 				<ul class="form">
 					<li>
 						<button class="btn btn_blue" type="submit" id="submit" style="padding:15px"
-						onclick="saveEdit()"><?php echo $lang['178']; ?></button>
+						onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
 						<p class="show_info info_red">
 							<?php echo $lang['123']; ?>
 						</p>

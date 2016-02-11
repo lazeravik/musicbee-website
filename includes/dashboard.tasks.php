@@ -210,7 +210,3 @@ function getAllVersion() {
 		}
 	}
 }
-
-
-
-?>

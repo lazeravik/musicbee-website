@@ -12,7 +12,7 @@
 				</li>
 				<li><?php echo $lang['footer_181']; ?> <?php echo $release['stable']['version']; ?></li>
 				<li>
-					<?php echo $lang['156']; ?> <?php echo $release['stable']['os']; ?>
+					<?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?>
 				</li>
 				<li><?php echo $lang['footer_182']; ?> <?php echo $release['stable']['date']; ?></li>
 				<br/>
@@ -51,7 +51,7 @@
 				<li><?php echo $lang['footer_189']; ?></li>
 				<li>
 					<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9BPHYSSZDDWDY&lc=GB&item_name=MusicBee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank" class="btn btn_blue" >
-						<i class="fa fa-paypal"></i> <?php echo $lang['footer_190']; ?>
+						<i class="fa fa-paypal"></i>&nbsp; <?php echo $lang['footer_190']; ?>
 					</a>
 				</li>
 				</ul>

@@ -15,26 +15,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 if (!isset($_POST['id'])){
 	die('Not Available!');
 }
-
-
-
 $inputId = $_POST['id'];
 ?>
 <style>
-	.bottom_panel_img {
-		position: absolute;
-		width: 100%;
-		bottom: 0px;
-		box-sizing: border-box;
-		padding: 10px;
-	}
-	.add_btn_upload{
-		margin:0px;
-		float:right;
-	}
-
-
-
 	.dropzone h2 {
 		font-weight: bold;
 		color: #6C7984;

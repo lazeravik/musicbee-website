@@ -41,7 +41,7 @@ if (count($params) > 1):?>
 			</li>	
 		<?php else: ?>
 			<li>
-				<a href="<?php echo $link['login']; ?>"><?php echo $lang['17']; ?></a>
+				<a href="<?php echo $link['login']; ?>"><i class="fa fa-user"></i>&nbsp; <?php echo $lang['17']; ?></a>
 			</li>
 		<?php endif; ?>
 		<?php 
