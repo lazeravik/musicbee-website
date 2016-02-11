@@ -15,8 +15,6 @@
 *
 * Language files for this website. After some thought i decided to make the site more of a multi lingual. The Reason mainly is to keep the code clean. This will be only for admin panel and add-on dashboard. I will expand it to the whole site (including the integrated parts of the forum). 
 *
-* This means community can create language files. This is mostly an experimental feature 
-* Every thing should be DEFINED, not variable. This will not change throughout the site.
 *
 * Some shortcut definition:
 * every defination starts with these and they are page names to make it easier 
