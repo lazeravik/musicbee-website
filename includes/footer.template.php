@@ -31,10 +31,7 @@
 		<div id="widgetCustomize" class="widgetCommon">
 			<h4><?php echo $lang['footer_188']; ?></h4>
 			<ul class="footer-list-menu addon_list">
-				<?php 
-				////
-				// Add-on footer menu is an array, edit function.php to modify it
-				////
+				<?php
 				foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 					echo "<li><a href=\"".$menu_addon['href']." \">";
 					if (!empty($menu_addon['icon']) && empty($no_menu_icon)) echo $menu_addon['icon'];

@@ -163,7 +163,7 @@ if (isset($_GET['view'])) :
 </div>
 <div id="clear"></div>
 <?php if($viewType!=1): ?>
-	<script src="<?php echo $siteUrl; ?>/scripts/wmdMod.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			MBEditor.wmdBase();

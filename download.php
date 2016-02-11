@@ -9,7 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<title>MusicBee - Downloads</title>
 	<!--include common meta tags and stylesheets -->
 	<?php include ('./includes/meta&styles.php'); ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeDownload.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeDownload.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include ('./includes/font.helper.php'); ?>
 </head>

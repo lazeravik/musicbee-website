@@ -6,10 +6,10 @@ if (defined('MB_FUNC')) return true;
 define('MB_FUNC', 'COMMON_FUNCTION');
 if(session_status() == PHP_SESSION_NONE) {session_start();}
 
-$siteUrl 						= 'http://'.$_SERVER['HTTP_HOST'];
+$siteUrl 						= 'http://'.$_SERVER['HTTP_HOST']."/";
 $siteRoot 						= $_SERVER['DOCUMENT_ROOT']."/";
 //Error related pages and codes
-$errorPage 						= $siteUrl . '/kb/';
+$errorPage 						= $siteUrl . 'kb/';
 $errorCode 						= array();
 $errorCode['ADMIN_ACCESS'] 		= "101"; //if a non admin is trying to access a page
 $errorCode['LOGIN_MUST'] 		= "102"; //User must logged in
@@ -18,6 +18,10 @@ $errorCode['NOT_FOUND']			= "104"; //Page not found
 $status['404']					= $siteRoot . "error/404.php";
 
 require_once $siteRoot.'includes/languages/en-us.php';
+//setting file contains setting variables, mysql database credentials, api ids, passwords etc
+require_once $siteRoot.'setting.php';
+
+
 /**
 * Forum integration is must, if it is not initialized before this then throw an error
 */
@@ -37,34 +41,30 @@ if (!$user_info['is_admin'] && !empty($admin_only)) {
 	}
 }
 
-//setting file contains setting variables, mysql database credentials, api ids, passwords etc
-require_once $siteRoot.'setting.php';
-
-
 /// page location variable starts here
 $mainmenu 						= $siteRoot.'includes/mainmenu.template.php';
 $footer 						= $siteRoot.'includes/footer.template.php';
 
 $link 							= array();
-$link['download'] 				= $siteUrl.'/download/';
-$link['rss'] 					= $siteUrl.'/rss/';
+$link['download'] 				= $siteUrl.'download/';
+$link['rss'] 					= $siteUrl.'rss/';
 $link['home'] 					= $siteUrl;
-$link['forum'] 					= $siteUrl .'/forum/';
-$link['admin']['admin-panel'] 	= $siteUrl .'/admin-panel/';
+$link['forum'] 					= $siteUrl .'forum/';
+$link['admin']['admin-panel'] 	= $siteUrl .'admin-panel/';
 $link['admin']['forum-panel'] 	= $link['forum'] .'?action=admin';
 $link['login'] 					= $link['forum'] . '?action=login';
-$link['support'] 				= $siteUrl . '/support/';
-$link['addon']['home'] 			= $siteUrl .'/addons/';
-$link['addon']['dashboard'] 	= $siteUrl .'/addon-dashboard/';
-$link['help'] 					= $siteUrl . '/help/';
-$link['release-note'] 			= $siteUrl . '/release-note/';
+$link['support'] 				= $siteUrl . 'support/';
+$link['addon']['home'] 			= $siteUrl . 'addons/';
+$link['addon']['dashboard'] 	= $siteUrl . 'addon-dashboard/';
+$link['help'] 					= $siteUrl . 'help/';
+$link['release-note'] 			= $siteUrl . 'release-note/';
 $link['logout'] 				= $link['forum'] . 'index.php?action=logout;' . $context['session_var'] . '='. $context['session_id'] ;
-$link['press'] 					= $siteUrl.'/press/';
-$link['devapi']					= $siteUrl.'/api/';
-$link['bugreport']				= $siteUrl.'/bug/';
+$link['press'] 					= $siteUrl.'press/';
+$link['devapi']					= $siteUrl.'api/';
+$link['bugreport']				= $siteUrl.'bug/';
 
 //get the MusicBee info from json api
-$releaseData = json_decode(file_get_contents($siteUrl .'/api.get.php?type=json&action=release-info'));
+$releaseData = json_decode(file_get_contents($siteUrl .'api.get.php?type=json&action=release-info'));
 
 $release 						= array();
 $release['stable']['appname'] 	= isset($releaseData[0]->appname)		?		$releaseData[0]->appname		:"...";
@@ -86,6 +86,11 @@ $release['beta']['link1'] 		= isset($releaseData[1]->DownloadLink)	?		$releaseDa
 $release['beta']['message'] 	= isset($releaseData[1]->message)		?		$releaseData[1]->message 		:null;
 $release['beta']['available']	= isset($releaseData[1]->available)		?		$releaseData[1]->available 		:0;
 
+
+/**
+ * @var URI $params
+ * creates an array from the URI
+ */
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
 

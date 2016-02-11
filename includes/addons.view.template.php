@@ -10,9 +10,9 @@
         <!--include common meta tags and stylesheets -->
         <?php include $siteRoot . 'includes/meta&styles.php'; ?>
         <!--Use OWL carousel for image screenshot slider -->
-        <link rel="stylesheet" href="<?php echo $siteUrl; ?>/styles/magnific-popup.css">
+        <link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/magnific-popup.css">
         <!-- Used for slider animation -->
-        <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAddons.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
         <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
         <?php include $siteRoot . 'includes/font.helper.php'; ?>
         <?php if (!empty($addon_type)): ?>
@@ -174,8 +174,8 @@
     include($footer);
     ?>
 
-    <script type="text/javascript" src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>/scripts/jquery.sticky.min.js"></script>
+    <script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+    <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
     <script type="text/javascript">
     	$('#type').on('change', function (event) {
     		$('#big_search').attr('placeholder', 'Search ' + $("#type option:selected").text());

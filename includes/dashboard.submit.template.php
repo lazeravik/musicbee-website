@@ -169,7 +169,7 @@ if (isset($_GET['view'])) {
 					<div class="right_float float_2">
 						<a href="javascript:void(0);" onclick="showUpModal('dlink','file')" id="upload_to_mediafire"
 						class="btn btn_blue input_add" title="<?php echo $lang['213']; ?>"><img
-						src="<?php echo $siteUrl . "/img/mf-flame-white.png"; ?>">&nbsp;&nbsp;<?php echo $lang['212']; ?></a>
+						src="<?php echo $siteUrl . "img/mf-flame-white.png"; ?>">&nbsp;&nbsp;<?php echo $lang['212']; ?></a>
 					</div>
 					<div id="clear"></div>
 				</label>

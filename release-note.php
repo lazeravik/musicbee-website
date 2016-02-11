@@ -17,15 +17,15 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 
 	<!--include common meta tags and stylesheets -->
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/meta&styles.php'; ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeReleaseNote.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAdminPanel.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/markdownView.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/code-style/obsidian.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeReleaseNote.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/font.helper.php'; ?>
 	<!--Social network tags for facebook and twitter -->
 	<meta property="og:title" content="">
-	<meta property="og:image" content="<?php echo $siteUrl; ?>/img/mb_big.png">
+	<meta property="og:image" content="<?php echo $siteUrl; ?>img/mb_big.png">
 	<meta property="og:description" content="<?php echo $meta_description; ?>">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@MusicBeePlayer"> 
@@ -106,9 +106,9 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 		<?php 
 			include($footer); 
 		?>
-		<script src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script> 
-		<script src="<?php echo $siteUrl; ?>/scripts/highlight/highlight.pack.js"></script>
-		<script src="<?php echo $siteUrl; ?>/scripts/jquery.sticky.min.js"></script>
+		<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+		<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
+		<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
 		<script>
 		$("#secondery_nav").sticky({ topSpacing: 0 });
 		$(document).ready(function(){

@@ -103,7 +103,7 @@ $inputId = $_POST['id'];
 <div class="main_mediafire_upload_body">
 <?php if (IMGUR_UPLOAD_ON): ?>
 	<div class="infocard_header grey_color">
-		<h3><?php echo $lang['400']; ?> <img src="<?php echo $siteUrl."/img/mf-logo-dark-bg.png"; ?>"></h3>
+		<h3><?php echo $lang['400']; ?> <img src="<?php echo $siteUrl."img/mf-logo-dark-bg.png"; ?>"></h3>
 	</div>
 	<div class="infocard_header dark_grey">
 		<p><?php echo $lang['401']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
@@ -142,9 +142,7 @@ $inputId = $_POST['id'];
 	</div>
 
 </div>
-<!-- 
-<script type="text/javascript" src="<?php echo $siteUrl; ?>/scripts/imgur.js"></script>
--->
+
 <script type="text/javascript">
 	var file = $('#file_input');
 

@@ -12,12 +12,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
         <!--include common meta tags and stylesheets -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/meta&styles.php'; ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeIndex.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeIndex.css">
         <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/font.helper.php'; ?>
         <!--Social network tags for facebook and twitter -->
         <meta property="og:title" content="">
-        <meta property="og:image" content="<?php echo $siteUrl; ?>/img/mb_big.png">
+        <meta property="og:image" content="<?php echo $siteUrl; ?>img/mb_big.png">
         <meta property="og:description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@MusicBeePlayer"> 
@@ -194,8 +194,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         <?php
         include($footer);
         ?>
-	<script src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>	
-	<script src="<?php echo $siteUrl; ?>/scripts/scrollReveal.min.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/scrollReveal.min.js"></script>
 	<script type="text/javascript">
 		//initialize scroll reveal
 		var hero_title_reveal = {

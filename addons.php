@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 			exit();
 		}
 		if (count($params) <= 4 || $params[3] != Slug($data['addon_title'])) {
-			header("Location: " . $siteUrl . "/addons/" . $data['ID_ADDON'] . "/" . Slug($data['addon_title']) . "", 301);
+			header("Location: " . $siteUrl . "addons/" . $data['ID_ADDON'] . "/" . Slug($data['addon_title']) . "", 301);
 		}
 
         $screenshots = explode(",", $data['image_links']); //create an array of screenshots
@@ -67,19 +67,19 @@ $meta_description = "Download MusicBee skins, plugins, theater mode, visualizer 
 
     <!--Social network tags for facebook and twitter -->
     <meta property="og:title" content="">
-    <meta property="og:image" content="<?php echo $siteUrl; ?>/img/mb_big.png">
+    <meta property="og:image" content="<?php echo $siteUrl; ?>img/mb_big.png">
     <meta property="og:description" content="<?php echo $meta_description; ?>">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@MusicBeePlayer">
     <meta name="twitter:title" content="MusicBee - Music Manager and Player">
     <meta name="twitter:description" content="<?php echo $meta_description; ?>">
 
-    <link rel="stylesheet" href="<?php echo $siteUrl; ?>/styles/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/magnific-popup.css">
     <!-- Used for slider animation -->
-    <link rel="stylesheet" href="<?php echo $siteUrl; ?>/styles/animate.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAddons.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/code-style/obsidian.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/markdownView.css">
+    <link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/animate.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
     <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
     <?php include $siteRoot . 'includes/font.helper.php'; ?>
     <?php if (!empty($addon_type)): ?>
@@ -272,11 +272,11 @@ $meta_description = "Download MusicBee skins, plugins, theater mode, visualizer 
 include($footer);
 ?>
 <canvas id="bg_hero_blur" style="display:none"></canvas>
-<script type="text/javascript" src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/jquery.magnific-popup.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/highlight/highlight.pack.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/StackBlur.js"></script>
+<script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
 <script type="text/javascript">
 	function blurDo() {
 		var bg_blur = document.getElementById("bg_hero_blur");
@@ -331,7 +331,7 @@ include($footer);
 function rate(id) {
 	hideNotification();
 	$.ajax({
-    url: "<?php echo $siteUrl; ?>/includes/addons.tasks.php",
+    url: "<?php echo $siteUrl; ?>includes/addons.tasks.php",
     cache: false,
     type: "POST",
     data: {id: "" + id + ""}

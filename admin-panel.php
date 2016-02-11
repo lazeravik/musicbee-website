@@ -8,11 +8,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 <title><?php echo $lang['AP_TITLE']; ?></title>
 <!--include common meta tags and stylesheets -->
 <?php include ('./includes/meta&styles.php'); ?>
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAdminPanel.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/animate.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/markdownView.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/wmd.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/code-style/obsidian.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
 
 <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 <?php include ('./includes/font.helper.php'); ?>
@@ -74,11 +74,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<?php 
 		include($footer); 
 	?>
-<script src="<?php echo $siteUrl; ?>/scripts/markdown-it.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/highlight/highlight.pack.js"></script>	
-<script src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>	
-<script src="<?php echo $siteUrl; ?>/scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/modalBox.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/markdown-it.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
 <?php 
 	include_once $siteRoot.'includes/ajax.navigation.script.php';
 ?>

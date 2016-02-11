@@ -41,12 +41,12 @@ $_SESSION['memberinfo'] = $memberinfoArray;
     <title>MusicBee Addon Dashboard</title>
     <!--include common meta tags and stylesheets -->
     <?php include('./includes/meta&styles.php'); ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAdminPanel.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/MusicBeeAddons.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/animate.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/markdownView.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/wmd.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/code-style/obsidian.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
     <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
     <?php include('./includes/font.helper.php'); ?>
 </head>
@@ -117,14 +117,13 @@ $_SESSION['memberinfo'] = $memberinfoArray;
 include($footer);
 ?>
 
-<script src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/jquery.tagsinput.min.js"></script>
-<!-- remove the following script for making the header non-sticky -->
-<script src="<?php echo $siteUrl; ?>/scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/markdown-it.min.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/highlight/highlight.pack.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/wmdMod.js"></script>
-<script src="<?php echo $siteUrl; ?>/scripts/modalBox.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/markdown-it.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
 
 <?php
 include_once $siteRoot . 'includes/ajax.navigation.script.php';

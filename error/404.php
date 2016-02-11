@@ -6,16 +6,14 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<head>
 	<title><?php echo $lang['197']; ?></title>
 	<!--include common meta tags and stylesheets -->
-	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/meta&styles.php'; ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>/styles/404.css">
+	<?php include $siteRoot.'includes/meta&styles.php'; ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/404.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/font.helper.php'; ?>
+	<?php include $siteRoot.'includes/font.helper.php'; ?>
 	</head>
 	<body>
 	<div id="indexBackground">
 	<div id="wrapper">
-
-	<!--IMPORTANT-->
 	<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
 	<?php 
 		include($mainmenu); 
@@ -46,6 +44,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	    <?php 
 	    	include($footer); 
 	    ?>
-	    <script src="<?php echo $siteUrl; ?>/scripts/jquery-2.1.4.min.js"></script>	
+	    <script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
 	</body>
 </html>
