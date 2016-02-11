@@ -1,5 +1,15 @@
 <?php
 /**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+
+/**
  * This class is a wrapper to the MediaFire.com API.
  *
  * It provides functions to interact with the MediaFire account, such as
@@ -9,13 +19,7 @@
  *
  * @package mflib
  */
-/**
- * MediaFire API PHP Library
- *
- * @author windylea <www.windylea.com>
- * @copyright Copyright (c) 2012, WindyLea. All right reserved
- * @version 0.33
- */
+
  if(@!include_once(dirname(__FILE__)."/upload.php")){
  	echo 'Upload Module not installed';
  } 

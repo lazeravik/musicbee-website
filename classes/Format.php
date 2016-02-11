@@ -1,4 +1,5 @@
-/*
+<?php
+/**
  * Copyright (c) AvikB, some rights reserved.
  * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
@@ -8,17 +9,14 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
-#main {
-    display: table;
-}
-.sub_content{
-    margin-top:100px;
-    margin-bottom:150px;
-    text-align:center;
-}
-.sub_content h1{
-    font-size:100px;
-}
-.sub_content h2{
-    margin:0px;
-}
+
+	/**
+	 * Created by PhpStorm.
+	 * User: Avik
+	 * Date: 11/02/2016
+	 * Time: 06:58 PM
+	 */
+	class Format
+	{
+		
+	}
