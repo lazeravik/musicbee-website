@@ -595,9 +595,6 @@ input#color:checked {
 }
 
 .addon_list_box li .addon_list_box_wrapper:hover .thumb_more {
-    -webkit-filter: blur(7px);
-    -moz-filter: blur(7px);
-    filter: blur(7px);
     overflow: hidden;
 }
 
