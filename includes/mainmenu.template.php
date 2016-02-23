@@ -24,9 +24,9 @@ if (count($params) > 1):?>
 
 ?>
 <!-- Navigation Menu starts -->
-<div id="header">
-	<div id="tabs">
-		<ul>  
+<nav class="mainmenu" id="header">
+	<div class="menu_wrapper">
+		<ul class="menu_position menu_right">  
 		<?php if (!$context['user']['is_guest']): ?>
 			<li>
 				<a href="<?php echo $scripturl; ?>?action=pm" 
@@ -85,7 +85,7 @@ if (count($params) > 1):?>
 		</ul>
 		<div id="clear"></div>
 	</div>
-</div>
+</nav>
 <noscript>
 	<div class="noscript_wrap"><p class="show_info info_red">Your browser does not support javascript(or disabled), please use a browser with javascript or enable it.<br/>We need javascript to function properly, otherwise some things won't work properly.</p></div>
 </noscript>

@@ -17,13 +17,18 @@
  * Style for input fields such as buttons, links, checkboxes etc
  */
  @import "components/mb_input";
+ @import "mb-style/components/buttons";
 
+
+/**
+ * Main Menu styles
+ *
+ */
+  @import "mb-style/mb_menu";
 
 /**
  *styles for codes highlighting
  */
  @import "others/highlight_obsidian";
-
- @import "mb-style/mb_base";
 
 

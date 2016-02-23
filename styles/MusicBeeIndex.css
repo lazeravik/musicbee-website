@@ -8,10 +8,17 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
-.mb_intro_top .sub_content{
-    padding: 150px 10px;
-    text-align: center;
+.sub_content::after {
+    position:absolute;
+    content: "";
+    clear: both;
+}
+
+.mb_intro_top .sub_content {
+    padding: 100px 10px 200px;
+    text-align: left;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
+    position: relative;
 }
 
 .mb_message_top .sub_content{
@@ -76,6 +83,7 @@
 .overlay{
     background: linear-gradient( 135deg, rgba(42, 62, 78, 0.95),rgba(39, 68, 90, 0.74),rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58) );
     color: #FFFFFF;
+    overflow: hidden;
 }
 
 .overlay_grad_quality_top {
@@ -95,9 +103,18 @@
     padding:30px;
 }
 
-
-
-
+.hero_text_top {
+    width: 50%;
+}
+.hero_img_top {
+    position: absolute;
+    right: -150px;
+    top: 100px;
+}
+.hero_text_top h4 {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.85);
+}
 
 /* Starts Color intro */
 .mb_intro_top {
@@ -108,7 +125,7 @@
     z-index: 2;
 }
 
-.mb_intro_top h1 {
+.mb_intro_top h1.hero_title {
     color: #FFB100;
     font-size: 55px;
     font-weight: bold;
@@ -145,35 +162,22 @@
     background: url("../../../img/hive_pat.png"),#2196F3;
 }
 
-.mb_more_top{
-    background: url("../../../img/bottom_more.jpg")  50% 0 fixed,#607D8B;
+.mb_intro_top {
+    background: url(../img/bg_teaser.svg) fixed #15327B;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    z-index: 2;
+}
+
+.mb_more_top {
+    background: url("../../../img/headphone.jpg") 50% 0 fixed,#0076db;
     background-size: cover;
     background-position: 50% 50%;
     background-position-x: center;
     background-position-y: center;
 }
 
-.shadow_wrap {
-    position: relative;
-    background: transparent url("../img/mb_hero.png");
-    background-position: top 100px right -120px;
-    background-size: 680px;
-    background-repeat: no-repeat;
-}
-
-/*.shadow_wrap::after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    box-shadow: 0 0 40px rgb(0, 0, 0);
-    bottom: 0px;
-    width: 100%;
-    height: 10%;
-    border-radius: 100%;
-    left: 0;
-    right: 0;
-}
-*/
 ul.feature_box,ul.feature_overview_box, ul.feature_overview_box li, ul.feature_box li{
     list-style:none;
     margin:0px;
@@ -204,33 +208,27 @@ ul.feature_box li p.feature_ico{
 .text_left{
     text-align: left !important;
 }
-
-@media (min-width: 1200px){
-    .shadow_wrap {
-        background-position: top 90px right 50px;
-        background-size: 600px;
-        background-repeat: no-repeat;
-    }
-}
-@media (min-width: 1600px){
-    .shadow_wrap {
-        background-position: top 100px right 120px;
-        background-size: 700px;
-        background-repeat: no-repeat;
-    }
-}
-@media (min-width: 1900px){
-    .shadow_wrap {
-        background-position: right 300px top 100px;
-        background-size: 700px auto;
-        background-repeat: no-repeat;
-    }
+.mb_intro_top  .hero_download_buttons {
+    text-align: left;
 }
 
+@media (max-width: 1020px) {
+    .hero_img_top {
+        display: none;
+    }
+    .mb_intro_top .sub_content {
+        text-align: center;
+        padding: 50px 10px 50px;
+    }
 
-@media (max-width: 1000px) {
-    .shadow_wrap {
-        background: none;
+    .mb_intro_top .hero_text_top {
+        width: 100%;
+        padding: 0px 100px;
+        box-sizing: border-box;
+    }
+
+    .mb_intro_top  .hero_download_buttons {
+        text-align: center;
     }
 }
 
@@ -243,6 +241,10 @@ ul.feature_box li p.feature_ico{
 }
 
 @media (max-width: 600px) {
+    .mb_intro_top .hero_text_top {
+        padding: 0px 10px;
+    }
+
     ul.feature_box li div {
         padding: 10px 5px 20px 5px;
         margin: 20px 5px 5px 5px;

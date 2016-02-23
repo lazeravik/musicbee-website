@@ -472,7 +472,7 @@ input[type="checkbox"] {
 }
 
 /* line 538, ../sass/mb_main.scss */
-#tabs {
+#header #tabs {
   max-width: 1000px;
   width: inherit;
   font-size: 16px;
@@ -483,7 +483,7 @@ input[type="checkbox"] {
   margin: 0 auto;
 }
 /* line 547, ../sass/mb_main.scss */
-#tabs ul {
+#header #tabs ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -491,14 +491,14 @@ input[type="checkbox"] {
   float: right;
 }
 /* line 554, ../sass/mb_main.scss */
-#tabs li {
+#header #tabs li {
   display: block;
   margin: 0;
   padding: 0;
   float: left;
 }
 /* line 560, ../sass/mb_main.scss */
-#tabs a {
+#header #tabs a {
   background: none;
   margin: 0;
   padding: 20px 15px;
@@ -513,14 +513,14 @@ input[type="checkbox"] {
   display: inline-block;
 }
 /* line 575, ../sass/mb_main.scss */
-#tabs a:hover {
+#header #tabs a:hover {
   background: none;
   text-decoration: none;
   color: orange;
   box-shadow: inset 0 -4px 0 orange;
 }
 /* line 583, ../sass/mb_main.scss */
-#tabs .selected a {
+#header #tabs .selected a {
   float: right;
   background: none;
   margin: 0;

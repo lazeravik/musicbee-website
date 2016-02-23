@@ -8715,6 +8715,82 @@ input, textarea, select {
   input:focus, textarea:focus, select:focus {
     border: 2px solid #333; }
 
+.mb-herobutton-large {
+  color: white;
+  padding: 10px 15px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-transition: linear all .15s;
+          transition: linear all .15s; }
+  .mb-herobutton-large:hover {
+    background: none; }
+  .mb-herobutton-large::after {
+    content: attr(data-mb-secondline);
+    display: block;
+    font-size: 12px;
+    margin: 0px; }
+  .mb-herobutton-large.mb-herobutton-large-wireframe {
+    background: none; }
+
+.mb-button-download {
+  background: #fff;
+  color: #333;
+  border-color: #fff;
+  -webkit-transition: linear all .15s;
+          transition: linear all .15s;
+  font-size: 20px;
+  font-weight: normal;
+  font-family: "Roboto", "sans-serif";
+  line-height: 25px; }
+
+.mb-button-feature {
+  color: #fff;
+  border-color: #fff;
+  -webkit-transition: linear all .15s;
+          transition: linear all .15s;
+  font-size: 20px;
+  font-weight: normal;
+  font-family: "Roboto", "sans-serif";
+  line-height: 25px; }
+
+/**
+ * Main Menu styles
+ *
+ */
+.mainmenu {
+  width: 100%;
+  background: #333;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  z-index: 20; }
+  .mainmenu .menu_wrapper {
+    max-width: 1000px;
+    width: inherit;
+    font-size: 16px;
+    line-height: normal;
+    float: none;
+    display: block;
+    padding-top: 0;
+    margin: 0 auto; }
+    .mainmenu .menu_wrapper .menu_position {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: inline-block; }
+      .mainmenu .menu_wrapper .menu_position .menu_right {
+        float: right; }
+      .mainmenu .menu_wrapper .menu_position .menu_left {
+        float: left; }
+      .mainmenu .menu_wrapper .menu_position:after {
+        clear: both;
+        display: table; }
+    .mainmenu .menu_wrapper:after {
+      clear: both;
+      display: table; }
+
 /**
  *styles for codes highlighting
  */
@@ -8792,69 +8868,3 @@ input, textarea, select {
 .hljs-name,
 .hljs-strong {
   font-weight: bold; }
-
-/*
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
- *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
- * @Contributors:
- * Created by AvikB for noncommercial MusicBee project.
- *
- */
-.mb-herobutton-large {
-  color: white;
-  padding: 10px 15px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  border-width: 1px;
-  border-style: solid;
-  -webkit-transition: linear all .15s;
-          transition: linear all .15s; }
-  .mb-herobutton-large:hover {
-    background: none; }
-  .mb-herobutton-large::after {
-    content: attr(data-mb-secondline);
-    display: block;
-    font-size: 12px;
-    margin: 0px; }
-  .mb-herobutton-large.mb-herobutton-large-wireframe {
-    background: none; }
-
-.mb-button-download {
-  background: #fff;
-  color: #333;
-  border-color: #fff;
-  -webkit-transition: linear all .15s;
-          transition: linear all .15s;
-  font-size: 20px;
-  font-weight: normal;
-  font-family: "Roboto", "sans-serif";
-  line-height: 25px; }
-
-.mb-button-feature {
-  color: #fff;
-  border-color: #fff;
-  -webkit-transition: linear all .15s;
-          transition: linear all .15s;
-  font-size: 20px;
-  font-weight: normal;
-  font-family: "Roboto", "sans-serif";
-  line-height: 25px; }
-
-.mb-section-colored, .mb-section-colored h1, .mb-section-colored h2, .mb-section-colored a:not([class]) {
-  color: #fff !important; }
-
-.mb-section-color-1 {
-  background: #FF9800 url("../../images/bg_teaser.svg") 50% 50% no-repeat; }
-
-.mb-middle, .mb-section, .mb-footer {
-  padding: 50px 0; }
-
-@media (min-width: 1220px) {
-  .mb-middle, .mb-section, .mb-footer {
-    padding: 120px 0; } }
-
-@media (min-width: 768px) {
-  .mb-middle, .mb-section, .mb-footer {
-    padding: 90px 0; } }

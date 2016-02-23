@@ -96,8 +96,8 @@
 	/* Index.php lang */
 	$lang['home_1'] = "MusicBee";
 	$lang['home_2'] = "The Ultimate Music Manager and Player";
-	$lang['home_3'] = "MusicBee makes it easy to manage, find, and play music files on your Windows computer and on portable devices. There's even support for several web-based services such as podcasts and streaming radio stations.";
-	$lang['home_4']= "Get MusicBee. It's free!";
+	$lang['home_3'] = "MusicBee makes it easy to manage, find, and play music files on your computer. MusicBee also supports podcasts and web radio stations and Soundcloud integration";
+	$lang['home_4']= "Get MusicBee, you will never go back and it's free!";
 	$lang['home_5'] = "Download Now";
 	$lang['home_6'] = "Check out features";
 	$lang['home_7'] = "See the best of MusicBee";
@@ -140,7 +140,7 @@
 	$lang['footer_190'] = "Donate with Paypal";
 	$lang['footer_191'] = "<i class=\"fa fa-heartbeat\"></i>&nbsp;&nbsp;Add a new feature to the Wishlist";
 	$lang['footer_192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
-	$lang['footer_193'] = "Copyright &copy; Steven Mayall 2008-" . date('Y') . ", All Rights Reserved";
+	$lang['footer_193'] = "MusicBee copyright &copy; Steven Mayall 2008-" . date('Y') . ", All Rights Reserved";
 	$lang['footer_231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press & Media";
 
 	/*404 page */
