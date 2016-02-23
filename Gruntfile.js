@@ -7,8 +7,7 @@ module.exports = function (grunt) {
             sass: {
                 files: 'styles/scss/**/*.scss',
                 tasks: [
-                    'sass',
-                    'autoprefixer'
+                    'sass'
                 ]
             }
         },
@@ -20,25 +19,25 @@ module.exports = function (grunt) {
         },
         sass: {
             options: {
-                style: 'compressed',
+                style: 'expanded',
             },
             dist: {
                 files: {
-                    'styles/src/mb_main.css': 'styles/scss/mb_main.scss'
+                    'styles/dist/mb_main.css': 'styles/scss/mb_main.scss'
                 }
             }
         },
-        autoprefixer: {
-            options: {
-                browsers: ['last 2 versions', 'ie 9', 'ie 10', '> 1%']
-            },
-            main: {
-                expand: true,
-                flatten: true,
-                src: 'styles/src/*.css',
-                dest: 'styles/dist/'
-            }
-        },
+        // autoprefixer: {
+        //     options: {
+        //         browsers: ['last 2 versions', 'ie 9', 'ie 10', '> 1%']
+        //     },
+        //     main: {
+        //         expand: true,
+        //         flatten: true,
+        //         src: 'styles/src/*.css',
+        //         dest: 'styles/dist/'
+        //     }
+        // },
          // browserSync: {
              // default_options: {
                  // bsFiles: {
@@ -66,6 +65,6 @@ module.exports = function (grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     // Default task(s).
     // grunt.registerTask('default', ['browserSync', 'watch']);
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'watch']);
+    grunt.registerTask('default', ['sass', 'watch']);
 
 };

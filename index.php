@@ -234,19 +234,27 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 			delay    : 400,
 			scale    : 0
 		};
-		var img = {
-			origin   : "top",
-			distance : "2vw",
-			duration : 1000,
-			delay    : 50,
-			scale    : 1
-		};
+        var img = {
+            origin   : "top",
+            distance : "2vw",
+            duration : 1000,
+            delay    : 50,
+            scale    : 1
+        };
+        var hero_img = {
+            origin   : "right",
+            distance : "10vw",
+            duration : 1000,
+            delay    : 50,
+            scale    : .9
+        };
 
 		window.sr = ScrollReveal()
-		.reveal('.hero_title', hero_title_reveal)
 		.reveal('.intro', intro)
+        .reveal('.hero_text_top h1', hero_title_reveal)
 		.reveal('.top_download_option', download)
-		.reveal('img', img);
+		.reveal('img', img)
+        .reveal('.mb_intro_top img', hero_img);
 
 	</script>
 </body>

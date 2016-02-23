@@ -8,17 +8,16 @@
  *
  */
 
-
- @import "core/mb_base";
+ @import "others/normalize";
  @import "core/mb_variables";
 
 
 /**
  * Style for input fields such as buttons, links, checkboxes etc
  */
- @import "components/mb_input";
+ @import "mb-style/components/mb_input";
  @import "mb-style/components/buttons";
-
+ @import "mb-style/components/headers";
 
 /**
  * Main Menu styles
