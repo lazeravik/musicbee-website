@@ -619,6 +619,10 @@ h1 {
   color: #444;
 }
 
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_black p.disclaimer {
+  color: #9E9E9E;
+}
+
 .mb_landing .sub_content .hero_text_top .text_wrapper.text_white h1 {
   color: white;
 }
@@ -627,8 +631,16 @@ h1 {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_white p.disclaimer {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .mb_landing .sub_content .hero_text_top h4 {
   margin-top: 20px;
+}
+
+.mb_landing .sub_content .hero_text_top p.disclaimer {
+  font-size: 12px;
 }
 
 .mb_landing .sub_content .hero_img_top {
@@ -654,6 +666,10 @@ h1 {
 
 .mb_landing.alternate_landing_row_bg {
   background: rgba(0, 0, 0, 0.1);
+}
+
+.mb_landing.bg_blue {
+  background: #0078D7;
 }
 
 .mb_landing.align_right .hero_img_wrapper {

@@ -17,14 +17,19 @@ $max_content_width : 1000px;
 				&.text_black {
 					h1 { color: #333; }
 					h4 { color: #444; }
+					p.disclaimer { color: #9E9E9E; }
 				}
 
 				&.text_white {
 					h1 { color: white; }
 					h4 { color: rgba(255, 255, 255, 0.85); }
+					p.disclaimer { color: rgba(255, 255, 255, 0.4);; }
 				}
 			}
 			h4 { margin-top: 20px; }
+			p.disclaimer {
+				font-size: 12px;
+			}
 		}
 
 		.hero_img_top {
@@ -49,6 +54,10 @@ $max_content_width : 1000px;
 
 	&.alternate_landing_row_bg {
 		background: rgba(0, 0, 0, 0.1);
+	}
+
+	&.bg_blue {
+		background: #0078D7;
 	}
 
 	&.align_right {

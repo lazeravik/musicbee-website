@@ -124,6 +124,16 @@
 	$lang['home_28'] = "Accurate CD ripping and file conversion";
 	$lang['home_29'] = "Get MusicBee and enhance your music experience";
 	$lang['home_30'] = "Submit";
+	$lang['home_31'] = "Groove Music Support";
+	$lang['home_32'] = "MusicBee has native support for Groove Music(formerly Xbox Music). You can stream directly from MusicBee, or add to your existing playlist, get song recommendation from vast catalog of Groove <br/><br/>Want to listen to a song before buy? You can listen to preview. ";
+	$lang['home_33'] = "The Best.... rated by reviewers and users";
+	$lang['home_34'] = "MusicBee is rated one of the best Music player and organizer available for PC. It packs with features that will make you WOW. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today, you will never go back.";
+	$lang['home_35'] = "last.fm, CD Ripping, Tagging tools.... plus more!";
+	$lang['home_36'] = "MusicBee packs with a comprehensive set of features to make your music experience better. <br/><br/>Yet it is <b>one of the most lightweight player</b>, uses about 25-70 MB ram* with skins and add-ons, and packs all of these under 10 MB!";
+	$lang['home_37'] = "<br/><br/>*Tested with MusicBee 3 with a library of 200 albums, sized around 3GB.";
+	$lang['home_38'] = "";
+	$lang['home_39'] = "";
+	$lang['home_40'] = "";
 
 	/*footer*/
 	$lang['footer_179'] = "Get the latest MusicBee";
