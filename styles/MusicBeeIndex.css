@@ -8,11 +8,6 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
-.sub_content::after {
-    position:absolute;
-    content: "";
-    clear: both;
-}
 
 .mb_intro_top .sub_content {
     padding: 100px 10px 200px;
@@ -103,18 +98,6 @@
     padding:30px;
 }
 
-.hero_text_top {
-    width: 50%;
-}
-.hero_img_top {
-    position: absolute;
-    right: -150px;
-    top: 100px;
-}
-.hero_text_top h4 {
-    margin-top: 20px;
-    color: rgba(255, 255, 255, 0.85);
-}
 
 /* Starts Color intro */
 .mb_intro_top {

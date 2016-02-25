@@ -13,9 +13,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><?php echo $lang['IP_TITLE']; ?></title>
-        <meta name="description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
+<head>
+    <title><?php echo $lang['IP_TITLE']; ?></title>
+    <meta name="description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
         <!-- keyword meta tag is obsolete, google does not use it, but some
         search engine still use it, so for legacy support it is included -->
         <meta name="keywords" content="musicbee, music, player, ultimate, best, customizable, skin, free, plugin">
@@ -36,30 +36,31 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     <body>
         <div id="indexBackground">
             <div id="wrapper">
-
-                <!--IMPORTANT-->
-                <!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
-                <?php
-                include($mainmenu);
-                ?>
                 <!-- BODY CONTENT -->
                 <div id="main">
                     <div id="main_panel">
-                        <div class="content mb_intro_top">
+                        <div class="mb_intro_top">
                             <div class="overlay">
-                                    <div class="sub_content" style="">
+                                <!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
+                                <?php
+                                include($mainmenu);
+                                ?>
+                                <section class="mb_landing align_right">
+                                    <div class="sub_content">
                                         <div class="hero_text_top">
-                                            <!-- <h1 class="hero_title"><?php echo $lang['home_1']; ?></h1> -->
-                                            <div class="intro">
+                                            <!-- <h1 class="hero_title"><?php //echo $lang['home_1']; ?></h1> -->
+                                            <div class="text_wrapper text_white">
                                                 <h1><?php echo $lang['home_2']; ?></h1>
                                                 <h4><?php echo $lang['home_3']; ?></h4> 
                                             </div>
                                         </div>
                                         <div class="hero_img_top">
-                                            <img src="img/hero-img-top-min.png">
+                                            <div class="hero_img_wrapper hero_img_topmost_wrap">
+                                                <img src="img/hero-img-top-min.png">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="content mb_message_top">
+                                    <div class="mb_message_top">
                                         <div class="sub_content top_download_option hero_download_buttons">
                                             <h4><?php echo $lang['home_4']; ?></h4>
                                             <a href="<?php echo $link['download']; ?>" class="yellow_btn_big">
@@ -72,6 +73,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                             </a>
                                         </div>
                                     </div>
+                                </section>
                             </div>
                         </div>
 
@@ -129,27 +131,67 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="content mb_skin_top">
-                            <div class="sub_content" >
-                                <h2 data-sr="enter top"><?php echo $lang['home_18']; ?></h2>
-                                <h4 data-sr="enter bottom"><?php echo $lang['home_19']; ?></h4>
-                                <img src="./img/mb_skin_feature.jpg" data-sr="vFactor 0.2">
-                            </div>
-                        </div>
-                        <div class="content mb_sync_top">
-                            <div class="sub_content" data-sr='move 24px'>
-                                <h2><?php echo $lang['home_20']; ?></h2>
-                                <h4><?php echo $lang['home_21']; ?></h4>
-                            </div>
-                        </div>
-                        <div class="content mb_tag_top">
+
+
+
+                        <section class="mb_landing align_right">
                             <div class="sub_content">
-                                <h2 data-sr="enter top"><?php echo $lang['home_22']; ?></h2>
-                                <h4 data-sr="enter bottom"><?php echo $lang['home_23']; ?>
-                                </h4>
-                                <img src="./img/mb_tag_feature.jpg" data-sr="vFactor 0.2">
+                                <div class="hero_text_top">
+                                    <!-- <h1 class="hero_title"><?php //echo $lang['home_1']; ?></h1> -->
+                                    <div class="text_wrapper text_black">
+                                        <h1><?php echo $lang['home_18']; ?></h1>
+                                        <h4><?php echo $lang['home_19']; ?></h4> 
+                                    </div>
+                                </div>
+                                <div class="hero_img_top">
+                                    <div class="hero_img_wrapper">
+                                        <img src="img/hero-img-skin-min.png">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </section>
+
+                        <section class="mb_landing align_left alternate_landing_row_bg">
+                            <div class="sub_content">
+                                <div class="hero_text_top">
+                                    <!-- <h1 class="hero_title"><?php //echo $lang['home_1']; ?></h1> -->
+                                    <div class="text_wrapper text_black">
+                                        <h1><?php echo $lang['home_20']; ?></h1>
+                                        <h4><?php echo $lang['home_21']; ?></h4> 
+                                    </div>
+                                </div>
+                                <div class="hero_img_top">
+                                    <div class="hero_img_wrapper">
+                                        <img src="img/hero-img-sync-min.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mb_landing align_right">
+                            <div class="sub_content">
+                                <div class="hero_text_top">
+                                    <!-- <h1 class="hero_title"><?php //echo $lang['home_1']; ?></h1> -->
+                                    <div class="text_wrapper text_black">
+                                        <h1><?php echo $lang['home_22']; ?></h1>
+                                        <h4><?php echo $lang['home_23']; ?></h4> 
+                                    </div>
+                                </div>
+                                <div class="hero_img_top">
+                                    <div class="hero_img_wrapper">
+                                        <img src="img/mb_tag_feature.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mb_landing align_center">
+                            <div class="sub_content">
+
+                            </div>
+                        </section>
+
+
                         <div class="content mb_more_top">
                             <div class="overlay_grad_more_top">
                                 <div class="sub_content">
@@ -206,10 +248,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         <?php
         include($footer);
         ?>
-	<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-	<script src="<?php echo $siteUrl; ?>scripts/scrollReveal.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/mb_common.js"></script>
-	<script type="text/javascript">
+        <script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+        <script src="<?php echo $siteUrl; ?>scripts/scrollReveal.min.js"></script>
+        <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+        <script src="<?php echo $siteUrl; ?>scripts/mb_common.js"></script>
+        <script type="text/javascript">
 		//initialize scroll reveal
 		var hero_title_reveal = {
 			origin   : "top",
@@ -219,7 +262,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 			scale    : 1.05
 		};
 
-		var intro = {
+		var text_wrapper = {
 			origin   : "bottom",
 			distance : "2vw",
 			duration : 900,
@@ -243,19 +286,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         };
         var hero_img = {
             origin   : "right",
-            distance : "10vw",
+            distance : "30px",
+            viewFactor : "0.5",
             duration : 1000,
             delay    : 50,
-            scale    : .9
+            scale    : .9,
+            mobile   : false
         };
 
-		window.sr = ScrollReveal()
-		.reveal('.intro', intro)
+        window.sr = ScrollReveal()
+        .reveal('.text_wrapper', text_wrapper)
         .reveal('.hero_text_top h1', hero_title_reveal)
-		.reveal('.top_download_option', download)
-		.reveal('img', img)
-        .reveal('.mb_intro_top img', hero_img);
+        .reveal('.top_download_option', download)
+        .reveal('img', img)
+        .reveal('.hero_img_top img', hero_img);
 
-	</script>
+        $("#main_menu").sticky({topSpacing: 0});
+
+    </script>
 </body>
 </html>

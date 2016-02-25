@@ -15,9 +15,9 @@ $input-transition : linear all .15s;
 
 /** Scss syntax starts here */
 input, textarea, select {
+  @include font_family_normal;
   font-size   : $font-size;
   color       : $font-color;
-  font-family : $font-family;
   max-width   : 100%;
   padding     : $input-padding;
   outline     : $input-outline;

@@ -1,6 +1,14 @@
 $menu_bg : #333;
 $menu_pos : relative;
-$menu_max_width : 1000px;
+$menu_max_width : 1200px;
+
+.overlay {
+	.mainmenu { background: transparent; }
+	.is-sticky .mainmenu { 
+		background: $menu_bg; 
+		box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+	}
+} 
 
 .mainmenu {
 	width: 100%;
@@ -9,6 +17,7 @@ $menu_max_width : 1000px;
 	position: $menu_pos;
 	margin: 0 auto;
 	z-index: 20;
+	transition: all 200ms linear 40ms;
 
 	.menu_wrapper {
 		max-width: $menu_max_width;
@@ -23,77 +32,99 @@ $menu_max_width : 1000px;
 		.menu_position {
 			margin: 0;
 			padding: 0;
-			.menu_right {
+			display: inline-block;
+			&.menu_right {
 				float: right;
 			}
-			.menu_left {
+			&.menu_left {
 				float: left;
-			}
-
-			&:after {
-				clear:both;
-				display: table;
 			}
 
 			li {
 				display: block;
-			    margin: 0;
-			    padding: 0px;
-			    float: left;
+				margin: 0;
+				padding: 0px;
+				float: left;
+				position: relative;
 
-			    a{
-			    	background: none;
-				    margin: 0;
-				    padding: 20px 15px;
-				    transition: all linear .2s;
-				    text-decoration: none;
-				    font-size: 14px;
-				    font-weight: bold;
-				    font-family: Roboto;
-				    text-transform: uppercase;
-				    color: #FFFFFF;
-				    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
-				    display: inline-block;
+				a{
+					background: none;
+					margin: 0;
+					padding: 20px 15px;
+					transition: all linear .2s;
+					text-decoration: none;
+					@include font_family_normal;
+					font-size: 14px;
+					font-weight: bold;
+					text-transform: uppercase;
+					color: #FFFFFF;
+					text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
+					display: inline-block;
 
-				    &:hover {
-				    	background: none;
-					    text-decoration: none;
-					    color: #FFA500;
-					    box-shadow: inset 0px -4px 0px #FFA500;
-				    }
-			    }
-
-			    .nav_dropdown_sub {
-				    /* float: right; */
-				    height: 0px;
-				    overflow: hidden;
-				    background: rgb(68, 68, 68);
-				    display: block;
-				    position: absolute;
-				    z-index: 1;
-				    max-width: 300px;
-				    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.44);
-				    opacity: 0;
-				    transition: linear all 0.2s;
-
-					li {
-					    float: left;
-					    width: 100%;
-						a {
-						    width: 100%;
-						    padding: 15px 15px;
-						    display: block;
-						    box-sizing: border-box;
-						    text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
-						}
+					&:hover {
+						background: none;
+						text-decoration: none;
+						color: $musicbee-color;
+						box-shadow: inset 0px -4px 0px $musicbee-color;
 					}
 				}
+
+				.nav_dropdown_sub {
+					height: 0px;
+					overflow: hidden;
+					background: rgb(68, 68, 68);
+					display: block;
+					position: absolute;
+					z-index: 1;
+					width: 200px;
+					max-width: 300px;
+					box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.44);
+					opacity: 0;
+					transition: linear all 0.2s;
+					left: 0px;
+
+					li {
+						float: left;
+						width: 100%;
+						a {
+							width: 100%;
+							padding: 15px 15px;
+							display: block;
+							box-sizing: border-box;
+							text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
+							box-shadow: none;
+							transition: linear all 0.03s;
+
+							&:hover {
+								background: $musicbee-color;
+								color: white;
+								box-shadow: none;
+							}
+						}
+					}
+
+					&.dropdown_right {
+						right: 0px;
+						left: inherit;
+					}
+
+					&:after {
+						@include clearfix;
+					}
+				}
+				&:hover .nav_dropdown_sub{
+					height: auto;
+					opacity: 1;
+				}
+			}
+			&:after {
+				@include clearfix;
 			}
 		}
 
 		&:after {
-			clear:both;
-			display: table;
+			@include clearfix;
 		}
 	}
 }
+

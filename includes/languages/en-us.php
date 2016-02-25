@@ -51,7 +51,7 @@
 	$lang['line'] = "<hr class=\"line\"/>";
 
 	/* MainMenu */
-	$lang['1'] = "Home";
+	$lang['1'] = "MusicBee";
 	$lang['2'] = "Download";
 	$lang['3'] = "Add-ons";
 	$lang['4'] = "Forum";
@@ -112,9 +112,9 @@
 	$lang['home_16'] = "Get the most of MusicBee with our Quality Guide";
 	$lang['home_17'] = "Go to Quality Guide &nbsp;&nbsp;<i class=\"fa fa-arrow-right\"></i>";
 	$lang['home_18'] = "Beautiful Skins";
-	$lang['home_19'] = "Change the appearance of MusicBee by choosing from the included skins. Many user-made skins are available in the Add-ons section.<br/> You can also make your own skin and share it with others.";
+	$lang['home_19'] = "Change the appearance of MusicBee by choosing from the included skins or download more from our Add-on section.<br/>Skins are a great way to personalize MusicBee to your liking.<br/><br/> You can also make your own skin and share it with others.";
 	$lang['home_20'] = "Sync with Devices";
-	$lang['home_21'] = "Sync your collection with Android and Windows Phone (8.1+) devices. <b>Click here to learn more</b>";
+	$lang['home_21'] = "Sync your music collection with devices you use. MusicBee supports playlist and podcast syncing, even supports audio books with 2 way syncing.<br/>Convert format on the fly, if your device does not support certain format. <br/></br>You can also sync your Android and Windows Phone (8.1+) devices.";
 	$lang['home_22'] = "Powerful Tagging tools";
 	$lang['home_23'] = "View and edit tags with the extensive Tag Editor and MusicBee's Tag Inspector. Create nearly unlimited possibilities with virtual tags. You can also manage duplicates and have your library and its structure automatically organized. Get song tags and lyrics from online sources. And much more!";
 	$lang['home_24'] = "Yes, even more ...";

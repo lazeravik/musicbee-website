@@ -7,6 +7,9 @@
  * Created by AvikB for noncommercial MusicBee project.
  *
  */
+/*================================================================================================================*\\
+    Normalize for better crossbrowser consistency
+\*================================================================================================================*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -19,13 +22,15 @@ html {
   -ms-text-size-adjust: 100%;
   /* 2 */
   -webkit-text-size-adjust: 100%;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Remove default margin.
  */
 body {
-  margin: 0; }
+  margin: 0;
+}
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -47,7 +52,8 @@ menu,
 nav,
 section,
 summary {
-  display: block; }
+  display: block;
+}
 
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
@@ -60,7 +66,8 @@ video {
   display: inline-block;
   /* 1 */
   vertical-align: baseline;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Prevent modern browsers from displaying `audio` without controls.
@@ -68,7 +75,8 @@ video {
  */
 audio:not([controls]) {
   display: none;
-  height: 0; }
+  height: 0;
+}
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
@@ -76,7 +84,8 @@ audio:not([controls]) {
  */
 [hidden],
 template {
-  display: none; }
+  display: none;
+}
 
 /* Links
    ========================================================================== */
@@ -84,7 +93,8 @@ template {
  * Remove the gray background color from active links in IE 10.
  */
 a {
-  background-color: transparent; }
+  background-color: transparent;
+}
 
 /**
  * Improve readability of focused elements when they are also in an
@@ -92,7 +102,8 @@ a {
  */
 a:active,
 a:hover {
-  outline: 0; }
+  outline: 0;
+}
 
 /* Text-level semantics
    ========================================================================== */
@@ -107,7 +118,8 @@ abbr[title] {
   text-decoration: underline;
   /* 2 */
   text-decoration: underline dotted;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Address inconsistent styling of b and strong.
@@ -117,18 +129,21 @@ abbr[title] {
 b,
 strong {
   font-weight: inherit;
-  /* 1 */ }
+  /* 1 */
+}
 
 b,
 strong {
   font-weight: bolder;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Address styling not present in Safari and Chrome.
  */
 dfn {
-  font-style: italic; }
+  font-style: italic;
+}
 
 /**
  * Address variable `h1` font-size and margin within `section` and `article`
@@ -136,20 +151,23 @@ dfn {
  */
 h1 {
   font-size: 2em;
-  margin: 0.67em 0; }
+  margin: 0.67em 0;
+}
 
 /**
  * Address styling not present in IE 8/9.
  */
 mark {
   background-color: #ff0;
-  color: #000; }
+  color: #000;
+}
 
 /**
  * Address inconsistent and variable font size in all browsers.
  */
 small {
-  font-size: 80%; }
+  font-size: 80%;
+}
 
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
@@ -159,13 +177,16 @@ sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+}
 
 sup {
-  top: -0.5em; }
+  top: -0.5em;
+}
 
 sub {
-  bottom: -0.25em; }
+  bottom: -0.25em;
+}
 
 /* Embedded content
    ========================================================================== */
@@ -173,13 +194,15 @@ sub {
  * Remove border when inside `a` element in IE 8/9/10.
  */
 img {
-  border: 0; }
+  border: 0;
+}
 
 /**
  * Correct overflow not hidden in IE 9/10/11.
  */
 svg:not(:root) {
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 /* Grouping content
    ========================================================================== */
@@ -187,7 +210,8 @@ svg:not(:root) {
  * Address margin not present in IE 8/9 and Safari.
  */
 figure {
-  margin: 1em 40px; }
+  margin: 1em 40px;
+}
 
 /**
  * Address inconsistent styling of `hr`.
@@ -200,13 +224,15 @@ hr {
   height: 0;
   /* 1 */
   overflow: visible;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Contain overflow in all browsers.
  */
 pre {
-  overflow: auto; }
+  overflow: auto;
+}
 
 /**
  * 1. Correct inheritance and scaling of font-size for preformatted text.
@@ -219,7 +245,8 @@ samp {
   font-family: monospace, monospace;
   /* 1 */
   font-size: 1em;
-  /* 2 */ }
+  /* 2 */
+}
 
 /* Forms
    ========================================================================== */
@@ -239,13 +266,15 @@ textarea {
   font: inherit;
   /* 1 */
   margin: 0;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
 button {
-  overflow: visible; }
+  overflow: visible;
+}
 
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
@@ -255,7 +284,8 @@ button {
  */
 button,
 select {
-  text-transform: none; }
+  text-transform: none;
+}
 
 /**
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
@@ -271,14 +301,16 @@ input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
-  /* 3 */ }
+  /* 3 */
+}
 
 /**
  * Re-set default cursor for disabled elements.
  */
 button[disabled],
 html input[disabled] {
-  cursor: default; }
+  cursor: default;
+}
 
 /**
  * Remove inner padding and border in Firefox 4+.
@@ -286,21 +318,24 @@ html input[disabled] {
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 /**
  * Restore focus style in Firefox 4+ (unset by a rule above)
  */
 button:-moz-focusring,
 input:-moz-focusring {
-  outline: 1px dotted ButtonText; }
+  outline: 1px dotted ButtonText;
+}
 
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
 input {
-  line-height: normal; }
+  line-height: normal;
+}
 
 /**
  * It's recommended that you don't attempt to style these elements.
@@ -314,7 +349,8 @@ input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Fix the cursor style for Chrome's increment/decrement buttons. For certain
@@ -323,13 +359,15 @@ input[type="radio"] {
  */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  height: auto; }
+  height: auto;
+}
 
 /**
  * Address `appearance` set to `searchfield` in Safari and Chrome.
  */
 input[type="search"] {
-  -webkit-appearance: textfield; }
+  -webkit-appearance: textfield;
+}
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -338,7 +376,8 @@ input[type="search"] {
  */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none; }
+  -webkit-appearance: none;
+}
 
 /**
  * Define consistent border, margin, and padding.
@@ -346,7 +385,8 @@ input[type="search"]::-webkit-search-decoration {
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em; }
+  padding: 0.35em 0.625em 0.75em;
+}
 
 /**
  * 1. Correct `color` not being inherited in IE 8/9/10/11.
@@ -356,131 +396,285 @@ legend {
   border: 0;
   /* 1 */
   padding: 0;
-  /* 2 */ }
+  /* 2 */
+}
 
 /**
  * Remove default vertical scrollbar in IE 8/9/10/11.
  */
 textarea {
-  overflow: auto; }
+  overflow: auto;
+}
 
 /**
  * Restore font weight (unset by a rule above).
  * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
  */
 optgroup {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
-/**
- * Style for input fields such as buttons, links, checkboxes etc
- */
+/*================================================================================================================*\\
+    Style for input fields such as buttons, links, checkboxes etc
+\*================================================================================================================*/
 /** Input variables common for all input fields */
 /** Scss syntax starts here */
 input, textarea, select {
+  font-family: "Roboto", "sans-serif", verdana;
   font-size: 12px;
   color: #333;
-  font-family: "Roboto", "sans-serif", verdana;
   max-width: 100%;
   padding: 10px;
   outline: none;
   box-sizing: border-box;
   transition: linear all 0.15s;
   border-radius: 0;
-  border: 2px solid #d7d7d7; }
-  input:hover, textarea:hover, select:hover {
-    border: 2px solid #ff9800; }
-  input:active, textarea:active, select:active {
-    border: 2px solid #333; }
-  input:focus, textarea:focus, select:focus {
-    border: 2px solid #333; }
+  border: 2px solid #d7d7d7;
+}
+
+input:hover, textarea:hover, select:hover {
+  border: 2px solid #ff9800;
+}
+
+input:active, textarea:active, select:active {
+  border: 2px solid #333;
+}
+
+input:focus, textarea:focus, select:focus {
+  border: 2px solid #333;
+}
 
 h1 {
   font-family: "Roboto", "sans-serif", verdana;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 300;
-  margin: 10px 0; }
+  margin: 10px 0;
+}
 
-/**
- * Main Menu styles
- *
- */
+/*================================================================================================================*\\
+    Main Menu Style
+\*================================================================================================================*/
+.overlay .mainmenu {
+  background: transparent;
+}
+
+.overlay .is-sticky .mainmenu {
+  background: #333;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+}
+
 .mainmenu {
   width: 100%;
   background: #333;
   display: block;
   position: relative;
   margin: 0 auto;
-  z-index: 20; }
-  .mainmenu .menu_wrapper {
-    max-width: 1000px;
-    width: inherit;
-    font-size: 16px;
-    line-height: normal;
-    float: none;
-    display: block;
-    padding-top: 0;
-    margin: 0 auto; }
-    .mainmenu .menu_wrapper .menu_position {
-      margin: 0;
-      padding: 0; }
-      .mainmenu .menu_wrapper .menu_position .menu_right {
-        float: right; }
-      .mainmenu .menu_wrapper .menu_position .menu_left {
-        float: left; }
-      .mainmenu .menu_wrapper .menu_position:after {
-        clear: both;
-        display: table; }
-      .mainmenu .menu_wrapper .menu_position li {
-        display: block;
-        margin: 0;
-        padding: 0px;
-        float: left; }
-        .mainmenu .menu_wrapper .menu_position li a {
-          background: none;
-          margin: 0;
-          padding: 20px 15px;
-          transition: all linear .2s;
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: bold;
-          font-family: Roboto;
-          text-transform: uppercase;
-          color: #FFFFFF;
-          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
-          display: inline-block; }
-          .mainmenu .menu_wrapper .menu_position li a:hover {
-            background: none;
-            text-decoration: none;
-            color: #FFA500;
-            box-shadow: inset 0px -4px 0px #FFA500; }
-        .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub {
-          /* float: right; */
-          height: 0px;
-          overflow: hidden;
-          background: #444444;
-          display: block;
-          position: absolute;
-          z-index: 1;
-          max-width: 300px;
-          box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.44);
-          opacity: 0;
-          transition: linear all 0.2s; }
-          .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li {
-            float: left;
-            width: 100%; }
-            .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a {
-              width: 100%;
-              padding: 15px 15px;
-              display: block;
-              box-sizing: border-box;
-              text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33); }
-    .mainmenu .menu_wrapper:after {
-      clear: both;
-      display: table; }
+  z-index: 20;
+  transition: all 200ms linear 40ms;
+}
 
-/**
- *styles for codes highlighting
- */
+.mainmenu .menu_wrapper {
+  max-width: 1200px;
+  width: inherit;
+  font-size: 16px;
+  line-height: normal;
+  float: none;
+  display: block;
+  padding-top: 0;
+  margin: 0 auto;
+}
+
+.mainmenu .menu_wrapper .menu_position {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.mainmenu .menu_wrapper .menu_position.menu_right {
+  float: right;
+}
+
+.mainmenu .menu_wrapper .menu_position.menu_left {
+  float: left;
+}
+
+.mainmenu .menu_wrapper .menu_position li {
+  display: block;
+  margin: 0;
+  padding: 0px;
+  float: left;
+  position: relative;
+}
+
+.mainmenu .menu_wrapper .menu_position li a {
+  background: none;
+  margin: 0;
+  padding: 20px 15px;
+  transition: all linear .2s;
+  text-decoration: none;
+  font-family: "Roboto", "sans-serif", verdana;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
+  display: inline-block;
+}
+
+.mainmenu .menu_wrapper .menu_position li a:hover {
+  background: none;
+  text-decoration: none;
+  color: #ff9800;
+  box-shadow: inset 0px -4px 0px #ff9800;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub {
+  height: 0px;
+  overflow: hidden;
+  background: #444444;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  max-width: 300px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.44);
+  opacity: 0;
+  transition: linear all 0.2s;
+  left: 0px;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li {
+  float: left;
+  width: 100%;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a {
+  width: 100%;
+  padding: 15px 15px;
+  display: block;
+  box-sizing: border-box;
+  text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
+  box-shadow: none;
+  transition: linear all 0.03s;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a:hover {
+  background: #ff9800;
+  color: white;
+  box-shadow: none;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub.dropdown_right {
+  right: 0px;
+  left: inherit;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.mainmenu .menu_wrapper .menu_position li:hover .nav_dropdown_sub {
+  height: auto;
+  opacity: 1;
+}
+
+.mainmenu .menu_wrapper .menu_position:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.mainmenu .menu_wrapper:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*================================================================================================================*\\
+    Landing page layout styles
+\*================================================================================================================*/
+.mb_landing {
+  position: relative;
+  overflow: hidden;
+}
+
+.mb_landing .sub_content {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  padding: 100px 0px;
+}
+
+.mb_landing .sub_content .hero_text_top {
+  width: 52%;
+}
+
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_black h1 {
+  color: #333;
+}
+
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_black h4 {
+  color: #444;
+}
+
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_white h1 {
+  color: white;
+}
+
+.mb_landing .sub_content .hero_text_top .text_wrapper.text_white h4 {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mb_landing .sub_content .hero_text_top h4 {
+  margin-top: 20px;
+}
+
+.mb_landing .sub_content .hero_img_top {
+  position: relative;
+  float: left;
+  width: 48%;
+}
+
+.mb_landing .sub_content .hero_img_top .hero_img_wrapper {
+  position: absolute;
+  top: -100px;
+}
+
+.mb_landing .sub_content .hero_img_top .hero_img_wrapper.hero_img_topmost_wrap {
+  top: -10px;
+}
+
+.mb_landing .sub_content::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.mb_landing.alternate_landing_row_bg {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mb_landing.align_right .hero_img_wrapper {
+  left: 50px;
+}
+
+.mb_landing.align_right .hero_text_top {
+  float: left;
+}
+
+.mb_landing.align_left .hero_img_wrapper {
+  right: 50px;
+}
+
+.mb_landing.align_left .hero_text_top {
+  float: right;
+}
+
+/*================================================================================================================*\\
+    Codes highlighting
+\*================================================================================================================*/
 /**
  * Obsidian style
  * ported by Alexander Marenin (http://github.com/ioncreature)
@@ -489,34 +683,42 @@ h1 {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #282b2e !important; }
+  background: #282b2e !important;
+}
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal,
 .hljs-selector-id {
-  color: #93c763; }
+  color: #93c763;
+}
 
 .hljs-number {
-  color: #ffcd22; }
+  color: #ffcd22;
+}
 
 .hljs {
-  color: #e0e2e4; }
+  color: #e0e2e4;
+}
 
 .hljs-attribute {
-  color: #668bb0; }
+  color: #668bb0;
+}
 
 .hljs-code,
 .hljs-class .hljs-title,
 .hljs-section {
-  color: white; }
+  color: white;
+}
 
 .hljs-regexp,
 .hljs-link {
-  color: #d39745; }
+  color: #d39745;
+}
 
 .hljs-meta {
-  color: #557182; }
+  color: #557182;
+}
 
 .hljs-tag,
 .hljs-name,
@@ -531,19 +733,23 @@ h1 {
 .hljs-variable,
 .hljs-template-tag,
 .hljs-template-variable {
-  color: #8cbbad; }
+  color: #8cbbad;
+}
 
 .hljs-string,
 .hljs-symbol {
-  color: #ec7600; }
+  color: #ec7600;
+}
 
 .hljs-comment,
 .hljs-quote,
 .hljs-deletion {
-  color: #818e96; }
+  color: #818e96;
+}
 
 .hljs-selector-class {
-  color: #A082BD; }
+  color: #A082BD;
+}
 
 .hljs-keyword,
 .hljs-selector-tag,
@@ -554,4 +760,7 @@ h1 {
 .hljs-type,
 .hljs-name,
 .hljs-strong {
-  font-weight: bold; }
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=mb_main.css.map */
