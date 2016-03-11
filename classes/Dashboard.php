@@ -149,7 +149,7 @@
 			} else {
 				$status = 0; //otherwise need approval
 			}
-			$addon_id = $_POST['record_id'];
+			$addon_id = (isset($_POST['record_id'])) ? $_POST['record_id'] : "";
 			$lastModeratedBy = $authorId;
 			$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 			$important_note = (isset($_POST['important_note'])) ? $_POST['important_note'] : "";

@@ -56,7 +56,6 @@ $_SESSION['memberinfo'] = $memberinfoArray;
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
     <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
     <?php include('./includes/font.helper.php'); ?>
 </head>

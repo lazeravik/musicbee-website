@@ -130,7 +130,7 @@ if (isset($_GET['view'])) {
 						<p class="show_info">
 							<?php echo $lang['111']; ?>
 						</p>
-						<input id="addonver" maxlength="15" min="1" name="addonver" type="number" placeholder="eg. 1.0"
+						<input id="addonver" value step="0.1" min="1.0" max="99.99" name="addonver" type="number" placeholder="eg. 1.0"
 						value="<?php if ($viewType == 2) echo $data['addon_version']; ?>"/>
 					</label>
 				</li>

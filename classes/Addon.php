@@ -266,16 +266,16 @@
 		}
 
 
-		public function getAddonFiltered($cat, $order = null)
+		public function getAddonFiltered($cat, $order = null, $page = 1)
 		{
-			global $connection;
+			global $connection, $addon_view_range;
 			if (databaseConnection()) {
 				try {
 					if ($cat == null) {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " ORDER BY ID_ADDON DESC";
+						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " ORDER BY ID_ADDON DESC LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
 						$statement = $connection->prepare($sql);
 					} else {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat ORDER BY ID_ADDON DESC";
+						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat ORDER BY ID_ADDON DESC LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
 						$statement = $connection->prepare($sql);
 						$statement->bindValue(':cat', $cat);
 					}
@@ -284,6 +284,29 @@
 					if (count($result) > 0) {
 						return $result;
 					}
+				} catch (Exception $e) {
+					return $e;
+				}
+			}
+		}
+
+		public function getAddonCount($cat = null)
+		{
+			global $connection;
+			if (databaseConnection()) {
+				try {
+					if ($cat == null) {
+						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON;
+						$statement = $connection->prepare($sql);
+					} else {
+						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat";
+						$statement = $connection->prepare($sql);
+						$statement->bindValue(':cat', $cat);
+					}
+					$statement->execute();
+					$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+					return count($result);
+
 				} catch (Exception $e) {
 					return $e;
 				}

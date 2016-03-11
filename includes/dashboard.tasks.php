@@ -52,8 +52,10 @@ if (isset($_POST['submit'])) {
 			if (!Validation::arrayLimit($_POST['tag'], 10)) {
 				die('{"status": "0", "data": "'.$lang['204'].'"}');
 			}
-			if (!array_key_exists($_POST['color'], $color_codes)) {
-				die('{"status": "0", "data": "'.$lang['223'].'"}');
+			if (isset($_POST['color'])) {
+				if (!array_key_exists($_POST['color'], $color_codes)) {
+					die('{"status": "0", "data": "'.$lang['223'].'"}');
+				}
 			}
 			if (isset($_POST['readme'])){
 				if (!Validation::charLimit($_POST['readme'], 5000))

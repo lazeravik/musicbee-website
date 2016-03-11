@@ -148,11 +148,9 @@
     									<div id="clear"></div>
     								</ul>
     								<ul class="pagination">
-    									<li><a href="?p=1"><p>1</p></a></li>
-    									<li><a href="?p=2"><p>2</p></a></li>
-    									<li><a href="?p=3"><p>3</p></a></li>
-    									<li><a href="?p=4"><p>4</p></a></li>
-    									<li><a href="?p=5"><p>5</p></a></li>
+                                    <?php for ($i=1; $i < $page_total+1; $i++): ?>
+    									<li><a href="?p=<?php echo $i; ?>"><p><?php echo $i; ?></p></a></li>
+                                    <?php endfor; ?>
     								</ul>
     							<?php else: ?>
     								<div class="no_result">

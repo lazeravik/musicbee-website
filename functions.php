@@ -97,6 +97,7 @@ $release['beta']['message'] 	= isset($releaseData[1]->message)		?		$releaseData[
 $release['beta']['available']	= isset($releaseData[1]->available)		?		$releaseData[1]->available 		:0;
 
 
+$addon_view_range = 30;
 /**
  * @var URI $params
  * creates an array from the URI
@@ -173,12 +174,6 @@ $main_menu = array(
 				'href'	=> $link['addon']['home'].Slug($lang['13']),
 				'icon'	=> $lang['26'],
 				'desc'	=> $lang['description_3'],
-				),
-			'equaliser' => array(
-				'title' => $lang['14'],
-				'href'	=> $link['addon']['home'].Slug($lang['14']),
-				'icon'	=> $lang['27'],
-				'desc'	=> $lang['description_4'],
 				),
 			'theater-mode' => array(
 				'title' => $lang['15'],
