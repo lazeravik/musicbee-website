@@ -31,71 +31,110 @@ if (isset($_GET['id'])) {
 		}
 
 		//Since the addon is found and everything is ok, create screenshot link array
-        $screenshots = explode(",", $data['image_links']);
+		$screenshots = explode(",", $data['image_links']);
 
         //Gets the addon author info
-        $author = $addon->memberInfo($data['ID_AUTHOR'])[0];
+		$author = $addon->memberInfo($data['ID_AUTHOR'])[0];
 
         //Create an array of supported musicbee version for this array
-        foreach (explode(",", $data['supported_mbversion']) as $mbVer) {
-        	$mbVerArray[] = $addon->getMbVersions($mbVer)[0]['appname'];
-        }
+		foreach (explode(",", $data['supported_mbversion']) as $mbVer) {
+			$mbVerArray[] = $addon->getMbVersions($mbVer)[0]['appname'];
+		}
 
         //get addon specific info like likes, title, description etc.
-        $meta_description = "Download MusicBee skins, plugins, theater mode, visualizer and more..";
-        $addon_type = UnslugTxt($data['addon_type']);
-        $from_author = $addon->getAddonListbyMember($data['ID_AUTHOR'], 4);
-        $addon_like = $addon->getRating($data['ID_ADDON']);
-        $addon_already_liked = $addon->is_rated($data['ID_ADDON'],$user_info['id']);
+		$meta_description = "Download MusicBee skins, plugins, theater mode, visualizer and more..";
+		$addon_type = UnslugTxt($data['addon_type']);
+		$from_author = $addon->getAddonListbyMember($data['ID_AUTHOR'], 4);
+		$addon_like = $addon->getRating($data['ID_ADDON']);
+		$addon_already_liked = $addon->is_rated($data['ID_ADDON'],$user_info['id']);
 
-        include_once $siteRoot . 'includes/addons.selected.template.php';
-    	exit();
+		include_once $siteRoot . 'includes/addons.selected.template.php';
+		exit();
 
-    } elseif (array_key_exists($_GET['id'], $main_menu['add-ons']['sub_menu'])) {
+	} 
+  //   elseif (array_key_exists($_GET['id'], $main_menu['add-ons']['sub_menu'])) {
 
-    	$meta_description = "blah";
-    	$data['type'] = $main_menu['add-ons']['sub_menu'][$_GET['id']]['title'];
-    	$addon_type = Slug($data['type']);
+  //   	$meta_description = "blah";
+  //   	$data['type'] = $main_menu['add-ons']['sub_menu'][$_GET['id']]['title'];
+  //   	$addon_type = Slug($data['type']);
 
-    	$addon_total = $addon->getAddonCount($addon_type);
-    	$page_total = ceil($addon_total/$addon_view_range);
+  //   	$addon_total = $addon->getAddonCount($addon_type);
+  //   	$page_total = ceil($addon_total/$addon_view_range);
+  //   	//Addon Pagination function!
+  //   	//remove the ? sign from the string and convert the url paramenter into an array
+		// parse_str(str_replace("?", "", $params[3]),$url_params); 
+  //   	if (isset($url_params['p'])) {
+  //   		$data['addon'] = $addon->getAddonFiltered($addon_type, null, $url_params['p']);
+  //   	} else {
+  //   		$data['addon'] = $addon->getAddonFiltered($addon_type);
+  //   	}
+
+  //   	include_once $siteRoot . 'includes/addons.view.template.php';
+  //   	exit();
+
+  //   } elseif ($_GET['id'] == "all") {
+  //   	$meta_description = "blah";
+  //   	$data['type'] = "All";
+  //   	$addon_type = Slug($data['type']);
+
+  //   	$addon_total = $addon->getAddonCount();
+  //   	$page_total = ceil($addon_total/$addon_view_range);
+  //   	//Addon Pagination function!
+  //   	//remove the ? sign from the string and convert the url paramenter into an array
+		// parse_str(str_replace("?", "", $params[3]),$url_params); 
+  //   	if (isset($url_params['p'])) {
+  //   		$data['addon'] = $addon->getAddonFiltered(null, null, $url_params['p']);
+  //   	} else {
+  //   		$data['addon'] = $addon->getAddonFiltered(null);
+  //   	}
+
+  //   	include_once $siteRoot . 'includes/addons.view.template.php';
+  //   	exit();
+  //   } 
+	elseif ($_GET['id'] == "s") {
+		$meta_description = "blah";
+
     	//Addon Pagination function!
     	//remove the ? sign from the string and convert the url paramenter into an array
 		parse_str(str_replace("?", "", $params[3]),$url_params); 
-    	if (isset($url_params['p'])) {
-    		$data['addon'] = $addon->getAddonFiltered($addon_type, null, $url_params['p']);
-    	} else {
-    		$data['addon'] = $addon->getAddonFiltered($addon_type);
-    	}
 
-    	include_once $siteRoot . 'includes/addons.view.template.php';
-    	exit();
+    	//get the addon type,result order,if any search query from the get request
+		$data['type'] = UnslugTxt(htmlspecialchars($url_params['type'], ENT_QUOTES, "UTF-8"));
+		$data['order'] = htmlspecialchars($url_params['order'], ENT_QUOTES, "UTF-8");
+		$data['query'] = htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8");
+		$addon_type = Slug($data['type']);
 
-    } elseif ($_GET['id'] == "all") {
-    	$meta_description = "blah";
-    	$data['type'] = "All";
-    	$addon_type = Slug($data['type']);
+    	//generated url is the current url with nesecery params, it is needed for pagination support
+		if (isset($url_params['search'])) {
+			$generated_url = $link['addon']['home']."s/?q=".urlencode($data['query'])."&search=true&type=".$addon_type."&order=".$data['order'];
 
-    	$addon_total = $addon->getAddonCount();
-    	$page_total = ceil($addon_total/$addon_view_range);
-    	//Addon Pagination function!
-    	//remove the ? sign from the string and convert the url paramenter into an array
-		parse_str(str_replace("?", "", $params[3]),$url_params); 
-    	if (isset($url_params['p'])) {
-    		$data['addon'] = $addon->getAddonFiltered(null, null, $url_params['p']);
-    	} else {
-    		$data['addon'] = $addon->getAddonFiltered(null);
-    	}
+			if (isset($url_params['p'])) {
+				$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], $url_params['p'], $data['query']);
+				
+			} else {
+				$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], "1", $data['query']);
+			}
+			$addon_total = $addon->getAddonCount($url_params['type'], $data['query']);
+			$page_total = ceil($addon_total/$addon_view_range);
+		} else {
+			$generated_url = $link['addon']['home']."s/?q=".urlencode($data['query'])."&type=".$addon_type."&order=".$data['order'];
+			if (isset($url_params['p'])) {
+				$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], $url_params['p']);
+			} else {
+				$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order']);
+			}
+			$addon_total = $addon->getAddonCount($url_params['type']);
+			$page_total = ceil($addon_total/$addon_view_range);
+		}
 
-    	include_once $siteRoot . 'includes/addons.view.template.php';
-    	exit();
-    } else {
-    	header("HTTP/1.0 404 Not Found");
-    	include_once $status['404'];
-    	exit();
-    }
+		include_once $siteRoot . 'includes/addons.search.template.php';
+		exit();
+	} else {
+		header("HTTP/1.0 404 Not Found");
+		include_once $status['404'];
+		exit();
+	}
 } else {
-	header("Location: " . $link['addon']['home'] . "/all");
+	header("Location: " . $link['addon']['home'] . "s/?q=&type=all&order=latest");
 	exit();
 }
-?>

@@ -159,31 +159,31 @@ $main_menu = array(
 		'sub_menu' => array(
 			'skins' => array(
 				'title' => $lang['11'],
-				'href'	=> $link['addon']['home'].Slug($lang['11']),
+				'href'	=> $link['addon']['home']."s/?q=&type=skins&order=latest",
 				'icon'	=> $lang['24'],
 				'desc'	=> $lang['description_1'],
 				),
 			'plugins' => array(
 				'title' => $lang['12'],
-				'href'	=> $link['addon']['home'].Slug($lang['12']),
+				'href'	=> $link['addon']['home']."s/?q=&type=plugins&order=latest",
 				'icon'	=> $lang['25'],
 				'desc'	=> $lang['description_2'],
 				),
 			'visualiser' => array(
 				'title' => $lang['13'],
-				'href'	=> $link['addon']['home'].Slug($lang['13']),
+				'href'	=> $link['addon']['home']."s/?q=&type=visualiser&order=latest",
 				'icon'	=> $lang['26'],
 				'desc'	=> $lang['description_3'],
 				),
 			'theater-mode' => array(
 				'title' => $lang['15'],
-				'href'	=> $link['addon']['home'].Slug($lang['15']),
+				'href'	=> $link['addon']['home']."s/?q=&type=theater-mode&order=latest",
 				'icon'	=> $lang['28'],
 				'desc'	=> $lang['description_5'],
 				),
 			'misc' => array(
 				'title' => $lang['16'],
-				'href'	=> $link['addon']['home'].Slug($lang['16']),
+				'href'	=> $link['addon']['home']."s/?q=&type=misc&order=latest",
 				'icon'	=> $lang['29'],
 				'desc'	=> $lang['description_6'],
 				),

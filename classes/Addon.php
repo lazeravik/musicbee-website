@@ -87,20 +87,20 @@
 			$rankname;
 			switch ($rankid) {
 				case 1:
-					$rankname = "Admin";
-					break;
+				$rankname = "Admin";
+				break;
 				case 2:
-					$rankname = "Mod";
-					break;
+				$rankname = "Mod";
+				break;
 				case 5:
-					$rankname = "Elite";
-					break;
+				$rankname = "Elite";
+				break;
 				case 10:
-					$rankname = "Newbie";
-					break;
+				$rankname = "Newbie";
+				break;
 				default:
-					$rankname = "Unknown";
-					break;
+				$rankname = "Unknown";
+				break;
 			}
 
 			return $rankname;
@@ -110,20 +110,20 @@
 		{
 			switch ($id) {
 				case '0':
-					return "Waiting for Approval";
-					break;
+				return "Waiting for Approval";
+				break;
 				case '1':
-					return "Approved";
-					break;
+				return "Approved";
+				break;
 				case '2':
-					return "Rejected";
-					break;
+				return "Rejected";
+				break;
 				case '3':
-					return "Deleted";
-					break;
+				return "Deleted";
+				break;
 				default:
-					return "Unknown";
-					break;
+				return "Unknown";
+				break;
 			}
 		}
 
@@ -266,18 +266,44 @@
 		}
 
 
-		public function getAddonFiltered($cat, $order = null, $page = 1)
+		public function getAddonFiltered($cat, $order = null, $page = 1, $query = null)
 		{
 			global $connection, $addon_view_range;
+
+			if ($order != null) {
+				if ($order == "oldest") {
+					$order_type = "ASC";
+				} else {
+					$order_type = "DESC";
+				}
+			} else {
+				$order_type = "DESC";
+			}
+
 			if (databaseConnection()) {
 				try {
-					if ($cat == null) {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " ORDER BY ID_ADDON DESC LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
-						$statement = $connection->prepare($sql);
+					if ($cat == null || $cat == "all") {
+						if ($query == null) {
+							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+							$statement = $connection->prepare($sql);
+						} else {
+							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':query', $query);
+						}
 					} else {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat ORDER BY ID_ADDON DESC LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
-						$statement = $connection->prepare($sql);
-						$statement->bindValue(':cat', $cat);
+						if ($query == null) {
+							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':cat', $cat);
+						} else {
+							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat AND MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':cat', $cat);
+							$statement->bindValue(':query', $query);
+						}
 					}
 					$statement->execute();
 					$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -290,18 +316,31 @@
 			}
 		}
 
-		public function getAddonCount($cat = null)
+		public function getAddonCount($cat = null, $query = null)
 		{
 			global $connection;
 			if (databaseConnection()) {
 				try {
-					if ($cat == null) {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON;
-						$statement = $connection->prepare($sql);
+					if ($cat == null || $cat == "all") {
+						if ($query == null) {
+							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON;
+							$statement = $connection->prepare($sql);
+						} else {
+							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':query', $query);
+						}
 					} else {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat";
-						$statement = $connection->prepare($sql);
-						$statement->bindValue(':cat', $cat);
+						if ($query == null) {
+							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE addon_type = :cat";
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':cat', $cat);
+						} else {
+							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE addon_type = :cat AND MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':query', $query);
+							$statement->bindValue(':cat', $cat);
+						}
 					}
 					$statement->execute();
 					$result = $statement->fetchAll(PDO::FETCH_ASSOC);

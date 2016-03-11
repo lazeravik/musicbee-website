@@ -7,7 +7,17 @@
  * Created by AvikB for noncommercial MusicBee project.
  * Spelling mistakes and fixes from phred and other community memebers.
  */
-
+.search_term {
+    font-style: italic;
+    font-weight: bolder;
+    color: #CA8A2D;
+    background: rgba(0, 0, 0, 0.24);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    font-size: 17px;
+    margin: 0px 5px;
+}
 .addon_panel_color {
     background: linear-gradient(135deg,#2F3558,#353E77,rgb(48, 58, 119))no-repeat;
     box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.16);

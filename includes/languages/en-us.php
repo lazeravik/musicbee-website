@@ -264,7 +264,7 @@
 	$lang['250'] = "";
 
 
-	/*Addons view/download page */
+	/*Addons view/download/search page */
 	$lang['251'] = "Add-ons and Screenshots are licensed under";
 	$lang['252'] = "by";
 	$lang['253'] = "Updated on";
@@ -283,7 +283,7 @@
 	$lang['266'] = "Your rating is removed!";
 	$lang['267'] = "Facing some problem with your rating status!";
 	$lang['268'] = "<i class=\"fa fa-heart\"></i>&nbsp;&nbsp; Liked!";
-	$lang['269'] = "";
+	$lang['269'] = "Showing results for: ";
 	$lang['270'] = "";
 	$lang['271'] = "";
 	$lang['272'] = "";
