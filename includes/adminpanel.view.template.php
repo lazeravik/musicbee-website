@@ -94,9 +94,9 @@ if (($safeGet)=="all") : ?>
 		$('#editView').html(""); //delete the html we got from ajax req
 	}
 });
-}
+							}
 
-	function loadEditView (id) {
+							function loadEditView (id) {
 	$.fx.off = true; // turn off jquery animation effects
 	$.ajax({
 		url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/adminpanel.edit.template.php?view=update&id='+id,
@@ -226,8 +226,8 @@ else: ?>
 				data-href="edit" 
 				data-load-page="adminpanel.edit"
 				data-get-req="view=edit"
-				class="btn btn_green" 
-				onclick="window.location.hash = $(this).attr('data-href');">
+				onclick="force_click_event($(this))"
+				class="btn btn_green">
 				<i class="fa fa-pencil"></i>&nbsp;&nbsp; Add a New Version!</a>
 
 				<!-- DO NOT MODIFY ANYTHING! This is enable/disable downloads button -->
@@ -282,8 +282,8 @@ else: ?>
 				data-href="editbeta" 
 				data-load-page="adminpanel.edit"
 				data-get-req="view=editbeta"
-				class="btn btn_green" 
-				onclick="window.location.hash = $(this).attr('data-href');">
+				onclick="force_click_event($(this))" 
+				class="btn btn_green" >
 				<i class="fa fa-pencil"></i>&nbsp;&nbsp; Add a new Version!</a>
 				<!-- DO NOT MODIFY ANYTHING! This is enable/disable downloads button -->
 				<div id="disable_enable_beta_download_disable">
@@ -300,6 +300,7 @@ else: ?>
 
 	<!-- Disable and Enable Downloads -->
 	<script type="text/javascript">
+
 		function changeDownload (id) {
 			$('#loading_icon').show();
 			$.fx.off = false;

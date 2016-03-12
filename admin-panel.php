@@ -22,7 +22,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
 
 <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 <?php include ('./includes/font.helper.php'); ?>
@@ -92,15 +91,5 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 <?php 
 	include_once $siteRoot.'includes/ajax.navigation.script.php';
 ?>
-<script>
-	function notificationCallback(data) {
-	var obj = jQuery.parseJSON(data);
-	if (obj.status == 0) {
-		showNotification(obj.data, "error", "red_color");
-	} else if (obj.status == 1) {
-		showNotification(obj.data, "success", "green_color");
-	}
-}
-</script>
 </body>
 </html>

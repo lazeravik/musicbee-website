@@ -284,8 +284,8 @@
 	$lang['267'] = "Facing some problem with your rating status!";
 	$lang['268'] = "<i class=\"fa fa-heart\"></i>&nbsp;&nbsp; Liked!";
 	$lang['269'] = "Showing results for: ";
-	$lang['270'] = "";
-	$lang['271'] = "";
+	$lang['270'] = "There is nothing yet! <i class=\"fa fa-frown-o\"></i>";
+	$lang['271'] = "You can request for an add-on on our forum, or you can create and submit one yourself";
 	$lang['272'] = "";
 	$lang['273'] = "";
 	$lang['274'] = "";

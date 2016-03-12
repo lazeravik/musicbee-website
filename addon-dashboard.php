@@ -137,15 +137,6 @@ include($footer);
 <?php
 include_once $siteRoot . 'includes/ajax.navigation.script.php';
 ?>
-<script>
-	function notificationCallback(data) {
-	var obj = jQuery.parseJSON(data);
-	if (obj.status == 0) {
-		showNotification(obj.data, "error", "red_color");
-	} else if (obj.status == 1) {
-		showNotification(obj.data, "success", "green_color");
-	}
-}
-</script>
+
 </body>
 </html>

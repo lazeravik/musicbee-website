@@ -47,7 +47,7 @@ $addonInfo = $addon->getAddonListbyMember($context['user']['id'], 100);
 							<button id=\"".$record['ID_ADDON']."_edit\" class=\"entry_edit\" title=\"Modify info\" onclick=\"showEditModal(".$record['ID_ADDON'].");\">".$lang['234']."</button>
 
 							<form id=\"".$record['ID_ADDON']."\" action=\"../includes/dashboard.tasks.php\" method=\"post\" data-autosubmit>
-								<button id=\"".$record['ID_ADDON']."_remove\" class=\"entry_remove\" title=\"".$lang['233']."\" onclick=\"modify();\" ><i class=\"fa fa-trash\"></i></button>
+								<button id=\"".$record['ID_ADDON']."_remove\" class=\"entry_remove\" title=\"".$lang['233']."\" onclick=\"deleteRecord();\" ><i class=\"fa fa-trash\"></i></button>
 								<input type=\"hidden\" name=\"record_id\" value=\"".$record['ID_ADDON']."\" />
 								<input type=\"hidden\" name=\"modify_type\" value=\"delete\" />
 							</form>    
@@ -81,7 +81,7 @@ $addonInfo = $addon->getAddonListbyMember($context['user']['id'], 100);
 });
 		}
 
-		function loadEditView (id) {
+function loadEditView (id) {
 	$.fx.off = true; // turn off jquery animation effects
 	$.ajax({
 		url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/dashboard.submit.template.php?view=update&id='+id,
@@ -98,11 +98,14 @@ $addonInfo = $addon->getAddonListbyMember($context['user']['id'], 100);
 	});	
 }
 
-function modify() {
+$delete_record_id = "0";
+function deleteRecord() {
 	var modify_confirm = confirm("<?php echo $lang['232']; ?>");
 	if (modify_confirm == true) {
 		hideNotification();
 		$('#loading_icon').show();
+		//store the record id so that we can remove the table from html
+		$delete_record_id = $('form[data-autosubmit]').attr('id');
 		$('form[data-autosubmit]').autosubmit();
 	} else {
 		this.event.preventDefault(); //stop the actual form submission
@@ -120,7 +123,6 @@ function modify() {
 				data: form.serialize()
 			}).done(function(data) {
 				notificationCallback(data);
-				removeRecordTbl(form.attr('id'));
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				showNotification("<b style=\"text-transform: uppercase;\">"+textStatus+"</b> - "+errorThrown, "error", "red_color");
 			}).always(function() {
@@ -131,9 +133,11 @@ function modify() {
 	return false;
 })(jQuery)
 
-function removeRecordTbl (id) {
-	$('#'+id+"_tbl").html("");
-	$('#'+id+"_tbl").addClass('record_removed');
+
+
+var remove_addon_record = function() {
+	$('#'+$delete_record_id+"_tbl").html("");
+	$('#'+$delete_record_id+"_tbl").addClass('record_removed');
 }
 
 

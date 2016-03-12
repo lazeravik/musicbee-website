@@ -21,12 +21,23 @@ $(document).ready(function(){
 	}	
 });
 
+
+
 /* 	Execute if any secondery nav button is pressed gets the 'data-href' to change the addressbar */
-$('a[data-load-page]').on('click', function(e) {
-	e.preventDefault();
-	loadPageGet(generateUrl($(this).attr('data-load-page')), (!! $(this).attr('data-get-req'))? $(this).attr('data-get-req'): "");
-	window.location.hash = $(this).attr('data-href');
-});
+function load_click_event() {
+	$('a[data-load-page]').on('click', function(e) {
+		e.preventDefault();
+		force_click_event($(this));
+	});
+}
+//load click events at startup
+load_click_event();
+
+//on click page load and hash change
+function force_click_event(elem) {
+	loadPageGet(generateUrl(elem.attr('data-load-page')), (!! elem.attr('data-get-req'))? elem.attr('data-get-req'): "");
+	window.location.hash = elem.attr('data-href');
+}
 
 /* 	Takes 'url' parameter and loads the page into the container,
 when a request is made the loading spinner shows and hide if the request is OK
@@ -34,7 +45,7 @@ or Failed */
 function loadPageGet (reqUrl, getReq) {
 	$.fx.off = true; // turn off jquery animation effects
 	$('#loading_icon').show(); //show loading icon'
-	showHideOverlay(); //show overlay while loading
+	showOverlay(); //show overlay while loading
 	$.ajax({
 		url: reqUrl+"?"+getReq,
 		cache: false,
@@ -46,7 +57,7 @@ function loadPageGet (reqUrl, getReq) {
 		showNotification("<b style=\"text-transform: uppercase;\">"+textStatus+"</b> - "+errorThrown, "error", "red_color");
 	}).always(function() {
 		$('#loading_icon').hide();
-		showHideOverlay(); //hide overlay while loading
+		hideOverlay(); //hide overlay while loading
 	});
 }
 //generates Url used to get files with ajax request
@@ -56,17 +67,33 @@ function generateUrl (data) {
 	return $subDir + data + $ext;
 }
 
+//scroll page to top
 function gotoTop() {
 	$.fx.off = false;
 	$("html, body").animate({ scrollTop: 0 }, "fast");
 	$.fx.off = true;
 }
 
+//overlay toogle
 function showHideOverlay () {
 	if ($('#disable_overlay').length) {
 		$('#disable_overlay').remove();
 	} else {
 		$('#main_panel').append("<div id=\"disable_overlay\" style=\"display:block;\"></div>")
+	}
+}
+
+//overlay hide
+function hideOverlay() {
+	if ($('#disable_overlay').length) {
+		$('#disable_overlay').remove();
+	}
+}
+
+//overlay visible
+function showOverlay() {
+	if (!$('#disable_overlay').length) {
+		$('#main_panel').append("<div id=\"disable_overlay\" style=\"display:block;\"></div>");
 	}
 }
 

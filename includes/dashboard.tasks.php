@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
 			$readme_raw = $Parsedown->text($readme);
 			//load and use html purifier for the readme notes.
 			$config = HTMLPurifier_Config::createDefault();
-			$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a');
+			$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src]');
 			$def = $config->getHTMLDefinition(true);
 			$def->addAttribute('code', 'lang-rel', 'Text');
 			$purifier = new HTMLPurifier($config);
@@ -90,7 +90,13 @@ if (isset($_POST['submit'])) {
 		$dashboard = new Dashboard();
 		if ($dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
 			if ($dashboard->deleteAddon($_POST['record_id'])) {
-				echo '{"status": "1", "data": "'.$lang['220'].'"}';
+				exit('
+				     {
+				     	"status": "1", 
+				     	"data": "'.$lang['220'].'", 
+				     	"callback_function": "remove_addon_record"
+				     }
+				     ');
 			} else {
 				//:S addon deletation failed! and we have no clue.... bummer
 				die('{"status": "0", "data": "'.$lang['221'].'"}');
@@ -135,7 +141,7 @@ if (isset($_POST['submit'])) {
 		$readme_raw = $Parsedown->text($readme);
 		//load and use html purifier for the readme notes.
 		$config = HTMLPurifier_Config::createDefault();
-		$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a,hr');
+		$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,hr,a[href|title],img[src]');
 		$def = $config->getHTMLDefinition(true);
 		$def->addAttribute('code', 'lang-rel', 'Text');
 		$purifier = new HTMLPurifier($config);

@@ -15,35 +15,27 @@
 	 */
 	class Addon
 	{
-//Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
-		public function memberInfo($ID)
-		{
-			global $connection;
-			if (databaseConnection()) {
-				try {
-					$sql = "SELECT * FROM " . SITE_MEMBER_TBL . " WHERE ID_MEMBER = :id";
-					$statement = $connection->prepare($sql);
-					$statement->bindValue(':id', $ID);
-					$statement->execute();
-					$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-					if (count($result) == 1) {
-						return $result;
-					} else {
-						return null;
-					}
-				} catch (Exception $e) {
-
-				}
-			}
-		}
-
 //gets all the addons from this member
 		public function getAddonListbyMember($id, $limit)
 		{
 			global $connection;
 			if (databaseConnection()) {
 				try {
-					$sql = "SELECT * FROM " . SITE_ADDON . " WHERE ID_AUTHOR = :id ORDER BY ID_ADDON DESC LIMIT " . $limit;
+					$sql = "
+						SELECT 
+							* 
+						FROM 
+							".SITE_ADDON." 
+								LEFT JOIN 
+							".SITE_MEMBER_TBL." 
+								on 
+							".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+						WHERE 
+							ID_AUTHOR = :id 
+						ORDER BY 
+							ID_ADDON DESC 
+						LIMIT 
+							".$limit;
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id', $id);
 					$statement->execute();
@@ -246,11 +238,17 @@
 			global $connection;
 			if (databaseConnection()) {
 				try {
-					if ($id == null) {
-						$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON;
-						$statement = $connection->prepare($sql);
-					} else {
-						$sql = "SELECT * FROM " . SITE_ADDON . " WHERE ID_ADDON = :id";
+					if ($id != null) {
+						$sql = "
+						SELECT * 
+						FROM ".SITE_ADDON." 
+								LEFT JOIN 
+							".SITE_MEMBER_TBL." 
+								on 
+							".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER
+						WHERE 
+							ID_ADDON = :id";
+
 						$statement = $connection->prepare($sql);
 						$statement->bindValue(':id', $id);
 					}
@@ -266,6 +264,33 @@
 		}
 
 
+		public function getMemberIdByName($query)
+		{
+			global $connection;
+			if (databaseConnection()) {
+				$query = str_replace(":author", "", $query);
+				$sql = "
+						SELECT 
+							* 
+						FROM 
+							".SITE_MEMBER_TBL." 
+						WHERE 
+							MATCH(membername) AGAINST (:query) 
+						LIMIT 1
+						";
+				$statement = $connection->prepare($sql);
+				$statement->bindValue(':query', str_replace(" ", "", $query));
+				$statement->execute();
+				$member_result = $statement->fetchAll(PDO::FETCH_ASSOC);
+				if (count($member_result) > 0) {
+					return $member_result;
+				} else {
+					return null;
+				}
+				
+			}
+		}
+
 		public function getAddonFiltered($cat, $order = null, $page = 1, $query = null)
 		{
 			global $connection, $addon_view_range;
@@ -280,29 +305,149 @@
 				$order_type = "DESC";
 			}
 
+			$offset = (($page-1) * $addon_view_range);
+
 			if (databaseConnection()) {
 				try {
 					if ($cat == null || $cat == "all") {
 						if ($query == null) {
-							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+							$sql = "
+									SELECT 
+										ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+									FROM 
+										".SITE_ADDON." 
+											LEFT JOIN 
+										".SITE_MEMBER_TBL." 
+											on 
+										".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+									ORDER BY 
+										ID_ADDON {$order_type} 
+									LIMIT 
+										{$addon_view_range} 
+									OFFSET 
+										{$offset} 
+									";
 							$statement = $connection->prepare($sql);
 						} else {
-							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
-							$statement = $connection->prepare($sql);
-							$statement->bindValue(':query', $query);
+							//Check if the search query contains author name, if true then search by author
+							if (strpos(strtolower($query), "author:") !== false) {
+								$member_result = $this->getMemberIdByName($query);
+								$sql = "
+										SELECT 
+											ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+										FROM 
+											".SITE_ADDON." 
+												LEFT JOIN 
+											".SITE_MEMBER_TBL." 
+												on 
+											".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+										WHERE 
+											ID_AUTHOR = {$member_result[0]['ID_MEMBER']} 
+										ORDER BY 
+											ID_ADDON {$order_type} 
+										LIMIT 
+											{$addon_view_range} 
+										OFFSET 
+											{$offset}
+										";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':query', $query);
+							} else {
+								$sql = "
+										SELECT 
+											ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+										FROM 
+											".SITE_ADDON." 
+												LEFT JOIN 
+											".SITE_MEMBER_TBL." 
+												on 
+											".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+										WHERE 
+											MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) 
+										ORDER BY 
+											ID_ADDON {$order_type} 
+										LIMIT 
+											{$addon_view_range} 
+										OFFSET 
+											{$offset}
+										";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':query', $query);
+							}
 						}
 					} else {
 						if ($query == null) {
-							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+							$sql = "
+								SELECT 
+									ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+								FROM 
+									".SITE_ADDON." 
+										LEFT JOIN 
+									".SITE_MEMBER_TBL." 
+										on 
+									".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+								WHERE 
+									addon_type = :cat 
+								ORDER BY 
+									ID_ADDON ".$order_type." 
+								LIMIT 
+									".$addon_view_range." 
+								OFFSET 
+									".(($page-1) * $addon_view_range);
 
 							$statement = $connection->prepare($sql);
 							$statement->bindValue(':cat', $cat);
 						} else {
-							$sql = "SELECT ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status FROM " . SITE_ADDON . " WHERE addon_type = :cat AND MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) ORDER BY ID_ADDON ".$order_type." LIMIT ".$addon_view_range." OFFSET ".(($page-1) * $addon_view_range);
+							//Check if the search query contains author name, if true then search by author
+							if (strpos(strtolower($query), "author:") !== false) {
+								$member_result = $this->getMemberIdByName($query);
+								$sql = "
+										SELECT 
+											ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+										FROM 
+											".SITE_ADDON." 
+												LEFT JOIN 
+											".SITE_MEMBER_TBL." 
+												on 
+											".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+										WHERE 
+											ID_AUTHOR = {$member_result[0]['ID_MEMBER']} 
+											AND 
+											addon_type = :cat 
+										ORDER BY 
+											ID_ADDON {$order_type} 
+										LIMIT 
+											{$addon_view_range} 
+										OFFSET 
+											{$offset}
+										";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':cat', $cat);
+							} else {
+								$sql = "
+									SELECT 
+										ID_ADDON, ID_AUTHOR, COLOR_ID, addon_title, addon_type, thumbnail, is_beta, status, membername 
+									FROM 
+										".SITE_ADDON." 
+											LEFT JOIN 
+										".SITE_MEMBER_TBL." 
+											on 
+										".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+									WHERE 
+										addon_type = :cat 
+										AND 
+										MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) 
+									ORDER BY 
+										ID_ADDON ".$order_type." 
+									LIMIT 
+										".$addon_view_range." 
+									OFFSET 
+										".(($page-1) * $addon_view_range);
 
-							$statement = $connection->prepare($sql);
-							$statement->bindValue(':cat', $cat);
-							$statement->bindValue(':query', $query);
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':cat', $cat);
+								$statement->bindValue(':query', $query);
+							}
 						}
 					}
 					$statement->execute();
@@ -326,9 +471,16 @@
 							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON;
 							$statement = $connection->prepare($sql);
 						} else {
-							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
-							$statement = $connection->prepare($sql);
-							$statement->bindValue(':query', $query);
+							//Check if the search query contains author name, if true then search by author
+							if (strpos(strtolower($query), "author:") !== false) {
+								$member_result = $this->getMemberIdByName($query);
+								$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE ID_AUTHOR = {$member_result[0]['ID_MEMBER']}";
+								$statement = $connection->prepare($sql);
+							} else {
+								$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':query', $query);
+							}
 						}
 					} else {
 						if ($query == null) {
@@ -336,10 +488,18 @@
 							$statement = $connection->prepare($sql);
 							$statement->bindValue(':cat', $cat);
 						} else {
-							$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE addon_type = :cat AND MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
-							$statement = $connection->prepare($sql);
-							$statement->bindValue(':query', $query);
-							$statement->bindValue(':cat', $cat);
+							//Check if the search query contains author name, if true then search by author
+							if (strpos(strtolower($query), "author:") !== false) {
+								$member_result = $this->getMemberIdByName($query);
+								$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE ID_AUTHOR = {$member_result[0]['ID_MEMBER']} AND addon_type = :cat";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':cat', $cat);
+							} else {
+								$sql = "SELECT ID_ADDON FROM " . SITE_ADDON . " WHERE addon_type = :cat AND MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)";
+								$statement = $connection->prepare($sql);
+								$statement->bindValue(':query', $query);
+								$statement->bindValue(':cat', $cat);
+							}
 						}
 					}
 					$statement->execute();
