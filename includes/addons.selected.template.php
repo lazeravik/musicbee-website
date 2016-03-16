@@ -28,7 +28,7 @@
 	<?php include $siteRoot . 'includes/font.helper.php'; ?>
 	<?php if (!empty($addon_type)): ?>
 		<style>
-			#<?php echo Slug($addon_type); ?>_active_page {
+			#<?php echo Format::Slug($addon_type); ?>_active_page {
 				box-shadow: inset 0px -3px 0px #FFC107;
 				color: #FFC107;
 				background: rgba(0, 0, 0, 0.1);
@@ -57,13 +57,11 @@
 									<li><a href="<?php echo $link['addon']['home'] . "s/?q=&type=all&order=latest"; ?>" id=""><?php echo $lang['18']; ?></a></li>
 									<?Php
 									foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-										echo "<li><a href=\"" . $menu_addon['href'] . " \" id=\"" . Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
+										echo "<li><a href=\"" . $menu_addon['href'] . " \" id=\"" . Format::Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
 									}
 
 									?>
-									<div id="clear"></div>
 								</ul>
-								<div id="clear"></div>
 							</div>
 						</div>
 						<div id="overlay_bg" class="general_info_color">
@@ -75,7 +73,7 @@
 												class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
 											</div>
 											<div class="general_info_addon_meta">
-												<p><?php echo $lang['252']; ?> <?php echo $data['membername']; ?></p>
+												<p><?php echo $lang['252']; ?> <a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
 												<?php if (null != $data['update_date']): ?>
 													<p><?php echo $lang['253']; ?> <?php echo $data['update_date']; ?></p>
 												<?php else: ?>
@@ -112,7 +110,7 @@
 													<i class="fa fa-info"></i><?php echo $lang['258']; ?>
 												</a>
 											<?php endif; ?>
-											<a id="like_count" href="javascript:void(0)" class="btn btn_red like_btn" onclick="rate('<?php echo $data['ID_ADDON']; ?>')" data-like-count="<?php echo number_format_suffix($addon_like); ?>">
+											<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn" onclick="rate('<?php echo $data['ID_ADDON']; ?>')" data-like-count="<?php echo Format::number_format_suffix($addon_like); ?>">
 												<?php echo $lang['263']; ?>
 											</a>
 										</div>
@@ -175,7 +173,7 @@
 					echo addon_result_view_generator($from_author, $addon);
 				?>
 				<div class="more_addon">
-					<a class="blue_btn_big" href="javascript:void(0)">
+					<a class="blue_btn_big" href="<?php echo addon_author_url_generator($data['membername']); ?>">
 						<h3><?php echo $lang['261']; ?></h3>
 						<p><?php echo $lang['262']; ?> <?php echo $data['membername']; ?></p>
 					</a>
@@ -222,7 +220,7 @@ include($footer);
 	$(document).ready(function () {
 		<?php if ($addon_already_liked == true): ?>
 		$('#like_count').html('<?php echo $lang['268']; ?>');
-		$('#like_count').addClass('red_color');
+		$('#like_count').addClass('btn_red');
 		<?php endif; ?>
 
 		blurDo(); //activate blurry bg
@@ -276,7 +274,7 @@ var remove_rating = function () {
 	var updated_love_count = current_love_count - 1;
 	$('#like_count').attr('data-like-count', updated_love_count);
 	$('#like_count').html('<?php echo $lang['263']; ?>');
-	$('#like_count').removeClass('red_color');
+	$('#like_count').removeClass('btn_red');
 }
 
 var add_rating = function () {
@@ -284,7 +282,7 @@ var add_rating = function () {
 	var updated_love_count = current_love_count + 1;
 	$('#like_count').attr('data-like-count', updated_love_count);
 	$('#like_count').html('<?php echo $lang['268']; ?>');
-	$('#like_count').addClass('red_color');
+	$('#like_count').addClass('btn_red');
 }
 
 </script>

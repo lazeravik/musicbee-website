@@ -26,11 +26,11 @@ if (isset($_GET['id'])) {
 			exit();
 		}
 
-		var_dump($data);
+		//var_dump($data);
 
 		//checks the url parameter and try to match the addon title, if the addon id matches but not the title, then do a 301 redirect
-		if (count($params) <= 4 || $params[3] != Slug($data['addon_title'])) {
-			header("Location: " . $siteUrl . "addons/" . $data['ID_ADDON'] . "/" . Slug($data['addon_title']) . "", 301);
+		if (count($params) <= 4 || $params[3] != Format::Slug($data['addon_title'])) {
+			header("Location: " . $siteUrl . "addons/" . $data['ID_ADDON'] . "/" . Format::Slug($data['addon_title']) . "", 301);
 		}
 
 		//Since the addon is found and everything is ok, create screenshot link array
@@ -43,8 +43,8 @@ if (isset($_GET['id'])) {
 
         //get addon specific info like likes, title, description etc.
 		$meta_description = "Download MusicBee skins, plugins, theater mode, visualizer and more..";
-		$addon_type = UnslugTxt($data['addon_type']);
-		$from_author = $addon->getAddonListbyMember($data['ID_AUTHOR'], 5);
+		$addon_type = Format::UnslugTxt($data['addon_type']);
+		$from_author = $addon->getAddonListByMember($data['ID_AUTHOR'], 5);
 		$addon_like = $addon->getRating($data['ID_ADDON']);
 		$addon_already_liked = $addon->is_rated($data['ID_ADDON'],$user_info['id']);
 
@@ -52,32 +52,39 @@ if (isset($_GET['id'])) {
 		exit();
 
 	} elseif ($_GET['id'] == "s") {
-		$meta_description = "blah";
 
     	//Addon Pagination function!
     	//remove the ? sign from the string and convert the url paramenter into an array
 		parse_str(str_replace("?", "", $params[3]),$url_params); 
 
+		//Just to be safe, we will check if the url contains type and order parameter otherwise initialize the default value for them
+		$url_params['type'] = isset($url_params['type'])? $url_params['type'] : "all";
+		$url_params['order'] = isset($url_params['order'])? $url_params['order'] : "latest";
+
     	//get the addon type,result order,if any search query from the get request
-		$data['type'] = UnslugTxt(htmlspecialchars($url_params['type'], ENT_QUOTES, "UTF-8"));
+		$data['type'] = Format::UnslugTxt(htmlspecialchars($url_params['type'], ENT_QUOTES, "UTF-8"));
 		$data['order'] = htmlspecialchars($url_params['order'], ENT_QUOTES, "UTF-8");
 		$data['query'] = (isset($url_params['q']))?htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"):null;
-		$addon_type = Slug($data['type']);
+		$addon_type = Format::Slug($data['type']);
 
 		$generated_url = $link['addon']['home']."s/?q=".urlencode($data['query'])."&type=".$addon_type."&order=".$data['order'];
+		
+		//get all the addon filtered by category/query and other
+		$data['addon_all'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], $data['query']);
 
-		//If the url already has a page number parameter then load only for that page
-		if (isset($url_params['p'])) {
-			$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], $url_params['p'], $data['query']);
-		} 
-		//else load only for page 1 as default
-		else {
-			$data['addon'] = $addon->getAddonFiltered($url_params['type'], $url_params['order'], "1", $data['query']);
-		}
+		//Offset start and end value for pagination
+		$offset_start = (isset($url_params['p']))? (($url_params['p']-1) * $addon_view_range) : "0";
+		$offset_end   = (isset($url_params['p']))? ($url_params['p'] * $addon_view_range) : $addon_view_range;
+
+		//instead of showing the full list at once, we wan't to break it down by chunks and use pagination
+		$data['addon'] = ($data['addon_all'] != null)? array_slice($data['addon_all'], $offset_start, $offset_end) : null;	
+
 		//var_dump($data['addon']);
-		$addon_total = $addon->getAddonCount($url_params['type'], $data['query']);
-		$page_total = ceil($addon_total/$addon_view_range);
+		
+		//Calculate total number of page required
+		$page_total = ceil(count($data['addon_all'])/$addon_view_range);
 
+		$meta_description = "blah";
 		include_once $siteRoot . 'includes/addons.search.template.php';
 		exit();
 	} else {
@@ -103,7 +110,7 @@ function addon_result_view_generator($data, $addon)
 	if ($data != null) {
 		$result_view = '<ul class="addon_list_box">';
 		foreach ($data as $key => $addon_data){
-			$addon_link = $link['addon']['home'] . $addon_data['ID_ADDON'] . '/' . Slug($addon_data['addon_title']);
+			$addon_link = $link['addon']['home'].$addon_data['ID_ADDON'].'/'.Format::Slug($addon_data['addon_title']);
 
 			$result_view .='<li id ="'.$addon_data['ID_ADDON'].'">
 			<div class="addon_list_box_wrapper">
@@ -113,7 +120,7 @@ function addon_result_view_generator($data, $addon)
 				</a>
 				<div class="addon_list_box_info">
 					<a href="'.$addon_link.'"><p class="title">'.$addon_data['addon_title'].'</p></a>
-					<p class="author">by '.$addon_data['membername'].'</p>
+					<p class="author"><a href="'.addon_author_url_generator($addon_data['membername']).'">by <b>'.$addon_data['membername'].'</b></a></p>
 				</div>
 			</div>
 		</li>'; }
@@ -144,4 +151,10 @@ function addon_result_pagination_generator($page_total, $generated_url)
 	}
 
 	return $pagination_view;
+}
+
+function addon_author_url_generator($name)
+{
+	global $link;
+	return $link['addon']['home']."s/?q=".urlencode("author:".$name)."&type=all&order=latest";
 }

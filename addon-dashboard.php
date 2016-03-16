@@ -11,39 +11,6 @@
 
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-
-include $siteRoot . 'classes/Dashboard.php';
-include $siteRoot . 'classes/Member.php';
-$dashboard = new Dashboard(); //create an instance of the addondashboard class
-$memberData = new Member();
-//check if the user has a rank or not, if not, then there is no addon account created for the user
-if ($memberData->memberInfo($user_info['id'])['rank'] == null) {
-    $permission = 10;
-    if ($user_info['is_admin']) {
-        $permission = 1; //permission level 1 means the member is admin
-    } elseif ($user_info['is_mod']) {
-        $permission = 2; //permission level 2 means the member is mod
-    }
-    //Create an Addon dashboard account for the user
-    $dashboard->createAddonAccount($user_info['id'], $permission, $user_info['name']);
-} else {
-    //If the memebr has an account but the permission session is not set, this is the time to do so...
-    $_SESSION['dashboard_permission'] = $memberData->memberInfo($user_info['id'])['rank'];
-}
-
-
-//Addon Account Related Session Initialize
-$getmemberinfo = $memberData->memberInfo($user_info['id']); //Gets all member info from the DB
-
-/* We will use an arra to store all the member data. the data contains:
-name, id, rank(rank name), raw rank(rank id)                    */
-$memberinfoArray['membername'] = $getmemberinfo['membername'];
-$memberinfoArray['memberid'] = $getmemberinfo['ID_MEMBER'];
-$memberinfoArray['rank'] = $memberData->rankName($getmemberinfo['rank']);
-$memberinfoArray['rank_raw'] = $getmemberinfo['rank'];
-/*store memberinfoArray in the session. Now we can get the value anytime*/
-$_SESSION['memberinfo'] = $memberinfoArray;
-
 ?>
 <!DOCTYPE html>
 <html>

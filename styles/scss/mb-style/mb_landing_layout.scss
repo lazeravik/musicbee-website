@@ -1,4 +1,7 @@
 $max_content_width : 1000px;
+$mb_top_bg_wireframe : "../../img/bg_teaser.svg";
+$mb_quality_bg : "../../../img/headphone.jpg";
+$mb_bottom_download_bg: "../../../img/download_bg.jpg";
 
 .mb_landing {
 	position: relative;
@@ -69,4 +72,127 @@ $max_content_width : 1000px;
 		.hero_img_wrapper { right: 50px; }
 		.hero_text_top { float: right; }
 	}
+
+	&.align_center {
+		.hero_img_top {
+			width: inherit;
+			text-align: center;
+			float: none;
+
+			.hero_img_wrapper {  }
+		}
+		.hero_text_top { 
+			text-align: center; 
+			width: inherit;
+		}
+	}
+
+	.sub_content_bottom {
+		background: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.46),rgba(0, 0, 0, 0.65));
+
+		.sub_content {
+			padding: 0px 0px 50px;
+		}
+	}
 }
+
+.mb_intro_top { 
+	background: url($mb_top_bg_wireframe) fixed #15327B; 
+
+	.overlay {
+		background: linear-gradient( 135deg, rgba(42, 62, 78, 0.95),rgba(39, 68, 90, 0.74),rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58));
+
+		.sub_content {
+			padding: 100px 10px 200px;
+		}
+	}
+}
+.mb_quality_top {
+	background: url($mb_quality_bg) 50% 0 fixed,#0076db; 
+
+	.overlay {
+		background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
+
+		.sub_content {
+			padding: 50px 10px 50px;
+
+			.feature_box {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+				display: flex;
+				flex-wrap: wrap;
+
+				li {
+					list-style: none;
+					margin: 0px;
+					padding: 0px;
+					width: 33.33333333333333%;
+
+					p{
+						margin: 10px;
+
+						&.feature_ico {
+							font-size: 50px;
+						}
+					}
+
+					div {
+						background: rgba(255, 255, 255, 0.07);
+						padding: 10px 5px 20px 5px;
+						margin: 50px 10px;
+						box-sizing: border-box;
+						border-radius: 3px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.mb_more_top {
+	background: url($mb_bottom_download_bg) 50% 0 fixed,#0076db;
+
+	.overlay {
+		background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
+
+		.sub_content {
+			padding: 40px 20px 40px 20px;
+		}
+	}
+}
+
+.mb_landing_overlay {
+	background-size: cover;
+	background-position-x: center;
+	background-position-y: center;
+	z-index: 2;
+
+	.overlay {
+		color: #FFFFFF;
+		overflow: hidden;
+
+		.sub_content {
+			max-width: 1000px;
+			margin: 0 auto;
+			text-align: inherit;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
+			position: relative;
+		}
+
+		.sub_content_bottom {
+			padding: 0px 0px 50px;
+
+			.hero_buttons {
+				padding: 0px;
+			}
+		}
+	}
+
+	&.align_center {
+		width: inherit;
+		text-align: center;
+		float: none;
+	}
+}
+

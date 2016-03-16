@@ -49,13 +49,13 @@ if (isset($_GET['view'])) {
 						foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 							$type_selection_text = "";
 							if (isset($data)) {
-								if ($data['addon_type']==Slug($menu_addon['title'])) {
+								if ($data['addon_type']==Format::Slug($menu_addon['title'])) {
 									$type_selection_text = "selected";
 								}
 							}
 
 							
-							echo "<option value=\"" . Slug($menu_addon['title']) . "\" ". $type_selection_text .">" . $menu_addon['title'] . "</option>";
+							echo "<option value=\"" . Format::Slug($menu_addon['title']) . "\" ". $type_selection_text .">" . $menu_addon['title'] . "</option>";
 						}
 						?>
 					</select>
@@ -153,11 +153,11 @@ if (isset($_GET['view'])) {
 						foreach ($color_codes as $key => $color): 
 							$color_selection_text = "";
 						if ($viewType == 2) {
-							if (Slug($data['COLOR_ID']) == Slug($color['name'])) {
+							if (Format::Slug($data['COLOR_ID']) == Format::Slug($color['name'])) {
 								$color_selection_text = "checked";
 							}
 						} ?>
-						<input type="radio" name="color" id="color" value="<?php echo Slug($color['name']); ?>" style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
+						<input type="radio" name="color" id="color" value="<?php echo Format::Slug($color['name']); ?>" style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
 					<?php endforeach; ?>
 					<div id="clear"></div>
 				</label>

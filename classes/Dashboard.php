@@ -16,47 +16,6 @@
 	class Dashboard
 	{
 
-		public $errorMessage;
-
-
-//Create An Account for the Addon dashborad, with SMF values. We won't store password or email as we can verify
-//them using SMF, but we do need ID_MEMBER values to uniquely idestify addon authors. 
-//Here is a list of what we store:
-//      ID_MEMBER (same as SMF ID_MEMBER)
-//      rank (this will determine member's permission)
-//      addon_added (number of addon added by the member, when number of addon reaches either 5, they won't require admin/mod approval)
-//      membername (though we can get member name from the SMF SSI.php, but some member may want different name than on the forum)
-//
-//Yup thats it. Also the following function SHOULD ONLY EXECUTE only one time for everyuser. otherwise it will override the
-//current one
-		public function createAddonAccount($ID, $permission, $name)
-		{
-			global $connection;
-			if ($permission == 1 || $permission == 2) {
-				$submitPermission = 1;
-			} else {
-				$submitPermission = 0;
-			}
-
-			if (databaseConnection()) {
-				try {
-					$sql = "INSERT INTO " . SITE_MEMBER_TBL . " SET ID_MEMBER = :id, rank = :permission, membername = :name, submitPermission = :submitPermission, addon_added = :addon_added";
-					$statement = $connection->prepare($sql);
-					$statement->bindValue(':id', $ID);
-					$statement->bindValue(':permission', $permission);
-					$statement->bindValue(':name', $name);
-					$statement->bindValue(':submitPermission', $submitPermission);
-					$statement->bindValue(':addon_added', 0);
-					$statement->execute();
-				} catch (Exception $e) {
-					return false;
-				}
-
-				return $ID . "-" . $permission . "-" . $name . "-";
-			}
-		}
-
-
 		public function verifyAuthor($member_id, $addon_id)
 		{
 			global $connection;
@@ -115,31 +74,6 @@
 				}
 			}
 		}
-
-		public function checkMbVersions($val)
-		{
-			global $connection;
-			$ver = explode(",", $val); //create an array of supported musicbee versions
-			if (databaseConnection()) {
-				foreach ($ver as $versionId) {
-					try {
-						$sql = "SELECT ID_ALLVERSIONS FROM " . SITE_MB_ALL_VERSION_TBL . " WHERE ID_ALLVERSIONS = :id";
-						$statement = $connection->prepare($sql);
-						$statement->bindValue(':id', $versionId);
-						$statement->execute();
-						$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-						if (count($result) != 1) {
-							return false;
-						}
-					} catch (Exception $e) {
-						return false;
-					}
-				}
-
-				return true;
-			}
-		}
-
 
 		public function submit($rankid, $authorId, $readme_html, $type)
 		{

@@ -30,17 +30,8 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeReleaseNote.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/code-style/obsidian.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/font.helper.php'; ?>
-	<!--Social network tags for facebook and twitter -->
-	<meta property="og:title" content="">
-	<meta property="og:image" content="<?php echo $siteUrl; ?>img/mb_big.png">
-	<meta property="og:description" content="<?php echo $meta_description; ?>">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@MusicBeePlayer"> 
-	<meta name="twitter:title" content="MusicBee - Music Manager and Player">
-	<meta name="twitter:description" content="<?php echo $meta_description; ?>">
 	</head>
 	<body>
 	<div id="indexBackground">

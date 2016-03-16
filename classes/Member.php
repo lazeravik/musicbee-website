@@ -15,8 +15,49 @@
 	 */
 	class Member
 	{
+
+		public function createDashboardAccount($user_id, $user_rankid, $user_name)
+		{
+			global $connection;
+			if ($user_rankid == 1 || $user_rankid == 2) {
+				$submitPermission = 1;
+			} else {
+				$submitPermission = 0;
+			}
+
+			if (databaseConnection()) {
+				try {
+					$sql = "INSERT
+								INTO
+									".SITE_MEMBER_TBL."
+								SET
+									ID_MEMBER = :id,
+									rank = :permission,
+									membername = :name,
+									submitPermission = {$submitPermission},
+									addon_added = :addon_added";
+					$statement = $connection->prepare($sql);
+					$statement->bindValue(':id', $user_id);
+					$statement->bindValue(':permission', $user_rankid);
+					$statement->bindValue(':name', $user_name);
+					$statement->bindValue(':addon_added', 0);
+					$statement->execute();
+				} catch (Exception $e) {
+					return false;
+				}
+
+				//check if user's dashboard account creation is successful or not
+				if($this->memberInfo($user_id) != null) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
 		/**
 		 * @param $user_id
+		 *
 		 * @return null
 		 * Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
 		 */
@@ -49,7 +90,7 @@
 		 * @return string
 		 * @todo improve it by using array with foreach switch, it will make it more feature rich and flexible
 		 */
-		public function rankName($rankid)
+		public static function rankName($rankid)
 		{
 			switch ($rankid) {
 				case 1:

@@ -13,13 +13,11 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 include $siteRoot.'classes/Addon.php';
-include $siteRoot.'classes/Member.php';
 $addon = new addon(); //create an instance of the addondashboard class
-$memberData = new Member(); //member class instance init
-$addonInfo = $addon->getAddonListbyMember($_SESSION['memberinfo']['memberid'],100);
+$addonInfo = $addon->getAddonListByMember($_SESSION['memberinfo']['memberid'],100);
 //Get all the info about the user at the begining
 $info = $memberData->memberInfo($_SESSION['memberinfo']['memberid']); //get info about the user
-$unapprovedAddonInfo = $addon->getUnApprovedAddonsbyMember($_SESSION['memberinfo']['memberid'],100,0);
+$unapprovedAddonInfo = $addon->getAddonListByStatusAndMember($_SESSION['memberinfo']['memberid'],100,0);
 ?>
 
 

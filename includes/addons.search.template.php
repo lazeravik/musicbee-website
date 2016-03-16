@@ -17,7 +17,7 @@
 		<?php include $siteRoot . 'includes/font.helper.php'; ?>
 		<?php if (!empty($addon_type)): ?>
 			<style>
-				#<?php echo Slug($addon_type); ?>_active_page{
+				#<?php echo Format::Slug($addon_type); ?>_active_page{
 					box-shadow: inset 0px -3px 0px #FFC107;
 					color: #FFC107;
 					background: rgba(0, 0, 0, 0.1);
@@ -45,9 +45,19 @@
 										<li><a href="<?php echo $link['addon']['home'] . "s/?q=&type=all&order=latest"; ?>" id="all_active_page"><?php echo $lang['18']; ?></a></li>
 										<?Php
 										foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-											echo "<li><a href=\"" . $menu_addon['href'] . " \"  id=\"" . Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
+											echo "<li><a href=\"" . $menu_addon['href'] . " \"  id=\"" . Format::Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
 										}
 										?>
+										<div id="clear"></div>
+									</ul>
+									<ul class="right">
+										<li>
+											<form method="GET" action="<?php echo $link['addon']['home']; ?>s/">
+												<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="srch small_search" placeholder="Search for Add-ons" name="q" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
+												<input type="hidden" name="type" value="all" />
+												<input type="hidden" name="order" value="latest" />
+											</form>
+										</li>
 										<div id="clear"></div>
 									</ul>
 									<div id="clear"></div>
@@ -61,7 +71,7 @@
 												<form method="GET" action="<?php echo $link['addon']['home']; ?>s/">
 													<p><label for="order">Search: </label></p>
 													<div class="search_left">
-														<input type="text" class="srch big_search" id="big_search" name="q" placeholder="Search <?php echo $data['type']; ?>" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
+														<input type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="srch big_search" id="big_search" name="q" placeholder="Search <?php echo $data['type']; ?>" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
 														<input type="hidden" name="search" value="true" />
 													</div>
 													<div class="search_right">
@@ -78,8 +88,8 @@
 																		echo "selected";
 																	echo ">All</option>";
 																	foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-																		echo "<option value=\"" . Slug($menu_addon['title']) . "\"";
-																		if ($addon_type == Slug($menu_addon['title']))
+																		echo "<option value=\"" . Format::Slug($menu_addon['title']) . "\"";
+																		if ($addon_type == Format::Slug($menu_addon['title']))
 																			echo "selected";
 																		echo ">" . $menu_addon['title'] . "</option>";
 																	}

@@ -141,7 +141,7 @@
 	$lang['footer_181'] = "Version:";
 	$lang['footer_182'] = "Released on";
 	$lang['footer_183'] = "More";
-	$lang['footer_184'] = "Subscribe to our RSS feed";
+	$lang['footer_184'] = "Subscribe to RSS";
 	$lang['footer_185'] = "<i class=\"fa fa-code\"></i>&nbsp;&nbsp;Developer API";
 	$lang['footer_186'] = "Want to get notified of new releases?";
 	$lang['footer_187'] = "<i class=\"fa fa-bug\"></i>&nbsp;&nbsp;Report a bug";
@@ -152,6 +152,7 @@
 	$lang['footer_192'] = "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for the community";
 	$lang['footer_193'] = "MusicBee copyright &copy; Steven Mayall 2008-" . date('Y') . ", All Rights Reserved";
 	$lang['footer_231'] = "<i class=\"fa fa-bullhorn\"></i>&nbsp;&nbsp;Press & Media";
+	$lang['footer_232'] = "Twitter";
 
 	/*404 page */
 	$lang['194'] = "404";

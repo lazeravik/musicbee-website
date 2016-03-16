@@ -414,6 +414,69 @@ optgroup {
   font-weight: bold;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-family: "Roboto", "sans-serif", verdana;
+}
+
+a {
+  text-decoration: none;
+  color: #c59131;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #ddaa00;
+}
+
+a:active, a:hover {
+  outline: 0;
+}
+
+.line {
+  margin: 0;
+  border-top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: rgba(148, 148, 148, 0.29);
+  background: rgba(255, 255, 255, 0);
+}
+
+.show_info {
+  color: #FFF;
+  font-size: 13px;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.13);
+  line-height: 21px;
+  font-family: "Roboto", "sans-serif", verdana;
+  display: block;
+  padding: 15px;
+  padding-left: 50px;
+  position: relative;
+  margin: 0px;
+  background: #2196f3;
+}
+
+.show_info::before {
+  content: "\f05a";
+  font-family: "FontAwesome";
+  padding: 10px;
+  position: absolute;
+  left: 10px;
+  font-size: 17px;
+  top: 6px;
+  color: #FFF;
+  text-shadow: none;
+}
+
+.show_info.warning {
+  background: #ff9800;
+}
+
+#clear {
+  clear: both;
+}
+
 /*================================================================================================================*\\
     Style for input fields such as buttons, links, checkboxes etc
 \*================================================================================================================*/
@@ -444,11 +507,164 @@ input:focus, textarea:focus, select:focus {
   border: 2px solid #333;
 }
 
+.btn {
+  text-decoration: none;
+  background: #515151;
+  color: #FFF;
+  padding: 10px 20px;
+  margin: 5px 5px 5px 0px;
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 0px;
+  outline: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.28);
+  min-width: 90px;
+  transition: all 0.1s linear 0s;
+  border: 0px;
+  cursor: pointer;
+  font-family: "Roboto", "sans-serif", verdana;
+}
+
+.btn:hover {
+  text-decoration: none;
+  background: #6E6E6E;
+}
+
+.btn:active {
+  text-decoration: none;
+  background: #333;
+}
+
+.btn.btn_blacknwhite {
+  background: #515151;
+  color: #fff;
+}
+
+.btn.btn_blacknwhite:hover {
+  background: #fff;
+  color: #474747;
+}
+
+.btn.btn_blue {
+  background: #2196f3;
+  color: #fff;
+}
+
+.btn.btn_blue:hover {
+  background: #1583da;
+}
+
+.btn.btn_green {
+  color: #fff;
+  background: #4CAF50;
+}
+
+.btn.btn_green:hover {
+  background: #3B923F;
+}
+
+.btn.btn_yellow {
+  background: #e6803b;
+  color: #fff;
+}
+
+.btn.btn_yellow:hover {
+  background: #c65e19;
+}
+
+.btn.btn_red {
+  background: #F44336;
+  color: #fff;
+}
+
+.btn.btn_red:hover {
+  background: #F45C51;
+}
+
+.btn.btn_download {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn.btn_wireframe {
+  margin: 5px;
+  border: 1px;
+  border-style: solid;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: linear all .15s;
+  display: inline-block;
+}
+
+.btn.btn_wireframe:hover {
+  text-decoration: none;
+  border: 1px;
+  border-style: solid;
+}
+
+.btn.btn_wireframe h3 {
+  margin: 5px 0px;
+}
+
+.btn.btn_wireframe p {
+  margin: 5px 0px;
+}
+
+.btn.btn_wireframe.btn_wireframe_blue {
+  background: rgba(0, 41, 255, 0.03);
+  border-color: #03a9f4;
+  color: #03a9f4;
+}
+
+.btn.btn_wireframe.btn_wireframe_blue:hover {
+  background: #03a9f4;
+  border-color: #2196f3;
+  color: white;
+}
+
+.btn.btn_wireframe.btn_wireframe_yellow {
+  background: rgba(255, 191, 0, 0.03);
+  border-color: #ff9800;
+  color: #ddaa00;
+}
+
+.btn.btn_wireframe.btn_wireframe_yellow:hover {
+  background: #e08600;
+  border-color: #ffa828;
+  color: white;
+}
+
+.like_btn {
+  padding-right: 0px;
+}
+
 h1 {
   font-family: "Roboto", "sans-serif", verdana;
   font-size: 30px;
   font-weight: 300;
-  margin: 10px 0;
+  margin: inherit;
+}
+
+h2 {
+  font-family: inherit;
+  font-size: 25px;
+  font-weight: 300;
+  margin: inherit;
+}
+
+h3 {
+  font-family: "Roboto";
+  font-size: 20px;
+  font-weight: 300;
+  margin: inherit;
+}
+
+h4 {
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 300;
+  margin: inherit;
 }
 
 /*================================================================================================================*\\
@@ -541,6 +757,8 @@ h1 {
   opacity: 0;
   transition: linear all 0.2s;
   left: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li {
@@ -592,8 +810,228 @@ h1 {
   display: table;
 }
 
+.secondery_nav {
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 96;
+  transition: linear all .1s;
+}
+
+.secondery_nav .secondery_nav_wrap {
+  max-width: 1200px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: block;
+}
+
+.secondery_nav .secondery_nav_wrap ul, .secondery_nav .secondery_nav_wrap li, .secondery_nav .secondery_nav_wrap ol {
+  list-style: none;
+}
+
+.secondery_nav .secondery_nav_wrap ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: inline-block;
+  float: left;
+}
+
+.secondery_nav .secondery_nav_wrap ul li {
+  float: left;
+  display: inline-block;
+}
+
+.secondery_nav .secondery_nav_wrap ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  display: block;
+  transition: linear all .15s;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.19);
+  box-shadow: none;
+  background: transparent;
+  text-decoration: none;
+}
+
+.secondery_nav .secondery_nav_wrap ul li a:hover {
+  text-decoration: none;
+  color: white;
+  box-shadow: inset 0 -3px 0 white;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub {
+  height: 0px;
+  overflow: hidden;
+  background: #444444;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  max-width: 300px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.44);
+  opacity: 0;
+  transition: linear all 0.2s;
+  left: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub li {
+  float: left;
+  width: 100%;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub li a {
+  width: 100%;
+  padding: 5px 15px;
+  display: block;
+  box-sizing: border-box;
+  text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
+  box-shadow: none;
+  transition: linear all 0.03s;
+  text-decoration: none;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub li a:hover {
+  background: #ff9800;
+  color: white;
+  box-shadow: none;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub.dropdown_right {
+  right: 0px;
+  left: inherit;
+}
+
+.secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.secondery_nav .secondery_nav_wrap ul li:hover .nav_dropdown_sub {
+  height: auto;
+  opacity: 1;
+}
+
+.secondery_nav .secondery_nav_wrap ul.left {
+  float: left;
+}
+
+.secondery_nav .secondery_nav_wrap ul.right {
+  float: right;
+}
+
+.secondery_nav .secondery_nav_wrap ul:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.secondery_nav .secondery_nav_wrap:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+footer.footer_section {
+  background: #333333;
+  color: #eeeeee;
+}
+
+footer.footer_section .widget {
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+footer.footer_section .widget .widgetCommon {
+  width: 33.33333333333333%;
+  height: auto;
+  vertical-align: top;
+  padding: 30px;
+  font-weight: normal;
+  font-size: 13px;
+  display: block;
+  box-sizing: border-box;
+}
+
+footer.footer_section .widget .widgetCommon h4 {
+  color: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 5px 0 0 #ff9800;
+  padding: 2px 15px;
+  margin: 0;
+  transition: linear all .1s;
+  text-transform: uppercase;
+}
+
+footer.footer_section .widget .widgetCommon:hover h4 {
+  padding: 2px 20px;
+  box-shadow: inset 5px 0 0 #ff9800;
+}
+
+footer.footer_section .widget .widgetCommon ul, footer.footer_section .widget .widgetCommon ol, footer.footer_section .widget .widgetCommon ul {
+  padding: 0px;
+  list-style: none;
+}
+
+footer.footer_section .widget .widgetCommon ul.footer_list_menu a {
+  color: #eeeeee;
+  padding: 10px 0;
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+footer.footer_section .widget .widgetCommon ul.footer_list_menu a:hover {
+  text-decoration: none;
+  color: #ff9800;
+}
+
+footer.footer_section .widget .widgetCommon ul.footer_list_menu a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+footer.footer_section .widget .widgetCommon ul.footer_list_menu .footer_donation {
+  background: rgba(78, 65, 44, 0.69);
+  padding: 10px 15px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin: 20px 0 10px;
+  border-radius: 2px;
+}
+
+footer.footer_section .footer_credit_wrap {
+  padding: 20px 0;
+  display: block;
+  margin: 0 auto;
+  background: #403000;
+  background: url("../../img/hive_pat.png"), linear-gradient(135deg, #212121, #403000, #212121);
+  font-size: 13px;
+  box-shadow: inset 0 4px 0 rgba(255, 152, 0, 0.5);
+}
+
+footer.footer_section .footer_credit_wrap .footer_credit {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding-left: 60px;
+}
+
+footer.footer_section .footer_credit_wrap .footer_credit p {
+  color: rgba(255, 255, 255, 0.76);
+  padding: 0px;
+  margin: 2px;
+}
+
 /*================================================================================================================*\\
-    Landing page layout styles
+    page layout styles
 \*================================================================================================================*/
 .mb_landing {
   position: relative;
@@ -686,6 +1124,215 @@ h1 {
 
 .mb_landing.align_left .hero_text_top {
   float: right;
+}
+
+.mb_landing.align_center .hero_img_top {
+  width: inherit;
+  text-align: center;
+  float: none;
+}
+
+.mb_landing.align_center .hero_text_top {
+  text-align: center;
+  width: inherit;
+}
+
+.mb_landing .sub_content_bottom {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.65));
+}
+
+.mb_landing .sub_content_bottom .sub_content {
+  padding: 0px 0px 50px;
+}
+
+.mb_intro_top {
+  background: url("../../img/bg_teaser.svg") fixed #15327B;
+}
+
+.mb_intro_top .overlay {
+  background: linear-gradient(135deg, rgba(42, 62, 78, 0.95), rgba(39, 68, 90, 0.74), rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58));
+}
+
+.mb_intro_top .overlay .sub_content {
+  padding: 100px 10px 200px;
+}
+
+.mb_quality_top {
+  background: url("../../../img/headphone.jpg") 50% 0 fixed, #0076db;
+}
+
+.mb_quality_top .overlay {
+  background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
+}
+
+.mb_quality_top .overlay .sub_content {
+  padding: 50px 10px 50px;
+}
+
+.mb_quality_top .overlay .sub_content .feature_box {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mb_quality_top .overlay .sub_content .feature_box li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 33.33333333333333%;
+}
+
+.mb_quality_top .overlay .sub_content .feature_box li p {
+  margin: 10px;
+}
+
+.mb_quality_top .overlay .sub_content .feature_box li p.feature_ico {
+  font-size: 50px;
+}
+
+.mb_quality_top .overlay .sub_content .feature_box li div {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 10px 5px 20px 5px;
+  margin: 50px 10px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.mb_more_top {
+  background: url("../../../img/download_bg.jpg") 50% 0 fixed, #0076db;
+}
+
+.mb_more_top .overlay {
+  background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
+}
+
+.mb_more_top .overlay .sub_content {
+  padding: 40px 20px 40px 20px;
+}
+
+.mb_landing_overlay {
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  z-index: 2;
+}
+
+.mb_landing_overlay .overlay {
+  color: #FFFFFF;
+  overflow: hidden;
+}
+
+.mb_landing_overlay .overlay .sub_content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: inherit;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
+  position: relative;
+}
+
+.mb_landing_overlay .overlay .sub_content_bottom {
+  padding: 0px 0px 50px;
+}
+
+.mb_landing_overlay .overlay .sub_content_bottom .hero_buttons {
+  padding: 0px;
+}
+
+.mb_landing_overlay.align_center {
+  width: inherit;
+  text-align: center;
+  float: none;
+}
+
+.main_panel .content {
+  padding: 0px;
+  position: relative;
+  margin: 0px;
+  height: auto;
+}
+
+.main_panel .content.mb_download_installer_bg {
+  position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content {
+  padding: 40px 20px;
+  text-align: center;
+  color: #1e1e1e;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content h3 {
+  margin: 5px 0px 10px;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content p {
+  margin: 5px 0px;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper {
+  display: block;
+  width: 40%;
+  margin: 30px 0px 0px;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper .installer_layer_wrapper {
+  text-align: left;
+  display: block;
+  padding: 10px;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper .installer_non_portable {
+  background: #0078ff;
+  color: white;
+}
+
+.main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper .mb_portable_download_bg {
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.main_panel .content.mb_download_installer_bg:after {
+  content: url("../../img/mb-hero-interface-min.png");
+  top: 100px;
+  right: -200px;
+  position: absolute;
+}
+
+.main_panel .content.mb_beta_download_bg {
+  position: relative;
+  background-color: #c9c9c9;
+  overflow: hidden;
+}
+
+.main_panel .content.mb_beta_download_bg .sub_content {
+  padding: 40px 20px;
+  text-align: left;
+  color: #353535;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+.main_panel .content.mb_beta_download_bg .sub_content h3 {
+  margin: 5px 0px 10px;
+}
+
+.main_panel .content.mb_beta_download_bg .sub_content p {
+  margin: 5px 0px;
+}
+
+.main_panel .content.mb_beta_download_bg:after {
+  content: "\f071";
+  font-family: "FontAwesome";
+  top: -10px;
+  right: -100px;
+  position: absolute;
+  font-size: 350px;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /*================================================================================================================*\\
