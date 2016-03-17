@@ -287,8 +287,8 @@
 	$lang['269'] = "Showing results for: ";
 	$lang['270'] = "There is nothing yet! <i class=\"fa fa-frown-o\"></i>";
 	$lang['271'] = "You can request for an add-on on our forum, or you can create and submit one yourself";
-	$lang['272'] = "";
-	$lang['273'] = "";
+	$lang['272'] = "Be Careful!";
+	$lang['273'] = "This addon is not approved by admins yet!";
 	$lang['274'] = "";
 	$lang['275'] = "";
 	$lang['276'] = "";

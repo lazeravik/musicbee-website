@@ -92,7 +92,7 @@
 			$thumb = (isset($_POST['thumb'])) ? $_POST['thumb'] : "";
 			$dlink = (isset($_POST['dlink'])) ? $_POST['dlink'] : "";
 			$description = (isset($_POST['description'])) ? $_POST['description'] : "";
-			$addonver = (isset($_POST['addonver'])) ? $_POST['addonver'] : "1.0";
+			$addonver = (!empty($_POST['addonver'])) ? $_POST['addonver'] : "1.0";
 			$color = (isset($_POST['color'])) ? $_POST['color'] : "default";
 
 			$publish_date = date("F j, Y"); //current date

@@ -46,16 +46,16 @@
 					<div class="general_info_wrap">
 						<div class="general_info_text">
 							<h2 class="title"><?php echo $data['addon_title']; ?> <?php if ($data['addon_version'] != null): ?><i
-									class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
-									<div class="general_info_addon_meta">
-										<p><?php echo $lang['252']; ?> <a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
-										<?php if (null != $data['update_date']): ?>
-											<p><?php echo $lang['253']; ?> <?php echo $data['update_date']; ?></p>
-										<?php else: ?>
-											<p><?php echo $lang['254']; ?> <?php echo $data['publish_date']; ?></p>
-										<?php endif; ?>
-									</div>
-									<p class="description"><?php echo $data['short_description']; ?></p>
+								class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
+								<div class="general_info_addon_meta">
+									<p><?php echo $lang['252']; ?> <a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
+									<?php if (null != $data['update_date']): ?>
+										<p><?php echo $lang['253']; ?> <?php echo $data['update_date']; ?></p>
+									<?php else: ?>
+										<p><?php echo $lang['254']; ?> <?php echo $data['publish_date']; ?></p>
+									<?php endif; ?>
+								</div>
+								<p class="description"><?php echo $data['short_description']; ?></p>
 							</div>
 							<div class="general_info_icon_wrap">
 								<div class="general_info_icon" style="background-image: url(<?php echo $data['thumbnail']; ?>);"></div>
@@ -67,6 +67,11 @@
 							<?php endif; ?>
 
 							<div class="general_info_downloadlink">
+
+								<?php if ($data['status']!=1): ?>
+									<span class="show_info danger"><h3><?php echo $lang['272']; ?></h3><p class="description"><?php echo $lang['273']; ?></p></span>
+								<?php endif; ?>	
+
 								<a href="<?php echo $data['download_links']; ?>" class="btn btn_green" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['255']; ?>
 									<?php if ($mbVerArray[0] != null): ?><?php echo $lang['256']; ?>
 										<b><?php echo implode(", ", $mbVerArray); ?></b><?php endif; ?>
@@ -89,6 +94,7 @@
 						</div>
 					</div>
 					<!--INFO SECTION ENDS -->
+
 
 					<!-- Screenshot STARTS -->
 					<div class="addon_similar">
@@ -114,9 +120,9 @@
 
 			<?php if (!empty(trim($data['readme_content_html']))): ?>
 				<!-- WORD FROM AUTHOR STARTS -->
-				<div class="addon_similar readme_markdown_bg">
+				<div class="addon_similar readme_markdown_bg" id="readme">
 					<div class="addon_similar_wrap readme_markdown_wrap">
-					<h2><?php echo $lang['259']; ?></h2>
+						<h2><?php echo $lang['259']; ?></h2>
 						<div id="readme_markdown" class="markdownView">
 							<?php echo $data['readme_content_html']; ?>
 						</div>
@@ -129,7 +135,7 @@
 			<!-- MORE FROM AUTHOR STARTS -->
 			<div class="addon_similar more_from_author">
 				<div class="addon_similar_wrap from_author">
-				<h2><?php echo $lang['260'] . $data['membername']; ?></h2>
+					<h2><?php echo $lang['260'] . $data['membername']; ?></h2>
 					<?php 
 					echo addon_result_view_generator($from_author, $addon);
 					?>

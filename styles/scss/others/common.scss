@@ -67,6 +67,14 @@ a {
 	&.info_darkgrey {
 		background: #5D5A58;
 	}
+
+	&.info_red, &.danger {
+		background: rgb(204, 17, 0);
+	}
+
+	.description {
+		margin: 2px 0px;
+	}
 }
 
 #clear {
@@ -118,5 +126,13 @@ a {
 		padding: 15px 15px;
 		font-size: 18px;
 		font-weight: 100;
+	}
+
+	&:hover {
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	&:focus {
+		border-color: $musicbee-color;
 	}
 }

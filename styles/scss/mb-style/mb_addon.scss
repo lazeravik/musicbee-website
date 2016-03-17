@@ -35,6 +35,10 @@
 						display: block;
 						padding: 0px 20px 0px 0px;
 
+						&.last {
+							padding: 0px 0px 0px 0px;
+						}
+
 						#type, #order {
 							width: 100%;
 							box-sizing: border-box;
@@ -231,6 +235,11 @@
 				width: 60%;
 				margin: 0px;
 
+				.general_info_addon_version {
+					font-size: 13px;
+					color: rgba(255, 255, 255, 0.44);
+				}
+
 				.general_info_addon_meta {
 					p {
 						margin: 0px;
@@ -265,6 +274,9 @@
 			.general_info_downloadlink {
 				margin: 15px 5px 5px 0px;
 				float: left;
+				display: block;
+				width: 100%;
+				box-sizing: border-box;
 			}
 
 			&::after {
@@ -314,4 +326,14 @@
 
 .license_attr {
 	color: #4A463A;
+}
+
+.search_term {
+	background: #333;
+	margin: 0px 5px;
+	padding: 3px 10px;
+	text-transform: none;
+	font-size: 18px;
+	border: 2px solid rgb(84, 77, 66);
+	border-radius: 2px;
 }

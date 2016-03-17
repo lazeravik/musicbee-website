@@ -259,19 +259,12 @@
 			}
 		}
 
-		public function getAddonFiltered($cat, $order = null, $query = null)
+		public function getAddonFiltered($cat, $order = "DESC", $query = null, $status = null)
 		{
 			global $connection;
 
-			if ($order != null) {
-				if ($order == "oldest") {
-					$order_type = "ASC";
-				} else {
-					$order_type = "DESC";
-				}
-			} else {
-				$order_type = "DESC";
-			}
+			$order = ($order == "oldest")? "ASC" : "DESC";
+			$status = ($status != null)? $status : "1";
 
 			if (databaseConnection()) {
 				try {
@@ -285,9 +278,11 @@
 											LEFT JOIN 
 										".SITE_MEMBER_TBL." 
 											on 
-										".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
+										".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER
+									WHERE
+										status={$status}
 									ORDER BY 
-										ID_ADDON {$order_type} 
+										ID_ADDON {$order}
 									";
 							$statement = $connection->prepare($sql);
 							$statement->execute();
@@ -318,9 +313,11 @@
 														on 
 													".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
 												WHERE 
-													ID_AUTHOR = {$member_val['ID_MEMBER']} 
+													ID_AUTHOR = {$member_val['ID_MEMBER']}
+													AND
+													status={$status}
 												ORDER BY 
-													ID_ADDON {$order_type} 
+													ID_ADDON {$order}
 												";
 										$statement = $connection->prepare($sql);
 										$statement->execute();
@@ -350,9 +347,11 @@
 												on 
 											".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
 										WHERE 
-											MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) 
+											MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)
+											AND
+											status={$status}
 										ORDER BY 
-											ID_ADDON {$order_type} 
+											ID_ADDON {$order}
 										";
 								$statement = $connection->prepare($sql);
 								$statement->bindValue(':query', $query);
@@ -376,9 +375,11 @@
 										on 
 									".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
 								WHERE 
-									addon_type = :cat 
+									addon_type = :cat
+									AND
+									status={$status}
 								ORDER BY 
-									ID_ADDON {$order_type} 
+									ID_ADDON {$order}
 									";
 
 							$statement = $connection->prepare($sql);
@@ -414,9 +415,11 @@
 												WHERE 
 													ID_AUTHOR = {$member_val['ID_MEMBER']} 
 													AND 
-													addon_type = :cat 
+													addon_type = :cat
+													AND
+													status={$status}
 												ORDER BY 
-													ID_ADDON {$order_type} 
+													ID_ADDON {$order}
 												";
 										$statement = $connection->prepare($sql);
 										$statement->bindValue(':cat', $cat);
@@ -446,12 +449,14 @@
 										".SITE_MEMBER_TBL." 
 											on 
 										".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER 
-									WHERE 
+									WHERE
+										status={$status}
+										AND
 										addon_type = :cat 
 										AND 
 										MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query) 
 									ORDER BY 
-										ID_ADDON {$order_type}
+										ID_ADDON {$order}
 										";
 
 								$statement = $connection->prepare($sql);

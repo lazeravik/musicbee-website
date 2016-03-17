@@ -485,6 +485,14 @@ a:active, a:hover {
   background: #5D5A58;
 }
 
+.show_info.info_red, .show_info.danger {
+  background: #cc1100;
+}
+
+.show_info .description {
+  margin: 2px 0px;
+}
+
 #clear {
   clear: both;
 }
@@ -532,6 +540,14 @@ a:active, a:hover {
   padding: 15px 15px;
   font-size: 18px;
   font-weight: 100;
+}
+
+.search:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.search:focus {
+  border-color: #ff9800;
 }
 
 /*================================================================================================================*\\
@@ -1547,6 +1563,10 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   padding: 0px 20px 0px 0px;
 }
 
+.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input.last {
+  padding: 0px 0px 0px 0px;
+}
+
 .mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #type, .mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #order {
   width: 100%;
   box-sizing: border-box;
@@ -1745,6 +1765,11 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   margin: 0px;
 }
 
+.general_info .general_info_color .general_info_wrap .general_info_text .general_info_addon_version {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.44);
+}
+
 .general_info .general_info_color .general_info_wrap .general_info_text .general_info_addon_meta p {
   margin: 0px;
   color: rgba(255, 255, 255, 0.57);
@@ -1776,6 +1801,9 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .general_info .general_info_color .general_info_wrap .general_info_downloadlink {
   margin: 15px 5px 5px 0px;
   float: left;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .general_info .general_info_color .general_info_wrap::after {
@@ -1826,6 +1854,16 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .license_attr {
   color: #4A463A;
+}
+
+.search_term {
+  background: #333;
+  margin: 0px 5px;
+  padding: 3px 10px;
+  text-transform: none;
+  font-size: 18px;
+  border: 2px solid #544d42;
+  border-radius: 2px;
 }
 
 /*================================================================================================================*\\

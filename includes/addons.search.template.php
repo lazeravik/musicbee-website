@@ -58,7 +58,7 @@
 													</div>
 												</div>
 												<div class="search_filter_cat">
-													<div class="search_cat_input search_cat_input_last">
+													<div class="search_cat_input last">
 														<p><label for="order">Order By: </label></p>
 														<select name="order" id="order">
 															<option value="latest">Latest</option>
