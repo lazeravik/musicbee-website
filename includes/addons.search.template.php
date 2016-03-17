@@ -15,15 +15,6 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
 		<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 		<?php include $siteRoot . 'includes/font.helper.php'; ?>
-		<?php if (!empty($addon_type)): ?>
-			<style>
-				#<?php echo Format::Slug($addon_type); ?>_active_page{
-					box-shadow: inset 0px -3px 0px #FFC107;
-					color: #FFC107;
-					background: rgba(0, 0, 0, 0.1);
-				}
-			</style>
-		<?php endif; ?>
 	</head>
 	<body>
 		<div id="indexBackground">
@@ -41,26 +32,7 @@
 							<!-- AddOn page navigation top menu -->
 							<div class="secondery_nav addon_secondery_nav secondery_nav_color" id="secondery_nav">
 								<div class="secondery_nav_wrap">
-									<ul class="left">
-										<li><a href="<?php echo $link['addon']['home'] . "s/?q=&type=all&order=latest"; ?>" id="all_active_page"><?php echo $lang['18']; ?></a></li>
-										<?Php
-										foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-											echo "<li><a href=\"" . $menu_addon['href'] . " \"  id=\"" . Format::Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
-										}
-										?>
-										<div id="clear"></div>
-									</ul>
-									<ul class="right">
-										<li>
-											<form method="GET" action="<?php echo $link['addon']['home']; ?>s/">
-												<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="srch small_search" placeholder="Search for Add-ons" name="q" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
-												<input type="hidden" name="type" value="all" />
-												<input type="hidden" name="order" value="latest" />
-											</form>
-										</li>
-										<div id="clear"></div>
-									</ul>
-									<div id="clear"></div>
+									<?php addon_secondery_nav_generator($addon_type); ?>
 								</div>
 							</div>
 							<div class="mb_addon_bg">
@@ -70,13 +42,8 @@
 											<div class="search_box_wrap">
 												<form method="GET" action="<?php echo $link['addon']['home']; ?>s/">
 													<p><label for="order">Search: </label></p>
-													<div class="search_left">
-														<input type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="srch big_search" id="big_search" name="q" placeholder="Search <?php echo $data['type']; ?>" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
+														<input type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search big_search" id="big_search" name="q" placeholder="Search <?php echo $data['type']; ?>" value="<?php echo htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8"); ?>"/>
 														<input type="hidden" name="search" value="true" />
-													</div>
-													<div class="search_right">
-														<button class="yellow_btn_big search_btn" ><h3>Search</h3></button>
-													</div>
 													<div class="search_filter_wrap">
 														<div class="search_filter_cat">
 															<div class="search_cat_input">
@@ -95,7 +62,6 @@
 																	}
 																	?>
 																</select>
-																<div id="clear"></div>	
 															</div>
 														</div>
 														<div class="search_filter_cat">
@@ -106,12 +72,9 @@
 																	<option value="oldest">Oldest</option>
 																	<!-- <option value="likes">Likes</option> -->
 																</select>
-																<div id="clear"></div>	
 															</div>
 														</div>
-														<div id="clear"></div>
 													</div>
-													<div id="clear"></div>
 												</form>
 											</div>
 										</div>

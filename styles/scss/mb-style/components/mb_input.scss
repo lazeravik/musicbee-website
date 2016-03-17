@@ -25,6 +25,7 @@ input, textarea, select {
   transition: $input-transition;
   border-radius: $input-border-radius;
   border      : $input-border;
+  -webkit-appearance   : none;
   &:hover {
     border: $input-border-hover;
   }
@@ -34,4 +35,8 @@ input, textarea, select {
   &:focus {
     border: $input-border-focus;
   }
+}
+
+select {
+  padding-right: 20px;
 }

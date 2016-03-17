@@ -90,7 +90,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                       </div>
 
                       <div class="mb_quality_top mb_landing_overlay align_center">
-                        <div class="overlay">
+                        <div class="mb_landing overlay">
                             <div class="sub_content">
                                 <h2 data-sr='move 24px'><?php echo $lang['home_11']; ?></h2>
                                 <h4 data-sr="enter bottom"><?php echo $lang['home_12']; ?></h4>

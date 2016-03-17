@@ -28,17 +28,17 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // autoprefixer: {
-        //     options: {
-        //         browsers: ['last 2 versions', 'ie 9', 'ie 10', '> 1%']
-        //     },
-        //     main: {
-        //         expand: true,
-        //         flatten: true,
-        //         src: 'styles/src/*.css',
-        //         dest: 'styles/dist/'
-        //     }
-        // },
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 9', 'ie 10', '> 1%']
+            },
+            main: {
+                expand: true,
+                flatten: true,
+                src: 'styles/src/*.css',
+                dest: 'styles/dist/'
+            }
+        },
          // browserSync: {
              // default_options: {
                  // bsFiles: {
@@ -66,6 +66,6 @@ module.exports = function (grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     // Default task(s).
     // grunt.registerTask('default', ['browserSync', 'watch']);
-    grunt.registerTask('default', ['sass', 'watch']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'watch']);
 
 };

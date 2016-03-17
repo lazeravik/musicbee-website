@@ -26,15 +26,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $siteRoot . 'includes/font.helper.php'; ?>
-	<?php if (!empty($addon_type)): ?>
-		<style>
-			#<?php echo Format::Slug($addon_type); ?>_active_page {
-				box-shadow: inset 0px -3px 0px #FFC107;
-				color: #FFC107;
-				background: rgba(0, 0, 0, 0.1);
-			}
-		</style>
-	<?php endif; ?>
 </head>
 <body>
 	<div id="indexBackground">
@@ -53,15 +44,7 @@
 						<!-- AddOn page navigation top menu -->
 						<div class="secondery_nav addon_secondery_nav" id="secondery_nav">
 							<div class="secondery_nav_wrap">
-								<ul class="left">
-									<li><a href="<?php echo $link['addon']['home'] . "s/?q=&type=all&order=latest"; ?>" id=""><?php echo $lang['18']; ?></a></li>
-									<?Php
-									foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-										echo "<li><a href=\"" . $menu_addon['href'] . " \" id=\"" . Format::Slug($menu_addon['title']) . "_active_page\">" . $menu_addon['title'] . "</a></li>";
-									}
-
-									?>
-								</ul>
+								<?php addon_secondery_nav_generator($addon_type); ?>
 							</div>
 						</div>
 						<div id="overlay_bg" class="general_info_color">

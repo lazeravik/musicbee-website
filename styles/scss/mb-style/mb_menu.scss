@@ -3,6 +3,8 @@ $menu_pos : relative;
 $menu_max_width : 1200px;
 $secondery_menu_max_width : 1200px;
 $secondery_menu_bg: rgba(0,0,0,0.1);
+$secondery_menu_sticky_bg: rgba(48,48,48,1.0);
+$info_bar_max_width : 1200px;
 
 .overlay {
 	.mainmenu { background: transparent; }
@@ -177,6 +179,10 @@ $secondery_menu_bg: rgba(0,0,0,0.1);
 						color: white;
 						box-shadow: inset 0 -3px 0 white;
 					}
+
+					&.active_menu_link {
+						box-shadow: inset 0 -3px 0 $musicbee-color;
+					}
 				}
 
 				.nav_dropdown_sub {
@@ -239,13 +245,48 @@ $secondery_menu_bg: rgba(0,0,0,0.1);
 				float: right;
 			}
 
-			&:after {
+			&::after {
 				@include clearfix;
 			}
 		}
 
-		&:after {
+		&::after {
 			@include clearfix;
 		}
+	}
+}
+
+.is-sticky .secondery_nav {
+	background: $secondery_menu_sticky_bg;
+}
+
+.top_infobar {
+	background: #333333;
+	color: white;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.44);
+
+	.infobar_wrapper {
+		max-width: $info_bar_max_width;
+		display: block;
+		margin: 0px auto;
+
+		.infobar_inner_wrapper {
+			margin: 10px auto 10px;
+			box-sizing: border-box;
+			display: inline-block;
+			padding: 10px;
+
+			h2 {
+				margin: 10px 0 0 0px;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.57);
+			}
+			p {
+				margin: 5px 0 5px 0px;
+			}
+		}
+	}
+
+	&.mb_release_note_color {
+		background: linear-gradient(135deg,#2F504F,#2B654A,rgb(28, 93, 65))no-repeat;
 	}
 }

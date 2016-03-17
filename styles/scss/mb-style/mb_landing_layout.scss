@@ -24,8 +24,8 @@ $mb_bottom_download_bg: "../../../img/download_bg.jpg";
 				}
 
 				&.text_white {
-					h1 { color: white; }
-					h4 { color: rgba(255, 255, 255, 0.85); }
+					h1, h2, h3 { color: white; }
+					h4,p { color: rgba(255, 255, 255, 0.85); }
 					p.disclaimer { color: rgba(255, 255, 255, 0.4);; }
 				}
 			}
