@@ -22,8 +22,6 @@
 	<link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/magnific-popup.css">
 	<!-- Used for slider animation -->
 	<link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/animate.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $siteRoot . 'includes/font.helper.php'; ?>
 </head>
@@ -36,80 +34,69 @@
 			include($mainmenu);
 			?>
 			<!-- BODY CONTENT -->
-			<div id="main">
-				<div id="main_panel">
-
-					<!-- addon page INFO SECTION STARTS -->
-					<div id="bg_image" class="general_info">
-						<!-- AddOn page navigation top menu -->
-						<div class="secondery_nav addon_secondery_nav" id="secondery_nav">
-							<div class="secondery_nav_wrap">
-								<?php addon_secondery_nav_generator($addon_type); ?>
+			<!-- addon page INFO SECTION STARTS -->
+			<div id="bg_image" class="general_info">
+				<!-- AddOn page navigation top menu -->
+				<div class="secondery_nav addon_secondery_nav" id="secondery_nav">
+					<div class="secondery_nav_wrap">
+						<?php addon_secondery_nav_generator($addon_type); ?>
+					</div>
+				</div>
+				<div id="overlay_bg" class="general_info_color">
+					<div class="general_info_wrap">
+						<div class="general_info_text">
+							<h2 class="title"><?php echo $data['addon_title']; ?> <?php if ($data['addon_version'] != null): ?><i
+									class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
+									<div class="general_info_addon_meta">
+										<p><?php echo $lang['252']; ?> <a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
+										<?php if (null != $data['update_date']): ?>
+											<p><?php echo $lang['253']; ?> <?php echo $data['update_date']; ?></p>
+										<?php else: ?>
+											<p><?php echo $lang['254']; ?> <?php echo $data['publish_date']; ?></p>
+										<?php endif; ?>
+									</div>
+									<p class="description"><?php echo $data['short_description']; ?></p>
 							</div>
-						</div>
-						<div id="overlay_bg" class="general_info_color">
-							<div class="general_info_wrap">
-								<div class="general_info_text">
-									<div class="general_info_text_wrap">
-										<div class="general_info_title">
-											<h2><?php echo $data['addon_title']; ?> <?php if ($data['addon_version'] != null): ?><i
-												class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
-											</div>
-											<div class="general_info_addon_meta">
-												<p><?php echo $lang['252']; ?> <a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
-												<?php if (null != $data['update_date']): ?>
-													<p><?php echo $lang['253']; ?> <?php echo $data['update_date']; ?></p>
-												<?php else: ?>
-													<p><?php echo $lang['254']; ?> <?php echo $data['publish_date']; ?></p>
-												<?php endif; ?>
-											</div>
-											<div class="general_info_short_description">
-												<p><?php echo $data['short_description']; ?></p>
-											</div>
-										</div>
-									</div>
-									<div class="general_info_icon_wrap">
-										<div class="general_info_icon" style="background-image: url(<?php echo $data['thumbnail']; ?>);"></div>
-									</div>
-									<div id="clear"></div>
-									<?php if (!empty(trim($data['important_note']))): ?>
-										<div class="general_info_sidenote">
-											<p><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp; <?php echo $data['important_note']; ?></p>
-										</div>
+							<div class="general_info_icon_wrap">
+								<div class="general_info_icon" style="background-image: url(<?php echo $data['thumbnail']; ?>);"></div>
+							</div>
+							<?php if (!empty(trim($data['important_note']))): ?>
+								<div class="general_info_sidenote">
+									<p><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp; <?php echo $data['important_note']; ?></p>
+								</div>
+							<?php endif; ?>
+
+							<div class="general_info_downloadlink">
+								<a href="<?php echo $data['download_links']; ?>" class="btn btn_green" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['255']; ?>
+									<?php if ($mbVerArray[0] != null): ?><?php echo $lang['256']; ?>
+										<b><?php echo implode(", ", $mbVerArray); ?></b><?php endif; ?>
+									</a>
+									<?php if (!empty(trim($data['support_forum']))): ?>
+										<a href="<?php echo $data['support_forum']; ?>" class="btn btn_blue">
+											<i class="fa fa-support"></i><?php echo $lang['257']; ?>
+										</a>
 									<?php endif; ?>
-
-									<div class="general_info_downloadlink">
-										<a href="<?php echo $data['download_links']; ?>" class="btn btn_green" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['255']; ?>
-											<?php if ($mbVerArray[0] != null): ?><?php echo $lang['256']; ?>
-												<b><?php echo implode(", ", $mbVerArray); ?></b><?php endif; ?>
-											</a>
-											<?php if (!empty(trim($data['support_forum']))): ?>
-												<a href="<?php echo $data['support_forum']; ?>" class="btn btn_blue">
-													<i class="fa fa-support"></i><?php echo $lang['257']; ?>
-												</a>
-											<?php endif; ?>
-											<?php if (!empty(trim($data['readme_content_html']))): ?>
-												<a href="#readme" class="btn btn_grey" onclick="$('html,body').animate({scrollTop: $('#readme').offset().top});">
-													<i class="fa fa-info"></i><?php echo $lang['258']; ?>
-												</a>
-											<?php endif; ?>
-											<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn" onclick="rate('<?php echo $data['ID_ADDON']; ?>')" data-like-count="<?php echo Format::number_format_suffix($addon_like); ?>">
-												<?php echo $lang['263']; ?>
-											</a>
-										</div>
-									</div>
-
+									<?php if (!empty(trim($data['readme_content_html']))): ?>
+										<a href="#readme" class="btn btn_grey" onclick="$('html,body').animate({scrollTop: $('#readme').offset().top});">
+											<i class="fa fa-info"></i><?php echo $lang['258']; ?>
+										</a>
+									<?php endif; ?>
+									<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn" onclick="rate('<?php echo $data['ID_ADDON']; ?>')" data-like-count="<?php echo Format::number_format_suffix($addon_like); ?>">
+										<?php echo $lang['263']; ?>
+									</a>
 								</div>
 							</div>
-							<!--INFO SECTION ENDS -->
+						</div>
+					</div>
+					<!--INFO SECTION ENDS -->
 
-							<!-- Screenshot STARTS -->
-							<div class="addon_similar">
-								<div class="addon_similar_wrap screenshot">
-									<ul id="screenshot_all">
-										<?php
-										foreach ($screenshots as $key => $img) {
-											if (preg_match('/^https?\:\/\/i\.imgur\.com\//', $img)) {
+					<!-- Screenshot STARTS -->
+					<div class="addon_similar">
+						<div class="addon_similar_wrap screenshot">
+							<ul id="screenshot_all">
+								<?php
+								foreach ($screenshots as $key => $img) {
+									if (preg_match('/^https?\:\/\/i\.imgur\.com\//', $img)) {
 									$ext_pos = strrpos($img, '.'); // find position of the last dot, so where the extension starts
 									$thumb = substr($img, 0, $ext_pos) . 'm' . substr($img, $ext_pos);
 								} else {
@@ -120,7 +107,6 @@
 							</a>';
 						}
 						?>
-						<div id="clear"></div>
 					</ul>
 				</div>
 			</div>
@@ -128,13 +114,9 @@
 
 			<?php if (!empty(trim($data['readme_content_html']))): ?>
 				<!-- WORD FROM AUTHOR STARTS -->
-				<div id="readme" class="addon_similar">
-					<div class="addon_similar_wrap">
-						<h2><?php echo $lang['259']; ?></h2>
-					</div>
-				</div>
 				<div class="addon_similar readme_markdown_bg">
 					<div class="addon_similar_wrap readme_markdown_wrap">
+					<h2><?php echo $lang['259']; ?></h2>
 						<div id="readme_markdown" class="markdownView">
 							<?php echo $data['readme_content_html']; ?>
 						</div>
@@ -146,51 +128,45 @@
 
 			<!-- MORE FROM AUTHOR STARTS -->
 			<div class="addon_similar more_from_author">
-				<div class="addon_similar_wrap">
-					<h2><?php echo $lang['260'] . $data['membername']; ?></h2>
-				</div>
-			</div>
-			<div class="addon_similar more_from_author">
 				<div class="addon_similar_wrap from_author">
-				<?php 
+				<h2><?php echo $lang['260'] . $data['membername']; ?></h2>
+					<?php 
 					echo addon_result_view_generator($from_author, $addon);
-				?>
-				<div class="more_addon">
-					<a class="blue_btn_big" href="<?php echo addon_author_url_generator($data['membername']); ?>">
-						<h3><?php echo $lang['261']; ?></h3>
-						<p><?php echo $lang['262']; ?> <?php echo $data['membername']; ?></p>
-					</a>
+					?>
+					<div class="more_addon">
+						<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator($data['membername']); ?>">
+							<h3><?php echo $lang['261']; ?></h3>
+							<p><?php echo $lang['262']; ?> <?php echo $data['membername']; ?></p>
+						</a>
+					</div>
+
+					<p class="license_attr"><?php echo $lang['251']; ?> <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a></p>
+
 				</div>
-
-				<div class="license_attr"><p><?php echo $lang['251']; ?> <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a></p></div>
-
 			</div>
+			<!-- MORE FROM AUTHOR ENDS-->
 		</div>
-		<!-- MORE FROM AUTHOR ENDS-->
 	</div>
-</div>
-</div>
-</div>
-<!--IMPORTANT-->
-<!-- INCLUDE THE FOOTER AT THE END -->
-<?php
-include($footer);
-?>
-<canvas id="bg_hero_blur" style="display:none"></canvas>
-<script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.magnific-popup.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
-<script type="text/javascript">
-	function blurDo() {
-		var bg_blur = document.getElementById("bg_hero_blur");
-		var bg_overlapto = $('#bg_image');
-		var ctx = bg_blur.getContext("2d");
-		var img = new Image();
-		img.setAttribute('crossOrigin', 'anonymous');
-		img.src = "<?php echo $data['thumbnail']; ?>";
-		img.onload = function () {
+	<!--IMPORTANT-->
+	<!-- INCLUDE THE FOOTER AT THE END -->
+	<?php
+	include($footer);
+	?>
+	<canvas id="bg_hero_blur" style="display:none"></canvas>
+	<script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/jquery.magnific-popup.min.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
+	<script type="text/javascript">
+		function blurDo() {
+			var bg_blur = document.getElementById("bg_hero_blur");
+			var bg_overlapto = $('#bg_image');
+			var ctx = bg_blur.getContext("2d");
+			var img = new Image();
+			img.setAttribute('crossOrigin', 'anonymous');
+			img.src = "<?php echo $data['thumbnail']; ?>";
+			img.onload = function () {
 			ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, bg_blur.width, bg_blur.height);// draw image
 			stackBlurCanvasRGB("bg_hero_blur", 0, 0, bg_blur.width, bg_blur.width, 40);
 			$blurryData = bg_blur.toDataURL();
@@ -204,7 +180,7 @@ include($footer);
 		<?php if ($addon_already_liked == true): ?>
 		$('#like_count').html('<?php echo $lang['268']; ?>');
 		$('#like_count').addClass('btn_red');
-		<?php endif; ?>
+	<?php endif; ?>
 
 		blurDo(); //activate blurry bg
 
@@ -251,22 +227,22 @@ include($footer);
 /*
   Anonymous function declaration for rating updates
   */
- 
-var remove_rating = function () {
-	var current_love_count = parseInt($('#like_count').attr('data-like-count'));
-	var updated_love_count = current_love_count - 1;
-	$('#like_count').attr('data-like-count', updated_love_count);
-	$('#like_count').html('<?php echo $lang['263']; ?>');
-	$('#like_count').removeClass('btn_red');
-}
 
-var add_rating = function () {
-	var current_love_count = parseInt($('#like_count').attr('data-like-count'));
-	var updated_love_count = current_love_count + 1;
-	$('#like_count').attr('data-like-count', updated_love_count);
-	$('#like_count').html('<?php echo $lang['268']; ?>');
-	$('#like_count').addClass('btn_red');
-}
+  var remove_rating = function () {
+  	var current_love_count = parseInt($('#like_count').attr('data-like-count'));
+  	var updated_love_count = current_love_count - 1;
+  	$('#like_count').attr('data-like-count', updated_love_count);
+  	$('#like_count').html('<?php echo $lang['263']; ?>');
+  	$('#like_count').removeClass('btn_red');
+  }
+
+  var add_rating = function () {
+  	var current_love_count = parseInt($('#like_count').attr('data-like-count'));
+  	var updated_love_count = current_love_count + 1;
+  	$('#like_count').attr('data-like-count', updated_love_count);
+  	$('#like_count').html('<?php echo $lang['268']; ?>');
+  	$('#like_count').addClass('btn_red');
+  }
 
 </script>
 <?php include_once $siteRoot.'includes/system.notification.script.php'; ?>
