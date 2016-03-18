@@ -9,13 +9,13 @@
 	 * Spelling mistakes and fixes from phred and other community memebers.
 	 */
 
-	require_once $_SERVER['DOCUMENT_ROOT'].'includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
+	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
 	class Format
 	{
 		public static function htmlSafeOutput($html)
 		{
 			$config = HTMLPurifier_Config::createDefault();
-			$config->set('HTML.Allowed', 'code,*[class],*[lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src]');
+			$config->set('HTML.Allowed', 'code[class|lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src],s,del,hr');
 			$def = $config->getHTMLDefinition(true);
 			$def->addAttribute('code', 'lang-rel', 'Text');
 			$purifier = new HTMLPurifier($config);

@@ -550,6 +550,24 @@ a:active, a:hover {
   border-color: #ff9800;
 }
 
+.notify {
+  max-width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  padding: 5px;
+  background: #9e9e9e;
+  text-align: center;
+  padding-right: 30px;
+  border: 0;
+  right: 20px;
+  bottom: 20px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.28);
+  color: white;
+  display: block;
+  z-index: 100;
+}
+
 /*================================================================================================================*\\
     Style for input fields such as buttons, links, checkboxes etc
 \*================================================================================================================*/
@@ -1526,48 +1544,45 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   background: #161A1B;
 }
 
-.mb_addon_bg .search_box_outer_wrap {
+.search_box_outer_wrap {
   background: #161A1B;
 }
 
-.mb_addon_bg .sub_content {
+.sub_content {
   padding: 40px 20px 40px 20px;
   text-align: center;
   color: #FFFFFF;
 }
 
-.mb_addon_bg .search_box {
-  margin: 0px;
-  text-align: left;
-}
-
-.mb_addon_bg .search_box .search_box_wrap {
+.search_box_wrap {
   max-width: 700px;
   margin: 0px auto;
+  text-align: left;
+  padding: 40px 0px;
 }
 
-.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap {
+.search_box_wrap .search_filter_wrap {
   float: left;
   width: 100%;
   margin-top: 20px;
 }
 
-.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat {
+.search_box_wrap .search_filter_wrap .search_filter_cat {
   float: left;
   width: 50%;
 }
 
-.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input {
+.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input {
   text-align: left;
   display: block;
   padding: 0px 20px 0px 0px;
 }
 
-.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input.last {
+.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input.last {
   padding: 0px 0px 0px 0px;
 }
 
-.mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #type, .mb_addon_bg .search_box .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #order {
+.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #type, .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #order {
   width: 100%;
   box-sizing: border-box;
   color: #FFFFFF;
@@ -1579,14 +1594,14 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   padding: 15px 15px;
 }
 
-.mb_addon_bg .search_box .search_box_wrap label {
+.search_box_wrap label {
   margin: 0px 0px 10px 0px;
   color: #9C9C9C;
   font-weight: bold;
   font-size: 15px;
 }
 
-.mb_addon_bg .search_box::after {
+.search_box_wrap::after {
   content: "";
   clear: both;
   display: table;
@@ -2003,6 +2018,13 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .markdownView h4 {
   font-size: 16px;
   margin: 15px 0px 10px 0px;
+}
+
+.markdownView hr {
+  border-top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: rgba(148, 148, 148, 0.29);
+  background: rgba(255, 255, 255, 0);
 }
 
 .markdownView blockquote {

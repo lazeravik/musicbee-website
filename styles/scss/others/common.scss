@@ -136,3 +136,22 @@ a {
 		border-color: $musicbee-color;
 	}
 }
+
+.notify {
+	max-width: 100%;
+	margin: 0 auto;
+	position: fixed;
+	padding: 5px;
+	background: #9e9e9e;
+	text-align: center;
+	padding-right: 30px;
+	border: 0;
+	right: 20px;
+	bottom: 20px;
+	box-sizing: border-box;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.28);
+	color: white;
+	display: block;
+	z-index: 100;
+
+}

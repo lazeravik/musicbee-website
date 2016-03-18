@@ -26,17 +26,17 @@ if (ctype_digit($_POST['id'])) {
 	if ($addon_already_liked == true) {
 		#if already liked then unlike it or simply remove the record
 		if($addon->rate($_POST['id'],$user_info['id'],"unlike")) {
-			exit('{"status": "1", "data": "'.$lang['266'].'", "callback_function": "remove_rating"}');
+			exit('{"status": "1", "data": "'.$lang['addon_28'].'", "callback_function": "remove_rating"}');
 		}
 	} elseif ($addon_already_liked == false) {
 		#if the addon still isn't liked then like it
 		if($addon->rate($_POST['id'],$user_info['id'],"like")) {
-			exit('{"status": "1", "data": "'.$lang['265'].'", "callback_function": "add_rating"}');
+			exit('{"status": "1", "data": "'.$lang['addon_27'].'", "callback_function": "add_rating"}');
 		}
 	} else {
-		die('{"status": "0", "data": "'.$lang['267'].'"}');
+		die('{"status": "0", "data": "'.$lang['addon_29'].'"}');
 	}
 	
 } else {
-	die('{"status": "0", "data": "'.$lang['264'].'"}');
+	die('{"status": "0", "data": "'.$lang['addon_26'].'"}');
 }

@@ -12,7 +12,7 @@ function showNotification (msg,type,color) {
 		msgType="nrml_msg";
 	}
 
-	$('#main_panel').append("<div class=\"notify "+color+" "+msgType+" \" id=\"notification\" style=\"display:block\"><div class=\"notify_wrap_left\">"+msg+"</div><div class=\"notify_wrap_right\"><button class=\"closeNotify\" onclick=\"$(this).parent().parent().remove();\"><i class=\"fa fa-times\"></i> </button></div><div id=\"clear\"></div></div>");
+	$('body').append("<div class=\"notify "+color+" "+msgType+" \" id=\"notification\" style=\"display:block\"><div class=\"notify_wrap_left\">"+msg+"</div><div class=\"notify_wrap_right\"><button class=\"closeNotify\" onclick=\"$(this).parent().parent().remove();\"><i class=\"fa fa-times\"></i> </button></div><div id=\"clear\"></div></div>");
 }
 
 function hideNotification () {

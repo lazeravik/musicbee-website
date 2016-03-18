@@ -6,66 +6,65 @@
 	background: #161A1B;
 }
 
-.mb_addon_bg {
-	.search_box_outer_wrap {
-		background: #161A1B;
-	}
-	.sub_content {
-		padding: 40px 20px 40px 20px;
-		text-align: center;
-		color: #FFFFFF;
-	}
 
-	.search_box {
-		margin: 0px;
-		text-align: left;
-		.search_box_wrap {
-			max-width: 700px;
-			margin: 0px auto;
+.search_box_outer_wrap {
+	background: #161A1B;
+}
+.sub_content {
+	padding: 40px 20px 40px 20px;
+	text-align: center;
+	color: #FFFFFF;
+}
 
-			.search_filter_wrap {
-				float: left;
-				width: 100%;
-				margin-top: 20px;
-				.search_filter_cat {
-					float: left;
-					width: 50%;
-					.search_cat_input {
-						text-align: left;
-						display: block;
-						padding: 0px 20px 0px 0px;
+.search_box_wrap {
+	max-width: 700px;
+	margin: 0px auto;
+	text-align: left;
+	padding: 40px 0px;
 
-						&.last {
-							padding: 0px 0px 0px 0px;
-						}
+	.search_filter_wrap {
+		float: left;
+		width: 100%;
+		margin-top: 20px;
+		.search_filter_cat {
+			float: left;
+			width: 50%;
+			.search_cat_input {
+				text-align: left;
+				display: block;
+				padding: 0px 20px 0px 0px;
 
-						#type, #order {
-							width: 100%;
-							box-sizing: border-box;
-							color: #FFFFFF;
-							background: rgb(26, 29, 30);
-							border-color: rgba(255, 255, 255, 0.1);
-							border-radius: 0px;
-							background-position: right 10px top 17px;
-							background-repeat: no-repeat;
-							padding: 15px 15px;
-						}
-					}
+				&.last {
+					padding: 0px 0px 0px 0px;
+				}
+
+				#type, #order {
+					width: 100%;
+					box-sizing: border-box;
+					color: #FFFFFF;
+					background: rgb(26, 29, 30);
+					border-color: rgba(255, 255, 255, 0.1);
+					border-radius: 0px;
+					background-position: right 10px top 17px;
+					background-repeat: no-repeat;
+					padding: 15px 15px;
 				}
 			}
-			label {
-				margin: 0px 0px 10px 0px;
-				color: #9C9C9C;
-				font-weight: bold;
-				font-size: 15px;
-			}
-		}
-
-		&::after {
-			@include clearfix;
 		}
 	}
+	label {
+		margin: 0px 0px 10px 0px;
+		color: #9C9C9C;
+		font-weight: bold;
+		font-size: 15px;
+	}
+
+	&::after {
+		@include clearfix;
+	}
 }
+
+
 
 .addon_similar {
 	background: #1D1D1D;

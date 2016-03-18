@@ -120,13 +120,13 @@ function addon_result_view_generator($data, $addon)
 				</a>
 				<div class="addon_list_box_info">
 					<a href="'.$addon_link.'"><p class="title">'.$addon_data['addon_title'].'</p></a>
-					<p class="author"><a href="'.addon_author_url_generator($addon_data['membername']).'">by <b>'.$addon_data['membername'].'</b></a></p>
+					<p class="author"><a href="'.addon_author_url_generator($addon_data['membername']).'"'.$lang['addon_15'].' <b>'.$addon_data['membername'].'</b></a></p>
 				</div>
 			</div>
 		</li>'; }
 		$result_view .='<div id="clear"></div></ul>';
 	} else {
-		$result_view = '<div class="no_result"><h2>'.$lang['270'].'</h2><p>'.$lang['271'].'</p></div>';
+		$result_view = '<div class="no_result"><h2>'.$lang['addon_32'].'</h2><p>'.$lang['addon_33'].'</p></div>';
 	}
 
 	return $result_view;
@@ -162,28 +162,28 @@ function addon_author_url_generator($name)
 function addon_secondery_nav_generator($addon_type)
 {
 	global $link, $lang, $main_menu, $url_params ;
-	echo '<ul class="left">';
+	$data = '<ul class="left">';
 
 	if(Format::Slug($addon_type)=="all"){
-		echo '<li><a href="'.$link['addon']['home'].'s/?q=&type=all&order=latest" class="active_menu_link">'.$lang['18'].'</a></li>';
+		$data .= '<li><a href="'.$link['addon']['home'].'s/?q=&type=all&order=latest" class="active_menu_link">'.$lang['18'].'</a></li>';
 	} else {
-		echo '<li><a href="'.$link['addon']['home'].'s/?q=&type=all&order=latest" >'.$lang['18'].'</a></li>';
+		$data .= '<li><a href="'.$link['addon']['home'].'s/?q=&type=all&order=latest" >'.$lang['18'].'</a></li>';
 	}
 
 	foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 		if (Format::Slug($addon_type)==Format::Slug($menu_addon['title'])) {
-			echo "
+			$data .= "
 			<li>
 				<a href=\"" . $menu_addon['href'] . " \"  class=\"active_menu_link\">" . $menu_addon['title'] . "</a>
 			</li>";
 		} else {
-			echo "
+			$data .= "
 			<li>
 				<a href=\"" . $menu_addon['href'] . " \" >" . $menu_addon['title'] . "</a>
 			</li>";
 		}
 	}
-	echo'
+	$data .='
 </ul>
 <ul class="right">
 	<li>
@@ -194,4 +194,6 @@ function addon_secondery_nav_generator($addon_type)
 		</form>
 	</li>
 </ul>';
+
+	return $data;
 }

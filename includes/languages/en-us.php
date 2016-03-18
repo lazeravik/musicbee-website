@@ -28,6 +28,9 @@
 	 */
 
 	$lang = array();
+
+	$lang['mb'] = "MusicBee";
+
 	$lang['AP_TITLE'] = "Control MusicBee Website infos all in one place";
 
 	$lang['IP_TITLE'] = "MusicBee - Music Manager and Player";
@@ -265,37 +268,39 @@
 	$lang['250'] = "";
 
 
-	/*Addons view/download/search page */
-	$lang['251'] = "Add-ons and Screenshots are licensed under";
-	$lang['252'] = "by";
-	$lang['253'] = "Updated on";
-	$lang['254'] = "Published on";
-	$lang['255'] = "&nbsp;&nbsp; Download";
-	$lang['256'] = "for";
-	$lang['257'] = "&nbsp;&nbsp; Support Forum";
-	$lang['258'] = "&nbsp;&nbsp; See Readme Document";
-	$lang['259'] = "Readme";
-	$lang['260'] = "More from ";
-	$lang['261'] = "See all add-ons";
-	$lang['262'] = "from";
-	$lang['263'] = "<i class=\"fa fa-heart-o\"></i>&nbsp;&nbsp; Like";
-	$lang['264'] = "<b>ERROR:</b> Add-on id is not valid! It must be a number";
-	$lang['265'] = "<b>Thank You</b> for rating. Check more from this author below";
-	$lang['266'] = "Your rating is removed!";
-	$lang['267'] = "Facing some problem with your rating status!";
-	$lang['268'] = "<i class=\"fa fa-heart\"></i>&nbsp;&nbsp; Liked!";
-	$lang['269'] = "Showing results for: ";
-	$lang['270'] = "There is nothing yet! <i class=\"fa fa-frown-o\"></i>";
-	$lang['271'] = "You can request for an add-on on our forum, or you can create and submit one yourself";
-	$lang['272'] = "Be Careful!";
-	$lang['273'] = "This addon is not approved by admins yet!";
-	$lang['274'] = "";
-	$lang['275'] = "";
-	$lang['276'] = "";
-	$lang['277'] = "";
-	$lang['278'] = "";
-	$lang['279'] = "";
-	$lang['280'] = "";
+	/*Addons download/search page */
+	$lang['addon_license_1'] = "Unless mentioned by the Author, all sdd-ons and Screenshots are licensed under";
+
+	$lang['addon_10'] = "Search: ";
+	$lang['addon_11'] = "Category: ";
+	$lang['addon_12'] = "Order By: ";
+	$lang['addon_13'] = "Latest";
+	$lang['addon_14'] = "Oldest";
+
+	$lang['addon_15'] = "by";
+	$lang['addon_16'] = "Updated on";
+	$lang['addon_17'] = "Published on";
+
+	$lang['addon_18'] = "&nbsp;&nbsp; Download for";
+	$lang['addon_19'] = "&nbsp;&nbsp; Support Forum";
+	$lang['addon_20'] = "&nbsp;&nbsp; See Readme Document";
+	$lang['addon_21'] = "Readme";
+	$lang['addon_22'] = "More from ";
+	$lang['addon_23'] = "See all add-ons";
+	$lang['addon_24'] = "from";
+	$lang['addon_25'] = "<i class=\"fa fa-heart-o\"></i>&nbsp;&nbsp; Like";
+	$lang['addon_26'] = "<b>ERROR:</b> Add-on id is not valid! It must be a number";
+	$lang['addon_27'] = "<b>Thank You</b> for rating. Check more from this author below";
+	$lang['addon_28'] = "Your rating is removed!";
+	$lang['addon_29'] = "Facing some problem with your rating status!";
+	$lang['addon_30'] = "<i class=\"fa fa-heart\"></i>&nbsp;&nbsp; Liked!";
+	$lang['addon_31'] = "Showing results for: ";
+	$lang['addon_32'] = "There is nothing yet! <i class=\"fa fa-frown-o\"></i>";
+	$lang['addon_33'] = "You can request for an add-on on our forum, or you can create and submit one yourself";
+	$lang['addon_34'] = "Be Careful!";
+	$lang['addon_35'] = "This addon is not approved by admins yet!";
+
+
 
 
 	/************************************************
@@ -337,4 +342,3 @@
 	$lang['428'] = "";
 	$lang['429'] = "";
 	$lang['430'] = "";
-?>
