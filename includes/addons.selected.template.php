@@ -39,13 +39,18 @@
 						<h2 class="title"><?php echo $data['addon_title']; ?> <?php if ($data['addon_version'] != null): ?><i
 								class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
 						<div class="general_info_addon_meta">
-							<p><?php echo $lang['addon_15']; ?> <a
-									href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
+							<p><?php echo $lang['addon_15']; ?> 
+							<a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
 							<?php if (null != $data['update_date']): ?>
-								<p><?php echo $lang['addon_16']; ?><?php echo $data['update_date']; ?></p>
+								<p><?php echo $lang['addon_16']; ?> <?php echo $data['update_date']; ?></p>
 							<?php else: ?>
-								<p><?php echo $lang['addon_17']; ?><?php echo $data['publish_date']; ?></p>
+								<p><?php echo $lang['addon_17']; ?> <?php echo $data['publish_date']; ?></p>
 							<?php endif; ?>
+							<p><?php echo $lang['addon_36']; ?> 
+								<b>
+								<?php echo ($mbVerArray[0] != null)? implode(", ", $mbVerArray) : $lang['addon_37']; ?>
+								</b>
+							</p>
 						</div>
 						<p class="description"><?php echo $data['short_description']; ?></p>
 					</div>
@@ -64,19 +69,10 @@
 							<span class="show_info danger"><h3><?php echo $lang['addon_34']; ?></h3><p class="description"><?php echo $lang['addon_35']; ?></p></span>
 						<?php endif; ?>
 
-						<a href="<?php echo $data['download_links']; ?>" class="btn btn_green" target="_blank"><i
-								class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
-							<b>
-								<?php if ($mbVerArray[0] != null) {
-									echo implode(", ", $mbVerArray);
-								} else {
-									echo $lang['mb'];
-								}
-								?>
-							</b>
+						<a href="<?php echo $data['download_links']; ?>" class="btn btn_blue" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
 						</a>
 						<?php if (!empty(trim($data['support_forum']))): ?>
-							<a href="<?php echo $data['support_forum']; ?>" class="btn btn_blue">
+							<a href="<?php echo $data['support_forum']; ?>" class="btn">
 								<i class="fa fa-support"></i><?php echo $lang['addon_19']; ?>
 							</a>
 						<?php endif; ?>
@@ -143,12 +139,12 @@
 				<div class="more_addon">
 					<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator($data['membername']); ?>">
 						<h3><?php echo $lang['addon_23']; ?></h3>
-						<p><?php echo $lang['addon_24']; ?><?php echo $data['membername']; ?></p>
+						<p><?php echo $lang['addon_24']; ?> <?php echo $data['membername']; ?></p>
 					</a>
 				</div>
 
-				<p class="license_attr"><?php echo $lang['addon_license_1']; ?> <a href="http://creativecommons.org/licenses/by-sa/3.0/"
-				                                                                   target="_blank">cc by-sa 3.0</a></p>
+				<p class="license_attr"><?php echo $lang['addon_license_1']; ?> 
+				<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a></p>
 
 			</div>
 		</div>
@@ -166,6 +162,7 @@
 <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
 	function blurDo() {
 		var bg_blur = document.getElementById("bg_hero_blur");
@@ -182,8 +179,6 @@
 		}
 	}
 
-
-	$("#secondery_nav").sticky({topSpacing: 0});
 	$(document).ready(function () {
 		<?php if ($addon_already_liked == true): ?>
 		$('#like_count').html('<?php echo $lang['addon_30']; ?>');
@@ -253,6 +248,8 @@
 	}
 
 </script>
-<?php include_once $siteRoot . 'includes/system.notification.script.php'; ?>
+<?php 
+	include_once $siteRoot . 'includes/system.notification.script.php'; 
+?>
 </body>
 </html>

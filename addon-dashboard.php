@@ -21,8 +21,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAddons.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
     <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
     <?php include('./includes/font.helper.php'); ?>
 </head>
@@ -48,6 +46,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                 <div class="secondery_nav" id="secondery_nav">
                     <div id="nav" class="secondery_nav_wrap">
                         <ul class="left">
+                        <li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>
                             <li>
                                 <a href="#overview" data-href="overview" data-load-page="dashboard.view"><?php echo $lang['225']; ?></a>
                             </li>
@@ -102,6 +101,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     <script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
+    <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 
     <?php
     include_once $siteRoot . 'includes/ajax.navigation.script.php';

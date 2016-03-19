@@ -79,7 +79,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
                         <div class="mb_landing align_center" >
                             <div class="sub_content" id="simple_powerful">
-                                <div class="hero_text_top">
+                                <div class="hero_text_top text_black">
                                   <h2 data-sr="enter top"><?php echo $lang['home_9']; ?></h2>
                                   <h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>  
                               </div>
@@ -89,7 +89,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                           </div>
                       </div>
 
-                      <div class="mb_quality_top mb_landing_overlay align_center">
+                      <div class="mb_quality_top mb_landing align_center">
                         <div class="mb_landing overlay">
                             <div class="sub_content">
                                 <h2 data-sr='move 24px'><?php echo $lang['home_11']; ?></h2>

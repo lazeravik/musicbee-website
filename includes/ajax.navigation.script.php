@@ -4,8 +4,8 @@
 * PHP is used for commenting this tuff. We don't want external user to know what thing does
 * To use this navigation system, the page must have a top nav bar. Since the system is built exclusively for it 
 **/ 
- //sticky secondery navbar ?>
- $("#secondery_nav").sticky({ topSpacing: 0 });
+?>
+
 
  <?php
 //If the document is loaded we want to check if any hash is available in the url. and redirect user to those url
@@ -93,7 +93,7 @@ function hideOverlay() {
 //overlay visible
 function showOverlay() {
 	if (!$('#disable_overlay').length) {
-		$('#main_panel').append("<div id=\"disable_overlay\" style=\"display:block;\"></div>");
+		$('body').append("<div id=\"disable_overlay\" style=\"display:block;\"></div>");
 	}
 }
 

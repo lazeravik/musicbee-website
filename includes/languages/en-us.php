@@ -280,10 +280,12 @@
 	$lang['addon_15'] = "by";
 	$lang['addon_16'] = "Updated on";
 	$lang['addon_17'] = "Published on";
+	$lang['addon_36'] = "Supports";
+	$lang['addon_37'] = "Unknown MusicBee version";
 
-	$lang['addon_18'] = "&nbsp;&nbsp; Download for";
-	$lang['addon_19'] = "&nbsp;&nbsp; Support Forum";
-	$lang['addon_20'] = "&nbsp;&nbsp; See Readme Document";
+	$lang['addon_18'] = "&nbsp;&nbsp;Download";
+	$lang['addon_19'] = "&nbsp;&nbsp;Support Forum";
+	$lang['addon_20'] = "&nbsp;&nbsp;See Readme Document";
 	$lang['addon_21'] = "Readme";
 	$lang['addon_22'] = "More from ";
 	$lang['addon_23'] = "See all add-ons";

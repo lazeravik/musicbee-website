@@ -18,6 +18,7 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 	require_once $siteRoot . 'classes/Dashboard.php';
+	require_once $siteRoot . 'classes/Addon.php';
 	require_once $siteRoot . 'classes/Validation.php';
 	require_once $siteRoot . 'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 	include_once $siteRoot . 'includes/parsedown/Parsedown.php';
@@ -25,59 +26,40 @@
 
 //enable and disable downloads
 	if (isset($_POST['submit'])) {
-		global $connection, $endMsg;
+
 		if (isset($_POST['type'])
 			&& isset($_POST['title'])
 			&& isset($_POST['description'])
 			&& isset($_POST['mbSupportedVer'])
-			&& isset($_POST['tag'])
 			&& isset($_POST['dlink'])
 			&& isset($_POST['thumb'])
 			&& isset($_POST['screenshot_links'])
 		) {
-			if (count(getAddonInfo($_POST['title'], "title", null)) > 0) {
+			if (addonExists($_POST['title'])) {
 				die('{"status": "0", "data": "' . $lang['201'] . '"}');
 			} else {
-				$dashboard = new Dashboard();
-				if (!array_key_exists($_POST['type'], $main_menu['add-ons']['sub_menu'])) {
-					die('{"status": "0", "data": "' . $lang['216'] . '"}');
-				}
-				//validate user inputs
-				if (!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
-					die('{"status": "0", "data": "' . $lang['202'] . '"}');
-				}
-				if (!Validation::charLimit($_POST['description'], 600)) {
-					die('{"status": "0", "data": "' . $lang['203'] . '"}');
-				}
-				if (!Validation::arrayLimit($_POST['tag'], 10)) {
-					die('{"status": "0", "data": "' . $lang['204'] . '"}');
-				}
-				if (isset($_POST['color'])) {
-					if (!array_key_exists($_POST['color'], $color_codes)) {
-						die('{"status": "0", "data": "' . $lang['223'] . '"}');
+				if (validateInput()) {
+					$dashboard = new Dashboard();
+					$addon = new Addon();
+					
+					//die, if the user alreay submitted more than X numbers of addon that needed aproval!
+					//This will prevent the floodgate
+					if (count($addon->getAddonListByStatusAndMember($context['user']['id'],"15","0")) > MAX_SUBMIT_WO_APPROVAL) {
+						die('{"status": "0", "data": "' . $lang['206'] . '"}');
 					}
-				}
-				if (isset($_POST['readme'])) {
-					if (!Validation::charLimit($_POST['readme'], 5000))
-						die('{"status": "0", "data": "' . $lang['205'] . '"}');
-				}
-				//die, if the user alreay submitted more than X numbers of addon that needed aproval!
-				//This will prevent the floodgate
-				if (count(getAddonInfo(0, "status", $context['user']['id'])) > MAX_SUBMIT_WO_APPROVAL) {
-					die('{"status": "0", "data": "' . $lang['206'] . '"}');
-				}
 
-				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
-				//load parsedown markup to html converter
-				$Parsedown = new Parsedown();
-				$readme_raw = $Parsedown->text($readme);
+					$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
+					//load parsedown markup to html converter
+					$Parsedown = new Parsedown();
+					$readme_raw = $Parsedown->text($readme);
 
-				//load and use html purifier for the readme notes.
-				$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
+					//load and use html purifier for the readme notes.
+					$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
 
-				//Phew.... all validations complete, now SUBMIT THE ADDON!
-				if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "submit")) {
-					echo '{"status": "1", "data": "' . $lang['207'] . '"}';
+					//Phew.... all validations complete, now SUBMIT THE ADDON!
+					if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "submit")) {
+						exit ('{"status": "1", "data": "' . $lang['207'] . '", "callback_function": "submitted"}');
+					}
 				}
 			}
 		}
@@ -87,12 +69,12 @@
 			if ($dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
 				if ($dashboard->deleteAddon($_POST['record_id'])) {
 					exit('
-				     {
-				     	"status": "1", 
-				     	"data": "' . $lang['220'] . '",
-				     	"callback_function": "remove_addon_record"
-				     }
-				     ');
+					{
+						"status": "1", 
+						"data": "' . $lang['220'] . '",
+						"callback_function": "remove_addon_record"
+					}
+					');
 				} else {
 					//:S addon deletation failed! and we have no clue.... bummer
 					die('{"status": "0", "data": "' . $lang['221'] . '"}');
@@ -102,115 +84,92 @@
 				die('{"status": "0", "data": "' . $lang['219'] . '"}');
 			}
 		} elseif ($_POST['modify_type'] == "update") {
-			$dashboard = new Dashboard();
-			if (!array_key_exists($_POST['type'], $main_menu['add-ons']['sub_menu'])) {
-				die('{"status": "0", "data": "' . $lang['216'] . '"}');
-			}
-			//validate user inputs
-			if (!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
-				die('{"status": "0", "data": "' . $lang['202'] . '"}');
-			}
-			if (!Validation::charLimit($_POST['description'], 600)) {
-				die('{"status": "0", "data": "' . $lang['203'] . '"}');
-			}
-			if (!Validation::arrayLimit($_POST['tag'], 10)) {
-				die('{"status": "0", "data": "' . $lang['204'] . '"}');
-			}
-			if (isset($_POST['color'])) {
-				if (!array_key_exists($_POST['color'], $color_codes)) {
-					die('{"status": "0", "data": "' . $lang['223'] . '"}');
+			if (validateInput()) {
+				$dashboard = new Dashboard();
+				//verify if the author can modify it.
+				if (!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+					die('{"status": "0", "data": "' . $lang['219'] . '"}');
+				}
+
+				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
+				//load parsedown markup to html converter
+				$Parsedown = new Parsedown();
+				$readme_raw = $Parsedown->text($readme);
+				//load and use html purifier for the readme notes.
+				$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
+
+				//Phew.... all validations complete, now SUBMIT THE ADDON!
+				if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "update")) {
+					echo '{"status": "1", "data": "' . $lang['224'] . '", "callback_function": "submitted"}';
 				}
 			}
-			if (isset($_POST['readme'])) {
-				if (!Validation::charLimit($_POST['readme'], 5000)) {
-					die('{"status": "0", "data": "' . $lang['205'] . '"}');
-				}
-			}
-			//verify if the author can modify it.
-			if (!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
-				die('{"status": "0", "data": "' . $lang['219'] . '"}');
-			}
 
-			$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
-			//load parsedown markup to html converter
-			$Parsedown = new Parsedown();
-			$readme_raw = $Parsedown->text($readme);
-			//load and use html purifier for the readme notes.
-			$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
 
-			//Phew.... all validations complete, now SUBMIT THE ADDON!
-			if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "update")) {
-				echo '{"status": "1", "data": "' . $lang['224'] . '"}';
-			}
 		} else {
-			//$_POST['modify_type'] contain unknown value! DIEEEEEE!!!! ^_^
+			//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
 			die('{"status": "0", "data": "' . $lang['222'] . '"}');
 		}
 	}
-	/* Get the download availablity of the current and beta version*/
-	function getAddonInfo($value, $reqType, $authorId)
+
+	/**
+	 * Validation check for dashboard user input
+	 *
+	 * @return bool
+	 */
+	function validateInput()
+	{
+		global $main_menu, $lang, $color_codes;
+
+		if (!array_key_exists($_POST['type'], $main_menu['add-ons']['sub_menu'])) {
+			die('{"status": "0", "data": "' . $lang['216'] . '"}');
+		}
+
+		if (!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
+			die('{"status": "0", "data": "' . $lang['202'] . '"}');
+		}
+		if (!Validation::charLimit($_POST['description'], 600)) {
+			die('{"status": "0", "data": "' . $lang['203'] . '"}');
+		}
+		if (!Validation::arrayLimit($_POST['tag'], 10)) {
+			die('{"status": "0", "data": "' . $lang['204'] . '"}');
+		}
+		if (isset($_POST['color'])) {
+			if (!array_key_exists($_POST['color'], $color_codes)) {
+				die('{"status": "0", "data": "' . $lang['223'] . '"}');
+			}
+		}
+		if (isset($_POST['readme'])) {
+			if (!Validation::charLimit($_POST['readme'], 5000))
+				die('{"status": "0", "data": "' . $lang['205'] . '"}');
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Check if an addon exists with similer title
+	 * @param string $title
+	 *
+	 * @return bool
+	 */
+	function addonExists($title)
 	{
 		global $connection, $endMsg, $lang;
 		if (databaseConnection()) {
 			try {
-				if ($reqType == "title")
-					$sql = "SELECT * FROM " . SITE_ADDON . " WHERE addon_title = :value";
-				elseif ($reqType == "status")
-					$sql = "SELECT * FROM " . SITE_ADDON . " WHERE status = :value AND ID_AUTHOR = :authorId";
+				$sql = "SELECT * FROM " . SITE_ADDON . " WHERE addon_title = :title";
 				$statement = $connection->prepare($sql);
-				$statement->bindValue(':value', $value);
-				if ($reqType == "status")
-					$statement->bindValue(':authorId', $authorId);
+				$statement->bindValue(':title', $title);
 				$statement->execute();
 				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 				if (count($result) > 0) {
-					return $result;
+					return true;
 				} else {
-					$endMsg = $lang['AP_NO_RECORD']; //store the error message in the variable
+					return false;
 				}
-			} catch (Exception $e) {
-				$endMsg = "Something went wrong. " . $e; //store the error message in the variable
-			}
+			} catch (Exception $e) {}
 		}
 	}
 
-	/* Set the download availablity of the current and beta version*/
-	function setAvailablity($isAvailable, $id_version)
-	{
-		global $connection, $endMsg;
-		$isAvailable = ($isAvailable == 1) ? "0" : "1";
-
-		if (databaseConnection()) {
-			try {
-				$sql = "UPDATE " . SITE_MB_CURRENT_VERSION_TBL . " SET available = {$isAvailable} WHERE ID_VERSION = {$id_version}";
-				$statement = $connection->prepare($sql);
-				$statement->execute();
-			} catch (Exception $e) {
-				$endMsg = "Something went wrong. " . $e; //store the error message in the variable
-				return false;
-			}
-
-			return true;
-		}
-	}
-
-	/*Get all version to show it on the "all musicbee release" page*/
-	function getAllVersion()
-	{
-		global $connection, $lang;
-		if (databaseConnection()) {
-			try {
-				$sql = "SELECT * FROM " . SITE_MB_ALL_VERSION_TBL . " ORDER BY version DESC LIMIT 10000 ";
-				$statement = $connection->prepare($sql);
-				$statement->execute();
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-				if (count($result) > 0) {
-					return $result; //Get the availablity first 1= available, 0=already disabled
-				} else {
-					return $lang['AP_NO_RECORD']; //store the error message in the variable
-				}
-			} catch (Exception $e) {
-				return "Something went wrong. " . $e; //store the error message in the variable
-			}
-		}
-	}

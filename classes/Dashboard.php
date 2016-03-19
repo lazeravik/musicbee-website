@@ -101,50 +101,51 @@
 			if (databaseConnection()) {
 				try {
 					if ($type == "submit") {
-						$sql = 'INSERT INTO ' . SITE_ADDON . ' SET
-				ID_AUTHOR = :id_author, 
-				COLOR_ID = :color, 
-				tags = :tags, 
-				supported_mbversion = :supported_mbversion, 
-				addon_title = :addon_title, 
-				addon_type = :addon_type, 
-				addon_version = :addon_version, 
-				short_description = :short_description, 
-				download_links = :download_links, 
-				image_links = :image_links, 
-				thumbnail = :thumbnail, 
-				support_forum = :support_forum, 
-				important_note = :important_note, 
-				readme_content = :readme_content, 
-				readme_content_html = :readme_content_html, 
-				is_beta = :is_beta, 
-				status = :status, 
-				publish_date = :publish_date, 
-				lastStatus_moderatedBy = :lastStatus_moderatedBy';
+						$sql = 'INSERT
+									INTO '.SITE_ADDON.'
+								SET
+									ID_AUTHOR = :id_author,
+									COLOR_ID = :color,
+									tags = :tags,
+									supported_mbversion = :supported_mbversion,
+									addon_title = :addon_title,
+									addon_type = :addon_type,
+									addon_version = :addon_version,
+									short_description = :short_description,
+									download_links = :download_links,
+									image_links = :image_links,
+									thumbnail = :thumbnail,
+									support_forum = :support_forum,
+									important_note = :important_note,
+									readme_content = :readme_content,
+									readme_content_html = :readme_content_html,
+									is_beta = :is_beta,
+									status = :status,
+									publish_date = :publish_date,
+									lastStatus_moderatedBy = :lastStatus_moderatedBy';
 					} elseif ($type == "update") {
-						$sql = 'UPDATE ' . SITE_ADDON . ' SET
-				COLOR_ID = :color, 
-				tags = :tags, 
-				supported_mbversion = :supported_mbversion, 
-				addon_title = :addon_title, 
-				addon_type = :addon_type, 
-				addon_version = :addon_version, 
-				short_description = :short_description, 
-				download_links = :download_links, 
-				image_links = :image_links, 
-				thumbnail = :thumbnail, 
-				support_forum = :support_forum, 
-				important_note = :important_note, 
-				readme_content = :readme_content, 
-				readme_content_html = :readme_content_html, 
-				is_beta = :is_beta, 
-				status = :status, 
-				update_date = :update_date, 
-				lastStatus_moderatedBy = :lastStatus_moderatedBy 
-				WHERE ID_ADDON = :addon_id';
+						$sql = 'UPDATE '.SITE_ADDON.'
+								SET
+									COLOR_ID = :color,
+									tags = :tags,
+									supported_mbversion = :supported_mbversion,
+									addon_title = :addon_title,
+									addon_type = :addon_type,
+									addon_version = :addon_version,
+									short_description = :short_description,
+									download_links = :download_links,
+									image_links = :image_links,
+									thumbnail = :thumbnail,
+									support_forum = :support_forum,
+									important_note = :important_note,
+									readme_content = :readme_content,
+									readme_content_html = :readme_content_html,
+									is_beta = :is_beta,
+									status = :status,
+									update_date = :update_date,
+									lastStatus_moderatedBy = :lastStatus_moderatedBy
+									WHERE ID_ADDON = :addon_id';
 					}
-
-
 					$statement = $connection->prepare($sql);
 					if ($type == "submit") {
 						$statement->bindValue(':id_author', $authorId);

@@ -20,8 +20,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<?php include ('./includes/meta&styles.php'); ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/MusicBeeAdminPanel.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/wmd.css">
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include ('./includes/font.helper.php'); ?>
@@ -44,26 +42,28 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 					</div>
 
 				</div>
-				<div id="secondery_nav-sticky-wrapper" class="sticky-wrapper" style="height: 48px;"><div class="secondery_nav" id="secondery_nav">
+				<div id="secondery_nav" class="sticky-wrapper secondery_nav">
 					<div id="nav" class="secondery_nav_wrap" data-scroll-header>
 						<ul class="left">
-
+							<li class="expand">
+								<a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a>
+							</li>
 							<li>
-								<a href="#overview" data-href="overview" data-load-page="adminpanel.view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a></li>
-								<li>
-									<a href="#viewAll" data-href="viewAll" data-load-page="adminpanel.view" data-get-req='view=all'>
-										<i class="fa fa-object-ungroup"></i>&nbsp;&nbsp; All MusicBee Releases</a>
-									</li>
-									<li>
-										<div id="loading_icon" class="spinner fadeIn animated" style="display:none;">
-											<div class="double-bounce1"></div>
-											<div class="double-bounce2"></div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
+								<a href="#overview" data-href="overview" data-load-page="adminpanel.view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a>
+							</li>
+							<li>
+								<a href="#viewAll" data-href="viewAll" data-load-page="adminpanel.view" data-get-req='view=all'>
+									<i class="fa fa-object-ungroup"></i>&nbsp;&nbsp; All MusicBee Releases</a>
+							</li>
+							<li>
+								<div id="loading_icon" class="spinner fadeIn animated" style="display:none;">
+									<div class="double-bounce1"></div>
+									<div class="double-bounce2"></div>
+								</div>
+							</li>
+						</ul>
 					</div>
+				</div>
 				</div>
 				<div id="main">
 					<div id="main_panel">
@@ -89,6 +89,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
 	<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
 	<script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 	<?php 
 	include_once $siteRoot.'includes/ajax.navigation.script.php';
 	?>

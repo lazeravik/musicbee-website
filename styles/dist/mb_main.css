@@ -568,6 +568,23 @@ a:active, a:hover {
   z-index: 100;
 }
 
+.notify.green_color {
+  background: #4caf50;
+}
+
+.notify.red_color {
+  background: #E53935;
+}
+
+#disable_overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(255, 255, 255, 0.29);
+  z-index: 100;
+}
+
 /*================================================================================================================*\\
     Style for input fields such as buttons, links, checkboxes etc
 \*================================================================================================================*/
@@ -919,7 +936,8 @@ h4 {
   max-width: 1200px;
   box-sizing: border-box;
   margin: 0 auto;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .secondery_nav .secondery_nav_wrap ul, .secondery_nav .secondery_nav_wrap li, .secondery_nav .secondery_nav_wrap ol {
@@ -935,8 +953,11 @@ h4 {
 }
 
 .secondery_nav .secondery_nav_wrap ul li {
-  float: left;
   display: inline-block;
+}
+
+.secondery_nav .secondery_nav_wrap ul li.expand {
+  display: none;
 }
 
 .secondery_nav .secondery_nav_wrap ul li a {
@@ -1017,23 +1038,84 @@ h4 {
 }
 
 .secondery_nav .secondery_nav_wrap ul.left {
-  float: left;
+  flex-grow: 2;
 }
 
 .secondery_nav .secondery_nav_wrap ul.right {
-  float: right;
+  flex-grow: 0;
 }
 
-.secondery_nav .secondery_nav_wrap ul::after {
-  content: "";
-  clear: both;
-  display: table;
+@media screen and (max-width: 800px) {
+  .secondery_nav .secondery_nav_wrap ul > li a {
+    padding: 15px 10px;
+  }
 }
 
-.secondery_nav .secondery_nav_wrap::after {
-  content: "";
-  clear: both;
-  display: table;
+@media screen and (max-width: 700px) {
+  .secondery_nav .secondery_nav_wrap ul {
+    display: block;
+    background: #212121;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li {
+    width: 100%;
+    text-align: left;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li.expand {
+    display: block;
+    width: inherit;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li.expand a {
+    padding: 15px 20px;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li:nth-child(n+2) {
+    display: none;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li form {
+    padding: 4px 15px;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li form input, .secondery_nav .secondery_nav_wrap ul > li form select {
+    width: 250px;
+    margin: 0px auto;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li a {
+    text-align: left;
+    padding: 15px 20px;
+  }
+  .secondery_nav .secondery_nav_wrap ul > li a:hover {
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .secondery_nav .secondery_nav_wrap ul > li a.active_menu_link {
+    box-shadow: none;
+    background: #ff9800;
+  }
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li {
+  display: block !important;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li.expand {
+  width: 100%;
+  background: #C62828;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li.expand a::after {
+  content: "CLOSE";
+  padding-left: 10px;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li form {
+  padding: 4px 15px;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li form input, .secondery_nav .secondery_nav_wrap.expanded ul li form select {
+  width: 100%;
+  margin: 0px auto;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul.right {
+  width: 100%;
 }
 
 .is-sticky .secondery_nav {
@@ -1095,6 +1177,18 @@ footer.footer_section .widget .widgetCommon {
   font-size: 13px;
   display: block;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 1000px) {
+  footer.footer_section .widget .widgetCommon {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  footer.footer_section .widget .widgetCommon {
+    width: 100%;
+  }
 }
 
 footer.footer_section .widget .widgetCommon h4 {
@@ -1183,29 +1277,31 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .mb_landing .sub_content .hero_text_top {
   width: 52%;
-}
-
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_black h1 {
+  text-align: left;
   color: #333;
 }
 
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_black h4 {
+.mb_landing .sub_content .hero_text_top .text_black h1, .mb_landing .sub_content .hero_text_top .text_black h2, .mb_landing .sub_content .hero_text_top .text_black h3 {
+  color: #333;
+}
+
+.mb_landing .sub_content .hero_text_top .text_black h4 {
   color: #444;
 }
 
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_black p.disclaimer {
+.mb_landing .sub_content .hero_text_top .text_black p.disclaimer {
   color: #9E9E9E;
 }
 
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_white h1, .mb_landing .sub_content .hero_text_top .text_wrapper.text_white h2, .mb_landing .sub_content .hero_text_top .text_wrapper.text_white h3 {
+.mb_landing .sub_content .hero_text_top .text_white h1, .mb_landing .sub_content .hero_text_top .text_white h2, .mb_landing .sub_content .hero_text_top .text_white h3 {
   color: white;
 }
 
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_white h4, .mb_landing .sub_content .hero_text_top .text_wrapper.text_white p {
+.mb_landing .sub_content .hero_text_top .text_white h4, .mb_landing .sub_content .hero_text_top .text_white p {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.mb_landing .sub_content .hero_text_top .text_wrapper.text_white p.disclaimer {
+.mb_landing .sub_content .hero_text_top .text_white p.disclaimer {
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -1283,6 +1379,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .mb_intro_top {
   background: url("../../img/bg_teaser.svg") fixed #15327B;
+  background-position: center center;
 }
 
 .mb_intro_top .overlay {
@@ -1290,7 +1387,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 .mb_intro_top .overlay .sub_content {
-  padding: 100px 10px 200px;
+  text-align: left;
 }
 
 .mb_quality_top {
@@ -1346,40 +1443,6 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .mb_more_top .overlay .sub_content {
   padding: 40px 20px 40px 20px;
-}
-
-.mb_landing_overlay {
-  background-size: cover;
-  background-position-x: center;
-  background-position-y: center;
-  z-index: 2;
-}
-
-.mb_landing_overlay .overlay {
-  color: #FFFFFF;
-  overflow: hidden;
-}
-
-.mb_landing_overlay .overlay .sub_content {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: inherit;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
-  position: relative;
-}
-
-.mb_landing_overlay .overlay .sub_content_bottom {
-  padding: 0px 0px 50px;
-}
-
-.mb_landing_overlay .overlay .sub_content_bottom .hero_buttons {
-  padding: 0px;
-}
-
-.mb_landing_overlay.align_center {
-  width: inherit;
-  text-align: center;
-  float: none;
 }
 
 .main_panel .content {
@@ -1533,7 +1596,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 #release_note_jump {
-  height: 48px;
+  margin: 4px 0px;
 }
 
 .addon_secondery_nav {
@@ -1559,6 +1622,12 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   margin: 0px auto;
   text-align: left;
   padding: 40px 0px;
+}
+
+@media screen and (max-width: 800px) {
+  .search_box_wrap {
+    padding: 40px 10px;
+  }
 }
 
 .search_box_wrap .search_filter_wrap {
@@ -1665,6 +1734,24 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   padding: 0px;
 }
 
+@media screen and (max-width: 1000px) {
+  .addon_list_box li {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .addon_list_box li {
+    width: 33.333333333%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .addon_list_box li {
+    width: 50%;
+  }
+}
+
 .addon_list_box li .addon_list_box_wrapper {
   position: relative;
   margin: 10px;
@@ -1762,7 +1849,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .general_info .general_info_color {
   background: linear-gradient(to bottom, rgba(29, 29, 29, 0.65) 0, #1d1d1d 100%);
-  padding: 30px;
+  padding: 10px;
 }
 
 .general_info .general_info_color .general_info_wrap {
@@ -1778,6 +1865,14 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   display: block;
   width: 60%;
   margin: 0px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 800px) {
+  .general_info .general_info_color .general_info_wrap .general_info_text {
+    width: 100%;
+  }
 }
 
 .general_info .general_info_color .general_info_wrap .general_info_text .general_info_addon_version {
@@ -1796,6 +1891,12 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   height: auto;
   margin: 0px;
   display: block;
+}
+
+@media screen and (max-width: 800px) {
+  .general_info .general_info_color .general_info_wrap .general_info_icon_wrap {
+    display: none;
+  }
 }
 
 .general_info .general_info_color .general_info_wrap .general_info_icon_wrap .general_info_icon {
@@ -1838,6 +1939,18 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   float: left;
   outline: none;
   border: 0px;
+}
+
+@media screen and (max-width: 800px) {
+  .screenshot ul .screenshot_zoom_click {
+    width: 33.3333333333%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .screenshot ul .screenshot_zoom_click {
+    width: 50%;
+  }
 }
 
 .screenshot ul .screenshot_zoom_click .screenshot_wrapper {
@@ -1977,29 +2090,38 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 .markdownView h1, .markdownView h2, .markdownView h3, .markdownView h4, .markdownView p {
-  padding-left: 0px;
+  padding-left: 0px !important;
 }
 
-.markdownView ul, .markdownView ol, .markdownView ol, .markdownView ul {
-  padding-left: 40px;
+.markdownView ul, .markdownView ol {
+  padding-left: 40px !important;
 }
 
-.markdownView ul li, .markdownView ol li, .markdownView ol li, .markdownView ul li {
-  list-style: inherit;
-  color: inherit;
-  padding: 2px 0px;
+.markdownView ul li, .markdownView ol li {
+  list-style: inherit !important;
+  color: inherit !important;
+  padding: 2px 0px !important;
+  background-color: transparent !important;
+}
+
+.markdownView ul li {
+  list-style-type: disc !important;
+}
+
+.markdownView ol li {
+  list-style-type: circle !important;
 }
 
 .markdownView p {
-  font-size: 14px;
-  color: inherit;
-  line-height: 21px;
-  margin: 2px 0px;
+  font-size: 14px !important;
+  color: inherit !important;
+  line-height: 21px !important;
+  margin: 2px 0px !important;
 }
 
 .markdownView h1 {
-  font-size: 30px;
-  margin: 15px 0px 10px 0px;
+  font-size: 30px !important;
+  margin: 15px 0px 10px 0px !important;
 }
 
 .markdownView h2 {
@@ -2011,31 +2133,31 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 .markdownView h3 {
-  font-size: 20px;
-  margin: 15px 0px 10px 0px;
+  font-size: 20px !important;
+  margin: 15px 0px 10px 0px !important;
 }
 
 .markdownView h4 {
-  font-size: 16px;
-  margin: 15px 0px 10px 0px;
+  font-size: 16px !important;
+  margin: 15px 0px 10px 0px !important;
 }
 
 .markdownView hr {
-  border-top: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  border-color: rgba(148, 148, 148, 0.29);
-  background: rgba(255, 255, 255, 0);
+  border-top: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(148, 148, 148, 0.29) !important;
+  background: rgba(255, 255, 255, 0) !important;
 }
 
 .markdownView blockquote {
-  padding: 10px 0px 10px 15px;
-  margin: 15px 0px 15px 0px;
-  background: #333;
-  border-left: 5px solid #444;
-  position: relative;
-  padding-left: 40px;
-  padding-right: 40px;
-  line-height: 19px;
+  padding: 10px 0px 10px 15px !important;
+  margin: 15px 0px 15px 0px !important;
+  background: #333 !important;
+  border-left: 5px solid #444 !important;
+  position: relative !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  line-height: 19px !important;
 }
 
 .markdownView blockquote::before {
@@ -2063,24 +2185,27 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 .markdownView code {
-  background: rgba(255, 255, 255, 0.13);
-  padding: 2px 10px;
-  box-shadow: inset 0px 0px 2px #FF9800;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.13) !important;
+  padding: 2px 10px !important;
+  box-shadow: inset 0px 0px 2px #FF9800 !important;
+  border-radius: 3px !important;
+  color: inherit !important;
+  border: inherit !important;
 }
 
 .markdownView pre {
-  color: inherit;
-  background: #282b2e;
-  padding: 70px 20px 20px 20px;
-  overflow: auto;
-  position: relative;
+  color: inherit !important;
+  background: #282b2e !important;
+  padding: 70px 20px 20px 20px !important;
+  overflow: auto !important;
+  position: relative !important;
 }
 
 .markdownView pre code {
-  color: inherit;
-  box-shadow: none;
-  border-radius: 0px;
+  color: inherit !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+  background: inherit  !important;
 }
 
 .markdownView pre code::before {
@@ -2100,18 +2225,18 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 }
 
 .markdownView table {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-spacing: 0;
-  border-collapse: collapse;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
 }
 
 .markdownView table thead > tr > th {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
 .markdownView table thead > tr > th,
@@ -2120,15 +2245,87 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .markdownView table thead > tr > td,
 .markdownView table tbody > tr > td,
 .markdownView table tfoot > tr > td {
-  padding: 10px;
-  line-height: 1.42857143;
-  vertical-align: top;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 10px !important;
+  line-height: 1.42857143 !important;
+  vertical-align: top !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
 }
 
 .markdownView table tbody > tr:nth-child(odd) > td,
 .markdownView table tbody > tr:nth-child(odd) > th {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+#wmd-button-bar {
+  width: 100%;
+  background-color: #fff;
+}
+
+#wmd-input {
+  min-height: 250px;
+  width: 100%;
+}
+
+#wmd-preview {
+  background-color: #1D1D1D;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin: 10px auto;
+  display: block;
+}
+
+#wmd-preview::before {
+  content: "Preview";
+  background: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  display: block;
+  margin-left: -20px;
+  margin-top: -10px;
+  margin-right: -20px;
+}
+
+#wmd-button-row, .wmd-button-row {
+  position: relative;
+  padding: 0px;
+  /* height: 20px; */
+  background: #F7F7F7;
+  display: flex;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 0px;
+  border-left: 1px solid;
+  border-color: #D7D7D7;
+}
+
+.wmd-spacer {
+  width: 1px;
+  height: 20px;
+  margin-left: 14px;
+  position: absolute;
+  background-color: Silver;
+  display: inline-block;
+  list-style: none;
+}
+
+.wmd-button > a {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: absolute;
+  display: inline-block;
+}
+
+.wmd-prompt-background {
+  background-color: Black;
+}
+
+.wmd-prompt-dialog {
+  border: 0px solid #333;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  padding: 30px;
 }
 
 /*# sourceMappingURL=mb_main.css.map */

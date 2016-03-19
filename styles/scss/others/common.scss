@@ -154,4 +154,20 @@ a {
 	display: block;
 	z-index: 100;
 
+	&.green_color{
+		background: #4caf50;
+	}
+
+	&.red_color {
+		background: #E53935;
+	}
+}
+
+#disable_overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background: rgba(255, 255, 255, 0.29);
+    z-index: 100;
 }

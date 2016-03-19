@@ -114,8 +114,8 @@ include($footer);
 <script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 <script>
-	$("#secondery_nav").sticky({ topSpacing: 0 });
 	$(document).ready(function(){
 		document.getElementById('release_note_jump').onchange = function(){
 			$id = '#'+this.getElementsByTagName('option')[this.selectedIndex].value;

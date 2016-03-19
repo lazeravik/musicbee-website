@@ -95,12 +95,12 @@
 
 		<script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
+		<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 		<script type="text/javascript">
 			$('#type').on('change', function (event) {
 				$('#big_search').attr('placeholder', 'Search ' + $("#type option:selected").text());
 			});
 
-			$("#secondery_nav").sticky({topSpacing: 0});
 		</script>
 	</body>
 	</html>

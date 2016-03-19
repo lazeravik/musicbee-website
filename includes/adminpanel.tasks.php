@@ -148,7 +148,7 @@
 	/*Get all version to show it on the "all musicbee release" page*/
 	function getAllVersion()
 	{
-		global $connection, $endMsg, $lang;
+		global $connection, $lang;
 		if (databaseConnection()) {
 			try {
 				$sql = "SELECT * FROM " . SITE_MB_ALL_VERSION_TBL . " ORDER BY version DESC LIMIT 10000 ";

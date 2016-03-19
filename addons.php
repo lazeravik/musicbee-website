@@ -120,7 +120,7 @@ function addon_result_view_generator($data, $addon)
 				</a>
 				<div class="addon_list_box_info">
 					<a href="'.$addon_link.'"><p class="title">'.$addon_data['addon_title'].'</p></a>
-					<p class="author"><a href="'.addon_author_url_generator($addon_data['membername']).'"'.$lang['addon_15'].' <b>'.$addon_data['membername'].'</b></a></p>
+					<p class="author"><a href="'.addon_author_url_generator($addon_data['membername']).'"> '.$lang['addon_15'].' <b>'.$addon_data['membername'].'</b></a></p>
 				</div>
 			</div>
 		</li>'; }
@@ -162,7 +162,8 @@ function addon_author_url_generator($name)
 function addon_secondery_nav_generator($addon_type)
 {
 	global $link, $lang, $main_menu, $url_params ;
-	$data = '<ul class="left">';
+	$data = '<ul class="left">
+	<li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>';
 
 	if(Format::Slug($addon_type)=="all"){
 		$data .= '<li><a href="'.$link['addon']['home'].'s/?q=&type=all&order=latest" class="active_menu_link">'.$lang['18'].'</a></li>';

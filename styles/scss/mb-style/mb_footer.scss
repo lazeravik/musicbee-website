@@ -23,6 +23,14 @@ footer.footer_section {
 			display: block;
 			box-sizing: border-box;
 
+			@media screen and (max-width: $break-medium){
+				padding: 10px;
+			}
+
+			@media screen and (max-width: $break-small){
+				width: 100%;
+			}
+
 			h4 {
 				color: rgba(255, 255, 255, 0.55);
 				box-shadow: inset 5px 0 0 $musicbee-color;

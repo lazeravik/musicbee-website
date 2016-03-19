@@ -130,7 +130,7 @@ if (isset($_GET['view'])) {
 						<p class="show_info">
 							<?php echo $lang['111']; ?>
 						</p>
-						<input id="addonver" value step="0.1" min="1.0" max="99.99" name="addonver" type="number" placeholder="eg. 1.0"
+						<input id="addonver" value step="0.1" min="1.0" max="99.99" name="addonver" type="text/number" placeholder="eg. 1.0"
 						value="<?php if ($viewType == 2) echo $data['addon_version']; ?>"/>
 					</label>
 				</li>
@@ -357,9 +357,9 @@ if (isset($_GET['view'])) {
 					$('#upView').html(""); //delete the html we got from ajax req
 				}
 			});
-}
+	}
 
-function loadImgurUpload(id) {
+	function loadImgurUpload(id) {
 		$.fx.off = true; // turn off jquery animation effects
 		$.ajax({
 			url: '../includes/upload.imgur.php',
@@ -433,13 +433,12 @@ function loadImgurUpload(id) {
 	$(document).ready(function () {
 		<?php
 		//for updating purpose a musicbee version should be always selected, so check it on load
-		 if ($viewType == 2): ?>
+		if ($viewType == 2): ?>
 			addVer();
-		<?php endif; ?>
+	<?php endif; ?>
 
-		MBEditor.wmdBase();
-		MBEditor.Util.startEditor();
-
+	MBEditor.wmdBase();
+	MBEditor.Util.startEditor();
 
 		var maxField = 8; //Input fields increment limitation
 		var wrapper = $('#screenshot_inputs'); //Input field wrapper
@@ -458,45 +457,43 @@ function loadImgurUpload(id) {
 	});
 
 
-function saveEdit() {
-	$('form[data-autosubmit]').autosubmit();
-}
+	function saveEdit() {
+		$('form[data-autosubmit]').autosubmit();
+	}
 
-(function ($) {
-	$.fn.autosubmit = function () {
-		this.submit(function (event) {
-			event.preventDefault();
+	(function ($) {
+		$.fn.autosubmit = function () {
+			this.submit(function (event) {
+				event.preventDefault();
 				event.stopImmediatePropagation(); //This will stop the form submit twice
 				var form = $(this);
 				hideNotification();
-				showHideOverlay();
+				showOverlay();
 				$('#loading_icon').show();
-				$('button').attr('disabled', 'disabled'); // disable button
 				$.ajax({
 					type: form.attr('method'),
 					url: form.attr('action'),
 					data: form.serialize()
 				}).done(function (data) {
-					<?php if ($viewType==2): ?>
-						$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
-					<?php endif; ?>
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
 				}).always(function () {
 					$('#loading_icon').hide();
-					$('button').removeAttr('disabled');
-					showHideOverlay();//show overlay while loading
-					<?php if ($viewType==2): ?>
-					/* Reload the page with ajax whenever an update saved */
-					$dataUrl = $('a[href="' + window.location.hash + '"]');
-					$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
-					loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
-				<?php endif; ?>
+					hideOverlay();//show overlay while loading
 				});
 			});
-	}
-	return false;
-})(jQuery)
+		}
+		return false;
+	})(jQuery)
 
+	<?php if ($viewType==2): ?>
+	function submitted() {
+			$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
+
+			$dataUrl = $('a[href="' + window.location.hash + '"]');
+			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
+			loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
+		}
+	<?php endif; ?>
 </script>
