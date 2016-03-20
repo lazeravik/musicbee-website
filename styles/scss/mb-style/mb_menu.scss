@@ -158,7 +158,6 @@ $info_bar_max_width : 1200px;
 			padding: 0;
 			border: 0;
 			display: inline-block;
-			float: left;
 
 			li {
 				display: inline-block;
@@ -277,7 +276,7 @@ $info_bar_max_width : 1200px;
 						}
 
 						form {
-							padding: 4px 15px;
+							padding: 4px 5px 4px 10px;
 
 							input, select {
 								width: 250px;
@@ -304,6 +303,10 @@ $info_bar_max_width : 1200px;
 			}
 		}
 		&.expanded {
+			padding-bottom: 20px;
+			background: #212121;
+			border-bottom: 5px solid rgba(255, 255, 255, 0.15);
+
 			ul {
 				li {
 					display: block !important;

@@ -328,12 +328,12 @@ if (isset($_GET['view'])) {
 			iconClose: true,
 			bodyClose: true,
 			<?php if($viewType == 2): ?>
-			overlay: false,
-		<?php else: ?>
-		overlay: true,
-	<?php endif; ?>
-	onOpen: function () {
-		$('#blur_content_id').addClass('blur_content_overlay');
+				overlay: false,
+			<?php else: ?>
+				overlay: true,
+			<?php endif; ?>
+			onOpen: function () {
+				$('#blur_content_id').addClass('blur_content_overlay');
 					$('#upView').html("<div class=\"sk-circle\"> <div class=\"sk-circle1 sk-child\"></div> <div class=\"sk-circle2 sk-child\"></div> <div class=\"sk-circle3 sk-child\"></div> <div class=\"sk-circle4 sk-child\"></div> <div class=\"sk-circle5 sk-child\"></div> <div class=\"sk-circle6 sk-child\"></div> <div class=\"sk-circle7 sk-child\"></div> <div class=\"sk-circle8 sk-child\"></div> <div class=\"sk-circle9 sk-child\"></div> <div class=\"sk-circle10 sk-child\"></div> <div class=\"sk-circle11 sk-child\"></div> <div class=\"sk-circle12 sk-child\"></div> </div>"); //show loading signal maybe!
 					if (upType == "img") {
 						loadImgurUpload(id);
@@ -342,9 +342,9 @@ if (isset($_GET['view'])) {
 					}
 
 				},
-				onClose: function () {
-					<?php if($viewType == 2): ?>
-					$('body').css({
+			onClose: function () {
+				<?php if($viewType == 2): ?>
+				$('body').css({
 						position: 'fixed',
 						width: '100%',
 						'top': '-' + $(window).scrollTop() + 'px',
@@ -488,10 +488,16 @@ if (isset($_GET['view'])) {
 	})(jQuery)
 
 	<?php if ($viewType==2): ?>
-	function submitted() {
+		function submitted() {
 			$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
 
 			$dataUrl = $('a[href="' + window.location.hash + '"]');
+			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
+			loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
+		}
+	<?php else: ?>
+		function submitted() {
+			$dataUrl = $('a[href="#all"]');
 			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
 			loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
 		}

@@ -131,4 +131,11 @@
 
 .like_btn {
     padding-right: 0px;
+    
+    &::after {
+        content: attr(data-like-count);
+        background: rgba(0, 0, 0, 0.24);
+        padding: 10px 15px;
+        margin: 0 0 0 10px;
+    }
 }

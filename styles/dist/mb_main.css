@@ -752,6 +752,13 @@ select {
   padding-right: 0px;
 }
 
+.like_btn::after {
+  content: attr(data-like-count);
+  background: rgba(0, 0, 0, 0.24);
+  padding: 10px 15px;
+  margin: 0 0 0 10px;
+}
+
 h1 {
   font-family: "Roboto", "sans-serif", verdana;
   font-size: 35px;
@@ -949,7 +956,6 @@ h4 {
   padding: 0;
   border: 0;
   display: inline-block;
-  float: left;
 }
 
 .secondery_nav .secondery_nav_wrap ul li {
@@ -1071,7 +1077,7 @@ h4 {
     display: none;
   }
   .secondery_nav .secondery_nav_wrap ul > li form {
-    padding: 4px 15px;
+    padding: 4px 5px 4px 10px;
   }
   .secondery_nav .secondery_nav_wrap ul > li form input, .secondery_nav .secondery_nav_wrap ul > li form select {
     width: 250px;
@@ -1089,6 +1095,12 @@ h4 {
     box-shadow: none;
     background: #ff9800;
   }
+}
+
+.secondery_nav .secondery_nav_wrap.expanded {
+  padding-bottom: 20px;
+  background: #212121;
+  border-bottom: 5px solid rgba(255, 255, 255, 0.15);
 }
 
 .secondery_nav .secondery_nav_wrap.expanded ul li {
@@ -1705,6 +1717,12 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   text-transform: none;
 }
 
+@media screen and (max-width: 600px) {
+  .addon_similar .addon_similar_wrap {
+    padding: 10px;
+  }
+}
+
 .addon_similar.more_from_author {
   background: #171717;
 }
@@ -1838,6 +1856,12 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   padding-bottom: 0px;
   font-size: 15px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+  .addon_list_box li .addon_list_box_wrapper {
+    padding: 0px;
+  }
 }
 
 .general_info {

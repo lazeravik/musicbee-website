@@ -96,6 +96,10 @@
 				text-transform: none;
 			}
 		}
+
+		@media screen and (max-width: $break-tiny){
+			padding: 10px;
+		}
 	}
 
 	&.more_from_author {
@@ -222,6 +226,10 @@
 						font-weight: bold;
 					}
 				}
+			}
+
+			@media screen and(max-width: $break-secondery-nav) {
+				padding: 0px;
 			}
 		}
 	}
