@@ -88,29 +88,6 @@
 
 
 
-		public static function getStatus($id)
-		{
-			switch ($id) {
-				case '0':
-				return "Waiting for Approval";
-				break;
-				case '1':
-				return "Approved";
-				break;
-				case '2':
-				return "Rejected";
-				break;
-				case '3':
-				return "Deleted";
-				break;
-				default:
-				return "Unknown";
-				break;
-			}
-		}
-
-
-
 		public function getMbVersions($val)
 		{
 			global $connection;

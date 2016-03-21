@@ -249,7 +249,7 @@
 	$lang['231'] = "Status";
 	$lang['232'] = "Are you sure you want to permanently remove this addon?\\n\\nyou can't restore it once it is deleted!";
 	$lang['233'] = "Remove this Version Permanently";
-	$lang['234'] = "<i class=\"fa fa-pencil\"></i>&nbsp;&nbsp;Edit / Update";
+	$lang['234'] = "<i class=\"fa fa-pencil\"></i>";
 	$lang['235'] = "";
 	$lang['236'] = "";
 	$lang['237'] = "";
@@ -266,6 +266,10 @@
 	$lang['248'] = "";
 	$lang['249'] = "";
 	$lang['250'] = "";
+
+	$lang['dashboard_err_1'] = "You don't have enough permission";
+	$lang['dashboard_err_2'] = "You haven't published any add-on yet!";
+	$lang['dashboard_err_3'] = "There are no add-ons waiting for your approval";
 
 
 	/*Addons download/search page */

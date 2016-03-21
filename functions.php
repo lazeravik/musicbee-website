@@ -11,6 +11,7 @@
 
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/forum/SSI.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Format.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Validation.php';
 
 // Don't do anything if already loaded.
 	if (defined('MB_FUNC')) return true;
@@ -19,6 +20,7 @@
 		session_start();
 	}
 
+	$link = array();
 	$siteUrl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
 	$siteRoot = $_SERVER['DOCUMENT_ROOT'] . "/";
 //Error related pages and codes
@@ -95,7 +97,7 @@
 	$mainmenu = $siteRoot . 'includes/mainmenu.template.php';
 	$footer = $siteRoot . 'includes/footer.template.php';
 
-	$link = array();
+
 	$link['download'] = $siteUrl . 'download/';
 	$link['rss'] = $siteUrl . 'rss/';
 	$link['home'] = $siteUrl;
@@ -112,6 +114,7 @@
 	$link['press'] = $siteUrl . 'press/';
 	$link['devapi'] = $siteUrl . 'api/';
 	$link['bugreport'] = $siteUrl . 'bug/';
+	$link['redirect'] = $siteUrl . 'out/';
 
 //get the MusicBee info from json api
 	$releaseData = json_decode(file_get_contents($siteUrl . 'api.get.php?type=json&action=release-info'));

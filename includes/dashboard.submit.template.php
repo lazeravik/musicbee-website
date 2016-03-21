@@ -31,8 +31,7 @@ if (isset($_GET['view'])) {
 }
 ?>
 <form action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
-	<div id="blur_content_id"
-	class="content_inner_wrapper_admin editmode_wide <?php if ($viewType == 2): ?>dashboard_margin_wrapper_inline<?php endif; ?>">
+	<div id="blur_content_id" class="content_inner_wrapper_admin editmode_wide ">
 	<div class="admin_margin_wrapper">
 		<div class="infocard_header">
 			<h3><?php if ($viewType == 2) echo $lang['217']; else echo $lang['101']; ?></h3>
@@ -425,6 +424,8 @@ if (isset($_GET['view'])) {
 			'interactive': true,
 			'minChars': 2,
 			'defaultText': 'add a tag',
+			'removeWithBackspace' : true,
+			'delimiter': [',',';'],
 			'maxChars': 10, // if not provided there is no limit
 			'placeholderColor': '#333'
 		});
@@ -435,7 +436,7 @@ if (isset($_GET['view'])) {
 		//for updating purpose a musicbee version should be always selected, so check it on load
 		if ($viewType == 2): ?>
 			addVer();
-	<?php endif; ?>
+		<?php endif; ?>
 
 	MBEditor.wmdBase();
 	MBEditor.Util.startEditor();
@@ -489,7 +490,7 @@ if (isset($_GET['view'])) {
 
 	<?php if ($viewType==2): ?>
 		function submitted() {
-			$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
+			//$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
 
 			$dataUrl = $('a[href="' + window.location.hash + '"]');
 			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));

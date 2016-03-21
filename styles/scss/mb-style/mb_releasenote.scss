@@ -1,42 +1,89 @@
 .main_content_wrapper {
-	display: block;
-	min-height: 400px;
-	max-width: 1200px;
-	margin: 0px auto;
+	display: flex;
+    min-height: 400px;
+    max-width: 1200px;
+    margin: 0px auto;
+    flex-wrap: wrap;
 
-	.sub_content_wrapper {
-		padding: 10px;
+    &.col_1_2 {
+    	.sub_content_wrapper:nth-child(1) {
+			width: 33.33333333333333%;
 
-		.box_content {
-			margin: 10px;
-			box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.18);
-			background: #fff;
-
-			.info_table_wrap {
-				display: block;
-				box-sizing: border-box;
-				padding: 5px 20px;
+			@media screen and (max-width: $break-small) {
+				width: 100%;
 			}
+		}
+    	.sub_content_wrapper:nth-child(2) {
+			width: 66.66666666666667%;
+			@media screen and (max-width: $break-small) {
+				width: 100%;
+			}
+		}
+    }
 
-			.flat_info_bar {
+    &.col_1{
+    	.sub_content_wrapper {
+			width: 100%;
+			@media screen and (max-width: $break-small) {
+				width: 100%;
+			}
+		}
+	}
+
+    &.col_2{
+    	.sub_content_wrapper {
+			width: 50%;
+			@media screen and (max-width: $break-small) {
+				width: 100%;
+			}
+		}
+	}
+
+    &.col_3{
+    	.sub_content_wrapper {
+			width: 33.33333333333333%;
+			@media screen and (max-width: $break-small) {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.sub_content_wrapper {
+
+	.box_content {
+		margin: 20px 10px 5px 10px;
+		box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.18);
+		background: #fff;
+
+		.info_table_wrap {
+			display: block;
+			box-sizing: border-box;
+			padding: 5px 20px;
+		}
+
+		.flat_info_bar {
+			list-style: none;
+			margin: 0px;
+			padding: 0px;
+			display: flex;
+			flex-wrap : wrap;
+
+			li {
 				list-style: none;
 				margin: 0px;
-				padding: 0px;
-				display: flex;
-				flex-wrap : wrap;
-
-				li {
-					list-style: none;
-					margin: 0px;
-					padding: 10px;
-					padding: 0px 15px 0px 15px;
-					box-shadow: inset -1px 0px 0px rgba(255, 255, 255, 0.25);
-				}
-
-				&::after {
-					@include clearfix;
-				}
+				padding: 10px;
+				padding: 0px 15px 0px 15px;
+				box-shadow: inset -1px 0px 0px rgba(255, 255, 255, 0.25);
 			}
+
+			&::after {
+				@include clearfix;
+			}
+		}
+		.message {
+			text-align: center;
+			padding:20px 10px;
 		}
 	}
 }

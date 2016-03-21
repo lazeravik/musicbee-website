@@ -26,54 +26,51 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 </head>
 <body>
-	<div id="indexBackground">
-		<div id="wrapper">
-			<!--IMPORTANT-->
-			<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
-			<?php 
-			include($mainmenu); 
-			?>
-			<!-- BODY CONTENT -->
-			<div class="top_infobar admin_panel_color" id="top_jump">
-				<div class="infobar_wrapper">
-					<div class="infobar_inner_wrapper">
-						<h2><?php echo $lang['AP_HEADER_TITLE']; ?></h2>
-						<p><?php echo $lang['AP_HEADER_DESC']; ?></p>					
-					</div>
+	<!--IMPORTANT-->
+	<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
+	<?php 
+	include($mainmenu); 
+	?>
+	<!-- BODY CONTENT -->
+	<div class="top_infobar admin_panel_color" id="top_jump">
+		<div class="infobar_wrapper">
+			<div class="infobar_inner_wrapper">
+				<h2><?php echo $lang['AP_HEADER_TITLE']; ?></h2>
+				<p><?php echo $lang['AP_HEADER_DESC']; ?></p>					
+			</div>
 
-				</div>
-				<div id="secondery_nav" class="sticky-wrapper secondery_nav">
-					<div id="nav" class="secondery_nav_wrap" data-scroll-header>
-						<ul class="left">
-							<li class="expand">
-								<a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a>
-							</li>
-							<li>
-								<a href="#overview" data-href="overview" data-load-page="adminpanel.view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a>
-							</li>
-							<li>
-								<a href="#viewAll" data-href="viewAll" data-load-page="adminpanel.view" data-get-req='view=all'>
-									<i class="fa fa-object-ungroup"></i>&nbsp;&nbsp; All MusicBee Releases</a>
-							</li>
-							<li>
-								<div id="loading_icon" class="spinner fadeIn animated" style="display:none;">
-									<div class="double-bounce1"></div>
-									<div class="double-bounce2"></div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				</div>
-				<div id="main">
-					<div id="main_panel">
-						<div class="content_wrapper_admin" id="ajax_area">
-
-						</div>
-					</div>
+		</div>
+		<div id="secondery_nav" class="sticky-wrapper secondery_nav">
+			<div id="nav" class="secondery_nav_wrap" data-scroll-header>
+				<ul class="left">
+					<li class="expand">
+						<a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a>
+					</li>
+					<li>
+						<a href="#overview" data-href="overview" data-load-page="adminpanel.view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a>
+					</li>
+					<li>
+						<a href="#viewAll" data-href="viewAll" data-load-page="adminpanel.view" data-get-req='view=all'>
+							<i class="fa fa-object-ungroup"></i>&nbsp;&nbsp; All MusicBee Releases</a>
+						</li>
+						<li>
+							<div id="loading_icon" class="spinner fadeIn animated" style="display:none;">
+								<div class="double-bounce1"></div>
+								<div class="double-bounce2"></div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+		<div id="main">
+			<div id="main_panel">
+				<div class="content_wrapper_admin" id="ajax_area">
+
+				</div>
+			</div>
+		</div>
+
 	<!-- IMPORTANT! ***** DO NOT REMOVE IT!
 	this is for fake ajax request data. This is needed for back and forward navigation as well as
 	if someone uses link like "admin-panel.php#edit" the hash will load that page -->

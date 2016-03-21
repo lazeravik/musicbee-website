@@ -12,59 +12,79 @@
 	$no_guests = true; //kick off the guests
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-	include $siteRoot . 'classes/Addon.php';
-	$addon = new addon(); //create an instance of the addondashboard class
+	include $siteRoot.'classes/Dashboard.php';
+	$dashboard = new Dashboard();
 
-	$addonInfo = $addon->getAddonListByMember($context['user']['id'], 100);
+	$addondata['all_addons_byuser'] = $dashboard->getAllAddonByMember($_SESSION['memberinfo']['memberid']);
 ?>
+<div class="main_content_wrapper col_1_2">
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_darkgrey custom">
+				<h3><i class="fa fa-filter"></i>&nbsp;&nbsp; Filter & Search your add-ons</h3>
+			</span>
 
-
-<div class="content_inner_wrapper_admin width100">
-	<div class="admin_margin_wrapper">
-		<div class="infocard_header">
-			<h3><?php echo $lang['228']; ?></h3>
-			<p></p>
 		</div>
-		<table class="allrelease">
-			<?php if ($addonInfo != null): ?>
-				<thead>
-				<tr>
-					<th><?php echo $lang['229']; ?></th>
-					<th><?php echo $lang['230']; ?></th>
-					<th><?php echo $lang['231']; ?></th>
-					<th></th>
-				</tr>
-				</thead>
-				<tbody>
-				<?php
-					//Iterate thorugh all og\f the release record and show them
-					foreach ($addonInfo as $record) {
-						echo "
-					<tr id=\"" . $record['ID_ADDON'] . "_tbl\">
-						<td><a href='" . $link['addon']['home'] . $record['ID_ADDON'] . "/" . Format::Slug($record['addon_title']) . "' target=\"_blank\">" . $record['addon_title'] . "</a></td>
-						<td>" . Format::UnslugTxt($record['addon_type']) . "</td>
-						<td>" . Addon::getStatus($record['status']) . "</td>
-						<td class=\"button_section\">
-							<button id=\"" . $record['ID_ADDON'] . "_edit\" class=\"entry_edit\" title=\"Modify info\" onclick=\"showEditModal(" . $record['ID_ADDON'] . ");\">" . $lang['234'] . "</button>
+	</div>
+	<div class="sub_content_wrapper">
+			<div class="box_content">
+				<span class="show_info custom">
+					<h3><i class="fa fa-th"></i>&nbsp;&nbsp; Your published add-ons</h3>
+				</span>
+				<?php if(!empty($addondata['all_addons_byuser'] )): ?>
 
-							<form id=\"" . $record['ID_ADDON'] . "\" action=\"../includes/dashboard.tasks.php\" method=\"post\" data-autosubmit>
-								<button id=\"" . $record['ID_ADDON'] . "_remove\" class=\"entry_remove\" title=\"" . $lang['233'] . "\" onclick=\"deleteRecord();\" ><i class=\"fa fa-trash\"></i></button>
-								<input type=\"hidden\" name=\"record_id\" value=\"" . $record['ID_ADDON'] . "\" />
-								<input type=\"hidden\" name=\"modify_type\" value=\"delete\" />
-							</form>
+				<table class="record">
+					<thead>
+						<tr>
+							<td>
+								<?php echo $lang['229']; ?>
+							</td>
+							<td>
+								<?php echo $lang['230']; ?>
+							</td>
+							<td>
+								<?php echo $lang['231']; ?>
+							</td>
+							<td>
 
-						</td>
-					</tr>";
-					};
-				?>
-				</tbody>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($addondata['all_addons_byuser']  as $key => $addon): ?>
+							<tr>
+								<td>
+									<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug($addon['addon_title']); ?>" target="_blank" title="View this addon"><?php echo $addon['addon_title']; ?></a>
+								</td>
+								<td>
+									<?php echo Format::UnslugTxt($addon['addon_type']); ?>
+								</td>
+								<td>
+									<?php echo Validation::getStatus($addon['status']); ?>
+								</td>
+								<td class="action_input">
+
+									<form id="<?php echo$addon['ID_ADDON']; ?>" action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
+										<button id="<?php echo$addon['ID_ADDON']; ?>" class="btn btn_red" title="<?php echo $lang['233']; ?>" onclick="deleteRecord();" ><i class="fa fa-trash"></i></button>
+										<input type="hidden" name="record_id" value="<?php echo $addon['ID_ADDON']; ?>" />
+										<input type="hidden" name="modify_type" value="delete" />
+									</form>
+									<button class="btn btn_blue" type="submit" onclick="loadEditView(<?php echo$addon['ID_ADDON']; ?>);"><?php echo  $lang['234']; ?></button>
+
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
 			<?php else: ?>
-				<p>You have not submitted any addon yet!</p>
+				<p class="message"><?php echo $lang['dashboard_err_3']; ?></p>
 			<?php endif; ?>
-		</table>
+			</div>		
 	</div>
 </div>
-<div id="clear"></div>
+
+<div class="space medium"></div>
+
 <div id="editView" class="modalBox1 iw-modalBox fadeIn animated"></div>
 <script type="text/javascript">
 	function showEditModal(id) {
@@ -93,8 +113,8 @@
 			cache: false,
 			type: "POST",
 		}).done(function (data) {
-			if ($('#editView').children().length > 0) {
-				$('#editView').html(data);
+			if ($('#ajax_area').children().length > 0) {
+				$('#ajax_area').html(data);
 				hideNotification();
 			}
 		}).fail(function (jqXHR, textStatus, errorThrown) {

@@ -1,5 +1,5 @@
 
-$secondery_nav_break = 700;
+$secondery_nav_break = 701;
 var $nav_bar = $("#secondery_nav");
 
 function secondery_nav_sticky() {

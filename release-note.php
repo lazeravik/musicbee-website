@@ -32,76 +32,72 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/font.helper.php'; ?>
 </head>
 <body>
-	<div id="indexBackground">
-		<div id="wrapper">
 
-			<!--IMPORTANT-->
-			<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
-			<?php 
-			include($mainmenu); 
-			?>
+	<!--IMPORTANT-->
+	<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
+	<?php 
+	include($mainmenu); 
+	?>
 
-			<!-- BODY CONTENT -->
-			<div id="main">
-				<div class="top_infobar mb_release_note_color" id="top_jump">
-					<div class="infobar_wrapper">
-						<div class="infobar_inner_wrapper">
-							<h2>Release Notes</h2>
-							<p>See the changes made throughout MusicBee's journey</p>					
-						</div>
+	<!-- BODY CONTENT -->
+	<div id="main">
+		<div class="top_infobar mb_release_note_color" id="top_jump">
+			<div class="infobar_wrapper">
+				<div class="infobar_inner_wrapper">
+					<h2>Release Notes</h2>
+					<p>See the changes made throughout MusicBee's journey</p>					
+				</div>
 
-					</div>
-					<div id="secondery_nav-sticky-wrapper" class="sticky-wrapper" style="height: 48px;"><div class="secondery_nav" id="secondery_nav">
-						<div id="nav" class="secondery_nav_wrap" data-scroll-header>
-							<ul class="left">
+			</div>
+			<div id="secondery_nav-sticky-wrapper" class="sticky-wrapper" style="height: 48px;"><div class="secondery_nav" id="secondery_nav">
+				<div id="nav" class="secondery_nav_wrap" data-scroll-header>
+					<ul class="left">
 
+						<li>
+							<select name="release_note_jump" id="release_note_jump" onfocus="" >
+								<option value="top_jump">Jump to release version</option>
+								<?php 
+								foreach (getVersionInfo(0,"byAllReleases") as $key => $value) {
+									echo '<option>'.str_replace(".", "-", $value['version']) .'</option>';
+								}
+								?>
+							</select>
+						</li>
+					</ul>
+				</div>
+			</div></div>
+		</div>
+		<div id="main_panel">
+		<div class="main_content_wrapper col_1">
+				<div class="sub_content_wrapper">
+					<?php 
+					foreach (getVersionInfo(0,"byAllReleases") as $key => $value): ?>
+					<div class="box_content" id="<?php echo str_replace(".", "-", $value['version']); ?>">
+						<span class="show_info <?php echo ($value['version']==$release['stable']['version'])?'info_green':'info_darkgrey'; ?>">
+							<ul class="flat_info_bar">
 								<li>
-									<select name="release_note_jump" id="release_note_jump" onfocus="" >
-										<option value="top_jump">Jump to release version</option>
-										<?php 
-										foreach (getVersionInfo(0,"byAllReleases") as $key => $value) {
-											echo '<option>'.str_replace(".", "-", $value['version']) .'</option>';
-										}
-										?>
-									</select>
+									<?php echo $value['appname']; ?>
 								</li>
-							</ul>
+								<li>
+									Version <?php echo $value['version'] ?>
+								</li>
+								<li>
+									Released on <?php echo $value['release_date']; ?>
+								</li>
+								<li>
+									For <?php echo $value['supported_os']; ?>
+								</li>
+								<li>
+									<?php echo ($value['version']==$release['stable']['version'])?'<p class="small_info active">Current Release</p>':''; ?>
+									<?php echo ($value['major']==1)?'<p class="small_info major">major Release</p>':''; ?>
+								</li>
+							</ul>	
+						</span>
+						<div class="info_table_wrap markdownView" >
+							<?php echo ($value['release_note_html']!=null)?$value['release_note_html']:'<div class="no_release_note" data-no-release-text="No Release Notes/Change Logs are provided for this version.&#xa;This is most likely a minor version and does not contain major changes"></div>'; ?>
 						</div>
-					</div></div>
-				</div>
-				<div id="main_panel">
-					<div class="main_content_wrapper">
-						<div class="sub_content_wrapper">
-							<?php 
-							foreach (getVersionInfo(0,"byAllReleases") as $key => $value): ?>
-							<div class="box_content" id="<?php echo str_replace(".", "-", $value['version']); ?>">
-								<span class="show_info <?php echo ($value['version']==$release['stable']['version'])?'info_green':'info_darkgrey'; ?>">
-									<ul class="flat_info_bar">
-										<li>
-											<?php echo $value['appname']; ?>
-										</li>
-										<li>
-											Version <?php echo $value['version'] ?>
-										</li>
-										<li>
-											Released on <?php echo $value['release_date']; ?>
-										</li>
-										<li>
-											For <?php echo $value['supported_os']; ?>
-										</li>
-										<li>
-											<?php echo ($value['version']==$release['stable']['version'])?'<p class="small_info active">Current Release</p>':''; ?>
-											<?php echo ($value['major']==1)?'<p class="small_info major">major Release</p>':''; ?>
-										</li>
-									</ul>	
-								</span>
-								<div class="info_table_wrap markdownView" >
-									<?php echo ($value['release_note_html']!=null)?$value['release_note_html']:'<div class="no_release_note" data-no-release-text="No Release Notes/Change Logs are provided for this version.&#xa;This is most likely a minor version and does not contain major changes"></div>'; ?>
-								</div>
-							</div>
-						<?php endforeach; ?>
 					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

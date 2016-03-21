@@ -18,9 +18,6 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 	require_once $siteRoot . 'classes/Dashboard.php';
-	require_once $siteRoot . 'classes/Addon.php';
-	require_once $siteRoot . 'classes/Validation.php';
-	require_once $siteRoot . 'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 	include_once $siteRoot . 'includes/parsedown/Parsedown.php';
 
 
@@ -40,11 +37,10 @@
 			} else {
 				if (validateInput()) {
 					$dashboard = new Dashboard();
-					$addon = new Addon();
 					
 					//die, if the user alreay submitted more than X numbers of addon that needed aproval!
 					//This will prevent the floodgate
-					if (count($addon->getAddonListByStatusAndMember($context['user']['id'],"15","0")) > MAX_SUBMIT_WO_APPROVAL) {
+					if (count($dashboard->getAllAddonByStatusAndMember($context['user']['id'],0)) > MAX_SUBMIT_WO_APPROVAL) {
 						die('{"status": "0", "data": "' . $lang['206'] . '"}');
 					}
 
@@ -107,6 +103,20 @@
 
 		} else {
 			//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
+			die('{"status": "0", "data": "' . $lang['222'] . '"}');
+		}
+	} elseif (isset($_POST['addon_approve'])) {
+		if(!$context['user']['can_mod']){
+			die('{"status": "0", "data": "' . $lang['dashboard_err_1'] . '"}');
+		}
+		if ($_POST['addon_approve']==1 || $_POST['addon_approve']==2) {
+			$dashboard = new Dashboard();
+
+			if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'])) {
+				echo '{"status": "1", "data": "' . $lang['224'] . '", "callback_function": "ajax_reload_page"}';
+				exit();
+			}
+		} else {
 			die('{"status": "0", "data": "' . $lang['222'] . '"}');
 		}
 	}
