@@ -1,30 +1,23 @@
 <?php
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 if (!isset($_POST['id'])){
 	die('Not Available!');
 }
-
-
-
 $inputId = $_POST['id'];
 ?>
 <style>
-	.bottom_panel_img {
-		position: absolute;
-		width: 100%;
-		bottom: 0px;
-		box-sizing: border-box;
-		padding: 10px;
-	}
-	.add_btn_upload{
-		margin:0px;
-		float:right;
-	}
-
-
-
 	.dropzone h2 {
 		font-weight: bold;
 		color: #6C7984;
@@ -111,7 +104,7 @@ $inputId = $_POST['id'];
 <div class="main_imgur_upload_body">
 <?php if (IMGUR_UPLOAD_ON): ?>
 	<div class="infocard_header green_color">
-		<h3><?php echo $lang['406']; ?><img src="<?php echo $siteUrl."/img/logo-light.png"; ?>"></h3>
+		<h3><?php echo $lang['406']; ?><img src="<?php echo $siteUrl."img/logo-light.png"; ?>"></h3>
 	</div>
 	<div class="infocard_header dark_grey">
 		<p><?php echo $lang['407']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
@@ -149,9 +142,7 @@ $inputId = $_POST['id'];
 	</div>
 
 </div>
-<!-- 
-<script type="text/javascript" src="<?php echo $siteUrl; ?>/scripts/imgur.js"></script>
--->
+
 <script type="text/javascript">
 	var img = $('#img_input');
 

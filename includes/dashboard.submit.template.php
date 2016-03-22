@@ -1,4 +1,14 @@
 <?php
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
@@ -21,8 +31,7 @@ if (isset($_GET['view'])) {
 }
 ?>
 <form action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
-	<div id="blur_content_id"
-	class="content_inner_wrapper_admin editmode_wide <?php if ($viewType == 2): ?>dashboard_margin_wrapper_inline<?php endif; ?>">
+	<div id="blur_content_id" class="content_inner_wrapper_admin editmode_wide ">
 	<div class="admin_margin_wrapper">
 		<div class="infocard_header">
 			<h3><?php if ($viewType == 2) echo $lang['217']; else echo $lang['101']; ?></h3>
@@ -39,13 +48,13 @@ if (isset($_GET['view'])) {
 						foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 							$type_selection_text = "";
 							if (isset($data)) {
-								if ($data['addon_type']==Slug($menu_addon['title'])) {
+								if ($data['addon_type']==Format::Slug($menu_addon['title'])) {
 									$type_selection_text = "selected";
 								}
 							}
 
 							
-							echo "<option value=\"" . Slug($menu_addon['title']) . "\" ". $type_selection_text .">" . $menu_addon['title'] . "</option>";
+							echo "<option value=\"" . Format::Slug($menu_addon['title']) . "\" ". $type_selection_text .">" . $menu_addon['title'] . "</option>";
 						}
 						?>
 					</select>
@@ -120,7 +129,7 @@ if (isset($_GET['view'])) {
 						<p class="show_info">
 							<?php echo $lang['111']; ?>
 						</p>
-						<input id="addonver" maxlength="15" min="1" name="addonver" type="number" placeholder="eg. 1.0"
+						<input id="addonver" value step="0.1" min="1.0" max="99.99" name="addonver" type="text/number" placeholder="eg. 1.0"
 						value="<?php if ($viewType == 2) echo $data['addon_version']; ?>"/>
 					</label>
 				</li>
@@ -143,11 +152,11 @@ if (isset($_GET['view'])) {
 						foreach ($color_codes as $key => $color): 
 							$color_selection_text = "";
 						if ($viewType == 2) {
-							if (Slug($data['COLOR_ID']) == Slug($color['name'])) {
+							if (Format::Slug($data['COLOR_ID']) == Format::Slug($color['name'])) {
 								$color_selection_text = "checked";
 							}
 						} ?>
-						<input type="radio" name="color" id="color" value="<?php echo Slug($color['name']); ?>" style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
+						<input type="radio" name="color" id="color" value="<?php echo Format::Slug($color['name']); ?>" style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
 					<?php endforeach; ?>
 					<div id="clear"></div>
 				</label>
@@ -169,7 +178,7 @@ if (isset($_GET['view'])) {
 					<div class="right_float float_2">
 						<a href="javascript:void(0);" onclick="showUpModal('dlink','file')" id="upload_to_mediafire"
 						class="btn btn_blue input_add" title="<?php echo $lang['213']; ?>"><img
-						src="<?php echo $siteUrl . "/img/mf-flame-white.png"; ?>">&nbsp;&nbsp;<?php echo $lang['212']; ?></a>
+						src="<?php echo $siteUrl . "img/mf-flame-white.png"; ?>">&nbsp;&nbsp;<?php echo $lang['212']; ?></a>
 					</div>
 					<div id="clear"></div>
 				</label>
@@ -282,7 +291,7 @@ if (isset($_GET['view'])) {
 				<ul class="form">
 					<li>
 						<button class="btn btn_blue" type="submit" id="submit" style="padding:15px"
-						onclick="saveEdit()"><?php echo $lang['178']; ?></button>
+						onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
 						<p class="show_info info_red">
 							<?php echo $lang['123']; ?>
 						</p>
@@ -318,12 +327,12 @@ if (isset($_GET['view'])) {
 			iconClose: true,
 			bodyClose: true,
 			<?php if($viewType == 2): ?>
-			overlay: false,
-		<?php else: ?>
-		overlay: true,
-	<?php endif; ?>
-	onOpen: function () {
-		$('#blur_content_id').addClass('blur_content_overlay');
+				overlay: false,
+			<?php else: ?>
+				overlay: true,
+			<?php endif; ?>
+			onOpen: function () {
+				$('#blur_content_id').addClass('blur_content_overlay');
 					$('#upView').html("<div class=\"sk-circle\"> <div class=\"sk-circle1 sk-child\"></div> <div class=\"sk-circle2 sk-child\"></div> <div class=\"sk-circle3 sk-child\"></div> <div class=\"sk-circle4 sk-child\"></div> <div class=\"sk-circle5 sk-child\"></div> <div class=\"sk-circle6 sk-child\"></div> <div class=\"sk-circle7 sk-child\"></div> <div class=\"sk-circle8 sk-child\"></div> <div class=\"sk-circle9 sk-child\"></div> <div class=\"sk-circle10 sk-child\"></div> <div class=\"sk-circle11 sk-child\"></div> <div class=\"sk-circle12 sk-child\"></div> </div>"); //show loading signal maybe!
 					if (upType == "img") {
 						loadImgurUpload(id);
@@ -332,9 +341,9 @@ if (isset($_GET['view'])) {
 					}
 
 				},
-				onClose: function () {
-					<?php if($viewType == 2): ?>
-					$('body').css({
+			onClose: function () {
+				<?php if($viewType == 2): ?>
+				$('body').css({
 						position: 'fixed',
 						width: '100%',
 						'top': '-' + $(window).scrollTop() + 'px',
@@ -347,9 +356,9 @@ if (isset($_GET['view'])) {
 					$('#upView').html(""); //delete the html we got from ajax req
 				}
 			});
-}
+	}
 
-function loadImgurUpload(id) {
+	function loadImgurUpload(id) {
 		$.fx.off = true; // turn off jquery animation effects
 		$.ajax({
 			url: '../includes/upload.imgur.php',
@@ -415,6 +424,8 @@ function loadImgurUpload(id) {
 			'interactive': true,
 			'minChars': 2,
 			'defaultText': 'add a tag',
+			'removeWithBackspace' : true,
+			'delimiter': [',',';'],
 			'maxChars': 10, // if not provided there is no limit
 			'placeholderColor': '#333'
 		});
@@ -423,13 +434,12 @@ function loadImgurUpload(id) {
 	$(document).ready(function () {
 		<?php
 		//for updating purpose a musicbee version should be always selected, so check it on load
-		 if ($viewType == 2): ?>
+		if ($viewType == 2): ?>
 			addVer();
 		<?php endif; ?>
 
-		MBEditor.wmdBase();
-		MBEditor.Util.startEditor();
-
+	MBEditor.wmdBase();
+	MBEditor.Util.startEditor();
 
 		var maxField = 8; //Input fields increment limitation
 		var wrapper = $('#screenshot_inputs'); //Input field wrapper
@@ -448,45 +458,49 @@ function loadImgurUpload(id) {
 	});
 
 
-function saveEdit() {
-	$('form[data-autosubmit]').autosubmit();
-}
+	function saveEdit() {
+		$('form[data-autosubmit]').autosubmit();
+	}
 
-(function ($) {
-	$.fn.autosubmit = function () {
-		this.submit(function (event) {
-			event.preventDefault();
+	(function ($) {
+		$.fn.autosubmit = function () {
+			this.submit(function (event) {
+				event.preventDefault();
 				event.stopImmediatePropagation(); //This will stop the form submit twice
 				var form = $(this);
 				hideNotification();
-				showHideOverlay();
+				showOverlay();
 				$('#loading_icon').show();
-				$('button').attr('disabled', 'disabled'); // disable button
 				$.ajax({
 					type: form.attr('method'),
 					url: form.attr('action'),
 					data: form.serialize()
 				}).done(function (data) {
-					<?php if ($viewType==2): ?>
-						$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
-					<?php endif; ?>
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
 				}).always(function () {
 					$('#loading_icon').hide();
-					$('button').removeAttr('disabled');
-					showHideOverlay();//show overlay while loading
-					<?php if ($viewType==2): ?>
-					/* Reload the page with ajax whenever an update saved */
-					$dataUrl = $('a[href="' + window.location.hash + '"]');
-					$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
-					loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
-				<?php endif; ?>
+					hideOverlay();//show overlay while loading
 				});
 			});
-	}
-	return false;
-})(jQuery)
+		}
+		return false;
+	})(jQuery)
 
+	<?php if ($viewType==2): ?>
+		function submitted() {
+			//$.modalBox.close(); //once the form is submitted, we don't need the modal box anymore
+
+			$dataUrl = $('a[href="' + window.location.hash + '"]');
+			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
+			loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
+		}
+	<?php else: ?>
+		function submitted() {
+			$dataUrl = $('a[href="#all"]');
+			$generatedUrl = generateUrl ($dataUrl.attr('data-load-page'));
+			loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req'))?$dataUrl.attr('data-get-req'): "");
+		}
+	<?php endif; ?>
 </script>

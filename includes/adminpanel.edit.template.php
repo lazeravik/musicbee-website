@@ -1,4 +1,14 @@
-<?php 
+<?php
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+
 $admin_only = true; //only for admins
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
@@ -163,7 +173,7 @@ if (isset($_GET['view'])) :
 </div>
 <div id="clear"></div>
 <?php if($viewType!=1): ?>
-	<script src="<?php echo $siteUrl; ?>/scripts/wmdMod.js"></script>
+	<script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			MBEditor.wmdBase();
