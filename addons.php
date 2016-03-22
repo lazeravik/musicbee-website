@@ -74,10 +74,9 @@ if (isset($_GET['id'])) {
 
 		//Offset start and end value for pagination
 		$offset_start = (isset($url_params['p']))? (($url_params['p']-1) * $addon_view_range) : "0";
-		$offset_end   = (isset($url_params['p']))? ($url_params['p'] * $addon_view_range) : $addon_view_range;
 
 		//instead of showing the full list at once, we wan't to break it down by chunks and use pagination
-		$data['addon'] = ($data['addon_all'] != null)? array_slice($data['addon_all'], $offset_start, $offset_end) : null;	
+		$data['addon'] = ($data['addon_all'] != null)? array_slice($data['addon_all'], $offset_start, $addon_view_range) : null;
 
 		//var_dump($data['addon']);
 		

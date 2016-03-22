@@ -1,92 +1,186 @@
 <?php
-	/**
-	 * Copyright (c) AvikB, some rights reserved.
-	 * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
-	 *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
-	 *
-	 * @Contributors:
-	 * Created by AvikB for noncommercial MusicBee project.
-	 * Spelling mistakes and fixes from phred and other community memebers.
-	 */
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
 
-	$no_guests = true; //kick off the guests
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+$no_guests = true; //kick off the guests
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-	include $siteRoot.'classes/Dashboard.php';
-	$dashboard = new Dashboard();
+include $siteRoot . 'classes/Dashboard.php';
+$dashboard = new Dashboard();
 
-	$addondata['all_addons_byuser'] = $dashboard->getAllAddonByMember($_SESSION['memberinfo']['memberid']);
+
+/**
+ * Get all addon list submitted by this user
+ * @var array $addondata
+ */
+$addondata['all_addons_byuser'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
+
+$addondata['lola'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
+
+/**
+ * Calculate the total page required if it shows x number of items per page
+ * @var int $page_total
+ */
+$page_total = ceil (count ($addondata['all_addons_byuser']) / $dashboard_all_view_range);
+
+/**
+ * Offset start and end value for pagination
+ * @var int $offset_start
+ */
+$offset_start = (isset($_POST['page_num']))? (($_POST['page_num']-1) * $dashboard_all_view_range) : "0";
+
+
+/**
+ * Slice the addon list to show x number of items
+ * @var array $addondata
+ */
+$addondata['all_addons_byuser'] = ($addondata['all_addons_byuser'] != null) ? array_slice ($addondata['all_addons_byuser'],
+                                                                                           $offset_start,
+                                                                                           $dashboard_all_view_range) : null;
+function dashboard_result_pagination_generator($page_total) {
+	if ($page_total > 0) {
+		$pagination_view = '<ul class="pagination">';
+		for ($i = 1; $i < $page_total + 1; $i++) {
+			$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(' . $i . ')">' . $i . '</button></li>';
+		}
+		$pagination_view .= '</ul>';
+	} else {
+		$pagination_view = "";
+	}
+
+	return $pagination_view;
+}
+
+
 ?>
-<div class="main_content_wrapper col_1_2">
+<div
+	class="main_content_wrapper col_1_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
-			<span class="show_info info_darkgrey custom">
-				<h3><i class="fa fa-filter"></i>&nbsp;&nbsp; Filter & Search your add-ons</h3>
+			<span
+				class="show_info info_darkgrey custom">
+				<h3>
+					<i class="fa fa-filter"></i>&nbsp;&nbsp;
+					Filter & Search your
+					add-ons</h3>
 			</span>
 
 		</div>
 	</div>
-	<div class="sub_content_wrapper">
-			<div class="box_content">
-				<span class="show_info custom">
-					<h3><i class="fa fa-th"></i>&nbsp;&nbsp; Your published add-ons</h3>
+	<div class="sub_content_wrapper" id="addon_records">
+		<div class="box_content">
+				<span
+					class="show_info custom">
+					<h3>
+						<i class="fa fa-th"></i>&nbsp;&nbsp;
+						Your published
+						add-ons</h3>
 				</span>
-				<?php if(!empty($addondata['all_addons_byuser'] )): ?>
+			<?php if (!empty($addondata['all_addons_byuser'])): ?>
 
 				<table class="record">
 					<thead>
+					<tr>
+						<td>
+							<?php echo $lang['229']; ?>
+						</td>
+						<td>
+							<?php echo $lang['230']; ?>
+						</td>
+						<td>
+							<?php echo $lang['231']; ?>
+						</td>
+						<td>
+
+						</td>
+					</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($addondata['all_addons_byuser'] as $key => $addon): ?>
 						<tr>
 							<td>
-								<?php echo $lang['229']; ?>
+								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
+								   target="_blank"
+								   title="View this addon"><?php echo $addon['addon_title']; ?></a>
 							</td>
 							<td>
-								<?php echo $lang['230']; ?>
+								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
 							</td>
 							<td>
-								<?php echo $lang['231']; ?>
+								<?php echo Validation::getStatus ($addon['status']); ?>
 							</td>
-							<td>
+							<td class="action_input">
+
+								<form
+									id="<?php echo $addon['ID_ADDON']; ?>"
+									action="../includes/dashboard.tasks.php"
+									method="post"
+									data-autosubmit>
+									<button
+										id="<?php echo $addon['ID_ADDON']; ?>"
+										class="btn btn_red"
+										title="<?php echo $lang['233']; ?>"
+										onclick="deleteRecord();">
+										<i class="fa fa-trash"></i>
+									</button>
+									<input
+										type="hidden"
+										name="record_id"
+										value="<?php echo $addon['ID_ADDON']; ?>"/>
+									<input
+										type="hidden"
+										name="modify_type"
+										value="delete"/>
+								</form>
+								<button
+									class="btn btn_blue"
+									type="submit"
+									onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['234']; ?></button>
 
 							</td>
 						</tr>
-					</thead>
-					<tbody>
-						<?php foreach ($addondata['all_addons_byuser']  as $key => $addon): ?>
-							<tr>
-								<td>
-									<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug($addon['addon_title']); ?>" target="_blank" title="View this addon"><?php echo $addon['addon_title']; ?></a>
-								</td>
-								<td>
-									<?php echo Format::UnslugTxt($addon['addon_type']); ?>
-								</td>
-								<td>
-									<?php echo Validation::getStatus($addon['status']); ?>
-								</td>
-								<td class="action_input">
-
-									<form id="<?php echo$addon['ID_ADDON']; ?>" action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
-										<button id="<?php echo$addon['ID_ADDON']; ?>" class="btn btn_red" title="<?php echo $lang['233']; ?>" onclick="deleteRecord();" ><i class="fa fa-trash"></i></button>
-										<input type="hidden" name="record_id" value="<?php echo $addon['ID_ADDON']; ?>" />
-										<input type="hidden" name="modify_type" value="delete" />
-									</form>
-									<button class="btn btn_blue" type="submit" onclick="loadEditView(<?php echo$addon['ID_ADDON']; ?>);"><?php echo  $lang['234']; ?></button>
-
-								</td>
-							</tr>
-						<?php endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
+
 				</table>
 			<?php else: ?>
 				<p class="message"><?php echo $lang['dashboard_err_3']; ?></p>
 			<?php endif; ?>
-			</div>		
+		</div>
+		<div class="box_content">
+			<?php echo dashboard_result_pagination_generator ($page_total); ?>
+		</div>
 	</div>
 </div>
 
 <div class="space medium"></div>
 
-<div id="editView" class="modalBox1 iw-modalBox fadeIn animated"></div>
+<div id="editView"
+     class="modalBox1 iw-modalBox fadeIn animated"></div>
 <script type="text/javascript">
+
+	function loadAddonPage(page_num) {
+		$.ajax({
+			url: '../includes/dashboard.all.template.php',
+			cache: false,
+			type: "POST",
+			data: {page_num: "" + page_num + ""}
+		}).done(function (data) {
+			var sourcedata = $('#addon_records > *', $(data));
+			$('#addon_records').html(sourcedata).fadeIn();
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+		}).always(function () {
+		});
+	}
+
 	function showEditModal(id) {
 		$('.modalBox1').modalBox({
 			left: '0',
