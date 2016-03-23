@@ -12,7 +12,8 @@ function showNotification (msg,type,color) {
 		msgType="nrml_msg";
 	}
 
-	$('body').append("<div class=\"notify "+color+" "+msgType+" \" id=\"notification\" style=\"display:block\"><div class=\"notify_wrap_left\">"+msg+"</div><div class=\"notify_wrap_right\"><button class=\"closeNotify\" onclick=\"$(this).parent().parent().remove();\"><i class=\"fa fa-times\"></i> </button></div><div id=\"clear\"></div></div>");
+	$('body').append("<div class=\"notify fadeInRight animated "+color+" "+msgType+" \" id=\"notification\" ><div class=\"notify_wrap_left\">"+msg+"</div><button class=\"closeNotify\" onclick=\"$('#notification').remove();\"><i class=\"fa fa-times\"></i> </button></div>");
+	$('#notification').delay(5000).fadeOut('normal', function() { $(this).remove()});
 }
 
 function hideNotification () {
@@ -22,6 +23,8 @@ function hideNotification () {
 		$('#notification').remove();
 	}
 }
+
+
 
 //This function executes when an ajax call is finished or failed.
 //accepts json as a parameter, and provide a function callback provided via json object

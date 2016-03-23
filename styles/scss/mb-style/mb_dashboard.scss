@@ -19,7 +19,18 @@
 					min-width: inherit;
 				}
 			}
-		}		
+		}
+
+		&.record_removed {
+			background: #D45B53;
+			color: #fff;
+
+			td {
+				p {
+					margin: 10px;
+				}
+			}
+		}
 	}
 
 	thead { 

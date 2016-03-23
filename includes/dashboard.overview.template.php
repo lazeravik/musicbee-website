@@ -20,19 +20,17 @@ $dashboard = new Dashboard();
 
 $stat['total_download'] = $Stats->getAddonDownloadCountByAuthor ($_SESSION['memberinfo']['memberid']);
 $stat['total_likes'] = $Stats->getAddonLikeCountByAuthor ($_SESSION['memberinfo']['memberid']);
-
 $stat['total_addon_submitted'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
-//Get all the info about the user at the begining
-
-
+$stat['total_unapproved_addon'] = $dashboard->getAllAddonByStatusAndMember ($_SESSION['memberinfo']['memberid'],
+                                                                            0);
 $stat['top_voted_addon'] = $dashboard->getTopVotedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],
                                                                   10);
 $stat['top_downloaded_addon'] = $dashboard->getMostDownloadedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],
                                                                              10);
+$stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
+                                          0,
+                                          10);
 
-$stat['total_unapproved_addon'] = $dashboard->getAllAddonByStatusAndMember ($_SESSION['memberinfo']['memberid'],
-                                                                            0);
-$stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 
 ?>
 
@@ -140,9 +138,11 @@ $stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 			</ul>
 		</div>
 	</div>
-	<div class="sub_content_wrapper">
+	<div class="sub_content_wrapper"
+	     id="addon_list_fullview">
 		<?php if ($context['user']['can_mod']): ?>
-			<div class="box_content">
+			<div class="box_content"
+			     id="addon_records">
 				<span
 					class="show_info info_darkgrey custom header">
 					<h3>
@@ -150,10 +150,6 @@ $stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 						Addons waiting
 						for approval
 					</h3>
-					<a href="http://localhost/download/"
-					   class="btn small_btn btn_yellow"><i
-							class="fa fa-navicon"></i>&nbsp;
-						Show All</a>
 				</span>
 				<p class="show_info warning">
 					You are seeing this
@@ -336,7 +332,7 @@ $stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 	$('#ajax_area a[data-load-page]').on('click', function (e) {
 		e.preventDefault();
 		/* Act on the event */
-		loadPageGet(generateUrl($(this).attr('data-load-page')), (!!$(this).attr('data-get-req')) ? $(this).attr('data-get-req') : "");
+		loadPageGet(generateUrl($(this).attr('data-href')), (!!$(this).attr('data-get-req')) ? $(this).attr('data-get-req') : "");
 		window.location.hash = $(this).attr('data-href');
 	});
 
@@ -353,6 +349,7 @@ $stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 			this.submit(function (event) {
 				event.preventDefault();
 				event.stopImmediatePropagation(); //This will stop the form submit twice
+				$('#loading_icon').show(); //show loading icon'
 				var form = $(this);
 				$.ajax({
 					type: form.attr('method'),
@@ -370,9 +367,21 @@ $stat['unapproved_addons'] = $dashboard->getAllUnApprovedAddons (10);
 		return false;
 	})(jQuery)
 
-	var ajax_reload_page = function () {
-		$dataUrl = $('a[href="#overview"]');
-		$generatedUrl = generateUrl($dataUrl.attr('data-load-page'));
-		loadPageGet($generatedUrl, (!!$dataUrl.attr('data-get-req')) ? $dataUrl.attr('data-get-req') : "");
+	var reload_addon_approval_list_overview = function () {
+		var $generatedUrl = generatePageUrl((window.location.hash).replace('#', ''));
+		$('#loading_icon').show(); //show loading icon'
+		$.ajax({
+			url: $generatedUrl,
+			cache: false,
+			type: "POST",
+		}).done(function (data) {
+			var sourcedata = $('#addon_records > *', $(data));
+			$('#addon_records').html(sourcedata).fadeIn();
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+		}).always(function () {
+			$('#loading_icon').hide(); //show loading icon'
+		});
 	}
+
 </script>

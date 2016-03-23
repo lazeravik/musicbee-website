@@ -47,10 +47,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 						<a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a>
 					</li>
 					<li>
-						<a href="#overview" data-href="overview" data-load-page="adminpanel.view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a>
+						<a href="#adminpanel_view" data-href="adminpanel_view"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp; Overview</a>
 					</li>
 					<li>
-						<a href="#viewAll" data-href="viewAll" data-load-page="adminpanel.view" data-get-req='view=all'>
+						<a href="#adminpanel_view" data-href="adminpanel_view" data-get-req='view=all'>
 							<i class="fa fa-object-ungroup"></i>&nbsp;&nbsp; All MusicBee Releases</a>
 						</li>
 						<li>
@@ -87,6 +87,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
 	<script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
 	<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+	<script>
+		var defaultpage = "adminpanel_view";
+	</script>
 	<?php 
 	include_once $siteRoot.'includes/ajax.navigation.script.php';
 	?>

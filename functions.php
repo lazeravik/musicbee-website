@@ -146,8 +146,8 @@ $release['beta']['message'] = isset($releaseData[1]->message) ? $releaseData[1]-
 $release['beta']['available'] = isset($releaseData[1]->available) ? $releaseData[1]->available : 0;
 
 
-$addon_view_range = 6;
-$dashboard_all_view_range = 6;
+$addon_view_range = 20;
+$dashboard_all_view_range = 15;
 
 /**
  * @var URI $params

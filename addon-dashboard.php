@@ -45,14 +45,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                 <ul class="left">
                     <li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>
                     <li>
-                        <a href="#overview" data-href="overview" data-load-page="dashboard.view"><?php echo $lang['225']; ?></a>
+                        <a href="#dashboard_overview" data-href="dashboard_overview"><?php echo $lang['225']; ?></a>
                     </li>
                     <li>
-                        <a href="#all" data-href="all" data-load-page="dashboard.all"><?php echo $lang['226']; ?>
+                        <a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['226']; ?>
                         </a>
                     </li>
                     <li>
-                        <a class="btn btn_green addon_panel_btn" href="#submit" data-href="submit" data-load-page="dashboard.submit"><?php echo $lang['227']; ?>
+                        <a href="#dashboard_submit" data-href="dashboard_submit"><?php echo $lang['227']; ?>
                         </a>
                     </li>
 
@@ -94,6 +94,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     <script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+
+    <script>
+        var defaultpage = "dashboard_overview";
+    </script>
 
     <?php
     include_once $siteRoot . 'includes/ajax.navigation.script.php';

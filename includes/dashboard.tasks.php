@@ -113,7 +113,7 @@
 			$dashboard = new Dashboard();
 
 			if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'])) {
-				echo '{"status": "1", "data": "' . $lang['224'] . '", "callback_function": "ajax_reload_page"}';
+				echo '{"status": "1", "data": "' . $lang['224'] . '", "callback_function": "reload_addon_approval_list_overview"}';
 				exit();
 			}
 		} else {

@@ -250,7 +250,7 @@
 			}
 		}
 
-		public function getAllUnApprovedAddons($limit = 10)
+		public function getAllUnApprovedAddons()
 		{
 			global $connection;
 
@@ -265,8 +265,7 @@
 					ON
 					".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER
 					WHERE 
-					".SITE_ADDON.".status = 0
-					LIMIT {$limit}";
+					".SITE_ADDON.".status = 0";
 					$statement = $connection->prepare($sql);
 					$statement->execute();
 					$result = $statement->fetchAll(PDO::FETCH_ASSOC);
