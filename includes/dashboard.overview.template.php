@@ -40,9 +40,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		<div class="box_content">
 			<span
 				class="show_info custom">
-				<h3>
-					<i class="fa fa-area-chart"></i>&nbsp;&nbsp;
-					Your Stats</h3>
+				<h3><?php echo $lang['dashboard_5']; ?></h3>
 			</span>
 			<table class="record">
 				<tbody>
@@ -50,7 +48,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 					<td>
 						<a href="#all"
 						   data-href="all"
-						   data-load-page="dashboard.all"><?php echo $lang['130']; ?></a>
+						   data-load-page="dashboard.all"><?php echo $lang['dashboard_0']; ?></a>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix (count ($stat['total_addon_submitted'])); ?>
@@ -58,7 +56,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				</tr>
 				<tr>
 					<td>
-						<?php echo $lang['132']; ?>
+						<?php echo $lang['dashboard_2']; ?>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix (count ($stat['total_unapproved_addon'])); ?>
@@ -66,7 +64,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				</tr>
 				<tr>
 					<td>
-						<?php echo $lang['131']; ?>
+						<?php echo $lang['dashboard_1']; ?>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix ($stat['total_likes']); ?>
@@ -74,7 +72,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				</tr>
 				<tr>
 					<td>
-						Total Downloads
+						<?php echo $lang['dashboard_3']; ?>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix ($stat['total_download']); ?>
@@ -87,22 +85,22 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			class="box_content side_links">
 			<span
 				class="show_info info_green custom">
-				<h3><?php echo $lang['137']; ?></h3>
+				<h3><?php echo $lang['dashboard_4']; ?></h3>
 			</span>
 			<ul class="link_list">
 				<li>
 					<a href="">
-						<?php echo $lang['139']; ?>
+						<?php echo $lang['dashboard_links_1']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['140']; ?>
+						<?php echo $lang['dashboard_links_2']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['141']; ?>
+						<?php echo $lang['dashboard_links_3']; ?>
 					</a>
 				</li>
 				<li>
@@ -112,27 +110,27 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 					<a href="#submit"
 					   data-href="submit"
 					   data-load-page="dashboard.submit">
-						<?php echo $lang['142']; ?>
+						<?php echo $lang['dashboard_links_4']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['143']; ?>
+						<?php echo $lang['dashboard_links_5']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['144']; ?>
+						<?php echo $lang['dashboard_links_6']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['145']; ?>
+						<?php echo $lang['dashboard_links_7']; ?>
 					</a>
 				</li>
 				<li>
 					<a href="">
-						<?php echo $lang['146']; ?>
+						<?php echo $lang['dashboard_links_8']; ?>
 					</a>
 				</li>
 			</ul>
@@ -145,32 +143,24 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			     id="addon_records">
 				<span
 					class="show_info info_darkgrey custom header">
-					<h3>
-						<i class="fa fa-shield"></i>&nbsp;&nbsp;
-						Addons waiting
-						for approval
-					</h3>
+					<h3><?php echo $lang['dashboard_6']; ?></h3>
 				</span>
 				<p class="show_info warning">
-					You are seeing this
-					because you are
-					either a mod or
-					admin
+					<?php echo $lang['dashboard_7']; ?>
 				</p>
 				<?php if (!empty($stat['unapproved_addons'])): ?>
-
 					<table
 						class="record">
 						<thead>
 						<tr>
 							<td>
-								<?php echo $lang['229']; ?>
+								<?php echo $lang['dashboard_record_th_1']; ?>
 							</td>
 							<td>
-								<?php echo $lang['230']; ?>
+								<?php echo $lang['dashboard_record_th_2']; ?>
 							</td>
 							<td>
-								Member
+								<?php echo $lang['dashboard_record_th_3']; ?>
 							</td>
 							<td>
 
@@ -249,20 +239,20 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		<div class="box_content">
 			<span
 				class="show_info custom">
-				<h3><?php echo $lang['133']; ?></h3>
+				<h3><?php echo $lang['dashboard_8']; ?></h3>
 			</span>
 			<?php if (!empty($stat['top_voted_addon'])): ?>
 				<table class="record">
 					<thead>
 					<tr>
 						<td>
-							<?php echo $lang['229']; ?>
+							<?php echo $lang['dashboard_record_th_1']; ?>
 						</td>
 						<td>
-							<?php echo $lang['230']; ?>
+							<?php echo $lang['dashboard_record_th_2']; ?>
 						</td>
 						<td>
-							Likes
+							<?php echo $lang['dashboard_record_th_5']; ?>
 						</td>
 					</tr>
 					</thead>
@@ -290,17 +280,17 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		<div class="box_content">
 			<span
 				class="show_info custom">
-				<h3><?php echo $lang['135']; ?></h3>
+				<h3><?php echo $lang['dashboard_8']; ?></h3>
 			</span>
 			<?php if (!empty($stat['top_downloaded_addon'])): ?>
 				<table class="record">
 					<thead>
 					<tr>
 						<td>
-							<?php echo $lang['229']; ?>
+							<?php echo $lang['dashboard_record_th_1']; ?>
 						</td>
 						<td>
-							Downloads
+							<?php echo $lang['dashboard_record_th_6']; ?>
 						</td>
 					</tr>
 					</thead>

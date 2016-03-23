@@ -67,6 +67,15 @@
 	}
 }
 
+.remove_img_btn {
+    background: #EFEFEF !important;
+    color: #333 !important;
+    padding: 2px 5px !important;
+    margin: 2px 0px 10px 0px !important;
+    box-shadow: none !important;
+    width: inherit !important;
+}
+
 @media screen and(max-width: $break-small) {
 	.side_links{
 		display: none;

@@ -70,10 +70,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		<div class="box_content">
 			<span
 				class="show_info info_darkgrey custom">
-				<h3>
-					<i class="fa fa-filter"></i>&nbsp;&nbsp;
-					Filter & Search your
-					add-ons</h3>
+				<h3><?php echo $lang['dashboard_10']; ?></h3>
 			</span>
 
 		</div>
@@ -83,10 +80,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		<div class="box_content">
 				<span
 					class="show_info custom">
-					<h3>
-						<i class="fa fa-th"></i>&nbsp;&nbsp;
-						Your published
-						add-ons</h3>
+					<h3><?php echo $lang['dashboard_11']; ?></h3>
 				</span>
 			<?php if (!empty($addondata['all_addons_byuser'])): ?>
 
@@ -94,13 +88,13 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					<thead>
 					<tr>
 						<td>
-							<?php echo $lang['229']; ?>
+							<?php echo $lang['dashboard_record_th_1']; ?>
 						</td>
 						<td>
-							<?php echo $lang['230']; ?>
+							<?php echo $lang['dashboard_record_th_2']; ?>
 						</td>
 						<td>
-							<?php echo $lang['231']; ?>
+							<?php echo $lang['dashboard_record_th_4']; ?>
 						</td>
 						<td>
 
@@ -131,7 +125,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 									<button
 										id="<?php echo $addon['ID_ADDON']; ?>"
 										class="btn btn_red"
-										title="<?php echo $lang['233']; ?>"
+										title="<?php echo $lang['dashboard_tooltip_1']; ?>"
 										onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);">
 										<i class="fa fa-trash"></i>
 									</button>
@@ -147,7 +141,8 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 								<button
 									class="btn btn_blue"
 									type="submit"
-									onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['234']; ?></button>
+									title="<?php echo $lang['dashboard_tooltip_2']; ?>"
+									onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['dashboard_12']; ?></button>
 
 							</td>
 						</tr>
@@ -168,8 +163,6 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 <div class="space medium"></div>
 
-<div id="editView"
-     class="modalBox1 iw-modalBox fadeIn animated"></div>
 <script type="text/javascript">
 
 	//get page(1,2,3..) addon list via ajax
@@ -191,25 +184,6 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			hideOverlay(); //show overlay while loading
 		});
 	}
-//
-//	function showEditModal(id) {
-//		$('.modalBox1').modalBox({
-//			left: '0',
-//			top: '0',
-//			width: '100%',
-//			height: '100%',
-//			keyClose: true,
-//			iconClose: true,
-//			bodyClose: true,
-//			onOpen: function () {
-//				$('#editView').html("<div class=\"sk-circle\"> <div class=\"sk-circle1 sk-child\"></div> <div class=\"sk-circle2 sk-child\"></div> <div class=\"sk-circle3 sk-child\"></div> <div class=\"sk-circle4 sk-child\"></div> <div class=\"sk-circle5 sk-child\"></div> <div class=\"sk-circle6 sk-child\"></div> <div class=\"sk-circle7 sk-child\"></div> <div class=\"sk-circle8 sk-child\"></div> <div class=\"sk-circle9 sk-child\"></div> <div class=\"sk-circle10 sk-child\"></div> <div class=\"sk-circle11 sk-child\"></div> <div class=\"sk-circle12 sk-child\"></div> </div>"); //show loading signal maybe!
-//				loadEditView(id); //do some ajax request for the file
-//			},
-//			onClose: function () {
-//				$('#editView').html(""); //delete the html we got from ajax req
-//			}
-//		});
-//	}
 
 	function loadEditView(id) {
 		$('#loading_icon').show(); //show loading icon'
@@ -234,7 +208,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	var delete_record_id = "0";
 
 	function deleteRecord(id) {
-		var modify_confirm = confirm("<?php echo $lang['232']; ?>");
+		var modify_confirm = confirm("<?php echo $lang['dashboard_msg_2']; ?>");
 		if (modify_confirm == true) {
 			hideNotification();
 			$('#loading_icon').show();
@@ -248,7 +222,6 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 	(function ($) {
 		$.fn.autosubmit = function () {
-			console.log("yy");
 			//noinspection JSUnresolvedFunction
 			this.submit(function (event) {
 				event.preventDefault();

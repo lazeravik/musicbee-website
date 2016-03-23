@@ -40,27 +40,31 @@ if (isset($_GET['view'])) {
 			<div class="box_content">
 			<span class="show_info custom">
 				<h3>
-					<i class="fa fa-area-chart"></i>&nbsp;&nbsp;
 					<?php if ($viewType == 2) {
-						echo $lang['217'];
+						echo $lang['dashboard_submit_2'];
 					} else {
-						echo $lang['101'];
+						echo $lang['dashboard_submit_1'];
 					} ?></h3>
 				<p class="description"><?php if ($viewType == 2) {
-						echo $lang['218'];
+						echo $lang['dashboard_submit_desc_2'];
 					} else {
-						echo $lang['102'];
+						echo $lang['dashboard_submit_desc_1'];
 					} ?></p>
 			</span>
 			</div>
 			<div class="box_content">
 			<span class="show_info custom info_silver">
-				<h3><?php echo $lang['103']; ?></h3>
+				<h3><?php echo $lang['dashboard_submit_header_1']; ?></h3>
 			</span>
-			<ul class="form">
-				<li>
-					<label for="type"><p>Addon type *</p></label>
-					<select name="type" id="type">
+				<ul class="form">
+					<li>
+						<label for="type">
+							<p>Addon
+								type
+								*</p>
+						</label>
+						<select name="type"
+						        id="type">
 							<?php
 							foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 								$type_selection_text = "";
@@ -74,39 +78,40 @@ if (isset($_GET['view'])) {
 								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\" " . $type_selection_text . ">" . $menu_addon['title'] . "</option>";
 							}
 							?>
-					</select>
+						</select>
 
-				</li>
-			</ul>
-			<script type="text/javascript">
-				$(document).ready(function () {
-					showSpecial();
-				});
-				$('#type').on('change', function (event) {
-					showSpecial();
-					console.log($('#type').val());
-				});
-				function showSpecial() {
-					if ($('#type').val() == "skins") {
-						$('#addon_special').removeAttr('style');
-						$('#addon_special_cover').removeAttr('style');
+					</li>
+				</ul>
+				<script type="text/javascript">
+					$(document).ready(function () {
+						showSpecial();
+					});
+					$('#type').on('change', function () {
+						showSpecial();
+						console.log($('#type').val());
+					});
+					function showSpecial() {
+						if ($('#type').val() == "skins") {
+							$('#addon_special').removeAttr('style');
+							$('#addon_special_cover').removeAttr('style');
+						}
+						else {
+							$('#addon_special').css('display', 'none');
+							$('#addon_special_cover').css('display', 'none');
+						}
 					}
-					else {
-						$('#addon_special').css('display', 'none');
-						$('#addon_special_cover').css('display', 'none');
-					}
-				}
-			</script>
-				</div>
+				</script>
+			</div>
 
 			<div class="box_content">
 			<span class="show_info custom info_silver">
-				<h3><?php echo $lang['104']; ?></h3>
+				<h3><?php echo $lang['dashboard_submit_header_2']; ?></h3>
 			</span>
-			<ul class="form">
-				<li>
-					<label for="title">
-						<p><?php echo $lang['105']; ?></p></label>
+				<ul class="form">
+					<li>
+						<label for="title">
+							<p><?php echo $lang['dashboard_submit_header_3']; ?></p>
+						</label>
 						<input type="text"
 						       id="title"
 						       maxlength="80"
@@ -116,12 +121,12 @@ if (isset($_GET['view'])) {
 							       echo $data['addon_title'];
 						       } ?>"/>
 
-				</li>
-				<li>
-					<label for="description">
-						<p><?php echo $lang['106']; ?></p>
-						<p class="description"><?php echo $lang['107']; ?></p>
-					</label>
+					</li>
+					<li>
+						<label for="description">
+							<p><?php echo $lang['dashboard_submit_header_4']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_submit_desc_3']; ?></p>
+						</label>
 				<textarea type="text"
 				          id="description"
 				          maxlength="600"
@@ -131,43 +136,46 @@ if (isset($_GET['view'])) {
 				          onkeyup="$('#description_count').text(600 - this.value.length+'/600')"><?php if ($viewType == 2) {
 						echo $data['short_description'];
 					} ?></textarea>
-					<p id="description_count"
-					   style="text-align:right"></p>
+						<p id="description_count"
+						   style="text-align:right"></p>
 
-				</li>
-				<li><label for="mbSupportedVer">
-						<p><?php echo $lang['108']; ?></p>
-						<p class="description"><?php echo $lang['109']; ?></p>
-					</label>
-					<input id="mbSupportedVer"
-					       name="mbSupportedVer"
-					       type="hidden"
-					       value=""/>
-					<select id="multipleVer"
-					        multiple="multiple"
-					        on>
-						<?php
-						foreach ($ALL_MBVERSION_DASHBOARD as $ver) {
-							if ($ver['dashboard_availablity'] == 1) {
-								if ($ver['ID_ALLVERSIONS'] == $data['supported_mbversion']) {
-									$selected_mb_text = "selected";
-								} else {
-									$selected_mb_text = ""; //if not matched then remove the selected text
+					</li>
+					<li>
+						<label for="mbSupportedVer">
+							<p><?php echo $lang['dashboard_submit_header_7']; ?></p>
+						</label>
+						<input id="mbSupportedVer"
+						       name="mbSupportedVer"
+						       type="hidden"
+						       value=""/>
+						<select id="multipleVer"
+						        multiple="multiple"
+						        on>
+							<?php
+							foreach ($ALL_MBVERSION_DASHBOARD as $ver) {
+								if ($ver['dashboard_availablity'] == 1) {
+									if ($ver['ID_ALLVERSIONS'] == $data['supported_mbversion']) {
+										$selected_mb_text = "selected";
+									} else {
+										$selected_mb_text = ""; //if not matched then remove the selected text
+									}
+									echo '<option value="' . $ver['ID_ALLVERSIONS'] . '" ' . $selected_mb_text . '>' . $ver['appname'] . '</option>';
 								}
-								echo '<option value="' . $ver['ID_ALLVERSIONS'] . '" ' . $selected_mb_text . '>' . $ver['appname'] . '</option>';
 							}
-						}
-						?>
-					</select>
-					<p id="mbVerFeedback"
-					   class="fadeInUp animated show_info info_green"
-					   style="display:none"></p>
-				</li>
-				<li>
-					<label for="addonver">
-						<p><?php echo $lang['110']; ?></p>
-						<p class="description"><?php echo $lang['111']; ?></p>
-					</label>
+							?>
+						</select>
+						<p id="mbVerFeedback"
+						   class="fadeInUp animated show_info info_green"
+						   style="display:none"></p>
+					</li>
+					<li>
+						<hr class="line">
+					</li>
+					<li>
+						<label for="addonver">
+							<p><?php echo $lang['dashboard_submit_header_8']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_submit_desc_7']; ?></p>
+						</label>
 						<input id="addonver"
 						       value
 						       step="0.1"
@@ -180,10 +188,11 @@ if (isset($_GET['view'])) {
 							       echo $data['addon_version'];
 						       } ?>"/>
 
-				</li>
-				<li>
-					<label for="tag">
-						<p><?php echo $lang['112']; ?></p></label>
+					</li>
+					<li>
+						<label for="tag">
+							<p><?php echo $lang['dashboard_submit_header_9']; ?></p>
+						</label>
 						<input id="tag"
 						       maxlength="150"
 						       name="tag"
@@ -193,180 +202,170 @@ if (isset($_GET['view'])) {
 							       echo $data['tags'];
 						       } ?>"/>
 
-				</li>
-				<li id="addon_special"
-				    style="display:none;">
-					<label for="color">
-						<p>Skin accent
-							color</p>
-						<?php
+					</li>
+					<li id="addon_special"
+					    style="display:none;">
+						<label for="color">
+							<p>Skin
+								accent
+								color</p>
+							<?php
 
-						foreach ($color_codes as $key => $color):
-							$color_selection_text = "";
-							if ($viewType == 2) {
-								if (Format::Slug ($data['COLOR_ID']) == Format::Slug ($color['name'])) {
-									$color_selection_text = "checked";
-								}
-							} ?>
-							<input type="radio"
-							       name="color"
-							       id="color"
-							       value="<?php echo Format::Slug ($color['name']); ?>"
-							       style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
-						<?php endforeach; ?>
-						<div id="clear"></div>
-					</label>
-				</li>
-			</ul>
-				</div>
+							foreach ($color_codes as $key => $color):
+								$color_selection_text = "";
+								if ($viewType == 2) {
+									if (Format::Slug ($data['COLOR_ID']) == Format::Slug ($color['name'])) {
+										$color_selection_text = "checked";
+									}
+								} ?>
+								<input type="radio"
+								       name="color"
+								       id="color"
+								       value="<?php echo Format::Slug ($color['name']); ?>"
+								       style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
+							<?php endforeach; ?>
+						</label>
+					</li>
+				</ul>
+			</div>
 			<div class="box_content">
-			<span class="show_info custom info_silver">
-				<h3><?php echo $lang['115']; ?></h3>
+			<span class="show_info custom">
+				<h3><?php echo $lang['dashboard_submit_header_5']; ?></h3>
 			</span>
-			<ul class="form">
-				<li>
-					<label for="dlink"><p><?php echo $lang['116']; ?></p></label>
-					<input type="url"
-							       id="dlink"
-							       name="dlink"
-							       required="required"
-							       value="<?php if ($viewType == 2) {
-								       echo $data['download_links'];
-							       } ?>"/>
-
-				</li>
-				<li>
-					<label for="thumb">
-						<p><?php echo $lang['208']; ?></p>
-					</label>
-					<div class="left_float">
-						<input id="thumb"
-						       type="text"
-						       name="thumb"
+				<ul class="form">
+					<li>
+						<label for="dlink">
+							<p><?php echo $lang['dashboard_submit_header_10']; ?></p>
+						</label>
+						<input type="url"
+						       id="dlink"
+						       name="dlink"
+						       required="required"
 						       value="<?php if ($viewType == 2) {
-							       echo $data['thumbnail'];
-						       } ?>"
-						       placeholder="eg. http://i.imgur.com/sdfsdf43gh5.jpg"/>
-					</div>
-					<div class="right_float float_2">
-						<a href="javascript:void(0);"
-						   onclick="showUpModal('thumb','img')"
-						   id="upload_to_imgur"
-						   class="btn btn_green input_add"
-						   title="<?php echo $lang['124']; ?>"><i
-									class="fa fa-upload"></i> <?php echo $lang['210']; ?>
-						</a>
-					</div>
-				</li>
-				<li class="screenshot_multiple_wrap">
-					<label for="imglink">
-						<p><?php echo $lang['118']; ?></p>
-					</label>
-					<p class="show_info">
-						<?php echo $lang['119']; ?>
-					</p>
-					<div id="screenshot_inputs">
-						<?php
-						if ($viewType == 2) :
-							foreach ($screenshot_array as $key => $screenshots):
-								$rand_container_id = uniqid ();
-								?>
-								<div class="screenshot_input_box">
-									<div class="left_float">
+							       echo $data['download_links'];
+						       } ?>"/>
+
+					</li>
+					<li>
+						<label for="thumb">
+							<p><?php echo $lang['dashboard_submit_header_11']; ?></p>
+						</label>
+						<div class="link_input">
+							<div class="flex_input col_2">
+								<input id="thumb"
+								       type="text"
+								       name="thumb"
+								       value="<?php if ($viewType == 2) {
+									       echo $data['thumbnail'];
+								       } ?>"
+								       placeholder="eg. http://i.imgur.com/sdfsdf43gh5.jpg"/>
+								<button
+										type="button"
+										onclick="showUpModal('thumb','img')"
+										id="upload_to_imgur"
+										class="btn btn_green input_add"
+										title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+									<i class="fa fa-upload"></i>
+								</button>
+							</div>
+						</div>
+					</li>
+					<li class="screenshot_multiple_wrap">
+						<label for="imglink">
+							<p><?php echo $lang['dashboard_submit_header_12']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_submit_desc_5']; ?></p>
+						</label>
+
+						<?php if ($viewType == 2) : ?>
+							<div id="screenshot_inputs"
+							     class="link_input">
+								<?php
+								foreach ($screenshot_array as $key => $screenshots):
+									$rand_container_id = uniqid ();
+									?>
+									<div class="flex_input col_2">
 										<input id="<?php echo $rand_container_id; ?>"
 										       type="text"
 										       name="screenshot_links[]"
 										       value="<?php echo $screenshots; ?>"
 										       placeholder="eg. http://i.imgur.com/<?php echo $rand_container_id; ?>.jpg"/>
-									</div>
-									<div class="right_float">
-										<?php if ($key == 0): ?>
-											<a href="javascript:void(0);"
-											   id="add_button"
-											   class="btn btn_blue input_add"
-											   title="<?php echo $lang['126']; ?>"><i
-														class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;
-												Add
-												more</a>
-										<?php else: ?>
-											<a href="javascript:void(0);"
-											   id="remove_button"
-											   class="btn btn_red input_add"
-											   title="Add field"><i
-														class="fa fa-minus-circle"></i>&nbsp;&nbsp;&nbsp;
-												Remove</a>
+										<button
+												type="button"
+												onclick="showUpModal('<?php echo $rand_container_id; ?>','img')"
+												id="upload_to_imgur"
+												class="btn btn_green"
+												title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+											<?php echo $lang['dashboard_submit_btn_1']; ?>
+										</button>
+										<?php if ($key != 0): ?>
+											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'].$lang['dashboard_submit_btn_4']; ?></a>
 										<?php endif; ?>
 									</div>
-									<div class="right_float_2">
-										<a href="javascript:void(0);"
-										   onclick="showUpModal('<?php echo $rand_container_id; ?>','img')"
-										   id="upload_to_imgur"
-										   class="btn btn_green input_add"
-										   title="<?php echo $lang['124']; ?>"><i
-													class="fa fa-upload"></i></a>
-									</div>
-									<div id="clear"></div>
-								</div>
-							<?php endforeach;
-						else: ?>
-							<div class="screenshot_input_box">
-								<div class="left_float">
+
+								<?php endforeach; ?>
+							</div>
+							<button
+									type="button"
+									id="add_button"
+									class="btn btn_blue">
+								<?php echo $lang['dashboard_submit_btn_2']; ?>
+							</button>
+						<?php else: ?>
+							<div id="screenshot_inputs"
+							     class="link_input">
+								<div class="flex_input col_2">
 									<input id="vfda54huk"
 									       type="text"
 									       name="screenshot_links[]"
 									       value=""
 									       placeholder="eg. http://i.imgur.com/vfda54huk.jpg"/>
-								</div>
-								<div class="right_float">
-									<a href="javascript:void(0);"
-									   id="add_button"
-									   class="btn btn_blue input_add"
-									   title="<?php echo $lang['126']; ?>"><i
-												class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;
-										Add
-										more</a>
-								</div>
-								<div class="right_float_2">
-									<a href="javascript:void(0);"
-									   onclick="showUpModal('vfda54huk','img')"
-									   id="upload_to_imgur"
-									   class="btn btn_green input_add"
-									   title="<?php echo $lang['124']; ?>"><i
-												class="fa fa-upload"></i></a>
-								</div>
-								<div id="clear"></div>
-							</div>
-						<?php endif; ?>
-					</div>
 
-				</li>
-			</ul>
-				</div>
+									<button
+											type="button"
+											onclick="showUpModal('vfda54huk','img')"
+											id="upload_to_imgur"
+											class="btn btn_green"
+											title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+										<?php echo $lang['dashboard_submit_btn_1']; ?>
+									</button>
+								</div>
+							</div>
+							<button
+									type="button"
+									id="add_button"
+									class="btn btn_blue"
+									title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+								<?php echo $lang['dashboard_submit_btn_2']; ?>
+							</button>
+						<?php endif; ?>
+					</li>
+				</ul>
+			</div>
 			<div class="box_content">
-			<span class="show_info custom dark_grey">
-				<h3><?php echo $lang['120']; ?></h3>
+			<span class="show_info custom info_silver">
+				<h3><?php echo $lang['dashboard_submit_header_6']; ?></h3>
 			</span>
-			<ul class="form">
-				<li>
-					<label for="support">
-						<p><?php echo $lang['199']; ?></p>
-						<p class="show_info">
-							<?php echo $lang['200']; ?>
-						</p>
+				<ul class="form">
+					<li>
+						<label for="support">
+							<p><?php echo $lang['dashboard_submit_header_13']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_submit_desc_6']; ?></p>
+						</label>
 						<input type="url"
 						       id="support"
 						       name="support"
 						       value="<?php if ($viewType == 2) {
 							       echo $data['support_forum'];
 						       } ?>"/>
-					</label>
-				</li>
-				<li>
-					<label for="wmd-input">
-						<p><?php echo $lang['121']; ?></p>
-						<p class="show_info info_yellow">
-							<?php echo $lang['122']; ?>
-						</p>
+
+					</li>
+					<li>
+						<hr class="line">
+					</li>
+					<li>
+						<label for="wmd-input">
+							<p><?php echo $lang['dashboard_submit_header_14']; ?></p>
+						</label>
 						<div id="wmd-editor"
 						     class="wmd-panel">
 							<div id="wmd-button-bar"></div>
@@ -379,46 +378,46 @@ if (isset($_GET['view'])) {
 						</div>
 						<p id="wmd-input_count"
 						   style="text-align:right"></p>
-					</label>
-					<div id="wmd-preview"
-					     class="wmd-panel markdownView"></div>
-				</li>
-			</ul>
-				</div>
+
+						<div id="wmd-preview"
+						     class="wmd-panel markdownView"></div>
+					</li>
+				</ul>
+			</div>
 			<div class="box_content">
-			<ul class="form">
-				<li>
-					<label for="imp_msg">
-						<p><?php echo $lang['214']; ?></p>
-						<p class="show_info info_yellow">
-							<?php echo $lang['215']; ?>
-						</p>
+				<ul class="form">
+					<li>
+						<label for="imp_msg">
+							<p><?php echo $lang['dashboard_submit_header_15']; ?></p>
+							<p class="description">
+								<?php echo $lang['dashboard_submit_desc_7']; ?>
+							</p>
+						</label>
 							<textarea
 									id="imp_msg"
 									name="important_note"
 									maxlength="200"
-									style="width:100%; min-height:100px;"
+									style="width:60%; min-height:100px;"
 									onkeyup="$('#imp_msg_count').text(200 - this.value.length+'/200')"><?php if ($viewType == 2) {
 									echo $data['important_note'];
 								} ?></textarea>
 						<p id="imp_msg_count"
 						   style="text-align:right"></p>
-					</label>
-				</li>
-			</ul>
-				</div>
-			<ul class="form">
-				<li>
-					<button class="btn btn_blue"
-					        type="submit"
-					        id="submit"
-					        style="padding:15px"
-					        onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
-					<p class="show_info info_red">
-						<?php echo $lang['123']; ?>
-					</p>
-				</li>
-			</ul>
+
+					</li>
+				</ul>
+			</div>
+			<div class="box_content">
+				<ul class="form">
+					<li>
+						<button class="btn btn_blue"
+						        type="submit"
+						        id="submit"
+						        style="padding:15px"
+						        onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<?php if ($viewType == 2): ?>
@@ -434,7 +433,7 @@ if (isset($_GET['view'])) {
 		       value="true"/>
 	<?php endif; ?>
 </form>
-<div id="clear"></div>
+<div class="space medium"></div>
 <div id="upView"
      class="modalBox iw-modalBox fadeIn animated"></div>
 
@@ -539,7 +538,7 @@ if (isset($_GET['view'])) {
 		$('#mbSupportedVer').val($selectedVerId);
 		if ($selectedVer != "") {
 			$('#mbVerFeedback').show();
-			$('#mbVerFeedback').html('<?php echo $lang['125'];?> <b>' + $selectedVer + '</b>');
+			$('#mbVerFeedback').html('<?php echo $lang['dashboard_msg_3'];?> <b>' + $selectedVer + '</b>');
 		} else {
 			$('#mbVerFeedback').hide();
 		}
@@ -575,14 +574,18 @@ if (isset($_GET['view'])) {
 		$('#add_button').click(function () { //Once add button is clicked
 			var randomId = randId();
 			var randPlaceholder = "http://i.imgur.com/" + randomId;
-			var fieldHTML = '<div class="screenshot_input_box"><div class="left_float"><input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/></div><div class="right_float"><a href="javascript:void(0);" id="remove_button" class="btn btn_red input_add" title="Add field"><i class="fa fa-minus-circle"></i>&nbsp;&nbsp;&nbsp; Remove</a></div><div class="right_float_2"><a href="javascript:void(0);"  onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green input_add" title="Select an image from your computer and upload to imgur"><i class="fa fa-upload"></i></a></div><div id="clear"></div></div>'; //New input field html
+			var fieldHTML = '<div class="flex_input col_2">' +
+					'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
+					'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
+					'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'].$lang['dashboard_submit_btn_4']; ?></a>' +
+					'</div>';
 			if (wrapper.children().length < maxField) { //Check maximum number of input fields
 				$(wrapper).append(fieldHTML); // Add field html
 			}
 		});
 		$(wrapper).on('click', '#remove_button', function (e) { //Once remove button is clicked
 			e.preventDefault();
-			$(this).parent('div').parent('div').remove(); //Remove field html
+			$(this).parent('div').remove(); //Remove field html
 		});
 	});
 

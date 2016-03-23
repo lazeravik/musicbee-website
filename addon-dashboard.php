@@ -15,7 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MusicBee Addon Dashboard</title>
+    <title><?php echo $lang['dashboard_title']; ?></title>
     <!--include common meta tags and stylesheets -->
     <?php include('./includes/meta&styles.php'); ?>
 
@@ -34,9 +34,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         <div class="infobar_wrapper">
             <div class="infobar_inner_wrapper">
                 <h2>
-                    <?php echo $lang['147']; ?>
+                    <?php echo $lang['dashboard_infobar_title']; ?>
                 </h2>
-                <p><?php echo $lang['148']; ?></p>
+                <p><?php echo $lang['dashboard_infobar_desc']; ?></p>
             </div>
         </div>
         <!-- AddOn page navigation top menu -->
@@ -45,14 +45,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                 <ul class="left">
                     <li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>
                     <li>
-                        <a href="#dashboard_overview" data-href="dashboard_overview"><?php echo $lang['225']; ?></a>
+                        <a href="#dashboard_overview" data-href="dashboard_overview"><?php echo $lang['dashboard_menu_1']; ?></a>
                     </li>
                     <li>
-                        <a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['226']; ?>
+                        <a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['dashboard_menu_2']; ?>
                         </a>
                     </li>
                     <li>
-                        <a href="#dashboard_submit" data-href="dashboard_submit"><?php echo $lang['227']; ?>
+                        <a href="#dashboard_submit" data-href="dashboard_submit"><?php echo $lang['dashboard_menu_3']; ?>
                         </a>
                     </li>
 

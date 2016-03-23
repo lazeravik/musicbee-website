@@ -1,44 +1,44 @@
 .main_content_wrapper {
 	display: flex;
-    min-height: 400px;
-    max-width: 1200px;
-    margin: 0px auto;
-    flex-wrap: wrap;
+	min-height: 400px;
+	max-width: 1200px;
+	margin: 0px auto;
+	flex-wrap: wrap;
 
-    &.col_1_2 {
-    	.sub_content_wrapper:nth-child(1) {
+	&.col_1_2 {
+		.sub_content_wrapper:nth-child(1) {
 			width: 33.33333333333333%;
 
 			@media screen and (max-width: $break-small) {
 				width: 100%;
 			}
 		}
-    	.sub_content_wrapper:nth-child(2) {
+		.sub_content_wrapper:nth-child(2) {
 			width: 66.66666666666667%;
 			@media screen and (max-width: $break-small) {
 				width: 100%;
 			}
 		}
-    }
+	}
 
-    &.col_2_1 {
-    	.sub_content_wrapper:nth-child(1) {
+	&.col_2_1 {
+		.sub_content_wrapper:nth-child(1) {
 			width: 66.66666666666667%;
 
 			@media screen and (max-width: $break-small) {
 				width: 100%;
 			}
 		}
-    	.sub_content_wrapper:nth-child(2) {
+		.sub_content_wrapper:nth-child(2) {
 			width: 33.33333333333333%;
 			@media screen and (max-width: $break-small) {
 				width: 100%;
 			}
 		}
-    }
+	}
 
-    &.col_1{
-    	.sub_content_wrapper {
+	&.col_1{
+		.sub_content_wrapper {
 			width: 100%;
 			@media screen and (max-width: $break-small) {
 				width: 100%;
@@ -46,8 +46,8 @@
 		}
 	}
 
-    &.col_2{
-    	.sub_content_wrapper {
+	&.col_2{
+		.sub_content_wrapper {
 			width: 50%;
 			@media screen and (max-width: $break-small) {
 				width: 100%;
@@ -55,8 +55,8 @@
 		}
 	}
 
-    &.col_3{
-    	.sub_content_wrapper {
+	&.col_3{
+		.sub_content_wrapper {
 			width: 33.33333333333333%;
 			@media screen and (max-width: $break-small) {
 				width: 100%;
@@ -104,29 +104,59 @@
 
 		ul.form {
 			padding: 10px 20px;
-    		margin: 0px;
+			margin: 0px;
 
-    		li {
-    			list-style: none;
-    			display: flex;
-    			flex-wrap: wrap;
-    			padding: 10px 0px;
+			.link_input {
+				width: 60%;
 
-    			label {
-    				width: 40%;
-    				padding-right: 10px;
-   					box-sizing: border-box;
+				.flex_input {
+					display: flex;
+					flex-wrap: wrap;
+					margin: 0px 0px 5px 0px;
 
-   					.description {
-   						color: #A9A9A9;
-   						margin: 0px;
-   					}
+					&.col_3 {
+
+					}
+
+					&.col_2 {
+						input {
+							width: 80%;
+						}
+
+						.btn {
+							width: 20%;
+							margin: 0px;
+						}
+					}
+
+					.btn {
+						min-width: inherit;
+						margin: 0px 0px 0px 5px;
+					}
+				}
+			}
+
+			li {
+				list-style: none;
+				display: flex;
+				flex-wrap: wrap;
+				padding: 10px 0px;
+
+				label {
+					width: 40%;
+					padding-right: 10px;
+					box-sizing: border-box;
+
+					.description {
+						color: #A9A9A9;
+						margin: 0px;
+					}
 				}
 
-    			input, select {
-    				width: 60%;
-    				align-self: flex-start;
-    			}
+				input, select {
+					width: 60%;
+					align-self: center;
+				}
 			}
 		}
 

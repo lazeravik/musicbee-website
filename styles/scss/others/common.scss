@@ -30,6 +30,7 @@ a {
 	border-bottom : 1px solid rgba(255, 255, 255, 0.12);
 	border-color  : rgba(148, 148, 148, 0.29);
 	background    : rgba(255, 255, 255, 0);
+	width: 100%;
 }
 
 .show_info {
@@ -74,8 +75,8 @@ a {
 
 	&.info_silver {
 		background: #F7F7F7;
-    	color: #333;
-    	text-shadow: none;
+		color: #333;
+		text-shadow: none;
 	}
 
 	.description {
@@ -194,6 +195,11 @@ a {
 		background : #464646;
 		margin     : 0px;
 	}
+
+	#copy_error {
+		display: inline-block;
+		margin-left: 10px;
+	}
 }
 
 #disable_overlay {
@@ -235,3 +241,8 @@ a {
 		}
 	}
 }
+
+.wmd-panel {
+    width: 100%;
+}
+

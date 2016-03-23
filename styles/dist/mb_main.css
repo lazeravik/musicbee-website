@@ -446,6 +446,7 @@ a:active, a:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   border-color: rgba(148, 148, 148, 0.29);
   background: rgba(255, 255, 255, 0);
+  width: 100%;
 }
 
 .show_info {
@@ -610,6 +611,11 @@ a:active, a:hover {
   margin: 0px;
 }
 
+.notify #copy_error {
+  display: inline-block;
+  margin-left: 10px;
+}
+
 #disable_overlay {
   position: fixed;
   width: 100%;
@@ -647,6 +653,10 @@ a:active, a:hover {
   background: rgba(185, 185, 185, 0.26);
   color: #333;
   box-shadow: inset 2px 2px 0px rgba(60, 60, 60, 0.5), inset -2px -2px 0px rgba(60, 60, 60, 0.5);
+}
+
+.wmd-panel {
+  width: 100%;
 }
 
 .spinner {
@@ -1812,6 +1822,30 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   margin: 0px;
 }
 
+.sub_content_wrapper .box_content ul.form .link_input {
+  width: 60%;
+}
+
+.sub_content_wrapper .box_content ul.form .link_input .flex_input {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px 0px 5px 0px;
+}
+
+.sub_content_wrapper .box_content ul.form .link_input .flex_input.col_2 input {
+  width: 80%;
+}
+
+.sub_content_wrapper .box_content ul.form .link_input .flex_input.col_2 .btn {
+  width: 20%;
+  margin: 0px;
+}
+
+.sub_content_wrapper .box_content ul.form .link_input .flex_input .btn {
+  min-width: inherit;
+  margin: 0px 0px 0px 5px;
+}
+
 .sub_content_wrapper .box_content ul.form li {
   list-style: none;
   display: flex;
@@ -1832,7 +1866,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .sub_content_wrapper .box_content ul.form li input, .sub_content_wrapper .box_content ul.form li select {
   width: 60%;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .sub_content_wrapper .box_content::after {
@@ -2328,6 +2362,15 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .link_list li a:hover {
   background: #eee;
   text-decoration: none;
+}
+
+.remove_img_btn {
+  background: #EFEFEF !important;
+  color: #333 !important;
+  padding: 2px 5px !important;
+  margin: 2px 0px 10px 0px !important;
+  box-shadow: none !important;
+  width: inherit !important;
 }
 
 @media screen and (max-width: 800px) {
