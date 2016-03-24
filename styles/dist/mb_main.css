@@ -447,6 +447,7 @@ a:active, a:hover {
   border-color: rgba(148, 148, 148, 0.29);
   background: rgba(255, 255, 255, 0);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .show_info {
@@ -659,6 +660,44 @@ a:active, a:hover {
   width: 100%;
 }
 
+.tagsinput {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid #d7d7d7;
+  box-sizing: border-box;
+  width: 60%;
+  transition: linear all 0.15s;
+}
+
+.tagsinput .tag {
+  align-self: center;
+  padding: 5px 10px;
+  margin: 5px 5px;
+  border: 1px solid #D7D7D7;
+  background: #FFFBDC;
+  border-radius: 2px;
+}
+
+.tagsinput .tag a::after {
+  content: "\f00d";
+  font-family: FontAwesome;
+}
+
+.tagsinput #tag_addTag input {
+  border: none;
+  padding: 10px 5px;
+  margin: 2px;
+}
+
+.tagsinput #tag_addTag input.not_valid {
+  background: #FBD8DB !important;
+  color: #90111A !important;
+}
+
+.tagsinput:hover {
+  border: 2px solid #ff9800;
+}
+
 .spinner {
   width: 30px;
   height: 30px;
@@ -705,6 +744,173 @@ a:active, a:hover {
   }
 }
 
+.ms-parent {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+.ms-choice {
+  background: url("../../img/select-arrows.svg") no-repeat right 10px center;
+  padding: 0;
+  padding-right: 20px;
+  display: block;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #d7d7d7;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 40px;
+  color: #444;
+  text-decoration: none;
+  background-color: #fff;
+  outline: none;
+}
+
+.ms-choice:hover {
+  display: block;
+  border: 2px solid #ff9800;
+}
+
+.ms-choice.disabled {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+
+.ms-choice > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  padding-left: 8px;
+}
+
+.ms-choice > span.placeholder {
+  color: #999;
+}
+
+.ms-drop {
+  width: 100%;
+  overflow: hidden;
+  display: none;
+  margin-top: -6px;
+  padding: 0;
+  position: absolute;
+  z-index: 1000;
+  background: #fff;
+  color: #000;
+  border: 2px solid #404040;
+  box-sizing: border-box;
+}
+
+.ms-drop.bottom {
+  top: 100%;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.ms-drop.top {
+  bottom: 100%;
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.ms-drop ul {
+  overflow: auto;
+  margin: 0;
+  padding: 5px 8px;
+}
+
+.ms-drop ul > li {
+  list-style: none;
+  display: list-item;
+  background-image: none;
+  position: static;
+}
+
+.ms-drop ul > li .disabled {
+  opacity: .35;
+  filter: Alpha(Opacity=35);
+}
+
+.ms-drop ul > li.multiple {
+  display: block;
+  float: left;
+}
+
+.ms-drop ul > li.multiple label {
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-drop ul > li.group {
+  clear: both;
+}
+
+.ms-drop ul > li label {
+  font-weight: normal;
+  display: block;
+  white-space: nowrap;
+}
+
+.ms-drop ul > li label.optgroup {
+  font-weight: bold;
+}
+
+.ms-drop ul > li input {
+  width: initial !important;
+}
+
+.ms-drop ul > li span {
+  margin: 5px;
+}
+
+.ms-drop input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+.ms-drop .ms-no-results {
+  display: none;
+}
+
+.ms-search {
+  display: inline-block;
+  margin: 0;
+  min-height: 26px;
+  padding: 4px;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 10000;
+  box-sizing: border-box;
+}
+
+.ms-search input {
+  width: 100%;
+  height: auto !important;
+  min-height: 24px;
+  padding: 0 20px 0 5px;
+  margin: 0;
+  outline: 0;
+  font-family: sans-serif;
+  font-size: 1em;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff no-repeat 100% -22px;
+  background: no-repeat 100% -22px, linear-gradient(top, #fff 85%, #eeeeee 99%);
+  box-sizing: border-box;
+}
+
 /*================================================================================================================*\\
     Style for input fields such as buttons, links, checkboxes etc
 \*================================================================================================================*/
@@ -736,6 +942,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 select {
+  background: url("../../img/select-arrows.svg") no-repeat right 10px center;
   padding-right: 20px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1784,6 +1991,10 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   background: #fff;
 }
 
+.sub_content_wrapper .box_content .info_text {
+  padding: 20px;
+}
+
 .sub_content_wrapper .box_content .info_table_wrap {
   display: block;
   box-sizing: border-box;
@@ -2326,6 +2537,10 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   min-width: inherit;
 }
 
+.record tr td.status {
+  width: 15%;
+}
+
 .record tr.record_removed {
   background: #D45B53;
   color: #fff;
@@ -2371,6 +2586,15 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   margin: 2px 0px 10px 0px !important;
   box-shadow: none !important;
   width: inherit !important;
+}
+
+#mbVerFeedback {
+  width: 100%;
+}
+
+.counter {
+  text-align: right;
+  width: 100%;
 }
 
 @media screen and (max-width: 800px) {
@@ -2644,6 +2868,14 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 #wmd-button-bar {
   width: 100%;
   background-color: #fff;
+}
+
+#wmd-button-bar #wmd-button-row .editor_btn {
+  padding: 15px 15px;
+}
+
+#wmd-button-bar #wmd-button-row .editor_btn:hover {
+  background: #ff9800;
 }
 
 #wmd-input {

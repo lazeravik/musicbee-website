@@ -19,6 +19,10 @@
 					min-width: inherit;
 				}
 			}
+
+			&.status {
+				width: 15%;
+			}
 		}
 
 		&.record_removed {
@@ -74,6 +78,15 @@
     margin: 2px 0px 10px 0px !important;
     box-shadow: none !important;
     width: inherit !important;
+}
+
+#mbVerFeedback {
+	width: 100%;
+}
+
+.counter {
+	text-align: right;
+	width: 100%;
 }
 
 @media screen and(max-width: $break-small) {

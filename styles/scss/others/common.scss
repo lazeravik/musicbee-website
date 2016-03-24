@@ -31,6 +31,7 @@ a {
 	border-color  : rgba(148, 148, 148, 0.29);
 	background    : rgba(255, 255, 255, 0);
 	width: 100%;
+	box-sizing: border-box;
 }
 
 .show_info {
@@ -243,6 +244,45 @@ a {
 }
 
 .wmd-panel {
-    width: 100%;
+	width: 100%;
 }
 
+.tagsinput {
+	display: flex;
+	flex-wrap: wrap;
+	border: 2px solid #d7d7d7;
+	box-sizing: border-box;
+	width: 60%;
+	transition: linear all 0.15s;
+
+	.tag {
+		align-self: center;
+		padding: 5px 10px;
+		margin: 5px 5px;
+		border: 1px solid #D7D7D7;
+		background: #FFFBDC;
+		border-radius: 2px;
+
+		a {
+			&::after {
+				content: "\f00d";
+				font-family: FontAwesome;
+			}
+		}
+	}
+	#tag_addTag {
+		input {
+			border: none;
+			padding: 10px 5px;
+			margin: 2px;
+			&.not_valid {
+				background: #FBD8DB !important;
+				color: #90111A !important;
+			}
+		}
+	}
+
+	&:hover {
+		border: 2px solid #ff9800;
+	}
+}

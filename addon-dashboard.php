@@ -87,11 +87,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     ?>
 
     <script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/markdown-it.min.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/wmdMod.js"></script>
+    <script src="<?php echo $siteUrl; ?>scripts/markdownEditor.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
     <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 

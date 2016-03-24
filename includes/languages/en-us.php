@@ -83,6 +83,13 @@ $lang['description_4'] = 'Equaliser presets are great way to make your music sou
 $lang['description_5'] = 'Get a full theater mode experience for MusicBee';
 $lang['description_6'] = 'Other useful add-ons for enhancing your MusicBee experience';
 
+/* Addon status*/
+$lang['addon_status_1'] = '<i class="fa fa-history"></i> Waiting';
+$lang['addon_status_2'] = '<i class="fa fa-check-circle-o"></i> Approved';
+$lang['addon_status_3'] = 'Rejected';
+$lang['addon_status_4'] = 'Deleted';
+$lang['addon_status_5'] = 'Unknown';
+
 /* Index.php lang */
 $lang['home_1'] = 'MusicBee';
 $lang['home_2'] = 'The Ultimate Music Manager and Player';
@@ -212,6 +219,7 @@ $lang['dashboard_submit_header_12'] = 'Screenshots of your add-on *';
 $lang['dashboard_submit_header_13'] = 'Support & Discussion Forum Link';
 $lang['dashboard_submit_header_14'] = 'Readme Note';
 $lang['dashboard_submit_header_15'] = 'Add important note for user';
+$lang['dashboard_submit_header_16'] = 'Add-on type *';
 
 $lang['dashboard_submit_desc_1'] = 'If your rank is newbie, you will need moderator approval. Also post your add-on on the forum first to get peoples attention';
 $lang['dashboard_submit_desc_2'] = 'You don\'t need admin/mod approval for updates, but malicious update can result permanent ban';
@@ -235,6 +243,10 @@ $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to
 $lang['dashboard_msg_1'] = 'Removed Permanently!';
 $lang['dashboard_msg_2'] = 'Are you sure you want to permanently remove this addon?\\n\\nyou can\'t restore it once it is deleted!';
 $lang['dashboard_msg_3'] = 'This Add-on will Support:';
+$lang['dashboard_msg_4'] = 'You have reached maximum tag input, any more tag will be removed!';
+
+$lang['dashboard_msg_5'] = "Your add-on is waiting to be reviewed by our Mods/Admin.";
+$lang['dashboard_msg_6'] = "Since you are an Elite User or Mod your add-on is successfully submitted and available for public to download!";
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
@@ -251,12 +263,12 @@ $lang['dashboard_err_7'] = '<b>ERROR:</b> Description exceeds character limit!';
 $lang['dashboard_err_8'] = '<b>ERROR:</b> Maximum 10 Tags are allowed! Please remove unnecessary tags.';
 $lang['dashboard_err_9'] = '<b>ERROR:</b> Readme Note exceeds character limit!';
 $lang['dashboard_err_10'] = '<b>ERROR:</b> There are more than 10 add-on that needs approval, before you can submit more!';
-$lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_err_12'] = '<b>ERROR:</b> The Add-on is submitted by someone else.<br>You don\'t have enough permission to modify it!';
 $lang['dashboard_err_13'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
 $lang['dashboard_err_14'] = '<b>ERROR:</b> For some unknown reason the add-on could not be deleted. Please report this in forum.';
 $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
-$lang['dashboard_err_16'] = '<b>ERROR:</b> Choose a valid accent color!';
+
+$lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
 
 

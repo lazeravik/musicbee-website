@@ -252,51 +252,6 @@ $main_menu = array(
 	),
 );
 
-/** @var addon color $color_codes */
-$color_codes = array(
-	"default"   => array(
-		"name"  => "Default",
-		"value" => "#607D8B",
-	),
-	"red"       => array(
-		"name"  => "Red",
-		"value" => "#F44336",
-	),
-	"green"     => array(
-		"name"  => "Green",
-		"value" => "#4CAF50",
-	),
-	"dark-grey" => array(
-		"name"  => "Dark Grey",
-		"value" => "#3A3A3A",
-	),
-	"pink"      => array(
-		"name"  => "Pink",
-		"value" => "#D042D2",
-	),
-	"violet"    => array(
-		"name"  => "Violet",
-		"value" => "#A000E2",
-	),
-	"navy-blue" => array(
-		"name"  => "Navy Blue",
-		"value" => "#4152B5",
-	),
-	"blue"      => array(
-		"name"  => "Blue",
-		"value" => "#2196F3",
-	),
-	"yellow"    => array(
-		"name"  => "Yellow",
-		"value" => "#FF9800",
-	),
-	"brown"     => array(
-		"name"  => "Brown",
-		"value" => "#9A5D46",
-	),
-);
-
-
 /** @var database connection $connection */
 $connection = null;
 

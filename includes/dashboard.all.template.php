@@ -112,7 +112,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<td>
 								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
 							</td>
-							<td>
+							<td class="status">
 								<?php echo Validation::getStatus ($addon['status']); ?>
 							</td>
 							<td class="action_input">
@@ -196,6 +196,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			if ($('#ajax_area').children().length > 0) {
 				$('#ajax_area').html(data);
 				hideNotification();
+				gotoTop();
 			}
 		}).fail(function (jqXHR, textStatus, errorThrown) {
 			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");

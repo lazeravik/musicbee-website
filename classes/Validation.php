@@ -107,21 +107,22 @@
 
 		public static function getStatus($id)
 		{
+			global $lang;
 			switch ($id) {
 				case '0':
-					return "Waiting for Approval";
+					return $lang['addon_status_1'];
 					break;
 				case '1':
-					return "Approved";
+					return $lang['addon_status_2'];
 					break;
 				case '2':
-					return "Rejected";
+					return $lang['addon_status_3'];
 					break;
 				case '3':
-					return "Deleted";
+					return $lang['addon_status_4'];
 					break;
 				default:
-					return "Unknown";
+					return $lang['addon_status_5'];
 					break;
 			}
 		}

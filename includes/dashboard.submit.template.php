@@ -29,9 +29,33 @@ if (isset($_GET['view'])) {
 
 	}
 } else {
-	$viewType = 0; //update mode
+	$viewType = 0; //submit mode
 }
 ?>
+
+<?php if(isset($_GET['action'])):
+	if($_GET['action']=="submit_success"): ?>
+<div class="main_content_wrapper col_2_1">
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_green custom">
+				<h3><?php echo $lang['dashboard_err_11']; ?></h3>
+			</span>
+			<?php if($_SESSION['memberinfo']['rank_raw'] > 5): ?>
+				<p class="info_text">
+					<?php echo $lang['dashboard_msg_5']; ?>
+				</p>
+			<?php else: ?>
+				<p class="info_text">
+					<?php echo $lang['dashboard_msg_6']; ?>
+				</p>
+			<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+<?php exit(); endif; endif; ?>
+
 <form action="../includes/dashboard.tasks.php"
       method="post" data-autosubmit>
 
@@ -59,9 +83,7 @@ if (isset($_GET['view'])) {
 				<ul class="form">
 					<li>
 						<label for="type">
-							<p>Addon
-								type
-								*</p>
+							<p><?php echo $lang['dashboard_submit_header_16']; ?></p>
 						</label>
 						<select name="type"
 						        id="type">
@@ -82,25 +104,6 @@ if (isset($_GET['view'])) {
 
 					</li>
 				</ul>
-				<script type="text/javascript">
-					$(document).ready(function () {
-						showSpecial();
-					});
-					$('#type').on('change', function () {
-						showSpecial();
-						console.log($('#type').val());
-					});
-					function showSpecial() {
-						if ($('#type').val() == "skins") {
-							$('#addon_special').removeAttr('style');
-							$('#addon_special_cover').removeAttr('style');
-						}
-						else {
-							$('#addon_special').css('display', 'none');
-							$('#addon_special_cover').css('display', 'none');
-						}
-					}
-				</script>
 			</div>
 
 			<div class="box_content">
@@ -136,8 +139,7 @@ if (isset($_GET['view'])) {
 				          onkeyup="$('#description_count').text(600 - this.value.length+'/600')"><?php if ($viewType == 2) {
 						echo $data['short_description'];
 					} ?></textarea>
-						<p id="description_count"
-						   style="text-align:right"></p>
+						<p id="description_count" class="counter"></p>
 
 					</li>
 					<li>
@@ -174,7 +176,6 @@ if (isset($_GET['view'])) {
 					<li>
 						<label for="addonver">
 							<p><?php echo $lang['dashboard_submit_header_8']; ?></p>
-							<p class="description"><?php echo $lang['dashboard_submit_desc_7']; ?></p>
 						</label>
 						<input id="addonver"
 						       value
@@ -194,38 +195,15 @@ if (isset($_GET['view'])) {
 							<p><?php echo $lang['dashboard_submit_header_9']; ?></p>
 						</label>
 						<input id="tag"
-						       maxlength="150"
 						       name="tag"
 						       type="text"
 						       placeholder="eg. metro, modern, elegant"
-						       value="<?php if ($viewType == 2) {
-							       echo $data['tags'];
-						       } ?>"/>
+						       value="<?php if ($viewType == 2) {echo $data['tags'];} ?>"/>
 
 					</li>
-					<li id="addon_special"
-					    style="display:none;">
-						<label for="color">
-							<p>Skin
-								accent
-								color</p>
-							<?php
-
-							foreach ($color_codes as $key => $color):
-								$color_selection_text = "";
-								if ($viewType == 2) {
-									if (Format::Slug ($data['COLOR_ID']) == Format::Slug ($color['name'])) {
-										$color_selection_text = "checked";
-									}
-								} ?>
-								<input type="radio"
-								       name="color"
-								       id="color"
-								       value="<?php echo Format::Slug ($color['name']); ?>"
-								       style="background:<?php echo $color['value']; ?>" <?php echo $color_selection_text; ?>>
-							<?php endforeach; ?>
-						</label>
-					</li>
+					<p id="mbTagFeedback"
+					   class="fadeInUp animated show_info warning"
+					   style="display:none"></p>
 				</ul>
 			</div>
 			<div class="box_content">
@@ -298,7 +276,7 @@ if (isset($_GET['view'])) {
 											<?php echo $lang['dashboard_submit_btn_1']; ?>
 										</button>
 										<?php if ($key != 0): ?>
-											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'].$lang['dashboard_submit_btn_4']; ?></a>
+											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>
 										<?php endif; ?>
 									</div>
 
@@ -376,8 +354,7 @@ if (isset($_GET['view'])) {
 										echo $data['readme_content'];
 									} ?></textarea>
 						</div>
-						<p id="wmd-input_count"
-						   style="text-align:right"></p>
+						<p id="wmd-input_count" class="counter"></p>
 
 						<div id="wmd-preview"
 						     class="wmd-panel markdownView"></div>
@@ -401,8 +378,7 @@ if (isset($_GET['view'])) {
 									onkeyup="$('#imp_msg_count').text(200 - this.value.length+'/200')"><?php if ($viewType == 2) {
 									echo $data['important_note'];
 								} ?></textarea>
-						<p id="imp_msg_count"
-						   style="text-align:right"></p>
+						<p id="imp_msg_count" class="counter"></p>
 
 					</li>
 				</ul>
@@ -437,7 +413,19 @@ if (isset($_GET['view'])) {
 <div id="upView"
      class="modalBox iw-modalBox fadeIn animated"></div>
 
+<script src="<?php echo $siteUrl; ?>scripts/multiple-select.js"></script>
+<script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
 <script type="text/javascript">
+
+	$('#multipleVer').multipleSelect({
+				placeholder: "Select targetted MusicBee Version",
+				selectAll: false,
+				width: "60%",
+			}<?php if ($viewType == 2): ?>,
+			"setSelects", [<?php echo $data['supported_mbversion']; ?>]
+			<?php endif; ?>
+	);
+
 	//generate random id for image input field
 	function randId() {
 		return Math.random().toString(36).substring(7);
@@ -464,10 +452,7 @@ if (isset($_GET['view'])) {
 						$('#upView').html("<div class=\"sk-circle\"> <div class=\"sk-circle1 sk-child\"></div> <div class=\"sk-circle2 sk-child\"></div> <div class=\"sk-circle3 sk-child\"></div> <div class=\"sk-circle4 sk-child\"></div> <div class=\"sk-circle5 sk-child\"></div> <div class=\"sk-circle6 sk-child\"></div> <div class=\"sk-circle7 sk-child\"></div> <div class=\"sk-circle8 sk-child\"></div> <div class=\"sk-circle9 sk-child\"></div> <div class=\"sk-circle10 sk-child\"></div> <div class=\"sk-circle11 sk-child\"></div> <div class=\"sk-circle12 sk-child\"></div> </div>"); //show loading signal maybe!
 						if (upType == "img") {
 							loadImgurUpload(id);
-						} else if (upType == "file") {
-							loadMediafireUpload(id);
 						}
-
 					},
 					onClose: function () {
 						<?php if($viewType == 2): ?>
@@ -504,28 +489,11 @@ if (isset($_GET['view'])) {
 		});
 	}
 
-	function loadMediafireUpload(id) {
-		$.fx.off = true; // turn off jquery animation effects
-		$.ajax({
-			url: '../includes/upload.mediafire.php',
-			cache: false,
-			type: "POST",
-			data: {id: "" + id + ""}
-		}).done(function (data) {
-			if ($('#upView').children().length > 0) {
-				$('#upView').html(data);
-				hideNotification();
-			}
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-		}).always(function () {
-		});
-	}
 	
 	$("#multipleVer").change(addVer);
 	function addVer() {
-		$selectedVer = "";
-		$selectedVerId = "";
+		var $selectedVer = "";
+		var $selectedVerId = "";
 		$("#multipleVer > option:selected").each(function (index, el) {
 			if ($selectedVer == "") {
 				$selectedVer = el.text;
@@ -547,17 +515,24 @@ if (isset($_GET['view'])) {
 
 	$(function () {
 		$('#tag').tagsInput({
-			'width': 'auto',
+			'width': 'none',
 			'height': 'auto',
 			'interactive': true,
 			'minChars': 2,
 			'defaultText': 'add a tag',
-			'removeWithBackspace': true,
-			'delimiter': [',', ';'],
-			'maxChars': 10, // if not provided there is no limit
-			'placeholderColor': '#333'
+			'maxChars': 15,
+			'onChange': tag_limit_checker,
 		});
 	});
+
+	function tag_limit_checker() {
+		if ($('#tag_tagsinput').children('.tag').length >= 10) {
+			$('#mbTagFeedback').show();
+			$('#mbTagFeedback').html('<?php echo $lang['dashboard_msg_4'];?>');
+		} else {
+			$('#mbTagFeedback').hide();
+		}
+	}
 
 	$(document).ready(function () {
 		<?php
@@ -577,7 +552,7 @@ if (isset($_GET['view'])) {
 			var fieldHTML = '<div class="flex_input col_2">' +
 					'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
 					'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
-					'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'].$lang['dashboard_submit_btn_4']; ?></a>' +
+					'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>' +
 					'</div>';
 			if (wrapper.children().length < maxField) { //Check maximum number of input fields
 				$(wrapper).append(fieldHTML); // Add field html
@@ -628,7 +603,7 @@ if (isset($_GET['view'])) {
 	<?php else: ?>
 	function submitted() {
 		var $generatedUrl = generatePageUrl((window.location.hash).replace('#', ''));
-		loadPageGet($generatedUrl);
+		loadPageGet($generatedUrl, "action=submit_success");
 	}
 	<?php endif; ?>
 </script>

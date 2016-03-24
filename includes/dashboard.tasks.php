@@ -99,8 +99,6 @@
 					echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "submitted", "origin": "dashboard.task line 99"}';
 				}
 			}
-
-
 		} else {
 			//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
 			die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
@@ -128,7 +126,7 @@
 	 */
 	function validateInput()
 	{
-		global $main_menu, $lang, $color_codes;
+		global $main_menu, $lang;
 
 		if (!array_key_exists($_POST['type'], $main_menu['add-ons']['sub_menu'])) {
 			die('{"status": "0", "data": "' . $lang['dashboard_err_4'] . '"}');
@@ -141,12 +139,7 @@
 			die('{"status": "0", "data": "' . $lang['dashboard_err_7'] . '"}');
 		}
 		if (!Validation::arrayLimit($_POST['tag'], 10)) {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_8'] . '"}');
-		}
-		if (isset($_POST['color'])) {
-			if (!array_key_exists($_POST['color'], $color_codes)) {
-				die('{"status": "0", "data": "' . $lang['dashboard_err_16'] . '"}');
-			}
+			die('{"status": "0", "data": "' . $lang['dashboard_err_8'].$_POST['tag'] . '"}');
 		}
 		if (isset($_POST['readme'])) {
 			if (!Validation::charLimit($_POST['readme'], 5000))

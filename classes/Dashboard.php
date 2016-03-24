@@ -93,7 +93,6 @@
 			$dlink = (isset($_POST['dlink'])) ? $_POST['dlink'] : "";
 			$description = (isset($_POST['description'])) ? $_POST['description'] : "";
 			$addonver = (!empty($_POST['addonver'])) ? $_POST['addonver'] : "1.0";
-			$color = (isset($_POST['color'])) ? $_POST['color'] : "default";
 
 			$publish_date = date("F j, Y"); //current date
 			$update_date = date("F j, Y"); //current date
@@ -105,7 +104,6 @@
 						INTO '.SITE_ADDON.'
 						SET
 						ID_AUTHOR = :id_author,
-						COLOR_ID = :color,
 						tags = :tags,
 						supported_mbversion = :supported_mbversion,
 						addon_title = :addon_title,
@@ -126,7 +124,6 @@
 					} elseif ($type == "update") {
 						$sql = 'UPDATE '.SITE_ADDON.'
 						SET
-						COLOR_ID = :color,
 						tags = :tags,
 						supported_mbversion = :supported_mbversion,
 						addon_title = :addon_title,
@@ -170,7 +167,6 @@
 					$statement->bindValue(':is_beta', "0");
 					$statement->bindValue(':status', $status);
 					$statement->bindValue(':lastStatus_moderatedBy', $lastModeratedBy);
-					$statement->bindValue(':color', htmlspecialchars($color));
 					$statement->execute();
 				} catch (Exception $e) {
 					return false;
