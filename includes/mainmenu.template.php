@@ -9,16 +9,7 @@
 	 * Spelling mistakes and fixes from phred and other community memebers.
 	 */
 
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-	if (count($params) > 1):?>
-		<style>
-			#<?php echo htmlspecialchars($params[1]);?>_active_page {
-				background  : rgba(255, 255, 255, 0.1) !important;
-				color       : #FFA500 !important;
-				text-shadow : 1px 1px 1px rgba(80, 80, 80, 0.3) !important;
-			}
-		</style>
-	<?php endif; ?>
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php'; ?>
 <?php
 
 	//var_dump($_SESSION['memberinfo']);

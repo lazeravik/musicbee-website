@@ -92,10 +92,22 @@ $info_bar_max_width : 1200px;
 					li {
 						float: left;
 						width: 100%;
+						
+						img.user_avatar {
+							width: 50px;
+							height: 50px;
+							margin-right: 10px;
+							border-radius: 999px;
+						}
+						.user_info {
+							display: inline-block;
+						}
+
 						a {
 							width: 100%;
 							padding: 15px 15px;
-							display: block;
+							display: flex;
+							flex-wrap: wrap;
 							box-sizing: border-box;
 							text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
 							box-shadow: none;
@@ -209,6 +221,7 @@ $info_bar_max_width : 1200px;
 					li {
 						float: left;
 						width: 100%;
+
 						a {
 							width: 100%;
 							padding: 15px;
@@ -224,6 +237,7 @@ $info_bar_max_width : 1200px;
 								color: white;
 								box-shadow: none;
 							}
+
 						}
 					}
 

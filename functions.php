@@ -75,10 +75,7 @@ if (!$context['user']['is_guest']) {
 			$permission = 2; //permission level 2 means the member is mod
 		}
 		//Create an Addon dashboard account for the user
-		if ($memberData->createDashboardAccount ($context['user']['id'],
-		                                         $permission,
-		                                         $context['user']['name'])
-		) {
+		if ($memberData->createDashboardAccount ($context['user']['id'], $permission, $context['user']['name'])) {
 			$getmemberinfo = $memberData->memberInfo ($context['user']['id']);
 		} else {
 
@@ -97,6 +94,8 @@ if (!$context['user']['is_guest']) {
 } else {
 	$_SESSION['memberinfo'] = null;
 }
+
+
 
 
 /// page location variable starts here
@@ -153,103 +152,112 @@ $dashboard_all_view_range = 15;
  * @var URI $params
  * creates an array from the URI
  */
-$params = array_map ('strtolower',
-                     explode ("/",
-                              $_SERVER['REQUEST_URI']));
+$params = array_map ('strtolower', explode ("/", $_SERVER['REQUEST_URI']));
 
+
+$user_avatar = ($context['user']['avatar']!=null)? $context['user']['avatar']['href'] : $siteUrl.'img/musicbee_icon.png';
 
 /**
  * MainMenu generator
  **/
 $main_menu = array(
-	'member-panel' => array(
-		'title'       => $lang['6'],
-		'href'        => "javascript:void(0)",
-		'restriction' => 'login',
-		'sub_menu'    => array(
-			'admin-panel' => array(
-				'title'       => $lang['7'],
-				'href'        => $link['admin']['admin-panel'],
-				'icon'        => $lang['20'],
-				'restriction' => 'admin',
-			),
-			'forum-admin' => array(
-				'title'       => $lang['8'],
-				'href'        => $link['admin']['forum-panel'],
-				'icon'        => $lang['21'],
-				'restriction' => 'admin',
-			),
-			'web-admin'   => array(
+		'web-admin'    => array(
 				'title' => $lang['9'],
 				'href'  => $link['addon']['dashboard'],
-				'icon'  => $lang['22'],
-			),
-			'line'        => array(
-				'title' => $lang['line'],
-			),
-			'sign-out'    => array(
-				'title' => $lang['10'],
-				'href'  => $link['logout'],
-				'icon'  => $lang['23'],
-			),
+				'restriction' => 'login',
+				'sub_menu' => array(),
 		),
-	),
-	'home'         => array(
-		'title'    => $lang['1'],
-		'href'     => $link['home'],
-		'sub_menu' => array(),
-	),
-	'download'     => array(
-		'title'    => $lang['2'],
-		'href'     => $link['download'],
-		'sub_menu' => array(),
-	),
-	'add-ons'      => array(
-		'title'    => $lang['3'],
-		'href'     => $link['addon']['home'],
-		'sub_menu' => array(
-			'skins'        => array(
-				'title' => $lang['11'],
-				'href'  => $link['addon']['home'] . "s/?q=&type=skins&order=latest",
-				'icon'  => $lang['24'],
-				'desc'  => $lang['description_1'],
-			),
-			'plugins'      => array(
-				'title' => $lang['12'],
-				'href'  => $link['addon']['home'] . "s/?q=&type=plugins&order=latest",
-				'icon'  => $lang['25'],
-				'desc'  => $lang['description_2'],
-			),
-			'visualiser'   => array(
-				'title' => $lang['13'],
-				'href'  => $link['addon']['home'] . "s/?q=&type=visualiser&order=latest",
-				'icon'  => $lang['26'],
-				'desc'  => $lang['description_3'],
-			),
-			'theater-mode' => array(
-				'title' => $lang['15'],
-				'href'  => $link['addon']['home'] . "s/?q=&type=theater-mode&order=latest",
-				'icon'  => $lang['28'],
-				'desc'  => $lang['description_5'],
-			),
-			'misc'         => array(
-				'title' => $lang['16'],
-				'href'  => $link['addon']['home'] . "s/?q=&type=misc&order=latest",
-				'icon'  => $lang['29'],
-				'desc'  => $lang['description_6'],
-			),
+		'member-panel' => array(
+				'title'       => $lang['6'],
+				'href'        => "javascript:void(0)",
+				'restriction' => 'login',
+				'sub_menu'    => array(
+						'user-profile' => array(
+								'title'       => '<p class="user_info">'.$lang['19'].$context['user']['username'].'</p>',
+								'href'        => $link['forum'].'?action=profile',
+								'icon'        => '<img src="'.$user_avatar.'" class="user_avatar">',
+						),
+						'line1'        => array(
+								'title' => $lang['line'],
+						),
+						'admin-panel' => array(
+								'title'       => $lang['7'],
+								'href'        => $link['admin']['admin-panel'],
+								'icon'        => $lang['20'],
+								'restriction' => 'admin',
+						),
+						'forum-admin' => array(
+								'title'       => $lang['8'],
+								'href'        => $link['admin']['forum-panel'],
+								'icon'        => $lang['21'],
+								'restriction' => 'admin',
+						),
+						'line2'        => array(
+								'title' => $lang['line'],
+						),
+						'sign-out'    => array(
+								'title' => $lang['10'],
+								'href'  => $link['logout'],
+								'icon'  => $lang['23'],
+						),
+				),
 		),
-	),
-	'forum'        => array(
-		'title'    => $lang['4'],
-		'href'     => $link['forum'],
-		'sub_menu' => array(),
-	),
-	'help'         => array(
-		'title'    => $lang['5'],
-		'href'     => $link['help'],
-		'sub_menu' => array(),
-	),
+		'home'         => array(
+				'title'    => $lang['1'],
+				'href'     => $link['home'],
+				'sub_menu' => array(),
+		),
+		'download'     => array(
+				'title'    => $lang['2'],
+				'href'     => $link['download'],
+				'sub_menu' => array(),
+		),
+		'add-ons'      => array(
+				'title'    => $lang['3'],
+				'href'     => $link['addon']['home'],
+				'sub_menu' => array(
+						'skins'        => array(
+								'title' => $lang['11'],
+								'href'  => $link['addon']['home'] . "s/?q=&type=skins&order=latest",
+								'icon'  => $lang['24'],
+								'desc'  => $lang['description_1'],
+						),
+						'plugins'      => array(
+								'title' => $lang['12'],
+								'href'  => $link['addon']['home'] . "s/?q=&type=plugins&order=latest",
+								'icon'  => $lang['25'],
+								'desc'  => $lang['description_2'],
+						),
+						'visualiser'   => array(
+								'title' => $lang['13'],
+								'href'  => $link['addon']['home'] . "s/?q=&type=visualiser&order=latest",
+								'icon'  => $lang['26'],
+								'desc'  => $lang['description_3'],
+						),
+						'theater-mode' => array(
+								'title' => $lang['15'],
+								'href'  => $link['addon']['home'] . "s/?q=&type=theater-mode&order=latest",
+								'icon'  => $lang['28'],
+								'desc'  => $lang['description_5'],
+						),
+						'misc'         => array(
+								'title' => $lang['16'],
+								'href'  => $link['addon']['home'] . "s/?q=&type=misc&order=latest",
+								'icon'  => $lang['29'],
+								'desc'  => $lang['description_6'],
+						),
+				),
+		),
+		'forum'        => array(
+				'title'    => $lang['4'],
+				'href'     => $link['forum'],
+				'sub_menu' => array(),
+		),
+		'help'         => array(
+				'title'    => $lang['5'],
+				'href'     => $link['help'],
+				'sub_menu' => array(),
+		),
 );
 
 /** @var database connection $connection */
@@ -266,9 +274,7 @@ function databaseConnection() {
 		return true;
 	} else {
 		try {
-			$connection = new PDO('mysql:host=' . DB_HOST . ';dbname=' . SITE_DB_NAME . ';charset=utf8',
-			                      SITE_DB_USER,
-			                      SITE_DB_PASS);
+			$connection = new PDO('mysql:host=' . DB_HOST . ';dbname=' . SITE_DB_NAME . ';charset=utf8', SITE_DB_USER, SITE_DB_PASS);
 
 			return true;
 		} catch (PDOException $e) {
@@ -301,8 +307,7 @@ function getVersionInfo($value, $type) {
 			}
 			$statement = $connection->prepare ($sql);
 			if ($type != "byAllReleases") {
-				$statement->bindValue (':value',
-				                       $value);
+				$statement->bindValue (':value', $value);
 			}
 			$statement->execute ();
 			$result = $statement->fetchAll (PDO::FETCH_ASSOC);

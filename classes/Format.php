@@ -70,5 +70,9 @@
 			)
 			. $suffixes[$suffixIndex];
 		}
+		
+		public static function safeSqlArray($val) {
+			return join(',', array_fill(0, count($val), '?'));
+		}
 
 	}

@@ -77,7 +77,7 @@
 	//scroll page to top
 	function gotoTop() {
 		$.fx.off = false;
-		$("html, body").animate({scrollTop: 0}, 70);
+		$("html, body").delay(100).animate({scrollTop: 0}, 'fast');
 		$.fx.off = true;
 	}
 

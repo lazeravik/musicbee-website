@@ -20,104 +20,98 @@
 	require_once $siteRoot . 'classes/Dashboard.php';
 	include_once $siteRoot . 'includes/parsedown/Parsedown.php';
 
+if (isset($_POST['submit'])) {
+	//if all user input is ok then move on
+	if (validateInput ()) {
+		$dashboard = new Dashboard();
+		//check if an addon with similer name exists or not
+		if (!$dashboard->addonExists ($_POST['title'], null)) {
 
-//enable and disable downloads
-	if (isset($_POST['submit'])) {
-
-		if (isset($_POST['type'])
-			&& isset($_POST['title'])
-			&& isset($_POST['description'])
-			&& isset($_POST['mbSupportedVer'])
-			&& isset($_POST['dlink'])
-			&& isset($_POST['thumb'])
-			&& isset($_POST['screenshot_links'])
-		) {
-			if (addonExists($_POST['title'])) {
-				die('{"status": "0", "data": "' . $lang['dashboard_err_5'] . '"}');
-			} else {
-				if (validateInput()) {
-					$dashboard = new Dashboard();
-					
-					//die, if the user alreay submitted more than X numbers of addon that needed aproval!
-					//This will prevent the floodgate
-					if (count($dashboard->getAllAddonByStatusAndMember($context['user']['id'],0)) > MAX_SUBMIT_WO_APPROVAL) {
-						die('{"status": "0", "data": "' . $lang['dashboard_err_10'] . '"}');
-					}
-
-					$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
-					//load parsedown markup to html converter
-					$Parsedown = new Parsedown();
-					$readme_raw = $Parsedown->text($readme);
-
-					//load and use html purifier for the readme notes.
-					$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
-
-					//Phew.... all validations complete, now SUBMIT THE ADDON!
-					if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "submit")) {
-						exit ('{"status": "1", "data": "' . $lang['dashboard_err_11'] . '", "callback_function": "submitted"}');
-					}
-				}
+			//die, if the user alreay submitted more than X numbers of addon that needed aproval!
+			//This will prevent the floodgate
+			if (count ($dashboard->getAllAddonByStatusAndMember ($context['user']['id'], 0)) > MAX_SUBMIT_WO_APPROVAL) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_10'] . '"}');
 			}
+
+			$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
+			//load parsedown markup to html converter
+			$Parsedown = new Parsedown();
+			$readme_raw = $Parsedown->text ($readme);
+
+			//load and use html purifier for the readme notes.
+			$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
+
+			//Phew.... all validations complete, now SUBMIT THE ADDON!
+			if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "submit")) {
+				exit ('{"status": "1", "data": "' . $lang['dashboard_err_11'] . '", "callback_function": "submitted"}');
+			}
+		} else {
+			die('{"status": "0", "data": "' . $lang['dashboard_err_5'] . '"}');
 		}
-	} elseif (isset($_POST['modify_type'])) {
-		if ($_POST['modify_type'] == "delete") {
-			$dashboard = new Dashboard();
-			if ($dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
-				if ($dashboard->deleteAddon($_POST['record_id'])) {
-					exit('
-					{
-						"status": "1", 
-						"data": "' . $lang['dashboard_err_13'] . '",
-						"callback_function": "remove_addon_record"
-					}
-					');
-				} else {
-					//:S addon deletation failed! and we have no clue.... bummer
-					die('{"status": "0", "data": "' . $lang['dashboard_err_14'] . '"}');
+	}
+} elseif (isset($_POST['modify_type'])) {
+	if ($_POST['modify_type'] == "delete") {
+		$dashboard = new Dashboard();
+		if ($dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+			if ($dashboard->deleteAddon($_POST['record_id'])) {
+				exit('
+				{
+					"status": "1",
+					"data": "' . $lang['dashboard_err_13'] . '",
+					"callback_function": "remove_addon_record"
 				}
+				');
 			} else {
-				//throw error if the author is different than the submitter itself
-				die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
+				//:S addon deletation failed! and we have no clue.... bummer
+				die('{"status": "0", "data": "' . $lang['dashboard_err_14'] . '"}');
 			}
-		} elseif ($_POST['modify_type'] == "update") {
-			if (validateInput()) {
-				$dashboard = new Dashboard();
+		} else {
+			//throw error if the author is different than the submitter itself
+			die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
+		}
+	} elseif ($_POST['modify_type'] == "update") {
+		if (validateInput()) {
+			$dashboard = new Dashboard();
+
+			//check if an addon with similer name except for this one exists or not
+			if(!$dashboard->addonExists($_POST['title'], $_POST['record_id'])) {
 				//verify if the author can modify it.
-				if (!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+				if (!$dashboard->verifyAuthor ($user_info['id'], $_POST['record_id'])) {
 					die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
 				}
-
 				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 				//load parsedown markup to html converter
 				$Parsedown = new Parsedown();
-				$readme_raw = $Parsedown->text($readme);
+				$readme_raw = $Parsedown->text ($readme);
 				//load and use html purifier for the readme notes.
-				$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
-
+				$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
 				//Phew.... all validations complete, now SUBMIT THE ADDON!
-				if ($dashboard->submit($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "update")) {
+				if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "update")) {
 					echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "submitted", "origin": "dashboard.task line 99"}';
 				}
+			} else {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_5'] . '"}');
 			}
-		} else {
-			//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
-			die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 		}
-	} elseif (isset($_POST['addon_approve'])) {
-		if(!$context['user']['can_mod']){
-			die('{"status": "0", "data": "' . $lang['dashboard_err_1'] . '"}');
-		}
-		if ($_POST['addon_approve']==1 || $_POST['addon_approve']==2) {
-			$dashboard = new Dashboard();
-
-			if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'])) {
-				echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "reload_addon_approval_list_overview"}';
-				exit();
-			}
-		} else {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
-		}
+	} else {
+		//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
+		die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 	}
+} elseif (isset($_POST['addon_approve'])) {
+	if(!$context['user']['can_mod']){
+		die('{"status": "0", "data": "' . $lang['dashboard_err_1'] . '"}');
+	}
+	if ($_POST['addon_approve']==1 || $_POST['addon_approve']==2) {
+		$dashboard = new Dashboard();
+
+		if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'])) {
+			echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "reload_addon_approval_list_overview"}';
+			exit();
+		}
+	} else {
+		die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
+	}
+}
 
 	/**
 	 * Validation check for dashboard user input
@@ -128,51 +122,47 @@
 	{
 		global $main_menu, $lang;
 
-		if (!array_key_exists($_POST['type'], $main_menu['add-ons']['sub_menu'])) {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_4'] . '"}');
-		}
+		if (isset($_POST['type'])
+		 && isset($_POST['title'])
+		 && isset($_POST['description'])
+		 && isset($_POST['mbSupportedVer'])
+		 && isset($_POST['dlink'])
+		 && isset($_POST['thumb'])
+		 && isset($_POST['screenshot_links'])
+		 && isset($_POST['readme'])
+		 && isset($_POST['beta'])
+		) {
+			//check if the addon is beta then a support forum link must be provided else show error
+			if ($_POST['beta'] == "1" && empty($_POST['support'])) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_16'] . '"}');
+			}
 
-		if (!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_6'] . '"}');
-		}
-		if (!Validation::charLimit($_POST['description'], 600)) {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_7'] . '"}');
-		}
-		if (!Validation::arrayLimit($_POST['tag'], 10)) {
-			die('{"status": "0", "data": "' . $lang['dashboard_err_8'].$_POST['tag'] . '"}');
-		}
-		if (isset($_POST['readme'])) {
-			if (!Validation::charLimit($_POST['readme'], 5000))
+			if (!isset($main_menu['add-ons']['sub_menu'][$_POST['type']])) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_4'] . '"}');
+			}
+
+			if (!Validation::validateMusicBeeVersions (explode (",", $_POST['mbSupportedVer']))) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_6'] . '"}');
+			}
+
+			if (!Validation::charLimit ($_POST['description'], 600)) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_7'] . '"}');
+			}
+
+			if (!Validation::arrayLimit ($_POST['tag'], 10)) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_8'] . $_POST['tag'] . '"}');
+			}
+
+			if (!Validation::charLimit ($_POST['readme'], 5000)) {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_9'] . '"}');
+			}
+		} else {
+			die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 		}
 
 		return true;
 	}
 
 
-	/**
-	 * Check if an addon exists with similer title
-	 * @param string $title
-	 *
-	 * @return bool
-	 */
-	function addonExists($title)
-	{
-		global $connection, $endMsg, $lang;
-		if (databaseConnection()) {
-			try {
-				$sql = "SELECT * FROM " . SITE_ADDON . " WHERE addon_title = :title";
-				$statement = $connection->prepare($sql);
-				$statement->bindValue(':title', $title);
-				$statement->execute();
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-				if (count($result) > 0) {
-					return true;
-				} else {
-					return false;
-				}
-			} catch (Exception $e) {}
-		}
-	}
 

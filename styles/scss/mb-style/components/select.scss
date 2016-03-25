@@ -63,37 +63,45 @@ $font_0: sans-serif;
     }
 }
 .ms-drop {
+    z-index: 10;
     width: 100%;
     overflow: hidden;
     display: none;
     margin-top: -6px;
     padding: 0;
     position: absolute;
-    z-index: 1000;
     background: $white;
     color: $black;
     border: 2px solid #404040;
-    //Instead of the line below you could use @include box-sizing($bs)
     box-sizing: border-box;
     &.bottom {
         top: 100%;
-        //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
         box-shadow: 0 4px 5px $black_15;
     }
     &.top {
         bottom: 100%;
-        //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
         box-shadow: 0 -4px 5px $black_15;
     }
     ul {
         overflow: auto;
         margin: 0;
-        padding: 5px 8px;
+        padding: 0px !important;
+
         > li {
+            padding: 0px !important;
             list-style: none;
             display: list-item;
             background-image: none;
             position: static;
+            label {
+                padding: 10px;
+                width: 100% !important;
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.07);
+                }
+            }
+
             .disabled {
                 opacity: .35;
                 filter: Alpha(Opacity=35);
@@ -146,8 +154,8 @@ $font_0: sans-serif;
     white-space: nowrap;
     width: 100%;
     z-index: 10000;
-    //Instead of the line below you could use @include box-sizing($bs)
     box-sizing: border-box;
+
     input {
         width: 100%;
         height: auto !important;

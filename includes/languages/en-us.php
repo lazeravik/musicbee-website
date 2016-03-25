@@ -49,7 +49,7 @@ $lang['5'] = 'Help';
 $lang['6'] = '<i class="fa fa-user" style="color:#FFA500;"></i>';
 $lang['7'] = 'Web Admin';
 $lang['8'] = 'Forum Admin';
-$lang['9'] = 'Add-on Dashboard';
+$lang['9'] = 'Dashboard';
 $lang['10'] = 'Sign Out';
 $lang['11'] = 'Skins';
 $lang['12'] = 'Plugins';
@@ -59,6 +59,7 @@ $lang['15'] = 'Theater Mode';
 $lang['16'] = 'Misc';
 $lang['17'] = 'Login';
 $lang['18'] = 'All';
+$lang['19'] = 'Hey, ';
 
 /** MainMenu Icons
  * Do not edit! important
@@ -220,6 +221,8 @@ $lang['dashboard_submit_header_13'] = 'Support & Discussion Forum Link';
 $lang['dashboard_submit_header_14'] = 'Readme Note';
 $lang['dashboard_submit_header_15'] = 'Add important note for user';
 $lang['dashboard_submit_header_16'] = 'Add-on type *';
+$lang['dashboard_submit_header_17'] = 'Provide Extra info';
+$lang['dashboard_submit_header_18'] = 'Is this add-on beta?';
 
 $lang['dashboard_submit_desc_1'] = 'If your rank is newbie, you will need moderator approval. Also post your add-on on the forum first to get peoples attention';
 $lang['dashboard_submit_desc_2'] = 'You don\'t need admin/mod approval for updates, but malicious update can result permanent ban';
@@ -228,7 +231,9 @@ $lang['dashboard_submit_desc_4'] = 'Select the supported MusicBee version for yo
 $lang['dashboard_submit_desc_7'] = 'If your add-on does not have a version, leave it blank';
 $lang['dashboard_submit_desc_5'] = 'You can provide a link from the web or upload an image directly to imgur.<br/>You can add upto 8 images.';
 $lang['dashboard_submit_desc_6'] = 'Create a thread in our forum if you haven\'t, or use an existing thread link';
-$lang['dashboard_submit_desc_7'] = 'Only text and number is allowed. No HTML code or Markup/Markdown code is allowed. Keep it short, Maximium Character limit is 200';
+$lang['dashboard_submit_desc_7'] = 'Add any important things that you wan\'t user to be aware of';
+$lang['dashboard_submit_desc_8'] = 'Use Mediafire, Mega, Onedrive, Google Drive, Dropbox to upload your add-on';
+$lang['dashboard_submit_desc_9'] = 'A support/discussion forum link is required for a beta add-on';
 
 $lang['dashboard_submit_btn_1'] = '<i class="fa fa-upload"></i>';
 $lang['dashboard_submit_btn_2'] = '<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Add more screenshots';
@@ -244,9 +249,9 @@ $lang['dashboard_msg_1'] = 'Removed Permanently!';
 $lang['dashboard_msg_2'] = 'Are you sure you want to permanently remove this addon?\\n\\nyou can\'t restore it once it is deleted!';
 $lang['dashboard_msg_3'] = 'This Add-on will Support:';
 $lang['dashboard_msg_4'] = 'You have reached maximum tag input, any more tag will be removed!';
-
 $lang['dashboard_msg_5'] = "Your add-on is waiting to be reviewed by our Mods/Admin.";
 $lang['dashboard_msg_6'] = "Since you are an Elite User or Mod your add-on is successfully submitted and available for public to download!";
+
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
@@ -254,7 +259,7 @@ $lang['json_err_copied'] = 'Copied to Clipboard!';
 
 // dashboard > tasks > error
 $lang['dashboard_err_1'] = 'You don\'t have enough permission';
-$lang['dashboard_err_2'] = 'You haven\'t published any add-on yet!';
+$lang['dashboard_err_2'] = 'Can\'t find anything to show here!';
 $lang['dashboard_err_3'] = 'There are no add-ons waiting for your approval';
 $lang['dashboard_err_4'] = '<b>ERROR:</b> The add-on type does not exists. Please choose a valid one';
 $lang['dashboard_err_5'] = '<b>ERROR:</b> An Add-on with similar name exists!';
@@ -264,12 +269,13 @@ $lang['dashboard_err_8'] = '<b>ERROR:</b> Maximum 10 Tags are allowed! Please re
 $lang['dashboard_err_9'] = '<b>ERROR:</b> Readme Note exceeds character limit!';
 $lang['dashboard_err_10'] = '<b>ERROR:</b> There are more than 10 add-on that needs approval, before you can submit more!';
 $lang['dashboard_err_12'] = '<b>ERROR:</b> The Add-on is submitted by someone else.<br>You don\'t have enough permission to modify it!';
-$lang['dashboard_err_13'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
 $lang['dashboard_err_14'] = '<b>ERROR:</b> For some unknown reason the add-on could not be deleted. Please report this in forum.';
 $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
+$lang['dashboard_err_16'] = '<b>ERROR:</b> You must add a support/discussion forum link for a beta add-on!';
 
 $lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
+$lang['dashboard_err_13'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
 
 
 
@@ -306,6 +312,24 @@ $lang['addon_32'] = 'There is nothing yet! <i class="fa fa-frown-o"></i>';
 $lang['addon_33'] = 'You can request for an add-on on our forum, or you can create and submit one yourself';
 $lang['addon_34'] = 'Be Careful!';
 $lang['addon_35'] = 'This addon is not approved by admins yet!';
+$lang['addon_36'] = 'beta';
+
+
+/**
+ * Release Notes
+ */
+$lang['releasenote_title'] = 'MusicBee - Release Notes';
+$lang['releasenote_desc'] = 'Release Notes/Change Logs for MusicBee, See the changes made throughout MusicBee\'s journey';
+$lang['releasenote_infobar_title'] = 'Release Notes';
+$lang['releasenote_infobar_desc'] = 'See the changes made throughout MusicBee\'s journey';
+
+$lang['releasenote_infobar_1'] = 'Jump to release version';
+
+
+
+
+
+
 
 
 /************************************************

@@ -35,20 +35,18 @@ $page_total = ceil (count ($addondata['all_addons_byuser']) / $dashboard_all_vie
  */
 $offset_start = (isset($_POST['page_num'])) ? (($_POST['page_num'] - 1) * $dashboard_all_view_range) : "0";
 
-$current_pagenum = (isset($_POST['page_num'])) ?($_POST['page_num']) : "1";
+$current_pagenum = (isset($_POST['page_num'])) ? ($_POST['page_num']) : "1";
 
 /**
  * Slice the addon list to show x number of items
  * @var array $addondata
  */
-$addondata['all_addons_byuser'] = ($addondata['all_addons_byuser'] != null) ? array_slice ($addondata['all_addons_byuser'],
-                                                                                           $offset_start,
-                                                                                           $dashboard_all_view_range) : null;
+$addondata['all_addons_byuser'] = ($addondata['all_addons_byuser'] != null) ? array_slice ($addondata['all_addons_byuser'], $offset_start, $dashboard_all_view_range) : null;
 function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	if ($page_total > 0) {
 		$pagination_view = '<ul class="pagination">';
 		for ($i = 1; $i < $page_total + 1; $i++) {
-			if($current_pagenum == $i) {
+			if ($current_pagenum == $i) {
 				$pagination_view .= '<li><button class="btn btn_blue active" onclick="loadAddonPage(' . $i . ')">' . $i . '</button></li>';
 			} else {
 				$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(' . $i . ')">' . $i . '</button></li>';
@@ -61,15 +59,13 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 	return $pagination_view;
 }
-
-
 ?>
 <div
-	class="main_content_wrapper col_1_2">
+		class="main_content_wrapper col_1_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
 			<span
-				class="show_info info_darkgrey custom">
+					class="show_info info_darkgrey custom">
 				<h3><?php echo $lang['dashboard_10']; ?></h3>
 			</span>
 
@@ -79,7 +75,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	     id="addon_records">
 		<div class="box_content">
 				<span
-					class="show_info custom">
+						class="show_info custom">
 					<h3><?php echo $lang['dashboard_11']; ?></h3>
 				</span>
 			<?php if (!empty($addondata['all_addons_byuser'])): ?>
@@ -107,7 +103,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<td>
 								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
 								   target="_blank"
-								   title="View this addon"><?php echo $addon['addon_title']; ?></a>
+								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if($addon['is_beta']==1): ?>&nbsp; <p class="small_info beta"><?php echo $lang['addon_36']; ?></p><?php endif; ?></a>
 							</td>
 							<td>
 								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
@@ -118,31 +114,31 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<td class="action_input">
 
 								<form
-									id="<?php echo $addon['ID_ADDON']; ?>"
-									action="../includes/dashboard.tasks.php"
-									method="post"
-									data-autosubmit>
-									<button
 										id="<?php echo $addon['ID_ADDON']; ?>"
-										class="btn btn_red"
-										title="<?php echo $lang['dashboard_tooltip_1']; ?>"
-										onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);">
+										action="../includes/dashboard.tasks.php"
+										method="post"
+										data-autosubmit>
+									<button
+											id="<?php echo $addon['ID_ADDON']; ?>"
+											class="btn btn_red"
+											title="<?php echo $lang['dashboard_tooltip_1']; ?>"
+											onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);">
 										<i class="fa fa-trash"></i>
 									</button>
 									<input
-										type="hidden"
-										name="record_id"
-										value="<?php echo $addon['ID_ADDON']; ?>"/>
+											type="hidden"
+											name="record_id"
+											value="<?php echo $addon['ID_ADDON']; ?>"/>
 									<input
-										type="hidden"
-										name="modify_type"
-										value="delete"/>
+											type="hidden"
+											name="modify_type"
+											value="delete"/>
 								</form>
 								<button
-									class="btn btn_blue"
-									type="submit"
-									title="<?php echo $lang['dashboard_tooltip_2']; ?>"
-									onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['dashboard_12']; ?></button>
+										class="btn btn_blue"
+										type="submit"
+										title="<?php echo $lang['dashboard_tooltip_2']; ?>"
+										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['dashboard_12']; ?></button>
 
 							</td>
 						</tr>
@@ -155,8 +151,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<?php endif; ?>
 		</div>
 		<div class="box_content">
-			<?php echo dashboard_result_pagination_generator ($page_total,
-			                                                  $current_pagenum); ?>
+			<?php echo dashboard_result_pagination_generator ($page_total, $current_pagenum); ?>
 		</div>
 	</div>
 </div>
@@ -180,6 +175,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		}).fail(function (jqXHR, textStatus, errorThrown) {
 			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
 		}).always(function () {
+			gotoTop();
 			$('#loading_icon').hide(); //show loading icon'
 			hideOverlay(); //show overlay while loading
 		});
@@ -206,8 +202,8 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		});
 	}
 
-	var delete_record_id = "0";
-
+	//Store to be deleted record id in a variable, later we can use this to locate the table row and remove it.
+	var delete_record_id;
 	function deleteRecord(id) {
 		var modify_confirm = confirm("<?php echo $lang['dashboard_msg_2']; ?>");
 		if (modify_confirm == true) {
@@ -215,7 +211,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			$('#loading_icon').show();
 			//store the record id so that we can remove the table from html
 			delete_record_id = id;
-			$('form[data-autosubmit][id='+id+']').autosubmit();
+			$('form[data-autosubmit][id=' + id + ']').autosubmit();
 		} else {
 			this.event.preventDefault(); //stop the actual form submission
 		}
@@ -246,10 +242,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	})(jQuery)
 
 
+	//Anonymous callback function for removing table row
 	var remove_addon_record = function () {
 		$('#' + delete_record_id + "_record").html("<td><p><?php echo $lang['dashboard_msg_1']; ?></p></td><td></td><td></td><td></td>");
 		$('#' + delete_record_id + "_record").addClass('record_removed');
 	}
-
-
 </script>

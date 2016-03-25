@@ -21,8 +21,8 @@
 
 		//If json data is invalid do not auto hide the notification
 		if (!invalid) {
-			$('#notification').delay(5000).fadeOut('normal', function () {
-				$(this).remove()
+			$('#notification').delay(5000).fadeOut('normal').delay(500, function () {
+				hideNotification();
 			});
 		}
 	}
@@ -30,8 +30,7 @@
 	function hideNotification() {
 		if ($('#notification').length) {
 			$.fx.off = false;
-			$('#notification').hide('fast');
-			$('#notification').remove();
+			$('#notification').fadeOut(500).delay(500).remove();
 		}
 	}
 

@@ -35,8 +35,15 @@
 	<div id="overlay_bg" class="general_info_color">
 		<div class="general_info_wrap">
 			<div class="general_info_text">
-				<h2 class="title"><?php echo $data['addon_title']; ?> <?php if ($data['addon_version'] != null): ?><i
-						class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i><?php endif; ?></h2>
+				<h2 class="title">
+					<?php echo $data['addon_title']; ?>
+					<?php if ($data['addon_version'] != null): ?>
+						<i class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i>
+					<?php endif; ?>
+					<?php if($data['is_beta']==1): ?>
+					<p class="small_info beta"><?php echo $lang['addon_36']; ?></p>
+					<?php endif; ?>
+				</h2>
 				<div class="general_info_addon_meta">
 					<p><?php echo $lang['addon_15']; ?> 
 					<a href="<?php echo addon_author_url_generator($data['membername']); ?>"><?php echo $data['membername']; ?></a></p>
@@ -162,21 +169,6 @@
 <script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
-	function blurDo() {
-		var bg_blur = document.getElementById("bg_hero_blur");
-		var bg_overlapto = $('#bg_image');
-		var ctx = bg_blur.getContext("2d");
-		var img = new Image();
-		img.setAttribute('crossOrigin', 'anonymous');
-		img.src = "<?php echo $data['thumbnail']; ?>";
-		img.onload = function () {
-			ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, bg_blur.width, bg_blur.height);// draw image
-			stackBlurCanvasRGB("bg_hero_blur", 0, 0, bg_blur.width, bg_blur.width, 40);
-			$blurryData = bg_blur.toDataURL();
-			$('#bg_image').attr('style', 'background-image: url("' + $blurryData + '");');
-		}
-	}
-
 	$(document).ready(function () {
 		<?php if ($addon_already_liked == true): ?>
 		$('#like_count').html('<?php echo $lang['addon_30']; ?>');
@@ -210,6 +202,20 @@
 
 		hljs.initHighlightingOnLoad();
 	});
+
+	function blurDo() {
+		var bg_blur = document.getElementById("bg_hero_blur");
+		var ctx = bg_blur.getContext("2d");
+		var img = new Image();
+		img.setAttribute('crossOrigin', 'anonymous');
+		img.src = "<?php echo $data['thumbnail']; ?>";
+		img.onload = function () {
+			ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, bg_blur.width, bg_blur.height);// draw image
+			stackBlurCanvasRGB("bg_hero_blur", 0, 0, bg_blur.width, bg_blur.width, 40);
+			var $blurryData = bg_blur.toDataURL();
+			$('#bg_image').attr('style', 'background-image: url("' + $blurryData + '");');
+		}
+	}
 
 	function rate(id) {
 		hideNotification();

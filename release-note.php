@@ -11,25 +11,17 @@
 
 include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-// Page related variables STARTS HERE
-// Since this page uses a lots of common meta tags, we are gonna assign once and use it
-$meta_description = "Release Notes/Change Logs for MusicBee, See the changes made throughout MusicBee's journey";
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MusicBee - Release Notes</title>
-	<meta name="description" content="<?php echo $meta_description; ?>">
-	<!-- keyword meta tag is obsolete, google does not use it, but some
-	search engine still use it, so for legacy support it is included -->
-	<meta name="keywords" content="musicbee, music, player, release note, note, version">
+	<title><?php echo $lang['releasenote_title']; ?></title>
+	<meta name="description" content="<?php echo $lang['releasenote_desc']; ?>">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/meta&styles.php'; ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/markdownView.css">
+	<?php include $siteRoot.'includes/meta&styles.php'; ?>
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $_SERVER['DOCUMENT_ROOT'].'/includes/font.helper.php'; ?>
+	<?php include $siteRoot.'includes/font.helper.php'; ?>
 </head>
 <body>
 
@@ -44,8 +36,8 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 		<div class="top_infobar mb_release_note_color" id="top_jump">
 			<div class="infobar_wrapper">
 				<div class="infobar_inner_wrapper">
-					<h2>Release Notes</h2>
-					<p>See the changes made throughout MusicBee's journey</p>					
+					<h2><?php echo $lang['releasenote_infobar_title']; ?></h2>
+					<p><?php echo $lang['releasenote_infobar_desc']; ?></p>
 				</div>
 
 			</div>
@@ -53,9 +45,11 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 				<div id="nav" class="secondery_nav_wrap" data-scroll-header>
 					<ul class="left">
 
+					</ul>
+					<ul class="right">
 						<li>
 							<select name="release_note_jump" id="release_note_jump" onfocus="" >
-								<option value="top_jump">Jump to release version</option>
+								<option value="top_jump"><?php echo $lang['releasenote_infobar_1']; ?></option>
 								<?php 
 								foreach (getVersionInfo(0,"byAllReleases") as $key => $value) {
 									echo '<option>'.str_replace(".", "-", $value['version']) .'</option>';
@@ -73,7 +67,7 @@ $meta_description = "Release Notes/Change Logs for MusicBee, See the changes mad
 					<?php 
 					foreach (getVersionInfo(0,"byAllReleases") as $key => $value): ?>
 					<div class="box_content" id="<?php echo str_replace(".", "-", $value['version']); ?>">
-						<span class="show_info <?php echo ($value['version']==$release['stable']['version'])?'info_green':'info_darkgrey'; ?>">
+						<span class="show_info <?php echo ($value['version']==$release['stable']['version'])?'info_green':'info_darkgrey'; ?> release_note_info">
 							<ul class="flat_info_bar">
 								<li>
 									<?php echo $value['appname']; ?>

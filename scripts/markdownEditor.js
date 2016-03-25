@@ -986,11 +986,10 @@ MBEditor.wmdBase = function(){
 					inputBox.value = md.render(text);
 				};
 				
-				if (markdownConverter) {
-					var parsed = reader.parse(text); // parsed is a 'Node' tree
-					inputBox.value = markdownConverter.render(parsed);
-					top.setTimeout(callback, 0);
-				}
+				// if (md) {
+					// inputBox.value = md.render(text);
+					// top.setTimeout(callback, 0);
+				// }
 				return true;
 			};
 			

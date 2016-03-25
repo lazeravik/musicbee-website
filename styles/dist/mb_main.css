@@ -546,6 +546,14 @@ a:active, a:hover {
   border: 1px solid #51b2ff;
 }
 
+.small_info.beta {
+  background: #FF8F00;
+  color: #fff;
+  border: 1px solid #F57C00;
+  margin: 0px 5px;
+  border-radius: 0px;
+}
+
 .search.small_search {
   margin: 4px;
   width: 250px;
@@ -650,10 +658,14 @@ a:active, a:hover {
   min-width: inherit;
 }
 
+.pagination li .btn p {
+  margin: 0px;
+}
+
 .pagination li .btn.active {
-  background: rgba(185, 185, 185, 0.26);
+  background: white;
   color: #333;
-  box-shadow: inset 2px 2px 0px rgba(60, 60, 60, 0.5), inset -2px -2px 0px rgba(60, 60, 60, 0.5);
+  box-shadow: inset 2px 2px 0px #2196F3, inset -2px -2px 0px #2196F3;
 }
 
 .wmd-panel {
@@ -798,13 +810,13 @@ a:active, a:hover {
 }
 
 .ms-drop {
+  z-index: 10;
   width: 100%;
   overflow: hidden;
   display: none;
   margin-top: -6px;
   padding: 0;
   position: absolute;
-  z-index: 1000;
   background: #fff;
   color: #000;
   border: 2px solid #404040;
@@ -824,14 +836,24 @@ a:active, a:hover {
 .ms-drop ul {
   overflow: auto;
   margin: 0;
-  padding: 5px 8px;
+  padding: 0px !important;
 }
 
 .ms-drop ul > li {
+  padding: 0px !important;
   list-style: none;
   display: list-item;
   background-image: none;
   position: static;
+}
+
+.ms-drop ul > li label {
+  padding: 10px;
+  width: 100% !important;
+}
+
+.ms-drop ul > li label:hover {
+  background: rgba(0, 0, 0, 0.07);
 }
 
 .ms-drop ul > li .disabled {
@@ -1217,10 +1239,22 @@ h4 {
   width: 100%;
 }
 
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li img.user_avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 999px;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li .user_info {
+  display: inline-block;
+}
+
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a {
   width: 100%;
   padding: 15px 15px;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   box-sizing: border-box;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
   box-shadow: none;
@@ -2017,6 +2051,16 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   box-shadow: inset -1px 0px 0px rgba(255, 255, 255, 0.25);
 }
 
+@media screen and (max-width: 600px) {
+  .sub_content_wrapper .box_content .flat_info_bar li {
+    padding: 10px;
+    padding: 5px 15px 5px 15px;
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+    width: 100%;
+    background: rgba(64, 64, 64, 0.34);
+  }
+}
+
 .sub_content_wrapper .box_content .flat_info_bar::after {
   content: "";
   clear: both;
@@ -2086,6 +2130,15 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   display: table;
 }
 
+@media screen and (max-width: 600px) {
+  .release_note_info {
+    padding: 0px;
+  }
+  .release_note_info::before {
+    content: none;
+  }
+}
+
 .no_release_note {
   display: block;
   padding: 30px 20px;
@@ -2102,8 +2155,14 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   white-space: pre-line;
 }
 
-#release_note_jump {
-  margin: 4px 0px;
+select#release_note_jump {
+  margin: 4px 10px 4px 0px;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+select#release_note_jump option {
+  color: #333;
 }
 
 .addon_secondery_nav {
@@ -2284,6 +2343,14 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 
 .addon_list_box li .addon_list_box_wrapper:hover .love {
   opacity: 1;
+}
+
+.addon_list_box li .addon_list_box_wrapper .small_info.beta {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border-radius: 0px;
+  background: #333;
 }
 
 .addon_list_box li .addon_list_box_wrapper .love {
@@ -2579,7 +2646,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   text-decoration: none;
 }
 
-.remove_img_btn {
+.form .remove_img_btn {
   background: #EFEFEF !important;
   color: #333 !important;
   padding: 2px 5px !important;
@@ -2588,13 +2655,19 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   width: inherit !important;
 }
 
-#mbVerFeedback {
+.form #mbVerFeedback {
   width: 100%;
 }
 
-.counter {
+.form .counter {
   text-align: right;
   width: 100%;
+}
+
+.form textarea#description, .form textarea#imp_msg {
+  width: 60%;
+  max-width: 60%;
+  height: 100px;
 }
 
 @media screen and (max-width: 800px) {
@@ -2943,6 +3016,10 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   background-color: #fff;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
   padding: 30px;
+}
+
+.wmd-prompt-dialog input {
+  border: none;
 }
 
 /*# sourceMappingURL=mb_main.css.map */

@@ -128,6 +128,14 @@ a {
 		color      : #fff;
 		border     : 1px solid #51b2ff;
 	}
+
+	&.beta {
+		background: #FF8F00;
+		color: #fff;
+		border: 1px solid #F57C00;
+		margin: 0px 5px;
+		border-radius: 0px;
+	}
 }
 
 .search {
@@ -233,11 +241,13 @@ a {
 		.btn {
 			margin: 5px 0px 5px 5px;
 			min-width: inherit;
-
+			p {
+				margin: 0px;
+			}
 			&.active {
-				background: rgba(185, 185, 185, 0.26);
+				background: rgb(255, 255, 255);
 				color: #333;
-				box-shadow: inset 2px 2px 0px rgba(60, 60, 60, 0.5), inset -2px -2px 0px rgba(60, 60, 60, 0.5);
+				box-shadow: inset 2px 2px 0px #2196F3, inset -2px -2px 0px #2196F3;
 			}
 		}
 	}

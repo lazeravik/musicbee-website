@@ -12,8 +12,7 @@
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-$ALL_MBVERSION_DASHBOARD = getVersionInfo (0,
-                                           "byAllReleases");
+$ALL_MBVERSION_DASHBOARD = getVersionInfo (0, "byAllReleases");
 
 //check if edit GET request is made, if not we don't want UNDEFINED ERROR to pop up! so define the variable
 if (isset($_GET['view'])) {
@@ -24,8 +23,7 @@ if (isset($_GET['view'])) {
 		$addon = new Addon(); //create an instance of the addondashboard class
 		$data = $addon->getAddonInfo ($_GET['id'])[0];
 
-		$screenshot_array = explode (",",
-		                             $data['image_links']);
+		$screenshot_array = explode (",", $data['image_links']);
 
 	}
 } else {
@@ -33,32 +31,43 @@ if (isset($_GET['view'])) {
 }
 ?>
 
-<?php if(isset($_GET['action'])):
-	if($_GET['action']=="submit_success"): ?>
-<div class="main_content_wrapper col_2_1">
-	<div class="sub_content_wrapper">
-		<div class="box_content">
+<?php
+/**
+ * If the request is for addon submission success the show a success diologue
+ */
+
+if (isset($_GET['action'])):
+	if ($_GET['action'] == "submit_success"): ?>
+
+		<div class="main_content_wrapper col_2_1">
+			<div class="sub_content_wrapper">
+				<div class="box_content">
 			<span class="show_info info_green custom">
 				<h3><?php echo $lang['dashboard_err_11']; ?></h3>
 			</span>
-			<?php if($_SESSION['memberinfo']['rank_raw'] > 5): ?>
-				<p class="info_text">
-					<?php echo $lang['dashboard_msg_5']; ?>
-				</p>
-			<?php else: ?>
-				<p class="info_text">
-					<?php echo $lang['dashboard_msg_6']; ?>
-				</p>
-			<?php endif; ?>
+					<?php if ($_SESSION['memberinfo']['rank_raw'] > 5): ?>
+						<p class="info_text">
+							<?php echo $lang['dashboard_msg_5']; ?>
+						</p>
+					<?php else: ?>
+						<p class="info_text">
+							<?php echo $lang['dashboard_msg_6']; ?>
+						</p>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
 
-<?php exit(); endif; endif; ?>
+		<?php
+		exit();
+	endif;
+endif;
+/**
+ * Else show the submit form
+ */
+?>
 
-<form action="../includes/dashboard.tasks.php"
-      method="post" data-autosubmit>
-
+<form action="../includes/dashboard.tasks.php" method="post" id="addon_submission" data-autosubmit>
 	<div class="main_content_wrapper col_2_1">
 		<div class="sub_content_wrapper">
 			<div class="box_content">
@@ -68,12 +77,14 @@ if (isset($_GET['view'])) {
 						echo $lang['dashboard_submit_2'];
 					} else {
 						echo $lang['dashboard_submit_1'];
-					} ?></h3>
+					} ?>
+				</h3>
 				<p class="description"><?php if ($viewType == 2) {
 						echo $lang['dashboard_submit_desc_2'];
 					} else {
 						echo $lang['dashboard_submit_desc_1'];
-					} ?></p>
+					} ?>
+				</p>
 			</span>
 			</div>
 			<div class="box_content">
@@ -85,8 +96,7 @@ if (isset($_GET['view'])) {
 						<label for="type">
 							<p><?php echo $lang['dashboard_submit_header_16']; ?></p>
 						</label>
-						<select name="type"
-						        id="type">
+						<select name="type" id="type">
 							<?php
 							foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
 								$type_selection_text = "";
@@ -95,13 +105,10 @@ if (isset($_GET['view'])) {
 										$type_selection_text = "selected";
 									}
 								}
-
-
 								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\" " . $type_selection_text . ">" . $menu_addon['title'] . "</option>";
 							}
 							?>
 						</select>
-
 					</li>
 				</ul>
 			</div>
@@ -135,7 +142,6 @@ if (isset($_GET['view'])) {
 				          maxlength="600"
 				          name="description"
 				          required="required"
-				          style="width:60%; min-height:100px;"
 				          onkeyup="$('#description_count').text(600 - this.value.length+'/600')"><?php if ($viewType == 2) {
 						echo $data['short_description'];
 					} ?></textarea>
@@ -198,7 +204,9 @@ if (isset($_GET['view'])) {
 						       name="tag"
 						       type="text"
 						       placeholder="eg. metro, modern, elegant"
-						       value="<?php if ($viewType == 2) {echo $data['tags'];} ?>"/>
+						       value="<?php if ($viewType == 2) {
+							       echo $data['tags'];
+						       } ?>"/>
 
 					</li>
 					<p id="mbTagFeedback"
@@ -214,6 +222,9 @@ if (isset($_GET['view'])) {
 					<li>
 						<label for="dlink">
 							<p><?php echo $lang['dashboard_submit_header_10']; ?></p>
+							<p class="description">
+								<?php echo $lang['dashboard_submit_desc_8']; ?>
+							</p>
 						</label>
 						<input type="url"
 						       id="dlink"
@@ -247,6 +258,9 @@ if (isset($_GET['view'])) {
 								</button>
 							</div>
 						</div>
+					</li>
+					<li>
+						<hr class="line">
 					</li>
 					<li class="screenshot_multiple_wrap">
 						<label for="imglink">
@@ -374,7 +388,6 @@ if (isset($_GET['view'])) {
 									id="imp_msg"
 									name="important_note"
 									maxlength="200"
-									style="width:60%; min-height:100px;"
 									onkeyup="$('#imp_msg_count').text(200 - this.value.length+'/200')"><?php if ($viewType == 2) {
 									echo $data['important_note'];
 								} ?></textarea>
@@ -395,6 +408,27 @@ if (isset($_GET['view'])) {
 				</ul>
 			</div>
 		</div>
+		<div class="sub_content_wrapper">
+			<div class="box_content">
+				<span class="show_info custom info_silver">
+					<h3>
+						<?php echo $lang['dashboard_submit_header_17']; ?>
+					</h3>
+				</span>
+				<ul class="form">
+					<li>
+						<label for="beta">
+							<p><?php echo $lang['dashboard_submit_header_18']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_submit_desc_9']; ?></p>
+						</label>
+						<select name="beta" id="beta">
+							<option value="0" >No</option>
+							<option value="1" <?php if($viewType==2){ if($data['is_beta']==1) echo 'selected'; } ?>>Yes</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 	<?php if ($viewType == 2): ?>
 		<input type="hidden"
@@ -410,13 +444,26 @@ if (isset($_GET['view'])) {
 	<?php endif; ?>
 </form>
 <div class="space medium"></div>
-<div id="upView"
-     class="modalBox iw-modalBox fadeIn animated"></div>
+<div id="upView" class="modalBox iw-modalBox fadeIn animated"></div>
 
 <script src="<?php echo $siteUrl; ?>scripts/multiple-select.js"></script>
 <script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
 <script type="text/javascript">
 
+	$(document).ready(function () {
+		<?php
+		//If we are updating an existing entry, pre select the targetted version that was provided when submitting
+		if ($viewType == 2): ?>
+		addVer();
+		<?php endif; ?>
+
+		//Markdown editor load
+		MBEditor.wmdBase();
+		MBEditor.Util.startEditor();
+	});
+
+
+	//Multiple Musicbee version selection diologue initializer
 	$('#multipleVer').multipleSelect({
 				placeholder: "Select targetted MusicBee Version",
 				selectAll: false,
@@ -426,7 +473,7 @@ if (isset($_GET['view'])) {
 			<?php endif; ?>
 	);
 
-	//generate random id for image input field
+	//generate random id for image input field placeholder
 	function randId() {
 		return Math.random().toString(36).substring(7);
 	}
@@ -471,6 +518,7 @@ if (isset($_GET['view'])) {
 				});
 	}
 
+	//load Imgur upload diologue content via ajax
 	function loadImgurUpload(id) {
 		$.fx.off = true; // turn off jquery animation effects
 		$.ajax({
@@ -512,7 +560,7 @@ if (isset($_GET['view'])) {
 		}
 	}
 
-
+	//Tag Input initializer
 	$(function () {
 		$('#tag').tagsInput({
 			'width': 'none',
@@ -525,6 +573,7 @@ if (isset($_GET['view'])) {
 		});
 	});
 
+	//Check if user exceeding tag limits and warn him
 	function tag_limit_checker() {
 		if ($('#tag_tagsinput').children('.tag').length >= 10) {
 			$('#mbTagFeedback').show();
@@ -534,39 +583,28 @@ if (isset($_GET['view'])) {
 		}
 	}
 
-	$(document).ready(function () {
-		<?php
-		//for updating purpose a musicbee version should be always selected, so check it on load
-		if ($viewType == 2): ?>
-		addVer();
-		<?php endif; ?>
-
-		MBEditor.wmdBase();
-		MBEditor.Util.startEditor();
-
-		var maxField = 8; //Input fields increment limitation
-		var wrapper = $('#screenshot_inputs'); //Input field wrapper
-		$('#add_button').click(function () { //Once add button is clicked
-			var randomId = randId();
-			var randPlaceholder = "http://i.imgur.com/" + randomId;
-			var fieldHTML = '<div class="flex_input col_2">' +
-					'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
-					'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
-					'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>' +
-					'</div>';
-			if (wrapper.children().length < maxField) { //Check maximum number of input fields
-				$(wrapper).append(fieldHTML); // Add field html
-			}
-		});
-		$(wrapper).on('click', '#remove_button', function (e) { //Once remove button is clicked
-			e.preventDefault();
-			$(this).parent('div').remove(); //Remove field html
-		});
+	var maxField = 8; //Input fields increment limitation
+	var wrapper = $('#screenshot_inputs'); //Input field wrapper
+	$('#add_button').click(function () { //Once add button is clicked
+		var randomId = randId();
+		var randPlaceholder = "http://i.imgur.com/" + randomId;
+		var fieldHTML = '<div class="flex_input col_2">' +
+				'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
+				'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
+				'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>' +
+				'</div>';
+		if (wrapper.children().length < maxField) { //Check maximum number of input fields
+			$(wrapper).append(fieldHTML); // Add field html
+		}
 	});
 
+	$(wrapper).on('click', '#remove_button', function (e) { //Once remove button is clicked
+		e.preventDefault();
+		$(this).parent('div').remove(); //Remove field html
+	});
 
 	function saveEdit() {
-		$('form[data-autosubmit]').autosubmit();
+		$('form[data-autosubmit][id=addon_submission]').autosubmit();
 	}
 
 	(function ($) {

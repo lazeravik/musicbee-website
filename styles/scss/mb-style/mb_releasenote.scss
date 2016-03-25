@@ -89,13 +89,25 @@
 			display: flex;
 			flex-wrap : wrap;
 
+
+
 			li {
 				list-style: none;
 				margin: 0px;
 				padding: 10px;
 				padding: 0px 15px 0px 15px;
 				box-shadow: inset -1px 0px 0px rgba(255, 255, 255, 0.25);
+
+				@media screen and (max-width: $break-tiny){
+					padding: 10px;
+					padding: 5px 15px 5px 15px;
+					box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+					width: 100%;
+					background: rgba(64, 64, 64, 0.34);
+				}
 			}
+
+
 
 			&::after {
 				@include clearfix;
@@ -170,6 +182,16 @@
 	}
 }
 
+.release_note_info{
+	@media screen and (max-width: $break-tiny){
+		padding: 0px;
+
+		&::before{
+			content: none;
+		}
+	}
+}
+
 .no_release_note {
 	display: block;
 	padding: 30px 20px;
@@ -186,6 +208,12 @@
 	}
 }
 
-#release_note_jump {
-	margin: 4px 0px;
+select#release_note_jump {
+	margin: 4px 10px 4px 0px;
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.5);
+
+	option{
+		color: #333;
+	}
 }
