@@ -93,6 +93,9 @@ class Dashboard
 		}
 	}
 
+
+
+
 	public function submit($rankid, $authorId, $readme_html, $type) {
 		global $connection;
 		if ($rankid != 10) {
@@ -298,19 +301,55 @@ class Dashboard
 		}
 	}
 
-	public function updateAddonStatus($id, $status) {
+
+
+	/**
+	 * @param $addon_id
+	 *
+	 * @return bool
+	 * deletes an addon from database
+	 */
+	public function getAddonStatus($addon_id) {
 		global $connection;
+		if (databaseConnection ()) {
+			try {
+				$sql = "SELECT status FROM " . SITE_ADDON . " WHERE ID_ADDON = :addon_id";
+				$statement = $connection->prepare ($sql);
+				$statement->bindValue (':addon_id', $addon_id);
+				$statement->execute ();
+				$result = $statement->fetchAll (PDO::FETCH_ASSOC);
+				if (count ($result) > 0) {
+					return $result[0]; //if record found then deletation failed, return false
+				} else {
+					return null; //else we successfully deleted the addon
+				}
+			} catch (Exception $e) {
+
+			}
+		}
+	}
+
+
+
+	public function updateAddonStatus($id, $status, $updater_id) {
+		global $connection;
+
+		$update_date = date("F j, Y, g:i a"); //current date
 
 		if (databaseConnection ()) {
 			try {
 				$sql = 'UPDATE ' . SITE_ADDON . '
 							SET
-								status = :status
+								status = :status,
+								lastStatus_moderatedBy = :lastStatus_moderatedBy,
+								update_date = :update_date
 							WHERE
 								ID_ADDON = :addon_id';
 				$statement = $connection->prepare ($sql);
 				$statement->bindValue (':status', $status);
 				$statement->bindValue (':addon_id', $id);
+				$statement->bindValue (':lastStatus_moderatedBy', $updater_id);
+				$statement->bindValue (':update_date', $update_date);
 				$statement->execute ();
 
 				return true;

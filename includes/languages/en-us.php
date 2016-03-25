@@ -86,9 +86,9 @@ $lang['description_6'] = 'Other useful add-ons for enhancing your MusicBee exper
 
 /* Addon status*/
 $lang['addon_status_1'] = '<i class="fa fa-history"></i> Waiting';
-$lang['addon_status_2'] = '<i class="fa fa-check-circle-o"></i> Approved';
-$lang['addon_status_3'] = 'Rejected';
-$lang['addon_status_4'] = 'Deleted';
+$lang['addon_status_2'] = '<i class="fa fa-check-circle"></i> Approved';
+$lang['addon_status_3'] = '<i class="fa fa-thumbs-down"></i> Rejected';
+$lang['addon_status_4'] = '<i class="fa fa-trash"></i> Deleted';
 $lang['addon_status_5'] = 'Unknown';
 
 /* Index.php lang */
@@ -239,18 +239,24 @@ $lang['dashboard_submit_btn_1'] = '<i class="fa fa-upload"></i>';
 $lang['dashboard_submit_btn_2'] = '<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Add more screenshots';
 $lang['dashboard_submit_btn_3'] = '<i class="fa fa-remove"></i>';
 $lang['dashboard_submit_btn_4'] = ' Remove this screenshot';
+$lang['dashboard_submit_btn_5'] = 'Approve';
+$lang['dashboard_submit_btn_6'] = 'Reject';
+$lang['dashboard_submit_btn_7'] = '<i class="fa fa-trash"></i>';
 
-$lang['dashboard_tooltip_1'] = 'Remove this Version Permanently';
+$lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
 $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to imgur';
 
 
-$lang['dashboard_msg_1'] = 'Removed Permanently!';
-$lang['dashboard_msg_2'] = 'Are you sure you want to permanently remove this addon?\\n\\nyou can\'t restore it once it is deleted!';
+$lang['dashboard_msg_1'] = 'Add-on Removed, contact mods/admin to restore it';
+$lang['dashboard_msg_2'] = 'Are you sure you want to remove this addon?\\n\\nyou can\'t modify it once it is added to delete queue!';
 $lang['dashboard_msg_3'] = 'This Add-on will Support:';
 $lang['dashboard_msg_4'] = 'You have reached maximum tag input, any more tag will be removed!';
-$lang['dashboard_msg_5'] = "Your add-on is waiting to be reviewed by our Mods/Admin.";
-$lang['dashboard_msg_6'] = "Since you are an Elite User or Mod your add-on is successfully submitted and available for public to download!";
+$lang['dashboard_msg_5'] = 'Your add-on is waiting to be reviewed by our Mods/Admin.';
+$lang['dashboard_msg_6'] = 'Since you are an Elite User or Mod your add-on is successfully submitted and available for public to download!';
+$lang['dashboard_msg_7'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
+$lang['dashboard_msg_8'] = '<b>SUCCESSFULL:</b> Add-on successfully added to delete queue! And will be automatically deleted';
+$lang['dashboard_msg_9'] = 'You can not View, download or edit deleted add-ons! contact admin/mods to undelete it first.';
 
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
@@ -272,10 +278,11 @@ $lang['dashboard_err_12'] = '<b>ERROR:</b> The Add-on is submitted by someone el
 $lang['dashboard_err_14'] = '<b>ERROR:</b> For some unknown reason the add-on could not be deleted. Please report this in forum.';
 $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
 $lang['dashboard_err_16'] = '<b>ERROR:</b> You must add a support/discussion forum link for a beta add-on!';
+$lang['dashboard_err_18'] = 'ERROR';
 
 $lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
-$lang['dashboard_err_13'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
+
 
 
 

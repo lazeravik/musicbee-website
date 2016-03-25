@@ -60,17 +60,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	return $pagination_view;
 }
 ?>
-<div
-		class="main_content_wrapper col_1_2">
-	<div class="sub_content_wrapper">
-		<div class="box_content">
-			<span
-					class="show_info info_darkgrey custom">
-				<h3><?php echo $lang['dashboard_10']; ?></h3>
-			</span>
-
-		</div>
-	</div>
+<div class="main_content_wrapper col_2_1">
 	<div class="sub_content_wrapper"
 	     id="addon_records">
 		<div class="box_content">
@@ -99,7 +89,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					</thead>
 					<tbody>
 					<?php foreach ($addondata['all_addons_byuser'] as $key => $addon): ?>
-						<tr id="<?php echo $addon['ID_ADDON']; ?>_record">
+						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3")? "deleted" : "";?>">
 							<td>
 								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
 								   target="_blank"
@@ -111,8 +101,12 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<td class="status">
 								<?php echo Validation::getStatus ($addon['status']); ?>
 							</td>
-							<td class="action_input">
 
+							<?php
+								$button_stat_text = ($addon['status'] == "3")? "disabled" : "";
+							?>
+
+							<td class="action_input">
 								<form
 										id="<?php echo $addon['ID_ADDON']; ?>"
 										action="../includes/dashboard.tasks.php"
@@ -122,7 +116,8 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 											id="<?php echo $addon['ID_ADDON']; ?>"
 											class="btn btn_red"
 											title="<?php echo $lang['dashboard_tooltip_1']; ?>"
-											onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);">
+											onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);"
+											<?php echo $button_stat_text; ?>>
 										<i class="fa fa-trash"></i>
 									</button>
 									<input
@@ -132,13 +127,14 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 									<input
 											type="hidden"
 											name="modify_type"
-											value="delete"/>
+											value="soft_delete"/>
 								</form>
 								<button
 										class="btn btn_blue"
 										type="submit"
 										title="<?php echo $lang['dashboard_tooltip_2']; ?>"
-										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"><?php echo $lang['dashboard_12']; ?></button>
+										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"
+										<?php echo $button_stat_text; ?>><?php echo $lang['dashboard_12']; ?></button>
 
 							</td>
 						</tr>
@@ -152,6 +148,15 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		</div>
 		<div class="box_content">
 			<?php echo dashboard_result_pagination_generator ($page_total, $current_pagenum); ?>
+		</div>
+	</div>
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span
+					class="show_info info_darkgrey custom">
+				<h3><?php echo $lang['dashboard_10']; ?></h3>
+			</span>
+
 		</div>
 	</div>
 </div>

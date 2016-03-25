@@ -1101,6 +1101,16 @@ select {
   margin: -4px 0px 0px 0px;
 }
 
+.btn:disabled {
+  background: #ABABAB;
+  box-shadow: none;
+}
+
+.btn:disabled:hover {
+  background: #ABABAB;
+  box-shadow: none;
+}
+
 .like_btn {
   padding-right: 0px;
 }

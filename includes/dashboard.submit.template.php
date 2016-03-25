@@ -62,6 +62,26 @@ if (isset($_GET['action'])):
 		exit();
 	endif;
 endif;
+
+if ($viewType == 2):
+	if ($data['status'] == 3):
+		?>
+		<div class="main_content_wrapper col_2_1">
+			<div class="sub_content_wrapper">
+				<div class="box_content">
+			<span class="show_info info_red custom">
+				<h3><?php echo $lang['dashboard_err_18']; ?></h3>
+			</span>
+					<p class="info_text">
+						<?php echo $lang['dashboard_msg_9']; ?>
+					</p>
+				</div>
+			</div>
+		</div>
+		<?php
+		exit();
+	endif;
+endif;
 /**
  * Else show the submit form
  */
@@ -422,8 +442,13 @@ endif;
 							<p class="description"><?php echo $lang['dashboard_submit_desc_9']; ?></p>
 						</label>
 						<select name="beta" id="beta">
-							<option value="0" >No</option>
-							<option value="1" <?php if($viewType==2){ if($data['is_beta']==1) echo 'selected'; } ?>>Yes</option>
+							<option value="0">No</option>
+							<option value="1" <?php if ($viewType == 2) {
+								if ($data['is_beta'] == 1) {
+									echo 'selected';
+								}
+							} ?>>Yes
+							</option>
 						</select>
 					</li>
 				</ul>

@@ -46,9 +46,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				<tbody>
 				<tr>
 					<td>
-						<a href="#all"
-						   data-href="all"
-						   data-load-page="dashboard.all"><?php echo $lang['dashboard_0']; ?></a>
+						<a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['dashboard_0']; ?></a>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix (count ($stat['total_addon_submitted'])); ?>
@@ -184,6 +182,26 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 									   title="Go to member forum profile"><?php echo $addon['membername']; ?></a>
 								</td>
 								<td class="action_input">
+									<form
+											id="addon_delete"
+											action="../includes/dashboard.tasks.php"
+											method="post"
+											data-autosubmit>
+										<button
+												class="btn btn_red"
+												type="submit"
+												onclick="addonDelete()">
+											<?php echo $lang['dashboard_submit_btn_7']; ?>
+										</button>
+										<input
+												type="hidden"
+												name="record_id"
+												value="<?php echo $addon['ID_ADDON']; ?>"/>
+										<input
+												type="hidden"
+												name="modify_type"
+												value="soft_delete"/>
+									</form>
 
 									<form
 										id="addon_reject"
@@ -191,10 +209,10 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 										method="post"
 										data-autosubmit>
 										<button
-											class="btn btn_red"
+											class="btn btn_yellow"
 											type="submit"
 											onclick="addonReject()">
-											Reject
+											<?php echo $lang['dashboard_submit_btn_6']; ?>
 										</button>
 										<input
 											type="hidden"
@@ -214,7 +232,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 											class="btn btn_blue"
 											type="submit"
 											onclick="addonApprove()">
-											Approve
+											<?php echo $lang['dashboard_submit_btn_5']; ?>
 										</button>
 										<input
 											type="hidden"
@@ -280,7 +298,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		<div class="box_content">
 			<span
 				class="show_info custom">
-				<h3><?php echo $lang['dashboard_8']; ?></h3>
+				<h3><?php echo $lang['dashboard_9']; ?></h3>
 			</span>
 			<?php if (!empty($stat['top_downloaded_addon'])): ?>
 				<table class="record">
@@ -328,6 +346,10 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 
 	function addonApprove() {
 		$('form[data-autosubmit][id=addon_approve]').autosubmit();
+	}
+
+	function addonDelete() {
+		$('form[data-autosubmit][id=addon_delete]').autosubmit();
 	}
 
 	function addonReject() {

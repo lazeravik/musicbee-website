@@ -50,14 +50,46 @@ if (isset($_POST['submit'])) {
 		}
 	}
 } elseif (isset($_POST['modify_type'])) {
-	if ($_POST['modify_type'] == "delete") {
-		$dashboard = new Dashboard();
-		if ($dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+	$dashboard = new Dashboard();
+
+	//permanent delete will delete the addon forever!
+	if ($_POST['modify_type'] == "permanent_delete") {
+
+		//Only an admin can permanently delete an addon
+		if ($context['user']['is_admin']) {
 			if ($dashboard->deleteAddon($_POST['record_id'])) {
 				exit('
 				{
 					"status": "1",
-					"data": "' . $lang['dashboard_err_13'] . '",
+					"data": "' . $lang['dashboard_msg_7'] . '",
+					"callback_function": "remove_addon_record"
+				}
+				');
+			} else {
+				//:S addon deletation failed! and we have no clue.... bummer
+				die('{"status": "0", "data": "' . $lang['dashboard_err_14'] . '"}');
+			}
+		} else {
+			//throw error if the author is different than the submitter itself
+			die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
+		}
+	}
+
+	//Soft delete won't delete it, but put it in to be deleted list, it will be deleted whenever the delete script executes!
+	if ($_POST['modify_type'] == "soft_delete") {
+
+		//You can not soft delete an addon that is already soft deleted
+		if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3"){
+			die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
+		}
+
+		//Mod/Admin/addon author will be able to soft delete and addon
+		if ($dashboard->verifyAuthor($context['user']['id'], $_POST['record_id']) || $context['user']['can_mod']) {
+			if ($dashboard->updateAddonStatus($_POST['record_id'],"3",$context['user']['id'])) {
+				exit('
+				{
+					"status": "1",
+					"data": "' . $lang['dashboard_msg_8'] . '",
 					"callback_function": "remove_addon_record"
 				}
 				');
@@ -71,7 +103,10 @@ if (isset($_POST['submit'])) {
 		}
 	} elseif ($_POST['modify_type'] == "update") {
 		if (validateInput()) {
-			$dashboard = new Dashboard();
+
+			if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3"){
+				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
+			}
 
 			//check if an addon with similer name except for this one exists or not
 			if(!$dashboard->addonExists($_POST['title'], $_POST['record_id'])) {
@@ -104,7 +139,7 @@ if (isset($_POST['submit'])) {
 	if ($_POST['addon_approve']==1 || $_POST['addon_approve']==2) {
 		$dashboard = new Dashboard();
 
-		if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'])) {
+		if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'], $context['user']['id'])) {
 			echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "reload_addon_approval_list_overview"}';
 			exit();
 		}
