@@ -228,7 +228,7 @@ $lang['dashboard_submit_header_18'] = 'Is this add-on beta?';
 
 $lang['dashboard_submit_desc_1'] = 'If your rank is newbie, you will need moderator approval. Also post your add-on on the forum first to get peoples attention';
 $lang['dashboard_submit_desc_2'] = 'You don\'t need admin/mod approval for updates, but malicious update can result permanent ban';
-$lang['dashboard_submit_desc_3'] = 'Only text and number is allowed. No HTML code or Markup/Markdown code is allowed.<br/>Also keep the description short, <b>Maximium Character limit is 600</b>';
+$lang['dashboard_submit_desc_3'] = 'Only text and number is allowed. No HTML code or Markup/Markdown code is allowed.<br/>Also keep the description short, <b>Maximum Character limit is 600</b>';
 $lang['dashboard_submit_desc_4'] = 'Select the supported MusicBee version for your add-on. You can Multi-select by holding down <code>ctrl</code> and click.<br/>A preview will show you the selected info as well!';
 $lang['dashboard_submit_desc_7'] = 'If your add-on does not have a version, leave it blank';
 $lang['dashboard_submit_desc_5'] = 'You can provide a link from the web or upload an image directly to imgur.<br/>You can add upto 8 images.';

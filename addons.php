@@ -12,6 +12,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require_once $siteRoot . 'classes/Addon.php';
 require_once $siteRoot . 'classes/Format.php';
+require_once $siteRoot . 'classes/Search.php';
 $addon = new Addon();
 
 
@@ -26,12 +27,12 @@ if (isset($_GET['id'])) {
 			exit();
 		}
 
-		//var_dump($data);
-
 		//checks the url parameter and try to match the addon title, if the addon id matches but not the title, then do a 301 redirect
-		if (count ($params) <= 4 || $params[3] != Format::Slug ($data['addon_title'])) {
+		if (count ($params) <= 4 || urldecode($params[3]) != Format::Slug ($data['addon_title'])) {
 			header ("Location: " . $siteUrl . "addons/" . $data['ID_ADDON'] . "/" . Format::Slug ($data['addon_title']) . "", 301);
 		}
+
+
 
 		//Since the addon is found and everything is ok, create screenshot link array
 		$screenshots = explode (",", $data['image_links']);
@@ -68,17 +69,18 @@ if (isset($_GET['id'])) {
 		$addon_type = Format::Slug ($data['type']);
 
 		$generated_url = $link['addon']['home'] . "s/?q=" . urlencode ($data['query']) . "&type=" . $addon_type . "&order=" . $data['order'];
-		
+
+		$data['current_type'] = ($url_params['type']=="all")? null : $url_params['type'];
+
+		$search = new Search();
 		//get all the addon filtered by category/query and other
-		$data['addon_all'] = $addon->getAddonFiltered ($url_params['type'], $url_params['order'], $data['query']);
+		$data['addon_all'] = $search->searchAddons($data['query'],$data['current_type'],1);
 
 		//Offset start and end value for pagination
 		$offset_start = (isset($url_params['p'])) ? (($url_params['p'] - 1) * $addon_view_range) : "0";
 
 		//instead of showing the full list at once, we wan't to break it down by chunks and use pagination
 		$data['addon'] = ($data['addon_all'] != null) ? array_slice ($data['addon_all'], $offset_start, $addon_view_range) : null;
-
-		//var_dump($data['addon']);
 		
 		//Calculate total number of page required
 		$page_total = ceil (count ($data['addon_all']) / $addon_view_range);
@@ -166,7 +168,7 @@ function addon_result_pagination_generator($page_total, $generated_url) {
 function addon_author_url_generator($name) {
 	global $link;
 
-	return $link['addon']['home'] . "s/?q=" . urlencode ("author:" . $name) . "&type=all&order=latest";
+	return $link['addon']['home'] . "s/?q=" . urlencode ($name) . "&type=all&order=latest";
 }
 
 function addon_secondery_nav_generator($addon_type) {

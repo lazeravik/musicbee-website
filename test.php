@@ -5,13 +5,15 @@ include 'classes/Search.php';
 
 if(isset($_GET['search'])){
 	$search = new Search();
-	$search_result = $search->searchAddons($_GET['search'], null, $_GET['status']);
+	$search_result = $search->searchAddons($_GET['search'], array_keys($main_menu['add-ons']['sub_menu']), $_GET['status']);
 } else {
 	$search_result = "search something";
 }
 
 
+$search_array = preg_filter('/$/', '$0*', Format::safeSqlSearchArray($_GET['search']));
 
+var_dump($search_array);
 ?>
 <html>
 <head>
