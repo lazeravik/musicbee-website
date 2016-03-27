@@ -379,6 +379,10 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		return false;
 	})(jQuery)
 
+	var remove_addon_record = function() {
+		reload_addon_approval_list_overview();
+	}
+
 	var reload_addon_approval_list_overview = function () {
 		var $generatedUrl = generatePageUrl((window.location.hash).replace('#', ''));
 		$('#loading_icon').show(); //show loading icon'

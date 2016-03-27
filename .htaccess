@@ -29,7 +29,7 @@ RewriteRule (.*)$ /$1/ [R=301,L]
 #if the url have addon in it and have 1 or 2 query then fireup this custom rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^addons/([\w-]+)/([\w-]+)/$    addons.php?id=$1&title=$2
+RewriteRule ^addons/([\w-]+)/(.*?)/$    addons.php?id=$1&title=$2
 RewriteRule ^addons/([\w-]+)/$    addons.php?id=$1 [L]
 
 

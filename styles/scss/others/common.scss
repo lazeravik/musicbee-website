@@ -157,6 +157,16 @@ a {
 		font-weight  : 100;
 	}
 
+	&.filter_search {
+		width: 100%;
+		background: rgba(0, 0, 0, 0.14) url("../../img/search.png") no-repeat right 10px center;
+		border-color: rgba(255, 255, 255, 0.5);
+		color: #FFF;
+		padding: 10px 10px;
+		font-size: 15px;
+		margin: 0px 0px 0px;
+	}
+
 	&:hover {
 		border-color : rgba(255, 255, 255, 0.4);
 	}
@@ -264,6 +274,10 @@ a {
 	box-sizing: border-box;
 	width: 60%;
 	transition: linear all 0.15s;
+
+	&.disabled {
+		background-color : #F9F9F9;
+	}
 
 	.tag {
 		align-self: center;

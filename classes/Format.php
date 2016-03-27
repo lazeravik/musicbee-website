@@ -30,7 +30,8 @@
 		 */
 		public static function Slug($string)
 		{
-			return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+			return strtolower(trim(preg_replace('~[^0-9a-z]+~i','-',
+					                               html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i','$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
 		}
 
 
@@ -71,8 +72,34 @@
 			. $suffixes[$suffixIndex];
 		}
 		
+		/**
+		 * @param array $val
+		 *
+		 * @return string
+		 */
 		public static function safeSqlArray($val) {
 			return join(',', array_fill(0, count($val), '?'));
+		}
+
+		public static function safeSqlSearchArray($val) {
+			return join(' ', array_fill(0, count($val), '?'));
+		}
+
+		public static function createSqlArrayParam($string) {
+			return explode(',',$string);
+		}
+
+		/* Converts any HTML-entities into characters */
+		public static function my_numeric2character($t)
+		{
+			$convmap = array(0x0, 0x2FFFF, 0, 0xFFFF);
+			return mb_decode_numericentity($t, $convmap, 'UTF-8');
+		}
+		/* Converts any characters into HTML-entities */
+		public static function my_character2numeric($t)
+		{
+			$convmap = array(0x0, 0x2FFFF, 0, 0xFFFF);
+			return mb_encode_numericentity($t, $convmap, 'UTF-8');
 		}
 
 	}

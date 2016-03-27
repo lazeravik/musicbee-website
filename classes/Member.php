@@ -39,7 +39,7 @@
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id', $user_id);
 					$statement->bindValue(':permission', $user_rankid);
-					$statement->bindValue(':name', $user_name);
+					$statement->bindValue(':name', Format::my_numeric2character($user_name));
 					$statement->bindValue(':addon_added', 0);
 					$statement->execute();
 				} catch (Exception $e) {

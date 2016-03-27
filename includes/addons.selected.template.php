@@ -59,7 +59,7 @@ if ($data['status'] == "3"): ?>
 							<i class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i>
 						<?php endif; ?>
 						<?php if ($data['is_beta'] == 1): ?>
-							<p class="small_info beta"><?php echo $lang['addon_36']; ?></p>
+							<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
 						<?php endif; ?>
 					</h2>
 					<div class="general_info_addon_meta">

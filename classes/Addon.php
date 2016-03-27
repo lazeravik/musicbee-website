@@ -34,10 +34,10 @@ class Addon
 							" . SITE_ADDON . "
 								LEFT JOIN 
 							" . SITE_MEMBER_TBL . "
-								on 
+								ON
 							" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
 						WHERE 
-							ID_AUTHOR = :id 
+							ID_AUTHOR = :id AND status = 1
 						ORDER BY 
 							ID_ADDON DESC 
 						LIMIT 
@@ -182,7 +182,7 @@ class Addon
 						FROM " . SITE_ADDON . "
 								LEFT JOIN 
 							" . SITE_MEMBER_TBL . "
-								on 
+								ON
 							" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
 						WHERE 
 							ID_ADDON = :id";
@@ -294,22 +294,22 @@ SQL;
 					}
 				} else {
 					if ($query == null) {
-						$sql = "
+						$sql = <<<SQL
 								SELECT
 									ID_ADDON, ID_AUTHOR, addon_title, addon_type, thumbnail, is_beta, status, membername
 								FROM
-									" . SITE_ADDON . "
+									$addon_tbl
 										LEFT JOIN
-									" . SITE_MEMBER_TBL . "
+									$member_tbl
 										on
-									" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
+									$addon_tbl.ID_AUTHOR = $member_tbl.ID_MEMBER
 								WHERE
-									addon_type = :cat
+									addon_type IN (:cat)
 									AND
-									status={$status}
+									status IN ($status)
 								ORDER BY
-									ID_ADDON {$order}
-									";
+									ID_ADDON $order;
+SQL;
 
 						$statement = $connection->prepare ($sql);
 						$statement->bindValue (':cat', $cat);
@@ -333,24 +333,24 @@ SQL;
 							//If the search returns 1 or more result then loop through them and get addons by thses members and merge them in an array
 							if (count ($member_result) > 0) {
 								foreach ($member_result as $key => $member_val) {
-									$sql = "
+									$sql = <<<SQL
 												SELECT
 													ID_ADDON, ID_AUTHOR, addon_title, addon_type, thumbnail, is_beta, status, membername
 												FROM
-													" . SITE_ADDON . "
+													$addon_tbl
 														LEFT JOIN
-													" . SITE_MEMBER_TBL . "
+													$member_tbl
 														on
-													" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
+													$addon_tbl.ID_AUTHOR = $member_tbl.ID_MEMBER
 												WHERE
 													ID_AUTHOR = {$member_val['ID_MEMBER']}
 													AND
 													addon_type = :cat
 													AND
-													status={$status}
+													status IN ($status)
 												ORDER BY
-													ID_ADDON {$order}
-												";
+													ID_ADDON $order;
+SQL;
 									$statement = $connection->prepare ($sql);
 									$statement->bindValue (':cat', $cat);
 									$statement->execute ();
@@ -373,24 +373,24 @@ SQL;
 							//return null if the search didn't returned any result
 							return null;
 						} else {
-							$sql = "
+							$sql = <<<SQL
 									SELECT
 										ID_ADDON, ID_AUTHOR, addon_title, addon_type, thumbnail, is_beta, status, membername
 									FROM
-										" . SITE_ADDON . "
+										$addon_tbl
 											LEFT JOIN
-										" . SITE_MEMBER_TBL . "
+										$member_tbl
 											on
-										" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
+										$addon_tbl.ID_AUTHOR = $member_tbl.ID_MEMBER
 									WHERE
-										status={$status}
+										status IN ($status)
 										AND
 										addon_type = :cat
 										AND
 										MATCH(tags,addon_title,short_description,readme_content,addon_type) AGAINST (:query)
 									ORDER BY
-										ID_ADDON {$order}
-										";
+										ID_ADDON $order;
+SQL;
 
 							$statement = $connection->prepare ($sql);
 							$statement->bindValue (':cat', $cat);
@@ -415,13 +415,7 @@ SQL;
 		global $connection;
 		if (databaseConnection ()) {
 			//remove the :author
-			$query = str_replace (array(
-					                      "author",
-					                      ":",
-			                      ), array(
-					                      "",
-					                      "",
-			                      ), $query) . "*";
+			$query = str_replace (array("author",":",), array("","",), $query) . "*";
 			$sql = "
 						SELECT
 							*

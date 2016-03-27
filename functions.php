@@ -112,7 +112,7 @@ $link['admin']['forum-panel'] = $link['forum'] . '?action=admin';
 $link['login'] = $link['forum'] . '?action=login';
 $link['support'] = $siteUrl . 'support/';
 $link['addon']['home'] = $siteUrl . 'addons/';
-$link['addon']['dashboard'] = $siteUrl . 'addon-dashboard/';
+$link['addon']['dashboard'] = $siteUrl . 'dashboard/';
 $link['help'] = $siteUrl . 'help/';
 $link['release-note'] = $siteUrl . 'release-note/';
 $link['logout'] = $link['forum'] . 'index.php?action=logout;' . $context['session_var'] . '=' . $context['session_id'];

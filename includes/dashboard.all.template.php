@@ -59,6 +59,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 	return $pagination_view;
 }
+
 ?>
 <div class="main_content_wrapper col_2_1">
 	<div class="sub_content_wrapper"
@@ -89,11 +90,13 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					</thead>
 					<tbody>
 					<?php foreach ($addondata['all_addons_byuser'] as $key => $addon): ?>
-						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3")? "deleted" : "";?>">
+						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3") ? "deleted" : ""; ?>">
 							<td>
 								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
 								   target="_blank"
-								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if($addon['is_beta']==1): ?>&nbsp; <p class="small_info beta"><?php echo $lang['addon_36']; ?></p><?php endif; ?></a>
+								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if ($addon['is_beta'] == 1): ?>&nbsp;
+										<p class="small_info beta"><?php echo $lang['addon_38']; ?></p><?php endif; ?>
+								</a>
 							</td>
 							<td>
 								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
@@ -103,7 +106,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							</td>
 
 							<?php
-								$button_stat_text = ($addon['status'] == "3")? "disabled" : "";
+							$button_stat_text = ($addon['status'] == "3") ? "disabled" : "";
 							?>
 
 							<td class="action_input">
@@ -152,11 +155,18 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	</div>
 	<div class="sub_content_wrapper">
 		<div class="box_content">
-			<span
-					class="show_info info_darkgrey custom">
+			<span class="show_info info_darkgrey custom">
 				<h3><?php echo $lang['dashboard_10']; ?></h3>
 			</span>
+			<span class="show_info info_blue custom">
+				<form id="search_filter" action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
+					<input type="search" class="search filter_search" onkeydown="searchFilterAddon()" placeholder="<?php echo $lang['dashboard_13']; ?>">
+					<input type="hidden" name="action" value="search">
+				</form>
+			</span>
+			<div>
 
+			</div>
 		</div>
 	</div>
 </div>
@@ -164,6 +174,12 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 <div class="space medium"></div>
 
 <script type="text/javascript">
+
+	function searchFilterAddon(){
+		if(event.keyCode == 13) {
+			$('form[data-autosubmit][id=search_filter]').autosubmit();
+		}
+	}
 
 	//get page(1,2,3..) addon list via ajax
 	function loadAddonPage(page_num) {

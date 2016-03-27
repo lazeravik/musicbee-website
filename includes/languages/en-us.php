@@ -183,8 +183,10 @@ $lang['dashboard_9'] = '<i class="fa fa-sitemap"></i>&nbsp;&nbsp;&nbsp;Your most
 $lang['dashboard_10'] = '<i class="fa fa-filter"></i>&nbsp;&nbsp;Filter & Search your add-ons';
 $lang['dashboard_11'] = '<i class="fa fa-th"></i>&nbsp;&nbsp;Your published add-ons';
 $lang['dashboard_12'] = '<i class="fa fa-pencil"></i>';
+$lang['dashboard_13'] = 'Search your submitted add-ons';
 
-//dashboard > table headers
+
+		//dashboard > table headers
 $lang['dashboard_record_th_1'] = 'Name';
 $lang['dashboard_record_th_2'] = 'Category';
 $lang['dashboard_record_th_3'] = 'Member';
@@ -319,7 +321,7 @@ $lang['addon_32'] = 'There is nothing yet! <i class="fa fa-frown-o"></i>';
 $lang['addon_33'] = 'You can request for an add-on on our forum, or you can create and submit one yourself';
 $lang['addon_34'] = 'Be Careful!';
 $lang['addon_35'] = 'This addon is not approved by admins yet!';
-$lang['addon_36'] = 'beta';
+$lang['addon_38'] = 'beta';
 
 
 /**

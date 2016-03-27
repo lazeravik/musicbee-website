@@ -146,6 +146,10 @@ if (isset($_POST['submit'])) {
 	} else {
 		die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 	}
+} elseif(isset($_POST['action'])) {
+	if ($_POST['action']=="search") {
+
+	}
 }
 
 	/**

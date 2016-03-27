@@ -286,6 +286,13 @@ endif;
 						<label for="imglink">
 							<p><?php echo $lang['dashboard_submit_header_12']; ?></p>
 							<p class="description"><?php echo $lang['dashboard_submit_desc_5']; ?></p>
+							<button
+									type="button"
+									id="add_button"
+									class="btn btn_blue"
+									title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+								<?php echo $lang['dashboard_submit_btn_2']; ?>
+							</button>
 						</label>
 
 						<?php if ($viewType == 2) : ?>
@@ -310,7 +317,7 @@ endif;
 											<?php echo $lang['dashboard_submit_btn_1']; ?>
 										</button>
 										<?php if ($key != 0): ?>
-											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>
+											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3']; ?></a>
 										<?php endif; ?>
 									</div>
 
@@ -342,13 +349,6 @@ endif;
 									</button>
 								</div>
 							</div>
-							<button
-									type="button"
-									id="add_button"
-									class="btn btn_blue"
-									title="<?php echo $lang['dashboard_tooltip_3']; ?>">
-								<?php echo $lang['dashboard_submit_btn_2']; ?>
-							</button>
 						<?php endif; ?>
 					</li>
 				</ul>
@@ -475,24 +475,11 @@ endif;
 <script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function () {
-		<?php
-		//If we are updating an existing entry, pre select the targetted version that was provided when submitting
-		if ($viewType == 2): ?>
-		addVer();
-		<?php endif; ?>
-
-		//Markdown editor load
-		MBEditor.wmdBase();
-		MBEditor.Util.startEditor();
-	});
-
-
 	//Multiple Musicbee version selection diologue initializer
 	$('#multipleVer').multipleSelect({
 				placeholder: "Select targetted MusicBee Version",
 				selectAll: false,
-				width: "60%",
+				width: "none",
 			}<?php if ($viewType == 2): ?>,
 			"setSelects", [<?php echo $data['supported_mbversion']; ?>]
 			<?php endif; ?>
@@ -601,9 +588,15 @@ endif;
 	//Check if user exceeding tag limits and warn him
 	function tag_limit_checker() {
 		if ($('#tag_tagsinput').children('.tag').length >= 10) {
+			$('#tag_tag').prop('disabled', true); //disable input
+
+			$('#tag_tagsinput').addClass('disabled');
+
 			$('#mbTagFeedback').show();
 			$('#mbTagFeedback').html('<?php echo $lang['dashboard_msg_4'];?>');
 		} else {
+			$('#tag_tag').prop('disabled', false); //enable input
+			$('#tag_tagsinput').removeClass('disabled');
 			$('#mbTagFeedback').hide();
 		}
 	}
@@ -614,9 +607,11 @@ endif;
 		var randomId = randId();
 		var randPlaceholder = "http://i.imgur.com/" + randomId;
 		var fieldHTML = '<div class="flex_input col_2">' +
-				'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
+				'<div class="up_group">' +
+					'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
+					'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn" title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['dashboard_submit_btn_3']; ?></a>' +
+				'</div>'+
 				'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
-				'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3'] . $lang['dashboard_submit_btn_4']; ?></a>' +
 				'</div>';
 		if (wrapper.children().length < maxField) { //Check maximum number of input fields
 			$(wrapper).append(fieldHTML); // Add field html
@@ -625,8 +620,22 @@ endif;
 
 	$(wrapper).on('click', '#remove_button', function (e) { //Once remove button is clicked
 		e.preventDefault();
-		$(this).parent('div').remove(); //Remove field html
+		$(this).parent('div').parent('div').remove(); //Remove field html
 	});
+
+
+	$(document).ready(function () {
+		<?php
+		//If we are updating an existing entry, pre select the targetted version that was provided when submitting
+		if ($viewType == 2): ?>
+		addVer();
+		<?php endif; ?>
+
+		//Markdown editor load
+		MBEditor.wmdBase();
+		MBEditor.Util.startEditor();
+	});
+
 
 	function saveEdit() {
 		$('form[data-autosubmit][id=addon_submission]').autosubmit();

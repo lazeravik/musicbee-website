@@ -111,7 +111,7 @@ function addon_result_view_generator($data, $addon) {
 		$result_view = '<ul class="addon_list_box">';
 		foreach ($data as $key => $addon_data) {
 			$addon_link = $link['addon']['home'] . $addon_data['ID_ADDON'] . '/' . Format::Slug ($addon_data['addon_title']);
-			$addon_beta_markup = ($addon_data['is_beta']==1)?'<p class="small_info beta">'.$lang['addon_36'].'</p>': '';
+			$addon_beta_markup = ($addon_data['is_beta']==1)?'<p class="small_info beta">'.$lang['addon_38'].'</p>': '';
 
 			$result_view .= '<li id ="' . $addon_data['ID_ADDON'] . '">
 			<div class="addon_list_box_wrapper">
