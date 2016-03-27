@@ -12,7 +12,7 @@
 
 class Search
 {
-	public function searchAddons($searchquery_input, $cat_input = null, $status_input = 1) {
+	public function searchAddons($searchquery_input, $cat_input = null, $status_input = 1, $authorid=null) {
 		global $connection, $main_menu;
 
 		$addon_tbl = SITE_ADDON;
@@ -38,6 +38,7 @@ class Search
 		$status = Format::safeSqlArray($status_array);
 
 		if (!is_array($searchquery_input)) {
+			$searchquery_input = trim($searchquery_input);
 
 			//create an array from spaces between wrods
 			$search_array = Format::safeSqlSearchArray($searchquery_input);
@@ -51,20 +52,25 @@ class Search
 			//Create another array which * sign after all array keys
 			$search_array_fulltext = preg_filter('/$/', '$0*', $search_array);
 
+			//create another array which has % sign before and at the end of all array keys
+			$search_array_like = preg_filter(['/^/','/$/'], ['%$0','$0%'], $search_array);
+
 			//If search input has only 1 word in it then use mysql %LIKE% for searching
 			if(count($search_array)==1){
 				//create another array like "?,?,?,?...", this will prevent sql injection
 				$search = Format::safeSqlArray($search_array);
-
-				//create another array which has % sign before and at the end of all array keys
-				$search_array_like = preg_filter(['/^/','/$/'], ['%$0','$0%'], $search_array);
 
 				//If search query is blank/* then get all
 				if($searchquery_input=="") {
 					//Now Merge all the arrays together and
 					$bindedVal = array_merge ($cat_array, $status_array);
 				} else {
-					$bindedVal = array_merge ($cat_array, $status_array, $search_array_like, $search_array_like, $search_array_like, $search_array_fulltext, $search_sort_term, $search_sort_term_unmod);
+					if($authorid==null) {
+						$bindedVal = array_merge ($cat_array, $status_array, $search_array_like, $search_array_like, $search_array_like, $search_array_fulltext, $search_sort_term, $search_sort_term_unmod);
+					} else {
+						$bindedVal = array_merge ($cat_array, $status_array, $search_array_like, $search_array_like, $search_array_fulltext, $search_sort_term, $search_sort_term_unmod);
+
+					}
 				}
 			} else {
 
@@ -72,15 +78,12 @@ class Search
 				//commas and instead will use spaces
 				$search = Format::safeSqlArrayFullText($search_array);
 
-				//Create another single array of all sanitized array, we will pass it into execute() method
-				$bindedVal = array_merge($cat_array,
-				                         $status_array,
-				                         $search_array_fulltext,
-				                         $search_array_fulltext,
-				                         $search_array_fulltext,
-				                         $search_array_fulltext,
-				                         $search_sort_term,
-				                         $search_sort_term_unmod);
+				if($authorid==null) {
+					//Create another single array of all sanitized array, we will pass it into execute() method
+					$bindedVal = array_merge ($cat_array, $status_array, $search_array_fulltext, $search_array_fulltext, $search_sort_term_unmod, $search_array_fulltext, $search_array_fulltext, $search_sort_term, $search_sort_term_unmod);
+				} else {
+					$bindedVal = array_merge ($cat_array, $status_array, $search_array_fulltext, $search_sort_term_unmod, $search_array_fulltext, $search_array_fulltext, $search_sort_term, $search_sort_term_unmod);
+				}
 			}
 		}
 		
@@ -103,36 +106,45 @@ class Search
 				  	addon_type IN ({$cat})
 				  	AND
 				  	status IN ({$status})";
+		if($authorid!=null) {
+			$sql .= " AND ID_AUTHOR = {$authorid} ";
+		}
 
 		if($searchquery_input=="") {
 			$sql .= "ORDER BY ID_ADDON DESC";
-		} else {
+		} else{
 			if (count ($search_array) == 1) {
-				$sql .= "AND (membername LIKE {$search}
-				     OR
-				     tags LIKE {$search}
-				     OR
-				     REPLACE(addon_title,' ','') LIKE {$search}
-				     OR
-				     MATCH(short_description) AGAINST ({$search} IN BOOLEAN MODE)) ";
+
+				$sql .= "AND (";
+				if($authorid==null) $sql .= "membername LIKE {$search} OR ";
+
+				$sql .= "tags LIKE {$search}
+				         OR
+				         REPLACE(addon_title,' ','') LIKE {$search}
+				         OR
+				         MATCH(short_description) AGAINST ({$search} IN BOOLEAN MODE)) ";
 			} else {
-				$sql .= "AND (MATCH(membername) AGAINST ({$search} IN BOOLEAN MODE)
-				     OR
-				     MATCH(tags) AGAINST ({$search} IN BOOLEAN MODE)
-				     OR
-				     MATCH(addon_title) AGAINST ({$search} IN BOOLEAN MODE)
-				     OR
-				     MATCH(short_description) AGAINST ({$search} IN BOOLEAN MODE)) ";
+
+				$sql .= "AND (";
+				if($authorid==null) $sql .= "MATCH(membername) AGAINST ({$search} IN BOOLEAN MODE) OR ";
+
+				$sql .= "MATCH(tags) AGAINST ({$search} IN BOOLEAN MODE)
+				         OR (REPLACE(addon_title,' ','') LIKE ?
+				             OR
+				             MATCH(addon_title) AGAINST ({$search} IN BOOLEAN MODE))
+				         OR
+				         MATCH(short_description) AGAINST ({$search} IN BOOLEAN MODE)) ";
 			}
 
-			$sql .= "ORDER BY (CASE
-              WHEN REPLACE(addon_title,' ','') LIKE ? THEN 0
-              WHEN addon_title LIKE ? THEN 1
-              ELSE 2
-              END), addon_title ASC";
+			$sql .= "
+			ORDER BY (CASE
+			WHEN REPLACE(addon_title,' ','') LIKE ? THEN 0
+            WHEN addon_title LIKE ? THEN 1
+            ELSE 2
+            END), addon_title ASC";
 		}
 
-
+//return $bindedVal;
 		if (databaseConnection ()) {
 			try {
 				$statement = $connection->prepare ($sql);

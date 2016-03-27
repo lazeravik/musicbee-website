@@ -13,15 +13,26 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 include $siteRoot . 'classes/Dashboard.php';
+include $siteRoot . 'classes/Search.php';
 $dashboard = new Dashboard();
+$search = new Search();
+
 
 
 /**
  * Get all addon list submitted by this user
  * @var array $addondata
  */
-$addondata['all_addons_byuser'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
+if(isset($_GET['action'])) {
+	if($_GET['action'] == "search" && (isset($_GET['query']) && isset($_GET['type']))) {
+		$type = ($_GET['type']=="all")? null : $_GET['type'];
+		$addondata['all_addons_byuser'] = $search->searchAddons ($_GET['query'], $type, "0,1,2,3", $_SESSION['memberinfo']['memberid']);
+	}
+} else {
+	$addondata['all_addons_byuser'] = $search->searchAddons (null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid']);
+}
 
+//var_dump($addondata['all_addons_byuser']);
 
 /**
  * Calculate the total page required if it shows x number of items per page
@@ -65,8 +76,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	<div class="sub_content_wrapper"
 	     id="addon_records">
 		<div class="box_content">
-				<span
-						class="show_info custom">
+				<span class="show_info custom">
 					<h3><?php echo $lang['dashboard_11']; ?></h3>
 				</span>
 			<?php if (!empty($addondata['all_addons_byuser'])): ?>
@@ -146,7 +156,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 				</table>
 			<?php else: ?>
-				<p class="message"><?php echo $lang['dashboard_err_3']; ?></p>
+				<p class="message"><?php echo $lang['dashboard_err_2']; ?></p>
 			<?php endif; ?>
 		</div>
 		<div class="box_content">
@@ -158,15 +168,27 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<span class="show_info info_darkgrey custom">
 				<h3><?php echo $lang['dashboard_10']; ?></h3>
 			</span>
+			<form id="search_filter" action="../includes/dashboard.all.template.php" method="get" data-autosubmit>
 			<span class="show_info info_blue custom">
-				<form id="search_filter" action="../includes/dashboard.tasks.php" method="post" data-autosubmit>
-					<input type="search" class="search filter_search" onkeydown="searchFilterAddon()" placeholder="<?php echo $lang['dashboard_13']; ?>">
-					<input type="hidden" name="action" value="search">
-				</form>
+				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter()" >
+				<input type="hidden" name="action" value="search">
 			</span>
-			<div>
-
-			</div>
+				<ul class="form">
+					<li>
+						<label for="type">
+							<p><?php echo $lang['addon_11']; ?></p>
+						</label>
+						<select name="type" id="type" onchange="searchFilterAddon()">
+							<option value="all">All</option>
+							<?php
+							foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
+								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\">" . $menu_addon['title'] . "</option>";
+							}
+							?>
+						</select>
+					</li>
+				</ul>
+			</form>
 		</div>
 	</div>
 </div>
@@ -175,10 +197,32 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 <script type="text/javascript">
 
-	function searchFilterAddon(){
-		if(event.keyCode == 13) {
-			$('form[data-autosubmit][id=search_filter]').autosubmit();
+	function searchEnter(){
+		if (event.keyCode == 13) {
+			searchFilterAddon();
 		}
+	}
+
+	function searchFilterAddon() {
+		$('#loading_icon').show(); //show loading icon'
+		showOverlay(); //show overlay while loading
+
+		var form = $('form[data-autosubmit][id=search_filter]');
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		$.ajax({
+			type: form.attr('method'),
+			url: form.attr('action'),
+			data: form.serialize()
+		}).done(function (data) {
+			var sourcedata = $('#addon_records > *', $(data));
+			$('#addon_records').html(sourcedata).fadeIn();
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+		}).always(function () {
+			$('#loading_icon').hide(); //show loading icon'
+			hideOverlay(); //show overlay while loading
+		});
 	}
 
 	//get page(1,2,3..) addon list via ajax
@@ -206,7 +250,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
 		$.ajax({
-			url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/dashboard.submit.template.php?view=update&id=' + id,
+			url: '../includes/dashboard.submit.template.php?view=update&id=' + id,
 			cache: false,
 			type: "POST",
 		}).done(function (data) {

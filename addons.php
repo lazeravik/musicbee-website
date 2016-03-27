@@ -74,7 +74,7 @@ if (isset($_GET['id'])) {
 
 		$search = new Search();
 		//get all the addon filtered by category/query and other
-		$data['addon_all'] = $search->searchAddons($data['query'],$data['current_type'],1);
+		$data['addon_all'] = $search->searchAddons($data['query'],$data['current_type'],'1');
 
 		//Offset start and end value for pagination
 		$offset_start = (isset($url_params['p'])) ? (($url_params['p'] - 1) * $addon_view_range) : "0";

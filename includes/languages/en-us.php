@@ -309,7 +309,7 @@ $lang['addon_20'] = '&nbsp;&nbsp;See Readme Document';
 $lang['addon_21'] = 'Readme';
 $lang['addon_22'] = 'More from ';
 $lang['addon_23'] = 'See all add-ons';
-$lang['addon_24'] = 'from';
+$lang['addon_24'] = 'from ';
 $lang['addon_25'] = '<i class="fa fa-heart-o"></i>&nbsp;&nbsp; Like';
 $lang['addon_26'] = '<b>ERROR:</b> Add-on id is not valid! It must be a number';
 $lang['addon_27'] = '<b>Thank You</b> for rating. Check more from this author below';
