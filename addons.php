@@ -54,6 +54,7 @@ if (isset($_GET['id'])) {
 
 	} elseif ($_GET['id'] == "s") {
 
+
 		//Addon Pagination function!
 		//remove the ? sign from the string and convert the url paramenter into an array
 		parse_str (str_replace ("?", "", $params[3]), $url_params);
@@ -65,25 +66,34 @@ if (isset($_GET['id'])) {
 		//get the addon type,result order,if any search query from the get request
 		$data['type'] = Format::UnslugTxt (htmlspecialchars ($url_params['type'], ENT_QUOTES, "UTF-8"));
 		$data['order'] = htmlspecialchars ($url_params['order'], ENT_QUOTES, "UTF-8");
-		$data['query'] = (isset($url_params['q'])) ? htmlspecialchars ($url_params['q'], ENT_QUOTES, "UTF-8") : null;
+		$data['query'] = (isset($url_params['q']) && !empty($url_params['q'])) ? htmlspecialchars (trim($url_params['q']), ENT_QUOTES, "UTF-8") : null;
 		$addon_type = Format::Slug ($data['type']);
 
 		$generated_url = $link['addon']['home'] . "s/?q=" . urlencode ($data['query']) . "&type=" . $addon_type . "&order=" . $data['order'];
 
 		$data['current_type'] = ($url_params['type']=="all")? null : $url_params['type'];
 
+		if (isset($url_params['p'])){
+			if(is_int($url_params['p']) || ctype_digit($url_params['p'])) {
+				$offset = ($url_params['p'] - 1) * $addon_view_range;
+				$current_page = $url_params['p'];
+			} else {
+				$offset = 0;
+				$current_page = 1;
+			}
+		} else {
+			$offset = 0;
+			$current_page = 1;
+		}
+
 		$search = new Search();
 		//get all the addon filtered by category/query and other
-		$data['addon_all'] = $search->searchAddons($data['query'],$data['current_type'],'1');
+		$data['addon_data'] = $search->searchAddons($data['query'],$data['current_type'],'1', null, $offset, $addon_view_range);
 
-		//Offset start and end value for pagination
-		$offset_start = (isset($url_params['p'])) ? (($url_params['p'] - 1) * $addon_view_range) : "0";
-
-		//instead of showing the full list at once, we wan't to break it down by chunks and use pagination
-		$data['addon'] = ($data['addon_all'] != null) ? array_slice ($data['addon_all'], $offset_start, $addon_view_range) : null;
-		
 		//Calculate total number of page required
-		$page_total = ceil (count ($data['addon_all']) / $addon_view_range);
+		$page_total = ceil ($data['addon_data']['row_count'] / $addon_view_range);
+
+		//var_dump($page_total);
 
 		$meta_description = "blah";
 		include_once $siteRoot . 'includes/addons.search.template.php';
@@ -102,11 +112,10 @@ if (isset($_GET['id'])) {
  * Generate addon result view
  *
  * @param  array $data  gets the data from Addon class using getAddonFiltered() method
- * @param  class $addon class instance
  *
  * @return string        necessary html for generating the addon list view
  */
-function addon_result_view_generator($data, $addon) {
+function addon_result_view_generator($data) {
 	global $link, $lang;
 
 	if ($data != null) {
@@ -119,7 +128,7 @@ function addon_result_view_generator($data, $addon) {
 			<div class="addon_list_box_wrapper">
 				<a href="' . $addon_link . '">
 					<div class="thumb_more" style="background-image:url(' . $addon_data['thumbnail'] . ')"></div>
-					<div class="love"><i class="fa fa-heart"></i><p class="love_count">' . $addon->getRating ($addon_data['ID_ADDON']) . '</p></div>
+					<div class="love"><i class="fa fa-heart"></i><p class="love_count">' . Format::number_format_suffix($addon_data['likesCount']) . '</p></div>
 					'.$addon_beta_markup.'
 				</a>
 				<div class="addon_list_box_info">
@@ -141,17 +150,16 @@ function addon_result_view_generator($data, $addon) {
  * Generate Pagination for addon result view
  *
  * @param  int    $page_total    total number of pagination breadcrumb required
+ * @param  int    $current_page
  * @param  string $generated_url url with required param only, no page param included
  *
- * @return string                   necessary html for generating the pagination bread crumb
+ * @return string necessary html for generating the pagination bread crumb
  */
-function addon_result_pagination_generator($page_total, $generated_url) {
-	global $url_params;
+function addon_result_pagination_generator($page_total, $current_page, $generated_url) {
 	if ($page_total > 0) {
 		$pagination_view = '<ul class="pagination">';
 		for ($i = 1; $i < $page_total + 1; $i++) {
-			$page_num = isset($url_params['p']) ? $url_params['p'] : "1";
-			if ($page_num == $i) {
+			if ($current_page == $i) {
 				$pagination_view .= '<li><a class="btn btn_blue active" href="' . $generated_url . '&p=' . $i . '"><p>' . $i . '</p></a></li>';
 			} else {
 				$pagination_view .= '<li><a class="btn btn_blue" href="' . $generated_url . '&p=' . $i . '"><p>' . $i . '</p></a></li>';

@@ -323,12 +323,6 @@ endif;
 
 								<?php endforeach; ?>
 							</div>
-							<button
-									type="button"
-									id="add_button"
-									class="btn btn_blue">
-								<?php echo $lang['dashboard_submit_btn_2']; ?>
-							</button>
 						<?php else: ?>
 							<div id="screenshot_inputs"
 							     class="link_input">

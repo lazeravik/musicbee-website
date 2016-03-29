@@ -27,17 +27,28 @@ class Addon
 		global $connection;
 		if (databaseConnection ()) {
 			try {
-				$sql = "
-						SELECT 
-							* 
+				$sql = "SELECT
+							" . SITE_ADDON . ".ID_ADDON,
+				  	        ID_AUTHOR,
+				  	        membername,
+				  	        addon_title,
+				  	        addon_type,
+				  	        thumbnail,
+				  	        is_beta,
+				  	        status,
+							COUNT(ID_LIKES) AS likesCount
 						FROM 
 							" . SITE_ADDON . "
-								LEFT JOIN 
+							LEFT JOIN
 							" . SITE_MEMBER_TBL . "
-								ON
+							ON
 							" . SITE_ADDON . ".ID_AUTHOR = " . SITE_MEMBER_TBL . ".ID_MEMBER
+							 LEFT JOIN
+							 ". SITE_ADDON_LIKE ."
+                            on ". SITE_ADDON .".ID_ADDON = ". SITE_ADDON_LIKE .".ID_ADDON
 						WHERE 
 							ID_AUTHOR = :id AND status = 1
+						GROUP BY " . SITE_ADDON . ".ID_ADDON
 						ORDER BY 
 							ID_ADDON DESC 
 						LIMIT 

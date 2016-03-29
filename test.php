@@ -25,7 +25,17 @@ var_dump($search_array);
 		<input type="hidden" name="status" value="1">
 	</form>
 <br/>
-<?php var_dump($search_result); ?>
+<?php
+$getvar = filter_input(INPUT_GET, 'getvar');
+
+var_dump($getvar);
+
+
+
+
+
+
+var_dump($search_result); ?>
 
 </body>
 </html>

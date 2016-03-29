@@ -91,6 +91,11 @@ a {
 		}
 	}
 
+	&.info_silverwhite {
+		background: #FFFFFF;
+		border-bottom: 1px solid #E3E3E3;
+	}
+
 	&.header {
 		h3 {
 			display : inline-block;
@@ -139,17 +144,17 @@ a {
 }
 
 .search {
+	background : url("../../img/search.png") no-repeat right 10px center;
+
 	&.small_search {
 		margin       : 4px;
 		width        : 250px;
-		background   : rgba(255, 255, 255, 0) url("../../img/search.png") no-repeat right 10px center;
 		border-color : rgba(255, 255, 255, 0.22);
 		color        : #fff;
 	}
 
 	&.big_search {
 		width        : 100%;
-		background   : rgb(26, 29, 30) url("../../img/search.png") no-repeat right 10px center;
 		border-color : rgba(255, 255, 255, 0.1);
 		color        : #fff;
 		padding      : 15px 15px;
@@ -159,20 +164,33 @@ a {
 
 	&.filter_search {
 		width: 100%;
-		background: rgba(0, 0, 0, 0.14) url("../../img/search.png") no-repeat right 10px center;
-		border-color: rgba(255, 255, 255, 0.5);
-		color: #FFF;
-		padding: 10px 10px;
+		border-color:rgba(255, 255, 255, 0.22);
+		color: #404040;
+		padding: 10px 35px 10px 10px;
 		font-size: 15px;
 		margin: 0px 0px 0px;
 	}
 
 	&:hover {
-		border-color : rgba(255, 255, 255, 0.4);
+		border-color : rgba(255, 255, 255, 0.7);
 	}
 
 	&:focus {
 		border-color : $musicbee-color;
+	}
+
+	&.dark {
+		background : url("../../img/search_dark.png") no-repeat right 10px center;
+		border-color: #d7d7d7;
+		color : #333;
+
+		&:hover {
+			border-color : $musicbee-color;
+		}
+
+		&:focus {
+			border-color : #333;
+		}
 	}
 }
 

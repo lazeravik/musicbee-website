@@ -509,6 +509,11 @@ a:active, a:hover {
   content: none;
 }
 
+.show_info.info_silverwhite {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E3E3E3;
+}
+
 .show_info.header h3 {
   display: inline-block;
 }
@@ -554,17 +559,19 @@ a:active, a:hover {
   border-radius: 0px;
 }
 
+.search {
+  background: url("../../img/search.png") no-repeat right 10px center;
+}
+
 .search.small_search {
   margin: 4px;
   width: 250px;
-  background: rgba(255, 255, 255, 0) url("../../img/search.png") no-repeat right 10px center;
   border-color: rgba(255, 255, 255, 0.22);
   color: #fff;
 }
 
 .search.big_search {
   width: 100%;
-  background: #1a1d1e url("../../img/search.png") no-repeat right 10px center;
   border-color: rgba(255, 255, 255, 0.1);
   color: #fff;
   padding: 15px 15px;
@@ -574,20 +581,33 @@ a:active, a:hover {
 
 .search.filter_search {
   width: 100%;
-  background: rgba(0, 0, 0, 0.14) url("../../img/search.png") no-repeat right 10px center;
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #FFF;
-  padding: 10px 10px;
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #404040;
+  padding: 10px 35px 10px 10px;
   font-size: 15px;
   margin: 0px 0px 0px;
 }
 
 .search:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .search:focus {
   border-color: #ff9800;
+}
+
+.search.dark {
+  background: url("../../img/search_dark.png") no-repeat right 10px center;
+  border-color: #d7d7d7;
+  color: #333;
+}
+
+.search.dark:hover {
+  border-color: #ff9800;
+}
+
+.search.dark:focus {
+  border-color: #333;
 }
 
 .notify {
@@ -1232,6 +1252,10 @@ h4 {
   color: #FFFFFF;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
   display: inline-block;
+}
+
+.mainmenu .menu_wrapper .menu_position li a i.fa {
+  align-self: center;
 }
 
 .mainmenu .menu_wrapper .menu_position li a:hover {
@@ -2301,7 +2325,7 @@ select#release_note_jump option {
   width: 100%;
   box-sizing: border-box;
   color: #FFFFFF;
-  background: #1a1d1e;
+  background-color: #1a1d1e;
   border-color: rgba(255, 255, 255, 0.1);
   border-radius: 0px;
   background-position: right 10px top 17px;

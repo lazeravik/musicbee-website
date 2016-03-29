@@ -14,11 +14,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 include $siteRoot . 'classes/Dashboard.php';
 include $siteRoot . 'classes/Search.php';
-$dashboard = new Dashboard();
 $search = new Search();
 
 
-
+if (isset($_GET['page_num'])){
+	if(is_int($_GET['page_num']) || ctype_digit($_GET['page_num'])) {
+		$offset = ($_GET['page_num'] - 1) * $dashboard_all_view_range;
+		$current_page = $_GET['page_num'];
+	} else {
+		$offset = 0;
+		$current_page = 1;
+	}
+} else {
+	$offset = 0;
+	$current_page = 1;
+}
 /**
  * Get all addon list submitted by this user
  * @var array $addondata
@@ -26,41 +36,29 @@ $search = new Search();
 if(isset($_GET['action'])) {
 	if($_GET['action'] == "search" && (isset($_GET['query']) && isset($_GET['type']))) {
 		$type = ($_GET['type']=="all")? null : $_GET['type'];
-		$addondata['all_addons_byuser'] = $search->searchAddons ($_GET['query'], $type, "0,1,2,3", $_SESSION['memberinfo']['memberid']);
+		$status = ($_GET['status']=="all")? "0,1,2,3" : $_GET['status'];
+		$resultdata = $search->searchAddons ($_GET['query'], $type, $status, $_SESSION['memberinfo']['memberid'],$offset,$dashboard_all_view_range);
 	}
 } else {
-	$addondata['all_addons_byuser'] = $search->searchAddons (null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid']);
+	$resultdata = $search->searchAddons (null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid'],$offset,$dashboard_all_view_range);
 }
-
-//var_dump($addondata['all_addons_byuser']);
 
 /**
  * Calculate the total page required if it shows x number of items per page
  * @var int $page_total
  */
-$page_total = ceil (count ($addondata['all_addons_byuser']) / $dashboard_all_view_range);
+$page_total = ceil ($resultdata['row_count'] / $dashboard_all_view_range);
 
-/**
- * Offset start and end value for pagination
- * @var int $offset_start
- */
-$offset_start = (isset($_POST['page_num'])) ? (($_POST['page_num'] - 1) * $dashboard_all_view_range) : "0";
 
-$current_pagenum = (isset($_POST['page_num'])) ? ($_POST['page_num']) : "1";
 
-/**
- * Slice the addon list to show x number of items
- * @var array $addondata
- */
-$addondata['all_addons_byuser'] = ($addondata['all_addons_byuser'] != null) ? array_slice ($addondata['all_addons_byuser'], $offset_start, $dashboard_all_view_range) : null;
 function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	if ($page_total > 0) {
 		$pagination_view = '<ul class="pagination">';
 		for ($i = 1; $i < $page_total + 1; $i++) {
 			if ($current_pagenum == $i) {
-				$pagination_view .= '<li><button class="btn btn_blue active" onclick="loadAddonPage(' . $i . ')">' . $i . '</button></li>';
+				$pagination_view .= '<li><button class="btn btn_blue active" onclick="loadAddonPage(event,' . $i . ')">' . $i . '</button></li>';
 			} else {
-				$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(' . $i . ')">' . $i . '</button></li>';
+				$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(event,' . $i . ')">' . $i . '</button></li>';
 			}
 		}
 		$pagination_view .= '</ul>';
@@ -72,14 +70,56 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 }
 
 ?>
-<div class="main_content_wrapper col_2_1">
-	<div class="sub_content_wrapper"
-	     id="addon_records">
+<div class="main_content_wrapper col_1_2">
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_darkgrey custom">
+				<h3><?php echo $lang['dashboard_10']; ?></h3>
+			</span>
+			<form id="search_filter" action="../includes/dashboard.all.template.php" method="get" data-autosubmit>
+			<span class="show_info info_silverwhite custom">
+				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)" >
+				<input type="hidden" name="action" value="search">
+			</span>
+				<ul class="form">
+					<li>
+						<label for="type">
+							<p><?php echo $lang['addon_11']; ?></p>
+						</label>
+						<select name="type" id="type" onchange="searchDropdown(event)">
+							<option value="all">All</option>
+							<?php
+							foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
+								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\">" . $menu_addon['title'] . "</option>";
+							}
+							?>
+						</select>
+					</li>
+				</ul>
+				<ul class="form">
+					<li>
+						<label for="status"><p><?php echo $lang['dashboard_record_th_4']; ?></p></label>
+						<select name="status" id="status" onchange="searchDropdown(event)">
+							<option value="all">All</option>
+							<option value="0"><?php echo $lang['addon_status_1']; ?></option>
+							<option value="1"><?php echo $lang['addon_status_2']; ?></option>
+							<option value="2"><?php echo $lang['addon_status_3']; ?></option>
+							<option value="3"><?php echo $lang['addon_status_4']; ?></option>
+						</select>
+					</li>
+				</ul>
+				<hr class="line">
+
+				<input id="page_num" type="hidden" name="page_num" value="1">
+			</form>
+		</div>
+	</div>
+	<div class="sub_content_wrapper" id="addon_records">
 		<div class="box_content">
 				<span class="show_info custom">
 					<h3><?php echo $lang['dashboard_11']; ?></h3>
 				</span>
-			<?php if (!empty($addondata['all_addons_byuser'])): ?>
+			<?php if (!empty($resultdata['result'])): ?>
 
 				<table class="record">
 					<thead>
@@ -99,7 +139,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					</tr>
 					</thead>
 					<tbody>
-					<?php foreach ($addondata['all_addons_byuser'] as $key => $addon): ?>
+					<?php foreach ($resultdata['result'] as $key => $addon): ?>
 						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3") ? "deleted" : ""; ?>">
 							<td>
 								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
@@ -160,53 +200,32 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<?php endif; ?>
 		</div>
 		<div class="box_content">
-			<?php echo dashboard_result_pagination_generator ($page_total, $current_pagenum); ?>
+			<?php echo dashboard_result_pagination_generator ($page_total, $current_page); ?>
 		</div>
 	</div>
-	<div class="sub_content_wrapper">
-		<div class="box_content">
-			<span class="show_info info_darkgrey custom">
-				<h3><?php echo $lang['dashboard_10']; ?></h3>
-			</span>
-			<form id="search_filter" action="../includes/dashboard.all.template.php" method="get" data-autosubmit>
-			<span class="show_info info_blue custom">
-				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter()" >
-				<input type="hidden" name="action" value="search">
-			</span>
-				<ul class="form">
-					<li>
-						<label for="type">
-							<p><?php echo $lang['addon_11']; ?></p>
-						</label>
-						<select name="type" id="type" onchange="searchFilterAddon()">
-							<option value="all">All</option>
-							<?php
-							foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\">" . $menu_addon['title'] . "</option>";
-							}
-							?>
-						</select>
-					</li>
-				</ul>
-			</form>
-		</div>
-	</div>
+
 </div>
 
 <div class="space medium"></div>
 
 <script type="text/javascript">
-
-	function searchEnter(){
+	searchEnter = function(event){
 		if (event.keyCode == 13) {
-			searchFilterAddon();
+			//reset pagination for search
+			$('#page_num').val(1);
+			searchFilterAddon(event);
 		}
 	}
 
-	function searchFilterAddon() {
+	searchDropdown = function (event){
+		//reset pagination for dropdown filter
+		$('#page_num').val(1);
+		searchFilterAddon(event);
+	}
+
+	searchFilterAddon = function(event) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
-
 		var form = $('form[data-autosubmit][id=search_filter]');
 		event.preventDefault();
 		event.stopImmediatePropagation();
@@ -226,24 +245,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	}
 
 	//get page(1,2,3..) addon list via ajax
-	function loadAddonPage(page_num) {
-		$('#loading_icon').show(); //show loading icon'
-		showOverlay(); //show overlay while loading
-		$.ajax({
-			url: '../includes/dashboard.all.template.php',
-			cache: false,
-			type: "POST",
-			data: {page_num: "" + page_num + ""}
-		}).done(function (data) {
-			var sourcedata = $('#addon_records > *', $(data));
-			$('#addon_records').html(sourcedata).fadeIn();
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-		}).always(function () {
-			gotoTop();
-			$('#loading_icon').hide(); //show loading icon'
-			hideOverlay(); //show overlay while loading
-		});
+	loadAddonPage = function (event,page_num) {
+		$('#page_num').val(page_num);
+		searchFilterAddon(event);
 	}
 
 	function loadEditView(id) {

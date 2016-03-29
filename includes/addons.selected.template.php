@@ -92,10 +92,20 @@ if ($data['status'] == "3"): ?>
 
 				<div class="general_info_downloadlink">
 
-					<?php if ($data['status'] != 1): ?>
-						<span class="show_info danger"><h3><?php echo $lang['addon_34']; ?></h3><p class="description"><?php echo $lang['addon_35']; ?></p></span>
+					<?php if ($data['status'] == 2): ?>
+					<span class="show_info">
+						<h3><?php echo $lang['addon_39']; ?></h3>
+						<p class="description"><?php echo $lang['addon_40']; ?></p>
+					</span>
+					<?php elseif ($data['status'] != 1): ?>
+						<span class="show_info danger">
+							<h3><?php echo $lang['addon_34']; ?></h3>
+							<p class="description"><?php echo $lang['addon_35']; ?></p>
+						</span>
 					<?php endif; ?>
 
+
+					<?php if ($data['status'] != 2): ?>
 					<a href="<?php echo $link['redirect'] . '?type=addon&id=' . $data['ID_ADDON'] . '&r=' . urlencode ($data['download_links']); ?>" class="btn btn_blue" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
 					</a>
 					<?php if (!empty(trim ($data['support_forum']))): ?>
@@ -113,6 +123,7 @@ if ($data['status'] == "3"): ?>
 					   data-like-count="<?php echo Format::number_format_suffix ($addon_like); ?>">
 						<?php echo $lang['addon_25']; ?>
 					</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -161,7 +172,7 @@ if ($data['status'] == "3"): ?>
 		<div class="addon_similar_wrap from_author">
 			<h2><?php echo $lang['addon_22'] . $data['membername']; ?></h2>
 			<?php
-			echo addon_result_view_generator ($from_author, $addon);
+			echo addon_result_view_generator ($from_author);
 			?>
 			<div class="more_addon">
 				<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator ($data['membername']); ?>">

@@ -65,6 +65,10 @@ $info_bar_max_width : 1200px;
 					text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.62);
 					display: inline-block;
 
+					i.fa {
+						align-self: center;
+					}
+
 					&:hover {
 						background: none;
 						text-decoration: none;

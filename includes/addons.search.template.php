@@ -81,8 +81,8 @@
 				?>
 
 				<?php 
-				echo addon_result_view_generator($data['addon'], $addon);
-				echo addon_result_pagination_generator($page_total, $generated_url);
+				echo addon_result_view_generator($data['addon_data']['result']);
+				echo addon_result_pagination_generator($page_total, $current_page, $generated_url);
 				?>
 			</div>
 		</div>

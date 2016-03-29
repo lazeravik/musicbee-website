@@ -212,20 +212,23 @@ class Dashboard
 		if (databaseConnection ()) {
 			try {
 				$sql = "SELECT
-					" . SITE_ADDON . ".ID_ADDON, " . SITE_ADDON . ".addon_title, " . SITE_ADDON . ".addon_type, " . SITE_ADDON . ".status,
+					".SITE_ADDON.".ID_ADDON,
+					".SITE_ADDON.".addon_title,
+					".SITE_ADDON.".addon_type,
+					".SITE_ADDON.".status,
 					COUNT(ID_LIKES) AS likesCount
 					FROM
-					" . SITE_ADDON_LIKE . "
+					".SITE_ADDON_LIKE."
 					LEFT JOIN
-					" . SITE_ADDON . "
+					".SITE_ADDON."
 					ON
-					" . SITE_ADDON_LIKE . ".ID_ADDON = " . SITE_ADDON . ".ID_ADDON
+					".SITE_ADDON_LIKE.".ID_ADDON = ".SITE_ADDON.".ID_ADDON
 					WHERE
-					" . SITE_ADDON . ".status = 1
+					".SITE_ADDON.".status = 1
 					AND
-					" . SITE_ADDON . ".ID_AUTHOR = :author_id
+					".SITE_ADDON.".ID_AUTHOR = :author_id
 					GROUP BY
-					" . SITE_ADDON . ".ID_ADDON
+					".SITE_ADDON.".ID_ADDON
 					ORDER BY
 					likesCount
 					DESC
@@ -403,20 +406,17 @@ class Dashboard
 	 *
 	 * @return array
 	 */
-	public function getAllAddonByStatusAndMember($id, $stat) {
+	public function getAllAddonCountByStatusAndMember($id, $stat) {
 		global $connection;
 		if (databaseConnection ()) {
 			try {
-				$sql = "SELECT * FROM " . SITE_ADDON . " WHERE ID_AUTHOR = :id AND status = " . $stat . " ORDER BY ID_ADDON DESC";
+				$sql = "SELECT COUNT(*) AS count FROM " . SITE_ADDON . " WHERE ID_AUTHOR = :id AND status = " . $stat . " ORDER BY ID_ADDON DESC";
 				$statement = $connection->prepare ($sql);
 				$statement->bindValue (':id', $id);
 				$statement->execute ();
 				$result = $statement->fetchAll (PDO::FETCH_ASSOC);
-				if (count ($result) > 0) {
-					return $result;
-				} else {
-					return null;
-				}
+				return $result[0]['count'];
+
 			} catch (Exception $e) {
 
 			}

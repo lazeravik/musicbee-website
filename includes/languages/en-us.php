@@ -44,7 +44,7 @@ $lang['line'] = '<hr class="line"/>';
 $lang['1'] = 'MusicBee';
 $lang['2'] = 'Download';
 $lang['3'] = 'Add-ons';
-$lang['4'] = 'Forum';
+$lang['4'] = 'Community';
 $lang['5'] = 'Help';
 $lang['6'] = '<i class="fa fa-user" style="color:#FFA500;"></i>';
 $lang['7'] = 'Web Admin';
@@ -162,8 +162,8 @@ $lang['198'] = 'Go to home &nbsp;<i class="fa fa-arrow-right"></i>';
 
 /*Add-on Dashboard*/
 $lang['dashboard_title'] = "MusicBee Add-on Dashboard";
-$lang['dashboard_infobar_title'] = "Add-on Dashboard";
-$lang['dashboard_infobar_desc'] = "Add a skin or plug-in all in one place, manage your uploaded add-ons and update them easily";
+$lang['dashboard_infobar_title'] = "Dashboard";
+$lang['dashboard_infobar_desc'] = "Dashboard is your control center to managing your uploaded addons, moderation and more";
 //dashboard > secondery menu
 $lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
 $lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
@@ -320,9 +320,10 @@ $lang['addon_31'] = 'Showing results for: ';
 $lang['addon_32'] = 'There is nothing yet! <i class="fa fa-frown-o"></i>';
 $lang['addon_33'] = 'You can request for an add-on on our forum, or you can create and submit one yourself';
 $lang['addon_34'] = 'Be Careful!';
-$lang['addon_35'] = 'This addon is not approved by admins yet!';
+$lang['addon_35'] = 'This add-on is not approved by admins yet!';
 $lang['addon_38'] = 'beta';
-
+$lang['addon_39'] = "This add-on has been rejected by Admin/Mods";
+$lang['addon_40'] = "You can not download rejected add-ons!";
 
 /**
  * Release Notes

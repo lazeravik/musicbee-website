@@ -21,12 +21,9 @@ $dashboard = new Dashboard();
 $stat['total_download'] = $Stats->getAddonDownloadCountByAuthor ($_SESSION['memberinfo']['memberid']);
 $stat['total_likes'] = $Stats->getAddonLikeCountByAuthor ($_SESSION['memberinfo']['memberid']);
 $stat['total_addon_submitted'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
-$stat['total_unapproved_addon'] = $dashboard->getAllAddonByStatusAndMember ($_SESSION['memberinfo']['memberid'],
-                                                                            0);
-$stat['top_voted_addon'] = $dashboard->getTopVotedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],
-                                                                  10);
-$stat['top_downloaded_addon'] = $dashboard->getMostDownloadedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],
-                                                                             10);
+$stat['total_unapproved_addon'] = $dashboard->getAllAddonCountByStatusAndMember ($_SESSION['memberinfo']['memberid'],0);
+$stat['top_voted_addon'] = $dashboard->getTopVotedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],10);
+$stat['top_downloaded_addon'] = $dashboard->getMostDownloadedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],10);
 $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
                                           0,
                                           10);
@@ -57,7 +54,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<?php echo $lang['dashboard_2']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix (count ($stat['total_unapproved_addon'])); ?>
+						<?php echo Format::number_format_suffix ($stat['total_unapproved_addon']); ?>
 					</td>
 				</tr>
 				<tr>
