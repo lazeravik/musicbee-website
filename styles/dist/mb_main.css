@@ -2274,17 +2274,17 @@ select#release_note_jump option {
 }
 
 .secondery_nav_color {
-  background: #161A1B;
+  background: #161a1b;
 }
 
 .search_box_outer_wrap {
-  background: #161A1B;
+  background: #161a1b;
 }
 
 .sub_content {
   padding: 40px 20px 40px 20px;
   text-align: center;
-  color: #FFFFFF;
+  color: #fff;
 }
 
 .search_box_wrap {
@@ -2324,7 +2324,7 @@ select#release_note_jump option {
 .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #type, .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #order {
   width: 100%;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #fff;
   background-color: #1a1d1e;
   border-color: rgba(255, 255, 255, 0.1);
   border-radius: 0px;
@@ -2335,7 +2335,7 @@ select#release_note_jump option {
 
 .search_box_wrap label {
   margin: 0px 0px 10px 0px;
-  color: #9C9C9C;
+  color: #9c9c9c;
   font-weight: bold;
   font-size: 15px;
 }
@@ -2347,7 +2347,7 @@ select#release_note_jump option {
 }
 
 .addon_similar {
-  background: #1D1D1D;
+  background: #1d1d1d;
   padding-bottom: 10px;
 }
 
@@ -2358,8 +2358,43 @@ select#release_note_jump option {
   margin: 0px auto;
 }
 
+.addon_similar .addon_similar_wrap.tags h3 {
+  display: inline-block;
+}
+
+.addon_similar .addon_similar_wrap.tags a {
+  padding: 5px 10px;
+  background: #2D2D2D;
+  margin: 4px;
+  font-style: italic;
+  border-radius: 2px;
+}
+
+.addon_similar .addon_similar_wrap.tags a:hover {
+  background: #ff9800;
+  text-decoration: none;
+  color: #404040;
+}
+
+.addon_similar .addon_similar_wrap.header_links a {
+  padding: 10px;
+  margin: 0px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  font-weight: normal;
+  font-size: 14px;
+  text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
+}
+
+.addon_similar .addon_similar_wrap.header_links a:hover {
+  background: #ff9800;
+  color: #4e4e4e;
+  text-decoration: none;
+  font-weight: normal;
+}
+
 .addon_similar .addon_similar_wrap h2 {
-  box-shadow: inset 5px 0px 0px #FF9800;
+  box-shadow: inset 5px 0px 0px #ff9800;
   padding-left: 20px;
   text-transform: uppercase;
   margin-bottom: 30px;
@@ -2474,7 +2509,7 @@ select#release_note_jump option {
 }
 
 .addon_list_box li .addon_list_box_wrapper .love i {
-  color: #FF5200;
+  color: #ff5200;
   text-shadow: 0px 0px 10px #690000;
 }
 
@@ -2502,13 +2537,13 @@ select#release_note_jump option {
 
 .addon_list_box li .addon_list_box_wrapper .addon_list_box_info .author {
   margin: 5px 0px 0px 0px;
-  color: #AFAFAF;
+  color: #afafaf;
 }
 
 .addon_list_box li .addon_list_box_wrapper .addon_list_box_info a {
   position: relative;
   text-decoration: none;
-  color: #D8D8D8;
+  color: #d8d8d8;
   display: block;
 }
 
@@ -2531,7 +2566,7 @@ select#release_note_jump option {
 }
 
 .general_info {
-  background: #607D8B;
+  background: #607d8b;
   color: #fff;
   background-size: cover;
   background-position: 50% 50%;
@@ -2601,7 +2636,7 @@ select#release_note_jump option {
 .general_info .general_info_color .general_info_wrap .general_info_sidenote {
   float: left;
   width: 100%;
-  color: #F47E36;
+  color: #f47e36;
 }
 
 .general_info .general_info_color .general_info_wrap .general_info_downloadlink {
@@ -2671,7 +2706,7 @@ select#release_note_jump option {
 }
 
 .license_attr {
-  color: #4A463A;
+  color: #4a463a;
 }
 
 .search_term {

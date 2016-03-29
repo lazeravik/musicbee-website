@@ -117,6 +117,7 @@ if (isset($_POST['submit'])) {
 				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 				//load parsedown markup to html converter
 				$Parsedown = new Parsedown();
+				$Parsedown->setBreaksEnabled(true);
 				$readme_raw = $Parsedown->text ($readme);
 				//load and use html purifier for the readme notes.
 				$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html

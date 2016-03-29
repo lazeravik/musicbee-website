@@ -325,6 +325,8 @@ $lang['addon_38'] = 'beta';
 $lang['addon_39'] = "This add-on has been rejected by Admin/Mods";
 $lang['addon_40'] = "You can not download rejected add-ons!";
 
+$lang['addon_41'] = "Tags: ";
+
 /**
  * Release Notes
  */

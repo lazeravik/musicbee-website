@@ -15,7 +15,7 @@
 		public static function htmlSafeOutput($html)
 		{
 			$config = HTMLPurifier_Config::createDefault();
-			$config->set('HTML.Allowed', 'code[class|lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src],s,del,hr');
+			$config->set('HTML.Allowed', 'code[class|lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src],s,del,hr,br');
 			$def = $config->getHTMLDefinition(true);
 			$def->addAttribute('code', 'lang-rel', 'Text');
 			$purifier = new HTMLPurifier($config);

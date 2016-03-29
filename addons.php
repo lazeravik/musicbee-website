@@ -11,49 +11,29 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require_once $siteRoot . 'classes/Addon.php';
-require_once $siteRoot . 'classes/Format.php';
 require_once $siteRoot . 'classes/Search.php';
 $addon = new Addon();
 
 
 if (isset($_GET['id'])) {
-	if (ctype_digit ($_GET['id'])) {
-		$data = $addon->getAddonInfo ($_GET['id'])[0];
+	if (is_int($_GET['id']) || ctype_digit ($_GET['id'])) {
 
-		//if no addon data is found on the database then it is likely to be deleted, throw a 404 error
-		if (null == $data) {
-			header ("HTTP/1.0 404 Not Found");
-			include_once $status['404'];
-			exit();
-		}
+		$params = array_filter($params);
+		array_shift($params); //"addons" from the array as we already know the page name
+		$addon_data = $addon->getAddonData($_GET['id']);
 
 		//checks the url parameter and try to match the addon title, if the addon id matches but not the title, then do a 301 redirect
-		if (count ($params) <= 4 || urldecode($params[3]) != Format::Slug ($data['addon_title'])) {
-			header ("Location: " . $siteUrl . "addons/" . $data['ID_ADDON'] . "/" . Format::Slug ($data['addon_title']) . "", 301);
+		if (count ($params) <= 2 && urldecode($params[1]) != Format::Slug ($addon_data['addon_title'])) {
+			header ("Location: " . $link['addon']['home'] . $addon_data['ID_ADDON'] . "/" . Format::Slug ($addon_data['addon_title']) . "/", 301);
 		}
 
-
-
-		//Since the addon is found and everything is ok, create screenshot link array
-		$screenshots = explode (",", $data['image_links']);
-
-		//Create an array of supported musicbee version for this array
-		foreach (explode (",", $data['supported_mbversion']) as $mbVer) {
-			$mbVerArray[] = $addon->getMbVersions ($mbVer)[0]['appname'];
-		}
-
-		//get addon specific info like likes, title, description etc.
-		$meta_description = "Download MusicBee skins, plugins, theater mode, visualizer and more..";
-		$addon_type = Format::UnslugTxt ($data['addon_type']);
-		$from_author = $addon->getAddonListByMember ($data['ID_AUTHOR'], 5);
-		$addon_like = $addon->getRating ($data['ID_ADDON']);
-		$addon_already_liked = $addon->is_rated ($data['ID_ADDON'], $user_info['id']);
+		$from_author = $addon->getAddonListByMember ($addon_data['ID_AUTHOR'], 5);
+		//var_dump($addon_data);
 
 		include_once $siteRoot . 'includes/addons.selected.template.php';
 		exit();
 
 	} elseif ($_GET['id'] == "s") {
-
 
 		//Addon Pagination function!
 		//remove the ? sign from the string and convert the url paramenter into an array

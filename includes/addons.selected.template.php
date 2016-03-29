@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $data['addon_title']; ?> for MusicBee</title>
-	<meta name="description" content="<?php echo $meta_description; ?>">
+	<title><?php echo $addon_data['addon_title']; ?> for MusicBee</title>
+	<meta name="description" content="<?php echo $addon_data['short_description']; ?>">
 	<!-- keyword meta tag is obsolete, google does not use it, but some
 	search engine still use it, so for legacy support it is included -->
-	<meta name="keywords" content="<?php echo $data['tags']; ?>, musicbee, customizable, skin, free, plugin, download">
+	<meta name="keywords" content="<?php echo implode(",", $addon_data['tags']); ?>, musicbee, customizable, skin, free, plugin, download">
 
 	<!--include common meta tags and stylesheets -->
 	<?php include $siteRoot . 'includes/meta&styles.php'; ?>
@@ -29,7 +29,7 @@ include ($mainmenu);
 /**
  * If the addon is soft deleted show error only!
  */
-if ($data['status'] == "3"): ?>
+if ($addon_data['status'] == "3"): ?>
 	<div class="main_content_wrapper col_2_1">
 		<div class="sub_content_wrapper">
 			<div class="box_content">
@@ -47,57 +47,57 @@ if ($data['status'] == "3"): ?>
 		<!-- AddOn page navigation top menu -->
 		<div class="secondery_nav addon_secondery_nav" id="secondery_nav">
 			<div class="secondery_nav_wrap">
-				<?php echo addon_secondery_nav_generator ($addon_type); ?>
+				<?php echo addon_secondery_nav_generator ($addon_data['addon_type']); ?>
 			</div>
 		</div>
 		<div id="overlay_bg" class="general_info_color">
 			<div class="general_info_wrap">
 				<div class="general_info_text">
 					<h2 class="title">
-						<?php echo $data['addon_title']; ?>
-						<?php if ($data['addon_version'] != null): ?>
-							<i class="general_info_addon_version">v<?php echo $data['addon_version']; ?></i>
+						<?php echo $addon_data['addon_title']; ?>
+						<?php if ($addon_data['addon_version'] != null): ?>
+							<i class="general_info_addon_version">v<?php echo $addon_data['addon_version']; ?></i>
 						<?php endif; ?>
-						<?php if ($data['is_beta'] == 1): ?>
+						<?php if ($addon_data['is_beta'] == 1): ?>
 							<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
 						<?php endif; ?>
 					</h2>
 					<div class="general_info_addon_meta">
 						<p><?php echo $lang['addon_15']; ?>
-							<a href="<?php echo addon_author_url_generator ($data['membername']); ?>"><?php echo $data['membername']; ?></a>
+							<a href="<?php echo addon_author_url_generator ($addon_data['membername']); ?>"><?php echo $addon_data['membername']; ?></a>
 						</p>
-						<?php if (null != $data['update_date']): ?>
-							<p><?php echo $lang['addon_16']; ?><?php echo $data['update_date']; ?></p>
+						<?php if (null != $addon_data['update_date']): ?>
+							<p><?php echo $lang['addon_16']; ?><?php echo $addon_data['update_date']; ?></p>
 						<?php else: ?>
-							<p><?php echo $lang['addon_17']; ?><?php echo $data['publish_date']; ?></p>
+							<p><?php echo $lang['addon_17']; ?><?php echo $addon_data['publish_date']; ?></p>
 						<?php endif; ?>
 						<p><?php echo $lang['addon_36']; ?>
 							<b>
-								<?php echo ($mbVerArray[0] != null) ? implode (", ", $mbVerArray) : $lang['addon_37']; ?>
+								<?php echo ($addon_data['supported_mbversion']) ? implode (", ", $addon_data['supported_mbversion']) : $lang['addon_37']; ?>
 							</b>
 						</p>
 					</div>
-					<p class="description"><?php echo $data['short_description']; ?></p>
+					<p class="description"><?php echo $addon_data['short_description']; ?></p>
 				</div>
 				<div class="general_info_icon_wrap">
-					<div class="general_info_icon" style="background-image: url(<?php echo $data['thumbnail']; ?>);"></div>
+					<div class="general_info_icon" style="background-image: url(<?php echo $addon_data['thumbnail']; ?>);"></div>
 				</div>
-				<?php if (!empty(trim ($data['important_note']))): ?>
+				<?php if (!empty(trim ($addon_data['important_note']))): ?>
 					<div class="general_info_sidenote">
 						<p>
-							<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp; <?php echo $data['important_note']; ?>
+							<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp; <?php echo $addon_data['important_note']; ?>
 						</p>
 					</div>
 				<?php endif; ?>
 
 				<div class="general_info_downloadlink">
 
-					<?php if ($data['status'] == 2): ?>
+					<?php if ($addon_data['status'] == 2): ?>
 					<span class="show_info">
 						<h3><?php echo $lang['addon_39']; ?></h3>
 						<p class="description"><?php echo $lang['addon_40']; ?></p>
 					</span>
-					<?php elseif ($data['status'] != 1): ?>
+					<?php elseif ($addon_data['status'] != 1): ?>
 						<span class="show_info danger">
 							<h3><?php echo $lang['addon_34']; ?></h3>
 							<p class="description"><?php echo $lang['addon_35']; ?></p>
@@ -105,22 +105,22 @@ if ($data['status'] == "3"): ?>
 					<?php endif; ?>
 
 
-					<?php if ($data['status'] != 2): ?>
-					<a href="<?php echo $link['redirect'] . '?type=addon&id=' . $data['ID_ADDON'] . '&r=' . urlencode ($data['download_links']); ?>" class="btn btn_blue" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
+					<?php if ($addon_data['status'] != 2): ?>
+					<a href="<?php echo $link['redirect'] . '?type=addon&id=' . $addon_data['ID_ADDON'] . '&r=' . urlencode ($addon_data['download_links']); ?>" class="btn btn_blue" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
 					</a>
-					<?php if (!empty(trim ($data['support_forum']))): ?>
-						<a href="<?php echo $data['support_forum']; ?>" class="btn">
+					<?php if (!empty(trim ($addon_data['support_forum']))): ?>
+						<a href="<?php echo $addon_data['support_forum']; ?>" class="btn">
 							<i class="fa fa-support"></i><?php echo $lang['addon_19']; ?>
 						</a>
 					<?php endif; ?>
-					<?php if (!empty(trim ($data['readme_content_html']))): ?>
+					<?php if (!empty(trim ($addon_data['readme_content_html']))): ?>
 						<a href="#readme" class="btn btn_grey" onclick="$('html,body').animate({scrollTop: $('#readme').offset().top});">
 							<i class="fa fa-info"></i><?php echo $lang['addon_20']; ?>
 						</a>
 					<?php endif; ?>
 					<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn"
-					   onclick="rate('<?php echo $data['ID_ADDON']; ?>')"
-					   data-like-count="<?php echo Format::number_format_suffix ($addon_like); ?>">
+					   onclick="rate('<?php echo $addon_data['ID_ADDON']; ?>')"
+					   data-like-count="<?php echo Format::number_format_suffix ($addon_data['likesCount']); ?>">
 						<?php echo $lang['addon_25']; ?>
 					</a>
 					<?php endif; ?>
@@ -130,13 +130,12 @@ if ($data['status'] == "3"): ?>
 	</div>
 	<!--INFO SECTION ENDS -->
 
-
 	<!-- Screenshot STARTS -->
 	<div class="addon_similar">
 		<div class="addon_similar_wrap screenshot">
 			<ul id="screenshot_all">
 				<?php
-				foreach ($screenshots as $key => $img) {
+				foreach ($addon_data['image_links'] as $key => $img) {
 					if (preg_match ('/^https?\:\/\/i\.imgur\.com\//', $img)) {
 						$ext_pos = strrpos ($img, '.'); // find position of the last dot, so where the extension starts
 						$thumb = substr ($img, 0, $ext_pos) . 'm' . substr ($img, $ext_pos);
@@ -153,31 +152,41 @@ if ($data['status'] == "3"): ?>
 	</div>
 	<!-- SLIDER ENDS-->
 
-	<?php if (!empty(trim ($data['readme_content_html']))): ?>
+
+
+	<?php if (!empty(trim ($addon_data['readme_content_html']))): ?>
 		<!-- WORD FROM AUTHOR STARTS -->
 		<div class="addon_similar readme_markdown_bg" id="readme">
 			<div class="addon_similar_wrap readme_markdown_wrap">
 				<h2><?php echo $lang['addon_21']; ?></h2>
 				<div id="readme_markdown" class="markdownView">
-					<?php echo $data['readme_content_html']; ?>
+					<?php echo $addon_data['readme_content_html']; ?>
 				</div>
 			</div>
 		</div>
 	<?php endif; ?>
 	<!-- WORD FROM AUTHOR ENDS-->
-
+	<!-- tags STARTS -->
+	<div class="addon_similar">
+		<div class="addon_similar_wrap tags">
+			<h3><?php echo $lang['addon_41']; ?></h3>
+			<?php foreach($addon_data['tags'] as $tags): ?>
+				<a href="<?php echo $link['addon']['home'] . 's/?q='.$tags; ?>"><?php echo $tags; ?></a>
+			<?php endforeach; ?>
+		</div>
+	</div>
 
 	<!-- MORE FROM AUTHOR STARTS -->
 	<div class="addon_similar more_from_author">
 		<div class="addon_similar_wrap from_author">
-			<h2><?php echo $lang['addon_22'] . $data['membername']; ?></h2>
+			<h2><?php echo $lang['addon_22'] . $addon_data['membername']; ?></h2>
 			<?php
 			echo addon_result_view_generator ($from_author);
 			?>
 			<div class="more_addon">
-				<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator ($data['membername']); ?>">
+				<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator ($addon_data['membername']); ?>">
 					<h3><?php echo $lang['addon_23']; ?></h3>
-					<p><?php echo $lang['addon_24']; ?><?php echo $data['membername']; ?></p>
+					<p><?php echo $lang['addon_24']; ?><?php echo $addon_data['membername']; ?></p>
 				</a>
 			</div>
 
@@ -204,7 +213,7 @@ include ($footer);
 <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		<?php if ($addon_already_liked == true): ?>
+		<?php if ($addon_data['user']['already_liked'] == true): ?>
 		$('#like_count').html('<?php echo $lang['addon_30']; ?>');
 		$('#like_count').addClass('btn_red');
 		<?php endif; ?>
@@ -242,7 +251,7 @@ include ($footer);
 		var ctx = bg_blur.getContext("2d");
 		var img = new Image();
 		img.setAttribute('crossOrigin', 'anonymous');
-		img.src = "<?php echo $data['thumbnail']; ?>";
+		img.src = "<?php echo $addon_data['thumbnail']; ?>";
 		img.onload = function () {
 			ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, bg_blur.width, bg_blur.height);// draw image
 			stackBlurCanvasRGB("bg_hero_blur", 0, 0, bg_blur.width, bg_blur.width, 40);

@@ -10,8 +10,12 @@
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/forum/SSI.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Format.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Validation.php';
+
+$siteUrl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
+$siteRoot = $_SERVER['DOCUMENT_ROOT'] . "/";
+
+require_once $siteRoot . 'classes/Format.php';
+require_once $siteRoot . 'classes/Validation.php';
 
 // Don't do anything if already loaded.
 if (defined ('MB_FUNC')) {
@@ -23,8 +27,6 @@ if (session_status () == PHP_SESSION_NONE) {
 }
 
 $link = array();
-$siteUrl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
-$siteRoot = $_SERVER['DOCUMENT_ROOT'] . "/";
 //Error related pages and codes
 $errorPage = $siteUrl . 'kb/';
 $errorCode = array();

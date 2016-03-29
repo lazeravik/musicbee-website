@@ -211,6 +211,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 <script type="text/javascript">
 	searchEnter = function(event){
 		if (event.keyCode == 13) {
+			window.location.hash = window.location.hash+"/s/wsfefv";
 			//reset pagination for search
 			$('#page_num').val(1);
 			searchFilterAddon(event);
