@@ -1473,14 +1473,13 @@ h4 {
 
 @media screen and (max-width: 800px) {
   .secondery_nav .secondery_nav_wrap ul > li a {
-    padding: 15px 10px;
+    padding: 15px 5px;
   }
 }
 
 @media screen and (max-width: 700px) {
   .secondery_nav .secondery_nav_wrap ul {
     display: block;
-    background: #212121;
   }
   .secondery_nav .secondery_nav_wrap ul > li {
     width: 100%;
@@ -1500,7 +1499,7 @@ h4 {
     padding-left: 50px;
   }
   .secondery_nav .secondery_nav_wrap ul > li.expand {
-    display: block;
+    display: inline-block;
     width: inherit;
   }
   .secondery_nav .secondery_nav_wrap ul > li.expand a {
@@ -1538,7 +1537,7 @@ h4 {
 
 .secondery_nav .secondery_nav_wrap.expanded {
   padding-bottom: 20px;
-  background: #212121;
+  background: #313131;
   border-bottom: 5px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -2278,7 +2277,14 @@ select#release_note_jump option {
 }
 
 .search_box_outer_wrap {
+  display: none;
   background: #161a1b;
+  overflow: hidden;
+  transition: linear all .5s;
+}
+
+.search_box_outer_wrap.expanded {
+  display: block;
 }
 
 .sub_content {
@@ -2348,7 +2354,6 @@ select#release_note_jump option {
 
 .addon_similar {
   background: #1d1d1d;
-  padding-bottom: 10px;
 }
 
 .addon_similar .addon_similar_wrap {
@@ -2364,7 +2369,7 @@ select#release_note_jump option {
 
 .addon_similar .addon_similar_wrap.tags a {
   padding: 5px 10px;
-  background: #2D2D2D;
+  background: #2d2d2d;
   margin: 4px;
   font-style: italic;
   border-radius: 2px;
@@ -2376,14 +2381,28 @@ select#release_note_jump option {
   color: #404040;
 }
 
+.addon_similar .addon_similar_wrap.header_links h3 {
+  display: inline-block;
+}
+
+.addon_similar .addon_similar_wrap.header_links h3.colored {
+  color: #ff9800;
+}
+
+.addon_similar .addon_similar_wrap.header_links p {
+  margin: 5px 0px;
+  color: #a5a5a5;
+}
+
 .addon_similar .addon_similar_wrap.header_links a {
   padding: 10px;
-  margin: 0px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 3px;
   font-weight: normal;
   font-size: 14px;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
+  display: inline-block;
+  margin: 10px 0px 0px;
 }
 
 .addon_similar .addon_similar_wrap.header_links a:hover {
@@ -2410,14 +2429,142 @@ select#release_note_jump option {
   text-transform: none;
 }
 
-@media screen and (max-width: 600px) {
-  .addon_similar .addon_similar_wrap {
-    padding: 10px;
+.addon_similar .addon_similar_wrap.heading_intro p {
+  max-width: 750px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap {
+  display: flex;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column {
+  box-sizing: border-box;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result {
+  margin: 0px;
+  padding: 0px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li {
+  list-style: none;
+  padding: 10px;
+  display: flex;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li img.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li .info {
+  align-self: center;
+  padding: 0px 15px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li .info i {
+  background: #2196f3;
+  margin: 10px;
+  padding: 0px 10px;
+  border-radius: 2px;
+  font-size: 13px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.47);
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li .info i.fa {
+  background: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li .info a:hover {
+  text-decoration: none;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p {
+  margin: 0px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p.membername {
+  font-size: 16px;
+  color: #fff;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p.rank {
+  margin-top: 5px;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p.rank.admin {
+  color: #ff9800;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p.rank.mod {
+  color: #39f;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .sidebar_result li p.rank.noob {
+  color: #777;
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .addon_list_box li {
+  list-style: none;
+  float: left;
+  width: 25%;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+@media screen and (max-width: 1000px) {
+  .addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .addon_list_box li {
+    width: 33.333333%;
   }
 }
 
-.addon_similar.more_from_author {
+.addon_similar .addon_similar_wrap.addon_result_column_wrap.col_2_1 .addon_result_column:nth-child(1) {
+  width: 75%;
+}
+
+@media screen and (max-width: 800px) {
+  .addon_similar .addon_similar_wrap.addon_result_column_wrap.col_2_1 .addon_result_column:nth-child(1) {
+    width: 100%;
+  }
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap.col_2_1 .addon_result_column:nth-child(2) {
+  width: 25%;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 1px solid #2d2d2d;
+  padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .addon_similar .addon_similar_wrap.addon_result_column_wrap.col_2_1 .addon_result_column:nth-child(2) {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .addon_similar .addon_similar_wrap.addon_result_column_wrap {
+    padding: 10px;
+    display: block;
+  }
+}
+
+.addon_similar .addon_similar_wrap.addon_result_column_wrap::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.addon_similar.alternate_bg {
   background: #171717;
+}
+
+.addon_similar.alternate_bg.blue {
+  background: #333 url("../../img/parallax_1.jpg") fixed;
+  background-position: center center;
+  background-size: cover;
 }
 
 .addon_similar.addon_cat_header {
@@ -2428,11 +2575,16 @@ select#release_note_jump option {
   margin: 5px;
 }
 
+.addon_similar::after, .addon_similar::before {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .addon_list_box {
   margin-bottom: 20px;
   padding: 0px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
 }

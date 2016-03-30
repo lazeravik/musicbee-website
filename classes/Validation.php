@@ -126,4 +126,33 @@
 					break;
 			}
 		}
+
+		/**
+		 * @param $rankid
+		 *
+		 * @return string
+		 * @todo improve it by using array with foreach switch, it will make it more feature rich and flexible
+		 */
+		public static function rankName($rankid)
+		{
+			switch ($rankid) {
+				case 1:
+					$rankname = "Admin";
+					break;
+				case 2:
+					$rankname = "Mod";
+					break;
+				case 5:
+					$rankname = "Elite";
+					break;
+				case 10:
+					$rankname = "Newbie";
+					break;
+				default:
+					$rankname = "Unknown";
+					break;
+			}
+
+			return $rankname;
+		}
 	}

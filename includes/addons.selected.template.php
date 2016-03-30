@@ -177,8 +177,8 @@ if ($addon_data['status'] == "3"): ?>
 	</div>
 
 	<!-- MORE FROM AUTHOR STARTS -->
-	<div class="addon_similar more_from_author">
-		<div class="addon_similar_wrap from_author">
+	<div class="addon_similar alternate_bg">
+		<div class="addon_similar_wrap">
 			<h2><?php echo $lang['addon_22'] . $addon_data['membername']; ?></h2>
 			<?php
 			echo addon_result_view_generator ($from_author);

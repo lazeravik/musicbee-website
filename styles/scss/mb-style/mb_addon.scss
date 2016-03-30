@@ -7,7 +7,14 @@
 }
 
 .search_box_outer_wrap {
+	display    : none;
 	background : #161a1b;
+	overflow   : hidden;
+	transition : linear all .5s;
+
+	&.expanded {
+		display : block;
+	}
 }
 
 .sub_content {
@@ -69,8 +76,7 @@
 }
 
 .addon_similar {
-	background     : #1d1d1d;
-	padding-bottom : 10px;
+	background : #1d1d1d;
 
 	.addon_similar_wrap {
 		color     : #fff;
@@ -80,33 +86,44 @@
 
 		&.tags {
 			h3 {
-				display: inline-block;
+				display : inline-block;
 			}
 
 			a {
-				padding: 5px 10px;
-				background: #2D2D2D;
-				margin: 4px;
-				font-style: italic;
-				border-radius: 2px;
+				padding       : 5px 10px;
+				background    : #2d2d2d;
+				margin        : 4px;
+				font-style    : italic;
+				border-radius : 2px;
 
 				&:hover {
-					background: $musicbee-color;
-					text-decoration: none;
-					color: #404040;
+					background      : $musicbee-color;
+					text-decoration : none;
+					color           : #404040;
 				}
 			}
 		}
 
 		&.header_links {
+			h3 {
+				display : inline-block;
+				&.colored {
+					color : $musicbee-color;
+				}
+			}
+			p {
+				margin : 5px 0px;
+				color  : #a5a5a5;
+			}
 			a {
 				padding       : 10px;
-				margin        : 0px;
 				background    : rgba(255, 255, 255, 0.05);
 				border-radius : 3px;
 				font-weight   : normal;
 				font-size     : 14px;
 				text-shadow   : 1px 0px 2px rgba(0, 0, 0, 0.33);
+				display       : inline-block;
+				margin        : 10px 0px 0px;
 
 				&:hover {
 					background      : $musicbee-color;
@@ -135,13 +152,135 @@
 			}
 		}
 
-		@media screen and (max-width : $break-tiny) {
-			padding : 10px;
+		&.heading_intro {
+			p {
+				max-width : 750px;
+			}
+		}
+
+		&.addon_result_column_wrap {
+			display : flex;
+			.addon_result_column {
+				box-sizing: border-box;
+				.sidebar_result {
+					margin  : 0px;
+					padding : 0px;
+					li {
+						list-style : none;
+						padding    : 10px;
+						display    : flex;
+
+						img.avatar {
+							width         : 50px;
+							height        : 50px;
+							border-radius : 999px;
+						}
+
+						.info {
+							align-self : center;
+							padding    : 0px 15px;
+
+							i {
+								background    : #2196f3;
+								margin        : 10px;
+								padding       : 0px 10px;
+								border-radius : 2px;
+								font-size     : 13px;
+								text-shadow   : 1px 1px 2px rgba(0, 0, 0, 0.47);
+
+								&.fa {
+									background : none;
+									padding    : 0px;
+									margin     : 0px;
+								}
+							}
+
+							a:hover {
+								text-decoration : none;
+							}
+						}
+
+						p {
+							margin : 0px;
+
+							&.membername {
+								font-size : 16px;
+								color     : #fff;
+							}
+
+							&.rank {
+								margin-top : 5px;
+
+								&.admin {
+									color : $musicbee-color;
+								}
+
+								&.mod {
+									color : #39f;
+								}
+								
+								&.noob {
+									color : #777;
+								}
+							}
+						}
+
+					}
+				}
+
+				.addon_list_box {
+					li {
+						list-style : none;
+						float      : left;
+						width      : 25%;
+						box-sizing : border-box;
+						padding    : 0px;
+
+						@media screen and (max-width : $break-medium) {
+							width: 33.333333%;
+						}
+					}
+				}
+			}
+
+			&.col_2_1 {
+				.addon_result_column:nth-child(1) {
+					width : 75%;
+
+					@media screen and (max-width : $break-small) {
+						width : 100%;
+					}
+				}
+				.addon_result_column:nth-child(2) {
+					width       : 25%;
+					background  : rgba(255, 255, 255, 0.03);
+					border-left : 1px solid #2d2d2d;
+					padding     : 10px;
+					@media screen and (max-width : $break-small) {
+						width : 100%;
+					}
+				}
+			}
+
+			@media screen and (max-width : $break-small) {
+				padding : 10px;
+				display: block;
+			}
+
+			&::after {
+				@include clearfix;
+			}
 		}
 	}
 
-	&.more_from_author {
+	&.alternate_bg {
 		background : #171717;
+
+		&.blue {
+			background: #333 url("../../img/parallax_1.jpg") fixed;
+			background-position: center center;
+			background-size: cover;
+		}
 	}
 
 	&.addon_cat_header {
@@ -151,13 +290,16 @@
 			margin : 5px;
 		}
 	}
+
+	&::after, &::before {
+		@include clearfix;
+	}
 }
 
 .addon_list_box {
 	margin-bottom  : 20px;
 	padding        : 0px;
-	padding-bottom : 30px;
-	border-bottom  : 1px solid rgba(255, 255, 255, 0.06);
+	padding-bottom : 20px;
 	display        : flex;
 	flex-wrap      : wrap;
 

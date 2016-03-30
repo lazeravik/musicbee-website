@@ -277,7 +277,7 @@ $info_bar_max_width : 1200px;
 			@media screen and(max-width: $break-small) {
 				& > li {
 					a {
-						padding: 15px 10px;
+						padding: 15px 5px;
 					}
 				}
 			}
@@ -285,7 +285,6 @@ $info_bar_max_width : 1200px;
 			@media screen and(max-width: $break-secondery-nav) {
 				& {
 					display: block;
-					background: #212121;
 
 					& > li {
 						width: 100%;
@@ -309,7 +308,7 @@ $info_bar_max_width : 1200px;
 						}
 
 						&.expand {
-							display: block;
+							display: inline-block;
 							width: inherit;
 							a { padding: 15px 20px; }
 						}
@@ -357,7 +356,7 @@ $info_bar_max_width : 1200px;
 		}
 		&.expanded {
 			padding-bottom: 20px;
-			background: #212121;
+			background: #313131;
 			border-bottom: 5px solid rgba(255, 255, 255, 0.15);
 
 			ul {

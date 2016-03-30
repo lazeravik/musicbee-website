@@ -12,16 +12,17 @@
 class Search
 {
 	/**
-	 * @param string  $searchquery
-	 * @param null    $cat_input
-	 * @param int     $status_input
-	 * @param null    $authorid
-	 * @param int     $offset
-	 * @param int     $range
+	 * @param string $searchquery
+	 * @param null   $cat_input
+	 * @param int    $status_input
+	 * @param null   $authorid
+	 * @param int    $offset
+	 * @param int    $range
+	 * @param string $orderby
 	 *
 	 * @return mixed
 	 */
-	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20) {
+	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20, $orderby = "ID_ADDON DESC") {
 		global $connection, $main_menu;
 		
 		//Create arrays for SQL value binding
@@ -95,8 +96,8 @@ class Search
 			}
 		}
 
-		$search_sql     = $this->generateQuery("result", $range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery);
-		$row_count_sql  = $this->generateQuery("count", $range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery);
+		$search_sql     = $this->generateQuery("result", $range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby);
+		$row_count_sql  = $this->generateQuery("count", $range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby);
 
 		if (databaseConnection ()) {
 			try {
@@ -114,7 +115,7 @@ class Search
 				$data['result'] = $search_statement->fetchAll (PDO::FETCH_ASSOC);
 				$data['row_count'] = count($count_statement->fetchAll (PDO::FETCH_ASSOC));
 
-				//var_dump(showQuery($search_sql, $bindedVal));
+				//return showQuery($search_sql, $bindedVal);
 				return $data;
 			} catch (Exception $e) {
 			}
@@ -122,10 +123,11 @@ class Search
 	}
 
 
-	public function generateQuery($gen_type,$range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery) {
+	public function generateQuery($gen_type,$range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby) {
 		$addon_tbl = SITE_ADDON;
 		$member_tbl = SITE_MEMBER_TBL;
 		$likes_tbl = SITE_ADDON_LIKE;
+		$download_stat = SITE_DOWNLOAD_STAT;
 
 		if($gen_type == "result") {
 			$search_sql = "SELECT
@@ -139,12 +141,15 @@ class Search
 				  	status,
 				  	tags,
 				  	short_description,
-				  	COUNT({$likes_tbl}.ID_LIKES)as likesCount
+				  	COUNT(distinct {$likes_tbl}.ID_LIKES)as likesCount,
+				  	COUNT(distinct {$download_stat}.STAT_ID)as downloadCount
 				  FROM {$addon_tbl}
 				  	LEFT JOIN {$member_tbl}
 				  		on {$addon_tbl}.ID_AUTHOR = {$member_tbl}.ID_MEMBER
 				  	LEFT JOIN {$likes_tbl}
 				  		on {$addon_tbl}.ID_ADDON = {$likes_tbl}.ID_ADDON
+				  	LEFT JOIN {$download_stat}
+				  		on {$addon_tbl}.ID_ADDON = {$download_stat}.ID
 				  WHERE
 				  	addon_type IN ({$cat})
 				  	AND
@@ -205,7 +210,7 @@ class Search
 					 	END), addon_title ASC";
 		} else {
 			$search_sql .= "GROUP BY {$addon_tbl}.ID_ADDON
-					ORDER BY ID_ADDON DESC";
+					ORDER BY {$orderby}";
 		}
 
 		//store search SQL query without any limit for page count

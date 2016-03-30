@@ -10,9 +10,12 @@
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/forum/SSI.php';
+$link = array();
 
 $siteUrl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
+$link['url'] = 'http://' . $_SERVER['HTTP_HOST'] . "/";
 $siteRoot = $_SERVER['DOCUMENT_ROOT'] . "/";
+$link['root'] = $_SERVER['DOCUMENT_ROOT'] . "/";
 
 require_once $siteRoot . 'classes/Format.php';
 require_once $siteRoot . 'classes/Validation.php';
@@ -26,7 +29,9 @@ if (session_status () == PHP_SESSION_NONE) {
 	session_start ();
 }
 
-$link = array();
+
+
+
 //Error related pages and codes
 $errorPage = $siteUrl . 'kb/';
 $errorCode = array();
@@ -89,7 +94,7 @@ if (!$context['user']['is_guest']) {
 
 	$memberinfoArray['membername'] = $getmemberinfo['membername'];
 	$memberinfoArray['memberid'] = $getmemberinfo['ID_MEMBER'];
-	$memberinfoArray['rank'] = Member::rankName ($getmemberinfo['rank']);
+	$memberinfoArray['rank'] = Validation::rankName ($getmemberinfo['rank']);
 	$memberinfoArray['rank_raw'] = $getmemberinfo['rank'];
 
 	$_SESSION['memberinfo'] = $memberinfoArray;
@@ -220,31 +225,31 @@ $main_menu = array(
 				'sub_menu' => array(
 						'skins'        => array(
 								'title' => $lang['11'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=skins&order=latest",
+								'href'  => $link['addon']['home'] . "s/?q=&type=skins",
 								'icon'  => $lang['24'],
 								'desc'  => $lang['description_1'],
 						),
 						'plugins'      => array(
 								'title' => $lang['12'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=plugins&order=latest",
+								'href'  => $link['addon']['home'] . "s/?q=&type=plugins",
 								'icon'  => $lang['25'],
 								'desc'  => $lang['description_2'],
 						),
 						'visualiser'   => array(
 								'title' => $lang['13'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=visualiser&order=latest",
+								'href'  => $link['addon']['home'] . "s/?q=&type=visualiser",
 								'icon'  => $lang['26'],
 								'desc'  => $lang['description_3'],
 						),
 						'theater-mode' => array(
 								'title' => $lang['15'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=theater-mode&order=latest",
+								'href'  => $link['addon']['home'] . "s/?q=&type=theater-mode",
 								'icon'  => $lang['28'],
 								'desc'  => $lang['description_5'],
 						),
 						'misc'         => array(
 								'title' => $lang['16'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=misc&order=latest",
+								'href'  => $link['addon']['home'] . "s/?q=&type=misc",
 								'icon'  => $lang['29'],
 								'desc'  => $lang['description_6'],
 						),

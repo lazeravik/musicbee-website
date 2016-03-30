@@ -15,54 +15,57 @@
  */
 class Addon
 {
+
+	private $addon_tbl = SITE_ADDON;
+	private $member_tbl = SITE_MEMBER_TBL;
+	private $likes_tbl = SITE_ADDON_LIKE;
+
 	
 	
 	public function getAddonData($addon_id) {
 		global $connection;
 
-		$addon_tbl = SITE_ADDON;
-		$member_tbl = SITE_MEMBER_TBL;
-		$likes_tbl = SITE_ADDON_LIKE;
+
 
 		if($this->checkAddonExistenceById($addon_id)) {
 			if(databaseConnection()) {
 				try {
 					$sql = "
 					SELECT
-					  {$addon_tbl}.ID_ADDON,
-					  {$addon_tbl}.ID_AUTHOR,
-					  {$addon_tbl}.addon_title,
-					  {$addon_tbl}.addon_version,
-					  {$addon_tbl}.supported_mbversion,
-					  {$addon_tbl}.addon_type,
-					  {$addon_tbl}.publish_date,
-					  {$addon_tbl}.update_date,
-					  {$addon_tbl}.tags,
-					  {$addon_tbl}.short_description,
-					  {$addon_tbl}.download_links,
-					  {$addon_tbl}.image_links,
-					  {$addon_tbl}.thumbnail,
-					  {$addon_tbl}.important_note,
-					  {$addon_tbl}.support_forum,
-					  {$addon_tbl}.readme_content_html,
-					  {$addon_tbl}.is_beta,
-					  {$addon_tbl}.status,
-					  {$addon_tbl}.lastStatus_moderatedBy,
-					  {$member_tbl}.membername,
-					  {$member_tbl}.rank,
+					  {$this->addon_tbl}.ID_ADDON,
+					  {$this->addon_tbl}.ID_AUTHOR,
+					  {$this->addon_tbl}.addon_title,
+					  {$this->addon_tbl}.addon_version,
+					  {$this->addon_tbl}.supported_mbversion,
+					  {$this->addon_tbl}.addon_type,
+					  {$this->addon_tbl}.publish_date,
+					  {$this->addon_tbl}.update_date,
+					  {$this->addon_tbl}.tags,
+					  {$this->addon_tbl}.short_description,
+					  {$this->addon_tbl}.download_links,
+					  {$this->addon_tbl}.image_links,
+					  {$this->addon_tbl}.thumbnail,
+					  {$this->addon_tbl}.important_note,
+					  {$this->addon_tbl}.support_forum,
+					  {$this->addon_tbl}.readme_content_html,
+					  {$this->addon_tbl}.is_beta,
+					  {$this->addon_tbl}.status,
+					  {$this->addon_tbl}.lastStatus_moderatedBy,
+					  {$this->member_tbl}.membername,
+					  {$this->member_tbl}.rank,
 					  COUNT(ID_LIKES) AS likesCount
 					FROM
-					  {$addon_tbl}
+					  {$this->addon_tbl}
 					LEFT JOIN
-					  {$member_tbl}
+					  {$this->member_tbl}
 					ON
-					  {$addon_tbl}.ID_AUTHOR = {$member_tbl}.ID_MEMBER
+					  {$this->addon_tbl}.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
 					LEFT JOIN
-					  {$likes_tbl}
+					  {$this->likes_tbl}
 					ON
-					  {$likes_tbl}.ID_ADDON = {$addon_tbl}.ID_ADDON
+					  {$this->likes_tbl}.ID_ADDON = {$this->addon_tbl}.ID_ADDON
 					WHERE
-					  {$addon_tbl}.ID_ADDON = :addon_id";
+					  {$this->addon_tbl}.ID_ADDON = :addon_id";
 
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':addon_id', $addon_id);
@@ -120,6 +123,41 @@ class Addon
 				} else {
 					return false;
 				}
+			} catch(Exception $e) {
+
+			}
+		}
+	}
+
+	public function getTopMembers() {
+		global $connection;
+		if(databaseConnection()) {
+			try {
+				$sql = "SELECT
+						  {$this->member_tbl}.ID_MEMBER,
+						  {$this->member_tbl}.membername,
+						  {$this->member_tbl}.rank,
+						  upload.addonUploads
+						FROM
+						  {$this->member_tbl}
+						LEFT JOIN
+						  (
+						  SELECT
+						    ID_AUTHOR,
+						    COUNT(DISTINCT ID_ADDON) AS addonUploads
+						  FROM
+						    {$this->addon_tbl}
+						  WHERE
+						    {$this->addon_tbl}.status = 1
+						  GROUP BY addons.ID_AUTHOR
+						) upload
+						ON
+						  upload.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
+						WHERE upload.addonUploads > 0
+						ORDER BY addonUploads DESC  ";
+				$statement = $connection->prepare($sql);
+				$statement->execute();
+				return $statement->fetchAll(PDO::FETCH_ASSOC);
 			} catch(Exception $e) {
 
 			}

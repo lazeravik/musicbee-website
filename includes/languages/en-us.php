@@ -322,12 +322,35 @@ $lang['addon_33'] = 'You can request for an add-on on our forum, or you can crea
 $lang['addon_34'] = 'Be Careful!';
 $lang['addon_35'] = 'This add-on is not approved by admins yet!';
 $lang['addon_38'] = 'beta';
-$lang['addon_39'] = "This add-on has been rejected by Admin/Mods";
-$lang['addon_40'] = "You can not download rejected add-ons!";
+$lang['addon_39'] = 'This add-on has been rejected by Admin/Mods';
+$lang['addon_40'] = 'You can not download rejected add-ons!';
 
-$lang['addon_41'] = "Tags: ";
+$lang['addon_41'] = 'Tags: ';
+$lang['addon_42'] = 'Search for Add-ons';
+$lang['addon_43'] = 'Member Rank';
+$lang['addon_44'] = 'Total uploaded add-ons by this member';
 
-/**
+$lang['addon_45'] = 'Add-ons are a great way to extend MusicBee\'s awesome capabailities. It does not matter if your are power user or using MusicBee just to listen to music add-ons will make your experience better.<br/><br/>Change how MusicBee looks or add a complete new twist with theater mode, it is all up to you.';
+$lang['addon_46'] = 'MusicBee Add-ons';
+$lang['addon_47'] = 'How to Install Add-ons';
+$lang['addon_48'] = 'Checkout our Community';
+$lang['addon_49'] = 'How to Install Add-ons';
+$lang['addon_50'] = 'Submit your Add-on';
+$lang['addon_51'] = 'Browse all';
+
+$lang['addon_52'] = 'Most Popular Add-ons';
+$lang['addon_53'] = '<h3 class="colored">Looking for Plugins? Want to extend Musicbee\'s functionality?</h3><p>Check out popular and essential plugins by category. 3rd party services, device syncing, or editing tags we have something for everything</p>';
+$lang['addon_54'] = 'Newly added Add-ons';
+$lang['addon_55'] = 'Recently Updated';
+$lang['addon_56'] = 'Browse all';
+$lang['addon_57'] = 'Top Members';
+
+
+
+
+
+
+		/**
  * Release Notes
  */
 $lang['releasenote_title'] = 'MusicBee - Release Notes';
@@ -378,11 +401,11 @@ $lang['422'] = '<b>ERROR:</b> Only supports <code>.rar, .zip, .7z, .tgz</code>';
 $lang['423'] = '<b>SUCCESSFUL:</b> Add-on successfully added to our repository';
 $lang['424'] = '<b>ERROR:</b> The file maybe uploaded but we can\'t get the download link. <br/>ERR_MSG: ';
 $lang['425'] = '<b>ERROR:</b> ';
-$lang['426'] = "";
-$lang['427'] = "";
-$lang['428'] = "";
-$lang['429'] = "";
-$lang['430'] = "";
+$lang['426'] = '';
+$lang['427'] = '';
+$lang['428'] = '';
+$lang['429'] = '';
+$lang['430'] = '';
 
 
 
