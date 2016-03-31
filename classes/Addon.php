@@ -154,7 +154,8 @@ class Addon
 						ON
 						  upload.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
 						WHERE upload.addonUploads > 0
-						ORDER BY addonUploads DESC  ";
+						ORDER BY addonUploads DESC
+						LIMIT 8";
 				$statement = $connection->prepare($sql);
 				$statement->execute();
 				return $statement->fetchAll(PDO::FETCH_ASSOC);

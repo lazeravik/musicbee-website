@@ -357,7 +357,11 @@ $info_bar_max_width : 1200px;
 		&.expanded {
 			padding-bottom: 20px;
 			background: #313131;
-			border-bottom: 5px solid rgba(255, 255, 255, 0.15);
+			max-width: 300px;
+			position: absolute;
+			width: 100%;
+			z-index: 10;
+			box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 
 			ul {
 				li {
@@ -387,6 +391,10 @@ $info_bar_max_width : 1200px;
 				}
 			}
 		}
+	}
+	@media screen and(max-width: $break-secondery-nav) {
+
+		height :48px;
 	}
 }
 

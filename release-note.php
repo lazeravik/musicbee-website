@@ -19,9 +19,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 	<meta name="description" content="<?php echo $lang['releasenote_desc']; ?>">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $siteRoot.'includes/meta&styles.php'; ?>
+	<?php include $link['root'].'includes/meta&styles.php'; ?>
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $siteRoot.'includes/font.helper.php'; ?>
+	<?php include $link['root'].'includes/font.helper.php'; ?>
 </head>
 <body>
 
@@ -101,10 +101,10 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 <?php 
 include($footer); 
 ?>
-<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 <script>
 	$(document).ready(function(){
 		document.getElementById('release_note_jump').onchange = function(){

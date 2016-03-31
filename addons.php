@@ -10,8 +10,8 @@
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-require_once $siteRoot . 'classes/Addon.php';
-require_once $siteRoot . 'classes/Search.php';
+require_once $link['root'] . 'classes/Addon.php';
+require_once $link['root'] . 'classes/Search.php';
 $addon = new Addon();
 
 
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
 		$from_author = $addon->getAddonListByMember ($addon_data['ID_AUTHOR'], 5);
 		//var_dump($addon_data);
 
-		include_once $siteRoot . 'includes/addons.selected.template.php';
+		include_once $link['root'] . 'includes/addons.selected.template.php';
 		exit();
 
 	} elseif ($_GET['id'] == "s") {
@@ -80,20 +80,22 @@ if (isset($_GET['id'])) {
 		//Calculate total number of page required
 		$page_total = ceil ($data['addon_data']['row_count'] / $addon_view_range);
 
-		$data['addon_data_new'] = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, 0, 5, "publish_date DESC");
-		$data['addon_data_updated'] = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, 0, 5, "update_date DESC");
-		$data['addon_data_like'] = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, 0, 8, "downloadCount DESC,likesCount DESC");
+		if($data['is_overview']) {
+			$data['addon_data_new'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "publish_date DESC");
+			$data['addon_data_updated'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "update_date DESC");
+			$data['addon_data_like'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 8, "downloadCount DESC,likesCount DESC");
 
-		$data['top_members'] = $addon->getTopMembers();
-		//var_dump($data['addon_data_like']);
-		// = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, 0, 5, "downloadCount DESC");
+			$data['top_members'] = $addon->getTopMembers();
+		}
+
+		if(isset($main_menu['add-ons']['sub_menu'][$addon_type]['desc'])) {
+			$meta_description = $main_menu['add-ons']['sub_menu'][$addon_type]['desc'];
+		} else {
+			$meta_description = strip_tags($lang['addon_45']);
+		}
 
 
-
-		//var_dump($page_total);
-
-		$meta_description = "blah";
-		include_once $siteRoot . 'includes/addons.search.template.php';
+		include_once $link['root'] . 'includes/addons.search.template.php';
 		exit();
 	} else {
 		header ("HTTP/1.0 404 Not Found");
@@ -101,7 +103,7 @@ if (isset($_GET['id'])) {
 		exit();
 	}
 } else {
-	header ("Location: " . $link['addon']['home'] . "s/?q=&type=all&overview");
+	header ("Location: " . $link['addon']['home'] . "s/?type=all&overview");
 	exit();
 }
 
@@ -162,12 +164,12 @@ function addon_result_view_generator($data) {
 			$result_view .= '<li id ="' . $addon_data['ID_ADDON'] . '">
 			<div class="addon_list_box_wrapper">
 				<a href="' . $addon_link . '">
-					<div class="thumb_more" style="background-image:url(' . $addon_data['thumbnail'] . ')"></div>
+					<div class="thumb_more" style=\'background-image:url("' . htmlspecialchars($addon_data['thumbnail'], ENT_QUOTES, "UTF-8") . '")\'></div>
 					<div class="love"><i class="fa fa-heart"></i><p class="love_count">' . Format::number_format_suffix($addon_data['likesCount']) . '</p></div>
 					'.$addon_beta_markup.'
 				</a>
 				<div class="addon_list_box_info">
-					<a href="' . $addon_link . '"><p class="title">' . $addon_data['addon_title'] . '</p></a>
+					<a href="' . $addon_link . '"><p class="title">' . htmlspecialchars($addon_data['addon_title'], ENT_QUOTES, "UTF-8") . '</p></a>
 					<p class="author"><a href="' . addon_author_url_generator ($addon_data['membername']) . '"> ' . $lang['addon_15'] . ' <b>' . $addon_data['membername'] . '</b></a></p>
 				</div>
 			</div>
@@ -211,22 +213,22 @@ function addon_result_pagination_generator($page_total, $current_page, $generate
 function addon_author_url_generator($name) {
 	global $link;
 
-	return $link['addon']['home'] . "s/?q=" . urlencode ($name) . "&type=all&order=latest";
+	return $link['addon']['home'] . "s/?q=" . urlencode ($name) . "&type=all";
 }
 
 function addon_secondery_nav_generator($addon_type) {
-	global $link, $lang, $main_menu, $url_params,$searchinput;
+	global $link, $lang, $main_menu, $url_params, $searchinput;
 	$data = '<ul class="left">
 	<li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>';
 
-	if (Format::Slug ($addon_type) == "all") {
-		$data .= '<li><a href="' . $link['addon']['home'] . 's/?q=&type=all&overview" class="active_menu_link">' . $lang['18'] . '</a></li>';
+	if (Format::Slug ($addon_type) == "all" && empty($searchinput['query'])) {
+		$data .= '<li><a href="' . $link['addon']['home'] . 's/?type=all&overview" class="active_menu_link">' . $lang['18'] . '</a></li>';
 	} else {
-		$data .= '<li><a href="' . $link['addon']['home'] . 's/?q=&type=all&overview" >' . $lang['18'] . '</a></li>';
+		$data .= '<li><a href="' . $link['addon']['home'] . 's/?type=all&overview" >' . $lang['18'] . '</a></li>';
 	}
 
 	foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
-		if (Format::Slug ($addon_type) == Format::Slug ($menu_addon['title'])) {
+		if (Format::Slug ($addon_type) == Format::Slug ($menu_addon['title']) && empty($searchinput['query'])) {
 			$data .= "
 			<li>
 				<a href=\"" . $menu_addon['href'] . " \"  class=\"active_menu_link\">" . $menu_addon['title'] . "</a>
@@ -238,20 +240,19 @@ function addon_secondery_nav_generator($addon_type) {
 			</li>";
 		}
 	}
+	if(!empty($searchinput['query'])){
+		$data .= '<li><a href="" class="active_menu_link">'.$lang['addon_42'].'</a></li>';
+	}
 	$data .= '
 </ul>
 <ul class="right">
 	<li>
-		<a href="javascript:void(0)" title="Advance Search" onclick="showAdvanceSearch()"><i class="fa fa-search-plus"></i></a>
-	</li>
-	<li>
 		<form method="GET" action="' . $link['addon']['home'] . 's/">
-			<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search small_search" placeholder="'.$lang['addon_42'].'" name="q" value="' . $searchinput['query']  . '"/>
-			<input type="hidden" name="type" value="all" />
+			<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search small_search" placeholder="'.$lang['addon_42'].Format::UnslugTxt($url_params['type']).'" name="q" value="' . $searchinput['query']  . '"/>
+			<input type="hidden" name="type" value="'.$url_params['type'].'" />
 			<input type="hidden" name="order" value="latest" />
 		</form>
 	</li>
 </ul>';
-
 	return $data;
 }

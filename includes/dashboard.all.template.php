@@ -12,8 +12,8 @@
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-include $siteRoot . 'classes/Dashboard.php';
-include $siteRoot . 'classes/Search.php';
+include $link['root'] . 'classes/Dashboard.php';
+include $link['root'] . 'classes/Search.php';
 $search = new Search();
 
 

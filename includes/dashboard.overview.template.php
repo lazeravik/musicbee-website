@@ -12,8 +12,8 @@
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-include $siteRoot . 'classes/Dashboard.php';
-include $siteRoot . 'classes/Stats.php';
+include $link['root'] . 'classes/Dashboard.php';
+include $link['root'] . 'classes/Stats.php';
 
 $Stats = new Stats();
 $dashboard = new Dashboard();
@@ -84,50 +84,45 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			</span>
 			<ul class="link_list">
 				<li>
-					<a href="">
+					<a href="<?php echo $link['devapi']; ?>">
 						<?php echo $lang['dashboard_links_1']; ?>
 					</a>
 				</li>
 				<li>
-					<a href="">
-						<?php echo $lang['dashboard_links_2']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<?php echo $lang['dashboard_links_3']; ?>
-					</a>
-				</li>
-				<li>
-					<hr class="line"/>
-				</li>
-				<li>
-					<a href="#submit"
-					   data-href="submit"
-					   data-load-page="dashboard.submit">
-						<?php echo $lang['dashboard_links_4']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<?php echo $lang['dashboard_links_5']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<?php echo $lang['dashboard_links_6']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="">
+					<a href="<?php echo $link['help']; ?>">
 						<?php echo $lang['dashboard_links_7']; ?>
 					</a>
 				</li>
 				<li>
-					<a href="">
+					<a href="<?php echo $link['help']; ?>">
 						<?php echo $lang['dashboard_links_8']; ?>
 					</a>
 				</li>
+				<hr class="line"/>
+				<li>
+					<a href="<?php echo $link['help']; ?>">
+						<?php echo $lang['dashboard_links_2']; ?>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo $link['help']; ?>">
+						<?php echo $lang['dashboard_links_3']; ?>
+					</a>
+				</li>
+				<li>
+				</li>
+				<li>
+					<a href="<?php echo $link['help']; ?>">
+						<?php echo $lang['dashboard_links_4']; ?>
+					</a>
+				</li>
+				<hr class="line"/>
+				<li>
+					<a href="<?php echo $link['bugreport']; ?>" >
+						<b><?php echo $lang['dashboard_links_5']; ?></b>
+					</a>
+				</li>
+
 			</ul>
 		</div>
 	</div>

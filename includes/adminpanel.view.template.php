@@ -11,7 +11,7 @@
 
 	$admin_only = true; //only for admins
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-	require_once $siteRoot . 'includes/adminpanel.tasks.php';
+	require_once $link['root'] . 'includes/adminpanel.tasks.php';
 	$safeGet = (isset($_GET['view'])) ? $_GET['view'] : "";
 	if (($safeGet) == "all") : ?>
 		<div class="admin_margin_wrapper">

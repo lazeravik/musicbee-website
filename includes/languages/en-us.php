@@ -194,14 +194,16 @@ $lang['dashboard_record_th_4'] = 'Status';
 $lang['dashboard_record_th_5'] = 'Likes';
 $lang['dashboard_record_th_6'] = 'Downloads';
 //dashboard > overview > side links
-$lang['dashboard_links_1'] = 'MusicBee Website API';
-$lang['dashboard_links_2'] = 'Submit a Skin';
-$lang['dashboard_links_3'] = 'Submit a Plug-in';
-$lang['dashboard_links_4'] = 'More Submit Option!';
-$lang['dashboard_links_5'] = 'Update an existing Add-on';
-$lang['dashboard_links_6'] = 'Create Read-me Docs';
-$lang['dashboard_links_7'] = 'Read MusicBee Docs for Developer';
-$lang['dashboard_links_8'] = 'Essential Skinning Guide';
+$lang['dashboard_links_1'] = 'MusicBee API';
+$lang['dashboard_links_7'] = 'Read MusicBee docs for developer';
+$lang['dashboard_links_8'] = 'Essential skinning guide';
+
+$lang['dashboard_links_2'] = 'Best practices when submitting an add-on';
+$lang['dashboard_links_3'] = 'Learn about Dashboard!';
+$lang['dashboard_links_4'] = 'How to update an add-on?';
+$lang['dashboard_links_5'] = 'Report bugs for dashbaord!';
+$lang['dashboard_links_6'] = '';
+
 
 //dashboard > submit
 $lang['dashboard_submit_1'] = '<i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;Add-on Submission';
@@ -291,12 +293,7 @@ $lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
 /*Addons download/search page */
 $lang['addon_license_1'] = 'Unless mentioned by the Author, all sdd-ons and Screenshots are licensed under';
 
-$lang['addon_10'] = 'Search: ';
-$lang['addon_11'] = 'Category: ';
-$lang['addon_12'] = 'Order By: ';
-$lang['addon_13'] = 'Latest';
-$lang['addon_14'] = 'Oldest';
-
+$lang['addon_11'] = 'Category';
 $lang['addon_15'] = 'by';
 $lang['addon_16'] = 'Updated on';
 $lang['addon_17'] = 'Published on';
@@ -326,7 +323,7 @@ $lang['addon_39'] = 'This add-on has been rejected by Admin/Mods';
 $lang['addon_40'] = 'You can not download rejected add-ons!';
 
 $lang['addon_41'] = 'Tags: ';
-$lang['addon_42'] = 'Search for Add-ons';
+$lang['addon_42'] = 'Search ';
 $lang['addon_43'] = 'Member Rank';
 $lang['addon_44'] = 'Total uploaded add-ons by this member';
 
@@ -369,16 +366,9 @@ $lang['releasenote_infobar_1'] = 'Jump to release version';
 
 /************************************************
  *****
- *****    Mediafire, imgur upload
+ *****    imgur upload
  *****
  *************************************************/
-//upload.mediafire.php
-$lang['400'] = 'Upload using';
-$lang['401'] = 'Only supports <code>.rar, .zip, .7z, .tgz</code>. Add-ons are licensed under';
-$lang['402'] = 'Drag and drop or click here';
-$lang['403'] = 'Maximum file size is 4MB';
-$lang['404'] = 'Mediafire upload is currently disabled!';
-$lang['405'] = 'Please use any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)';
 //upload.imgur.php
 $lang['406'] = 'Upload Image using &nbsp;';
 $lang['407'] = 'Images are licensed under';

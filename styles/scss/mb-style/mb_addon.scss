@@ -1,78 +1,20 @@
-.addon_secondery_nav {
-	background : rgba(29, 29, 29, 0.65);
-}
-
 .secondery_nav_color {
 	background : #161a1b;
 }
 
-.search_box_outer_wrap {
-	display    : none;
-	background : #161a1b;
-	overflow   : hidden;
-	transition : linear all .5s;
-
-	&.expanded {
-		display : block;
-	}
+.addon_secondery_nav{
+	background: rgba(45, 45, 45, 0.8);
 }
+
+.addon_page_nav {
+	background: rgba(29, 29, 29, 0.65);
+}
+
 
 .sub_content {
 	padding    : 40px 20px 40px 20px;
 	text-align : center;
 	color      : #fff;
-}
-
-.search_box_wrap {
-	max-width  : 700px;
-	margin     : 0px auto;
-	text-align : left;
-	padding    : 40px 0px;
-
-	@media screen and(max-width : $break-small) {
-		padding : 40px 10px;
-	}
-
-	.search_filter_wrap {
-		float      : left;
-		width      : 100%;
-		margin-top : 20px;
-		.search_filter_cat {
-			float : left;
-			width : 50%;
-			.search_cat_input {
-				text-align : left;
-				display    : block;
-				padding    : 0px 20px 0px 0px;
-
-				&.last {
-					padding : 0px 0px 0px 0px;
-				}
-
-				#type, #order {
-					width               : 100%;
-					box-sizing          : border-box;
-					color               : #fff;
-					background-color    : rgb(26, 29, 30);
-					border-color        : rgba(255, 255, 255, 0.1);
-					border-radius       : 0px;
-					background-position : right 10px top 17px;
-					background-repeat   : no-repeat;
-					padding             : 15px 15px;
-				}
-			}
-		}
-	}
-	label {
-		margin      : 0px 0px 10px 0px;
-		color       : #9c9c9c;
-		font-weight : bold;
-		font-size   : 15px;
-	}
-
-	&::after {
-		@include clearfix;
-	}
 }
 
 .addon_similar {
@@ -81,7 +23,7 @@
 	.addon_similar_wrap {
 		color     : #fff;
 		padding   : 20px;
-		max-width : 1100px;
+		max-width : 1200px;
 		margin    : 0px auto;
 
 		&.tags {
@@ -124,6 +66,7 @@
 				text-shadow   : 1px 0px 2px rgba(0, 0, 0, 0.33);
 				display       : inline-block;
 				margin        : 10px 0px 0px;
+				transition    : linear all .1s;
 
 				&:hover {
 					background      : $musicbee-color;
@@ -143,12 +86,17 @@
 		}
 
 		.no_result {
-			text-align : center;
-			margin     : 30px 0px 180px 0px;
+			margin     : 50px 0px 180px 0px;
 
 			h2 {
 				box-shadow     : none;
 				text-transform : none;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			p {
+				color : #797979;
 			}
 		}
 
@@ -252,10 +200,9 @@
 					}
 				}
 				.addon_result_column:nth-child(2) {
-					width       : 25%;
-					background  : rgba(255, 255, 255, 0.03);
-					border-left : 1px solid #2d2d2d;
-					padding     : 10px;
+					width: 25%;
+					border-left: 1px solid rgba(255, 255, 255, 0.06);
+					padding: 0px 0px 0px 15px;
 					@media screen and (max-width : $break-small) {
 						width : 100%;
 					}
@@ -277,11 +224,12 @@
 		background : #171717;
 
 		&.blue {
-			background: #333 url("../../img/parallax_1.jpg") fixed;
-			background-position: center center;
-			background-size: cover;
+			background      : #333 url("../../img/addon_header_bg.jpg") fixed center center;
+			background-size : cover;
+			min-height      : 250px
 		}
 	}
+
 
 	&.addon_cat_header {
 		color : #fff;
@@ -435,7 +383,7 @@
 		padding    : 10px;
 
 		.general_info_wrap {
-			max-width  : 1100px;
+			max-width  : 1200px;
 			margin     : 0px auto;
 			display    : block;
 			padding    : 10px 15px 10px 15px;

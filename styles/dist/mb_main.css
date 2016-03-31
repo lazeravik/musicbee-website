@@ -1538,7 +1538,11 @@ h4 {
 .secondery_nav .secondery_nav_wrap.expanded {
   padding-bottom: 20px;
   background: #313131;
-  border-bottom: 5px solid rgba(255, 255, 255, 0.15);
+  max-width: 300px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
 .secondery_nav .secondery_nav_wrap.expanded ul li {
@@ -1566,6 +1570,12 @@ h4 {
 
 .secondery_nav .secondery_nav_wrap.expanded ul.right {
   width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .secondery_nav {
+    height: 48px;
+  }
 }
 
 .is-sticky .secondery_nav {
@@ -2268,88 +2278,22 @@ select#release_note_jump option {
   color: #333;
 }
 
-.addon_secondery_nav {
-  background: rgba(29, 29, 29, 0.65);
-}
-
 .secondery_nav_color {
   background: #161a1b;
 }
 
-.search_box_outer_wrap {
-  display: none;
-  background: #161a1b;
-  overflow: hidden;
-  transition: linear all .5s;
+.addon_secondery_nav {
+  background: rgba(45, 45, 45, 0.8);
 }
 
-.search_box_outer_wrap.expanded {
-  display: block;
+.addon_page_nav {
+  background: rgba(29, 29, 29, 0.65);
 }
 
 .sub_content {
   padding: 40px 20px 40px 20px;
   text-align: center;
   color: #fff;
-}
-
-.search_box_wrap {
-  max-width: 700px;
-  margin: 0px auto;
-  text-align: left;
-  padding: 40px 0px;
-}
-
-@media screen and (max-width: 800px) {
-  .search_box_wrap {
-    padding: 40px 10px;
-  }
-}
-
-.search_box_wrap .search_filter_wrap {
-  float: left;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.search_box_wrap .search_filter_wrap .search_filter_cat {
-  float: left;
-  width: 50%;
-}
-
-.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input {
-  text-align: left;
-  display: block;
-  padding: 0px 20px 0px 0px;
-}
-
-.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input.last {
-  padding: 0px 0px 0px 0px;
-}
-
-.search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #type, .search_box_wrap .search_filter_wrap .search_filter_cat .search_cat_input #order {
-  width: 100%;
-  box-sizing: border-box;
-  color: #fff;
-  background-color: #1a1d1e;
-  border-color: rgba(255, 255, 255, 0.1);
-  border-radius: 0px;
-  background-position: right 10px top 17px;
-  background-repeat: no-repeat;
-  padding: 15px 15px;
-}
-
-.search_box_wrap label {
-  margin: 0px 0px 10px 0px;
-  color: #9c9c9c;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.search_box_wrap::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 .addon_similar {
@@ -2359,7 +2303,7 @@ select#release_note_jump option {
 .addon_similar .addon_similar_wrap {
   color: #fff;
   padding: 20px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0px auto;
 }
 
@@ -2403,6 +2347,7 @@ select#release_note_jump option {
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
   display: inline-block;
   margin: 10px 0px 0px;
+  transition: linear all .1s;
 }
 
 .addon_similar .addon_similar_wrap.header_links a:hover {
@@ -2420,13 +2365,18 @@ select#release_note_jump option {
 }
 
 .addon_similar .addon_similar_wrap .no_result {
-  text-align: center;
-  margin: 30px 0px 180px 0px;
+  margin: 50px 0px 180px 0px;
 }
 
 .addon_similar .addon_similar_wrap .no_result h2 {
   box-shadow: none;
   text-transform: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.addon_similar .addon_similar_wrap .no_result p {
+  color: #797979;
 }
 
 .addon_similar .addon_similar_wrap.heading_intro p {
@@ -2533,9 +2483,8 @@ select#release_note_jump option {
 
 .addon_similar .addon_similar_wrap.addon_result_column_wrap.col_2_1 .addon_result_column:nth-child(2) {
   width: 25%;
-  background: rgba(255, 255, 255, 0.03);
-  border-left: 1px solid #2d2d2d;
-  padding: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0px 0px 0px 15px;
 }
 
 @media screen and (max-width: 800px) {
@@ -2562,9 +2511,9 @@ select#release_note_jump option {
 }
 
 .addon_similar.alternate_bg.blue {
-  background: #333 url("../../img/parallax_1.jpg") fixed;
-  background-position: center center;
+  background: #333 url("../../img/addon_header_bg.jpg") fixed center center;
   background-size: cover;
+  min-height: 250px;
 }
 
 .addon_similar.addon_cat_header {
@@ -2730,7 +2679,7 @@ select#release_note_jump option {
 }
 
 .general_info .general_info_color .general_info_wrap {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0px auto;
   display: block;
   padding: 10px 15px 10px 15px;
@@ -3311,7 +3260,7 @@ select#release_note_jump option {
   padding: 30px;
 }
 
-.wmd-prompt-dialog input {
+.wmd-prompt-dialog input[type=button] {
   border: none;
 }
 

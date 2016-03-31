@@ -173,7 +173,7 @@ if (isset($_GET['view'])) :
 </div>
 <div id="clear"></div>
 <?php if($viewType!=1): ?>
-	<script src="<?php echo $siteUrl; ?>scripts/markdownEditor.js"></script>
+	<script src="<?php echo $link['url']; ?>scripts/markdownEditor.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			MBEditor.wmdBase();

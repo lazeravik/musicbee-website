@@ -19,7 +19,7 @@ if (isset($_GET['view'])) {
 	if ($_GET['view'] == "update" && isset($_GET['id'])) {
 		$viewType = 2; //update mode
 		include './dashboard.tasks.php';
-		require_once $siteRoot . 'classes/Addon.php';
+		require_once $link['root'] . 'classes/Addon.php';
 		$addon = new Addon(); //create an instance of the addondashboard class
 		$data = $addon->getAddonInfo ($_GET['id'])[0];
 
@@ -29,6 +29,8 @@ if (isset($_GET['view'])) {
 } else {
 	$viewType = 0; //submit mode
 }
+
+//var_dump($data);
 ?>
 
 <?php
@@ -204,16 +206,10 @@ endif;
 							<p><?php echo $lang['dashboard_submit_header_8']; ?></p>
 						</label>
 						<input id="addonver"
-						       value
-						       step="0.1"
-						       min="1.0"
-						       max="99.99"
 						       name="addonver"
 						       type="text/number"
 						       placeholder="eg. 1.0"
-						       value="<?php if ($viewType == 2) {
-							       echo $data['addon_version'];
-						       } ?>"/>
+						       value="<?php echo ($viewType == 2)?$data['addon_version']: ''; ?>"/>
 
 					</li>
 					<li>
@@ -465,8 +461,8 @@ endif;
 <div class="space medium"></div>
 <div id="upView" class="modalBox iw-modalBox fadeIn animated"></div>
 
-<script src="<?php echo $siteUrl; ?>scripts/multiple-select.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.tagsinput.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/multiple-select.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery.tagsinput.min.js"></script>
 <script type="text/javascript">
 
 	//Multiple Musicbee version selection diologue initializer

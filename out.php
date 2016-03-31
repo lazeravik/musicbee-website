@@ -9,7 +9,7 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-require_once $siteRoot . 'classes/Stats.php';
+require_once $link['root'] . 'classes/Stats.php';
 
 parse_str(str_replace("?", "", $params[2]),$url_params); 
 
@@ -31,9 +31,9 @@ if ($url_params['type'] == "addon" && isset($url_params['id'])) {
 	$Stats->addStat($stat);
 
 	$url = $url_params['r'];
-	include $siteRoot . 'includes/redirect.template.php';
+	include $link['root'] . 'includes/redirect.template.php';
 } else {
-	include $siteRoot . 'includes/redirect.template.php';
+	include $link['root'] . 'includes/redirect.template.php';
 }
 
 

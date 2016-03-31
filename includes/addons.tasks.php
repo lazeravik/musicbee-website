@@ -17,8 +17,8 @@
 $no_guests = true; //kick off the guests
 $json_response = true; //if the user is not logged in then send the json error instead of redirecting
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
-require_once $siteRoot.'classes/Addon.php';
-require_once $siteRoot.'includes/languages/en-us.php'; //gets text descriptions for errors and success message
+require_once $link['root'].'classes/Addon.php';
+require_once $link['root'].'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 
 if (ctype_digit($_POST['id'])) {
 	$addon = new Addon();

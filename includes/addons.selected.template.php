@@ -8,13 +8,13 @@
 	<meta name="keywords" content="<?php echo implode(",", $addon_data['tags']); ?>, musicbee, customizable, skin, free, plugin, download">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $siteRoot . 'includes/meta&styles.php'; ?>
+	<?php include $link['root'] . 'includes/meta&styles.php'; ?>
 
-	<link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/magnific-popup.css">
+	<link rel="stylesheet" href="<?php echo $link['url']; ?>styles/magnific-popup.css">
 	<!-- Used for slider animation -->
-	<link rel="stylesheet" href="<?php echo $siteUrl; ?>styles/animate.css">
+	<link rel="stylesheet" href="<?php echo $link['url']; ?>styles/animate.css">
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $siteRoot . 'includes/font.helper.php'; ?>
+	<?php include $link['root'] . 'includes/font.helper.php'; ?>
 </head>
 <body>
 
@@ -45,7 +45,7 @@ if ($addon_data['status'] == "3"): ?>
 <?php else: ?>
 	<div id="bg_image" class="general_info">
 		<!-- AddOn page navigation top menu -->
-		<div class="secondery_nav addon_secondery_nav" id="secondery_nav">
+		<div class="secondery_nav addon_secondery_nav addon_page_nav" id="secondery_nav">
 			<div class="secondery_nav_wrap">
 				<?php echo addon_secondery_nav_generator ($addon_data['addon_type']); ?>
 			</div>
@@ -56,7 +56,7 @@ if ($addon_data['status'] == "3"): ?>
 					<h2 class="title">
 						<?php echo $addon_data['addon_title']; ?>
 						<?php if ($addon_data['addon_version'] != null): ?>
-							<i class="general_info_addon_version">v<?php echo $addon_data['addon_version']; ?></i>
+							<i class="general_info_addon_version">v<?php echo htmlspecialchars($addon_data['addon_version'], ENT_QUOTES, "UTF-8"); ?></i>
 						<?php endif; ?>
 						<?php if ($addon_data['is_beta'] == 1): ?>
 							<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
@@ -64,7 +64,7 @@ if ($addon_data['status'] == "3"): ?>
 					</h2>
 					<div class="general_info_addon_meta">
 						<p><?php echo $lang['addon_15']; ?>
-							<a href="<?php echo addon_author_url_generator ($addon_data['membername']); ?>"><?php echo $addon_data['membername']; ?></a>
+							<a href="<?php echo htmlspecialchars(addon_author_url_generator ($addon_data['membername']), ENT_QUOTES, "UTF-8"); ?>"><?php echo $addon_data['membername']; ?></a>
 						</p>
 						<?php if (null != $addon_data['update_date']): ?>
 							<p><?php echo $lang['addon_16']; ?><?php echo $addon_data['update_date']; ?></p>
@@ -80,7 +80,7 @@ if ($addon_data['status'] == "3"): ?>
 					<p class="description"><?php echo $addon_data['short_description']; ?></p>
 				</div>
 				<div class="general_info_icon_wrap">
-					<div class="general_info_icon" style="background-image: url(<?php echo $addon_data['thumbnail']; ?>);"></div>
+					<div class="general_info_icon" style='background-image: url("<?php echo htmlspecialchars($addon_data['thumbnail'], ENT_QUOTES, "UTF-8"); ?>");'></div>
 				</div>
 				<?php if (!empty(trim ($addon_data['important_note']))): ?>
 					<div class="general_info_sidenote">
@@ -169,10 +169,11 @@ if ($addon_data['status'] == "3"): ?>
 	<!-- tags STARTS -->
 	<div class="addon_similar">
 		<div class="addon_similar_wrap tags">
-			<h3><?php echo $lang['addon_41']; ?></h3>
+			<?php if(!empty($addon_data['tags'][0])): ?>
+				<h3><?php echo $lang['addon_41']; ?></h3>
 			<?php foreach($addon_data['tags'] as $tags): ?>
 				<a href="<?php echo $link['addon']['home'] . 's/?q='.$tags; ?>"><?php echo $tags; ?></a>
-			<?php endforeach; ?>
+			<?php endforeach; endif; ?>
 		</div>
 	</div>
 
@@ -205,12 +206,12 @@ endif;
 include ($footer);
 ?>
 <canvas id="bg_hero_blur" style="display:none"></canvas>
-<script type="text/javascript" src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.magnific-popup.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/StackBlur.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+<script type="text/javascript" src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/StackBlur.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
 		<?php if ($addon_data['user']['already_liked'] == true): ?>
@@ -263,7 +264,7 @@ include ($footer);
 	function rate(id) {
 		hideNotification();
 		$.ajax({
-			url: "<?php echo $siteUrl; ?>includes/addons.tasks.php",
+			url: "<?php echo $link['url']; ?>includes/addons.tasks.php",
 			cache: false,
 			type: "POST",
 			data: {id: "" + id + ""}
@@ -296,7 +297,7 @@ include ($footer);
 
 </script>
 <?php
-include_once $siteRoot . 'includes/system.notification.script.php';
+include_once $link['root'] . 'includes/system.notification.script.php';
 ?>
 </body>
 </html>

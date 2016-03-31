@@ -12,13 +12,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/forum/SSI.php';
 $link = array();
 
-$siteUrl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
 $link['url'] = 'http://' . $_SERVER['HTTP_HOST'] . "/";
-$siteRoot = $_SERVER['DOCUMENT_ROOT'] . "/";
 $link['root'] = $_SERVER['DOCUMENT_ROOT'] . "/";
 
-require_once $siteRoot . 'classes/Format.php';
-require_once $siteRoot . 'classes/Validation.php';
+require_once $link['root'] . 'classes/Format.php';
+require_once $link['root'] . 'classes/Validation.php';
 
 // Don't do anything if already loaded.
 if (defined ('MB_FUNC')) {
@@ -33,17 +31,17 @@ if (session_status () == PHP_SESSION_NONE) {
 
 
 //Error related pages and codes
-$errorPage = $siteUrl . 'kb/';
+$errorPage = $link['url'] . 'kb/';
 $errorCode = array();
 $errorCode['ADMIN_ACCESS'] = "101"; //if a non admin is trying to access a page
 $errorCode['LOGIN_MUST'] = "102"; //User must logged in
 $errorCode['FORUM_INTEGRATION'] = "103"; //Forum integration is not initialized
 $errorCode['NOT_FOUND'] = "104"; //Page not found
-$status['404'] = $siteRoot . "error/404.php";
+$status['404'] = $link['root'] . "error/404.php";
 
-require_once $siteRoot . 'includes/languages/en-us.php';
+require_once $link['root'] . 'includes/languages/en-us.php';
 //setting file contains setting variables, mysql database credentials, api ids, passwords etc
-require_once $siteRoot . 'setting.php';
+require_once $link['root'] . 'setting.php';
 
 /**
  * Forum integration is must, if it is not initialized before this then throw an error
@@ -71,7 +69,7 @@ if (!$context['user']['is_admin'] && !empty($admin_only)) {
  * and set dashoard user info in session
  */
 if (!$context['user']['is_guest']) {
-	require_once $siteRoot . 'classes/Member.php';
+	require_once $link['root'] . 'classes/Member.php';
 	$memberData = new Member();
 
 	if ($memberData->memberInfo ($context['user']['id'])['rank'] == null) {
@@ -106,30 +104,30 @@ if (!$context['user']['is_guest']) {
 
 
 /// page location variable starts here
-$mainmenu = $siteRoot . 'includes/mainmenu.template.php';
-$footer = $siteRoot . 'includes/footer.template.php';
+$mainmenu = $link['root'] . 'includes/mainmenu.template.php';
+$footer = $link['root'] . 'includes/footer.template.php';
 
 
-$link['download'] = $siteUrl . 'download/';
-$link['rss'] = $siteUrl . 'rss/';
-$link['home'] = $siteUrl;
-$link['forum'] = $siteUrl . 'forum/';
-$link['admin']['admin-panel'] = $siteUrl . 'admin-panel/';
+$link['download'] = $link['url'] . 'download/';
+$link['rss'] = $link['url'] . 'rss/';
+$link['home'] = $link['url'];
+$link['forum'] = $link['url'] . 'forum/';
+$link['admin']['admin-panel'] = $link['url'] . 'admin-panel/';
 $link['admin']['forum-panel'] = $link['forum'] . '?action=admin';
 $link['login'] = $link['forum'] . '?action=login';
-$link['support'] = $siteUrl . 'support/';
-$link['addon']['home'] = $siteUrl . 'addons/';
-$link['addon']['dashboard'] = $siteUrl . 'dashboard/';
-$link['help'] = $siteUrl . 'help/';
-$link['release-note'] = $siteUrl . 'release-note/';
+$link['support'] = $link['url'] . 'support/';
+$link['addon']['home'] = $link['url'] . 'addons/';
+$link['addon']['dashboard'] = $link['url'] . 'dashboard/';
+$link['help'] = $link['url'] . 'help/';
+$link['release-note'] = $link['url'] . 'release-note/';
 $link['logout'] = $link['forum'] . 'index.php?action=logout;' . $context['session_var'] . '=' . $context['session_id'];
-$link['press'] = $siteUrl . 'press/';
-$link['devapi'] = $siteUrl . 'api/';
-$link['bugreport'] = $siteUrl . 'bug/';
-$link['redirect'] = $siteUrl . 'out/';
+$link['press'] = $link['url'] . 'press/';
+$link['devapi'] = $link['url'] . 'api/';
+$link['bugreport'] = $link['url'] . 'bug/';
+$link['redirect'] = $link['url'] . 'out/';
 
 //get the MusicBee info from json api
-$releaseData = json_decode (file_get_contents ($siteUrl . 'api.get.php?type=json&action=release-info'));
+$releaseData = json_decode (file_get_contents ($link['url'] . 'api.get.php?type=json&action=release-info'));
 
 $release = array();
 $release['stable']['appname'] = isset($releaseData[0]->appname) ? $releaseData[0]->appname : "...";
@@ -162,7 +160,7 @@ $dashboard_all_view_range = 15;
 $params = array_map ('strtolower', explode ("/", $_SERVER['REQUEST_URI']));
 
 
-$user_avatar = ($context['user']['avatar']!=null)? $context['user']['avatar']['href'] : $siteUrl.'img/musicbee_icon.png';
+$user_avatar = ($context['user']['avatar']!=null)? $context['user']['avatar']['href'] : $link['url'].'img/musicbee_icon.png';
 
 /**
  * MainMenu generator
@@ -225,31 +223,31 @@ $main_menu = array(
 				'sub_menu' => array(
 						'skins'        => array(
 								'title' => $lang['11'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=skins",
+								'href'  => $link['addon']['home'] . "s/?type=skins",
 								'icon'  => $lang['24'],
 								'desc'  => $lang['description_1'],
 						),
 						'plugins'      => array(
 								'title' => $lang['12'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=plugins",
+								'href'  => $link['addon']['home'] . "s/?type=plugins",
 								'icon'  => $lang['25'],
 								'desc'  => $lang['description_2'],
 						),
 						'visualiser'   => array(
 								'title' => $lang['13'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=visualiser",
+								'href'  => $link['addon']['home'] . "s/?type=visualiser",
 								'icon'  => $lang['26'],
 								'desc'  => $lang['description_3'],
 						),
 						'theater-mode' => array(
 								'title' => $lang['15'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=theater-mode",
+								'href'  => $link['addon']['home'] . "s/?type=theater-mode",
 								'icon'  => $lang['28'],
 								'desc'  => $lang['description_5'],
 						),
 						'misc'         => array(
 								'title' => $lang['16'],
-								'href'  => $link['addon']['home'] . "s/?q=&type=misc",
+								'href'  => $link['addon']['home'] . "s/?type=misc",
 								'icon'  => $lang['29'],
 								'desc'  => $lang['description_6'],
 						),

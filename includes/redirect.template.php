@@ -16,10 +16,10 @@
 	<title>Redirect</title>
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $siteRoot . '/includes/meta&styles.php'; ?>
+	<?php include $link['root'] . '/includes/meta&styles.php'; ?>
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $siteRoot . '/includes/font.helper.php'; ?>
+	<?php include $link['root'] . '/includes/font.helper.php'; ?>
 	<meta http-equiv="refresh" content="1;url=<?php echo $url; ?>" />
 </head>
 <body>
@@ -58,7 +58,7 @@
 <?php 
 include($footer); 
 ?>
-<script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 </body>
 </html>

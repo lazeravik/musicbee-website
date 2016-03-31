@@ -19,7 +19,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     <!--include common meta tags and stylesheets -->
     <?php include('./includes/meta&styles.php'); ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $siteUrl; ?>styles/animate.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $link['url']; ?>styles/animate.css">
     <!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
     <?php include('./includes/font.helper.php'); ?>
 </head>
@@ -86,20 +86,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     include($footer);
     ?>
 
-    <script src="<?php echo $siteUrl; ?>scripts/jquery-2.1.4.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/jquery.sticky.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/markdown-it.min.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/highlight/highlight.pack.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/markdownEditor.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/modalBox.js"></script>
-    <script src="<?php echo $siteUrl; ?>scripts/menu.navigation.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/markdown-it.min.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/markdownEditor.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/modalBox.js"></script>
+    <script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 
     <script>
         var defaultpage = "dashboard_overview";
     </script>
 
     <?php
-    include_once $siteRoot . 'includes/ajax.navigation.script.php';
+    include_once $link['root'] . 'includes/ajax.navigation.script.php';
     ?>
 
 </body>

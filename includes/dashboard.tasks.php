@@ -17,8 +17,8 @@
 	$no_guests = true; //kick off the guests
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-	require_once $siteRoot . 'classes/Dashboard.php';
-	include_once $siteRoot . 'includes/parsedown/Parsedown.php';
+	require_once $link['root'] . 'classes/Dashboard.php';
+	include_once $link['root'] . 'includes/parsedown/Parsedown.php';
 
 if (isset($_POST['submit'])) {
 	//if all user input is ok then move on
