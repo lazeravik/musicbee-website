@@ -8,25 +8,32 @@
  * Created by AvikB for noncommercial MusicBee project.
  * Spelling mistakes and fixes from phred and other community memebers.
  */
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/forum/SSI.php';
 $link = array();
-
 $link['url'] = 'http://' . $_SERVER['HTTP_HOST'] . "/";
 $link['root'] = $_SERVER['DOCUMENT_ROOT'] . "/";
 
-require_once $link['root'] . 'classes/Format.php';
-require_once $link['root'] . 'classes/Validation.php';
 
-// Don't do anything if already loaded.
-if (defined ('MB_FUNC')) {
-	return true;
-}
-define ('MB_FUNC', 'COMMON_FUNCTION');
-if (session_status () == PHP_SESSION_NONE) {
-	session_start ();
-}
+require_once $link['root'] . 'forum/SSI.php';
 
+
+$link['download'] = $link['url'] . 'download/';
+$link['rss'] = $link['url'] . 'rss/';
+$link['home'] = $link['url'];
+$link['forum'] = $link['url'] . 'forum/';
+$link['admin']['admin-panel'] = $link['url'] . 'admin-panel/';
+$link['admin']['forum-panel'] = $link['forum'] . '?action=admin';
+$link['login'] = $link['forum'] . '?action=login';
+$link['support'] = $link['url'] . 'support/';
+$link['addon']['home'] = $link['url'] . 'addons/';
+$link['addon']['dashboard'] = $link['url'] . 'dashboard/';
+$link['help'] = $link['url'] . 'help/';
+$link['release-note'] = $link['url'] . 'release-note/';
+$link['press'] = $link['url'] . 'press/';
+$link['devapi'] = $link['url'] . 'api/';
+$link['bugreport'] = $link['url'] . 'bug/';
+$link['redirect'] = $link['url'] . 'out/';
+
+$link['404'] = $link['root'] . "error/404.php";
 
 
 
@@ -40,6 +47,38 @@ $errorCode['NOT_FOUND'] = "104"; //Page not found
 $status['404'] = $link['root'] . "error/404.php";
 
 require_once $link['root'] . 'includes/languages/en-us.php';
+require_once $link['root'] . 'classes/Format.php';
+require_once $link['root'] . 'classes/Validation.php';
+
+
+$link['logout'] = $link['forum'] . 'index.php?action=logout;' . $context['session_var'] . '=' . $context['session_id'];
+
+
+
+// Don't do anything if already loaded.
+if (defined ('MB_FUNC')) {
+	return true;
+}
+define ('MB_FUNC', 'COMMON_FUNCTION');
+if (session_status () == PHP_SESSION_NONE) {
+	session_start ();
+}
+
+
+
+if(!strpos(currentUrl(), 'login')
+		&& !strpos(currentUrl(), 'includes')
+		&& !strpos(currentUrl(), 'styles')
+		&& !strpos(currentUrl(), 'img'))
+{
+	$_SESSION['login_url']= currentUrl();
+	$_SESSION['logout_url']= currentUrl();
+	$_SESSION['old_url']= currentUrl();
+
+}
+
+//var_dump($_SESSION);
+
 //setting file contains setting variables, mysql database credentials, api ids, passwords etc
 require_once $link['root'] . 'setting.php';
 
@@ -87,7 +126,15 @@ if (!$context['user']['is_guest']) {
 		}
 
 	} else {
+		//check if forum username updated,
 		$getmemberinfo = $memberData->memberInfo ($context['user']['id']);
+
+		if($getmemberinfo['membername'] != $context['user']['username']){
+			if($memberData->updateDashboardAccount($context['user']['id'],$context['user']['username'])) {
+				$getmemberinfo = $memberData->memberInfo ($context['user']['id']);
+			}
+		}
+
 	}
 
 	$memberinfoArray['membername'] = $getmemberinfo['membername'];
@@ -102,29 +149,12 @@ if (!$context['user']['is_guest']) {
 
 
 
-
 /// page location variable starts here
 $mainmenu = $link['root'] . 'includes/mainmenu.template.php';
 $footer = $link['root'] . 'includes/footer.template.php';
 
 
-$link['download'] = $link['url'] . 'download/';
-$link['rss'] = $link['url'] . 'rss/';
-$link['home'] = $link['url'];
-$link['forum'] = $link['url'] . 'forum/';
-$link['admin']['admin-panel'] = $link['url'] . 'admin-panel/';
-$link['admin']['forum-panel'] = $link['forum'] . '?action=admin';
-$link['login'] = $link['forum'] . '?action=login';
-$link['support'] = $link['url'] . 'support/';
-$link['addon']['home'] = $link['url'] . 'addons/';
-$link['addon']['dashboard'] = $link['url'] . 'dashboard/';
-$link['help'] = $link['url'] . 'help/';
-$link['release-note'] = $link['url'] . 'release-note/';
-$link['logout'] = $link['forum'] . 'index.php?action=logout;' . $context['session_var'] . '=' . $context['session_id'];
-$link['press'] = $link['url'] . 'press/';
-$link['devapi'] = $link['url'] . 'api/';
-$link['bugreport'] = $link['url'] . 'bug/';
-$link['redirect'] = $link['url'] . 'out/';
+
 
 //get the MusicBee info from json api
 $releaseData = json_decode (file_get_contents ($link['url'] . 'api.get.php?type=json&action=release-info'));
@@ -331,6 +361,24 @@ function getVersionInfo($value, $type) {
 		}
 	}
 }
+
+
+function currentUrl() {
+	$pageURL = 'http';
+	if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]== "on") {$pageURL .= "s";}
+	$pageURL .= "://";
+	if ($_SERVER["SERVER_PORT"] != "80") {
+		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+	} else {
+		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	}
+	return $pageURL;
+}
+
+
+
+
+
 
 function showQuery($query, $params)
 {

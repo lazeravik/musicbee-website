@@ -790,6 +790,74 @@ a:active, a:hover {
   }
 }
 
+.loader {
+  position: relative;
+  margin: 0px auto;
+  width: 30px;
+}
+
+.loader:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes color {
+  100%, 0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%, 90% {
+    stroke: #ffa700;
+  }
+}
+
 .ms-parent {
   display: inline-block;
   position: relative;
@@ -1722,6 +1790,46 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   color: rgba(255, 255, 255, 0.76);
   padding: 0px;
   margin: 2px;
+}
+
+/*
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+.main_imgur_upload_body {
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.main_imgur_upload_body .show_info.custom img {
+  height: 20px;
+  margin-bottom: -4px;
+}
+
+.iw-modalOverlay {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.dropzone {
+  text-align: center;
+  padding-bottom: 70px;
+  position: relative;
+}
+
+.dropzone input[type=file] {
+  height: 100%;
+  left: 0;
+  outline: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  cursor: pointer;
 }
 
 /*================================================================================================================*\\

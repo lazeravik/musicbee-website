@@ -65,16 +65,14 @@ s-yadav.github.com
         var closeBtn = e.data.closeBtn,
             elm = e.data.elm;
         closeBtn.css({
-            top: (elm.offset().top - $(window).scrollTop()) + 10+ 'px',
-            left: (elm.offset().left - $(window).scrollLeft() + elm.width() -50) + 'px',
+            top: '10px',
+            right: '10px',
             position: 'fixed',
             'z-index': '99'
         });
     };
-    $fromTop="";
     //to show overlay
     var addOverlay = function () {
-        $fromTop = $(window).scrollTop();
         $('body').append('<div class="iw-modalOverlay"></div>');
         $('.iw-modalOverlay').css({
             display: 'block',
@@ -84,13 +82,6 @@ s-yadav.github.com
             top: 0,
             left: 0,
             'z-index': '98'
-        });
-        $('body').css({
-            position: 'fixed',
-            width: '100%',
-            'top': '-'+$fromTop+'px',
-            'overflow-x': 'hidden',
-            'overflow-y': 'hidden'
         });
 
     };
@@ -213,16 +204,12 @@ s-yadav.github.com
                     'display': 'none'
                 });
 				$('body').removeAttr('style');
-                $(window).scrollTop($fromTop);
                 elm.removeAttr('style');
                 //call callback function
                 elm.data('closeFun').call(this);
 
                 //restore modal box
-                elm.removeData('iw-size')
-                    .removeData('closeFun')
-                //remove class
-                .removeClass('iw-modalBox');
+                elm.removeData('iw-size').removeData('closeFun').removeClass('iw-modalBox');
 
                 //if all modal box is closed unbinde all events.
                 if ($('.iw-modalBox').length === 0) {

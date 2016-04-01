@@ -65,9 +65,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                 </ul>
                 <ul class="right">
                     <li>
+                        <a href="">Moderate</a>
+                    </li>
+                    <li>
                         <a class="btn addon_panel_btn" href="javascript:void(0)" title="Your rank is <?php echo $_SESSION['memberinfo']['rank']; ?>">
-                            <i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $_SESSION['memberinfo']['rank']; ?>
+                            <i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $_SESSION['memberinfo']['rank']; ?>&nbsp;&nbsp; <i class="fa fa-caret-down"></i>
                         </a>
+                            <ul class="nav_dropdown_sub">
+                                <li>
+                                    <a href="">
+                                        Downloads & Releases
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                       Website Setting & Options
+                                    </a>
+                                </li>
+
+                            </ul>
                     </li>
                 </ul>
             </div>

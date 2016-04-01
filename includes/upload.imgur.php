@@ -46,16 +46,6 @@ $inputId = $_POST['id'];
 	.dropzone:hover {
 		background: #F2F4F5;
 	}
-	.dropzone input[type="file"] {
-		height: 100%;
-		left: 0;
-		outline: none;
-		opacity: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		cursor:pointer;
-	}
 
 
 	.loading-modal {
@@ -103,11 +93,11 @@ $inputId = $_POST['id'];
 </style>
 <div class="main_imgur_upload_body">
 <?php if (IMGUR_UPLOAD_ON): ?>
-	<div class="infocard_header green_color">
+	<div class="show_info custom">
 		<h3><?php echo $lang['406']; ?><img src="<?php echo $link['url']."img/logo-light.png"; ?>"></h3>
 	</div>
-	<div class="infocard_header dark_grey">
-		<p><?php echo $lang['407']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u></p>
+	<div class="show_info info_darkgrey">
+		<?php echo $lang['407']; ?> <u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u>
 	</div>
 	<div class="img-drop-wrap">
 		<div class="dropzone"><h2><?php echo $lang['408']; ?></h2><p><?php echo $lang['409']; ?></p>
@@ -118,7 +108,7 @@ $inputId = $_POST['id'];
 		</div>
 	</div>
 <?php else: ?>
-<div class="infocard_header darkred_color">
+<div class="show_info danger">
 	<h3><?php echo $lang['410']; ?></h3>
 	<p><?php echo $lang['411']; ?></p>
 </div>

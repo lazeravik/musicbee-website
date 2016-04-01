@@ -34,13 +34,11 @@
 									ID_MEMBER = :id,
 									rank = :permission,
 									membername = :name,
-									submitPermission = {$submitPermission},
-									addon_added = :addon_added";
+									submitPermission = {$submitPermission}";
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id', $user_id);
 					$statement->bindValue(':permission', $user_rankid);
 					$statement->bindValue(':name', Format::my_numeric2character($user_name));
-					$statement->bindValue(':addon_added', 0);
 					$statement->execute();
 				} catch (Exception $e) {
 					return false;
@@ -52,6 +50,30 @@
 				} else {
 					return false;
 				}
+			}
+		}
+
+
+		public function updateDashboardAccount($user_id, $user_name)
+		{
+			global $connection;
+
+			if (databaseConnection()) {
+				try {
+					$sql = "UPDATE ".SITE_MEMBER_TBL."
+								SET
+									membername = :name
+								WHERE
+									ID_MEMBER = :user_id";
+					$statement = $connection->prepare($sql);
+					$statement->bindValue(':name', Format::my_numeric2character($user_name));
+					$statement->bindValue(':user_id', $user_id);
+					$statement->execute();
+				} catch (Exception $e) {
+					return false;
+				}
+
+				return true;
 			}
 		}
 

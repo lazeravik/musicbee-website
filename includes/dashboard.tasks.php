@@ -108,12 +108,14 @@ if (isset($_POST['submit'])) {
 				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 			}
 
+			//verify if the author can modify it.
+			if (!$dashboard->verifyAuthor ($user_info['id'], $_POST['record_id'])) {
+				die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
+			}
+
 			//check if an addon with similer name except for this one exists or not
 			if(!$dashboard->addonExists($_POST['title'], $_POST['record_id'])) {
-				//verify if the author can modify it.
-				if (!$dashboard->verifyAuthor ($user_info['id'], $_POST['record_id'])) {
-					die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
-				}
+
 				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 				//load parsedown markup to html converter
 				$Parsedown = new Parsedown();

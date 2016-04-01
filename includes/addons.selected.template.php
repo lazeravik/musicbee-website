@@ -142,8 +142,8 @@ if ($addon_data['status'] == "3"): ?>
 					} else {
 						$thumb = $img;
 					}
-					echo '<a class="screenshot_zoom_click" href="', $img, '">
-						<div class="screenshot_wrapper" style="background-image:url(' . $thumb . ')"></div>
+					echo '<a class="screenshot_zoom_click" href="', htmlspecialchars($img, ENT_QUOTES, "UTF-8"), '">
+						<div class="screenshot_wrapper" style=\'background-image:url("' . htmlspecialchars($thumb, ENT_QUOTES, "UTF-8") . '")\'></div>
 					</a>';
 				}
 				?>

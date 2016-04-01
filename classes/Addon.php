@@ -23,9 +23,7 @@ class Addon
 	
 	
 	public function getAddonData($addon_id) {
-		global $connection;
-
-
+		global $connection, $link;
 
 		if($this->checkAddonExistenceById($addon_id)) {
 			if(databaseConnection()) {
@@ -84,9 +82,7 @@ class Addon
 				}
 			}
 		} else {
-			header("HTTP/1.0 404 Not Found");
-			include 'error/404.php';
-			exit();
+			return null;
 		}
 	}
 

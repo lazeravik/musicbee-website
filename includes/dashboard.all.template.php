@@ -162,7 +162,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<td class="action_input">
 								<form
 										id="<?php echo $addon['ID_ADDON']; ?>"
-										action="../includes/dashboard.tasks.php"
+										action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
 										method="post"
 										data-autosubmit>
 									<button
@@ -254,8 +254,10 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	function loadEditView(id) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
+
+		window.location.hash = '/'+id;
 		$.ajax({
-			url: '../includes/dashboard.submit.template.php?view=update&id=' + id,
+			url: '<?php echo $link['url']; ?>includes/dashboard.submit.template.php?view=update&id=' + id,
 			cache: false,
 			type: "POST",
 		}).done(function (data) {

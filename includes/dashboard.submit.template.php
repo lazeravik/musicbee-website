@@ -40,7 +40,6 @@ if (isset($_GET['view'])) {
 
 if (isset($_GET['action'])):
 	if ($_GET['action'] == "submit_success"): ?>
-
 		<div class="main_content_wrapper col_2_1">
 			<div class="sub_content_wrapper">
 				<div class="box_content">
@@ -89,7 +88,7 @@ endif;
  */
 ?>
 
-<form action="../includes/dashboard.tasks.php" method="post" id="addon_submission" data-autosubmit>
+<form action="<?php echo $link['url']; ?>includes/dashboard.tasks.php" method="post" id="addon_submission" data-autosubmit>
 	<div class="main_content_wrapper col_2_1">
 		<div class="sub_content_wrapper">
 			<div class="box_content">
@@ -482,49 +481,25 @@ endif;
 
 	//show imgur upload modal box
 	function showUpModal(id, upType) {
-		$fromTop = $(window).scrollTop(),
-				$('.modalBox').modalBox({
-					width: '680',
-					height: '400',
-					top: 'auto',
-					left: 'auto',
-					keyClose: true,
-					iconClose: true,
-					bodyClose: true,
-					<?php if($viewType == 2): ?>
-					overlay: false,
-					<?php else: ?>
-					overlay: true,
-					<?php endif; ?>
-					onOpen: function () {
-						$('#blur_content_id').addClass('blur_content_overlay');
-						$('#upView').html("<div class=\"sk-circle\"> <div class=\"sk-circle1 sk-child\"></div> <div class=\"sk-circle2 sk-child\"></div> <div class=\"sk-circle3 sk-child\"></div> <div class=\"sk-circle4 sk-child\"></div> <div class=\"sk-circle5 sk-child\"></div> <div class=\"sk-circle6 sk-child\"></div> <div class=\"sk-circle7 sk-child\"></div> <div class=\"sk-circle8 sk-child\"></div> <div class=\"sk-circle9 sk-child\"></div> <div class=\"sk-circle10 sk-child\"></div> <div class=\"sk-circle11 sk-child\"></div> <div class=\"sk-circle12 sk-child\"></div> </div>"); //show loading signal maybe!
-						if (upType == "img") {
-							loadImgurUpload(id);
-						}
-					},
-					onClose: function () {
-						<?php if($viewType == 2): ?>
-						$('body').css({
-							position: 'fixed',
-							width: '100%',
-							'top': '-' + $(window).scrollTop() + 'px',
-							'overflow-x': 'hidden',
-							'overflow-y': 'hidden'
-						});
-						<?php endif; ?>
-						$('#blur_content_id').removeClass('blur_content_overlay');
-						$('#upView').removeClass('busy');
-						$('#upView').html(""); //delete the html we got from ajax req
-					}
-				});
+		$('.modalBox').modalBox({ width: '680', height: '347px', top: 'auto', left: 'auto', keyClose: true, iconClose: true, bodyClose: true,
+			onOpen: function () {
+				$('#upView').html('<div class="loader"><svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"/></svg></div>'); //show loading signal maybe!
+				if (upType == "img") {
+					loadImgurUpload(id);
+				}
+			},
+			onClose: function () {
+				$('#upView').removeClass('busy');
+				$('#upView').html(""); //delete the html we got from ajax req
+			}
+		});
 	}
 
 	//load Imgur upload diologue content via ajax
 	function loadImgurUpload(id) {
 		$.fx.off = true; // turn off jquery animation effects
 		$.ajax({
-			url: '../includes/upload.imgur.php',
+			url: '<?php echo $link['url']; ?>includes/upload.imgur.php',
 			cache: false,
 			type: "POST",
 			data: {id: "" + id + ""}
@@ -659,12 +634,13 @@ endif;
 
 	<?php if ($viewType == 2): ?>
 	function submitted() {
-		var $generatedUrl = generatePageUrl((window.location.hash).replace('#', ''));
+		var $generatedUrl = generatePageUrl('dashboard_all');
 		loadPageGet($generatedUrl);
+		window.location.hash = 'dashboard_all';
 	}
 	<?php else: ?>
 	function submitted() {
-		var $generatedUrl = generatePageUrl((window.location.hash).replace('#', ''));
+		var $generatedUrl = generatePageUrl(window.location.hash.replace('#', ''));
 		loadPageGet($generatedUrl, "action=submit_success");
 	}
 	<?php endif; ?>

@@ -22,6 +22,12 @@ if (isset($_GET['id'])) {
 		array_shift($params); //"addons" from the array as we already know the page name
 		$addon_data = $addon->getAddonData($_GET['id']);
 
+		if($addon_data == null){
+			header("HTTP/1.0 404 Not Found");
+			include $link['404'];
+			exit();
+		}
+
 		//checks the url parameter and try to match the addon title, if the addon id matches but not the title, then do a 301 redirect
 		if (count ($params) <= 2 && urldecode($params[1]) != Format::Slug ($addon_data['addon_title'])) {
 			header ("Location: " . $link['addon']['home'] . $addon_data['ID_ADDON'] . "/" . Format::Slug ($addon_data['addon_title']) . "/", 301);
@@ -99,7 +105,7 @@ if (isset($_GET['id'])) {
 		exit();
 	} else {
 		header ("HTTP/1.0 404 Not Found");
-		include_once $status['404'];
+		include_once $link['404'];
 		exit();
 	}
 } else {
@@ -169,7 +175,7 @@ function addon_result_view_generator($data) {
 					'.$addon_beta_markup.'
 				</a>
 				<div class="addon_list_box_info">
-					<a href="' . $addon_link . '"><p class="title">' . htmlspecialchars($addon_data['addon_title'], ENT_QUOTES, "UTF-8") . '</p></a>
+					<a href="' . $addon_link . '"><p class="title">' . $addon_data['addon_title']. '</p></a>
 					<p class="author"><a href="' . addon_author_url_generator ($addon_data['membername']) . '"> ' . $lang['addon_15'] . ' <b>' . $addon_data['membername'] . '</b></a></p>
 				</div>
 			</div>

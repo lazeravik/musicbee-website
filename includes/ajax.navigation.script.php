@@ -10,24 +10,34 @@
 	//If the document is loaded we want to check if any hash is available in the url. and redirect user to those url
 	//otherwise load the default page ?>
 	$(document).ready(function () {
-		var dataUrl = ((window.location.hash)? (window.location.hash).replace('#','') : defaultpage);
-		loadPageGet(generatePageUrl(dataUrl));
-
+		var dataUrl = ((window.location.hash) ? (window.location.hash).replace('#', '') : defaultpage);
+		loadUpdatePage(dataUrl);
 		window.location.hash = dataUrl;
-
 		//load click events at startup
 		load_click_event();
 	});
 
-	$(window).on('hashchange', function(e){
-		var dataUrl = (window.location.hash)? (window.location.hash).replace('#','') : defaultpage;
-		loadPageGet(generatePageUrl(dataUrl));
+	$(window).on('hashchange', function (e) {
+		var dataUrl = (window.location.hash) ? (window.location.hash).replace('#', '') : defaultpage;
+		loadUpdatePage(dataUrl);
 
 	})
 
-	function generatePageUrl(data){
-		var subDir = "<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/";
-		return subDir+data.replace('_','.')+'.template.php';
+	function loadUpdatePage(dataUrl){
+		if (dataUrl.toLowerCase().indexOf("/") >= 0) {
+			var id = dataUrl.split('/')[1];
+			if (Math.floor(id) == id && $.isNumeric(id)) {
+				loadPageGet(generatePageUrl('dashboard_submit'),'view=update&id=' + id);
+				return false;
+			}
+		} else {
+			loadPageGet(generatePageUrl(dataUrl));
+		}
+	}
+
+	function generatePageUrl(data) {
+		var subDir = "<?php echo $link['url']; ?>includes/";
+		return subDir + data.replace('_', '.') + '.template.php';
 	}
 
 
@@ -67,17 +77,11 @@
 			hideOverlay(); //hide overlay while loading
 		});
 	}
-	//generates Url used to get files with ajax request
-	function generateUrl(data) {
-		var subDir = "<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/";
-		var ext = ".template.php";
-		return subDir + data + ext;
-	}
 
 	//scroll page to top
 	function gotoTop() {
 		$.fx.off = false;
-		$("html, body").delay(100).animate({scrollTop: 0}, 'fast');
+		$("html, body").animate({scrollTop: 0}, 'fast');
 		$.fx.off = true;
 	}
 
@@ -106,4 +110,4 @@
 
 </script>
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/system.notification.script.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/includes/system.notification.script.php'; ?>

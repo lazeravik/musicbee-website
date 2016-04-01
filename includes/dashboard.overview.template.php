@@ -197,7 +197,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 
 									<form
 										id="addon_reject"
-										action="../includes/dashboard.tasks.php"
+										action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
 										method="post"
 										data-autosubmit>
 										<button
@@ -217,7 +217,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 									</form>
 									<form
 										id="addon_approve"
-										action="../includes/dashboard.tasks.php"
+										action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
 										method="post"
 										data-autosubmit>
 										<button
@@ -247,8 +247,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			</div>
 		<?php endif; ?>
 		<div class="box_content">
-			<span
-				class="show_info custom">
+			<span class="show_info custom">
 				<h3><?php echo $lang['dashboard_8']; ?></h3>
 			</span>
 			<?php if (!empty($stat['top_voted_addon'])): ?>
@@ -288,8 +287,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			<?php endif; ?>
 		</div>
 		<div class="box_content">
-			<span
-				class="show_info custom">
+			<span class="show_info custom">
 				<h3><?php echo $lang['dashboard_9']; ?></h3>
 			</span>
 			<?php if (!empty($stat['top_downloaded_addon'])): ?>
