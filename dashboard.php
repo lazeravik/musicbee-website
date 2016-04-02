@@ -78,8 +78,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
-                                       Website Setting & Options
+                                    <a href="#admin_setting" data-href="admin_setting">
+                                       Website Setting
                                     </a>
                                 </li>
 

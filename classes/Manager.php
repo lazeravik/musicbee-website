@@ -17,8 +17,6 @@
 	{
 		public $errorMessage;
 
-		private $db_connection = null;
-
 		public function saveArchieveData($note_html)
 		{
 			global $connection;
@@ -203,6 +201,10 @@
 		 * notification for the user of what might went wrong, also if they make any accidental mistake
 		 *
 		 * @param $appname , $ver, $os
+		 * @param $ver
+		 * @param $os
+		 *
+		 * @return bool
 		 */
 		private function validateData($appname, $ver, $os)
 		{
@@ -245,7 +247,7 @@
 			return null;
 		}
 
-		//remove ebery single spaces from the string
+		//remove every single spaces from the string
 		private function removeSpace($value)
 		{
 			if (!empty($value)) {

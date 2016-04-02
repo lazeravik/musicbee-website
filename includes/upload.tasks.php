@@ -18,7 +18,7 @@
 
 	if ($_POST['target'] == "imgur") {
 
-		if (!IMGUR_UPLOAD_ON) {
+		if (!$setting['imgurUploadOn']) {
 			die('{"status": "0", "data": "' . $lang['413'] . '"}');
 		}
 
@@ -34,7 +34,7 @@
 
 
 		//var_dump($img);
-		$client_id = IMGUR_CLIENT_ID;
+		$client_id = $setting['imgurClientID'];
 		$filename = $img['tmp_name'];
 		$handle = fopen($filename, "r");
 		$data = fread($handle, filesize($filename));

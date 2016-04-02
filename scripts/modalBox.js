@@ -165,7 +165,8 @@ s-yadav.github.com
                         modalBox: elm
                     }, clickEvent);
 
-                    $('body').append(closeBtn);
+                $('body').append(closeBtn);
+                $('#main_upload_body > #close').attr('data-test',randId);
 
             }
 
@@ -209,7 +210,9 @@ s-yadav.github.com
                 elm.data('closeFun').call(this);
 
                 //restore modal box
-                elm.removeData('iw-size').removeData('closeFun').removeClass('iw-modalBox');
+                elm.removeData('iw-size').removeData('closeFun')
+                //remove class
+                .removeClass('iw-modalBox');
 
                 //if all modal box is closed unbinde all events.
                 if ($('.iw-modalBox').length === 0) {

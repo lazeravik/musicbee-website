@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 		$from_author = $addon->getAddonListByMember ($addon_data['ID_AUTHOR'], 5);
 		//var_dump($addon_data);
 
-		include_once $link['root'] . 'includes/addons.selected.template.php';
+		include_once $link['root'] . 'views/addons.selected.template.php';
 		exit();
 
 	} elseif ($_GET['id'] == "s") {
@@ -101,7 +101,7 @@ if (isset($_GET['id'])) {
 		}
 
 
-		include_once $link['root'] . 'includes/addons.search.template.php';
+		include_once $link['root'] . 'views/addons.search.template.php';
 		exit();
 	} else {
 		header ("HTTP/1.0 404 Not Found");

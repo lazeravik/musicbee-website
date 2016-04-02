@@ -18,7 +18,7 @@ $ALL_MBVERSION_DASHBOARD = getVersionInfo (0, "byAllReleases");
 if (isset($_GET['view'])) {
 	if ($_GET['view'] == "update" && isset($_GET['id'])) {
 		$viewType = 2; //update mode
-		include './dashboard.tasks.php';
+		include $link['root'].'includes/dashboard.tasks.php';
 		require_once $link['root'] . 'classes/Addon.php';
 		$addon = new Addon(); //create an instance of the addondashboard class
 		$data = $addon->getAddonInfo ($_GET['id'])[0];
@@ -293,16 +293,24 @@ endif;
 						<?php if ($viewType == 2) : ?>
 							<div id="screenshot_inputs"
 							     class="link_input">
-								<?php
-								foreach ($screenshot_array as $key => $screenshots):
-									$rand_container_id = uniqid ();
-									?>
+								<?php foreach ($screenshot_array as $key => $screenshots):
+									$rand_container_id = uniqid (); ?>
+
 									<div class="flex_input col_2">
-										<input id="<?php echo $rand_container_id; ?>"
-										       type="text"
-										       name="screenshot_links[]"
-										       value="<?php echo $screenshots; ?>"
-										       placeholder="eg. http://i.imgur.com/<?php echo $rand_container_id; ?>.jpg"/>
+										<div class="up_group">
+											<input id="<?php echo $rand_container_id; ?>"
+											       type="text"
+											       name="screenshot_links[]"
+											       value="<?php echo $screenshots; ?>"
+											       placeholder="eg. http://i.imgur.com/<?php echo $rand_container_id; ?>.jpg"/>
+
+											<?php if ($key != 0): ?>
+												<a href="javascript:void(0)"
+												   id="remove_button"
+												   class="btn remove_img_btn"
+												   title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['dashboard_submit_btn_3']; ?></a>
+											<?php endif; ?>
+										</div>
 										<button
 												type="button"
 												onclick="showUpModal('<?php echo $rand_container_id; ?>','img')"
@@ -311,16 +319,11 @@ endif;
 												title="<?php echo $lang['dashboard_tooltip_3']; ?>">
 											<?php echo $lang['dashboard_submit_btn_1']; ?>
 										</button>
-										<?php if ($key != 0): ?>
-											<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn"><?php echo $lang['dashboard_submit_btn_3']; ?></a>
-										<?php endif; ?>
 									</div>
 
-								<?php endforeach; ?>
-							</div>
-						<?php else: ?>
-							<div id="screenshot_inputs"
-							     class="link_input">
+									<?php endforeach;
+								else: ?>
+							<div id="screenshot_inputs" class="link_input">
 								<div class="flex_input col_2">
 									<input id="vfda54huk"
 									       type="text"
@@ -410,8 +413,6 @@ endif;
 					<li>
 						<button class="btn btn_blue"
 						        type="submit"
-						        id="submit"
-						        style="padding:15px"
 						        onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
 					</li>
 				</ul>
@@ -499,7 +500,7 @@ endif;
 	function loadImgurUpload(id) {
 		$.fx.off = true; // turn off jquery animation effects
 		$.ajax({
-			url: '<?php echo $link['url']; ?>includes/upload.imgur.php',
+			url: '<?php echo $link['url']; ?>views/upload.imgur.template.php',
 			cache: false,
 			type: "POST",
 			data: {id: "" + id + ""}

@@ -31,9 +31,9 @@ if ($url_params['type'] == "addon" && isset($url_params['id'])) {
 	$Stats->addStat($stat);
 
 	$url = $url_params['r'];
-	include $link['root'] . 'includes/redirect.template.php';
+	include $link['root'] . 'views/redirect.template.php';
 } else {
-	include $link['root'] . 'includes/redirect.template.php';
+	include $link['root'] . 'views/redirect.template.php';
 }
 
 

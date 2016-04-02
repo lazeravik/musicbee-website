@@ -76,7 +76,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<span class="show_info info_darkgrey custom">
 				<h3><?php echo $lang['dashboard_10']; ?></h3>
 			</span>
-			<form id="search_filter" action="../includes/dashboard.all.template.php" method="get" data-autosubmit>
+			<form id="search_filter" action="<?php echo $link['url']; ?>views/dashboard.all.template.php" method="get" data-autosubmit>
 			<span class="show_info info_silverwhite custom">
 				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)" >
 				<input type="hidden" name="action" value="search">
@@ -160,8 +160,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							?>
 
 							<td class="action_input">
-								<form
-										id="<?php echo $addon['ID_ADDON']; ?>"
+								<form id="<?php echo $addon['ID_ADDON']; ?>"
 										action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
 										method="post"
 										data-autosubmit>
@@ -211,7 +210,6 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 <script type="text/javascript">
 	searchEnter = function(event){
 		if (event.keyCode == 13) {
-			window.location.hash = window.location.hash+"/s/wsfefv";
 			//reset pagination for search
 			$('#page_num').val(1);
 			searchFilterAddon(event);
@@ -257,7 +255,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 		window.location.hash = '/'+id;
 		$.ajax({
-			url: '<?php echo $link['url']; ?>includes/dashboard.submit.template.php?view=update&id=' + id,
+			url: '<?php echo $link['url']; ?>views/dashboard.submit.template.php?view=update&id=' + id,
 			cache: false,
 			type: "POST",
 		}).done(function (data) {

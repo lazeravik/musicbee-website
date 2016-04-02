@@ -7,6 +7,7 @@ RewriteEngine On
 
 #do not perform rewrite in the following directory
 RewriteRule ^includes - [L,NC]
+RewriteRule ^views - [L,NC]
 RewriteRule ^forum - [L,NC]
 RewriteRule ^dokuwiki - [L,NC]
 RewriteRule ^sqlbuddy - [L,NC] #only for dev purpose

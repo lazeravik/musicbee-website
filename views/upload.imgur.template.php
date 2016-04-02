@@ -91,8 +91,9 @@ $inputId = $_POST['id'];
 	}
 
 </style>
-<div class="main_imgur_upload_body">
-<?php if (IMGUR_UPLOAD_ON): ?>
+<div id="main_upload_body" class="main_imgur_upload_body">
+	<div id="close"></div>
+<?php if ($setting['imgurUploadOn']): ?>
 	<div class="show_info custom">
 		<h3><?php echo $lang['406']; ?><img src="<?php echo $link['url']."img/logo-light.png"; ?>"></h3>
 	</div>

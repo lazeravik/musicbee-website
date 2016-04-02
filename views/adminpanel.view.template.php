@@ -99,7 +99,7 @@
 				function loadEditView(id) {
 					$.fx.off = true; // turn off jquery animation effects
 					$.ajax({
-						url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/adminpanel.edit.template.php?view=update&id=' + id,
+						url: '<?php echo $link['url']; ?>views/adminpanel.edit.template.php?view=update&id=' + id,
 						cache: false,
 						type: "POST",
 					}).done(function (data) {

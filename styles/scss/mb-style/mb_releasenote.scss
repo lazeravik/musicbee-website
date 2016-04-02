@@ -154,6 +154,7 @@
 							&.remove_img_btn {
 								position   : absolute;
 								right      : 0px;
+								top 	   : 0px;
 								background : none;
 								color      : #7b7b7b;
 								box-shadow : none;
@@ -193,6 +194,17 @@
 					.description {
 						color  : #a9a9a9;
 						margin : 0px;
+					}
+				}
+
+				.right_toogle {
+					width: 60%;
+					display: flex;
+					flex-direction: row-reverse;
+					align-items: center;
+
+					label {
+						width : 60px;
 					}
 				}
 

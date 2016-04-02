@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 
 			//die, if the user alreay submitted more than X numbers of addon that needed aproval!
 			//This will prevent the floodgate
-			if ($dashboard->getAllAddonCountByStatusAndMember ($context['user']['id'], 0)> MAX_SUBMIT_WO_APPROVAL) {
+			if ($dashboard->getAllAddonCountByStatusAndMember ($context['user']['id'], 0)> $setting['maxSubmitWithOutApproval']) {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_10'] . '"}');
 			}
 

@@ -288,6 +288,46 @@ $lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!'
 $lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
 
 
+/**
+ * Dashboard Admin Panel
+ */
+
+$lang['dashboard_admin_header_1'] = 'Website Stats';
+$lang['dashboard_admin_header_2'] = '<i class="fa fa-cogs"></i>&nbsp;&nbsp; Website Setting';
+
+$lang['dashboard_admin_header_5'] = 'Show page load time in footer';
+$lang['dashboard_admin_header_6'] = 'Turn on/off add-on submission';
+$lang['dashboard_admin_header_7'] = 'Maximum unapproved add-on';
+$lang['dashboard_admin_header_8'] = 'Turn on/off imgur upload';
+$lang['dashboard_admin_header_9'] = 'Imgur Client ID';
+$lang['dashboard_admin_header_10'] = 'Imgur Client Secret';
+
+$lang['dashboard_admin_header_11'] = 'Paypal Link';
+$lang['dashboard_admin_header_12'] = 'Twitter Link';
+$lang['dashboard_admin_header_14'] = 'Wikia Link';
+$lang['dashboard_admin_header_15'] = 'Wishlist Link';
+$lang['dashboard_admin_header_16'] = 'Website API Link';
+$lang['dashboard_admin_header_17'] = 'MusicBee API Link';
+$lang['dashboard_admin_header_18'] = 'Website Bug Link';
+$lang['dashboard_admin_header_19'] = 'MusicBee Bug Link';
+
+
+$lang['dashboard_admin_desc_1'] = 'Shows page generation time in seconds';
+$lang['dashboard_admin_desc_2'] = 'If you disable the submission form, user won\'t be able to submit addons for the add-on page';
+$lang['dashboard_admin_desc_3'] = 'Maximum number of add-on user can submit for admin/mod approval, until those are approved they can\'t submit more';
+$lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, musicbee release form.';
+
+$lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be carefull when modifying. Don\'t change if you have doubts';
+
+
+
+
+
+
+
+$lang['dashboard_admin_button_1'] = 'Save';
+
+
 
 
 /*Addons download/search page */
@@ -347,7 +387,7 @@ $lang['addon_57'] = 'Top Members';
 
 
 
-		/**
+/**
  * Release Notes
  */
 $lang['releasenote_title'] = 'MusicBee - Release Notes';

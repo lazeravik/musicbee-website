@@ -36,7 +36,7 @@
 	}
 
 	function generatePageUrl(data) {
-		var subDir = "<?php echo $link['url']; ?>includes/";
+		var subDir = "<?php echo $link['url']; ?>views/";
 		return subDir + data.replace('_', '.') + '.template.php';
 	}
 

@@ -1,4 +1,3 @@
-
 <!-- Footer Conetnt Begins -->
 <footer class="footer_section">
 	<div class="widget">
@@ -21,9 +20,11 @@
 					<a href="<?php echo $link['rss']; ?>" class="btn btn_yellow" target="_blank">
 						<i class="fa fa-rss"></i> <?php echo $lang['footer_184']; ?>
 					</a>
-					<a href="https://twitter.com/musicbeeplayer" target="_blank" class="btn btn_blue" >
+					<?php if(!empty($setting['twitterLink'])): ?>
+						<a href="<?php echo $setting['twitterLink']; ?>" target="_blank" class="btn btn_blue" >
 						<i class="fa fa-twitter"></i>&nbsp; <?php echo $lang['footer_232']; ?>
-					</a>
+						</a>
+					<?php endif; ?>
 				</li>
 
 
@@ -46,16 +47,22 @@
 			<ul class="footer_list_menu">
 				<li><a href="<?php echo $link['devapi']; ?>"><?php echo $lang['footer_185']; ?></a></li>
 				<li><a href="<?php echo $link['bugreport']; ?>"><?php echo $lang['footer_187']; ?></a></li>
-				<li><a href="<?php echo $link['forum']; ?>"><?php echo $lang['footer_191']; ?></a></li>
+
+				<?php if(!empty($setting['wishlistLink'])): ?>
+					<li><a href="<?php echo $setting['wishlistLink']; ?>"><?php echo $lang['footer_191']; ?></a></li>
+				<?php endif; ?>
+
 				<li><a href="<?php echo $link['press']; ?>"><?php echo $lang['footer_231']; ?></a></li>
+				<?php if(!empty($setting['paypalDonationLink'])): ?>
 				<ul class="footer_donation">
 					<li><?php echo $lang['footer_189']; ?></li>
 					<li>
-						<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9BPHYSSZDDWDY&lc=GB&item_name=MusicBee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank" class="btn btn_blue" >
+						<a href="<?php echo $setting['paypalDonationLink']; ?>" target="_blank" class="btn btn_blue" >
 							<i class="fa fa-paypal"></i>&nbsp; <?php echo $lang['footer_190']; ?>
 						</a>
 					</li>
 				</ul>
+				<?php endif; ?>
 			</ul>
 		</div>
 		<div id="clear"></div>
@@ -64,6 +71,13 @@
 		<div class="footer_credit">
 			<p><?php echo $lang['footer_192']; ?></p>
 			<p id="copyright"><?php echo $lang['footer_193']; ?></p>
+			<?php
+			$endScriptTime=microtime(TRUE);
+			$totalScriptTime=$endScriptTime-$startScriptTime;
+			if($setting['showPgaeLoadTime']) {
+				echo '<p>Page generated in '.number_format($totalScriptTime, 4).' seconds</p>';
+			}
+			?>
 		</div>
 	</div>
 </footer>

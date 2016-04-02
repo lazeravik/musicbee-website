@@ -1832,6 +1832,74 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
   cursor: pointer;
 }
 
+/*
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.cmn-toggle-round-flat + label {
+  padding: 2px;
+  width: 60px;
+  height: 30px;
+  background-color: #dddddd;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+input.cmn-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #fff;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+
+input.cmn-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 23px;
+  background-color: #dddddd;
+  border-radius: 52px;
+  transition: margin 0.4s, background 0.4s;
+}
+
+input.cmn-toggle-round-flat:checked + label {
+  background-color: #ff9800;
+}
+
+input.cmn-toggle-round-flat:checked + label:after {
+  margin-left: 28px;
+  background-color: #ff9800;
+}
+
 /*================================================================================================================*\\
     page layout styles
 \*================================================================================================================*/
@@ -2280,6 +2348,7 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .sub_content_wrapper .box_content ul.form .link_input .flex_input.col_2 .btn.remove_img_btn {
   position: absolute;
   right: 0px;
+  top: 0px;
   background: none;
   color: #7b7b7b;
   box-shadow: none;
@@ -2319,6 +2388,17 @@ footer.footer_section .footer_credit_wrap .footer_credit p {
 .sub_content_wrapper .box_content ul.form li label .description {
   color: #a9a9a9;
   margin: 0px;
+}
+
+.sub_content_wrapper .box_content ul.form li .right_toogle {
+  width: 60%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.sub_content_wrapper .box_content ul.form li .right_toogle label {
+  width: 60px;
 }
 
 .sub_content_wrapper .box_content ul.form li textarea {
