@@ -19,26 +19,76 @@ class Dashboard
 	private $member_tbl = SITE_MEMBER_TBL;
 	private $likes_tbl = SITE_ADDON_LIKE;
 	private $download_stat_tbl = SITE_DOWNLOAD_STAT;
+	private $settings_tbl = SETTINGS;
+	
+	
+	public function saveSiteSetting() {
+		global $connection;
 
-	public static function getStatus($id) {
-		switch($id) {
-			case '0':
-				return "Waiting for Approval";
-				break;
-			case '1':
-				return "Approved";
-				break;
-			case '2':
-				return "Rejected";
-				break;
-			case '3':
-				return "Deleted";
-				break;
-			default:
-				return "Unknown";
-				break;
+		$showPgaeLoadTime = (isset($_POST['pageloadtime'])) ? 1 : 0;
+		$addonSubmissionOn = (isset($_POST['submission'])) ? 1 : 0;
+		$imgurUploadOn = (isset($_POST['imguron'])) ? 1 : 0;
+		$maxSubmitWithOutApproval = (isset($_POST['unapproved_addon_max'])) ? htmlspecialchars($_POST['unapproved_addon_max']) : 10;
+		$imgurClientID = $_POST['imgurClientID'];
+		$imgurClientSecret = $_POST['imgurClientSecret'];
+		$paypalDonationLink = htmlspecialchars($_POST['paypalDonationLink']);
+		$twitterLink = htmlspecialchars($_POST['twitterLink']);
+		$wikiaLink = htmlspecialchars($_POST['wikiaLink']);
+		$wishlistLink = htmlspecialchars($_POST['wishlistLink']);
+		$websiteApiLink = htmlspecialchars($_POST['websiteApiLink']);
+		$musicbeeApiLink = htmlspecialchars($_POST['musicbeeApiLink']);
+		$websiteBugLink = htmlspecialchars($_POST['websiteBugLink']);
+		$musicbeeBugLink = htmlspecialchars($_POST['musicbeeBugLink']);
+
+		$bindedVal = array(
+				$showPgaeLoadTime,
+				$addonSubmissionOn,
+				$imgurUploadOn,
+				$maxSubmitWithOutApproval,
+				$imgurClientID,
+				$imgurClientSecret,
+				$paypalDonationLink,
+				$twitterLink,
+				$wikiaLink,
+				$wishlistLink,
+				$websiteApiLink,
+				$musicbeeApiLink,
+				$websiteBugLink,
+				$musicbeeBugLink,
+		);
+
+
+		if(databaseConnection()) {
+			try {
+				$sql = "
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'showPgaeLoadTime';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'addonSubmissionOn';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurUploadOn';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'maxSubmitWithOutApproval';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurClientID';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurClientSecret';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'paypalDonationLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'twitterLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'wikiaLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'wishlistLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'websiteApiLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'musicbeeApiLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'websiteBugLink';
+						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'musicbeeBugLink';
+						";
+
+				//var_dump(showQuery($sql, $bindedVal));
+
+				$statement = $connection->prepare($sql);
+				$statement->execute($bindedVal);
+
+				return true;
+			} catch(Exception $e) {
+				return false;
+			}
 		}
 	}
+
 
 	public function verifyAuthor($member_id, $addon_id) {
 		global $connection;
@@ -127,7 +177,7 @@ class Dashboard
 		}
 
 		$publish_date = date("F j, Y"); //current date
-		$update_date = date("F j, Y"); //current date
+		$update_date = date("F j, Y, g:i a"); //current date
 
 		if(databaseConnection()) {
 			try {
@@ -470,6 +520,123 @@ class Dashboard
 			}
 		}
 	}
+
+
+
+
+	public function getAddonDownloadCount($author_id)
+	{
+		global $connection;
+
+		if (databaseConnection()) {
+			try {
+				$sql = "SELECT
+							STAT_ID, ip_address,ID_ADDON, ID_AUTHOR
+						FROM
+							{$this->download_stat_tbl}
+							LEFT JOIN
+								{$this->addon_tbl}
+								ON
+								{$this->download_stat_tbl}.ID = {$this->addon_tbl}.ID_ADDON ";
+				if(!empty($author_id)){
+					$sql .= "WHERE
+								status = 1
+								AND
+								ID_AUTHOR = :author_id";
+					$statement = $connection->prepare($sql);
+					$statement->bindValue(':author_id', $author_id);
+				} else {
+					$statement = $connection->prepare($sql);
+				}
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return count($result);
+			} catch (Exception $e) {}
+		}
+	}
+
+	public function getAddonLikeCount($author_id)
+	{
+		global $connection;
+
+		if (databaseConnection()) {
+			try {
+				$sql = "SELECT
+							ID_LIKES
+						FROM
+							{$this->likes_tbl}
+							LEFT JOIN
+								{$this->addon_tbl}
+								ON
+								{$this->likes_tbl}.ID_ADDON = {$this->addon_tbl}.ID_ADDON ";
+
+				if(!empty($author_id)){
+					$sql .= "WHERE
+								status = 1
+								AND
+								ID_AUTHOR = :author_id";
+					$statement = $connection->prepare($sql);
+					$statement->bindValue(':author_id', $author_id);
+				} else {
+					$statement = $connection->prepare($sql);
+				}
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return count($result);
+			} catch (Exception $e) {}
+		}
+	}
+
+
+	public function getAllAddonCountByStatus($stat) {
+		global $connection;
+		if(databaseConnection()) {
+			try {
+				$sql = "SELECT
+							COUNT(*) AS count
+						FROM
+							{$this->addon_tbl}
+						WHERE
+							status = {$stat}";
+				$statement = $connection->prepare($sql);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return $result[0]['count'];
+
+			} catch(Exception $e) {
+
+			}
+		}
+	}
+
+
+	public function getAllAddonCount() {
+		global $connection;
+		if(databaseConnection()) {
+			try {
+				$sql = "SELECT
+							COUNT(*) AS count
+						FROM
+							{$this->addon_tbl}";
+				$statement = $connection->prepare($sql);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return $result[0]['count'];
+
+			} catch(Exception $e) {
+
+			}
+		}
+	}
+
+
+
+
+
 
 }
 

@@ -5,7 +5,7 @@ include 'classes/Search.php';
 
 if(isset($_GET['search'])){
 	$search = new Search();
-	$search_result = $search->searchAddons(null, array_keys($main_menu['add-ons']['sub_menu']), "0,1,2,3", $_SESSION['memberinfo']['memberid']);
+	$search_result = $search->searchAddons(null, array_keys($mb['main_menu']['add-ons']['sub_menu']), "0,1,2,3", $_SESSION['memberinfo']['memberid']);
 } else {
 	$search_result = "search something";
 }

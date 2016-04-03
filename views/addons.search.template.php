@@ -96,8 +96,8 @@ include($mainmenu);
 				echo "<h2>".$lang['addon_31']."<i class=\"search_term\">".htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8")."</i>"."<i class=\"search_term\">".$data['type']."</i></h2>";
 			} else {
 				echo "<h2>".$data['type']."</h2>";
-				if(isset($main_menu['add-ons']['sub_menu'][$addon_type]['desc'])) {
-					echo "<h4>".$main_menu['add-ons']['sub_menu'][$addon_type]['desc']."</h4>";
+				if(isset($mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc'])) {
+					echo "<h4>".$mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc']."</h4>";
 				}
 			}
 			?>

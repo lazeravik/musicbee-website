@@ -37,24 +37,24 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 					<h4>Start enjoying your music experience with MusicBee!</h4>
 					<div class="installer_panel_wrapper">
 						<div class="installer_layer_wrapper">
-							<h2>MusicBee <?php echo $release['stable']['version'];?></h2>
-							<p>Released on <?php echo $release['stable']['date'];?></p>
-							<p>For <?php echo $release['stable']['os'];?></p>
+							<h2>MusicBee <?php echo $mb['musicbee_download']['stable']['version'];?></h2>
+							<p>Released on <?php echo $mb['musicbee_download']['stable']['release_date'];?></p>
+							<p>For <?php echo $mb['musicbee_download']['stable']['supported_os'];?></p>
 							<p>View the <a href="<?php echo $link['release-note']; ?>">release notes</a></p>
 						</div>
-						<?php if ($release['stable']['available'] == 1) : ?>
+						<?php if ($mb['musicbee_download']['stable']['download']['available'] == 1) : ?>
 							<div class="installer_layer_wrapper installer_non_portable">
 								<h3>Installer Edition</h3>
 								<p>
 									This edition will install MusicBee on your Windows system drive
 								</p>
-								<a href="<?php echo $release['stable']['link1']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
+								<a href="<?php echo $mb['musicbee_download']['stable']['download']['installer']['link1']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
 									<i class="fa fa-download"></i> Get MusicBee Installer
 								</a><br/>
-								<a href="<?php echo $release['stable']['link2']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
+								<a href="<?php echo $mb['musicbee_download']['stable']['download']['installer']['link2']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
 									Mirror 1
 								</a> 
-								<a href="<?php echo $release['stable']['link3']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
+								<a href="<?php echo $mb['musicbee_download']['stable']['download']['installer']['link3']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
 									Mirror 2
 								</a>
 							</div>
@@ -62,7 +62,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 							<div class="installer_layer_wrapper mb_portable_download_bg">
 								<h3>Portable Edition</h3>
 								<p>This edition can be installed in other locations, such as another partition or USB drive</p>
-								<a href="<?php echo $release['stable']['link4']; ?>" target="_blank" class="btn btn_blacknwhite">
+								<a href="<?php echo $mb['musicbee_download']['stable']['download']['portable']['link1']; ?>" target="_blank" class="btn btn_blacknwhite">
 									<i class="fa fa-download"></i> Get MusicBee Portable
 								</a>
 
@@ -92,14 +92,14 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 					<h4><b>The beta version is under active development and is not the current stable version</b></h4>
 					<p>It is intended for anyone interested in trying the latest features or bug fixes.
 						You should regularly check the forum for updates.</p>
-						<?php if($release['beta']['available'] == 1) : ?>
-							<p>Version: <?php echo $release['beta']['version']; ?></p>
-							<p>Released on <?php echo $release['beta']['date']; ?></p>
-							<p>For <?php echo $release['beta']['os']; ?></p>
+						<?php if($mb['musicbee_download']['beta']['download']['available'] == 1) : ?>
+							<p>Version: <?php echo $mb['musicbee_download']['beta']['version']; ?></p>
+							<p>Released on <?php echo $mb['musicbee_download']['beta']['release_date']; ?></p>
+							<p>For <?php echo $mb['musicbee_download']['beta']['supported_os']; ?></p>
 							<br/>
-							<?php if($release['beta']['message'] != null)
-							echo '<p class="show_info">'.$release['beta']['message'].'</p>';?>
-							<a href="<?php echo $release['beta']['link1']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
+							<?php if($mb['musicbee_download']['beta']['message'] != null)
+							echo '<p class="show_info">'.$mb['musicbee_download']['beta']['message'].'</p>';?>
+							<a href="<?php echo $mb['musicbee_download']['beta']['download']['link1']; ?>" target="_blank" class="btn btn_blacknwhite btn_download">
 								<i class="fa fa-warning"></i> Get MusicBee Beta
 							</a>
 						<?php else: ?>

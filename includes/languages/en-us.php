@@ -40,13 +40,16 @@ $lang['AP_RECORD_DELETED'] = 'Deleted!';
 $lang['LOGIN_NEED'] = '<b>ERROR:</b> You must login first!';
 $lang['line'] = '<hr class="line"/>';
 
+$lang['no_js'] = 'Your browser does not support javascript(or disabled), please use a browser with
+			javascript or enable it.<br/>We need javascript to function properly, otherwise some things won\'t work properly.';
+
 /* MainMenu */
 $lang['1'] = 'MusicBee';
 $lang['2'] = 'Download';
 $lang['3'] = 'Add-ons';
 $lang['4'] = 'Community';
 $lang['5'] = 'Help';
-$lang['6'] = '<i class="fa fa-user" style="color:#FFA500;"></i>';
+//$lang['6'] = '<i class="fa fa-user" style="color:#FFA500;"></i>';
 $lang['7'] = 'Web Admin';
 $lang['8'] = 'Forum Admin';
 $lang['9'] = 'Dashboard';
@@ -163,7 +166,7 @@ $lang['198'] = 'Go to home &nbsp;<i class="fa fa-arrow-right"></i>';
 /*Add-on Dashboard*/
 $lang['dashboard_title'] = "MusicBee Add-on Dashboard";
 $lang['dashboard_infobar_title'] = "Dashboard";
-$lang['dashboard_infobar_desc'] = "Dashboard is your control center to managing your uploaded addons, moderation and more";
+$lang['dashboard_infobar_desc'] = "Dashboard is your control center for managing your uploaded addons, moderation and more";
 //dashboard > secondery menu
 $lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
 $lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
@@ -261,6 +264,9 @@ $lang['dashboard_msg_6'] = 'Since you are an Elite User or Mod your add-on is su
 $lang['dashboard_msg_7'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
 $lang['dashboard_msg_8'] = '<b>SUCCESSFULL:</b> Add-on successfully added to delete queue! And will be automatically deleted';
 $lang['dashboard_msg_9'] = 'You can not View, download or edit deleted add-ons! contact admin/mods to undelete it first.';
+$lang['dashboard_msg_10'] = 'Setting successfully saved! You need to refresh the page to see the changes.';
+$lang['dashboard_msg_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
+$lang['dashboard_msg_12'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
 
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
@@ -283,9 +289,21 @@ $lang['dashboard_err_14'] = '<b>ERROR:</b> For some unknown reason the add-on co
 $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
 $lang['dashboard_err_16'] = '<b>ERROR:</b> You must add a support/discussion forum link for a beta add-on!';
 $lang['dashboard_err_18'] = 'ERROR';
+$lang['dashboard_err_19'] = '<b>ERROR:</b> Website setting can\'t be saved!';
 
-$lang['dashboard_err_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
-$lang['dashboard_err_17'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
+
+/**
+ * Moderator Panel goes here
+ */
+
+$lang['mod_1'] = 'Overall downloads';
+$lang['mod_2'] = 'Overall likes';
+$lang['mod_3'] = 'Waiting for approval';
+$lang['mod_4'] = 'Overall add-on submitted';
+$lang['mod_5'] = 'All Rejected add-ons';
+$lang['mod_6'] = 'Total soft deleted add-ons';
+
+
 
 
 /**
@@ -318,9 +336,6 @@ $lang['dashboard_admin_desc_3'] = 'Maximum number of add-on user can submit for 
 $lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, musicbee release form.';
 
 $lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be carefull when modifying. Don\'t change if you have doubts';
-
-
-
 
 
 
@@ -362,7 +377,7 @@ $lang['addon_38'] = 'beta';
 $lang['addon_39'] = 'This add-on has been rejected by Admin/Mods';
 $lang['addon_40'] = 'You can not download rejected add-ons!';
 
-$lang['addon_41'] = 'Tags: ';
+$lang['addon_41'] = '<i class="fa fa-tags"></i> ';
 $lang['addon_42'] = 'Search ';
 $lang['addon_43'] = 'Member Rank';
 $lang['addon_44'] = 'Total uploaded add-ons by this member';

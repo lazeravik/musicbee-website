@@ -23,11 +23,11 @@ class Search
 	 * @return mixed
 	 */
 	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20, $orderby = "ID_ADDON DESC") {
-		global $connection, $main_menu;
+		global $connection, $mb;
 		
 		//Create arrays for SQL value binding
 		if ($cat_input == null) {
-			$cat_array = array_keys ($main_menu['add-ons']['sub_menu']);
+			$cat_array = array_keys ($mb['main_menu']['add-ons']['sub_menu']);
 		} elseif (!is_array ($cat_input)) {
 			$cat_array = Format::createSqlArrayParam ($cat_input);
 		} else {

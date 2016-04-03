@@ -15,6 +15,7 @@
 * 
 */
 $no_guests = true; //kick off the guests
+$no_directaccess = true;
 $json_response = true; //if the user is not logged in then send the json error instead of redirecting
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Addon.php';

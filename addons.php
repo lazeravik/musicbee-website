@@ -69,7 +69,7 @@ if (isset($_GET['id'])) {
 
 		if (isset($url_params['p'])){
 			if(is_int($url_params['p']) || ctype_digit($url_params['p'])) {
-				$offset = ($url_params['p'] - 1) * $addon_view_range;
+				$offset = ($url_params['p'] - 1) * $mb['view_range']['addon_view_range'];
 				$current_page = $url_params['p'];
 			} else {
 				$offset = 0;
@@ -82,9 +82,9 @@ if (isset($_GET['id'])) {
 
 		$search = new Search();
 		//get all the addon filtered by category/query and other
-		$data['addon_data'] = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, $offset, $addon_view_range);
+		$data['addon_data'] = $search->searchAddons($searchinput['query'],$data['current_type'],'1', null, $offset, $mb['view_range']['addon_view_range']);
 		//Calculate total number of page required
-		$page_total = ceil ($data['addon_data']['row_count'] / $addon_view_range);
+		$page_total = ceil ($data['addon_data']['row_count'] / $mb['view_range']['addon_view_range']);
 
 		if($data['is_overview']) {
 			$data['addon_data_new'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "publish_date DESC");
@@ -94,8 +94,8 @@ if (isset($_GET['id'])) {
 			$data['top_members'] = $addon->getTopMembers();
 		}
 
-		if(isset($main_menu['add-ons']['sub_menu'][$addon_type]['desc'])) {
-			$meta_description = $main_menu['add-ons']['sub_menu'][$addon_type]['desc'];
+		if(isset($mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc'])) {
+			$meta_description = $mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc'];
 		} else {
 			$meta_description = strip_tags($lang['addon_45']);
 		}
@@ -223,7 +223,7 @@ function addon_author_url_generator($name) {
 }
 
 function addon_secondery_nav_generator($addon_type) {
-	global $link, $lang, $main_menu, $url_params, $searchinput;
+	global $link, $lang, $mb, $url_params, $searchinput;
 	$data = '<ul class="left">
 	<li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>';
 
@@ -233,7 +233,7 @@ function addon_secondery_nav_generator($addon_type) {
 		$data .= '<li><a href="' . $link['addon']['home'] . 's/?type=all&overview" >' . $lang['18'] . '</a></li>';
 	}
 
-	foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
+	foreach ($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
 		if (Format::Slug ($addon_type) == Format::Slug ($menu_addon['title']) && empty($searchinput['query'])) {
 			$data .= "
 			<li>

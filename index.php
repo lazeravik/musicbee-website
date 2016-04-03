@@ -64,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                             <h4><?php echo $lang['home_4']; ?></h4>
                                             <a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_yellow">
                                                 <h3><?php echo $lang['home_5']; ?></h3>
-                                                <p><?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?></p>
+                                                <p><?php echo $lang['home_8']; ?> <?php echo $mb['musicbee_download']['stable']['supported_os']; ?></p>
                                             </a>
                                             <a class="btn btn_wireframe btn_wireframe_blue" onclick="$('html,body').animate({scrollTop: $('#simple_powerful').offset().top});" href="javascript:void(0)">
                                                 <h3><?php echo $lang['home_6']; ?></h3>
@@ -227,7 +227,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                 <h4><?php echo $lang['home_29']; ?></h4>
                                 <a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_blue">
                                     <h3><?php echo $lang['home_5']; ?></h3>
-                                    <p><?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?></p>
+                                    <p><?php echo $lang['home_8']; ?> <?php echo $mb['musicbee_download']['stable']['supported_os']; ?></p>
                                 </a>
                             </div>
                         </div>

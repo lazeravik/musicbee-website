@@ -9,15 +9,27 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
+$json_response = true;
 $no_guests = true; //kick off the guests
-require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+$mod_only = true;
+require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-include $link['root'] . 'classes/Dashboard.php';
-include $link['root'] . 'classes/Search.php';
+include $link['root'].'classes/Dashboard.php';
+include $link['root'].'classes/Search.php';
 $search = new Search();
+$dashboard = new Dashboard();
+
+$stat['total_download'] = $dashboard->getAddonDownloadCount(null);
+$stat['total_likes'] = $dashboard->getAddonLikeCount(null);
+$stat['total_addon'] = $dashboard->getAllAddonCount();
+$stat['total_unapproved_addon'] = $dashboard->getAllAddonCountByStatus(0);
+$stat['total_rejected_addon'] = $dashboard->getAllAddonCountByStatus(2);
+$stat['total_softdeleted_addon'] = $dashboard->getAllAddonCountByStatus(3);
+
+$stat['total_softdeleted_addon'] = $dashboard->getAllAddonCountByStatus(3);
 
 
-if (isset($_GET['page_num'])){
+if(isset($_GET['page_num'])) {
 	if(is_int($_GET['page_num']) || ctype_digit($_GET['page_num'])) {
 		$offset = ($_GET['page_num'] - 1) * $mb['view_range']['dashboard_all_view_range'];
 		$current_page = $_GET['page_num'];
@@ -35,30 +47,29 @@ if (isset($_GET['page_num'])){
  */
 if(isset($_GET['action'])) {
 	if($_GET['action'] == "search" && (isset($_GET['query']) && isset($_GET['type']))) {
-		$type = ($_GET['type']=="all")? null : $_GET['type'];
-		$status = ($_GET['status']=="all")? "0,1,2,3" : $_GET['status'];
-		$resultdata = $search->searchAddons ($_GET['query'], $type, $status, $_SESSION['memberinfo']['memberid'],$offset,$mb['view_range']['dashboard_all_view_range']);
+		$type = ($_GET['type'] == "all") ? null : $_GET['type'];
+		$status = ($_GET['status'] == "all") ? "0,1,2,3" : $_GET['status'];
+		$resultdata = $search->searchAddons($_GET['query'], $type, $status, $_SESSION['memberinfo']['memberid'], $offset, $mb['view_range']['dashboard_all_view_range']);
 	}
 } else {
-	$resultdata = $search->searchAddons (null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid'],$offset,$mb['view_range']['dashboard_all_view_range']);
+	$resultdata = $search->searchAddons(null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid'], $offset, $mb['view_range']['dashboard_all_view_range']);
 }
 
 /**
  * Calculate the total page required if it shows x number of items per page
  * @var int $page_total
  */
-$page_total = ceil ($resultdata['row_count'] / $mb['view_range']['dashboard_all_view_range']);
-
+$page_total = ceil($resultdata['row_count'] / $mb['view_range']['dashboard_all_view_range']);
 
 
 function dashboard_result_pagination_generator($page_total, $current_pagenum) {
-	if ($page_total > 0) {
+	if($page_total > 0) {
 		$pagination_view = '<ul class="pagination">';
-		for ($i = 1; $i < $page_total + 1; $i++) {
-			if ($current_pagenum == $i) {
-				$pagination_view .= '<li><button class="btn btn_blue active" onclick="loadAddonPage(event,' . $i . ')">' . $i . '</button></li>';
+		for($i = 1; $i < $page_total + 1; $i++) {
+			if($current_pagenum == $i) {
+				$pagination_view .= '<li><button class="btn btn_blue active" onclick="loadAddonPage(event,'.$i.')">'.$i.'</button></li>';
 			} else {
-				$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(event,' . $i . ')">' . $i . '</button></li>';
+				$pagination_view .= '<li><button class="btn btn_blue" onclick="loadAddonPage(event,'.$i.')">'.$i.'</button></li>';
 			}
 		}
 		$pagination_view .= '</ul>';
@@ -70,6 +81,90 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 }
 
 ?>
+<div class="main_content_wrapper col_3">
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_silver custom">
+				<h3>All add-on statistic</h3>
+			</span>
+			<hr class="line"/>
+			<table class="record">
+				<tbody>
+				<tr>
+					<td>
+						<a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['mod_4']; ?></a>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_addon']); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $lang['mod_2']; ?>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_likes']); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $lang['mod_1']; ?>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_download']); ?>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<hr class="line"/>
+			<table class="record">
+				<tbody>
+				<tr>
+					<td>
+						<?php echo $lang['mod_3']; ?>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_unapproved_addon']); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $lang['mod_5']; ?>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_rejected_addon']); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $lang['mod_6']; ?>
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_softdeleted_addon']); ?>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_silver custom">
+				<h3>Add-on publishers & users</h3>
+			</span>
+		</div>
+	</div>
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<span class="show_info info_silver custom">
+				<h3>Soft deleted add-ons</h3>
+			</span>
+		</div>
+	</div>
+</div>
+
+
 <div class="main_content_wrapper col_1_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
@@ -78,7 +173,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			</span>
 			<form id="search_filter" action="<?php echo $link['url']; ?>views/dashboard.all.template.php" method="get" data-autosubmit>
 			<span class="show_info info_silverwhite custom">
-				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)" >
+				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)">
 				<input type="hidden" name="action" value="search">
 			</span>
 				<ul class="form">
@@ -89,8 +184,8 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 						<select name="type" id="type" onchange="searchDropdown(event)">
 							<option value="all">All</option>
 							<?php
-							foreach ($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
-								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\">" . $menu_addon['title'] . "</option>";
+							foreach($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
+								echo "<option value=\"".Format::Slug($menu_addon['title'])."\">".$menu_addon['title']."</option>";
 							}
 							?>
 						</select>
@@ -98,7 +193,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 				</ul>
 				<ul class="form">
 					<li>
-						<label for="status"><p><?php echo $lang['dashboard_record_th_4']; ?></p></label>
+						<label for="status">
+							<p><?php echo $lang['dashboard_record_th_4']; ?></p>
+						</label>
 						<select name="status" id="status" onchange="searchDropdown(event)">
 							<option value="all">All</option>
 							<option value="0"><?php echo $lang['addon_status_1']; ?></option>
@@ -119,7 +216,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 				<span class="show_info custom">
 					<h3><?php echo $lang['dashboard_11']; ?></h3>
 				</span>
-			<?php if (!empty($resultdata['result'])): ?>
+			<?php if(!empty($resultdata['result'])): ?>
 
 				<table class="record">
 					<thead>
@@ -139,20 +236,20 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					</tr>
 					</thead>
 					<tbody>
-					<?php foreach ($resultdata['result'] as $key => $addon): ?>
+					<?php foreach($resultdata['result'] as $key => $addon): ?>
 						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3") ? "deleted" : ""; ?>">
 							<td>
-								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
+								<a href="<?php echo $link['addon']['home'].$addon['ID_ADDON']."/".Format::Slug($addon['addon_title']); ?>"
 								   target="_blank"
-								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if ($addon['is_beta'] == 1): ?>&nbsp;
+								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if($addon['is_beta'] == 1): ?>&nbsp;
 										<p class="small_info beta"><?php echo $lang['addon_38']; ?></p><?php endif; ?>
 								</a>
 							</td>
 							<td>
-								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
+								<?php echo Format::UnslugTxt($addon['addon_type']); ?>
 							</td>
 							<td class="status">
-								<?php echo Validation::getStatus ($addon['status']); ?>
+								<?php echo Validation::getStatus($addon['status']); ?>
 							</td>
 
 							<?php
@@ -161,9 +258,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 
 							<td class="action_input">
 								<form id="<?php echo $addon['ID_ADDON']; ?>"
-										action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
-										method="post"
-										data-autosubmit>
+								      action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
+								      method="post"
+								      data-autosubmit>
 									<button
 											id="<?php echo $addon['ID_ADDON']; ?>"
 											class="btn btn_red"
@@ -199,7 +296,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<?php endif; ?>
 		</div>
 		<div class="box_content">
-			<?php echo dashboard_result_pagination_generator ($page_total, $current_page); ?>
+			<?php echo dashboard_result_pagination_generator($page_total, $current_page); ?>
 		</div>
 	</div>
 
@@ -208,7 +305,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 <div class="space medium"></div>
 
 <script type="text/javascript">
-	searchEnter = function(event){
+	searchEnter = function (event) {
 		if (event.keyCode == 13) {
 			//reset pagination for search
 			$('#page_num').val(1);
@@ -216,13 +313,13 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		}
 	}
 
-	searchDropdown = function (event){
+	searchDropdown = function (event) {
 		//reset pagination for dropdown filter
 		$('#page_num').val(1);
 		searchFilterAddon(event);
 	}
 
-	searchFilterAddon = function(event) {
+	searchFilterAddon = function (event) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
 		var form = $('form[data-autosubmit][id=search_filter]');
@@ -244,7 +341,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	}
 
 	//get page(1,2,3..) addon list via ajax
-	loadAddonPage = function (event,page_num) {
+	loadAddonPage = function (event, page_num) {
 		$('#page_num').val(page_num);
 		searchFilterAddon(event);
 	}
@@ -253,7 +350,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
 
-		window.location.hash = '/'+id;
+		window.location.hash = '/' + id;
 		$.ajax({
 			url: '<?php echo $link['url']; ?>views/dashboard.submit.template.php?view=update&id=' + id,
 			cache: false,

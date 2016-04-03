@@ -67,7 +67,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 					<?php 
 					foreach (getVersionInfo(0,"byAllReleases") as $key => $value): ?>
 					<div class="box_content" id="<?php echo str_replace(".", "-", $value['version']); ?>">
-						<span class="show_info <?php echo ($value['version']==$release['stable']['version'])?'info_green':'info_darkgrey'; ?> release_note_info">
+						<span class="show_info <?php echo ($value['version']==$mb['musicbee_download']['stable']['version'])?'info_green':'info_darkgrey'; ?> release_note_info">
 							<ul class="flat_info_bar">
 								<li>
 									<?php echo $value['appname']; ?>
@@ -82,7 +82,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 									For <?php echo $value['supported_os']; ?>
 								</li>
 								<li>
-									<?php echo ($value['version']==$release['stable']['version'])?'<p class="small_info active">Current Release</p>':''; ?>
+									<?php echo ($value['version']==$mb['musicbee_download']['stable']['version'])?'<p class="small_info active">Current Release</p>':''; ?>
 									<?php echo ($value['major']==1)?'<p class="small_info major">major Release</p>':''; ?>
 								</li>
 							</ul>	

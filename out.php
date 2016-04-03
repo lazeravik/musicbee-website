@@ -20,7 +20,7 @@ if (!(isset($url_params['type']) && isset($url_params['r']))) {
 }
 
 $stat['ip'] = $_SERVER['REMOTE_ADDR'];
-$stat['is_registered'] = ($context['user']['is_guest'])? "0" : "1";
+$stat['is_registered'] = ($mb['user']['is_guest'])? "0" : "1";
 
 if ($url_params['type'] == "addon" && isset($url_params['id'])) {
 

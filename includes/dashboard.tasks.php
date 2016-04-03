@@ -15,8 +15,9 @@
 	 *
 	 */
 	$no_guests = true; //kick off the guests
+	$no_directaccess = true;
+	
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-
 	require_once $link['root'] . 'classes/Dashboard.php';
 	include_once $link['root'] . 'includes/parsedown/Parsedown.php';
 
@@ -29,7 +30,7 @@ if (isset($_POST['submit'])) {
 
 			//die, if the user alreay submitted more than X numbers of addon that needed aproval!
 			//This will prevent the floodgate
-			if ($dashboard->getAllAddonCountByStatusAndMember ($context['user']['id'], 0)> $setting['maxSubmitWithOutApproval']) {
+			if ($dashboard->getAllAddonCountByStatusAndMember ($mb['user']['id'], 0)> $setting['maxSubmitWithOutApproval']) {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_10'] . '"}');
 			}
 
@@ -42,8 +43,8 @@ if (isset($_POST['submit'])) {
 			$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
 
 			//Phew.... all validations complete, now SUBMIT THE ADDON!
-			if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "submit")) {
-				exit ('{"status": "1", "data": "' . $lang['dashboard_err_11'] . '", "callback_function": "submitted"}');
+			if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $mb['user']['id'], $readme_html, "submit")) {
+				exit ('{"status": "1", "data": "' . $lang['dashboard_msg_11'] . '", "callback_function": "submitted"}');
 			}
 		} else {
 			die('{"status": "0", "data": "' . $lang['dashboard_err_5'] . '"}');
@@ -56,7 +57,7 @@ if (isset($_POST['submit'])) {
 	if ($_POST['modify_type'] == "permanent_delete") {
 
 		//Only an admin can permanently delete an addon
-		if ($context['user']['is_admin']) {
+		if ($mb['user']['is_admin']) {
 			if ($dashboard->deleteAddon($_POST['record_id'])) {
 				exit('
 				{
@@ -84,8 +85,8 @@ if (isset($_POST['submit'])) {
 		}
 
 		//Mod/Admin/addon author will be able to soft delete and addon
-		if ($dashboard->verifyAuthor($context['user']['id'], $_POST['record_id']) || $context['user']['can_mod']) {
-			if ($dashboard->updateAddonStatus($_POST['record_id'],"3",$context['user']['id'])) {
+		if ($dashboard->verifyAuthor($mb['user']['id'], $_POST['record_id']) || $mb['user']['can_mod']) {
+			if ($dashboard->updateAddonStatus($_POST['record_id'],"3",$mb['user']['id'])) {
 				exit('
 				{
 					"status": "1",
@@ -109,8 +110,8 @@ if (isset($_POST['submit'])) {
 			}
 
 			//verify if the author can modify it.
-			if (!$dashboard->verifyAuthor ($user_info['id'], $_POST['record_id'])) {
-				die('{"status": "0", "data": "' . $lang['dashboard_err_12'] . '"}');
+			if(!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+				die('{"status": "0", "data": "'.$lang['dashboard_err_12'].'"}');
 			}
 
 			//check if an addon with similer name except for this one exists or not
@@ -124,8 +125,8 @@ if (isset($_POST['submit'])) {
 				//load and use html purifier for the readme notes.
 				$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
 				//Phew.... all validations complete, now SUBMIT THE ADDON!
-				if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $context['user']['id'], $readme_html, "update")) {
-					echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "submitted", "origin": "dashboard.task line 99"}';
+				if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $mb['user']['id'], $readme_html, "update")) {
+					exit('{"status": "1", "data": "' . $lang['dashboard_msg_12'] . '", "callback_function": "submitted", "origin": "dashboard.task line 99"}');
 				}
 			} else {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_5'] . '"}');
@@ -136,22 +137,33 @@ if (isset($_POST['submit'])) {
 		die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 	}
 } elseif (isset($_POST['addon_approve'])) {
-	if(!$context['user']['can_mod']){
+	if(!$mb['user']['can_mod']){
 		die('{"status": "0", "data": "' . $lang['dashboard_err_1'] . '"}');
 	}
 	if ($_POST['addon_approve']==1 || $_POST['addon_approve']==2) {
 		$dashboard = new Dashboard();
 
-		if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'], $context['user']['id'])) {
-			echo '{"status": "1", "data": "' . $lang['dashboard_err_17'] . '", "callback_function": "reload_addon_approval_list_overview"}';
-			exit();
+		if ($dashboard->updateAddonStatus($_POST['addon_id'], $_POST['addon_approve'], $mb['user']['id'])) {
+			exit('{"status": "1", "data": "' . $lang['dashboard_msg_12'] . '", "callback_function": "reload_addon_approval_list_overview"}');
 		}
 	} else {
 		die('{"status": "0", "data": "' . $lang['dashboard_err_15'] . '"}');
 	}
-} elseif(isset($_POST['action'])) {
-	if ($_POST['action']=="search") {
+} elseif(isset($_POST['site_setting'])) {
+	if ($_POST['site_setting']=="true") {
 
+		//Make sure the user is an admin or DIE!!
+		if(!$mb['user']['is_admin']){
+			die('{"status": "0", "data": "' . $lang['dashboard_err_1'] . '"}');
+		}
+
+		$dashboard = new Dashboard();
+
+		if($dashboard->saveSiteSetting()){
+			exit('{"status": "1", "data": "' . $lang['dashboard_msg_10'] . '", "callback_function": "setting_saved"}');
+		} else {
+			die('{"status": "0", "data": "' . $lang['dashboard_err_19'] . '"}');
+		}
 	}
 }
 
@@ -162,7 +174,7 @@ if (isset($_POST['submit'])) {
 	 */
 	function validateInput()
 	{
-		global $main_menu, $lang;
+		global $mb, $lang;
 
 		if (isset($_POST['type'])
 		 && isset($_POST['title'])
@@ -179,7 +191,7 @@ if (isset($_POST['submit'])) {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_16'] . '"}');
 			}
 
-			if (!isset($main_menu['add-ons']['sub_menu'][$_POST['type']])) {
+			if (!isset($mb['main_menu']['add-ons']['sub_menu'][$_POST['type']])) {
 				die('{"status": "0", "data": "' . $lang['dashboard_err_4'] . '"}');
 			}
 

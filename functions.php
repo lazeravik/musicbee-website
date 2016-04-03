@@ -45,11 +45,14 @@ $link['404'] = $link['root']."error/404.php";
 $link['kb'] = $link['url'].'kb/';
 
 
-$errorCode = array();
-$errorCode['ADMIN_ACCESS'] = "101"; //if a non admin is trying to access a page
-$errorCode['LOGIN_MUST'] = "102"; //User must logged in
-$errorCode['FORUM_INTEGRATION'] = "103"; //Forum integration is not initialized
-$errorCode['NOT_FOUND'] = "104"; //Page not found
+$errorCode = array(
+	'ADMIN_ACCESS' => '101',
+	'LOGIN_MUST' => '102',
+	'FORUM_INTEGRATION' => '103',
+	'NOT_FOUND' => '104',
+	'NO_DIRECT_ACCESS' => '105',
+	'MOD_ACCESS' => '106',
+);
 
 require_once $link['root'].'forum/SSI.php';
 require_once $link['root'].'includes/languages/en-us.php';
@@ -57,17 +60,22 @@ require_once $link['root'].'classes/Format.php';
 require_once $link['root'].'classes/Validation.php';
 require_once $link['root'].'setting.php';
 
+/**
+ * Forum integration is must, if it is not initialized before this then throw an error
+ */
+if(!isset($context)) {
+	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
+}
+
+
+//Create the logout link
 $link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
 
-/**
- * Gets website setting
- *
- * @var array $setting
- */
+
+//Gets website setting
 $setting = getSetting();
-//var_dump($setting);
 
-
+//Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
 if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img')) {
 	$_SESSION['login_url'] = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
@@ -76,59 +84,228 @@ if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpo
 }
 
 
+$user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/usersmall.jpg';
+$releaseData = json_decode(file_get_contents($link['url'].'api.get.php?type=json&action=release-info'));
+$mb = array(
+		'user'           => array(
+				'id'              => $context['user']['id'],
+				'is_logged'       => $context['user']['is_logged'],
+				'is_guest'        => $context['user']['is_guest'],
+				'is_admin'        => $context['user']['is_admin'],
+				'is_mod'          => $context['user']['is_mod'],
+				'can_mod'         => $context['user']['can_mod'],
+				'username'        => $context['user']['username'],
+				'language'        => $context['user']['language'],
+				'email'           => $context['user']['email'],
+				'name'            => $context['user']['name'],
+				'messages'        => $context['user']['messages'],
+				'unread_messages' => $context['user']['unread_messages'],
+				'avatar'          => $user_avatar,
+		),
+		'session_var'    => $context['session_var'],
+		'session_id'     => $context['session_id'],
+		'current_time'   => array(
+				'date'      => date("F j, Y"),
+				'date_time' => date("F j, Y, g:i a"),
+		),
 
-/**
- * Forum integration is must, if it is not initialized before this then throw an error
- */
-if(!isset($context)) {
-	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
-}
+		'main_menu'            => array(
+				'web-admin'       => array(
+						'title'       => $lang['9'],
+						'href'        => $link['addon']['dashboard'],
+						'restriction' => 'login',
+						'sub_menu'    => array(),
+				),
+				'member-panel'    => array(
+						'title'       => '<img src="'.$user_avatar.'" class="user_avatar">',
+						'href'        => $link['forum'].'?action=profile',
+						'restriction' => 'login',
+						'sub_menu'    => array(
+								'user-profile' => array(
+										'title' => '<p class="user_info">'.$lang['19'].$context['user']['username'].'</p>',
+								),
+								'line1'        => array('title' => $lang['line'],),
+								'admin-panel'  => array(
+										'title'       => $lang['7'],
+										'href'        => $link['admin']['admin-panel'],
+										'icon'        => $lang['20'],
+										'restriction' => 'admin',
+								),
+								'forum-admin'  => array(
+										'title'       => $lang['8'],
+										'href'        => $link['admin']['forum-panel'],
+										'icon'        => $lang['21'],
+										'restriction' => 'admin',
+								),
+								'line2'        => array('title' => $lang['line'],),
+								'sign-out'     => array(
+										'title' => $lang['10'],
+										'href'  => $link['logout'],
+										'icon'  => $lang['23'],
+								),
+						),
+				),
+				'home'            => array(
+						'title'    => $lang['1'],
+						'href'     => $link['home'],
+						'sub_menu' => array(),
+				),
+				'download'        => array(
+						'title'    => $lang['2'],
+						'href'     => $link['download'],
+						'sub_menu' => array(),
+				),
+				'add-ons'         => array(
+						'title'    => $lang['3'],
+						'href'     => $link['addon']['home'],
+						'sub_menu' => array(
+								'skins'        => array(
+										'title' => $lang['11'],
+										'href'  => $link['addon']['home']."s/?type=skins",
+										'icon'  => $lang['24'],
+										'desc'  => $lang['description_1'],
+								),
+								'plugins'      => array(
+										'title' => $lang['12'],
+										'href'  => $link['addon']['home']."s/?type=plugins",
+										'icon'  => $lang['25'],
+										'desc'  => $lang['description_2'],
+								),
+								'visualiser'   => array(
+										'title' => $lang['13'],
+										'href'  => $link['addon']['home']."s/?type=visualiser",
+										'icon'  => $lang['26'],
+										'desc'  => $lang['description_3'],
+								),
+								'theater-mode' => array(
+										'title' => $lang['15'],
+										'href'  => $link['addon']['home']."s/?type=theater-mode",
+										'icon'  => $lang['28'],
+										'desc'  => $lang['description_5'],
+								),
+								'misc'         => array(
+										'title' => $lang['16'],
+										'href'  => $link['addon']['home']."s/?type=misc",
+										'icon'  => $lang['29'],
+										'desc'  => $lang['description_6'],
+								),
+						),
+				),
+				'forum'           => array(
+						'title'    => $lang['4'],
+						'href'     => $link['forum'],
+						'sub_menu' => array(),
+				),
+				'help'            => array(
+						'title'    => $lang['5'],
+						'href'     => $link['help'],
+						'sub_menu' => array(),
+				),
+		), 'musicbee_download' => array(
+				'stable' => array(
+						'appname'      => isset($releaseData[0]->appname) ? $releaseData[0]->appname : "NA",
+						'version'      => isset($releaseData[0]->version) ? $releaseData[0]->version : "NA",
+						'release_date' => isset($releaseData[0]->release_date) ? $releaseData[0]->release_date : "NA",
+						'supported_os' => isset($releaseData[0]->supported_os) ? $releaseData[0]->supported_os : "NA",
+						'download'     => array(
+								'available' => isset($releaseData[0]->available) ? $releaseData[0]->available : 0,
+								'installer' => array(
+										'link1' => isset($releaseData[0]->DownloadLink) ? $releaseData[0]->DownloadLink : "NA",
+										'link2' => isset($releaseData[0]->MirrorLink1) ? $releaseData[0]->MirrorLink1 : null,
+										'link3' => isset($releaseData[0]->MirrorLink2) ? $releaseData[0]->MirrorLink2 : null,
+								),
+								'portable'  => array(
+										'link1' => isset($releaseData[0]->PortableLink) ? $releaseData[0]->PortableLink : "NA",
+								),
+
+						),
+				),
+
+				'beta' => array(
+						'appaname'     => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
+						'version'      => isset($releaseData[1]->version) ? $releaseData[1]->version : "NA",
+						'release_date' => isset($releaseData[1]->release_date) ? $releaseData[1]->release_date : "NA",
+						'supported_os' => isset($releaseData[1]->supported_os) ? $releaseData[1]->supported_os : "NA",
+						'download'     => array(
+								'available' => isset($releaseData[1]->available) ? $releaseData[1]->available : 0,
+								'link1'     => isset($releaseData[1]->DownloadLink) ? $releaseData[1]->DownloadLink : "NA",
+						),
+						'message'      => isset($releaseData[1]->message) ? $releaseData[1]->message : null,
+				),
+		),
+
+		'view_range' => array(
+			'addon_view_range' => 20,
+			'dashboard_all_view_range' => 15,
+		),
+);
+
+//var_dump($mb);
+
+
+
 /**
  * Maybe we don't wan't anyone except admin to see this, show error to anyone else. Or maybe
  * this is only available for logged in users. No guest is allowed kicked them to error page
  */
-if(!$context['user']['is_admin'] && !empty($admin_only)) {
+if(!$mb['user']['is_admin'] && !empty($admin_only)) {
+
 	header('Location: '.$link['kb'].'?code='.$errorCode['ADMIN_ACCESS']);
-} elseif($context['user']['is_guest'] && !empty($no_guests)) {
+
+} elseif(!$mb['user']['can_mod'] && !empty($mod_only)) {
+
+	if(!empty($json_response)) {
+		die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
+	} else {
+		header('Location: '.$link['kb'].'?code='.$errorCode['MOD_ACCESS']);
+	}
+
+} elseif($mb['user']['is_guest'] && !empty($no_guests)) {
+
 	if(!empty($json_response)) {
 		die('{"status": "0", "data": "'.$lang['LOGIN_NEED'].'"}');
 	} else {
 		header('Location: '.$link['kb'].'?code='.$errorCode['LOGIN_MUST']);
 	}
+
 }
 
+if(!empty($no_directaccess)) {
+	if(!@$_SERVER['HTTP_REFERER']) {
+		header('Location: '.$link['kb'].'?code='.$errorCode['NO_DIRECT_ACCESS']);
+	}
+}
 
 /**
  * If the User has an account in forum but not for the dashboard then create one,
  * and set dashoard user info in session
  */
-if(!$context['user']['is_guest']) {
+if(!$mb['user']['is_guest']) {
 	require_once $link['root'].'classes/Member.php';
 	$memberData = new Member();
 
-	if($memberData->memberInfo($context['user']['id'])['rank'] == null) {
+	if($memberData->memberInfo($mb['user']['id'])['rank'] == null) {
 		$permission = 10;
-		if($context['user']['is_admin']) {
+		if($mb['user']['is_admin']) {
 			$permission = 1; //permission level 1 means the member is admin
-		} elseif($context['user']['is_mod']) {
+		} elseif($mb['user']['is_mod']) {
 			$permission = 2; //permission level 2 means the member is mod
 		}
 		//Create an Addon dashboard account for the user
-		if($memberData->createDashboardAccount($context['user']['id'], $permission, $context['user']['name'])) {
-			$getmemberinfo = $memberData->memberInfo($context['user']['id']);
+		if($memberData->createDashboardAccount($mb['user']['id'], $permission, $mb['user']['name'])) {
+			$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
 		} else {
 
 		}
 	} else {
 		//check if forum username updated,
-		$getmemberinfo = $memberData->memberInfo($context['user']['id']);
+		$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
 
-		if($getmemberinfo['membername'] != $context['user']['username']) {
-			if($memberData->updateDashboardAccount($context['user']['id'], $context['user']['username'])) {
-				$getmemberinfo = $memberData->memberInfo($context['user']['id']);
+		if($getmemberinfo['membername'] != $mb['user']['username']) {
+			if($memberData->updateDashboardAccount($mb['user']['id'], $mb['user']['username'])) {
+				$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
 			}
 		}
-
 	}
 
 	$memberinfoArray['membername'] = $getmemberinfo['membername'];
@@ -147,32 +324,6 @@ $mainmenu = $link['root'].'views/mainmenu.template.php';
 $footer = $link['root'].'views/footer.template.php';
 
 
-//get the MusicBee info from json api
-$releaseData = json_decode(file_get_contents($link['url'].'api.get.php?type=json&action=release-info'));
-
-$release = array();
-$release['stable']['appname'] = isset($releaseData[0]->appname) ? $releaseData[0]->appname : "...";
-$release['stable']['version'] = isset($releaseData[0]->version) ? $releaseData[0]->version : "...";
-$release['stable']['date'] = isset($releaseData[0]->release_date) ? $releaseData[0]->release_date : "...";
-$release['stable']['os'] = isset($releaseData[0]->supported_os) ? $releaseData[0]->supported_os : "...";
-$release['stable']['link1'] = isset($releaseData[0]->DownloadLink) ? $releaseData[0]->DownloadLink : "...";
-$release['stable']['link2'] = isset($releaseData[0]->MirrorLink1) ? $releaseData[0]->MirrorLink1 : null;
-$release['stable']['link3'] = isset($releaseData[0]->MirrorLink2) ? $releaseData[0]->MirrorLink2 : null;
-$release['stable']['link4'] = isset($releaseData[0]->PortableLink) ? $releaseData[0]->PortableLink : "...";
-$release['stable']['available'] = isset($releaseData[0]->available) ? $releaseData[0]->available : 0;
-
-
-$release['beta']['appname'] = isset($releaseData[1]->appname) ? $releaseData[1]->appname : "...";
-$release['beta']['version'] = isset($releaseData[1]->version) ? $releaseData[1]->version : "...";
-$release['beta']['date'] = isset($releaseData[1]->release_date) ? $releaseData[1]->release_date : "...";
-$release['beta']['os'] = isset($releaseData[1]->supported_os) ? $releaseData[1]->supported_os : "...";
-$release['beta']['link1'] = isset($releaseData[1]->DownloadLink) ? $releaseData[1]->DownloadLink : "...";
-$release['beta']['message'] = isset($releaseData[1]->message) ? $releaseData[1]->message : null;
-$release['beta']['available'] = isset($releaseData[1]->available) ? $releaseData[1]->available : 0;
-
-
-$addon_view_range = 20;
-$dashboard_all_view_range = 15;
 
 /**
  * @var URI $params
@@ -180,13 +331,6 @@ $dashboard_all_view_range = 15;
  */
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
-
-$user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/musicbee_icon.png';
-
-/**
- * MainMenu generator
- **/
-$main_menu = array('web-admin' => array('title' => $lang['9'], 'href' => $link['addon']['dashboard'], 'restriction' => 'login', 'sub_menu' => array(),), 'member-panel' => array('title' => $lang['6'], 'href' => "javascript:void(0)", 'restriction' => 'login', 'sub_menu' => array('user-profile' => array('title' => '<p class="user_info">'.$lang['19'].$context['user']['username'].'</p>', 'href' => $link['forum'].'?action=profile', 'icon' => '<img src="'.$user_avatar.'" class="user_avatar">',), 'line1' => array('title' => $lang['line'],), 'admin-panel' => array('title' => $lang['7'], 'href' => $link['admin']['admin-panel'], 'icon' => $lang['20'], 'restriction' => 'admin',), 'forum-admin' => array('title' => $lang['8'], 'href' => $link['admin']['forum-panel'], 'icon' => $lang['21'], 'restriction' => 'admin',), 'line2' => array('title' => $lang['line'],), 'sign-out' => array('title' => $lang['10'], 'href' => $link['logout'], 'icon' => $lang['23'],),),), 'home' => array('title' => $lang['1'], 'href' => $link['home'], 'sub_menu' => array(),), 'download' => array('title' => $lang['2'], 'href' => $link['download'], 'sub_menu' => array(),), 'add-ons' => array('title' => $lang['3'], 'href' => $link['addon']['home'], 'sub_menu' => array('skins' => array('title' => $lang['11'], 'href' => $link['addon']['home']."s/?type=skins", 'icon' => $lang['24'], 'desc' => $lang['description_1'],), 'plugins' => array('title' => $lang['12'], 'href' => $link['addon']['home']."s/?type=plugins", 'icon' => $lang['25'], 'desc' => $lang['description_2'],), 'visualiser' => array('title' => $lang['13'], 'href' => $link['addon']['home']."s/?type=visualiser", 'icon' => $lang['26'], 'desc' => $lang['description_3'],), 'theater-mode' => array('title' => $lang['15'], 'href' => $link['addon']['home']."s/?type=theater-mode", 'icon' => $lang['28'], 'desc' => $lang['description_5'],), 'misc' => array('title' => $lang['16'], 'href' => $link['addon']['home']."s/?type=misc", 'icon' => $lang['29'], 'desc' => $lang['description_6'],),),), 'forum' => array('title' => $lang['4'], 'href' => $link['forum'], 'sub_menu' => array(),), 'help' => array('title' => $lang['5'], 'href' => $link['help'], 'sub_menu' => array(),),);
 
 /** @var database connection $connection */
 $connection = null;
@@ -263,15 +407,16 @@ function getSetting() {
 			$sql = "SELECT * FROM ".SETTINGS;
 			$statement = $connection->prepare($sql);
 			$statement->execute();
-			$result = array_map('reset', array_map('reset',$statement->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC)));
+			$result = array_map('reset', array_map('reset', $statement->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC)));
 
-			$result['showPgaeLoadTime'] = ($result['showPgaeLoadTime']==1)? true:false;
-			$result['addonSubmissionOn'] = ($result['addonSubmissionOn']==1)? true:false;
-			$result['imgurUploadOn'] = ($result['imgurUploadOn']==1)? true:false;
+			$result['showPgaeLoadTime'] = ($result['showPgaeLoadTime'] == 1) ? true : false;
+			$result['addonSubmissionOn'] = ($result['addonSubmissionOn'] == 1) ? true : false;
+			$result['imgurUploadOn'] = ($result['imgurUploadOn'] == 1) ? true : false;
 
 
 			return $result;
-		} catch(Exception $e) {}
+		} catch(Exception $e) {
+		}
 	}
 }
 

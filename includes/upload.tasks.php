@@ -10,11 +10,11 @@
 	 */
 
 	$no_guests = true; //kick off the guests
+	$no_directaccess = true;
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 	require_once $link['root'] . 'setting.php';
-	if (!@$_SERVER['HTTP_REFERER']) die('No direct Access');
-	if (!isset($_POST['target'])) die('{"status": "0", "data": "' . $lang['412'] . '"}');
 
+	if (!isset($_POST['target'])) die('{"status": "0", "data": "' . $lang['412'] . '"}');
 
 	if ($_POST['target'] == "imgur") {
 

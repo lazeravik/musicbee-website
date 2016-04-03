@@ -13,13 +13,11 @@ $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
 include $link['root'] . 'classes/Dashboard.php';
-include $link['root'] . 'classes/Stats.php';
 
-$Stats = new Stats();
 $dashboard = new Dashboard();
 
-$stat['total_download'] = $Stats->getAddonDownloadCountByAuthor ($_SESSION['memberinfo']['memberid']);
-$stat['total_likes'] = $Stats->getAddonLikeCountByAuthor ($_SESSION['memberinfo']['memberid']);
+$stat['total_download'] = $dashboard->getAddonDownloadCount ($_SESSION['memberinfo']['memberid']);
+$stat['total_likes'] = $dashboard->getAddonLikeCount ($_SESSION['memberinfo']['memberid']);
 $stat['total_addon_submitted'] = $dashboard->getAllAddonByMember ($_SESSION['memberinfo']['memberid']);
 $stat['total_unapproved_addon'] = $dashboard->getAllAddonCountByStatusAndMember ($_SESSION['memberinfo']['memberid'],0);
 $stat['top_voted_addon'] = $dashboard->getTopVotedAddonsByAuthor ($_SESSION['memberinfo']['memberid'],10);
@@ -128,7 +126,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 	</div>
 	<div class="sub_content_wrapper"
 	     id="addon_list_fullview">
-		<?php if ($context['user']['can_mod']): ?>
+		<?php if ($mb['user']['can_mod']): ?>
 			<div class="box_content"
 			     id="addon_records">
 				<span

@@ -27,14 +27,13 @@ xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<copyright>Copyright (C) '.date("Y").' '.$link['url'].'</copyright>
 	<item>
-		<title> MusicBee v.'.$release['stable']['version'].' released</title>
+		<title> MusicBee v.'.$mb['musicbee_download']['stable']['version'].' released</title>
 		<description>A new version of MusicBee is released, click to go to download page.</description>
 		<link>'.$link['download'].'</link>
-		<pubDate>'.$release['stable']['date'].'</pubDate>
-		<guid isPermaLink="false">#'.md5($release['stable']['version']).'</guid>
+		<pubDate>'.$mb['musicbee_download']['stable']['release_date'].'</pubDate>
+		<guid isPermaLink="false">#'.md5($mb['musicbee_download']['stable']['version']).'</guid>
 	</item>
 </channel>
 </rss>';
 
 echo $feed;
-?>

@@ -4,7 +4,13 @@
 */
 class Stats
 {
-	
+	private $addon_tbl = SITE_ADDON;
+	private $member_tbl = SITE_MEMBER_TBL;
+	private $likes_tbl = SITE_ADDON_LIKE;
+	private $download_stat_tbl = SITE_DOWNLOAD_STAT;
+	private $settings_tbl = SETTINGS;
+
+
 	public function addStat($stat)
 	{
 		global $connection;
@@ -61,57 +67,11 @@ class Stats
 		}
 	}
 
-	public function getAddonDownloadCountByAuthor($author_id)
-	{
-		global $connection;
 
-		if (databaseConnection()) {
-			try {
-				$sql = "SELECT 
-							STAT_ID, ip_address,ID_ADDON, ID_AUTHOR 
-						FROM ".SITE_DOWNLOAD_STAT." 
-								LEFT JOIN 
-							".SITE_ADDON." 
-								ON 
-								".SITE_DOWNLOAD_STAT.".ID = ".SITE_ADDON.".ID_ADDON 
-							WHERE
-								status = 1
-								AND
-								ID_AUTHOR = :author_id";
-				$statement = $connection->prepare($sql);
-				$statement->bindValue(':author_id', $author_id);
-				$statement->execute();
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-				return count($result);
-			} catch (Exception $e) {}
-		}
-	}
 
-	public function getAddonLikeCountByAuthor($author_id)
-	{
-		global $connection;
 
-		if (databaseConnection()) {
-			try {
-				$sql = "SELECT 
-							ID_LIKES 
-						FROM ".SITE_ADDON_LIKE." 
-								LEFT JOIN 
-							".SITE_ADDON." 
-								ON 
-								".SITE_ADDON_LIKE.".ID_ADDON = ".SITE_ADDON.".ID_ADDON 
-							WHERE
-								status = 1
-								AND
-								ID_AUTHOR = :author_id";
-				$statement = $connection->prepare($sql);
-				$statement->bindValue(':author_id', $author_id);
-				$statement->execute();
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-				return count($result);
-			} catch (Exception $e) {}
-		}
-	}
+
+
 }

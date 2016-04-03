@@ -170,7 +170,7 @@ if ($addon_data['status'] == "3"): ?>
 	<div class="addon_similar">
 		<div class="addon_similar_wrap tags">
 			<?php if(!empty($addon_data['tags'][0])): ?>
-				<h3><?php echo $lang['addon_41']; ?></h3>
+				<?php echo $lang['addon_41']; ?>
 			<?php foreach($addon_data['tags'] as $tags): ?>
 				<a href="<?php echo $link['addon']['home'] . 's/?q='.$tags; ?>"><?php echo $tags; ?></a>
 			<?php endforeach; endif; ?>

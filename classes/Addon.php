@@ -23,7 +23,7 @@ class Addon
 	
 	
 	public function getAddonData($addon_id) {
-		global $connection, $link;
+		global $connection;
 
 		if($this->checkAddonExistenceById($addon_id)) {
 			if(databaseConnection()) {

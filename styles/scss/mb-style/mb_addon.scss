@@ -27,8 +27,10 @@
 		margin    : 0px auto;
 
 		&.tags {
-			h3 {
-				display : inline-block;
+			i {
+				color: #656565;
+				padding-right: 10px;
+				font-size: 20px;
 			}
 
 			a {

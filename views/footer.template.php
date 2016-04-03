@@ -6,12 +6,12 @@
 			<ul>
 				<li>
 					<a href="<?php echo $link['download']; ?>" class="btn btn_blacknwhite">
-						<i class="fa fa-download"></i> <?php echo $lang['footer_180']; ?> <?php echo $release['stable']['appname']; ?>
+						<i class="fa fa-download"></i> <?php echo $lang['footer_180']; ?> <?php echo $mb['musicbee_download']['stable']['appname']; ?>
 					</a>
 				</li>
-				<li><?php echo $lang['footer_181']; ?> <?php echo $release['stable']['version']; ?></li>
-				<li><?php echo $lang['home_8']; ?> <?php echo $release['stable']['os']; ?></li>
-				<li><?php echo $lang['footer_182']; ?> <?php echo $release['stable']['date']; ?></li>
+				<li><?php echo $lang['footer_181']; ?> <?php echo $mb['musicbee_download']['stable']['version']; ?></li>
+				<li><?php echo $lang['home_8']; ?> <?php echo $mb['musicbee_download']['stable']['supported_os']; ?></li>
+				<li><?php echo $lang['footer_182']; ?> <?php echo $mb['musicbee_download']['stable']['release_date']; ?></li>
 				<br/>
 				<li class="line"></li>
 				<br/>
@@ -34,7 +34,7 @@
 			<h4><?php echo $lang['footer_188']; ?></h4>
 			<ul class="footer_list_menu">
 				<?php
-				foreach ($main_menu['add-ons']['sub_menu'] as $key => $menu_addon) {
+				foreach ($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
 					echo "<li><a href=\"".$menu_addon['href']." \">";
 					if (!empty($menu_addon['icon']) && empty($no_menu_icon)) echo $menu_addon['icon'];
 					echo $menu_addon['title']."</a></li>";

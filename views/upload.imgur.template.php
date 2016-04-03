@@ -10,6 +10,7 @@
  */
 
 $no_guests = true; //kick off the guests
+$no_directaccess = true;
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 if (!isset($_POST['id'])){
