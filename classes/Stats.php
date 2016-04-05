@@ -13,13 +13,13 @@ class Stats
 
 	public function addStat($stat)
 	{
-		global $connection;
+		global $connection, $db_info;
 
 		if ($this->checkStatExistsByIp($stat) == false) {
 			if (databaseConnection()) {
 				try {
 					$sql = "INSERT
-					INTO ".SITE_DOWNLOAD_STAT."
+					INTO {$db_info['download_stat_tbl']}
 					SET
 					ip_address = :ip,
 					is_registered = :is_registered,
@@ -38,12 +38,12 @@ class Stats
 
 	public function checkStatExistsByIp($stat)
 	{
-		global $connection;
+		global $connection, $db_info;
 
 		if (databaseConnection()) {
 			try {
 				$sql = "SELECT STAT_ID 
-				FROM ".SITE_DOWNLOAD_STAT." 
+				FROM {$db_info['download_stat_tbl']}
 				WHERE 
 				is_registered = {$stat['is_registered']}
 				AND

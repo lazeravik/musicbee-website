@@ -34,13 +34,27 @@ if (isset($_GET['page_num'])){
  * @var array $addondata
  */
 if(isset($_GET['action'])) {
-	if($_GET['action'] == "search" && (isset($_GET['query']) && isset($_GET['type']))) {
-		$type = ($_GET['type']=="all")? null : $_GET['type'];
-		$status = ($_GET['status']=="all")? "0,1,2,3" : $_GET['status'];
-		$resultdata = $search->searchAddons ($_GET['query'], $type, $status, $_SESSION['memberinfo']['memberid'],$offset,$mb['view_range']['dashboard_all_view_range']);
+	if($_GET['action'] == "search") {
+
+		if(isset($_GET['query']))
+			$query = $_GET['query'];
+		else
+			$query = null;
+
+		if(isset($_GET['type']))
+			$type = ($_GET['type'] == "all") ? null : $_GET['type'];
+		else
+			$type = null;
+
+		if(isset($_GET['status']))
+			$status = ($_GET['status'] == "all") ? "0,1,2,3" : $_GET['status'];
+		else
+			$status = "0,1,2,3";
+
+		$resultdata = $search->searchAddons ($query, $type, $status, $mb['user']['id'],$offset,$mb['view_range']['dashboard_all_view_range']);
 	}
 } else {
-	$resultdata = $search->searchAddons (null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid'],$offset,$mb['view_range']['dashboard_all_view_range']);
+	$resultdata = $search->searchAddons (null, null, "0,1,2,3", $mb['user']['id'],$offset,$mb['view_range']['dashboard_all_view_range']);
 }
 
 /**
@@ -100,11 +114,11 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					<li>
 						<label for="status"><p><?php echo $lang['dashboard_record_th_4']; ?></p></label>
 						<select name="status" id="status" onchange="searchDropdown(event)">
-							<option value="all">All</option>
-							<option value="0"><?php echo $lang['addon_status_1']; ?></option>
-							<option value="1"><?php echo $lang['addon_status_2']; ?></option>
-							<option value="2"><?php echo $lang['addon_status_3']; ?></option>
-							<option value="3"><?php echo $lang['addon_status_4']; ?></option>
+							<option value="all" <?php echo (!isset($_GET['status']))? 'selected' :''; ?>>All</option>
+							<option value="0"  <?php echo (isset($_GET['status']) && $status==0)? 'selected' :''; ?>><?php echo $lang['addon_status_1']; ?></option>
+							<option value="1"  <?php echo (isset($_GET['status']) && $status==1)? 'selected' :''; ?>><?php echo $lang['addon_status_2']; ?></option>
+							<option value="2"  <?php echo (isset($_GET['status']) && $status==2)? 'selected' :''; ?>><?php echo $lang['addon_status_3']; ?></option>
+							<option value="3"  <?php echo (isset($_GET['status']) && $status==3)? 'selected' :''; ?>><?php echo $lang['addon_status_4']; ?></option>
 						</select>
 					</li>
 				</ul>
@@ -152,9 +166,12 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
 							</td>
 							<td class="status">
-								<?php echo Validation::getStatus ($addon['status']); ?>
-							</td>
+								<?php $status_array_each = Validation::getStatus($addon['status']); ?>
+								<p class="small_info <?php echo Format::Slug($status_array_each['text']); ?>">
+									<?php echo $status_array_each['icon'].' '.$status_array_each['text']; ?>
+								</p>
 
+							</td>
 							<?php
 							$button_stat_text = ($addon['status'] == "3") ? "disabled" : "";
 							?>
@@ -252,24 +269,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 	function loadEditView(id) {
 		$('#loading_icon').show(); //show loading icon'
 		showOverlay(); //show overlay while loading
-
-		window.location.hash = '/'+id;
-		$.ajax({
-			url: '<?php echo $link['url']; ?>views/dashboard.submit.template.php?view=update&id=' + id,
-			cache: false,
-			type: "POST",
-		}).done(function (data) {
-			if ($('#ajax_area').children().length > 0) {
-				$('#ajax_area').html(data);
-				hideNotification();
-				gotoTop();
-			}
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-		}).always(function () {
-			$('#loading_icon').hide(); //show loading icon'
-			hideOverlay(); //show overlay while loading
-		});
+		window.location.hash = '/'+id+'/update';
 	}
 
 	//Store to be deleted record id in a variable, later we can use this to locate the table row and remove it.

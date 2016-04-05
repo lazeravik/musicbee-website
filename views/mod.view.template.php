@@ -26,7 +26,18 @@ $stat['total_unapproved_addon'] = $dashboard->getAllAddonCountByStatus(0);
 $stat['total_rejected_addon'] = $dashboard->getAllAddonCountByStatus(2);
 $stat['total_softdeleted_addon'] = $dashboard->getAllAddonCountByStatus(3);
 
-$stat['total_softdeleted_addon'] = $dashboard->getAllAddonCountByStatus(3);
+$stat['total_members'] = $dashboard->getAllMemberCount();
+$stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
+
+
+
+
+
+
+
+//var_dump($stat['total_addon_publisher']);
+
+
 
 
 if(isset($_GET['page_num'])) {
@@ -49,10 +60,10 @@ if(isset($_GET['action'])) {
 	if($_GET['action'] == "search" && (isset($_GET['query']) && isset($_GET['type']))) {
 		$type = ($_GET['type'] == "all") ? null : $_GET['type'];
 		$status = ($_GET['status'] == "all") ? "0,1,2,3" : $_GET['status'];
-		$resultdata = $search->searchAddons($_GET['query'], $type, $status, $_SESSION['memberinfo']['memberid'], $offset, $mb['view_range']['dashboard_all_view_range']);
+		$resultdata = $search->searchAddons($_GET['query'], $type, $status, $mb['user']['id'], $offset, $mb['view_range']['dashboard_all_view_range']);
 	}
 } else {
-	$resultdata = $search->searchAddons(null, null, "0,1,2,3", $_SESSION['memberinfo']['memberid'], $offset, $mb['view_range']['dashboard_all_view_range']);
+	$resultdata = $search->searchAddons(null, null, "0,1,2,3", $mb['user']['id'], $offset, $mb['view_range']['dashboard_all_view_range']);
 }
 
 /**
@@ -81,7 +92,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 }
 
 ?>
-<div class="main_content_wrapper col_3">
+<div class="main_content_wrapper col_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
 			<span class="show_info info_silver custom">
@@ -92,7 +103,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 				<tbody>
 				<tr>
 					<td>
-						<a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['mod_4']; ?></a>
+						<a href="#mod_all" data-href="mod_all"><?php echo $lang['mod_4']; ?></a>
 					</td>
 					<td>
 						<?php echo Format::number_format_suffix($stat['total_addon']); ?>
@@ -153,265 +164,75 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			<span class="show_info info_silver custom">
 				<h3>Add-on publishers & users</h3>
 			</span>
+			<hr class="line"/>
+			<table class="record">
+				<tbody>
+				<tr>
+					<td>
+						Total registered User
+					</td>
+					<td title="<?php echo $stat['total_members']; ?>">
+						<?php echo Format::number_format_suffix($stat['total_members']); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Total add-on publishers
+					</td>
+					<td>
+						<?php echo Format::number_format_suffix($stat['total_addon_publisher']); ?>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+<!--			<hr class="line"/>-->
+<!--			<span class="show_info info_silver custom">-->
+<!--				<h3>Actions</h3>-->
+<!--			</span>-->
+<!--			<hr class="line"/>-->
+<!--			<ul class="link_list">-->
+<!--				<li>-->
+<!--					<a href="#mod_user" data-href="mod_user">-->
+<!--						User Permission and Rank-->
+<!--					</a>-->
+<!--				</li>-->
+<!--				<li>-->
+<!--					<a href="">-->
+<!--						Delete all add-ons by User-->
+<!--					</a>-->
+<!--				</li>-->
+<!--			</ul>-->
 		</div>
-	</div>
-	<div class="sub_content_wrapper">
 		<div class="box_content">
-			<span class="show_info info_silver custom">
-				<h3>Soft deleted add-ons</h3>
+						<span class="show_info info_silver custom">
+				<h3>Actions</h3>
 			</span>
+			<hr class="line"/>
+			<ul class="link_list">
+<!--				<li>-->
+<!--					<a href="#mod_all" data-href="mod_all">-->
+<!--						User Permission and Rank-->
+<!--					</a>-->
+<!--				</li>-->
+				<li>
+					<a href="#mod_all/action=search&status=3" data-href="mod_all/action=search&status=3">
+						Undelete add-ons
+					</a>
+				</li>
+				<li>
+					<a href="#mod_all/action=search&status=0" data-href="mod_all/action=search&status=0">
+						All unapproved add-ons
+					</a>
+				</li>
+				<li>
+					<a href="#mod_all/action=search&status=2" data-href="mod_all/action=search&status=2">
+						All rejected add-ons
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
 
-
-<div class="main_content_wrapper col_1_2">
-	<div class="sub_content_wrapper">
-		<div class="box_content">
-			<span class="show_info info_darkgrey custom">
-				<h3><?php echo $lang['dashboard_10']; ?></h3>
-			</span>
-			<form id="search_filter" action="<?php echo $link['url']; ?>views/dashboard.all.template.php" method="get" data-autosubmit>
-			<span class="show_info info_silverwhite custom">
-				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)">
-				<input type="hidden" name="action" value="search">
-			</span>
-				<ul class="form">
-					<li>
-						<label for="type">
-							<p><?php echo $lang['addon_11']; ?></p>
-						</label>
-						<select name="type" id="type" onchange="searchDropdown(event)">
-							<option value="all">All</option>
-							<?php
-							foreach($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
-								echo "<option value=\"".Format::Slug($menu_addon['title'])."\">".$menu_addon['title']."</option>";
-							}
-							?>
-						</select>
-					</li>
-				</ul>
-				<ul class="form">
-					<li>
-						<label for="status">
-							<p><?php echo $lang['dashboard_record_th_4']; ?></p>
-						</label>
-						<select name="status" id="status" onchange="searchDropdown(event)">
-							<option value="all">All</option>
-							<option value="0"><?php echo $lang['addon_status_1']; ?></option>
-							<option value="1"><?php echo $lang['addon_status_2']; ?></option>
-							<option value="2"><?php echo $lang['addon_status_3']; ?></option>
-							<option value="3"><?php echo $lang['addon_status_4']; ?></option>
-						</select>
-					</li>
-				</ul>
-				<hr class="line">
-
-				<input id="page_num" type="hidden" name="page_num" value="1">
-			</form>
-		</div>
-	</div>
-	<div class="sub_content_wrapper" id="addon_records">
-		<div class="box_content">
-				<span class="show_info custom">
-					<h3><?php echo $lang['dashboard_11']; ?></h3>
-				</span>
-			<?php if(!empty($resultdata['result'])): ?>
-
-				<table class="record">
-					<thead>
-					<tr>
-						<td>
-							<?php echo $lang['dashboard_record_th_1']; ?>
-						</td>
-						<td>
-							<?php echo $lang['dashboard_record_th_2']; ?>
-						</td>
-						<td>
-							<?php echo $lang['dashboard_record_th_4']; ?>
-						</td>
-						<td>
-
-						</td>
-					</tr>
-					</thead>
-					<tbody>
-					<?php foreach($resultdata['result'] as $key => $addon): ?>
-						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3") ? "deleted" : ""; ?>">
-							<td>
-								<a href="<?php echo $link['addon']['home'].$addon['ID_ADDON']."/".Format::Slug($addon['addon_title']); ?>"
-								   target="_blank"
-								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if($addon['is_beta'] == 1): ?>&nbsp;
-										<p class="small_info beta"><?php echo $lang['addon_38']; ?></p><?php endif; ?>
-								</a>
-							</td>
-							<td>
-								<?php echo Format::UnslugTxt($addon['addon_type']); ?>
-							</td>
-							<td class="status">
-								<?php echo Validation::getStatus($addon['status']); ?>
-							</td>
-
-							<?php
-							$button_stat_text = ($addon['status'] == "3") ? "disabled" : "";
-							?>
-
-							<td class="action_input">
-								<form id="<?php echo $addon['ID_ADDON']; ?>"
-								      action="<?php echo $link['url']; ?>includes/dashboard.tasks.php"
-								      method="post"
-								      data-autosubmit>
-									<button
-											id="<?php echo $addon['ID_ADDON']; ?>"
-											class="btn btn_red"
-											title="<?php echo $lang['dashboard_tooltip_1']; ?>"
-											onclick="deleteRecord(<?php echo $addon['ID_ADDON']; ?>);"
-											<?php echo $button_stat_text; ?>>
-										<i class="fa fa-trash"></i>
-									</button>
-									<input
-											type="hidden"
-											name="record_id"
-											value="<?php echo $addon['ID_ADDON']; ?>"/>
-									<input
-											type="hidden"
-											name="modify_type"
-											value="soft_delete"/>
-								</form>
-								<button
-										class="btn btn_blue"
-										type="submit"
-										title="<?php echo $lang['dashboard_tooltip_2']; ?>"
-										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"
-										<?php echo $button_stat_text; ?>><?php echo $lang['dashboard_12']; ?></button>
-
-							</td>
-						</tr>
-					<?php endforeach; ?>
-					</tbody>
-
-				</table>
-			<?php else: ?>
-				<p class="message"><?php echo $lang['dashboard_err_2']; ?></p>
-			<?php endif; ?>
-		</div>
-		<div class="box_content">
-			<?php echo dashboard_result_pagination_generator($page_total, $current_page); ?>
-		</div>
-	</div>
-
-</div>
 
 <div class="space medium"></div>
-
-<script type="text/javascript">
-	searchEnter = function (event) {
-		if (event.keyCode == 13) {
-			//reset pagination for search
-			$('#page_num').val(1);
-			searchFilterAddon(event);
-		}
-	}
-
-	searchDropdown = function (event) {
-		//reset pagination for dropdown filter
-		$('#page_num').val(1);
-		searchFilterAddon(event);
-	}
-
-	searchFilterAddon = function (event) {
-		$('#loading_icon').show(); //show loading icon'
-		showOverlay(); //show overlay while loading
-		var form = $('form[data-autosubmit][id=search_filter]');
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		$.ajax({
-			type: form.attr('method'),
-			url: form.attr('action'),
-			data: form.serialize()
-		}).done(function (data) {
-			var sourcedata = $('#addon_records > *', $(data));
-			$('#addon_records').html(sourcedata).fadeIn();
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-		}).always(function () {
-			$('#loading_icon').hide(); //show loading icon'
-			hideOverlay(); //show overlay while loading
-		});
-	}
-
-	//get page(1,2,3..) addon list via ajax
-	loadAddonPage = function (event, page_num) {
-		$('#page_num').val(page_num);
-		searchFilterAddon(event);
-	}
-
-	function loadEditView(id) {
-		$('#loading_icon').show(); //show loading icon'
-		showOverlay(); //show overlay while loading
-
-		window.location.hash = '/' + id;
-		$.ajax({
-			url: '<?php echo $link['url']; ?>views/dashboard.submit.template.php?view=update&id=' + id,
-			cache: false,
-			type: "POST",
-		}).done(function (data) {
-			if ($('#ajax_area').children().length > 0) {
-				$('#ajax_area').html(data);
-				hideNotification();
-				gotoTop();
-			}
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-		}).always(function () {
-			$('#loading_icon').hide(); //show loading icon'
-			hideOverlay(); //show overlay while loading
-		});
-	}
-
-	//Store to be deleted record id in a variable, later we can use this to locate the table row and remove it.
-	var delete_record_id;
-	function deleteRecord(id) {
-		var modify_confirm = confirm("<?php echo $lang['dashboard_msg_2']; ?>");
-		if (modify_confirm == true) {
-			hideNotification();
-			$('#loading_icon').show();
-			//store the record id so that we can remove the table from html
-			delete_record_id = id;
-			$('form[data-autosubmit][id=' + id + ']').autosubmit();
-		} else {
-			this.event.preventDefault(); //stop the actual form submission
-		}
-	}
-
-	(function ($) {
-		$.fn.autosubmit = function () {
-			//noinspection JSUnresolvedFunction
-			this.submit(function (event) {
-				event.preventDefault();
-				event.stopImmediatePropagation(); //This will stop the form submit twice
-				var form = $(this);
-				//noinspection JSUnresolvedFunction
-				$.ajax({
-					type: form.attr('method'),
-					url: form.attr('action'),
-					data: form.serialize()
-				}).done(function (data) {
-					notificationCallback(data);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
-				}).always(function () {
-					$('#loading_icon').hide();
-				});
-			});
-		}
-		return false;
-	})(jQuery)
-
-
-	//Anonymous callback function for removing table row
-	var remove_addon_record = function () {
-		$('#' + delete_record_id + "_record").html("<td><p><?php echo $lang['dashboard_msg_1']; ?></p></td><td></td><td></td><td></td>");
-		$('#' + delete_record_id + "_record").addClass('record_removed');
-	}
-</script>

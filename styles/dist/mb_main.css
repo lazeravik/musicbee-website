@@ -559,6 +559,29 @@ a:active, a:hover {
   border-radius: 0px;
 }
 
+.small_info.waiting {
+  background: #ffcc6f;
+  color: 424242;
+}
+
+.small_info.approved {
+  background: #ace865;
+  color: #424242;
+  border: 1px solid #ace865;
+}
+
+.small_info.deleted {
+  background: #ff4e50;
+  color: #fff;
+  border: 1px solid #ff454a;
+}
+
+.small_info.rejected {
+  background: #69c;
+  color: #fff;
+  border: 1px solid #5e8acc;
+}
+
 .search {
   background: url("../../img/search.png") no-repeat right 10px center;
 }

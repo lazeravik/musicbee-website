@@ -29,7 +29,7 @@ include ($mainmenu);
 /**
  * If the addon is soft deleted show error only!
  */
-if ($addon_data['status'] == "3"): ?>
+if ($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 	<div class="main_content_wrapper col_2_1">
 		<div class="sub_content_wrapper">
 			<div class="box_content">

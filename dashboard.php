@@ -72,8 +72,8 @@ include($mainmenu);
 				</li>
 				<?php if($mb['user']['is_admin']): ?>
 				<li>
-					<a class="btn addon_panel_btn" href="javascript:void(0)" title="Your rank is <?php echo $_SESSION['memberinfo']['rank']; ?>">
-						<i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $_SESSION['memberinfo']['rank']; ?>
+					<a class="btn addon_panel_btn" href="javascript:void(0)" title="Your rank is <?php echo $mb['user']['rank_name']; ?>">
+						<i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $mb['user']['rank_name']; ?>
 					</a>
 					<ul class="nav_dropdown_sub">
 						<li>

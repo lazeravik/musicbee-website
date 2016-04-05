@@ -124,14 +124,11 @@ class Search
 
 
 	public function generateQuery($gen_type,$range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby) {
-		$addon_tbl = SITE_ADDON;
-		$member_tbl = SITE_MEMBER_TBL;
-		$likes_tbl = SITE_ADDON_LIKE;
-		$download_stat = SITE_DOWNLOAD_STAT;
+		global $db_info;
 
 		if($gen_type == "result") {
 			$search_sql = "SELECT
-					{$addon_tbl}.ID_ADDON,
+					{$db_info['addon_tbl']}.ID_ADDON,
 				  	ID_AUTHOR,
 				  	membername,
 				  	addon_title,
@@ -141,15 +138,15 @@ class Search
 				  	status,
 				  	tags,
 				  	short_description,
-				  	COUNT(distinct {$likes_tbl}.ID_LIKES)as likesCount,
-				  	COUNT(distinct {$download_stat}.STAT_ID)as downloadCount
-				  FROM {$addon_tbl}
-				  	LEFT JOIN {$member_tbl}
-				  		on {$addon_tbl}.ID_AUTHOR = {$member_tbl}.ID_MEMBER
-				  	LEFT JOIN {$likes_tbl}
-				  		on {$addon_tbl}.ID_ADDON = {$likes_tbl}.ID_ADDON
-				  	LEFT JOIN {$download_stat}
-				  		on {$addon_tbl}.ID_ADDON = {$download_stat}.ID
+				  	COUNT(distinct {$db_info['likes_tbl']}.ID_LIKES)as likesCount,
+				  	COUNT(distinct {$db_info['download_stat_tbl']}.STAT_ID)as downloadCount
+				  FROM {$db_info['addon_tbl']}
+				  	LEFT JOIN {$db_info['member_tbl']}
+				  		on {$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
+				  	LEFT JOIN {$db_info['likes_tbl']}
+				  		on {$db_info['addon_tbl']}.ID_ADDON = {$db_info['likes_tbl']}.ID_ADDON
+				  	LEFT JOIN {$db_info['download_stat_tbl']}
+				  		on {$db_info['addon_tbl']}.ID_ADDON = {$db_info['download_stat_tbl']}.ID
 				  WHERE
 				  	addon_type IN ({$cat})
 				  	AND
@@ -157,9 +154,9 @@ class Search
 				  	";
 		} elseif ($gen_type == "count") {
 			$search_sql = "SELECT COUNT(*)
-				  FROM {$addon_tbl}
-				  	LEFT JOIN {$member_tbl}
-				  		on {$addon_tbl}.ID_AUTHOR = {$member_tbl}.ID_MEMBER
+				  FROM {$db_info['addon_tbl']}
+				  	LEFT JOIN {$db_info['member_tbl']}
+				  		on {$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 				  WHERE
 				  	addon_type IN ({$cat})
 				  	AND
@@ -202,14 +199,14 @@ class Search
 
 			$search_sql .= "OR MATCH(short_description) AGAINST ({$placeholder} IN BOOLEAN MODE)
 					 )
-					 GROUP BY {$addon_tbl}.ID_ADDON
+					 GROUP BY {$db_info['addon_tbl']}.ID_ADDON
 					 ORDER BY (CASE
 					 		WHEN REPLACE(addon_title,' ','') LIKE ? THEN 0
 					 		WHEN addon_title LIKE ? THEN 1
 					 		ELSE 2
 					 	END), addon_title ASC";
 		} else {
-			$search_sql .= "GROUP BY {$addon_tbl}.ID_ADDON
+			$search_sql .= "GROUP BY {$db_info['addon_tbl']}.ID_ADDON
 					ORDER BY {$orderby}";
 		}
 

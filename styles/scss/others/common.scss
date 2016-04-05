@@ -141,6 +141,29 @@ a {
 		margin: 0px 5px;
 		border-radius: 0px;
 	}
+
+	&.waiting{
+		background: #ffcc6f;
+		color: 424242;
+	}
+
+	&.approved {
+		background : #ace865;
+		color      : #424242;
+		border     : 1px solid #ace865;
+	}
+
+	&.deleted {
+		background : #ff4e50;
+		color      : #fff;
+		border     : 1px solid #ff454a;
+	}
+
+	&.rejected {
+		background : #69c;
+		color      : #fff;
+		border     : 1px solid #5e8acc;
+	}
 }
 
 .search {

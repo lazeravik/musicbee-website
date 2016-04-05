@@ -8,12 +8,11 @@
  * Created by AvikB for noncommercial MusicBee project.
  * Spelling mistakes and fixes from phred and other community memebers.
  */
-
+$json_response = true;
 $admin_only = true; //only admin
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
 include $link['root'].'classes/Dashboard.php';
-include $link['root'].'classes/Stats.php';
 include $link['root'].'classes/Admin.php';
 
 $admin = new Admin();

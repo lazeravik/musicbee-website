@@ -15,55 +15,48 @@
  */
 class Addon
 {
-
-	private $addon_tbl = SITE_ADDON;
-	private $member_tbl = SITE_MEMBER_TBL;
-	private $likes_tbl = SITE_ADDON_LIKE;
-
-	
-	
 	public function getAddonData($addon_id) {
-		global $connection;
+		global $connection, $db_info, $mb;
 
 		if($this->checkAddonExistenceById($addon_id)) {
 			if(databaseConnection()) {
 				try {
 					$sql = "
 					SELECT
-					  {$this->addon_tbl}.ID_ADDON,
-					  {$this->addon_tbl}.ID_AUTHOR,
-					  {$this->addon_tbl}.addon_title,
-					  {$this->addon_tbl}.addon_version,
-					  {$this->addon_tbl}.supported_mbversion,
-					  {$this->addon_tbl}.addon_type,
-					  {$this->addon_tbl}.publish_date,
-					  {$this->addon_tbl}.update_date,
-					  {$this->addon_tbl}.tags,
-					  {$this->addon_tbl}.short_description,
-					  {$this->addon_tbl}.download_links,
-					  {$this->addon_tbl}.image_links,
-					  {$this->addon_tbl}.thumbnail,
-					  {$this->addon_tbl}.important_note,
-					  {$this->addon_tbl}.support_forum,
-					  {$this->addon_tbl}.readme_content_html,
-					  {$this->addon_tbl}.is_beta,
-					  {$this->addon_tbl}.status,
-					  {$this->addon_tbl}.lastStatus_moderatedBy,
-					  {$this->member_tbl}.membername,
-					  {$this->member_tbl}.rank,
+					  {$db_info['addon_tbl']}.ID_ADDON,
+					  {$db_info['addon_tbl']}.ID_AUTHOR,
+					  {$db_info['addon_tbl']}.addon_title,
+					  {$db_info['addon_tbl']}.addon_version,
+					  {$db_info['addon_tbl']}.supported_mbversion,
+					  {$db_info['addon_tbl']}.addon_type,
+					  {$db_info['addon_tbl']}.publish_date,
+					  {$db_info['addon_tbl']}.update_date,
+					  {$db_info['addon_tbl']}.tags,
+					  {$db_info['addon_tbl']}.short_description,
+					  {$db_info['addon_tbl']}.download_links,
+					  {$db_info['addon_tbl']}.image_links,
+					  {$db_info['addon_tbl']}.thumbnail,
+					  {$db_info['addon_tbl']}.important_note,
+					  {$db_info['addon_tbl']}.support_forum,
+					  {$db_info['addon_tbl']}.readme_content_html,
+					  {$db_info['addon_tbl']}.is_beta,
+					  {$db_info['addon_tbl']}.status,
+					  {$db_info['addon_tbl']}.lastStatus_moderatedBy,
+					  {$db_info['member_tbl']}.membername,
+					  {$db_info['member_tbl']}.rank,
 					  COUNT(ID_LIKES) AS likesCount
 					FROM
-					  {$this->addon_tbl}
+					  {$db_info['addon_tbl']}
 					LEFT JOIN
-					  {$this->member_tbl}
+					  {$db_info['member_tbl']}
 					ON
-					  {$this->addon_tbl}.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
+					  {$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 					LEFT JOIN
-					  {$this->likes_tbl}
+					  {$db_info['likes_tbl']}
 					ON
-					  {$this->likes_tbl}.ID_ADDON = {$this->addon_tbl}.ID_ADDON
+					  {$db_info['likes_tbl']}.ID_ADDON = {$db_info['addon_tbl']}.ID_ADDON
 					WHERE
-					  {$this->addon_tbl}.ID_ADDON = :addon_id";
+					  {$db_info['addon_tbl']}.ID_ADDON = :addon_id";
 
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':addon_id', $addon_id);
@@ -72,10 +65,13 @@ class Addon
 
 					$result = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
 
-					$result['supported_mbversion'] = array_map(array($this, "getMbVersions"), explode(",", $result['supported_mbversion']));
+					$result['supported_mbversion'] = array_map(array(
+							                                           $this,
+							                                           "getMbVersions",
+					                                           ), explode(",", $result['supported_mbversion']));
 					$result['tags'] = explode(",", $result['tags']);
 					$result['image_links'] = explode(",", $result['image_links']);
-					$result['user']['already_liked'] = $this->is_rated($addon_id, $_SESSION['memberinfo']['memberid']);
+					$result['user']['already_liked'] = $this->is_rated($addon_id, $mb['user']['id']);
 
 					return $result;
 				} catch(Exception $e) {
@@ -88,10 +84,10 @@ class Addon
 
 
 	public function checkAddonExistenceById($addon_id) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT COUNT(*) AS count FROM ".SITE_ADDON." WHERE ID_ADDON = :addon_id";
+				$sql = "SELECT COUNT(*) AS count FROM {$db_info['addon_tbl']} WHERE ID_ADDON = :addon_id";
 
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':addon_id', $addon_id);
@@ -105,10 +101,10 @@ class Addon
 	}
 
 	public function is_rated($addon_id, $user_id) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT * FROM ".SITE_ADDON_LIKE." WHERE ID_MEMBER = :user_id AND ID_ADDON = :addon_id";
+				$sql = "SELECT * FROM {$db_info['likes_tbl']} WHERE ID_MEMBER = :user_id AND ID_ADDON = :addon_id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':user_id', $user_id);
 				$statement->bindValue(':addon_id', $addon_id);
@@ -126,34 +122,35 @@ class Addon
 	}
 
 	public function getTopMembers() {
-		global $connection;
+		global $connection, $db_info;
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-						  {$this->member_tbl}.ID_MEMBER,
-						  {$this->member_tbl}.membername,
-						  {$this->member_tbl}.rank,
+						  {$db_info['member_tbl']}.ID_MEMBER,
+						  {$db_info['member_tbl']}.membername,
+						  {$db_info['member_tbl']}.rank,
 						  upload.addonUploads
 						FROM
-						  {$this->member_tbl}
+						  {$db_info['member_tbl']}
 						LEFT JOIN
 						  (
 						  SELECT
 						    ID_AUTHOR,
 						    COUNT(DISTINCT ID_ADDON) AS addonUploads
 						  FROM
-						    {$this->addon_tbl}
+						    {$db_info['addon_tbl']}
 						  WHERE
-						    {$this->addon_tbl}.status = 1
+						    {$db_info['addon_tbl']}.status = 1
 						  GROUP BY addons.ID_AUTHOR
 						) upload
 						ON
-						  upload.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
+						  upload.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 						WHERE upload.addonUploads > 0
 						ORDER BY addonUploads DESC
 						LIMIT 8";
 				$statement = $connection->prepare($sql);
 				$statement->execute();
+
 				return $statement->fetchAll(PDO::FETCH_ASSOC);
 			} catch(Exception $e) {
 
@@ -170,11 +167,11 @@ class Addon
 	 * @return array
 	 */
 	public function getAddonListByMember($id, $limit) {
-		global $connection;
+		global $connection, $db_info;
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-							".SITE_ADDON.".ID_ADDON,
+							{$db_info['addon_tbl']}.ID_ADDON,
 				  	        ID_AUTHOR,
 				  	        membername,
 				  	        addon_title,
@@ -184,21 +181,23 @@ class Addon
 				  	        status,
 							COUNT(ID_LIKES) AS likesCount
 						FROM
-							".SITE_ADDON."
+							{$db_info['addon_tbl']}
 							LEFT JOIN
-							".SITE_MEMBER_TBL."
-							ON
-							".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER
-							 LEFT JOIN
-							 ".SITE_ADDON_LIKE."
-                            on ".SITE_ADDON.".ID_ADDON = ".SITE_ADDON_LIKE.".ID_ADDON
+								{$db_info['member_tbl']}
+								ON
+								{$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
+							LEFT JOIN
+								{$db_info['likes_tbl']}
+                                on
+                                {$db_info['addon_tbl']}.ID_ADDON = {$db_info['likes_tbl']}.ID_ADDON
 						WHERE
 							ID_AUTHOR = :id AND status = 1
-						GROUP BY ".SITE_ADDON.".ID_ADDON
+						GROUP BY
+							{$db_info['addon_tbl']}.ID_ADDON
 						ORDER BY
 							ID_ADDON DESC
 						LIMIT
-							".$limit;
+							{$limit}";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':id', $id);
 				$statement->execute();
@@ -215,17 +214,17 @@ class Addon
 	}
 
 	/**
-	 * @param int $id   member id
+	 * @param int $id member id
 	 * @param int $limit
 	 * @param int $stat addon status code
 	 *
 	 * @return array
 	 */
 	public function getAddonListByStatusAndMember($id, $limit, $stat) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT * FROM ".SITE_ADDON." WHERE ID_AUTHOR = :id AND status = ".$stat." ORDER BY ID_ADDON DESC LIMIT ".$limit;
+				$sql = "SELECT * FROM {$db_info['addon_tbl']} WHERE ID_AUTHOR = :id AND status = {$stat} ORDER BY ID_ADDON DESC LIMIT {$limit}";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':id', $id);
 				$statement->execute();
@@ -265,13 +264,13 @@ class Addon
 	}
 
 	public function rate($addon_id, $user_id, $rate_val) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
 				if($rate_val == "like") {
-					$sql = "INSERT INTO ".SITE_ADDON_LIKE." SET ID_MEMBER = :user_id, ID_ADDON = :addon_id";
+					$sql = "INSERT INTO {$db_info['likes_tbl']} SET ID_MEMBER = :user_id, ID_ADDON = :addon_id";
 				} elseif($rate_val == "unlike") {
-					$sql = "DELETE FROM ".SITE_ADDON_LIKE." WHERE ID_MEMBER = :user_id AND ID_ADDON = :addon_id";
+					$sql = "DELETE FROM {$db_info['likes_tbl']} WHERE ID_MEMBER = :user_id AND ID_ADDON = :addon_id";
 				}
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':user_id', $user_id);
@@ -287,10 +286,10 @@ class Addon
 
 
 	public function getRating($addon_id, $raw = false) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT * FROM ".SITE_ADDON_LIKE." WHERE ID_ADDON = :id";
+				$sql = "SELECT * FROM {$db_info['likes_tbl']} WHERE ID_ADDON = :id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':id', $addon_id);
 				$statement->execute();
@@ -305,17 +304,17 @@ class Addon
 	}
 
 	public function getAddonInfo($id) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
 				if($id != null) {
 					$sql = "
 						SELECT * 
-						FROM ".SITE_ADDON."
+						FROM {$db_info['addon_tbl']}
 								LEFT JOIN 
-							".SITE_MEMBER_TBL."
+							{$db_info['member_tbl']}
 								ON
-							".SITE_ADDON.".ID_AUTHOR = ".SITE_MEMBER_TBL.".ID_MEMBER
+							{$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 						WHERE 
 							ID_ADDON = :id";
 

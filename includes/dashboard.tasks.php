@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 			}
 
 			$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
-			//load parsedown markup to html converter
+			//load parsedown for markdown to html converter
 			$Parsedown = new Parsedown();
 			$readme_raw = $Parsedown->text ($readme);
 
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 			$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
 
 			//Phew.... all validations complete, now SUBMIT THE ADDON!
-			if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $mb['user']['id'], $readme_html, "submit")) {
+			if ($dashboard->submit ($readme_html, "submit")) {
 				exit ('{"status": "1", "data": "' . $lang['dashboard_msg_11'] . '", "callback_function": "submitted"}');
 			}
 		} else {
@@ -105,17 +105,18 @@ if (isset($_POST['submit'])) {
 	} elseif ($_POST['modify_type'] == "update") {
 		if (validateInput()) {
 
-			if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3"){
+			if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3" && !$mb['user']['can_mod']){
 				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 			}
 
 			//verify if the author can modify it.
-			if(!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id'])) {
+			if(!$dashboard->verifyAuthor($user_info['id'], $_POST['record_id']) && !$mb['user']['can_mod']) {
 				die('{"status": "0", "data": "'.$lang['dashboard_err_12'].'"}');
 			}
 
 			//check if an addon with similer name except for this one exists or not
-			if(!$dashboard->addonExists($_POST['title'], $_POST['record_id'])) {
+			//We need to escape special chars since we submitted the title with escaped value, otherwise they won't match
+			if(!$dashboard->addonExists(htmlspecialchars(trim($_POST['title']), ENT_QUOTES, "UTF-8"), $_POST['record_id'])) {
 
 				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 				//load parsedown markup to html converter
@@ -125,7 +126,7 @@ if (isset($_POST['submit'])) {
 				//load and use html purifier for the readme notes.
 				$readme_html = Format::htmlSafeOutput ($readme_raw); //purify the readme note html
 				//Phew.... all validations complete, now SUBMIT THE ADDON!
-				if ($dashboard->submit ($_SESSION['memberinfo']['rank_raw'], $mb['user']['id'], $readme_html, "update")) {
+				if ($dashboard->submit ($readme_html, "update")) {
 					exit('{"status": "1", "data": "' . $lang['dashboard_msg_12'] . '", "callback_function": "submitted", "origin": "dashboard.task line 99"}');
 				}
 			} else {

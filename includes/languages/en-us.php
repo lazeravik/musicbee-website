@@ -88,11 +88,17 @@ $lang['description_5'] = 'Get a full theater mode experience for MusicBee';
 $lang['description_6'] = 'Other useful add-ons for enhancing your MusicBee experience';
 
 /* Addon status*/
-$lang['addon_status_1'] = '<i class="fa fa-history"></i> Waiting';
-$lang['addon_status_2'] = '<i class="fa fa-check-circle"></i> Approved';
-$lang['addon_status_3'] = '<i class="fa fa-thumbs-down"></i> Rejected';
-$lang['addon_status_4'] = '<i class="fa fa-trash"></i> Deleted';
+$lang['addon_status_1'] = 'Waiting';
+$lang['addon_status_2'] = 'Approved';
+$lang['addon_status_3'] = 'Rejected';
+$lang['addon_status_4'] = 'Deleted';
 $lang['addon_status_5'] = 'Unknown';
+
+$lang['addon_status_icon_1'] = '<i class="fa fa-history"></i>';
+$lang['addon_status_icon_2'] = '<i class="fa fa-check-circle"></i>';
+$lang['addon_status_icon_3'] = '<i class="fa fa-thumbs-down"></i>';
+$lang['addon_status_icon_4'] = '<i class="fa fa-trash"></i>';
+$lang['addon_status_icon_5'] = '<i class="fa fa-frown-o"></i>';
 
 /* Index.php lang */
 $lang['home_1'] = 'MusicBee';
@@ -196,6 +202,7 @@ $lang['dashboard_record_th_3'] = 'Member';
 $lang['dashboard_record_th_4'] = 'Status';
 $lang['dashboard_record_th_5'] = 'Likes';
 $lang['dashboard_record_th_6'] = 'Downloads';
+$lang['dashboard_record_th_6'] = 'Submitted by';
 //dashboard > overview > side links
 $lang['dashboard_links_1'] = 'MusicBee API';
 $lang['dashboard_links_7'] = 'Read MusicBee docs for developer';
@@ -230,6 +237,7 @@ $lang['dashboard_submit_header_15'] = 'Add important note for user';
 $lang['dashboard_submit_header_16'] = 'Add-on type *';
 $lang['dashboard_submit_header_17'] = 'Provide Extra info';
 $lang['dashboard_submit_header_18'] = 'Is this add-on beta?';
+$lang['dashboard_submit_header_19'] = 'NOTE';
 
 $lang['dashboard_submit_desc_1'] = 'If your rank is newbie, you will need moderator approval. Also post your add-on on the forum first to get peoples attention';
 $lang['dashboard_submit_desc_2'] = 'You don\'t need admin/mod approval for updates, but malicious update can result permanent ban';
@@ -249,6 +257,8 @@ $lang['dashboard_submit_btn_4'] = ' Remove this screenshot';
 $lang['dashboard_submit_btn_5'] = 'Approve';
 $lang['dashboard_submit_btn_6'] = 'Reject';
 $lang['dashboard_submit_btn_7'] = '<i class="fa fa-trash"></i>';
+$lang['dashboard_submit_btn_8'] = 'Undelete';
+
 
 $lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
@@ -267,6 +277,10 @@ $lang['dashboard_msg_9'] = 'You can not View, download or edit deleted add-ons! 
 $lang['dashboard_msg_10'] = 'Setting successfully saved! You need to refresh the page to see the changes.';
 $lang['dashboard_msg_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_msg_12'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
+
+$lang['dashboard_msg_13'] = 'You can edit submitted add-ons from other users, because you have permission to moderate';
+
+$lang['dashboard_msg_14'] = 'Are you sure you want to remove this addon?\\n\\nyou can undo this action.';
 
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';

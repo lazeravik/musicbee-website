@@ -9,6 +9,8 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
+
+
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Dashboard.php';
@@ -17,12 +19,12 @@ require_once $link['root'].'classes/Addon.php';
 //check if edit GET request is made, if not we don't want UNDEFINED ERROR to pop up! so define the variable
 if(isset($_GET['view'])) {
 	if($_GET['view'] == "update" && isset($_GET['id'])) {
-
-
 		$dashboard = new Dashboard();
 
-		//verify if the author can modify it.
-		if(!$dashboard->verifyAuthor($user_info['id'], $_GET['id'])) { ?>
+		$is_author = $dashboard->verifyAuthor($user_info['id'], $_GET['id']);
+
+		//verify if the author can modify it.... or if user is mod/admin allow
+		if(!$is_author && !$mb['user']['can_mod']) { ?>
 			<div class="main_content_wrapper col_2_1">
 				<div class="sub_content_wrapper">
 					<div class="box_content">
@@ -45,6 +47,8 @@ if(isset($_GET['view'])) {
 		$data = $addon->getAddonInfo($_GET['id'])[0];
 		$screenshot_array = explode(",", $data['image_links']);
 
+	} else {
+		$viewType = 0; //submit mode
 	}
 } else {
 	$viewType = 0; //submit mode
@@ -63,7 +67,7 @@ if(isset($_GET['action'])):
 			<span class="show_info info_green custom">
 				<h3><?php echo $lang['dashboard_msg_11']; ?></h3>
 			</span>
-					<?php if($_SESSION['memberinfo']['rank_raw'] > 5): ?>
+					<?php if($mb['user']['need_approval']): ?>
 						<p class="info_text">
 							<?php echo $lang['dashboard_msg_5']; ?>
 						</p>
@@ -79,11 +83,10 @@ if(isset($_GET['action'])):
 		<?php
 		exit();
 	endif;
-endif;
+endif; ?>
 
-if($viewType == 2):
-	if($data['status'] == 3):
-		?>
+
+<?php if($viewType == 2 && $data['status'] == 3 && !$mb['user']['can_mod']){ ?>
 		<div class="main_content_wrapper col_2_1">
 			<div class="sub_content_wrapper">
 				<div class="box_content">
@@ -98,11 +101,7 @@ if($viewType == 2):
 		</div>
 		<?php
 		exit();
-	endif;
-endif;
-/**
- * Else show the submit form
- */
+	}
 ?>
 
 <form action="<?php echo $link['url']; ?>includes/dashboard.tasks.php" method="post" id="addon_submission" data-autosubmit>
@@ -125,6 +124,17 @@ endif;
 				</p>
 			</span>
 			</div>
+
+			<?php if(isset($_GET['mod'])): ?>
+				<div class="box_content">
+					<span class="show_info info_red custom">
+						<h3><?php echo $lang['dashboard_submit_header_19']; ?></h3>
+						<p class="description"><?php echo $lang['dashboard_msg_13']; ?></p>
+					</span>
+				</div>
+			<?php endif; ?>
+
+
 			<div class="box_content">
 			<span class="show_info custom info_silver">
 				<h3><?php echo $lang['dashboard_submit_header_1']; ?></h3>
@@ -656,16 +666,27 @@ endif;
 		return false;
 	})(jQuery)
 
-	<?php if ($viewType == 2): ?>
+	<?php if(isset($_GET['mod'])) { ?>
+
+	function submitted() {
+		var $generatedUrl = generatePageUrl('mod_all');
+		loadPageGet($generatedUrl);
+		window.location.hash = 'mod_all';
+	}
+
+	<?php } elseif ($viewType == 2){ ?>
+
 	function submitted() {
 		var $generatedUrl = generatePageUrl('dashboard_all');
 		loadPageGet($generatedUrl);
 		window.location.hash = 'dashboard_all';
 	}
-	<?php else: ?>
+
+	<?php } else { ?>
+
 	function submitted() {
 		var $generatedUrl = generatePageUrl(window.location.hash.replace('#', ''));
 		loadPageGet($generatedUrl, "action=submit_success");
 	}
-	<?php endif; ?>
+	<?php } ?>
 </script>

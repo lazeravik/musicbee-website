@@ -10,20 +10,15 @@
  */
 
 /**
- * Handles ADDON DASHBOARD(musicbee addon center) related stuff
+ * Handles Dashboard related stuff
  * @author : AvikB;
+ *
+ * @todo mention charset in htmlspecialchars()
  */
 class Dashboard
 {
-	private $addon_tbl = SITE_ADDON;
-	private $member_tbl = SITE_MEMBER_TBL;
-	private $likes_tbl = SITE_ADDON_LIKE;
-	private $download_stat_tbl = SITE_DOWNLOAD_STAT;
-	private $settings_tbl = SETTINGS;
-	
-	
 	public function saveSiteSetting() {
-		global $connection;
+		global $connection,$db_info;
 
 		$showPgaeLoadTime = (isset($_POST['pageloadtime'])) ? 1 : 0;
 		$addonSubmissionOn = (isset($_POST['submission'])) ? 1 : 0;
@@ -61,20 +56,20 @@ class Dashboard
 		if(databaseConnection()) {
 			try {
 				$sql = "
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'showPgaeLoadTime';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'addonSubmissionOn';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurUploadOn';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'maxSubmitWithOutApproval';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurClientID';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'imgurClientSecret';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'paypalDonationLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'twitterLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'wikiaLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'wishlistLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'websiteApiLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'musicbeeApiLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'websiteBugLink';
-						UPDATE {$this->settings_tbl} SET value = ? WHERE {$this->settings_tbl}.variable = 'musicbeeBugLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'showPgaeLoadTime';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'addonSubmissionOn';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurUploadOn';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maxSubmitWithOutApproval';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientID';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientSecret';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'paypalDonationLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'twitterLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wikiaLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wishlistLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteApiLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeApiLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteBugLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeBugLink';
 						";
 
 				//var_dump(showQuery($sql, $bindedVal));
@@ -91,10 +86,10 @@ class Dashboard
 
 
 	public function verifyAuthor($member_id, $addon_id) {
-		global $connection;
+		global $connection, $db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT * FROM {$this->addon_tbl} WHERE ID_ADDON = :addon_id";
+				$sql = "SELECT * FROM {$db_info['addon_tbl']} WHERE ID_ADDON = :addon_id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':addon_id', $addon_id);
 				$statement->execute();
@@ -121,17 +116,17 @@ class Dashboard
 	 * deletes an addon from database
 	 */
 	public function deleteAddon($addon_id) {
-		global $connection;
+		global $connection, $db_info;
 		if(databaseConnection()) {
 			try {
 				//delete query
-				$sql = "DELETE FROM {$this->addon_tbl} WHERE ID_ADDON = :addon_id";
+				$sql = "DELETE FROM {$db_info['addon_tbl']} WHERE ID_ADDON = :addon_id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':addon_id', $addon_id);
 				$statement->execute();
 
 				//check if the addon is truly deleted or not
-				$sql = "SELECT ID_ADDON FROM {$this->addon_tbl} WHERE ID_ADDON = :addon_id";
+				$sql = "SELECT ID_ADDON FROM {$db_info['addon_tbl']} WHERE ID_ADDON = :addon_id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':addon_id', $addon_id);
 				$statement->execute();
@@ -148,15 +143,21 @@ class Dashboard
 	}
 
 
-	public function submit($rankid, $authorId, $readme_html, $type) {
-		global $connection;
-		if($rankid != 10) {
-			$status = 1; //user has higher rank then we automatically approve
-		} else {
-			$status = 0; //otherwise need approval
-		}
+	/**
+	 * Submit addons or Update existing addons
+	 *
+	 * @param $readme_html
+	 * @param $type
+	 *
+	 * @return bool
+	 */
+	public function submit($readme_html, $type) {
+		global $connection, $db_info, $mb;
+
+		$status = (!$mb['user']['need_approval'])? 1 : 0;
 		$addon_id = (isset($_POST['record_id'])) ? $_POST['record_id'] : "";
-		$lastModeratedBy = $authorId;
+		$authorId = $mb['user']['id'];
+		$lastModeratedBy = $mb['user']['id'];
 		$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 		$important_note = (isset($_POST['important_note'])) ? $_POST['important_note'] : "";
 		$support = (isset($_POST['support'])) ? $_POST['support'] : "";
@@ -183,7 +184,7 @@ class Dashboard
 			try {
 				if($type == "submit") {
 					$sql = "INSERT
-								INTO {$this->addon_tbl}
+								INTO {$db_info['addon_tbl']}
 							SET
 								ID_AUTHOR = :id_author,
 								tags = :tags,
@@ -205,7 +206,7 @@ class Dashboard
 								lastStatus_moderatedBy = :lastStatus_moderatedBy";
 				} elseif($type == "update") {
 					$sql = "UPDATE
-								{$this->addon_tbl}
+								{$db_info['addon_tbl']}
 							SET
 								tags = :tags,
 								supported_mbversion = :supported_mbversion,
@@ -235,17 +236,18 @@ class Dashboard
 					$statement->bindValue(':update_date', $update_date);
 					$statement->bindValue(':addon_id', $addon_id);
 				}
+
 				$statement->bindValue(':tags', htmlspecialchars(trim($_POST['tag'])));
 				$statement->bindValue(':supported_mbversion', htmlspecialchars($_POST['mbSupportedVer']));
-				$statement->bindValue(':addon_title', htmlspecialchars(trim($_POST['title'])));
+				$statement->bindValue(':addon_title', htmlspecialchars(trim($_POST['title']), ENT_QUOTES, "UTF-8"));
 				$statement->bindValue(':addon_type', htmlspecialchars($_POST['type']));
 				$statement->bindValue(':addon_version', htmlspecialchars(trim($addonver)));
-				$statement->bindValue(':short_description', htmlspecialchars(trim($description)));
+				$statement->bindValue(':short_description', htmlspecialchars(trim($description), ENT_QUOTES, "UTF-8"));
 				$statement->bindValue(':download_links', htmlspecialchars(trim($dlink)));
 				$statement->bindValue(':image_links', htmlspecialchars($screenshot_links));
 				$statement->bindValue(':thumbnail', htmlspecialchars($thumb));
 				$statement->bindValue(':support_forum', htmlspecialchars(trim($support)));
-				$statement->bindValue(':important_note', htmlspecialchars(trim($important_note)));
+				$statement->bindValue(':important_note', htmlspecialchars(trim($important_note), ENT_QUOTES, "UTF-8"));
 				$statement->bindValue(':readme_content', $readme);
 				$statement->bindValue(':readme_content_html', $readme_html);
 				$statement->bindValue(':is_beta', $beta);
@@ -261,28 +263,28 @@ class Dashboard
 	}
 
 	public function getTopVotedAddonsByAuthor($author_id, $limit = 10) {
-		global $connection;
+		global $connection, $db_info;
 
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-					{$this->addon_tbl}.ID_ADDON,
-					{$this->addon_tbl}.addon_title,
-					{$this->addon_tbl}.addon_type,
-					{$this->addon_tbl}.status,
+					{$db_info['addon_tbl']}.ID_ADDON,
+					{$db_info['addon_tbl']}.addon_title,
+					{$db_info['addon_tbl']}.addon_type,
+					{$db_info['addon_tbl']}.status,
 					COUNT(ID_LIKES) AS likesCount
 					FROM
-					{$this->likes_tbl}
+					{$db_info['likes_tbl']}
 					LEFT JOIN
-					{$this->addon_tbl}
+					{$db_info['addon_tbl']}
 					ON
-					{$this->likes_tbl}.ID_ADDON = {$this->addon_tbl}.ID_ADDON
+					{$db_info['likes_tbl']}.ID_ADDON = {$db_info['addon_tbl']}.ID_ADDON
 					WHERE
-					{$this->addon_tbl}.status = 1
+					{$db_info['addon_tbl']}.status = 1
 					AND
-					{$this->addon_tbl}.ID_AUTHOR = :author_id
+					{$db_info['addon_tbl']}.ID_AUTHOR = :author_id
 					GROUP BY
-					{$this->addon_tbl}.ID_ADDON
+					{$db_info['addon_tbl']}.ID_ADDON
 					ORDER BY
 					likesCount
 					DESC
@@ -299,28 +301,28 @@ class Dashboard
 	}
 
 	public function getMostDownloadedAddonsByAuthor($author_id, $limit = 10) {
-		global $connection;
+		global $connection,$db_info;
 
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-						{$this->addon_tbl}.ID_ADDON,
-						{$this->addon_tbl}.addon_title,
-						{$this->addon_tbl}.addon_type,
-						{$this->addon_tbl}.status,
+						{$db_info['addon_tbl']}.ID_ADDON,
+						{$db_info['addon_tbl']}.addon_title,
+						{$db_info['addon_tbl']}.addon_type,
+						{$db_info['addon_tbl']}.status,
 						COUNT(STAT_ID) AS downloadCount
 					FROM
-						{$this->download_stat_tbl}
+						{$db_info['download_stat_tbl']}
 					LEFT JOIN
-						{$this->addon_tbl}
+						{$db_info['addon_tbl']}
 						ON
-						{$this->addon_tbl}.ID_ADDON = {$this->download_stat_tbl}.ID
+						{$db_info['addon_tbl']}.ID_ADDON = {$db_info['download_stat_tbl']}.ID
 					WHERE
-						{$this->addon_tbl}.status = 1
+						{$db_info['addon_tbl']}.status = 1
 						AND
-						{$this->addon_tbl}.ID_AUTHOR = :author_id
+						{$db_info['addon_tbl']}.ID_AUTHOR = :author_id
 					GROUP BY
-						{$this->addon_tbl}.ID_ADDON
+						{$db_info['addon_tbl']}.ID_ADDON
 					ORDER BY
 						downloadCount
 					DESC
@@ -337,20 +339,20 @@ class Dashboard
 	}
 
 	public function getAllUnApprovedAddons() {
-		global $connection;
+		global $connection,$db_info;
 
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-					{$this->addon_tbl}.ID_ADDON, {$this->addon_tbl}.addon_title, {$this->addon_tbl}.addon_type, {$this->addon_tbl}.status, {$this->member_tbl}.membername, {$this->member_tbl}.ID_MEMBER
+					{$db_info['addon_tbl']}.ID_ADDON, {$db_info['addon_tbl']}.addon_title, {$db_info['addon_tbl']}.addon_type, {$db_info['addon_tbl']}.status, {$db_info['member_tbl']}.membername, {$db_info['member_tbl']}.ID_MEMBER
 					FROM
-					{$this->member_tbl}
+					{$db_info['member_tbl']}
 					LEFT JOIN
-					{$this->addon_tbl}
+					{$db_info['addon_tbl']}
 					ON
-					{$this->addon_tbl}.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
+					{$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 					WHERE
-					{$this->addon_tbl}.status = 0";
+					{$db_info['addon_tbl']}.status = 0";
 				$statement = $connection->prepare($sql);
 				$statement->execute();
 				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -369,10 +371,10 @@ class Dashboard
 	 * deletes an addon from database
 	 */
 	public function getAddonStatus($addon_id) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
-				$sql = "SELECT status FROM {$this->addon_tbl} WHERE ID_ADDON = :addon_id";
+				$sql = "SELECT status FROM {$db_info['addon_tbl']} WHERE ID_ADDON = :addon_id";
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':addon_id', $addon_id);
 				$statement->execute();
@@ -390,13 +392,13 @@ class Dashboard
 
 
 	public function updateAddonStatus($id, $status, $updater_id) {
-		global $connection;
+		global $connection,$db_info;
 
 		$update_date = date("F j, Y, g:i a"); //current date
 
 		if(databaseConnection()) {
 			try {
-				$sql = "UPDATE {$this->addon_tbl}
+				$sql = "UPDATE {$db_info['addon_tbl']}
 							SET
 								status = :status,
 								lastStatus_moderatedBy = :lastStatus_moderatedBy,
@@ -424,17 +426,17 @@ class Dashboard
 	 * @return array
 	 */
 	public function getAllAddonByMember($id) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
 							*
 						FROM
-							{$this->addon_tbl}
+							{$db_info['addon_tbl']}
 								LEFT JOIN
-							{$this->member_tbl}
+							{$db_info['member_tbl']}
 								on
-							{$this->addon_tbl}.ID_AUTHOR = {$this->member_tbl}.ID_MEMBER
+							{$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 						WHERE
 							ID_AUTHOR = :id
 						ORDER BY
@@ -461,13 +463,13 @@ class Dashboard
 	 * @return array
 	 */
 	public function getAllAddonCountByStatusAndMember($id, $stat) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
 							COUNT(*) AS count
 						FROM
-							{$this->addon_tbl}
+							{$db_info['addon_tbl']}
 						WHERE
 							ID_AUTHOR = :id
 							AND
@@ -496,14 +498,14 @@ class Dashboard
 	 * @return bool
 	 */
 	function addonExists($title, $exception = null) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			try {
 				if($exception == null) {
-					$sql = "SELECT * FROM {$this->addon_tbl} WHERE addon_title = :title";
+					$sql = "SELECT * FROM {$db_info['addon_tbl']} WHERE addon_title = :title";
 					$statement = $connection->prepare($sql);
 				} else {
-					$sql = "SELECT * FROM {$this->addon_tbl} WHERE addon_title = :title AND NOT ID_ADDON = :id_addon";
+					$sql = "SELECT * FROM {$db_info['addon_tbl']} WHERE addon_title = :title AND NOT ID_ADDON = :id_addon";
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id_addon', $exception);
 				}
@@ -524,20 +526,19 @@ class Dashboard
 
 
 
-	public function getAddonDownloadCount($author_id)
-	{
-		global $connection;
+	public function getAddonDownloadCount($author_id) {
+		global $connection,$db_info;
 
 		if (databaseConnection()) {
 			try {
 				$sql = "SELECT
 							STAT_ID, ip_address,ID_ADDON, ID_AUTHOR
 						FROM
-							{$this->download_stat_tbl}
+							{$db_info['download_stat_tbl']}
 							LEFT JOIN
-								{$this->addon_tbl}
+								{$db_info['addon_tbl']}
 								ON
-								{$this->download_stat_tbl}.ID = {$this->addon_tbl}.ID_ADDON ";
+								{$db_info['download_stat_tbl']}.ID = {$db_info['addon_tbl']}.ID_ADDON ";
 				if(!empty($author_id)){
 					$sql .= "WHERE
 								status = 1
@@ -556,20 +557,19 @@ class Dashboard
 		}
 	}
 
-	public function getAddonLikeCount($author_id)
-	{
-		global $connection;
+	public function getAddonLikeCount($author_id) {
+		global $connection,$db_info;
 
 		if (databaseConnection()) {
 			try {
 				$sql = "SELECT
 							ID_LIKES
 						FROM
-							{$this->likes_tbl}
+							{$db_info['likes_tbl']}
 							LEFT JOIN
-								{$this->addon_tbl}
+								{$db_info['addon_tbl']}
 								ON
-								{$this->likes_tbl}.ID_ADDON = {$this->addon_tbl}.ID_ADDON ";
+								{$db_info['likes_tbl']}.ID_ADDON = {$db_info['addon_tbl']}.ID_ADDON ";
 
 				if(!empty($author_id)){
 					$sql .= "WHERE
@@ -591,13 +591,14 @@ class Dashboard
 
 
 	public function getAllAddonCountByStatus($stat) {
-		global $connection;
+		global $connection,$db_info;
+
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
 							COUNT(*) AS count
 						FROM
-							{$this->addon_tbl}
+							{$db_info['addon_tbl']}
 						WHERE
 							status = {$stat}";
 				$statement = $connection->prepare($sql);
@@ -614,13 +615,14 @@ class Dashboard
 
 
 	public function getAllAddonCount() {
-		global $connection;
+		global $connection,$db_info;
+
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
 							COUNT(*) AS count
 						FROM
-							{$this->addon_tbl}";
+							{$db_info['addon_tbl']}";
 				$statement = $connection->prepare($sql);
 				$statement->execute();
 				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -633,7 +635,62 @@ class Dashboard
 		}
 	}
 
+	public function getAllMemberCount() {
+		global $connection, $db_info;
 
+		if(databaseConnection()) {
+			try {
+				$sql = "SELECT
+							COUNT(*) AS count
+						FROM
+							{$db_info['member_tbl']}";
+				$statement = $connection->prepare($sql);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return $result[0]['count'];
+
+			} catch(Exception $e) {
+
+			}
+		}
+	}
+
+	public function getAllAddonPublisherCount() {
+		global $connection, $db_info;
+
+		if(databaseConnection()) {
+			try {
+				$sql = "SELECT
+						  COUNT(*) as publisherCount
+						FROM
+						  {$db_info['member_tbl']}
+						LEFT JOIN
+						  (
+						  SELECT
+						    ID_AUTHOR,
+						    COUNT(DISTINCT ID_ADDON) AS addonUploads
+						  FROM
+						    {$db_info['addon_tbl']}
+						  WHERE
+						    {$db_info['addon_tbl']}.status = 1
+						  GROUP BY addons.ID_AUTHOR
+						) upload
+						ON
+						  upload.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
+						WHERE
+							upload.addonUploads > 0";
+				$statement = $connection->prepare($sql);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+				return $result[0]['publisherCount'];
+
+			} catch(Exception $e) {
+
+			}
+		}
+	}
 
 
 

@@ -16,9 +16,9 @@
 	class Member
 	{
 
-		public function createDashboardAccount($user_id, $user_rankid, $user_name)
-		{
-			global $connection;
+		public function createDashboardAccount($user_id, $user_rankid, $user_name) {
+			global $connection, $db_info;
+
 			if ($user_rankid == 1 || $user_rankid == 2) {
 				$submitPermission = 1;
 			} else {
@@ -29,7 +29,7 @@
 				try {
 					$sql = "INSERT
 								INTO
-									".SITE_MEMBER_TBL."
+									{$db_info['member_tbl']}
 								SET
 									ID_MEMBER = :id,
 									rank = :permission,
@@ -54,13 +54,12 @@
 		}
 
 
-		public function updateDashboardAccount($user_id, $user_name)
-		{
-			global $connection;
+		public function updateDashboardAccount($user_id, $user_name) {
+			global $connection, $db_info;
 
 			if (databaseConnection()) {
 				try {
-					$sql = "UPDATE ".SITE_MEMBER_TBL."
+					$sql = "UPDATE {$db_info['member_tbl']}
 								SET
 									membername = :name
 								WHERE
@@ -83,12 +82,12 @@
 		 * @return null
 		 * Gets the member rank, if the ID_MEMBER is known. ID_MEMBER can be easily obtained if the user is logged into the forum
 		 */
-		public function memberInfo($user_id)
-		{
-			global $connection;
+		public function memberInfo($user_id) {
+			global $connection, $db_info;
+
 			if (databaseConnection()) {
 				try {
-					$sql = "SELECT * FROM " . SITE_MEMBER_TBL . " WHERE ID_MEMBER = :user_id";
+					$sql = "SELECT * FROM {$db_info['member_tbl']} WHERE ID_MEMBER = :user_id";
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':user_id', $user_id);
 					$statement->execute();

@@ -110,19 +110,19 @@
 			global $lang;
 			switch ($id) {
 				case '0':
-					return $lang['addon_status_1'];
+					return array('icon' => $lang['addon_status_icon_1'], 'text'=> $lang['addon_status_1']);
 					break;
 				case '1':
-					return $lang['addon_status_2'];
+					return array('icon' => $lang['addon_status_icon_2'], 'text'=> $lang['addon_status_2']);
 					break;
 				case '2':
-					return $lang['addon_status_3'];
+					return array('icon' => $lang['addon_status_icon_3'], 'text'=> $lang['addon_status_3']);
 					break;
 				case '3':
-					return $lang['addon_status_4'];
+					return array('icon' => $lang['addon_status_icon_4'], 'text'=> $lang['addon_status_4']);
 					break;
 				default:
-					return $lang['addon_status_5'];
+					return array('icon' => $lang['addon_status_icon_5'], 'text'=> $lang['addon_status_5']);
 					break;
 			}
 		}
@@ -131,7 +131,7 @@
 		 * @param $rankid
 		 *
 		 * @return string
-		 * @todo improve it by using array with foreach switch, it will make it more feature rich and flexible
+		 * @todo improve it by making it more flexible
 		 */
 		public static function rankName($rankid)
 		{

@@ -9,19 +9,26 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
+/**
+ * @todo ability to automatically update user rank to elite when submitted add-on exceeds defined limit
+ * @todo ability to remove mod approval for addons when a user is trusted
+ */
+
+//use microtime to get page loadtime
 $startScriptTime = microtime(true);
 
-// Don't do anything if already loaded.
+//Don't do anything if functions.php is already loaded.
 if(defined('MB_FUNC')) {
 	return true;
 }
 define('MB_FUNC', 'COMMON_FUNCTION');
 
+//Start a new session if no session detected..... WARNING! IT REQUIRES PHP 5.4 OR LATER
 if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-
+//All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
 $link = array();
 $link['url'] = 'http://'.$_SERVER['HTTP_HOST']."/";
 $link['root'] = $_SERVER['DOCUMENT_ROOT']."/";
@@ -44,35 +51,38 @@ $link['redirect'] = $link['url'].'out/';
 $link['404'] = $link['root']."error/404.php";
 $link['kb'] = $link['url'].'kb/';
 
-
+//Error code for knowledge base page
 $errorCode = array(
-	'ADMIN_ACCESS' => '101',
-	'LOGIN_MUST' => '102',
-	'FORUM_INTEGRATION' => '103',
-	'NOT_FOUND' => '104',
-	'NO_DIRECT_ACCESS' => '105',
-	'MOD_ACCESS' => '106',
+		'ADMIN_ACCESS'      => '101',
+		'LOGIN_MUST'        => '102',
+		'FORUM_INTEGRATION' => '103',
+		'NOT_FOUND'         => '104',
+		'NO_DIRECT_ACCESS'  => '105',
+		'MOD_ACCESS'        => '106',
 );
 
+//SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
 require_once $link['root'].'forum/SSI.php';
-require_once $link['root'].'includes/languages/en-us.php';
-require_once $link['root'].'classes/Format.php';
-require_once $link['root'].'classes/Validation.php';
-require_once $link['root'].'setting.php';
 
-/**
- * Forum integration is must, if it is not initialized before this then throw an error
- */
+//Forum integration is must, if it is not initialized before this then throw an error
 if(!isset($context)) {
 	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
 
+//Default language file. DO NOT REMOVE IT!
+require_once $link['root'].'includes/languages/en-us.php';
 
-//Create the logout link
+//Load other classes and database login info
+require_once $link['root'].'classes/Format.php';
+require_once $link['root'].'classes/Validation.php';
+require_once $link['root'].'setting.php';
+
+
+//Create the logout link..... THIS SHOULD NOT BE DECLARED BEFORE SSI.php SCRIPT!
 $link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
 
 
-//Gets website setting
+//Gets website setting !DO NOT REMOVE IT!
 $setting = getSetting();
 
 //Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
@@ -80,12 +90,18 @@ if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpo
 	$_SESSION['login_url'] = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
 	$_SESSION['old_url'] = currentUrl();
-
 }
 
+//creates an array from the URI
+$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
+//Get user avatar or use the default avatar
 $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/usersmall.jpg';
+
+//Get the musicbee satble and beta release data from the API page
 $releaseData = json_decode(file_get_contents($link['url'].'api.get.php?type=json&action=release-info'));
+
+//Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
 		'user'           => array(
 				'id'              => $context['user']['id'],
@@ -93,6 +109,10 @@ $mb = array(
 				'is_guest'        => $context['user']['is_guest'],
 				'is_admin'        => $context['user']['is_admin'],
 				'is_mod'          => $context['user']['is_mod'],
+				'is_elite'        => false,
+				'is_newbie'       => false,
+				'rank_name'       => null,
+				'need_approval'   => true,
 				'can_mod'         => $context['user']['can_mod'],
 				'username'        => $context['user']['username'],
 				'language'        => $context['user']['language'],
@@ -201,7 +221,9 @@ $mb = array(
 						'href'     => $link['help'],
 						'sub_menu' => array(),
 				),
-		), 'musicbee_download' => array(
+		),
+
+		'musicbee_download' => array(
 				'stable' => array(
 						'appname'      => isset($releaseData[0]->appname) ? $releaseData[0]->appname : "NA",
 						'version'      => isset($releaseData[0]->version) ? $releaseData[0]->version : "NA",
@@ -235,13 +257,12 @@ $mb = array(
 		),
 
 		'view_range' => array(
-			'addon_view_range' => 20,
-			'dashboard_all_view_range' => 15,
+				'addon_view_range'         => 20,
+				'dashboard_all_view_range' => 20,
 		),
 );
 
 //var_dump($mb);
-
 
 
 /**
@@ -249,27 +270,22 @@ $mb = array(
  * this is only available for logged in users. No guest is allowed kicked them to error page
  */
 if(!$mb['user']['is_admin'] && !empty($admin_only)) {
-
 	header('Location: '.$link['kb'].'?code='.$errorCode['ADMIN_ACCESS']);
-
 } elseif(!$mb['user']['can_mod'] && !empty($mod_only)) {
-
 	if(!empty($json_response)) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
 	} else {
 		header('Location: '.$link['kb'].'?code='.$errorCode['MOD_ACCESS']);
 	}
-
 } elseif($mb['user']['is_guest'] && !empty($no_guests)) {
-
 	if(!empty($json_response)) {
 		die('{"status": "0", "data": "'.$lang['LOGIN_NEED'].'"}');
 	} else {
 		header('Location: '.$link['kb'].'?code='.$errorCode['LOGIN_MUST']);
 	}
-
 }
 
+//if $no_directaccess is set, no direct access is allowed
 if(!empty($no_directaccess)) {
 	if(!@$_SERVER['HTTP_REFERER']) {
 		header('Location: '.$link['kb'].'?code='.$errorCode['NO_DIRECT_ACCESS']);
@@ -293,43 +309,43 @@ if(!$mb['user']['is_guest']) {
 		}
 		//Create an Addon dashboard account for the user
 		if($memberData->createDashboardAccount($mb['user']['id'], $permission, $mb['user']['name'])) {
-			$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
+			$userinfo = $memberData->memberInfo($mb['user']['id']);
 		} else {
 
 		}
 	} else {
 		//check if forum username updated,
-		$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
+		$userinfo = $memberData->memberInfo($mb['user']['id']);
 
-		if($getmemberinfo['membername'] != $mb['user']['username']) {
+		if($userinfo['membername'] != $mb['user']['username']) {
 			if($memberData->updateDashboardAccount($mb['user']['id'], $mb['user']['username'])) {
-				$getmemberinfo = $memberData->memberInfo($mb['user']['id']);
+				$userinfo = $memberData->memberInfo($mb['user']['id']);
 			}
 		}
 	}
 
-	$memberinfoArray['membername'] = $getmemberinfo['membername'];
-	$memberinfoArray['memberid'] = $getmemberinfo['ID_MEMBER'];
-	$memberinfoArray['rank'] = Validation::rankName($getmemberinfo['rank']);
-	$memberinfoArray['rank_raw'] = $getmemberinfo['rank'];
+	$_SESSION['memberinfo'] = array(
+			'membername' => $userinfo['membername'],
+			'memberid'   => $userinfo['ID_MEMBER'],
+			'rank'       => Validation::rankName($userinfo['rank']),
+			'rank_raw'   => $userinfo['rank'],
+	);
 
-	$_SESSION['memberinfo'] = $memberinfoArray;
+	//Set the user ranks and permissions once we get it from database
+	$mb['user']['is_elite'] = ($userinfo['rank']==5)? true : false;
+	$mb['user']['is_newbie'] = ($userinfo['rank']==10)? true : false;
+	$mb['user']['rank_name'] = Validation::rankName($userinfo['rank']);
+	$mb['user']['need_approval'] = ($userinfo['rank']>5)? true : false;
 } else {
 	$_SESSION['memberinfo'] = null;
 }
 
+//var_dump($mb);
 
-/// page location variable starts here
+
+///page location variable starts here
 $mainmenu = $link['root'].'views/mainmenu.template.php';
 $footer = $link['root'].'views/footer.template.php';
-
-
-
-/**
- * @var URI $params
- * creates an array from the URI
- */
-$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
 
 /** @var database connection $connection */
@@ -341,7 +357,7 @@ $connection = null;
  */
 function databaseConnection() {
 	global $connection;
-	// if connection already exists
+	//if connection already exists
 	if($connection != null) {
 		return true;
 	} else {
@@ -399,6 +415,11 @@ function getVersionInfo($value, $type) {
 	}
 }
 
+/**
+ * Get all Website setting
+ *
+ * @return array
+ */
 function getSetting() {
 	global $connection;
 

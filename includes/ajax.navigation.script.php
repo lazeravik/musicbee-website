@@ -26,9 +26,15 @@
 	function loadUpdatePage(dataUrl){
 		if (dataUrl.toLowerCase().indexOf("/") >= 0) {
 			var id = dataUrl.split('/')[1];
-			if (Math.floor(id) == id && $.isNumeric(id)) {
-				loadPageGet(generatePageUrl('dashboard_submit'),'view=update&id=' + id);
+			var type = dataUrl.split('/')[2];
+			var request_param = dataUrl.split('/')[3];
+
+			if (Math.floor(id) == id && $.isNumeric(id) && type != undefined) {
+				loadPageGet(generatePageUrl('dashboard_submit'),'view='+type+'&id='+id+'&'+request_param);
 				return false;
+			} else {
+				console.log(dataUrl.split('/'));
+				loadPageGet(generatePageUrl(dataUrl.split('/')[0]),dataUrl.split('/')[1]);
 			}
 		} else {
 			loadPageGet(generatePageUrl(dataUrl));
