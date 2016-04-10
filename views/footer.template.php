@@ -45,9 +45,12 @@
 		<div id="widgetCommunity"  class="widgetCommon">
 			<h4><?php echo $lang['footer_183']; ?></h4>
 			<ul class="footer_list_menu">
-				<li><a href="<?php echo $link['devapi']; ?>"><?php echo $lang['footer_185']; ?></a></li>
-				<li><a href="<?php echo $link['bugreport']; ?>"><?php echo $lang['footer_187']; ?></a></li>
 
+				<?php if(!empty($setting['musicbeeApiLink'])): ?>
+					<li><a href="<?php echo $setting['musicbeeApiLink']; ?>"><?php echo $lang['footer_185']; ?></a></li>
+				<?php endif; ?>
+
+				<li><a href="<?php echo $link['bugreport']; ?>"><?php echo $lang['footer_187']; ?></a></li>
 				<?php if(!empty($setting['wishlistLink'])): ?>
 					<li><a href="<?php echo $setting['wishlistLink']; ?>"><?php echo $lang['footer_191']; ?></a></li>
 				<?php endif; ?>

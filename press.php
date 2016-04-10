@@ -8,8 +8,6 @@
  * Created by AvikB for noncommercial MusicBee project.
  * Spelling mistakes and fixes from phred and other community memebers.
  */
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-$no_guests = true; //kick off the guests
-require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
-
-include $link['root'].'views/dashboard.template.php';
+include $link['root'].'views/press.template.php';

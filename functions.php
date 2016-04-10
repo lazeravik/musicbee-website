@@ -244,7 +244,7 @@ $mb = array(
 				),
 
 				'beta' => array(
-						'appaname'     => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
+						'appname'     => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
 						'version'      => isset($releaseData[1]->version) ? $releaseData[1]->version : "NA",
 						'release_date' => isset($releaseData[1]->release_date) ? $releaseData[1]->release_date : "NA",
 						'supported_os' => isset($releaseData[1]->supported_os) ? $releaseData[1]->supported_os : "NA",
@@ -348,7 +348,7 @@ $mainmenu = $link['root'].'views/mainmenu.template.php';
 $footer = $link['root'].'views/footer.template.php';
 
 
-/** @var database connection $connection */
+
 $connection = null;
 
 /**

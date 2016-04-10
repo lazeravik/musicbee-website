@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Redirect</title>
+	<title><?php echo $lang['redirect_title']; ?></title>
 
 	<!--include common meta tags and stylesheets -->
 	<?php include $link['root'] . '/includes/meta&styles.php'; ?>
@@ -38,14 +38,14 @@
 					<div class="box_content" >
 					<?php if (isset($url)) : ?>
 						<span class="show_info info_darkgrey custom">
-							<h3>Please Wait! </h3>
-							<p class="description">You will be redirected to the download page soon.</p>
-							<p class="description">You can <a href="<?php echo $url; ?>">Click here</a> to continue</p>
+							<h3><?php echo $lang['redirect_1']; ?></h3>
+							<p class="description"><?php echo $lang['redirect_2']; ?></p>
+							<p class="description"><?php echo $lang['redirect_3']; ?> <a href="<?php echo $url; ?>"><?php echo $lang['redirect_4']; ?></a></p>
 						</span>
       					
 					<?php else: ?>
 						<span class="show_info danger custom">
-							<h3>URL Parameter is incorrect</h3>
+							<h3><?php echo $lang['redirect_5']; ?></h3>
 						</span>
 					<?php endif; ?>
 					</div>

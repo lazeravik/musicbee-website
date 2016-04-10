@@ -327,8 +327,6 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 	//sidebar link redirect and ajax load
 	$('#ajax_area a[data-load-page]').on('click', function (e) {
 		e.preventDefault();
-		/* Act on the event */
-		loadPageGet(generateUrl($(this).attr('data-href')), (!!$(this).attr('data-get-req')) ? $(this).attr('data-get-req') : "");
 		window.location.hash = $(this).attr('data-href');
 	});
 
@@ -358,7 +356,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				}).done(function (data) {
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 				}).always(function () {
 					$('#loading_icon').hide();
 				});
@@ -382,7 +380,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 			var sourcedata = $('#addon_records > *', $(data));
 			$('#addon_records').html(sourcedata).fadeIn();
 		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 		}).always(function () {
 			$('#loading_icon').hide(); //show loading icon'
 		});

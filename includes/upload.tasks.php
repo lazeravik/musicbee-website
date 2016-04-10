@@ -14,7 +14,8 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 	require_once $link['root'] . 'setting.php';
 
-	if (!isset($_POST['target'])) die('{"status": "0", "data": "' . $lang['412'] . '"}');
+	if (!isset($_POST['target']))
+		die('{"status": "0", "data": "' . $lang['412'] . '"}');
 
 	if ($_POST['target'] == "imgur") {
 
@@ -23,13 +24,15 @@
 		}
 
 		$img = $_FILES['img'];
+
+		//Check image file name and size if empty or size is less that 2byte DIE!
 		if ($img['name'] == '' || $img['size'] <= 2) {
-			echo '{"status": "0", "data": "' . $lang['414'] . '"}';
-			exit();
+			die('{"status": "0", "data": "' . $lang['414'] . '"}');
 		}
+
+		//Check the image size, if it is larger than 2MB DIE!
 		if ($img['size'] > 2097152) {
-			echo '{"status": "0", "data": "' . $lang['415'] . '"}';
-			exit();
+			die('{"status": "0", "data": "' . $lang['415'] . '"}');
 		}
 
 
@@ -57,10 +60,9 @@
 		$url = $pms['data']['link'];
 
 		if ($url != "") {
-			echo '{"status": "1", "url": "' . $url . '", "data": "' . $lang['416'] . '"}';
+			exit('{"status": "1", "url": "' . $url . '", "data": "' . $lang['416'] . '", "callback_function": "uploadsuccess"}');
 		} else {
-			echo '{"status": "0", "data": "' . $lang['417'] . $pms['data']['error'] . '"}';
-			exit();
+			die('{"status": "0", "data": "' . $lang['417'] . $pms['data']['error'] . '"}');
 		}
 
 	}

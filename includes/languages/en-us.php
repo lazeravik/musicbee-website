@@ -18,23 +18,21 @@ $lang = array();
 
 $lang['mb'] = 'MusicBee';
 
+
+
+
+
 $lang['AP_TITLE'] = 'Control MusicBee Website infos all in one place';
-
-$lang['IP_TITLE'] = 'MusicBee - Music Manager and Player';
-$lang['IP_DESCRIPTION'] = 'The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, on portable devices, and on the web';
 $lang['AP_NO_RECORD'] = 'We can\'t find anything to show! <i class="fa fa-frown-o"></i>';
-$lang['AP_SR_DISABLED'] = '<i class="fa fa-frown-o"></i> Stable Release download is now disabled for users';
-$lang['AP_SR_ENABLED'] = '<i class="fa fa-check"></i> Stable Release download is now enabled for users';
-$lang['AP_SR_RECORD_EXIST'] = '<i class="fa fa-bomb"></i> This version already exists! Change/Update the version info';
-$lang['AP_BR_DISABLED'] = '<i class="fa fa-frown-o"></i> Beta Release download is now disabled for users';
-$lang['AP_BR_ENABLED'] = '<i class="fa fa-check"></i> Beta Release download is now enabled for users';
-
-$lang['AP_SR_SAVED_SUCCESS'] = '<i class="fa fa-check"></i> Stable release data updated and added to archive successfully';
-$lang['AP_BR_SAVED_SUCCESS'] = '<i class="fa fa-check"></i> Beta release data updated successfully';
-
+$lang['AP_SR_DISABLED'] = 'Stable Release download is now disabled for users';
+$lang['AP_SR_ENABLED'] = 'Stable Release download is now enabled for users';
+$lang['AP_SR_RECORD_EXIST'] = 'This version already exists! Change/Update the version info';
+$lang['AP_BR_DISABLED'] = 'Beta Release download is now disabled for users';
+$lang['AP_BR_ENABLED'] = 'Beta Release download is now enabled for users';
+$lang['AP_SR_SAVED_SUCCESS'] = 'Stable release data updated and added to archive successfully';
+$lang['AP_BR_SAVED_SUCCESS'] = 'Beta release data updated successfully';
 $lang['AP_HEADER_TITLE'] = 'Website Control Center';
 $lang['AP_HEADER_DESC'] = 'Have a new MusicBee version? or beta release! maybe a patch, update any MusicBee site releated info here, everything will auto update';
-$lang['AD_NO_USER'] = 'We can\'t seem to find the user';
 $lang['AP_RECORD_DELETED'] = 'Deleted!';
 
 $lang['LOGIN_NEED'] = '<b>ERROR:</b> You must login first!';
@@ -94,13 +92,16 @@ $lang['addon_status_3'] = 'Rejected';
 $lang['addon_status_4'] = 'Deleted';
 $lang['addon_status_5'] = 'Unknown';
 
+/* Addon status icons */
 $lang['addon_status_icon_1'] = '<i class="fa fa-history"></i>';
 $lang['addon_status_icon_2'] = '<i class="fa fa-check-circle"></i>';
 $lang['addon_status_icon_3'] = '<i class="fa fa-thumbs-down"></i>';
 $lang['addon_status_icon_4'] = '<i class="fa fa-trash"></i>';
 $lang['addon_status_icon_5'] = '<i class="fa fa-frown-o"></i>';
 
-/* Index.php lang */
+/* Index.php/Landing page or the Home page lang */
+$lang['home_title'] = 'MusicBee - The Ultimate Music Manager and Player';
+$lang['home_desc'] = 'The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, on portable devices, and on the web';
 $lang['home_1'] = 'MusicBee';
 $lang['home_2'] = 'The Ultimate Music Manager and Player';
 $lang['home_3'] = 'MusicBee makes it easy to manage, find, and play music files on your computer. MusicBee also supports podcasts and web radio stations and Soundcloud integration';
@@ -142,6 +143,9 @@ $lang['home_38'] = "";
 $lang['home_39'] = "";
 $lang['home_40'] = "";
 
+
+
+
 /*footer*/
 $lang['footer_179'] = 'Get the latest MusicBee';
 $lang['footer_180'] = 'Get';
@@ -177,7 +181,12 @@ $lang['dashboard_infobar_desc'] = "Dashboard is your control center for managing
 $lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
 $lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
 $lang['dashboard_menu_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit add-on';
-//dashboard > overview
+$lang['dashboard_menu_4'] = 'Moderate';
+$lang['dashboard_menu_5'] = 'Downloads & Releases';
+$lang['dashboard_menu_6'] = 'Website Setting';
+$lang['dashboard_menu_7'] = '';
+
+		//dashboard > overview
 $lang['dashboard_0'] = 'Add-on Submitted';
 $lang['dashboard_1'] = 'Likes Received';
 $lang['dashboard_2'] = 'Needs Approval';
@@ -195,7 +204,7 @@ $lang['dashboard_12'] = '<i class="fa fa-pencil"></i>';
 $lang['dashboard_13'] = 'Search your submitted add-ons';
 
 
-		//dashboard > table headers
+//dashboard > table headers
 $lang['dashboard_record_th_1'] = 'Name';
 $lang['dashboard_record_th_2'] = 'Category';
 $lang['dashboard_record_th_3'] = 'Member';
@@ -316,7 +325,14 @@ $lang['mod_3'] = 'Waiting for approval';
 $lang['mod_4'] = 'Overall add-on submitted';
 $lang['mod_5'] = 'All Rejected add-ons';
 $lang['mod_6'] = 'Total soft deleted add-ons';
-
+$lang['mod_7'] = 'All add-on statistic';
+$lang['mod_8'] = 'Add-on publishers & users';
+$lang['mod_9'] = 'Total registered User';
+$lang['mod_10'] = 'Total add-on publishers';
+$lang['mod_11'] = 'Actions';
+$lang['mod_12'] = 'Undelete add-ons';
+$lang['mod_13'] = 'All unapproved add-ons';
+$lang['mod_14'] = 'All rejected add-ons';
 
 
 
@@ -357,9 +373,33 @@ $lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site
 $lang['dashboard_admin_button_1'] = 'Save';
 
 
+/**
+ * Dashboard > admin > musicbee release
+ */
+
+$lang['mbr_h_1'] = 'Stable Release';
+$lang['mbr_h_2'] = 'Beta Release';
+
+$lang['mbr_th_1'] = 'Appname';
+$lang['mbr_th_2'] = 'Version';
+$lang['mbr_th_3'] = 'Released on';
+$lang['mbr_th_4'] = 'Supported OS';
+$lang['mbr_th_5'] = 'Release Note';
+$lang['mbr_th_6'] = 'Click here to view ->';
+$lang['mbr_th_7'] = 'Message for Beta users';
+
+$lang['mbr_btn_1'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; New Stable Release';
+$lang['mbr_btn_2'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable Stable Release';
+$lang['mbr_btn_5'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable Stable Release';
+
+$lang['mbr_btn_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; New Beta Release';
+$lang['mbr_btn_4'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable Beta Release';
+$lang['mbr_btn_6'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable Beta Release';
 
 
-/*Addons download/search page */
+/**
+ * Addons download/search page
+ */
 $lang['addon_license_1'] = 'Unless mentioned by the Author, all sdd-ons and Screenshots are licensed under';
 
 $lang['addon_11'] = 'Category';
@@ -425,6 +465,94 @@ $lang['releasenote_infobar_title'] = 'Release Notes';
 $lang['releasenote_infobar_desc'] = 'See the changes made throughout MusicBee\'s journey';
 
 $lang['releasenote_infobar_1'] = 'Jump to release version';
+$lang['releasenote_1'] = 'Version';
+$lang['releasenote_2'] = 'Released on';
+$lang['releasenote_3'] = 'For';
+$lang['releasenote_4'] = 'Current Release';
+$lang['releasenote_5'] = 'Major Release';
+$lang['releasenote_6'] = 'No Release Notes/Change Logs are provided for this version.&#xa;This is most likely a minor version and does not contain major changes';
+
+
+/**
+ * Redirect template
+ */
+$lang['redirect_title'] = 'Redirect';
+$lang['redirect_1'] = 'Please Wait! ';
+$lang['redirect_2'] = 'You will be redirected to the download page soon.';
+$lang['redirect_3'] = 'You can';
+$lang['redirect_4'] = 'Click here to continue';
+$lang['redirect_5'] = 'URL Parameter is incorrect';
+
+
+/**
+ * BUG Template
+ */
+$lang['bug_title'] = 'Bug Report for MusicBee Application and Website';
+$lang['bug_desc'] = 'Report MusicBee related bugs and issues or report website issues';
+
+$lang['bug_1'] = 'Report a MusicBee Bug!';
+$lang['bug_2'] = 'Please read carefully before reporting any bugs!';
+
+$lang['bug_3'] = <<<EOT
+<li><p>Make sure you <b>ALWAYS have the latest MusicBee version!</b> Get the latest version on the download page, or get the Beta to see if the problem persists.</p></li>
+<li><p>Provide detailed steps for reproducing the issue! <br/>If possible provide a GIF showing the steps.</p></li>
+<li><p>Provide the error log file. (<b>Help > Support > View Error Log</b>)</p></li>
+EOT;
+
+$lang['bug_4'] = 'If you feel like ready, go ahead and create a new post regarding the Issue. You will need a forum account.';
+$lang['bug_button_1'] = 'Create a new Bug request &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
+
+
+
+$lang['bug_5'] = 'Website related Bugs!';
+$lang['bug_6'] = 'Found a website related bug? security issue or styling issue?';
+
+$lang['bug_7'] = <<<EOT
+<li><p>For critical security related issue, Go to the link below and post the issue, <b>DO NOT DISCLOSE THE PROCEDURE TO RECREATE THE ISSUE!</b></p></li>
+<li><p>For styling issue post it in the link below.</p></li>
+<li><p>Found any weird behaviour? or have a new idea or suggestion? Post in the link below!</p></li>
+EOT;
+
+$lang['bug_8'] = 'Go ahead and post bugs in the discussion thread. You will need a forum account.';
+$lang['bug_9'] = 'Go to website discussion thread &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
+
+
+
+
+
+/**
+ * PRESS Kit Template
+ */
+$lang['press_title'] = 'Press Materials for MusicBee';
+$lang['press_desc'] = 'Get MusicBee press kit. Contains high quality MusicBee logo, screenshots and posters.';
+
+$lang['press_1'] = 'Press Materials for MusicBee';
+$lang['press_2'] = 'Get MusicBee press kit. Contains high quality MusicBee logo and screenshots';
+
+$lang['press_3'] = <<<EOT
+<p>
+MusicBee is The Ultimate Music Manager and Player. MusicBee packs with a comprehensive set of features to make your music experience better. </p>
+<p>
+It is one of the most lightweight player, uses about 25-70 MB ram with skins and add-ons, and packs all of these under 10 MB!
+</p>
+<p>
+MusicBee has native support for Groove Music(formerly Xbox Music). You can stream directly from MusicBee, add to your existing playlist or get song recommendation from vast catalog of Groove Music.
+</p>
+<p>
+Sync your music collection with devices you use. MusicBee supports playlist and podcast syncing, even supports audio books with 2 way syncing.
+You can convert your music files to mp3, ogg, FLAC, wma and others or convert them on the fly, if your device does not support certain format.
+</p>
+<p>
+Change the appearance of MusicBee by choosing from the included skins or download more from our Add-on section.
+Skins are a great way to personalize MusicBee to your liking.</p>
+<p>
+MusicBee is created and maintained by Steven Mayall.
+</p>
+EOT;
+
+$lang['press_5'] = 'A little bit about MusicBee!';
+$lang['press_4'] = 'You will be redirected to the download provider!';
+$lang['press_button_1'] = 'Download MusicBee presskit &nbsp;&nbsp;<i class="fa fa-download"></i>';
 
 
 
@@ -433,7 +561,13 @@ $lang['releasenote_infobar_1'] = 'Jump to release version';
 
 
 
-/************************************************
+
+
+
+
+
+
+		/************************************************
  *****
  *****    imgur upload
  *****

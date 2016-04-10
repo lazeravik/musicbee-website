@@ -38,7 +38,7 @@ if (isset($_GET['view'])) :
 				<p>Released on <?php echo $infoArray[0]['release_date']; ?></p>
 			<?php endif;?>
 		</div>
-		<form action="../includes/adminpanel.tasks.php" method="post" data-autosubmit>
+		<form action="../includes/admin.tasks.php" method="post" data-autosubmit>
 			<ul class="form">
 				<li>
 					<label for="appname"><p>App Name</p>
@@ -206,7 +206,7 @@ if (isset($_GET['view'])) :
 					<?php endif; ?>
 					notificationCallback(data);
 				}).fail(function(jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">"+textStatus+"</b> - "+errorThrown, "error", "red_color");
+					showNotification("<b style=\"text-transform: uppercase;\">"+textStatus+"</b> - "+errorThrown, "red_color");
 				}).always(function() {
 					$('#loading_icon').hide();
 					$('button').removeAttr('disabled');

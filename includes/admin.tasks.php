@@ -31,9 +31,9 @@
 				//since the download is enabled we want to disable it.
 				if (setAvailablity(getAvavilability($id_version), $id_version)) {
 					if (getAvavilability($id_version) == 1)
-						echo '{"status": "1", "data": "' . $lang['AP_SR_ENABLED'] . '"}';
+						echo '{"status": "1", "data": "' . $lang['AP_SR_ENABLED'] . '", "callback_function": "reload_view"}';
 					else
-						echo '{"status": "1", "data": "' . $lang['AP_SR_DISABLED'] . '"}';
+						echo '{"status": "2", "data": "' . $lang['AP_SR_DISABLED'] . '", "callback_function": "reload_view"}';
 				} elseif (!empty($endMsg)) {
 					echo '{"status": "0", "data": "' . $endMsg . '"}';
 				}
@@ -44,9 +44,9 @@
 				//since the download is enabled we want to disable it.
 				if (setAvailablity(getAvavilability($id_version), $id_version)) {
 					if (getAvavilability($id_version) == 1)
-						echo '{"status": "1", "data": "' . $lang['AP_BR_ENABLED'] . '"}';
+						echo '{"status": "1", "data": "' . $lang['AP_BR_ENABLED'] . '", "callback_function": "reload_view"}';
 					else
-						echo '{"status": "0", "data": "' . $lang['AP_BR_DISABLED'] . '"}';
+						echo '{"status": "2", "data": "' . $lang['AP_BR_DISABLED'] . '", "callback_function": "reload_view"}';
 				} elseif (!empty($endMsg)) {
 					echo '{"status": "0", "data": "' . $endMsg . '"}';
 				}

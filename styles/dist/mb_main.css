@@ -654,6 +654,10 @@ a:active, a:hover {
   background: #4caf50;
 }
 
+.notify.yellow_color {
+  background: #ff9800;
+}
+
 .notify.red_color {
   background: #e53935;
 }
@@ -1236,6 +1240,10 @@ select {
   box-shadow: none;
 }
 
+.hero_buttons .btn.btn_wireframe {
+  margin: 15px 10px 5px 0px;
+}
+
 .like_btn {
   padding-right: 0px;
 }
@@ -1294,7 +1302,7 @@ h4 {
   position: relative;
   margin: 0 auto;
   z-index: 20;
-  transition: all 200ms linear 40ms;
+  transition: background cubic-bezier(0.31, 0.81, 0.85, 0.71) 150ms, box-shadow ease-out 10ms;
 }
 
 .mainmenu .menu_wrapper {
@@ -2017,6 +2025,12 @@ input.cmn-toggle-round-flat:checked + label:after {
   font-size: 12px;
 }
 
+@media screen and (max-width: 800px) {
+  .mb_landing .sub_content .hero_text_top {
+    width: 100%;
+  }
+}
+
 .mb_landing .sub_content .hero_img_top {
   position: relative;
   float: left;
@@ -2032,10 +2046,23 @@ input.cmn-toggle-round-flat:checked + label:after {
   top: -10px;
 }
 
+@media screen and (max-width: 800px) {
+  .mb_landing .sub_content .hero_img_top {
+    display: none;
+  }
+}
+
 .mb_landing .sub_content::after {
   content: "";
   clear: both;
   display: table;
+}
+
+@media screen and (max-width: 1200px) {
+  .mb_landing .sub_content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .mb_landing.alternate_landing_row_bg {
@@ -2054,6 +2081,13 @@ input.cmn-toggle-round-flat:checked + label:after {
   float: left;
 }
 
+@media screen and (max-width: 800px) {
+  .mb_landing.align_right .hero_text_top {
+    float: none;
+    text-align: center;
+  }
+}
+
 .mb_landing.align_left .hero_img_wrapper {
   right: 50px;
 }
@@ -2062,10 +2096,21 @@ input.cmn-toggle-round-flat:checked + label:after {
   float: right;
 }
 
+@media screen and (max-width: 800px) {
+  .mb_landing.align_left .hero_text_top {
+    float: none;
+    text-align: center;
+  }
+}
+
 .mb_landing.align_center .hero_img_top {
   width: inherit;
   text-align: center;
   float: none;
+}
+
+.mb_landing.align_center .hero_img_top img {
+  max-width: 100%;
 }
 
 .mb_landing.align_center .hero_text_top {
@@ -2081,8 +2126,16 @@ input.cmn-toggle-round-flat:checked + label:after {
   padding: 0px 0px 50px;
 }
 
+@media screen and (max-width: 1200px) {
+  .mb_landing .sub_content_bottom .sub_content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 .mb_intro_top {
   background: #15327b url("../../img/bg_teaser.svg") fixed center center;
+  background-size: cover;
 }
 
 .mb_intro_top .overlay {
@@ -2093,8 +2146,15 @@ input.cmn-toggle-round-flat:checked + label:after {
   text-align: left;
 }
 
+@media screen and (max-width: 800px) {
+  .mb_intro_top .overlay .sub_content {
+    text-align: center;
+  }
+}
+
 .mb_quality_top {
   background: url("../../../img/headphone.jpg") 50% 0 fixed, #0076db;
+  background-size: cover;
 }
 
 .mb_quality_top .overlay {
@@ -2103,6 +2163,17 @@ input.cmn-toggle-round-flat:checked + label:after {
 
 .mb_quality_top .overlay .sub_content {
   padding: 50px 10px 50px;
+}
+
+.mb_quality_top .overlay .sub_content.hero_buttons {
+  padding: 0px 0px 50px;
+}
+
+@media screen and (max-width: 1200px) {
+  .mb_quality_top .overlay .sub_content.hero_buttons {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .mb_quality_top .overlay .sub_content .feature_box {
@@ -2134,6 +2205,24 @@ input.cmn-toggle-round-flat:checked + label:after {
   margin: 50px 10px;
   box-sizing: border-box;
   border-radius: 3px;
+}
+
+@media screen and (max-width: 800px) {
+  .mb_quality_top .overlay .sub_content .feature_box li div {
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mb_quality_top .overlay .sub_content .feature_box li {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mb_quality_top .overlay .sub_content .feature_box li {
+    width: 100%;
+  }
 }
 
 .mb_more_top {
@@ -2571,6 +2660,7 @@ select#release_note_jump option {
   margin: 4px;
   font-style: italic;
   border-radius: 2px;
+  display: inline-block;
 }
 
 .addon_similar .addon_similar_wrap.tags a:hover {
@@ -2786,8 +2876,7 @@ select#release_note_jump option {
 
 .addon_list_box {
   margin-bottom: 20px;
-  padding: 0px;
-  padding-bottom: 20px;
+  padding: 0px 0px 20px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -3171,6 +3260,25 @@ select#release_note_jump option {
   }
 }
 
+/*
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from phred and other community memebers.
+ */
+.box_content ul.list {
+  padding: 10px 40px;
+  margin: 0px;
+  color: #555;
+}
+
+.box_content ul.list li {
+  list-style: circle;
+}
+
 /*================================================================================================================*\\
     Codes highlighting
 \*================================================================================================================*/
@@ -3290,7 +3398,7 @@ select#release_note_jump option {
 }
 
 .markdownView p {
-  font-size: 14px !important;
+  font-size: 13px !important;
   color: inherit !important;
   line-height: 21px !important;
   margin: 2px 0px !important;
@@ -3298,12 +3406,12 @@ select#release_note_jump option {
 
 .markdownView h1 {
   font-size: 30px !important;
-  margin: 15px 0px 10px 0px !important;
+  margin: 25px 0px 10px !important;
 }
 
 .markdownView h2 {
   font-size: 25px !important;
-  margin: 15px 0px 10px 0px !important;
+  margin: 25px 0px 10px !important;
   box-shadow: none !important;
   padding-left: 0px !important;
   text-transform: none !important;
@@ -3311,12 +3419,12 @@ select#release_note_jump option {
 
 .markdownView h3 {
   font-size: 20px !important;
-  margin: 15px 0px 10px 0px !important;
+  margin: 25px 0px 10px !important;
 }
 
 .markdownView h4 {
   font-size: 16px !important;
-  margin: 15px 0px 10px 0px !important;
+  margin: 25px 0px 10px 0px !important;
 }
 
 .markdownView hr {
@@ -3368,24 +3476,38 @@ select#release_note_jump option {
   border-radius: 3px !important;
   color: inherit !important;
   border: inherit !important;
+  display: inline-block !important;
+  margin: 2px !important;
 }
 
 .markdownView pre {
   color: inherit !important;
   background: #282b2e !important;
-  padding: 70px 20px 20px 20px !important;
+  padding: 20px !important;
   overflow: auto !important;
   position: relative !important;
+  white-space: pre-line;
 }
 
 .markdownView pre code {
   color: inherit !important;
   box-shadow: none !important;
   border-radius: 0px !important;
-  background: inherit  !important;
+  background: inherit !important;
+  margin-top: 0px !important;
+  white-space: pre;
 }
 
-.markdownView pre code::before {
+.markdownView pre code[lang-rel] {
+  color: inherit !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+  background: inherit  !important;
+  margin-top: 35px !important;
+  white-space: pre;
+}
+
+.markdownView pre code[lang-rel]::before {
   content: attr(lang-rel);
   text-transform: uppercase;
   display: block;
@@ -3399,6 +3521,15 @@ select#release_note_jump option {
   top: 0px;
   right: 0px;
   left: 0px;
+}
+
+.markdownView pre code[lang-rel][lang-rel=nohighlight], .markdownView pre code[lang-rel][lang-rel=no-highlight] {
+  margin-top: 0px !important;
+  white-space: pre-line;
+}
+
+.markdownView pre code[lang-rel][lang-rel=nohighlight]::before, .markdownView pre code[lang-rel][lang-rel=no-highlight]::before {
+  content: none;
 }
 
 .markdownView table {

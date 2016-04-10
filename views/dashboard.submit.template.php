@@ -543,7 +543,7 @@ endif; ?>
 				hideNotification();
 			}
 		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 		}).always(function () {
 		});
 	}
@@ -656,7 +656,7 @@ endif; ?>
 				}).done(function (data) {
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 				}).always(function () {
 					$('#loading_icon').hide();
 					hideOverlay();//show overlay while loading

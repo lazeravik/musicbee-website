@@ -23,7 +23,7 @@ $info_bar_max_width : 1200px;
 	position   : $menu_pos;
 	margin     : 0 auto;
 	z-index    : 20;
-	transition : all 200ms linear 40ms;
+	transition : background cubic-bezier(0.31, 0.81, 0.85, 0.71) 150ms, box-shadow ease-out 10ms;
 
 	.menu_wrapper {
 		max-width   : $menu_max_width;

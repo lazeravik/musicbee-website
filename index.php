@@ -14,8 +14,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo $lang['IP_TITLE']; ?></title>
-    <meta name="description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
+    <title><?php echo $lang['home_title']; ?></title>
+    <meta name="description" content="<?php echo $lang['home_desc']; ?>">
         <!-- keyword meta tag is obsolete, google does not use it, but some
         search engine still use it, so for legacy support it is included -->
         <meta name="keywords" content="musicbee, music, player, ultimate, best, customizable, skin, free, plugin">
@@ -26,11 +26,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         <!--Social network tags for facebook and twitter -->
         <meta property="og:title" content="">
         <meta property="og:image" content="<?php echo $link['url']; ?>img/mb_big.png">
-        <meta property="og:description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
+        <meta property="og:description" content="<?php echo $lang['home_desc']; ?>">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@MusicBeePlayer"> 
         <meta name="twitter:title" content="MusicBee - Music Manager and Player">
-        <meta name="twitter:description" content="<?php echo $lang['IP_DESCRIPTION']; ?>">
+        <meta name="twitter:description" content="<?php echo $lang['home_desc']; ?>">
     </head>
     <body>
         <div id="indexBackground">
@@ -55,7 +55,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                         </div>
                                         <div class="hero_img_top">
                                             <div class="hero_img_wrapper hero_img_topmost_wrap">
-                                                <img src="img/hero-img-top-min.png">
+                                                <img src="<?php echo $link['url']; ?>img/hero-img-top-min.png">
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                                   <h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>  
                               </div>
                               <div class="hero_img_top">
-                                  <img src="./img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
+                                  <img src="<?php echo $link['url']; ?>img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
                               </div>
                           </div>
                       </div>
@@ -149,7 +149,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             </div>
                             <div class="hero_img_top">
                                 <div class="hero_img_wrapper">
-                                    <img src="img/hero-img-skin-min.png">
+                                    <img src="<?php echo $link['url']; ?>img/hero-img-skin-min.png">
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             </div>
                             <div class="hero_img_top">
                                 <div class="hero_img_wrapper">
-                                    <img src="img/hero-img-sync-min.png">
+                                    <img src="<?php echo $link['url']; ?>img/hero-img-sync-min.png">
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             </div>
                             <div class="hero_img_top">
                                 <div class="hero_img_wrapper">
-                                    <img src="img/hero-img-groove-min.png">
+                                    <img src="<?php echo $link['url']; ?>img/hero-img-groove-min.png">
                                 </div>
                             </div>
                         </div>
@@ -198,7 +198,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             </div>
                             <div class="hero_img_top">
                                 <div class="hero_img_wrapper">
-                                    <img src="img/mb_tag_feature.jpg">
+                                    <img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
                                 </div>
                             </div>
                         </div>
@@ -214,7 +214,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
                             </div>
                             <div class="hero_img_top">
                                 <div class="hero_img_wrapper">
-                                    <img src="img/mb_tag_feature.jpg">
+                                    <img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
                                 </div>
                             </div>
                         </div>
@@ -258,8 +258,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 		var text_wrapper = {
 			origin   : "bottom",
 			distance : "2vw",
-			duration : 900,
-			delay    : 600,
+			duration : 500,
+			delay    : 300,
 			scale    : 1
 		};
 
@@ -294,7 +294,26 @@ include $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
         .reveal('img', img)
         .reveal('.hero_img_top img', hero_img);
 
-        $("#main_menu").sticky({topSpacing: 0});
+
+        $primary_nav_break = 801;
+        var $nav_bar = $("#main_menu");
+
+        function primary_nav_sticky() {
+            if (window.innerWidth < $primary_nav_break) {
+                $nav_bar.unstick();
+            } else {
+                $nav_bar.unstick();
+                $nav_bar.sticky({topSpacing: 0});
+            }
+        }
+
+        $(window).resize(function(e) {
+            primary_nav_sticky();
+        });
+
+        $(document).ready(function(){
+            primary_nav_sticky();
+        });
 
     </script>
 </body>

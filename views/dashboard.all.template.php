@@ -253,7 +253,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			var sourcedata = $('#addon_records > *', $(data));
 			$('#addon_records').html(sourcedata).fadeIn();
 		}).fail(function (jqXHR, textStatus, errorThrown) {
-			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 		}).always(function () {
 			$('#loading_icon').hide(); //show loading icon'
 			hideOverlay(); //show overlay while loading
@@ -302,7 +302,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 				}).done(function (data) {
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 				}).always(function () {
 					$('#loading_icon').hide();
 				});

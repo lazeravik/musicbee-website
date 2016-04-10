@@ -141,6 +141,14 @@
   }
 }
 
+.hero_buttons {
+	.btn {
+		&.btn_wireframe {
+			margin : 15px 10px 5px 0px;
+		}
+	}
+}
+
 .like_btn {
   padding-right : 0px;
 

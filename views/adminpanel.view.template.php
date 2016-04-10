@@ -11,7 +11,7 @@
 
 	$admin_only = true; //only for admins
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-	require_once $link['root'] . 'includes/adminpanel.tasks.php';
+	require_once $link['root'] . 'includes/admin.tasks.php';
 	$safeGet = (isset($_GET['view'])) ? $_GET['view'] : "";
 	if (($safeGet) == "all") : ?>
 		<div class="admin_margin_wrapper">
@@ -62,7 +62,7 @@
 							echo "<button id=\"" . $record['ID_ALLVERSIONS'] . "_remove\" class=\"entry_remove\" title=\"You can not delete the current version!\" disabled><i class=\"fa fa-trash\"></i></button>";
 						} else {
 							echo "
-									<form id=\"" . $record['ID_ALLVERSIONS'] . "\" action=\"../includes/adminpanel.tasks.php\" method=\"post\" data-autosubmit>
+									<form id=\"" . $record['ID_ALLVERSIONS'] . "\" action=\"../includes/admin.tasks.php\" method=\"post\" data-autosubmit>
 										<button id=\"" . $record['ID_ALLVERSIONS'] . "_remove\" class=\"entry_remove\" title=\"Remove this Version Permanently\" onclick=\"modify();\" ><i class=\"fa fa-trash\"></i></button>
 										<input type=\"hidden\" name=\"record_id\" value=\"" . $record['ID_ALLVERSIONS'] . "\" />
 										<input type=\"hidden\" name=\"modify_type\" value=\"delete\" />
@@ -108,7 +108,7 @@
 							hideNotification();
 						}
 					}).fail(function (jqXHR, textStatus, errorThrown) {
-						showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+						showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 					}).always(function () {
 					});
 				}
@@ -132,7 +132,7 @@
 								notificationCallback(data);
 								removeRecordTbl(form.attr('id'));
 							}).fail(function (jqXHR, textStatus, errorThrown) {
-								showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+								showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 							}).always(function () {
 								$('#loading_icon').hide();
 							});
@@ -313,7 +313,7 @@
 				var disableLabel = "<a id=\"" + id + "\" data-disable=\"true\" class=\"btn btn_red\" onclick=\"changeDownload(this.id);\">Disable Downloads</a>";
 				var enableLabel = "<a id=\"" + id + "\" data-disable=\"false\" class=\"btn btn_green\" onclick=\"changeDownload(this.id);\">Enable Downloads</a>";
 				$.ajax({
-					url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/adminpanel.tasks.php',
+					url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/includes/admin.tasks.php',
 					data: {"change_id": id},
 					cache: false,
 					type: "POST",
@@ -325,7 +325,7 @@
 					}
 					notificationCallback(data);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "error", "red_color");
+					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
 				}).always(function () {
 					$('#loading_icon').hide('fast');
 					showHideOverlay();

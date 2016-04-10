@@ -48,6 +48,10 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
       p.disclaimer {
         font-size : 12px;
       }
+
+      @media screen and(max-width: $break-small){
+        width: 100%;
+      }
     }
 
     .hero_img_top {
@@ -63,10 +67,19 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
           top : -10px
         }
       }
+
+      @media screen and(max-width: $break-small){
+        display: none;
+      }
     }
 
     &::after {
       @include clearfix;
+    }
+
+    @media screen and(max-width: $break-large){
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 
@@ -84,6 +97,11 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
     }
     .hero_text_top {
       float : left;
+
+      @media screen and(max-width: $break-small){
+        float : none;
+        text-align: center;
+      }
     }
   }
 
@@ -93,6 +111,10 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
     }
     .hero_text_top {
       float : right;
+      @media screen and(max-width: $break-small){
+        float : none;
+        text-align: center;
+      }
     }
   }
 
@@ -101,6 +123,10 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
       width      : inherit;
       text-align : center;
       float      : none;
+
+      img{
+        max-width: 100%;
+      }
 
       .hero_img_wrapper {
       }
@@ -116,30 +142,49 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
 
     .sub_content {
       padding : 0px 0px 50px;
+
+      @media screen and(max-width: $break-large){
+        padding-left: 20px;
+        padding-right: 20px;
+      }
     }
   }
 }
 
 .mb_intro_top {
   background : #15327b url($mb_top_bg_wireframe) fixed center center;
+  background-size: cover;
 
   .overlay {
     background : linear-gradient(135deg, rgba(42, 62, 78, 0.95), rgba(39, 68, 90, 0.74), rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58));
 
     .sub_content {
       text-align : left;
+      @media screen and(max-width: $break-small){
+        text-align : center;
+      }
     }
   }
 }
 
 .mb_quality_top {
   background : url($mb_quality_bg) 50% 0 fixed, #0076db;
+  background-size: cover;
 
   .overlay {
     background : linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
 
     .sub_content {
       padding : 50px 10px 50px;
+
+      &.hero_buttons {
+        padding: 0px 0px 50px;
+
+        @media screen and(max-width: $break-large){
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
 
       .feature_box {
         list-style : none;
@@ -168,6 +213,18 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
             margin        : 50px 10px;
             box-sizing    : border-box;
             border-radius : 3px;
+
+            @media screen and(max-width: $break-small){
+              margin        : 10px;
+            }
+          }
+
+          @media screen and(max-width: $break-small){
+            width: 50%;
+          }
+
+          @media screen and(max-width: $break-mini){
+            width: 100%;
           }
         }
       }

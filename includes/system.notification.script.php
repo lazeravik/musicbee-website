@@ -1,23 +1,12 @@
 <!--suppress JSUnresolvedVariable -->
 <script type="text/javascript">
-	function showNotification(msg, type, color, invalid) {
+	function showNotification(msg, color, invalid) {
 		invalid = typeof invalid !== 'undefined' ? invalid : false;
-		var msgType; //message type will show icon
 
 		//hide any previous notification
 		hideNotification();
 
-		if (type == "error") {
-			msgType = "err_msg";
-		}
-		else if (type == "success") {
-			msgType = "scs_msg";
-		}
-		else {
-			msgType = "nrml_msg";
-		}
-
-		$('body').append("<div class=\"notify fadeInRight animated " + color + " " + msgType + " \" id=\"notification\" ><div class=\"notify_wrap_left\">" + msg + "</div><button class=\"closeNotify\" onclick=\"$('#notification').remove();\"><i class=\"fa fa-times\"></i> </button></div>");
+		$('body').append("<div class=\"notify fadeInRight animated " + color + " \" id=\"notification\" ><div class=\"notify_wrap_left\">" + msg + "</div><button class=\"closeNotify\" onclick=\"$('#notification').remove();\"><i class=\"fa fa-times\"></i> </button></div>");
 
 		//If json data is invalid do not auto hide the notification
 		if (!invalid) {
@@ -38,12 +27,17 @@
 	//This function executes when an ajax call is finished or failed.
 	//accepts json as a parameter, and provide a function callback provided via json object
 	function notificationCallback(data) {
+		//Check if the json is valid
 		var obj = validateJSON(data);
+
 		if (obj != false) {
-			if (obj.status == 0) {
-				showNotification(obj.data, "error", "red_color");
-			} else if (obj.status == 1) {
-				showNotification(obj.data, "success", "green_color");
+			//Check the status value and assaign a color for the notification box
+			if (obj.status == 0 || obj.status == "error") {
+				showNotification(obj.data, "red_color");
+			} else if (obj.status == 1 || obj.status == "success") {
+				showNotification(obj.data, "green_color");
+			} else if (obj.status == 2 || obj.status == "warning") {
+				showNotification(obj.data, "yellow_color");
 			}
 
 			//If a callback function is provided, we will call this via notificationFunctionCallback(string func_name) method
@@ -52,7 +46,7 @@
 			}
 		} else {
 			console.log("Here is the corrupted response: " + data);
-			showNotification("<?php echo $lang['json_err_invalid']; ?><br/><textarea id=\"correupted_response\" style=\"display:none\">" + data + "</textarea> <button class=\"btn btn_blacknwhite\" onclick=\"copyError('#correupted_response')\"><?php echo $lang['json_err_copy_btn']; ?></button><p id=\"copy_error\" ></p> ", "error", "red_color", true);
+			showNotification("<?php echo $lang['json_err_invalid']; ?><br/><textarea id=\"correupted_response\" style=\"display:none\">" + data + "</textarea> <button class=\"btn btn_blacknwhite\" onclick=\"copyError('#correupted_response')\"><?php echo $lang['json_err_copy_btn']; ?></button><p id=\"copy_error\" ></p> ", "red_color", true);
 		}
 	}
 
@@ -74,12 +68,10 @@
 				return json;
 			}
 		}
-		catch (e) {
-		}
+		catch (e) {}
 
 		return false;
-	}
-	;
+	};
 
 	function copyError(element) {
 		var $temp = $("<input>");
