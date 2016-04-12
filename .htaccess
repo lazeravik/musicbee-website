@@ -9,10 +9,8 @@ RewriteEngine On
 RewriteRule ^includes - [L,NC]
 RewriteRule ^views - [L,NC]
 RewriteRule ^forum - [L,NC]
-RewriteRule ^dokuwiki - [L,NC]
 RewriteRule ^sqlbuddy - [L,NC] #only for dev purpose
 RewriteRule ^installer - [L,NC] #only for dev purpose
-RewriteRule ^mediafire-php-open-sdk-master - [L,NC] #only for dev purpose
 
 #if the requested file has a .php or .php/ ending then remove it
 RewriteCond %{REQUEST_FILENAME} !-d
