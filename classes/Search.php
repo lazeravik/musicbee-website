@@ -132,7 +132,7 @@ class Search
 				  	ID_AUTHOR,
 				  	membername,
 				  	addon_title,
-				  	addon_type,
+				  	category,
 				  	thumbnail,
 				  	is_beta,
 				  	status,
@@ -148,7 +148,7 @@ class Search
 				  	LEFT JOIN {$db_info['download_stat_tbl']}
 				  		on {$db_info['addon_tbl']}.ID_ADDON = {$db_info['download_stat_tbl']}.ID
 				  WHERE
-				  	addon_type IN ({$cat})
+				  	category IN ({$cat})
 				  	AND
 				  	status IN ({$status})
 				  	";
@@ -158,7 +158,7 @@ class Search
 				  	LEFT JOIN {$db_info['member_tbl']}
 				  		on {$db_info['addon_tbl']}.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
 				  WHERE
-				  	addon_type IN ({$cat})
+				  	category IN ({$cat})
 				  	AND
 				  	status IN ({$status})
 				  	";

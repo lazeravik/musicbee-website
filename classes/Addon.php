@@ -28,7 +28,7 @@ class Addon
 					  {$db_info['addon_tbl']}.addon_title,
 					  {$db_info['addon_tbl']}.addon_version,
 					  {$db_info['addon_tbl']}.supported_mbversion,
-					  {$db_info['addon_tbl']}.addon_type,
+					  {$db_info['addon_tbl']}.category,
 					  {$db_info['addon_tbl']}.publish_date,
 					  {$db_info['addon_tbl']}.update_date,
 					  {$db_info['addon_tbl']}.tags,
@@ -175,7 +175,7 @@ class Addon
 				  	        ID_AUTHOR,
 				  	        membername,
 				  	        addon_title,
-				  	        addon_type,
+				  	        category,
 				  	        thumbnail,
 				  	        is_beta,
 				  	        status,
@@ -241,12 +241,12 @@ class Addon
 	}
 
 	public function getMbVersions($val) {
-		global $connection;
+		global $connection, $db_info;
 		$ver = explode(",", $val); //create an array of supported musicbee versions
 		if(databaseConnection()) {
 			foreach($ver as $versionId) {
 				try {
-					$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." WHERE ID_ALLVERSIONS = :id";
+					$sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :id";
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id', $versionId);
 					$statement->execute();

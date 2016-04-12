@@ -104,7 +104,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<option value="all">All</option>
 							<?php
 							foreach ($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
-								echo "<option value=\"" . Format::Slug ($menu_addon['title']) . "\">" . $menu_addon['title'] . "</option>";
+								echo "<option value=\"" . Format::Slug ($menu_addon['id']) . "\">" . $menu_addon['title'] . "</option>";
 							}
 							?>
 						</select>
@@ -163,7 +163,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 								</a>
 							</td>
 							<td>
-								<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
+								<?php echo Format::UnslugTxt ($mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']); ?>
 							</td>
 							<td class="status">
 								<?php $status_array_each = Validation::getStatus($addon['status']); ?>
@@ -286,30 +286,6 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			this.event.preventDefault(); //stop the actual form submission
 		}
 	}
-
-	(function ($) {
-		$.fn.autosubmit = function () {
-			//noinspection JSUnresolvedFunction
-			this.submit(function (event) {
-				event.preventDefault();
-				event.stopImmediatePropagation(); //This will stop the form submit twice
-				var form = $(this);
-				//noinspection JSUnresolvedFunction
-				$.ajax({
-					type: form.attr('method'),
-					url: form.attr('action'),
-					data: form.serialize()
-				}).done(function (data) {
-					notificationCallback(data);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
-				}).always(function () {
-					$('#loading_icon').hide();
-				});
-			});
-		}
-		return false;
-	})(jQuery)
 
 
 	//Anonymous callback function for removing table row

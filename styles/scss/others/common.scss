@@ -97,11 +97,26 @@ a {
 	}
 
 	&.header {
+		display : flex;
+		align-items: center;
+
 		h3 {
 			display : inline-block;
+			flex-grow: 2;
 		}
-		a,button {
+
+		a,button,form {
 			float : right;
+			margin :0px 0px 0px 5px;
+		}
+
+		button {
+			padding: 5px;
+		}
+
+		&::after{
+			@include clearfix;
+
 		}
 	}
 }
@@ -354,4 +369,8 @@ a {
 	&:hover {
 		border: 2px solid #ff9800;
 	}
+}
+
+.lang_selector {
+	background-color: #fff;
 }

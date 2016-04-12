@@ -114,6 +114,32 @@
 		}
 	}
 
+
+	(function ($) {
+		$.fn.autosubmit = function () {
+			this.submit(function (event) {
+				event.preventDefault();
+				event.stopImmediatePropagation(); //This will stop the form submit twice
+				$('#loading_icon').show(); //show loading icon'
+				showOverlay();
+				var form = $(this);
+				$.ajax({
+					type: form.attr('method'),
+					url: form.attr('action'),
+					data: form.serialize()
+				}).done(function (data) {
+					notificationCallback(data);
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
+				}).always(function () {
+					$('#loading_icon').hide();
+					hideOverlay();
+				});
+			});
+		}
+		return false;
+	})(jQuery)
+
 </script>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/includes/system.notification.script.php'; ?>

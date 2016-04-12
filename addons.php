@@ -234,7 +234,7 @@ function addon_secondery_nav_generator($addon_type) {
 	}
 
 	foreach ($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
-		if (Format::Slug ($addon_type) == Format::Slug ($menu_addon['title']) && empty($searchinput['query'])) {
+		if ($addon_type == $menu_addon['id'] && empty($searchinput['query'])) {
 			$data .= "
 			<li>
 				<a href=\"" . $menu_addon['href'] . " \"  class=\"active_menu_link\">" . $menu_addon['title'] . "</a>
@@ -249,14 +249,16 @@ function addon_secondery_nav_generator($addon_type) {
 	if(!empty($searchinput['query'])){
 		$data .= '<li><a href="" class="active_menu_link">'.$lang['addon_42'].'</a></li>';
 	}
+
+	$placeholder = (array_key_exists($url_params['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$url_params['type']]['title'] : '';
+
 	$data .= '
 </ul>
 <ul class="right">
 	<li>
 		<form method="GET" action="' . $link['addon']['home'] . 's/">
-			<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search small_search" placeholder="'.$lang['addon_42'].Format::UnslugTxt($url_params['type']).'" name="q" value="' . $searchinput['query']  . '"/>
+			<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search small_search" placeholder="'.$lang['addon_42'].' '.$placeholder.'" name="q" value="' . $searchinput['query']  . '"/>
 			<input type="hidden" name="type" value="'.$url_params['type'].'" />
-			<input type="hidden" name="order" value="latest" />
 		</form>
 	</li>
 </ul>';

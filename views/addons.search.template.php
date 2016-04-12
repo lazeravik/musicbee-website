@@ -56,10 +56,9 @@ include($mainmenu);
 		<hr class="line"/>
 		<div class="addon_similar_wrap header_links">
 			<?php echo $lang['addon_53']; ?>
-			<a href="<?php echo $link['addon']['home']; ?>s/?q=Service&type=plugins&order=latest">Services</a>
-			<a href="<?php echo $link['addon']['home']; ?>s/?q=Device&type=plugins&order=latest">Devices</a>
-			<a href="<?php echo $link['addon']['home']; ?>s/?q=Audio&type=plugins&order=latest">Audio</a>
-			<a href="<?php echo $link['addon']['home']; ?>s/?q=&type=plugins&order=latest">General & Misc</a>
+			<a href="<?php echo $link['addon']['home']; ?>s/?q=Service">Services</a>
+			<a href="<?php echo $link['addon']['home']; ?>s/?q=Device">Devices</a>
+			<a href="<?php echo $link['addon']['home']; ?>s/?q=Audio">Audio</a>
 
 		</div>
 		<hr class="line"/>
@@ -92,10 +91,15 @@ include($mainmenu);
 	<div class="addon_similar addon_cat_header">
 		<div class="addon_similar_wrap">
 			<?php
+
 			if(!empty($url_params['q'])) {
-				echo "<h2>".$lang['addon_31']."<i class=\"search_term\">".htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8")."</i>"."<i class=\"search_term\">".$data['type']."</i></h2>";
+				$type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$data['type']]['title'] : $data['type'];
+
+				echo "<h2>".$lang['addon_31']."<i class=\"search_term\">".htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8")."</i>"."<i class=\"search_term\">".$type_blob."</i></h2>";
 			} else {
-				echo "<h2>".$data['type']."</h2>";
+				$type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$data['type']]['title'] : $data['type'];
+
+				echo "<h2>".$type_blob."</h2>";
 				if(isset($mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc'])) {
 					echo "<h4>".$mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc']."</h4>";
 				}
@@ -116,9 +120,7 @@ include($mainmenu);
 include($footer);
 ?>
 
-<script type="text/javascript" src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
-<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
 
 </script>

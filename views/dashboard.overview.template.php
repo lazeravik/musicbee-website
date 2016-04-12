@@ -164,7 +164,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 									   title="View this addon"><?php echo $addon['addon_title']; ?></a>
 								</td>
 								<td>
-									<?php echo Format::UnslugTxt ($addon['addon_type']); ?>
+									<?php echo $mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']; ?>
 								</td>
 								<td>
 									<a href="<?php echo $link['forum']; ?>?action=profile;u=<?php echo $addon['ID_MEMBER']; ?>"
@@ -271,7 +271,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 								   target="_blank"><?php echo $addon['addon_title']; ?></a>
 							</td>
 							<td>
-								<?php echo $addon['addon_type']; ?>
+								<?php echo $mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']; ?>
 							</td>
 							<td>
 								<?php echo Format::number_format_suffix ($addon['likesCount']); ?>
@@ -342,28 +342,6 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 		$('form[data-autosubmit][id=addon_reject]').autosubmit();
 	}
 
-	(function ($) {
-		$.fn.autosubmit = function () {
-			this.submit(function (event) {
-				event.preventDefault();
-				event.stopImmediatePropagation(); //This will stop the form submit twice
-				$('#loading_icon').show(); //show loading icon'
-				var form = $(this);
-				$.ajax({
-					type: form.attr('method'),
-					url: form.attr('action'),
-					data: form.serialize()
-				}).done(function (data) {
-					notificationCallback(data);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
-				}).always(function () {
-					$('#loading_icon').hide();
-				});
-			});
-		}
-		return false;
-	})(jQuery)
 
 	var remove_addon_record = function() {
 		reload_addon_approval_list_overview();

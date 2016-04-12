@@ -10,19 +10,53 @@
  */
 
 $json_response = true;
-$no_guests = true; //kick off the guests
-$mod_only = true;
+$admin_only = true;
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-include $link['root'].'classes/Dashboard.php';
-$dashboard = new Dashboard();
-
 ?>
-<div class="main_content_wrapper col_2">
+<div class="main_content_wrapper col_1_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
-			<div class="show_info warning custom">
+			<div class="show_info custom info_darkgrey">
+				<h3><?php echo $lang['mbr_h_3']; ?></h3>
+			</div>
+			<ul class="link_list">
+				<li>
+					<a href="#mbrelease_all" data-href="mbrelease_all">
+						<?php echo $lang['mbr_btn_20']; ?>
+					</a>
+					<hr class="line"/>
+
+					<a href="#mbrelease_submit/stable" data-href="mbrelease_submit/stable">
+						<?php echo $lang['mbr_btn_1']; ?>
+					</a>
+
+					<a href="#mbrelease_submit/beta" data-href="mbrelease_submit/beta">
+						<?php echo $lang['mbr_btn_3']; ?>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="sub_content_wrapper">
+		<div class="box_content">
+			<div class="show_info custom header">
 				<h3><?php echo $lang['mbr_h_1']; ?></h3>
+				<form id="stable_download_availablity"
+				      action="<?php echo $link['url']; ?>includes/admin.tasks.php"
+				      method="post"
+				      data-autosubmit>
+					<button type="submit" class="btn btn_blacknwhite" onclick="$('form[data-autosubmit][id=stable_download_availablity]').autosubmit();">
+						<?php
+						if($mb['musicbee_download']['stable']['download']['available']) {
+							echo $lang['mbr_btn_2'];
+						} else {
+							echo $lang['mbr_btn_5'];
+						}
+						?>
+					</button>
+					<input type="hidden" name="change_id" value="stable_download_disable"/>
+				</form>
 			</div>
 			<hr class="line"/>
 			<table class="record">
@@ -71,34 +105,23 @@ $dashboard = new Dashboard();
 			</table>
 		</div>
 		<div class="box_content">
-			<ul class="form">
-				<li>
-					<a href="#mbrelease_edit/stable" class="btn btn_blue">
-						<?php echo $lang['mbr_btn_1']; ?>
-					</a>
-					<form id="stable_download_availablity"
-					      action="<?php echo $link['url']; ?>includes/admin.tasks.php"
-					      method="post"
-					      data-autosubmit>
-						<button type="submit" class="btn " onclick="$('form[data-autosubmit][id=stable_download_availablity]').autosubmit();">
-							<?php
-							if($mb['musicbee_download']['stable']['download']['available']) {
-								echo $lang['mbr_btn_2'];
-							} else {
-								echo $lang['mbr_btn_5'];
-							}
-							?>
-						</button>
-						<input type="hidden" name="change_id" value="stable_download_disable" />
-					</form>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="sub_content_wrapper">
-		<div class="box_content">
-			<div class="show_info info_silver custom">
+			<div class="show_info info_silver custom header">
 				<h3><?php echo $lang['mbr_h_2']; ?></h3>
+				<form id="beta_download_availablity"
+				      action="<?php echo $link['url']; ?>includes/admin.tasks.php"
+				      method="post"
+				      data-autosubmit>
+					<button type="submit" class="btn " onclick="$('form[data-autosubmit][id=beta_download_availablity]').autosubmit();">
+						<?php
+						if($mb['musicbee_download']['beta']['download']['available']) {
+							echo $lang['mbr_btn_2'];
+						} else {
+							echo $lang['mbr_btn_5'];
+						}
+						?>
+					</button>
+					<input type="hidden" name="change_id" value="beta_download_disable"/>
+				</form>
 			</div>
 			<hr class="line"/>
 			<table class="record">
@@ -145,61 +168,14 @@ $dashboard = new Dashboard();
 				<p><?php echo $mb['musicbee_download']['beta']['message']; ?></p>
 			</ul>
 		</div>
-		<div class="box_content">
-			<ul class="form">
-				<li>
-					<a href="" class="btn btn_blue">
-						<?php echo $lang['mbr_btn_3']; ?>
-					</a>
-					<form id="beta_download_availablity"
-					      action="<?php echo $link['url']; ?>includes/admin.tasks.php"
-					      method="post"
-					      data-autosubmit>
-						<button type="submit" class="btn " onclick="$('form[data-autosubmit][id=beta_download_availablity]').autosubmit();">
-							<?php
-							if($mb['musicbee_download']['beta']['download']['available']) {
-								echo $lang['mbr_btn_4'];
-							} else {
-								echo $lang['mbr_btn_6'];
-							}
-							?>
-						</button>
-						<input type="hidden" name="change_id" value="beta_download_disable" />
-					</form>
-				</li>
-			</ul>
-		</div>
 	</div>
 </div>
 
 
 <div class="space medium"></div>
 <script>
-	(function ($) {
-		$.fn.autosubmit = function () {
-			//noinspection JSUnresolvedFunction
-			this.submit(function (event) {
-				event.preventDefault();
-				event.stopImmediatePropagation(); //This will stop the form submit twice
-				var form = $(this);
-				//noinspection JSUnresolvedFunction
-				$.ajax({
-					type: form.attr('method'),
-					url: form.attr('action'),
-					data: form.serialize()
-				}).done(function (data) {
-					notificationCallback(data);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
-				}).always(function () {
-					$('#loading_icon').hide();
-				});
-			});
-		}
-		return false;
-	})(jQuery)
 
-	var reload_view = function (){
+	var reload_view = function () {
 		loadUpdatePage((window.location.hash).replace('#', ''));
 	}
 </script>

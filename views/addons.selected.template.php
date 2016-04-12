@@ -47,7 +47,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 		<!-- AddOn page navigation top menu -->
 		<div class="secondery_nav addon_secondery_nav addon_page_nav" id="secondery_nav">
 			<div class="secondery_nav_wrap">
-				<?php echo addon_secondery_nav_generator($addon_data['addon_type']); ?>
+				<?php echo addon_secondery_nav_generator($addon_data['category']); ?>
 			</div>
 		</div>
 		<div id="overlay_bg" class="general_info_color">
@@ -56,7 +56,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 					<h2 class="title">
 						<?php echo $addon_data['addon_title']; ?>
 						<?php if($addon_data['addon_version'] != null): ?>
-							<i class="general_info_addon_version">v<?php echo htmlspecialchars($addon_data['addon_version'], ENT_QUOTES, "UTF-8"); ?></i>
+							<i class="general_info_addon_version"><?php echo htmlspecialchars($addon_data['addon_version'], ENT_QUOTES, "UTF-8"); ?></i>
 						<?php endif; ?>
 						<?php if($addon_data['is_beta'] == 1): ?>
 							<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
@@ -67,11 +67,12 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 							<a href="<?php echo htmlspecialchars(addon_author_url_generator($addon_data['membername']), ENT_QUOTES, "UTF-8"); ?>"><?php echo $addon_data['membername']; ?></a>
 						</p>
 						<?php if(null != $addon_data['update_date']): ?>
-							<p><?php echo $lang['addon_16']; ?><?php echo $addon_data['update_date']; ?></p>
+							<p><?php echo $lang['addon_16']; ?> <?php echo $addon_data['update_date']; ?></p>
 						<?php else: ?>
-							<p><?php echo $lang['addon_17']; ?><?php echo $addon_data['publish_date']; ?></p>
+							<p><?php echo $lang['addon_17']; ?> <?php echo $addon_data['publish_date']; ?></p>
 						<?php endif; ?>
-						<p><?php echo $lang['addon_36']; ?>
+						<p>
+							<?php echo $lang['addon_36']; ?>
 							<b>
 								<?php echo ($addon_data['supported_mbversion']) ? implode(", ", $addon_data['supported_mbversion']) : $lang['addon_37']; ?>
 							</b>
@@ -205,12 +206,10 @@ endif;
 include($footer);
 ?>
 <canvas id="bg_hero_blur" style="display:none"></canvas>
-<script type="text/javascript" src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/jquery.magnific-popup.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/StackBlur.js"></script>
-<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
 

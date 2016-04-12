@@ -514,12 +514,29 @@ a:active, a:hover {
   border-bottom: 1px solid #E3E3E3;
 }
 
-.show_info.header h3 {
-  display: inline-block;
+.show_info.header {
+  display: flex;
+  align-items: center;
 }
 
-.show_info.header a, .show_info.header button {
+.show_info.header h3 {
+  display: inline-block;
+  flex-grow: 2;
+}
+
+.show_info.header a, .show_info.header button, .show_info.header form {
   float: right;
+  margin: 0px 0px 0px 5px;
+}
+
+.show_info.header button {
+  padding: 5px;
+}
+
+.show_info.header::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 #clear {
@@ -769,6 +786,10 @@ a:active, a:hover {
 
 .tagsinput:hover {
   border: 2px solid #ff9800;
+}
+
+.lang_selector {
+  background-color: #fff;
 }
 
 .spinner {
@@ -1311,7 +1332,7 @@ h4 {
   font-size: 16px;
   line-height: normal;
   float: none;
-  display: block;
+  display: flex;
   padding-top: 0;
   margin: 0 auto;
 }
@@ -1319,26 +1340,23 @@ h4 {
 .mainmenu .menu_wrapper .menu_position {
   margin: 0;
   padding: 0;
-  display: inline-block;
-}
-
-.mainmenu .menu_wrapper .menu_position.menu_right {
-  float: right;
+  display: flex;
 }
 
 .mainmenu .menu_wrapper .menu_position.menu_left {
-  float: left;
+  flex-grow: 1;
 }
 
 .mainmenu .menu_wrapper .menu_position li {
-  display: block;
+  display: flex;
   margin: 0;
   padding: 0px;
-  float: left;
   position: relative;
+  transition: all linear .2s;
+  align-items: center;
 }
 
-.mainmenu .menu_wrapper .menu_position li:hover a {
+.mainmenu .menu_wrapper .menu_position li:hover {
   box-shadow: inset 0px -4px 0px #ff9800;
 }
 
@@ -1346,7 +1364,6 @@ h4 {
   background: none;
   margin: 0;
   padding: 20px 15px;
-  transition: all linear .2s;
   text-decoration: none;
   font-family: "Roboto", "sans-serif", verdana;
   font-size: 14px;
@@ -1387,6 +1404,7 @@ h4 {
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li {
   float: left;
   width: 100%;
+  transition: linear all 0.03s;
 }
 
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a {
@@ -1397,10 +1415,13 @@ h4 {
   box-sizing: border-box;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
   box-shadow: none;
-  transition: linear all 0.03s;
 }
 
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a:hover {
+  color: white;
+}
+
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li:hover {
   background: #ff9800;
   color: white;
   box-shadow: none;
@@ -1855,13 +1876,30 @@ footer.footer_section .footer_credit_wrap {
 footer.footer_section .footer_credit_wrap .footer_credit {
   max-width: 1200px;
   margin: 0px auto;
-  padding-left: 60px;
+  display: block;
+  padding: 0px;
+}
+
+footer.footer_section .footer_credit_wrap .footer_credit li {
+  list-style: none;
+  padding: 0px 25px;
+  display: inline-block;
+}
+
+footer.footer_section .footer_credit_wrap .footer_credit li.right {
+  float: right;
 }
 
 footer.footer_section .footer_credit_wrap .footer_credit p {
   color: rgba(255, 255, 255, 0.76);
   padding: 0px;
   margin: 2px;
+}
+
+footer.footer_section .footer_credit_wrap .footer_credit::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 /*
@@ -2271,6 +2309,7 @@ input.cmn-toggle-round-flat:checked + label:after {
   display: block;
   width: 40%;
   margin: 30px 0px 0px;
+  float: left;
 }
 
 .main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper .installer_layer_wrapper {
@@ -2288,11 +2327,15 @@ input.cmn-toggle-round-flat:checked + label:after {
   background: rgba(0, 0, 0, 0.22);
 }
 
-.main_panel .content.mb_download_installer_bg:after {
-  content: url("../../img/mb-hero-interface-min.png");
-  top: 100px;
-  right: -200px;
-  position: absolute;
+@media screen and (max-width: 800px) {
+  .main_panel .content.mb_download_installer_bg .sub_content .installer_panel_wrapper {
+    width: 100%;
+  }
+}
+
+.main_panel .content.mb_download_installer_bg .hero_img_top .hero_img_wrapper.hero_img_topmost_wrap {
+  top: 10px;
+  left: 50px;
 }
 
 .main_panel .content.mb_beta_download_bg {
@@ -2325,6 +2368,12 @@ input.cmn-toggle-round-flat:checked + label:after {
   position: absolute;
   font-size: 350px;
   color: rgba(255, 255, 255, 0.3);
+}
+
+@media screen and (max-width: 800px) {
+  .main_panel .content.mb_beta_download_bg:after {
+    content: none;
+  }
 }
 
 .main_content_wrapper {
@@ -2812,6 +2861,12 @@ select#release_note_jump option {
 @media screen and (max-width: 1000px) {
   .addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .addon_list_box li {
     width: 33.333333%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .addon_similar .addon_similar_wrap.addon_result_column_wrap .addon_result_column .addon_list_box li {
+    width: 50%;
   }
 }
 

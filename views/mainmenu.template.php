@@ -24,7 +24,7 @@
 					if (!isset($menu_item['restriction'])) {
 						echo "<li><a href=\"" . $menu_item['href'] . " \">" . $menu_item['title'] . "</a>";
 						if (count($menu_item['sub_menu']) > 0) {
-							echo "<ul class=\"nav_dropdown_sub\">";
+							echo "<ul class=\"nav_dropdown_sub primary_submenu\">";
 							foreach ($menu_item['sub_menu'] as $sub_item_key => $sub_item) {
 								if (isset($sub_item['restriction'])) {
 									if ($sub_item['restriction'] == 'admin' && $mb['user']['is_admin']) {
@@ -59,7 +59,7 @@
 						echo '<li class="'. $key .'">
 								<a href="' . $logged_menu_item['href'] .'">' . $logged_menu_item['title'] .'</a>';
 						if (count($logged_menu_item['sub_menu']) > 0) {
-							echo '<ul class="nav_dropdown_sub dropdown_right">';
+							echo '<ul class="nav_dropdown_sub dropdown_right primary_submenu" >';
 							foreach ($logged_menu_item['sub_menu'] as $sub_item_key => $sub_item) {
 								if (isset($sub_item['restriction'])) {
 									if ($sub_item['restriction'] == 'admin' && $mb['user']['is_admin']) {

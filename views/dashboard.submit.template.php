@@ -149,11 +149,11 @@ endif; ?>
 							foreach($mb['main_menu']['add-ons']['sub_menu'] as $key => $menu_addon) {
 								$type_selection_text = "";
 								if(isset($data)) {
-									if($data['addon_type'] == Format::Slug($menu_addon['title'])) {
+									if($data['category'] == $menu_addon['id']) {
 										$type_selection_text = "selected";
 									}
 								}
-								echo "<option value=\"".Format::Slug($menu_addon['title'])."\" ".$type_selection_text.">".$menu_addon['title']."</option>";
+								echo "<option value=\"".Format::Slug($menu_addon['id'])."\" ".$type_selection_text.">".$menu_addon['title']."</option>";
 							}
 							?>
 						</select>
@@ -396,8 +396,7 @@ endif; ?>
 						<label for="wmd-input">
 							<p><?php echo $lang['dashboard_submit_header_14']; ?></p>
 						</label>
-						<div id="wmd-editor"
-						     class="wmd-panel">
+						<div id="wmd-editor" class="wmd-panel">
 							<div id="wmd-button-bar"></div>
 								<textarea
 										id="wmd-input"
@@ -408,8 +407,7 @@ endif; ?>
 						</div>
 						<p id="wmd-input_count" class="counter"></p>
 
-						<div id="wmd-preview"
-						     class="wmd-panel markdownView"></div>
+						<div id="wmd-preview" class="wmd-panel markdownView"></div>
 					</li>
 				</ul>
 			</div>
@@ -640,45 +638,15 @@ endif; ?>
 		$('form[data-autosubmit][id=addon_submission]').autosubmit();
 	}
 
-	(function ($) {
-		$.fn.autosubmit = function () {
-			this.submit(function (event) {
-				event.preventDefault();
-				event.stopImmediatePropagation(); //This will stop the form submit twice
-				var form = $(this);
-				hideNotification();
-				showOverlay();
-				$('#loading_icon').show();
-				$.ajax({
-					type: form.attr('method'),
-					url: form.attr('action'),
-					data: form.serialize()
-				}).done(function (data) {
-					notificationCallback(data);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
-				}).always(function () {
-					$('#loading_icon').hide();
-					hideOverlay();//show overlay while loading
-				});
-			});
-		}
-		return false;
-	})(jQuery)
-
 	<?php if(isset($_GET['mod'])) { ?>
 
 	function submitted() {
-		var $generatedUrl = generatePageUrl('mod_all');
-		loadPageGet($generatedUrl);
 		window.location.hash = 'mod_all';
 	}
 
 	<?php } elseif ($viewType == 2){ ?>
 
 	function submitted() {
-		var $generatedUrl = generatePageUrl('dashboard_all');
-		loadPageGet($generatedUrl);
 		window.location.hash = 'dashboard_all';
 	}
 

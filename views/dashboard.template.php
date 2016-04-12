@@ -106,13 +106,11 @@ include($mainmenu);
 include($footer);
 ?>
 
-<script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/markdown-it.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/markdownEditor.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/modalBox.js"></script>
-<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
 
 <script>
 	var defaultpage = "dashboard_overview";

@@ -14,13 +14,8 @@
  * @version 1.0 beta
  */
 
-$lang = array();
 
 $lang['mb'] = 'MusicBee';
-
-
-
-
 
 $lang['AP_TITLE'] = 'Control MusicBee Website infos all in one place';
 $lang['AP_NO_RECORD'] = 'We can\'t find anything to show! <i class="fa fa-frown-o"></i>';
@@ -45,25 +40,25 @@ $lang['no_js'] = 'Your browser does not support javascript(or disabled), please 
 $lang['1'] = 'MusicBee';
 $lang['2'] = 'Download';
 $lang['3'] = 'Add-ons';
-$lang['4'] = 'Community';
+$lang['4'] = 'Forum';
 $lang['5'] = 'Help';
-//$lang['6'] = '<i class="fa fa-user" style="color:#FFA500;"></i>';
 $lang['7'] = 'Web Admin';
 $lang['8'] = 'Forum Admin';
 $lang['9'] = 'Dashboard';
 $lang['10'] = 'Sign Out';
+$lang['17'] = 'Login';
+$lang['19'] = 'Hey, ';
+$lang['18'] = 'All';
 $lang['11'] = 'Skins';
 $lang['12'] = 'Plugins';
 $lang['13'] = 'Visualiser';
 $lang['14'] = 'Equaliser';
 $lang['15'] = 'Theater Mode';
 $lang['16'] = 'Misc';
-$lang['17'] = 'Login';
-$lang['18'] = 'All';
-$lang['19'] = 'Hey, ';
 
-/** MainMenu Icons
- * Do not edit! important
+/**
+ * MainMenu Icons
+ * DO NOT EDIT! important
  */
 $lang['20'] = '<i class="fa fa-desktop"></i>&nbsp;&nbsp;';
 $lang['21'] = '<i class="fa fa-comments"></i>&nbsp;&nbsp;';
@@ -145,8 +140,38 @@ $lang['home_40'] = "";
 
 
 
+/**
+ * Download page
+ */
+$lang['download_title'] = 'MusicBee - Downloads';
+$lang['download_desc'] = 'Get MusicBee Installer executable or Portable and start enjoying MusicBee';
 
-/*footer*/
+$lang['download_header'] = 'Download MusicBee';
+$lang['download_sub_header'] = 'Start enjoying your music experience with MusicBee!';
+$lang['download_h_installer'] = 'Installer Edition';
+$lang['download_h_installer_desc'] ='This edition will install MusicBee on your Windows system drive';
+
+$lang['download_h_beta'] = 'MusicBee Beta';
+$lang['download_h_beta_desc'] ='The beta version is under active development and is not the current stable version. It is intended for anyone interested in trying the latest features or bug fixes. You should regularly check the forum for updates.';
+
+$lang['download_h_portable'] = 'Portable Edition';
+$lang['download_h_portable_desc'] ='This edition can be installed in other locations, such as another partition or USB drive';
+
+$lang['download_get_installer'] = '<i class="fa fa-download"></i> Get MusicBee Installer';
+$lang['download_get_portable'] = '<i class="fa fa-download"></i> Get MusicBee Portable';
+$lang['download_get_beta'] = '<i class="fa fa-warning"></i> Get MusicBee Beta';
+$lang['download_mirror1'] = 'Mirror 1';
+$lang['download_mirror2'] = 'Mirror 2';
+
+$lang['download_disabled_h'] = 'Downloads are disabled!';
+$lang['download_disabled_desc'] = 'Sorry for the inconvenience. This is probably temporary. Please check the forum or come back later.';
+$lang['download_beta_disabled_desc'] = 'Download is Disabled for MusicBee Beta, checkout our forum for more info';
+
+
+
+/**
+ * footer
+ */
 $lang['footer_179'] = 'Get the latest MusicBee';
 $lang['footer_180'] = 'Get';
 $lang['footer_181'] = 'Version:';
@@ -161,7 +186,7 @@ $lang['footer_189'] = 'Support MusicBee with a voluntary donation';
 $lang['footer_190'] = 'Donate with Paypal';
 $lang['footer_191'] = '<i class="fa fa-heartbeat"></i>&nbsp;&nbsp;Add a new feature to the Wishlist';
 $lang['footer_192'] = 'Site built with <i class="fa fa-heart" style="color: #F44336;"></i> for the community';
-$lang['footer_193'] = 'MusicBee copyright &copy; Steven Mayall 2008-' . date ('Y') . ', All Rights Reserved';
+$lang['footer_193'] = 'Copyright &copy; Steven Mayall 2008-' . date ('Y') . ', All Rights Reserved.';
 $lang['footer_231'] = '<i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Press & Media';
 $lang['footer_232'] = 'Twitter';
 
@@ -185,13 +210,11 @@ $lang['dashboard_menu_4'] = 'Moderate';
 $lang['dashboard_menu_5'] = 'Downloads & Releases';
 $lang['dashboard_menu_6'] = 'Website Setting';
 $lang['dashboard_menu_7'] = '';
-
-		//dashboard > overview
+//dashboard > overview
 $lang['dashboard_0'] = 'Add-on Submitted';
 $lang['dashboard_1'] = 'Likes Received';
 $lang['dashboard_2'] = 'Needs Approval';
 $lang['dashboard_3'] = "Total Downloads";
-
 $lang['dashboard_4'] = '<i class="fa fa-tasks"></i>&nbsp;&nbsp;&nbsp;Things you can DO!';
 $lang['dashboard_5'] = '<i class="fa fa-area-chart"></i>&nbsp;&nbsp;Your Stats';
 $lang['dashboard_6'] = '<i class="fa fa-shield"></i>&nbsp;&nbsp;Addons waiting for approval';
@@ -202,8 +225,6 @@ $lang['dashboard_10'] = '<i class="fa fa-filter"></i>&nbsp;&nbsp;Filter & Search
 $lang['dashboard_11'] = '<i class="fa fa-th"></i>&nbsp;&nbsp;Your published add-ons';
 $lang['dashboard_12'] = '<i class="fa fa-pencil"></i>';
 $lang['dashboard_13'] = 'Search your submitted add-ons';
-
-
 //dashboard > table headers
 $lang['dashboard_record_th_1'] = 'Name';
 $lang['dashboard_record_th_2'] = 'Category';
@@ -216,18 +237,14 @@ $lang['dashboard_record_th_6'] = 'Submitted by';
 $lang['dashboard_links_1'] = 'MusicBee API';
 $lang['dashboard_links_7'] = 'Read MusicBee docs for developer';
 $lang['dashboard_links_8'] = 'Essential skinning guide';
-
 $lang['dashboard_links_2'] = 'Best practices when submitting an add-on';
 $lang['dashboard_links_3'] = 'Learn about Dashboard!';
 $lang['dashboard_links_4'] = 'How to update an add-on?';
 $lang['dashboard_links_5'] = 'Report bugs for dashbaord!';
 $lang['dashboard_links_6'] = '';
-
-
 //dashboard > submit
 $lang['dashboard_submit_1'] = '<i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;Add-on Submission';
 $lang['dashboard_submit_2'] = '<i class="fa fa-pencil"></i>&nbsp;&nbsp;Add-on Update';
-
 $lang['dashboard_submit_header_1'] = 'Step 1. Choose Add-on type';
 $lang['dashboard_submit_header_2'] = 'Step 2. Basic Info about your Add-on';
 $lang['dashboard_submit_header_3'] = 'Title/Name of your Add-on *';
@@ -268,11 +285,9 @@ $lang['dashboard_submit_btn_6'] = 'Reject';
 $lang['dashboard_submit_btn_7'] = '<i class="fa fa-trash"></i>';
 $lang['dashboard_submit_btn_8'] = 'Undelete';
 
-
 $lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
 $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to imgur';
-
 
 $lang['dashboard_msg_1'] = 'Add-on Removed, contact mods/admin to restore it';
 $lang['dashboard_msg_2'] = 'Are you sure you want to remove this addon?\\n\\nyou can\'t modify it once it is added to delete queue!';
@@ -286,11 +301,10 @@ $lang['dashboard_msg_9'] = 'You can not View, download or edit deleted add-ons! 
 $lang['dashboard_msg_10'] = 'Setting successfully saved! You need to refresh the page to see the changes.';
 $lang['dashboard_msg_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
 $lang['dashboard_msg_12'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
-
 $lang['dashboard_msg_13'] = 'You can edit submitted add-ons from other users, because you have permission to moderate';
-
 $lang['dashboard_msg_14'] = 'Are you sure you want to remove this addon?\\n\\nyou can undo this action.';
-
+$lang['dashboard_msg_15'] = 'Are you sure you want to delete this record?\\n\\nyou can\'t undo this action.';
+$lang['dashboard_msg_16'] = 'Record deleted';
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
@@ -318,7 +332,6 @@ $lang['dashboard_err_19'] = '<b>ERROR:</b> Website setting can\'t be saved!';
 /**
  * Moderator Panel goes here
  */
-
 $lang['mod_1'] = 'Overall downloads';
 $lang['mod_2'] = 'Overall likes';
 $lang['mod_3'] = 'Waiting for approval';
@@ -342,14 +355,12 @@ $lang['mod_14'] = 'All rejected add-ons';
 
 $lang['dashboard_admin_header_1'] = 'Website Stats';
 $lang['dashboard_admin_header_2'] = '<i class="fa fa-cogs"></i>&nbsp;&nbsp; Website Setting';
-
 $lang['dashboard_admin_header_5'] = 'Show page load time in footer';
 $lang['dashboard_admin_header_6'] = 'Turn on/off add-on submission';
 $lang['dashboard_admin_header_7'] = 'Maximum unapproved add-on';
 $lang['dashboard_admin_header_8'] = 'Turn on/off imgur upload';
 $lang['dashboard_admin_header_9'] = 'Imgur Client ID';
 $lang['dashboard_admin_header_10'] = 'Imgur Client Secret';
-
 $lang['dashboard_admin_header_11'] = 'Paypal Link';
 $lang['dashboard_admin_header_12'] = 'Twitter Link';
 $lang['dashboard_admin_header_14'] = 'Wikia Link';
@@ -359,16 +370,11 @@ $lang['dashboard_admin_header_17'] = 'MusicBee API Link';
 $lang['dashboard_admin_header_18'] = 'Website Bug Link';
 $lang['dashboard_admin_header_19'] = 'MusicBee Bug Link';
 
-
 $lang['dashboard_admin_desc_1'] = 'Shows page generation time in seconds';
 $lang['dashboard_admin_desc_2'] = 'If you disable the submission form, user won\'t be able to submit addons for the add-on page';
 $lang['dashboard_admin_desc_3'] = 'Maximum number of add-on user can submit for admin/mod approval, until those are approved they can\'t submit more';
 $lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, musicbee release form.';
-
 $lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be carefull when modifying. Don\'t change if you have doubts';
-
-
-
 
 $lang['dashboard_admin_button_1'] = 'Save';
 
@@ -376,10 +382,9 @@ $lang['dashboard_admin_button_1'] = 'Save';
 /**
  * Dashboard > admin > musicbee release
  */
-
 $lang['mbr_h_1'] = 'Stable Release';
 $lang['mbr_h_2'] = 'Beta Release';
-
+$lang['mbr_h_3'] = 'Tasks';
 $lang['mbr_th_1'] = 'Appname';
 $lang['mbr_th_2'] = 'Version';
 $lang['mbr_th_3'] = 'Released on';
@@ -387,14 +392,52 @@ $lang['mbr_th_4'] = 'Supported OS';
 $lang['mbr_th_5'] = 'Release Note';
 $lang['mbr_th_6'] = 'Click here to view ->';
 $lang['mbr_th_7'] = 'Message for Beta users';
+$lang['mbr_th_8'] = 'Available on Dashboard';
 
 $lang['mbr_btn_1'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; New Stable Release';
-$lang['mbr_btn_2'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable Stable Release';
-$lang['mbr_btn_5'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable Stable Release';
-
+$lang['mbr_btn_2'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable';
+$lang['mbr_btn_5'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable';
 $lang['mbr_btn_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; New Beta Release';
-$lang['mbr_btn_4'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable Beta Release';
-$lang['mbr_btn_6'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable Beta Release';
+
+
+
+/**
+ * Dashboard > admin > musicbee release > new release
+ */
+
+//stable release
+
+$lang['mbr_submit_h_1'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit a new Release!';
+$lang['mbr_submit_h_2'] = 'All MusicBee releases';
+$lang['mbr_submit_h_2'] = 'Update existing Release';
+
+$lang['mbr_lbl_1'] = 'Appname';
+$lang['mbr_lbl_2'] = 'Version';
+$lang['mbr_lbl_3'] = 'Supported OS';
+$lang['mbr_lbl_4'] = 'Installer Download Link';
+$lang['mbr_lbl_5'] = 'Installer Mirror 1';
+$lang['mbr_lbl_6'] = 'Installer Mirror 2';
+$lang['mbr_lbl_7'] = 'Portable Download Link';
+$lang['mbr_lbl_8'] = 'Release Note';
+$lang['mbr_lbl_9'] = 'Important Message for users';
+$lang['mbr_lbl_10'] = 'Is this MusicBee release a major one?';
+$lang['mbr_lbl_11'] = 'Available in Dashboard?';
+
+$lang['mbr_desc_1'] = 'If this musicbee release contains major changes mark it as major release. All major release will be included in Dashboard and can be targetted by Add-on Authors.';
+
+$lang['mbr_placeholder_1'] = 'eg. MusicBee 3';
+$lang['mbr_placeholder_2'] = 'eg. 3.0.5933';
+$lang['mbr_placeholder_3'] = 'eg. Windows 8.1/10';
+$lang['mbr_placeholder_4'] = 'eg. http://www.getmusicbee.com/installer.exe';
+
+$lang['mbr_btn_20'] = '<i class="fa fa-th"></i>&nbsp;&nbsp; View and edit MusicBee releases';
+
+
+
+
+
+
+
 
 
 /**
@@ -502,8 +545,6 @@ EOT;
 $lang['bug_4'] = 'If you feel like ready, go ahead and create a new post regarding the Issue. You will need a forum account.';
 $lang['bug_button_1'] = 'Create a new Bug request &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
 
-
-
 $lang['bug_5'] = 'Website related Bugs!';
 $lang['bug_6'] = 'Found a website related bug? security issue or styling issue?';
 
@@ -567,7 +608,7 @@ $lang['press_button_1'] = 'Download MusicBee presskit &nbsp;&nbsp;<i class="fa f
 
 
 
-		/************************************************
+/************************************************
  *****
  *****    imgur upload
  *****
@@ -586,20 +627,6 @@ $lang['414'] = '<b>ERROR:</b> An valid image required!';
 $lang['415'] = '<b>ERROR:</b> Maximum image size is 2MB!';
 $lang['416'] = '<b>SUCCESSFUL:</b> Image successfully uploaded to Imgur';
 $lang['417'] = '<b>ERROR:</b> There\'s a Problem<br/>';
-$lang['418'] = '<b>ERROR:</b> Mediafire upload is currently disabled! <br/>Please any file sahring sites(eg. dropbox, mediafire, zippyshare, mega)';
-$lang['419'] = '<b>ERROR:</b> Mediafire upload is not configured correctly, please edit the setting file with correct credentials and try again.';
-$lang['420'] = '<b>ERROR:</b> An valid file required!';
-$lang['421'] = '<b>ERROR:</b> Maximum file size is 4MB!';
-$lang['422'] = '<b>ERROR:</b> Only supports <code>.rar, .zip, .7z, .tgz</code>';
-$lang['423'] = '<b>SUCCESSFUL:</b> Add-on successfully added to our repository';
-$lang['424'] = '<b>ERROR:</b> The file maybe uploaded but we can\'t get the download link. <br/>ERR_MSG: ';
-$lang['425'] = '<b>ERROR:</b> ';
-$lang['426'] = '';
-$lang['427'] = '';
-$lang['428'] = '';
-$lang['429'] = '';
-$lang['430'] = '';
-
 
 
 

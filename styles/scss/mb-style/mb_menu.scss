@@ -31,39 +31,38 @@ $info_bar_max_width : 1200px;
 		font-size   : 16px;
 		line-height : normal;
 		float       : none;
-		display     : block;
+		display     : flex;
 		padding-top : 0;
 		margin      : 0 auto;
 
 		.menu_position {
 			margin  : 0;
 			padding : 0;
-			display : inline-block;
+			display : flex;
 			&.menu_right {
-				float : right;
+				//float : right;
 			}
 			&.menu_left {
-				float : left;
+				//float : left;
+				flex-grow: 1;
 			}
 
 			li {
-				display  : block;
+				display  : flex;
 				margin   : 0;
 				padding  : 0px;
-				float    : left;
 				position : relative;
+				transition      : all linear .2s;
+				align-items: center;
 
 				&:hover {
-					a {
-						box-shadow : inset 0px -4px 0px $musicbee-color;
-					}
+					box-shadow : inset 0px -4px 0px $musicbee-color;
 				}
 
 				a {
 					background      : none;
 					margin          : 0;
 					padding         : 20px 15px;
-					transition      : all linear .2s;
 					text-decoration : none;
 					@include font_family_normal;
 					font-size       : 14px;
@@ -103,6 +102,7 @@ $info_bar_max_width : 1200px;
 					li {
 						float : left;
 						width : 100%;
+						transition  : linear all 0.03s;
 
 						a {
 							width       : 100%;
@@ -112,13 +112,16 @@ $info_bar_max_width : 1200px;
 							box-sizing  : border-box;
 							text-shadow : 1px 0px 2px rgba(0, 0, 0, 0.33);
 							box-shadow  : none;
-							transition  : linear all 0.03s;
 
 							&:hover {
-								background : $musicbee-color;
 								color      : white;
-								box-shadow : none;
 							}
+						}
+
+						&:hover {
+							background : $musicbee-color;
+							color      : white;
+							box-shadow : none;
 						}
 					}
 

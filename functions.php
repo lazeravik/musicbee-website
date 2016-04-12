@@ -51,6 +51,9 @@ $link['redirect'] = $link['url'].'out/';
 $link['404'] = $link['root']."error/404.php";
 $link['kb'] = $link['url'].'kb/';
 
+//creates an array from the URI
+$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
+
 //Error code for knowledge base page
 $errorCode = array(
 		'ADMIN_ACCESS'      => '101',
@@ -69,17 +72,32 @@ if(!isset($context)) {
 	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
 
+//Create the logout link..... THIS SHOULD NOT BE DECLARED BEFORE SSI.php SCRIPT!
+$link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
+
+//Language array
+$lang = array();
+
+//List of all indexed language files
+require_once $link['root'].'includes/languages/lang.list.php';
+
 //Default language file. DO NOT REMOVE IT!
-require_once $link['root'].'includes/languages/en-us.php';
+include_once $link['root'].'includes/languages/en-us.php';
+
+//Default language is english
+$language = setLanguage();
+if(!empty($language)) {
+	if(file_exists($link['root'].'includes/languages/'.$language['filename']) && $language['meta'] != 'en-us') {
+		/** @noinspection PhpIncludeInspection */
+		include_once $link['root'].'includes/languages/'.$language['filename'];
+	}
+}
+
 
 //Load other classes and database login info
 require_once $link['root'].'classes/Format.php';
 require_once $link['root'].'classes/Validation.php';
 require_once $link['root'].'setting.php';
-
-
-//Create the logout link..... THIS SHOULD NOT BE DECLARED BEFORE SSI.php SCRIPT!
-$link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
 
 
 //Gets website setting !DO NOT REMOVE IT!
@@ -92,8 +110,9 @@ if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpo
 	$_SESSION['old_url'] = currentUrl();
 }
 
-//creates an array from the URI
-$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
+$_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $link['url'];
+
+//var_dump($_SESSION);
 
 //Get user avatar or use the default avatar
 $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/usersmall.jpg';
@@ -103,6 +122,7 @@ $releaseData = json_decode(file_get_contents($link['url'].'api.get.php?type=json
 
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
+		'charset'        => 'UTF-8',
 		'user'           => array(
 				'id'              => $context['user']['id'],
 				'is_logged'       => $context['user']['is_logged'],
@@ -115,7 +135,6 @@ $mb = array(
 				'need_approval'   => true,
 				'can_mod'         => $context['user']['can_mod'],
 				'username'        => $context['user']['username'],
-				'language'        => $context['user']['language'],
 				'email'           => $context['user']['email'],
 				'name'            => $context['user']['name'],
 				'messages'        => $context['user']['messages'],
@@ -129,8 +148,8 @@ $mb = array(
 				'date_time' => date("F j, Y, g:i a"),
 		),
 
-		'main_menu'            => array(
-				'web-admin'       => array(
+		'main_menu' => array(
+				'dashboard'       => array(
 						'title'       => $lang['9'],
 						'href'        => $link['addon']['dashboard'],
 						'restriction' => 'login',
@@ -147,7 +166,7 @@ $mb = array(
 								'line1'        => array('title' => $lang['line'],),
 								'admin-panel'  => array(
 										'title'       => $lang['7'],
-										'href'        => $link['admin']['admin-panel'],
+										'href'        => $link['addon']['dashboard'].'#mbrelease_view',
 										'icon'        => $lang['20'],
 										'restriction' => 'admin',
 								),
@@ -179,35 +198,40 @@ $mb = array(
 						'title'    => $lang['3'],
 						'href'     => $link['addon']['home'],
 						'sub_menu' => array(
-								'skins'        => array(
+								'1' => array(
 										'title' => $lang['11'],
-										'href'  => $link['addon']['home']."s/?type=skins",
+										'href'  => $link['addon']['home']."s/?type=1",
 										'icon'  => $lang['24'],
 										'desc'  => $lang['description_1'],
+										'id'    => 1,
 								),
-								'plugins'      => array(
+								'2' => array(
 										'title' => $lang['12'],
-										'href'  => $link['addon']['home']."s/?type=plugins",
+										'href'  => $link['addon']['home']."s/?type=2",
 										'icon'  => $lang['25'],
 										'desc'  => $lang['description_2'],
+										'id'    => 2,
 								),
-								'visualiser'   => array(
+								'3' => array(
 										'title' => $lang['13'],
-										'href'  => $link['addon']['home']."s/?type=visualiser",
+										'href'  => $link['addon']['home']."s/?type=3",
 										'icon'  => $lang['26'],
 										'desc'  => $lang['description_3'],
+										'id'    => 3,
 								),
-								'theater-mode' => array(
+								'4' => array(
 										'title' => $lang['15'],
-										'href'  => $link['addon']['home']."s/?type=theater-mode",
+										'href'  => $link['addon']['home']."s/?type=4",
 										'icon'  => $lang['28'],
 										'desc'  => $lang['description_5'],
+										'id'    => 4,
 								),
-								'misc'         => array(
+								'5' => array(
 										'title' => $lang['16'],
-										'href'  => $link['addon']['home']."s/?type=misc",
+										'href'  => $link['addon']['home']."s/?type=5",
 										'icon'  => $lang['29'],
 										'desc'  => $lang['description_6'],
+										'id'    => 5,
 								),
 						),
 				),
@@ -244,7 +268,7 @@ $mb = array(
 				),
 
 				'beta' => array(
-						'appname'     => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
+						'appname'      => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
 						'version'      => isset($releaseData[1]->version) ? $releaseData[1]->version : "NA",
 						'release_date' => isset($releaseData[1]->release_date) ? $releaseData[1]->release_date : "NA",
 						'supported_os' => isset($releaseData[1]->supported_os) ? $releaseData[1]->supported_os : "NA",
@@ -259,10 +283,11 @@ $mb = array(
 		'view_range' => array(
 				'addon_view_range'         => 20,
 				'dashboard_all_view_range' => 20,
+				'release_all_view_range'   => 20,
 		),
 );
 
-//var_dump($mb);
+//var_dump($language);
 
 
 /**
@@ -332,21 +357,30 @@ if(!$mb['user']['is_guest']) {
 	);
 
 	//Set the user ranks and permissions once we get it from database
-	$mb['user']['is_elite'] = ($userinfo['rank']==5)? true : false;
-	$mb['user']['is_newbie'] = ($userinfo['rank']==10)? true : false;
+	$mb['user']['is_elite'] = ($userinfo['rank'] == 5) ? true : false;
+	$mb['user']['is_newbie'] = ($userinfo['rank'] == 10) ? true : false;
 	$mb['user']['rank_name'] = Validation::rankName($userinfo['rank']);
-	$mb['user']['need_approval'] = ($userinfo['rank']>5)? true : false;
+	$mb['user']['total_approved_addon'] = $memberData->getAddonCountByUser($mb['user']['id']);
+	$mb['user']['need_approval'] = ($mb['user']['total_approved_addon'] >= $setting['selfApprovalRequirement'] || $mb['user']['can_mod']) ? false : true;
+
+	//If the user is not an admin or mod or already an elite, make the user elite
+	if($mb['user']['total_approved_addon'] >= $setting['eliteRequirement'] && !$mb['user']['can_mod'] && !$mb['user']['is_elite']) {
+		$memberData->makeUserElite($mb['user']['id'], 5);
+
+		//update the elite status
+		$mb['user']['is_elite'] = true;
+	}
+
+	//@todo: change admin/mod stat if their forum profile is updated
+
 } else {
 	$_SESSION['memberinfo'] = null;
 }
-
-//var_dump($mb);
 
 
 ///page location variable starts here
 $mainmenu = $link['root'].'views/mainmenu.template.php';
 $footer = $link['root'].'views/footer.template.php';
-
 
 
 $connection = null;
@@ -374,24 +408,25 @@ function databaseConnection() {
 
 
 /**
+ * MusicBee stable and beta release Info
+ *
  * @param $value
  * @param $type
  *
  * @return null|string
- * MusicBee stable and beta release Info
  */
 function getVersionInfo($value, $type) {
-	global $connection, $lang;
+	global $connection, $lang, $db_info;
 	if(databaseConnection()) {
 		try {
 			if($type == "byId") {
-				$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." WHERE ID_ALLVERSIONS=:value";
+				$sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS=:value";
 			} elseif($type == "byVersion") {
-				$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." WHERE version=:value";
+				$sql = "SELECT * FROM {$db_info['mb_all']} WHERE version=:value";
 			} elseif($type == "byCurrentVersion") {
-				$sql = "SELECT * FROM ".SITE_MB_CURRENT_VERSION_TBL." WHERE ID_VERSION=:value";
+				$sql = "SELECT * FROM {$db_info['mb_current']} WHERE ID_VERSION=:value";
 			} elseif($type == "byAllReleases") {
-				$sql = "SELECT * FROM ".SITE_MB_ALL_VERSION_TBL." ORDER BY version DESC";
+				$sql = "SELECT * FROM {$db_info['mb_all']} ORDER BY version DESC";
 			}
 			$statement = $connection->prepare($sql);
 			if($type != "byAllReleases") {
@@ -421,11 +456,11 @@ function getVersionInfo($value, $type) {
  * @return array
  */
 function getSetting() {
-	global $connection;
+	global $connection, $db_info;
 
 	if(databaseConnection()) {
 		try {
-			$sql = "SELECT * FROM ".SETTINGS;
+			$sql = "SELECT * FROM {$db_info['settings_tbl']}";
 			$statement = $connection->prepare($sql);
 			$statement->execute();
 			$result = array_map('reset', array_map('reset', $statement->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC)));
@@ -438,6 +473,43 @@ function getSetting() {
 			return $result;
 		} catch(Exception $e) {
 		}
+	}
+}
+
+
+/**
+ * Set language cookie and returns language file details
+ *
+ * @return mixed
+ */
+function setLanguage() {
+	if(isset($_GET['lang'])) {
+		$language = getLanguageFileName($_GET['lang']);
+	} elseif(isset($_COOKIE['lang'])) {
+		$language = getLanguageFileName($_COOKIE['lang']);
+	} else {
+		$language = getLanguageFileName('en-us');
+	}
+
+	//Sets the language cookie for 30 days
+	setcookie('lang', $language['meta'], time() + 60 * 60 * 24 * 30, '/');
+
+	return $language;
+}
+
+
+/**
+ * gets language file list & details from lang.list.php
+ *
+ * @param $lang
+ *
+ * @return mixed
+ */
+function getLanguageFileName($lang) {
+	global $lang_filelist;
+
+	if(array_key_exists($lang, $lang_filelist)) {
+		return $lang_filelist[$lang];
 	}
 }
 

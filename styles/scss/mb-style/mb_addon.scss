@@ -189,6 +189,10 @@
 						@media screen and (max-width : $break-medium) {
 							width : 33.333333%;
 						}
+
+						@media screen and (max-width : $break-tiny) {
+							width : 50%;
+						}
 					}
 				}
 			}

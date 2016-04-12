@@ -58,7 +58,6 @@
 <?php 
 include($footer); 
 ?>
-<script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
-<script src="<?php echo $link['url']; ?>scripts/menu.navigation.js"></script>
+
 </body>
 </html>

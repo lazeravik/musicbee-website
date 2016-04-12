@@ -190,7 +190,7 @@ class Dashboard
 								tags = :tags,
 								supported_mbversion = :supported_mbversion,
 								addon_title = :addon_title,
-								addon_type = :addon_type,
+								category = :category,
 								addon_version = :addon_version,
 								short_description = :short_description,
 								download_links = :download_links,
@@ -211,7 +211,7 @@ class Dashboard
 								tags = :tags,
 								supported_mbversion = :supported_mbversion,
 								addon_title = :addon_title,
-								addon_type = :addon_type,
+								category = :category,
 								addon_version = :addon_version,
 								short_description = :short_description,
 								download_links = :download_links,
@@ -240,7 +240,7 @@ class Dashboard
 				$statement->bindValue(':tags', htmlspecialchars(trim($_POST['tag'])));
 				$statement->bindValue(':supported_mbversion', htmlspecialchars($_POST['mbSupportedVer']));
 				$statement->bindValue(':addon_title', htmlspecialchars(trim($_POST['title']), ENT_QUOTES, "UTF-8"));
-				$statement->bindValue(':addon_type', htmlspecialchars($_POST['type']));
+				$statement->bindValue(':category', htmlspecialchars($_POST['type']));
 				$statement->bindValue(':addon_version', htmlspecialchars(trim($addonver)));
 				$statement->bindValue(':short_description', htmlspecialchars(trim($description), ENT_QUOTES, "UTF-8"));
 				$statement->bindValue(':download_links', htmlspecialchars(trim($dlink)));
@@ -270,7 +270,7 @@ class Dashboard
 				$sql = "SELECT
 					{$db_info['addon_tbl']}.ID_ADDON,
 					{$db_info['addon_tbl']}.addon_title,
-					{$db_info['addon_tbl']}.addon_type,
+					{$db_info['addon_tbl']}.category,
 					{$db_info['addon_tbl']}.status,
 					COUNT(ID_LIKES) AS likesCount
 					FROM
@@ -308,7 +308,7 @@ class Dashboard
 				$sql = "SELECT
 						{$db_info['addon_tbl']}.ID_ADDON,
 						{$db_info['addon_tbl']}.addon_title,
-						{$db_info['addon_tbl']}.addon_type,
+						{$db_info['addon_tbl']}.category,
 						{$db_info['addon_tbl']}.status,
 						COUNT(STAT_ID) AS downloadCount
 					FROM
@@ -344,7 +344,7 @@ class Dashboard
 		if(databaseConnection()) {
 			try {
 				$sql = "SELECT
-					{$db_info['addon_tbl']}.ID_ADDON, {$db_info['addon_tbl']}.addon_title, {$db_info['addon_tbl']}.addon_type, {$db_info['addon_tbl']}.status, {$db_info['member_tbl']}.membername, {$db_info['member_tbl']}.ID_MEMBER
+					{$db_info['addon_tbl']}.ID_ADDON, {$db_info['addon_tbl']}.addon_title, {$db_info['addon_tbl']}.category, {$db_info['addon_tbl']}.status, {$db_info['member_tbl']}.membername, {$db_info['member_tbl']}.ID_MEMBER
 					FROM
 					{$db_info['member_tbl']}
 					LEFT JOIN
