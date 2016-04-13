@@ -29,7 +29,7 @@
 	}
 
 	p {
-		font-size: 14px !important;
+		font-size: 13px !important;
 		color: inherit !important;
 		line-height: 21px !important;
 		margin: 2px 0px !important;
@@ -37,12 +37,12 @@
 
 	h1 {
 		font-size: 30px !important;
-		margin: 15px 0px 10px 0px !important;
+		margin: 25px 0px 10px !important;
 	}
 
 	h2 {
 		font-size: 25px !important;
-		margin: 15px 0px 10px 0px !important;
+		margin: 25px 0px 10px !important;
 		box-shadow: none !important;
 		padding-left: 0px !important;
 		text-transform: none !important;
@@ -50,12 +50,12 @@
 
 	h3 {
 		font-size: 20px !important;
-		margin: 15px 0px 10px 0px !important;
+		margin: 25px 0px 10px !important;
 	}
 
 	h4 {
 		font-size: 16px !important;
-		margin: 15px 0px 10px 0px !important;
+		margin: 25px 0px 10px 0px !important;
 	}
 
 	hr {
@@ -107,20 +107,34 @@
 		border-radius: 3px !important;
 		color: inherit !important;
 		border: inherit !important;
+		display: inline-block !important;
+		margin: 2px !important;
 	}
 
 	pre {
 		color: inherit !important;
 		background: #282b2e !important;
-		padding: 70px 20px 20px 20px !important;
+		padding: 20px !important;
 		overflow: auto !important;
 		position: relative !important;
+		white-space: pre-line;
 
 		code {
+			color         : inherit !important;
+			box-shadow    : none !important;
+			border-radius : 0px !important;
+			background    : inherit !important;
+			margin-top    : 0px !important;
+			white-space   : pre;
+		}
+
+		code[lang-rel] {
 			color: inherit !important;
 			box-shadow: none !important;
 			border-radius: 0px !important;
 			background: inherit  !important;
+			margin-top: 35px !important;
+			white-space: pre;
 
 			&::before {
 				content: attr(lang-rel);
@@ -137,6 +151,16 @@
 				right: 0px;
 				left: 0px;
 			}
+
+			&[lang-rel=nohighlight], &[lang-rel=no-highlight] {
+				margin-top: 0px !important;
+				white-space: pre-line;
+
+				&::before {
+					content : none;
+				}
+			}
+
 		}
 	}
 

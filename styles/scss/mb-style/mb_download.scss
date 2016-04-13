@@ -1,5 +1,4 @@
 $stable_release_bg : rgb(240, 240, 240);
-$stable_release_hero_img : "../../img/mb-hero-interface-min.png";
 $beta_release_bg : rgb(201, 201, 201);
 
 .main_panel {
@@ -33,6 +32,7 @@ $beta_release_bg : rgb(201, 201, 201);
 					display: block;
 					width: 40%;
 					margin: 30px 0px 0px;
+					float: left;
 
 					.installer_layer_wrapper {
 						text-align: left;
@@ -48,14 +48,16 @@ $beta_release_bg : rgb(201, 201, 201);
 					.mb_portable_download_bg {
 						background: rgba(0, 0, 0, 0.22);
 					}
+
+					@media screen and(max-width: $break-small){
+						width: 100%;
+					}
 				}
 			}
 
-			&:after {
-				content: url($stable_release_hero_img);
-				top: 100px;
-				right: -200px;
-				position: absolute;
+			.hero_img_top .hero_img_wrapper.hero_img_topmost_wrap {
+				top: 10px;
+				left: 50px;
 			}
 		}
 
@@ -88,6 +90,12 @@ $beta_release_bg : rgb(201, 201, 201);
 				position: absolute;
 				font-size: 350px;
 				color: rgba(255, 255, 255, 0.3);
+			}
+
+			@media screen and(max-width: $break-small){
+				&:after {
+					content : none;
+				}
 			}
 		}
 	}

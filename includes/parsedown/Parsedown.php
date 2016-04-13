@@ -9,6 +9,12 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
+/**
+ * MODIFICATIONS:
+ * @line 417 added "'lang-rel' => $class," for adding a "lang-rel" data attribute to the code element.
+ * This allows better styling and more control.
+ */
+
 #
 #
 # Parsedown

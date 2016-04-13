@@ -107,22 +107,52 @@
 
 		public static function getStatus($id)
 		{
+			global $lang;
 			switch ($id) {
 				case '0':
-					return "Waiting for Approval";
+					return array('icon' => $lang['addon_status_icon_1'], 'text'=> $lang['addon_status_1']);
 					break;
 				case '1':
-					return "Approved";
+					return array('icon' => $lang['addon_status_icon_2'], 'text'=> $lang['addon_status_2']);
 					break;
 				case '2':
-					return "Rejected";
+					return array('icon' => $lang['addon_status_icon_3'], 'text'=> $lang['addon_status_3']);
 					break;
 				case '3':
-					return "Deleted";
+					return array('icon' => $lang['addon_status_icon_4'], 'text'=> $lang['addon_status_4']);
 					break;
 				default:
-					return "Unknown";
+					return array('icon' => $lang['addon_status_icon_5'], 'text'=> $lang['addon_status_5']);
 					break;
 			}
+		}
+
+		/**
+		 * @param $rankid
+		 *
+		 * @return string
+		 * @todo improve it by making it more flexible
+		 */
+		public static function rankName($rankid)
+		{
+			switch ($rankid) {
+				case 1:
+					$rankname = "Admin";
+					break;
+				case 2:
+					$rankname = "Mod";
+					break;
+				case 5:
+					$rankname = "Elite";
+					break;
+				case 10:
+					$rankname = "Newbie";
+					break;
+				default:
+					$rankname = "Unknown";
+					break;
+			}
+
+			return $rankname;
 		}
 	}

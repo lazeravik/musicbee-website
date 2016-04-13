@@ -9,31 +9,37 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-require_once $siteRoot . 'classes/Stats.php';
+require_once $link['root'] . 'classes/Stats.php';
 
 parse_str(str_replace("?", "", $params[2]),$url_params); 
 
 
-if (!(isset($url_params['type']) && isset($url_params['r']))) {
-	invalidRedirect();
-	exit();
+if (isset($url_params['type']) && isset($url_params['id']) && isset($url_params['r'])) {
+	if($url_params['type'] == "addon") {
+		$stat['ip'] = $_SERVER['REMOTE_ADDR'];
+		$stat['is_registered'] = ($mb['user']['is_guest']) ? "0" : "1";
+
+		$stat['stat_type'] = $url_params['type'];
+		$stat['id'] = $url_params['id'];
+
+		$Stats = new Stats();
+		$Stats->addStat($stat);
+
+		$url = $url_params['r'];
+		include $link['root'].'views/redirect.template.php';
+	}
 }
+/**
+ * For setting language file all we need is to set  `$_GET['lang']`,
+ * all other things are taken care of in functions.php file
+ */
+elseif($url_params['type'] = "lang" || isset($_GET['lang'])){
 
-$stat['ip'] = $_SERVER['REMOTE_ADDR'];
-$stat['is_registered'] = ($context['user']['is_guest'])? "0" : "1";
-
-if ($url_params['type'] == "addon" && isset($url_params['id'])) {
-
-	$stat['stat_type'] = $url_params['type'];
-	$stat['id'] = $url_params['id'];
-
-	$Stats = new Stats();
-	$Stats->addStat($stat);
-
-	$url = $url_params['r'];
-	include $siteRoot . 'includes/redirect.template.php';
-} else {
-	include $siteRoot . 'includes/redirect.template.php';
+	//Now that we have `$_GET['lang']` set, head back to wherever we were
+	header('Location: '.$_SESSION['previous_page']);
+}
+else {
+	include $link['root'] . 'views/redirect.template.php';
 }
 
 

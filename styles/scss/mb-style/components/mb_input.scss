@@ -37,6 +37,7 @@ input, textarea, select {
 }
 
 select {
+  background: url("../../img/select-arrows.svg") no-repeat right 10px center;
   padding-right: 20px;
   -webkit-appearance   : none;
   -moz-appearance      : none;

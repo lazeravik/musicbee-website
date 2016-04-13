@@ -7,11 +7,10 @@ RewriteEngine On
 
 #do not perform rewrite in the following directory
 RewriteRule ^includes - [L,NC]
+RewriteRule ^views - [L,NC]
 RewriteRule ^forum - [L,NC]
-RewriteRule ^dokuwiki - [L,NC]
 RewriteRule ^sqlbuddy - [L,NC] #only for dev purpose
 RewriteRule ^installer - [L,NC] #only for dev purpose
-RewriteRule ^mediafire-php-open-sdk-master - [L,NC] #only for dev purpose
 
 #if the requested file has a .php or .php/ ending then remove it
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -29,7 +28,7 @@ RewriteRule (.*)$ /$1/ [R=301,L]
 #if the url have addon in it and have 1 or 2 query then fireup this custom rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^addons/([\w-]+)/([\w-]+)/$    addons.php?id=$1&title=$2
+RewriteRule ^addons/([\w]+)/(.*?)/$    addons.php?id=$1&title=$2
 RewriteRule ^addons/([\w-]+)/$    addons.php?id=$1 [L]
 
 

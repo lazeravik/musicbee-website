@@ -94,12 +94,27 @@ footer.footer_section {
 		.footer_credit{
 			max-width: 1200px;
 			margin: 0px auto;
-			padding-left: 60px;
+			display: block;
+			padding: 0px;
+
+			li{
+				list-style: none;
+				padding: 0px 25px;
+				display: inline-block;
+
+				&.right{
+					float: right;
+				}
+			}
 
 			p{
 				color: rgba(255, 255, 255, 0.76);
 				padding:0px;
 				margin: 2px;
+			}
+
+			&::after{
+				@include clearfix;
 			}
 		}
 	}
