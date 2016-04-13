@@ -1,7 +1,12 @@
+<?php
+
+$type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$data['type']]['title'] : $data['type'];
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo ($data['type'] == "All") ? "Add-ons" : $data['type']; ?> for MusicBee</title>
+	<title><?php echo ($data['type'] == "All") ? "Add-ons" : $type_blob; ?> for MusicBee</title>
 	<meta name="description" content="<?php echo $meta_description; ?>">
 	<!-- keyword meta tag is obsolete, google does not use it, but some
 	search engine still use it, so for legacy support it is included -->
@@ -28,7 +33,7 @@ include($mainmenu);
 		<a href="<?php echo $link['help']; ?>"><?php echo $lang['addon_49']; ?></a>
 		<a href="<?php echo $link['forum']; ?>"><?php echo $lang['addon_48']; ?></a>
 		<a href="<?php echo $link['addon']['dashboard']; ?>#dashboard_submit"><?php echo $lang['addon_50']; ?></a>
-		<a href="<?php echo $generated_url; ?>"><?php echo $lang['addon_51']; ?></a>
+		<a href="<?php echo $link['addon']['home']; ?>s/?type=all"><?php echo $lang['addon_51']; ?></a>
 	</div>
 	<!-- AddOn page navigation top menu -->
 	<div class="secondery_nav addon_secondery_nav secondery_nav_color" id="secondery_nav">
@@ -93,12 +98,8 @@ include($mainmenu);
 			<?php
 
 			if(!empty($url_params['q'])) {
-				$type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$data['type']]['title'] : $data['type'];
-
 				echo "<h2>".$lang['addon_31']."<i class=\"search_term\">".htmlspecialchars($url_params['q'], ENT_QUOTES, "UTF-8")."</i>"."<i class=\"search_term\">".$type_blob."</i></h2>";
 			} else {
-				$type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_menu']))? $mb['main_menu']['add-ons']['sub_menu'][$data['type']]['title'] : $data['type'];
-
 				echo "<h2>".$type_blob."</h2>";
 				if(isset($mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc'])) {
 					echo "<h4>".$mb['main_menu']['add-ons']['sub_menu'][$addon_type]['desc']."</h4>";
