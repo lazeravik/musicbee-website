@@ -34,6 +34,9 @@ class Dashboard
 		$musicbeeApiLink = htmlspecialchars($_POST['musicbeeApiLink']);
 		$websiteBugLink = htmlspecialchars($_POST['websiteBugLink']);
 		$musicbeeBugLink = htmlspecialchars($_POST['musicbeeBugLink']);
+		$presskitLink = htmlspecialchars($_POST['presskitLink']);
+		$eliteRequirement = htmlspecialchars($_POST['eliteRequirement']);
+		$selfApprovalRequirement = htmlspecialchars($_POST['selfApprovalRequirement']);
 
 		$bindedVal = array(
 				$showPgaeLoadTime,
@@ -50,6 +53,9 @@ class Dashboard
 				$musicbeeApiLink,
 				$websiteBugLink,
 				$musicbeeBugLink,
+				$presskitLink,
+				$eliteRequirement,
+				$selfApprovalRequirement,
 		);
 
 
@@ -70,6 +76,9 @@ class Dashboard
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeApiLink';
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteBugLink';
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeBugLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'presskitLink';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'eliteRequirement';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'selfApprovalRequirement';
 						";
 
 				//var_dump(showQuery($sql, $bindedVal));

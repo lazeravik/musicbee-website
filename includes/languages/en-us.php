@@ -232,7 +232,7 @@ $lang['dashboard_record_th_3'] = 'Member';
 $lang['dashboard_record_th_4'] = 'Status';
 $lang['dashboard_record_th_5'] = 'Likes';
 $lang['dashboard_record_th_6'] = 'Downloads';
-$lang['dashboard_record_th_6'] = 'Submitted by';
+$lang['dashboard_record_th_7'] = 'Submitted by';
 //dashboard > overview > side links
 $lang['dashboard_links_1'] = 'MusicBee API';
 $lang['dashboard_links_7'] = 'Read MusicBee docs for developer';
@@ -327,7 +327,8 @@ $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
 $lang['dashboard_err_16'] = '<b>ERROR:</b> You must add a support/discussion forum link for a beta add-on!';
 $lang['dashboard_err_18'] = 'ERROR';
 $lang['dashboard_err_19'] = '<b>ERROR:</b> Website setting can\'t be saved!';
-
+$lang['dashboard_err_20'] = '<b>ERROR:</b> Dashboard submission is turned off. Contact admin/mod on the forum!';
+$lang['dashboard_err_21'] = 'You can not submit any new add-on! but you can still update your existing add-on.';
 
 /**
  * Moderator Panel goes here
@@ -369,13 +370,15 @@ $lang['dashboard_admin_header_16'] = 'Website API Link';
 $lang['dashboard_admin_header_17'] = 'MusicBee API Link';
 $lang['dashboard_admin_header_18'] = 'Website Bug Link';
 $lang['dashboard_admin_header_19'] = 'MusicBee Bug Link';
+$lang['dashboard_admin_header_20'] = 'Presskit Download Link';
+$lang['dashboard_admin_header_21'] = 'Add-on needed for Elite status';
+$lang['dashboard_admin_header_22'] = 'Add-on needed for submitting without approval';
 
 $lang['dashboard_admin_desc_1'] = 'Shows page generation time in seconds';
 $lang['dashboard_admin_desc_2'] = 'If you disable the submission form, user won\'t be able to submit addons for the add-on page';
 $lang['dashboard_admin_desc_3'] = 'Maximum number of add-on user can submit for admin/mod approval, until those are approved they can\'t submit more';
 $lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, musicbee release form.';
 $lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be carefull when modifying. Don\'t change if you have doubts';
-
 $lang['dashboard_admin_button_1'] = 'Save';
 
 

@@ -10,7 +10,6 @@
  */
 
 
-
 $no_guests = true; //kick off the guests
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Dashboard.php';
@@ -56,6 +55,25 @@ if(isset($_GET['view'])) {
 
 
 /**
+ * If Dashboard submission is turned off show error message
+ */
+if($viewType == 0 && !$setting['addonSubmissionOn']) { ?>
+	<div class="main_content_wrapper col_2_1">
+		<div class="sub_content_wrapper">
+			<div class="box_content">
+				<div class="show_info info_red custom">
+					<h3><?php echo $lang['dashboard_err_20']; ?></h3>
+					<p class="description"><?php echo $lang['dashboard_err_21']; ?></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
+	exit();
+}
+
+/**
  * If the request is for addon submission success the show a success diologue
  */
 
@@ -64,9 +82,9 @@ if(isset($_GET['action'])):
 		<div class="main_content_wrapper col_2_1">
 			<div class="sub_content_wrapper">
 				<div class="box_content">
-			<span class="show_info info_green custom">
+			<div class="show_info info_green custom">
 				<h3><?php echo $lang['dashboard_msg_11']; ?></h3>
-			</span>
+			</div>
 					<?php if($mb['user']['need_approval']): ?>
 						<p class="info_text">
 							<?php echo $lang['dashboard_msg_5']; ?>
@@ -86,22 +104,22 @@ if(isset($_GET['action'])):
 endif; ?>
 
 
-<?php if($viewType == 2 && $data['status'] == 3 && !$mb['user']['can_mod']){ ?>
-		<div class="main_content_wrapper col_2_1">
-			<div class="sub_content_wrapper">
-				<div class="box_content">
+<?php if($viewType == 2 && $data['status'] == 3 && !$mb['user']['can_mod']) { ?>
+	<div class="main_content_wrapper col_2_1">
+		<div class="sub_content_wrapper">
+			<div class="box_content">
 			<span class="show_info info_red custom">
 				<h3><?php echo $lang['dashboard_err_18']; ?></h3>
 			</span>
-					<p class="info_text">
-						<?php echo $lang['dashboard_msg_9']; ?>
-					</p>
-				</div>
+				<p class="info_text">
+					<?php echo $lang['dashboard_msg_9']; ?>
+				</p>
 			</div>
 		</div>
-		<?php
-		exit();
-	}
+	</div>
+	<?php
+	exit();
+}
 ?>
 
 <form action="<?php echo $link['url']; ?>includes/dashboard.tasks.php" method="post" id="addon_submission" data-autosubmit>

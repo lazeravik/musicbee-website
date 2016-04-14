@@ -54,7 +54,7 @@ include($mainmenu);
 						<p>
 							<?php echo $lang['press_4']; ?>
 						</p>
-						<a href="<?php echo $setting['musicbeeBugLink']; ?>" class="btn btn_blue">
+						<a href="<?php echo $setting['presskitLink']; ?>" class="btn btn_blue">
 							<?php echo $lang['press_button_1']; ?>
 						</a>
 					</ul>

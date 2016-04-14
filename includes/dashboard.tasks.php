@@ -22,6 +22,13 @@
 	include_once $link['root'] . 'includes/parsedown/Parsedown.php';
 
 if (isset($_POST['submit'])) {
+
+	//If Add-on submission is turned of show error
+	if(!$setting['addonSubmissionOn']){
+		die('{"status": "0", "data": "' . $lang['dashboard_err_20'] . '"}');
+	}
+
+
 	//if all user input is ok then move on
 	if (validateInput ()) {
 		$dashboard = new Dashboard();

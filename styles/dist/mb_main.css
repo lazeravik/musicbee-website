@@ -3337,96 +3337,216 @@ select#release_note_jump option {
 /*================================================================================================================*\\
     Codes highlighting
 \*================================================================================================================*/
+/*
+For light theme use xcode style
+*/
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff;
+  color: black;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #006a00;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #aa0d91;
+}
+
+.hljs-name {
+  color: #008;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #660;
+}
+
+.hljs-string {
+  color: #c41a16;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #080;
+}
+
+.hljs-title,
+.hljs-tag,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-number,
+.hljs-meta {
+  color: #FF5722;
+}
+
+.hljs-section,
+.hljs-class .hljs-title,
+.hljs-type,
+.hljs-attr,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-params {
+  color: #FFC107;
+}
+
+.hljs-attribute,
+.hljs-subst {
+  color: #000;
+}
+
+.hljs-formula {
+  background-color: #eee;
+  font-style: italic;
+}
+
+.hljs-addition {
+  background-color: #baeeba;
+}
+
+.hljs-deletion {
+  background-color: #ffc8bd;
+}
+
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #9b703f;
+}
+
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
 /**
  * Obsidian style
  * ported by Alexander Marenin (http://github.com/ioncreature)
  */
-.hljs {
+.dark .hljs, .dark_theme .hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
   background: #282b2e !important;
 }
 
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-selector-id {
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-literal,
+.dark .hljs-selector-id, .dark_theme .hljs-keyword,
+.dark_theme .hljs-selector-tag,
+.dark_theme .hljs-literal,
+.dark_theme .hljs-selector-id {
   color: #93c763;
 }
 
-.hljs-number {
+.dark .hljs-number, .dark_theme .hljs-number {
   color: #ffcd22;
 }
 
-.hljs {
+.dark .hljs, .dark_theme .hljs {
   color: #e0e2e4;
 }
 
-.hljs-attribute {
+.dark .hljs-attribute, .dark_theme .hljs-attribute {
   color: #668bb0;
 }
 
-.hljs-code,
-.hljs-class .hljs-title,
-.hljs-section {
+.dark .hljs-code,
+.dark .hljs-class .hljs-title,
+.dark .hljs-section, .dark_theme .hljs-code,
+.dark_theme .hljs-class .hljs-title,
+.dark_theme .hljs-section {
   color: white;
 }
 
-.hljs-regexp,
-.hljs-link {
+.dark .hljs-regexp,
+.dark .hljs-link, .dark_theme .hljs-regexp,
+.dark_theme .hljs-link {
   color: #d39745;
 }
 
-.hljs-meta {
+.dark .hljs-meta, .dark_theme .hljs-meta {
   color: #557182;
 }
 
-.hljs-tag,
-.hljs-name,
-.hljs-bullet,
-.hljs-subst,
-.hljs-emphasis,
-.hljs-type,
-.hljs-built_in,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable {
+.dark .hljs-tag,
+.dark .hljs-name,
+.dark .hljs-bullet,
+.dark .hljs-subst,
+.dark .hljs-emphasis,
+.dark .hljs-type,
+.dark .hljs-built_in,
+.dark .hljs-selector-attr,
+.dark .hljs-selector-pseudo,
+.dark .hljs-addition,
+.dark .hljs-variable,
+.dark .hljs-template-tag,
+.dark .hljs-template-variable, .dark_theme .hljs-tag,
+.dark_theme .hljs-name,
+.dark_theme .hljs-bullet,
+.dark_theme .hljs-subst,
+.dark_theme .hljs-emphasis,
+.dark_theme .hljs-type,
+.dark_theme .hljs-built_in,
+.dark_theme .hljs-selector-attr,
+.dark_theme .hljs-selector-pseudo,
+.dark_theme .hljs-addition,
+.dark_theme .hljs-variable,
+.dark_theme .hljs-template-tag,
+.dark_theme .hljs-template-variable {
   color: #8cbbad;
 }
 
-.hljs-string,
-.hljs-symbol {
+.dark .hljs-string,
+.dark .hljs-symbol, .dark_theme .hljs-string,
+.dark_theme .hljs-symbol {
   color: #ec7600;
 }
 
-.hljs-comment,
-.hljs-quote,
-.hljs-deletion {
+.dark .hljs-comment,
+.dark .hljs-quote,
+.dark .hljs-deletion, .dark_theme .hljs-comment,
+.dark_theme .hljs-quote,
+.dark_theme .hljs-deletion {
   color: #818e96;
 }
 
-.hljs-selector-class {
-  color: #A082BD;
+.dark .hljs-selector-class, .dark_theme .hljs-selector-class {
+  color: #a082bd;
 }
 
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-doctag,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-name,
-.hljs-strong {
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-literal,
+.dark .hljs-doctag,
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-type,
+.dark .hljs-name,
+.dark .hljs-strong, .dark_theme .hljs-keyword,
+.dark_theme .hljs-selector-tag,
+.dark_theme .hljs-literal,
+.dark_theme .hljs-doctag,
+.dark_theme .hljs-title,
+.dark_theme .hljs-section,
+.dark_theme .hljs-type,
+.dark_theme .hljs-name,
+.dark_theme .hljs-strong {
   font-weight: bold;
 }
 
 .markdownView {
-  color: #cecece;
+  color: #333;
 }
 
 .markdownView h1, .markdownView h2, .markdownView h3, .markdownView h4, .markdownView p {
@@ -3446,10 +3566,12 @@ select#release_note_jump option {
 
 .markdownView ul li {
   list-style-type: disc !important;
+  display: list-item !important;
 }
 
 .markdownView ol li {
   list-style-type: circle !important;
+  display: list-item !important;
 }
 
 .markdownView p {
@@ -3492,7 +3614,7 @@ select#release_note_jump option {
 .markdownView blockquote {
   padding: 10px 0px 10px 15px !important;
   margin: 15px 0px 15px 0px !important;
-  background: #333 !important;
+  background: #eee !important;
   border-left: 5px solid #444 !important;
   position: relative !important;
   padding-left: 40px !important;
@@ -3502,7 +3624,7 @@ select#release_note_jump option {
 
 .markdownView blockquote::before {
   content: "\f10d";
-  color: #9e9e9e;
+  color: #CCCCCC;
   font-size: 20px;
   font-style: normal;
   font-family: FontAwesome;
@@ -3514,7 +3636,7 @@ select#release_note_jump option {
 
 .markdownView blockquote::after {
   content: "\f10e";
-  color: #9e9e9e;
+  color: #CCCCCC;
   font-size: 20px;
   font-style: normal;
   font-family: FontAwesome;
@@ -3537,7 +3659,7 @@ select#release_note_jump option {
 
 .markdownView pre {
   color: inherit !important;
-  background: #282b2e !important;
+  background: #eee !important;
   padding: 20px !important;
   overflow: auto !important;
   position: relative !important;
@@ -3567,7 +3689,7 @@ select#release_note_jump option {
   text-transform: uppercase;
   display: block;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.09);
+  background: #D8D8D8;
   border-bottom: 2px solid rgba(255, 255, 255, 0.09);
   font-size: 14px;
   font-family: sans-serif;
@@ -3619,6 +3741,31 @@ select#release_note_jump option {
   background-color: rgba(255, 255, 255, 0.06) !important;
 }
 
+.markdownView.dark {
+  color: #cecece;
+}
+
+.markdownView.dark blockquote {
+  background: #333 !important;
+}
+
+.markdownView.dark blockquote::before {
+  color: #9e9e9e;
+}
+
+.markdownView.dark blockquote::after {
+  color: #9e9e9e;
+}
+
+.markdownView.dark pre {
+  background: #282b2e !important;
+}
+
+.markdownView.dark pre code[lang-rel]::before {
+  background: rgba(255, 255, 255, 0.09);
+  border-bottom: none;
+}
+
 #wmd-button-bar {
   width: 100%;
   background-color: #fff;
@@ -3639,11 +3786,12 @@ select#release_note_jump option {
 }
 
 #wmd-preview {
-  background-color: #1D1D1D;
+  background-color: #fff;
   padding: 10px 20px;
   box-sizing: border-box;
   margin: 10px auto;
   display: block;
+  border: 1px solid #4CAF50;
 }
 
 #wmd-preview::before {
