@@ -139,8 +139,32 @@ include $link['root'].'classes/Dashboard.php';
 						</label>
 						<input type="text" id="musicbeeBugLink" name="musicbeeBugLink" value="<?php echo $setting['musicbeeBugLink']; ?>"/>
 					</li>
+
+					<li>
+						<label for="presskitLink">
+							<p><?php echo $lang['dashboard_admin_header_20']; ?></p>
+						</label>
+						<input type="text" id="presskitLink" name="presskitLink" value="<?php echo $setting['presskitLink']; ?>"/>
+					</li>
 				</ul>
 			</div>
+			<div class="box_content">
+				<ul class="form">
+					<li>
+						<label for="eliteRequirement">
+							<p><?php echo $lang['dashboard_admin_header_21']; ?></p>
+						</label>
+						<input type="text" id="eliteRequirement" name="eliteRequirement" value="<?php echo $setting['eliteRequirement']; ?>"/>
+					</li>
+					<li>
+						<label for="selfApprovalRequirement">
+							<p><?php echo $lang['dashboard_admin_header_22']; ?></p>
+						</label>
+						<input type="text" id="selfApprovalRequirement" name="selfApprovalRequirement" value="<?php echo $setting['selfApprovalRequirement']; ?>"/>
+					</li>
+				</ul>
+			</div>
+
 			<div class="box_content">
 				<ul class="form">
 					<button class="btn btn_blue" type="submit" onclick="saveSetting()"><?php echo $lang['dashboard_admin_button_1']; ?></button>

@@ -159,7 +159,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 		<div class="addon_similar readme_markdown_bg" id="readme">
 			<div class="addon_similar_wrap readme_markdown_wrap">
 				<h2><?php echo $lang['addon_21']; ?></h2>
-				<div id="readme_markdown" class="markdownView">
+				<div id="readme_markdown" class="markdownView dark">
 					<?php echo $addon_data['readme_content_html']; ?>
 				</div>
 			</div>
@@ -240,6 +240,14 @@ include($footer);
 				}
 			}
 		});
+
+		/* Code blocks that do not have code type mentioned we will simply use "CODE" to display*/
+		$( "pre > code" ).not('[lang-rel]')
+				.each(function() {
+					$(this).attr('lang-rel', 'code');
+				});
+
+
 
 		// Initialize code highlighting
 		hljs.initHighlightingOnLoad();

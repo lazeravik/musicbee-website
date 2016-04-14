@@ -23,11 +23,12 @@
 
 
 #wmd-preview {
-    background-color: #1D1D1D;
+    background-color: #fff;
     padding: 10px 20px;
     box-sizing: border-box;
     margin: 10px auto;
     display: block;
+	border: 1px solid #4CAF50;
 
     &::before {
         content: "Preview";

@@ -101,7 +101,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<?php echo $lang['dashboard_record_th_1']; ?>
 						</td>
 						<td>
-							<?php echo $lang['dashboard_record_th_6']; ?>
+							<?php echo $lang['dashboard_record_th_7']; ?>
 						</td>
 						<td>
 							<?php echo $lang['dashboard_record_th_2']; ?>

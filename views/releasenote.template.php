@@ -85,7 +85,7 @@ include($mainmenu);
 								</li>
 							</ul>
 						</span>
-						<div class="info_table_wrap markdownView" >
+						<div class="info_table_wrap markdownView light" >
 							<?php echo ($value['release_note_html']!=null)?$value['release_note_html']:'<div class="no_release_note" data-no-release-text="'.$lang['releasenote_6'].'"></div>'; ?>
 						</div>
 					</div>
