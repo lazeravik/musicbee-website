@@ -28,9 +28,12 @@ if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
+$secure = (isSecure())?'https://':'http://';
+
 //All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
 $link = array();
-$link['url'] = 'http://'.$_SERVER['HTTP_HOST']."/";
+
+$link['url'] = $secure.$_SERVER['HTTP_HOST']."/";
 $link['root'] = $_SERVER['DOCUMENT_ROOT']."/";
 $link['download'] = $link['url'].'download/';
 $link['rss'] = $link['url'].'rss/';
@@ -325,23 +328,31 @@ if(!$mb['user']['is_guest']) {
 	require_once $link['root'].'classes/Member.php';
 	$memberData = new Member();
 
-	if($memberData->memberInfo($mb['user']['id'])['rank'] == null) {
+	//permission level 1 means the member is admin
+	//permission level 2 means the member is mod
+	//permission level 5 means the member is elite
+	//permission level 10 means the member is noob
+	if($mb['user']['is_admin']) {
+		$permission = 1;
+	} elseif($mb['user']['can_mod']) {
+
+		$permission = 2;
+	} else {
 		$permission = 10;
-		if($mb['user']['is_admin']) {
-			$permission = 1; //permission level 1 means the member is admin
-		} elseif($mb['user']['is_mod']) {
-			$permission = 2; //permission level 2 means the member is mod
-		}
+	}
+
+	if($memberData->memberInfo($mb['user']['id'])['rank'] == null) {
 		//Create an Addon dashboard account for the user
 		if($memberData->createDashboardAccount($mb['user']['id'], $permission, $mb['user']['name'])) {
 			$userinfo = $memberData->memberInfo($mb['user']['id']);
 		} else {
-
+			//@todo: put some error feedback
 		}
 	} else {
 		//check if forum username updated,
 		$userinfo = $memberData->memberInfo($mb['user']['id']);
 
+		//Update the website name if the forum name is updated
 		if($userinfo['membername'] != $mb['user']['username']) {
 			if($memberData->updateDashboardAccount($mb['user']['id'], $mb['user']['username'])) {
 				$userinfo = $memberData->memberInfo($mb['user']['id']);
@@ -349,34 +360,26 @@ if(!$mb['user']['is_guest']) {
 		}
 	}
 
-	$_SESSION['memberinfo'] = array(
-			'membername' => $userinfo['membername'],
-			'memberid'   => $userinfo['ID_MEMBER'],
-			'rank'       => Validation::rankName($userinfo['rank']),
-			'rank_raw'   => $userinfo['rank'],
-	);
+	//Get total approved addon count of the user
+	$totalApprovedAddon = $memberData->getAddonCountByUser($mb['user']['id']);
+
+	//If the user is not an admin or mod but already reached elite requirement, make the user elite
+	if($totalApprovedAddon >= $setting['eliteRequirement'] && !$mb['user']['can_mod']) {
+		$permission = 5;
+	}
+
+	//If permission is not equal to rank then update the data and keep it in sync with the forum
+	if($userinfo['rank'] != $permission){
+		$memberData->updateUserRank($mb['user']['id'], $permission);
+	}
 
 	//Set the user ranks and permissions once we get it from database
 	$mb['user']['is_elite'] = ($userinfo['rank'] == 5) ? true : false;
 	$mb['user']['is_newbie'] = ($userinfo['rank'] == 10) ? true : false;
 	$mb['user']['rank_name'] = Validation::rankName($userinfo['rank']);
-	$mb['user']['total_approved_addon'] = $memberData->getAddonCountByUser($mb['user']['id']);
+	$mb['user']['total_approved_addon'] = $totalApprovedAddon;
 	$mb['user']['need_approval'] = ($mb['user']['total_approved_addon'] >= $setting['selfApprovalRequirement'] || $mb['user']['can_mod']) ? false : true;
-
-	//If the user is not an admin or mod or already an elite, make the user elite
-	if($mb['user']['total_approved_addon'] >= $setting['eliteRequirement'] && !$mb['user']['can_mod'] && !$mb['user']['is_elite']) {
-		$memberData->makeUserElite($mb['user']['id'], 5);
-
-		//update the elite status
-		$mb['user']['is_elite'] = true;
-	}
-
-	//@todo: change admin/mod stat if their forum profile is updated
-
-} else {
-	$_SESSION['memberinfo'] = null;
 }
-
 
 ///page location variable starts here
 $mainmenu = $link['root'].'views/mainmenu.template.php';
@@ -514,17 +517,23 @@ function getLanguageFileName($lang) {
 }
 
 
+function isSecure() {
+	return
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || $_SERVER['SERVER_PORT'] == 443;
+}
+
+
+
 /**
  * Gets the current page URL
  *
  * @return string
  */
 function currentUrl() {
-	$pageURL = 'http';
-	if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
-		$pageURL .= "s";
-	}
-	$pageURL .= "://";
+	global $secure ;
+	
+	$pageURL = $secure.'://';
 	if($_SERVER["SERVER_PORT"] != "80") {
 		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
 	} else {

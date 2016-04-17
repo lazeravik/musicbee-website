@@ -114,7 +114,7 @@ class Member
 		return null;
 	}
 
-	public function makeUserElite($user_id,$rank) {
+	public function updateUserRank($user_id,$rank) {
 		global $connection, $db_info;
 
 		if(databaseConnection()) {

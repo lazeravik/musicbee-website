@@ -77,7 +77,7 @@ include($mainmenu);
 				</div>
 				<div class="hero_img_top">
 					<div class="hero_img_wrapper hero_img_topmost_wrap">
-						<img src="<?php echo $link['url']; ?>img/mb-hero-interface-min.png">
+						<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-download-min.png">
 					</div>
 				</div>
 				<div id="clear"></div>

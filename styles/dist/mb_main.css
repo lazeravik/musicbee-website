@@ -8,6 +8,10 @@
  *
  */
 /*================================================================================================================*\\
+   load roboto from google font api
+\*================================================================================================================*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100);
+/*================================================================================================================*\\
     Normalize for better crossbrowser consistency
 \*================================================================================================================*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -418,7 +422,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 13px;
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   background: #eee;
 }
 
@@ -455,7 +459,7 @@ a:active, a:hover {
   font-size: 13px;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.13);
   line-height: 21px;
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   display: block;
   padding: 15px 15px 15px 50px;
   position: relative;
@@ -1089,7 +1093,7 @@ a:active, a:hover {
 /** Input variables common for all input fields */
 /** Scss syntax starts here */
 input, textarea, select {
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 12px;
   color: #333;
   max-width: 100%;
@@ -1135,7 +1139,7 @@ select {
   transition: all 0.1s linear 0s;
   border: 0px;
   cursor: pointer;
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
 }
 
 .btn:hover {
@@ -1146,6 +1150,10 @@ select {
 .btn:active {
   text-decoration: none;
   background: #333;
+}
+
+.btn:focus {
+  outline: 3px solid rgba(130, 130, 130, 0.5);
 }
 
 .btn.btn_blacknwhite {
@@ -1277,28 +1285,28 @@ select {
 }
 
 h1 {
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 35px;
   font-weight: 300;
   margin: inherit;
 }
 
 h2 {
-  font-family: inherit;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 25px;
   font-weight: 300;
   margin: inherit;
 }
 
 h3 {
-  font-family: "Roboto";
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 20px;
   font-weight: 300;
   margin: inherit;
 }
 
 h4 {
-  font-family: inherit;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 17px;
   font-weight: 300;
   margin: inherit;
@@ -1365,7 +1373,7 @@ h4 {
   margin: 0;
   padding: 20px 15px;
   text-decoration: none;
-  font-family: "Roboto", "sans-serif", verdana;
+  font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -1535,6 +1543,14 @@ h4 {
   display: none;
 }
 
+.secondery_nav .secondery_nav_wrap ul li.search_wrap {
+  box-shadow: none;
+}
+
+.secondery_nav .secondery_nav_wrap ul li.search_wrap:hover {
+  box-shadow: none;
+}
+
 .secondery_nav .secondery_nav_wrap ul li a {
   color: rgba(255, 255, 255, 0.8);
   padding: 15px;
@@ -1550,11 +1566,14 @@ h4 {
 .secondery_nav .secondery_nav_wrap ul li a:hover {
   text-decoration: none;
   color: white;
-  box-shadow: inset 0 -3px 0 white;
 }
 
 .secondery_nav .secondery_nav_wrap ul li a.active_menu_link {
   box-shadow: inset 0 -3px 0 #ff9800;
+}
+
+.secondery_nav .secondery_nav_wrap ul li:hover {
+  box-shadow: inset 0 -3px 0 white;
 }
 
 .secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub {
@@ -1577,6 +1596,7 @@ h4 {
 .secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub li {
   float: left;
   width: 100%;
+  box-shadow: none;
 }
 
 .secondery_nav .secondery_nav_wrap ul li .nav_dropdown_sub li a {
@@ -1727,6 +1747,10 @@ h4 {
 .secondery_nav .secondery_nav_wrap.expanded ul li form input, .secondery_nav .secondery_nav_wrap.expanded ul li form select {
   width: 100%;
   margin: 0px auto;
+}
+
+.secondery_nav .secondery_nav_wrap.expanded ul li:hover {
+  box-shadow: none;
 }
 
 .secondery_nav .secondery_nav_wrap.expanded ul.right {
@@ -2172,7 +2196,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 }
 
 .mb_intro_top {
-  background: #15327b url("../../img/bg_teaser.svg") fixed center center;
+  background: #15327b url("../../../img/bg_teaser.svg") fixed center center;
   background-size: cover;
 }
 
@@ -2191,7 +2215,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 }
 
 .mb_quality_top {
-  background: url("../../../img/headphone.jpg") 50% 0 fixed, #0076db;
+  background: url("../../../img/hero_img/headphone.jpg") 50% 0 fixed, #0076db;
   background-size: cover;
 }
 
@@ -2264,7 +2288,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 }
 
 .mb_more_top {
-  background: #0076db url("../../../img/download_bg.jpg") fixed center center;
+  background: #0076db url("../../../img/hero_img/download_bg.jpg") fixed center center;
   background-size: cover;
 }
 
@@ -2910,7 +2934,7 @@ select#release_note_jump option {
 }
 
 .addon_similar.alternate_bg.blue {
-  background: #333 url("../../img/addon_header_bg.jpg") fixed center center;
+  background: #333 url("../../img/hero_img/addon_header_bg.jpg") fixed center center;
   background-size: cover;
   min-height: 250px;
 }

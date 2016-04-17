@@ -50,16 +50,7 @@ include $link['root'].'classes/Dashboard.php';
 							<label for="submission"></label>
 						</div>
 					</li>
-					<li>
-						<label for="unapproved_addon_max">
-							<p><?php echo $lang['dashboard_admin_header_7']; ?></p>
-							<p class="description"><?php echo $lang['dashboard_admin_desc_3']; ?></p>
-						</label>
-						<input type="number" id="unapproved_addon_max" name="unapproved_addon_max" value="<?php echo $setting['maxSubmitWithOutApproval']; ?>"/>
-
-					</li>
 				</ul>
-
 			</div>
 
 			<div class="box_content">
@@ -151,16 +142,31 @@ include $link['root'].'classes/Dashboard.php';
 			<div class="box_content">
 				<ul class="form">
 					<li>
+						<label for="unapproved_addon_max">
+							<p><?php echo $lang['dashboard_admin_header_7']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_admin_desc_3']; ?></p>
+						</label>
+						<input type="number" id="unapproved_addon_max" name="unapproved_addon_max" value="<?php echo $setting['maxSubmitWithOutApproval']; ?>"/>
+					</li>
+					<li>
 						<label for="eliteRequirement">
 							<p><?php echo $lang['dashboard_admin_header_21']; ?></p>
 						</label>
-						<input type="text" id="eliteRequirement" name="eliteRequirement" value="<?php echo $setting['eliteRequirement']; ?>"/>
+						<input type="number" id="eliteRequirement" name="eliteRequirement" value="<?php echo $setting['eliteRequirement']; ?>"/>
 					</li>
 					<li>
 						<label for="selfApprovalRequirement">
 							<p><?php echo $lang['dashboard_admin_header_22']; ?></p>
 						</label>
-						<input type="text" id="selfApprovalRequirement" name="selfApprovalRequirement" value="<?php echo $setting['selfApprovalRequirement']; ?>"/>
+						<input type="number" id="selfApprovalRequirement" name="selfApprovalRequirement" value="<?php echo $setting['selfApprovalRequirement']; ?>"/>
+					</li>
+					<hr class="line"/>
+					<li>
+						<label for="maximumAddonSubmissionPerDay">
+							<p><?php echo $lang['dashboard_admin_header_23']; ?></p>
+							<p class="description"><?php echo $lang['dashboard_admin_desc_6']; ?></p>
+						</label>
+						<input type="number" id="maximumAddonSubmissionPerDay" name="maximumAddonSubmissionPerDay" value="<?php echo $setting['maximumAddonSubmissionPerDay']; ?>"/>
 					</li>
 				</ul>
 			</div>

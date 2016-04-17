@@ -8,21 +8,21 @@ h1 {
 }
 
 h2 {
-	font-family: inherit;
+	font-family: $font-family;
 	font-size: 25px;
 	font-weight: 300;
 	margin: inherit;
 }
 
 h3 {
-	font-family: "Roboto";
+	font-family: $font-family;
 	font-size: 20px;
 	font-weight: 300;
 	margin: inherit;
 }
 
 h4 {
-	font-family: inherit;
+	font-family: $font-family;
 	font-size: 17px;
 	font-weight: 300;
 	margin: inherit;

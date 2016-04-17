@@ -55,7 +55,7 @@
 								</div>
 								<div class="hero_img_top">
 									<div class="hero_img_wrapper hero_img_topmost_wrap">
-										<img src="<?php echo $link['url']; ?>img/hero-img-top-min.png">
+										<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-top-min.png">
 									</div>
 								</div>
 							</div>
@@ -84,7 +84,7 @@
 							<h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>
 						</div>
 						<div class="hero_img_top">
-							<img src="<?php echo $link['url']; ?>img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
+							<img src="<?php echo $link['url']; ?>img/hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
 						</div>
 					</div>
 				</div>
@@ -149,7 +149,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-skin-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-skin-min.png">
 							</div>
 						</div>
 					</div>
@@ -165,7 +165,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-sync-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-sync-min.png">
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-groove-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-groove-min.png">
 							</div>
 						</div>
 					</div>
@@ -198,7 +198,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
+								<img src="<?php echo $link['url']; ?>img/hero_img/mb_tag_feature.jpg">
 							</div>
 						</div>
 					</div>
@@ -214,7 +214,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
+								<img src="<?php echo $link['url']; ?>img/hero_img/mb_tag_feature.jpg">
 							</div>
 						</div>
 					</div>

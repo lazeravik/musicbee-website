@@ -1,3 +1,5 @@
+$top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
+
 .secondery_nav_color {
 	background : #161a1b;
 }
@@ -230,7 +232,7 @@
 		background : #171717;
 
 		&.blue {
-			background      : #333 url("../../img/addon_header_bg.jpg") fixed center center;
+			background      : #333 url($top_header_bg) fixed center center;
 			background-size : cover;
 			min-height      : 250px
 		}

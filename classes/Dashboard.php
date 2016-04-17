@@ -37,6 +37,7 @@ class Dashboard
 		$presskitLink = htmlspecialchars($_POST['presskitLink']);
 		$eliteRequirement = htmlspecialchars($_POST['eliteRequirement']);
 		$selfApprovalRequirement = htmlspecialchars($_POST['selfApprovalRequirement']);
+		$maximumAddonSubmissionPerDay = htmlspecialchars($_POST['maximumAddonSubmissionPerDay']);
 
 		$bindedVal = array(
 				$showPgaeLoadTime,
@@ -56,6 +57,7 @@ class Dashboard
 				$presskitLink,
 				$eliteRequirement,
 				$selfApprovalRequirement,
+				$maximumAddonSubmissionPerDay,
 		);
 
 
@@ -79,9 +81,8 @@ class Dashboard
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'presskitLink';
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'eliteRequirement';
 						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'selfApprovalRequirement';
+						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maximumAddonSubmissionPerDay';
 						";
-
-				//var_dump(showQuery($sql, $bindedVal));
 
 				$statement = $connection->prepare($sql);
 				$statement->execute($bindedVal);

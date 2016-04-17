@@ -255,7 +255,7 @@ function addon_secondery_nav_generator($addon_type) {
 	$data .= '
 </ul>
 <ul class="right">
-	<li>
+	<li class="search_wrap">
 		<form method="GET" action="' . $link['addon']['home'] . 's/">
 			<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search small_search" placeholder="'.$lang['addon_42'].' '.$placeholder.'" name="q" value="' . $searchinput['query']  . '"/>
 			<input type="hidden" name="type" value="'.$url_params['type'].'" />
