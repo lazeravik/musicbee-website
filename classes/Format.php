@@ -1,13 +1,13 @@
 <?php
 	/**
-	 * Copyright (c) AvikB, some rights reserved.
-	 * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
-	 *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
-	 *
-	 * @Contributors:
-	 * Created by AvikB for noncommercial MusicBee project.
-	 * Spelling mistakes and fixes from phred and other community memebers.
-	 */
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from community members.
+ */
 
 	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
 	class Format
@@ -15,7 +15,11 @@
 		public static function htmlSafeOutput($html)
 		{
 			$config = HTMLPurifier_Config::createDefault();
-			$config->set('HTML.Allowed', 'code[class|lang-rel],p,pre,table,thead,tbody,td,tr,th,h2,h1,h3,h4,h5,span,ul,li,ol,strong,blockquote,em,a[href|title],img[src],s,del,hr,br');
+			$config->set('HTML.AllowedElements', array(
+			             'code', 'p',  'a',  'img',  'div',  'pre',  'table',  'thead',  'tbody',  'td',  'tr',  'th',  'h2',  'h1',  'h3',  'h4',  'h5',  'span',  'ul',  'li',  'ol',  'strong',  'blockquote',  'em',  's',  'del',  'hr',  'br',  'iframe', 'i'));
+			$config->set('HTML.AllowedAttributes', array('a.href','a.target' ,'code.lang-rel', 'img.src', '*.class', '*.alt', '*.title', '*.border', 'a.target', 'a.rel', 'iframe.src', 'iframe.width', 'iframe.height', 'iframe.frameborder'));
+			$config->set('HTML.SafeIframe', true);
+			$config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo
 			$def = $config->getHTMLDefinition(true);
 			$def->addAttribute('code', 'lang-rel', 'Text');
 			$purifier = new HTMLPurifier($config);
@@ -93,12 +97,6 @@
 			$convmap = array(0x0, 0x2FFFF, 0, 0xFFFF);
 			return mb_encode_numericentity($t, $convmap, 'UTF-8');
 		}
-
-
-
-
-
-
 
 
 		/**
@@ -207,6 +205,77 @@
 			$str = trim($str, $options['delimiter']);
 
 			return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
+		}
+
+		/**
+		 * Input sanitizer for specialcharacter and html tag escape
+		 * @param $value
+		 *
+		 * @return null|string
+		 */
+		public static function safeInput($value)
+		{
+			if (!empty($value)) {
+				$value = strip_tags($value);
+				$value = htmlspecialchars($value);
+				$value = str_replace("\\", "", $value);
+				$value = str_replace(array(
+					"\r\n",
+					"\r",
+					"\n",
+				), "", $value); //remove new line breaks fom the string
+				return stripslashes($value);
+			}
+
+			return null;
+		}
+
+		public static function removeSpace($value)
+		{
+			if (!empty($value)) {
+				return str_replace(" ", "", $value);
+			}
+
+			return null;
+		}
+
+		public static function parsePage($pageLocation)
+		{
+			if(!empty($pageLocation))
+			{
+				//open the Page file
+				$fileData   = file($pageLocation);
+
+				$data       = array();
+				$data['markdown'] = '';
+
+				for ($i = 0, $n = count($fileData); $i < $n; $i++)
+				{
+					//if the line starts and ends with [], then it is page meta info
+					if(substr(trim($fileData[$i]),0,1).substr(trim($fileData[$i]),-1) == '[]')
+					{
+						//remove [ and ] from the string
+						$fileData[$i] = substr(trim($fileData[$i]),1,-1);
+
+						if(strchr($fileData[$i], 'title =') || strchr($fileData[$i], 'title='))
+						{
+							$data['title'] = trim(str_replace(array('title =','title='), '', $fileData[$i]));
+						}
+						elseif (strchr($fileData[$i], 'description =') || strchr($fileData[$i], 'description='))
+						{
+							$data['description'] = trim(str_replace(array('description =','description='), '', $fileData[$i]));
+						}
+
+					}
+					else
+					{
+						$data['markdown']   .= $fileData[$i];
+					}
+				}
+
+				return $data;
+			}
+			return null;
 		}
 
 	}

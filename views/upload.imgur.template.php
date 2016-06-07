@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 $no_guests = true; //kick off the guests
@@ -82,13 +82,13 @@ $inputId = $_POST['id'];
 		</div>
 		<div class="show_info info_darkgrey">
 			<?php echo $lang['407']; ?>
-			<u><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a></u>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="blank">cc by-sa 3.0</a>
 		</div>
 		<div class="img-drop-wrap">
 			<div class="dropzone">
 				<h2><?php echo $lang['408']; ?></h2>
 				<p><?php echo $lang['409']; ?></p>
-				<form action="../includes/upload.tasks.php" method="POST" enctype="multipart/form-data" id="uploadform">
+				<form action="<?php echo $link['url']; ?>includes/upload.tasks.php" method="POST" enctype="multipart/form-data" id="uploadform">
 					<input type="file" id="img_input" accept="image/*" name="img">
 					<input type="hidden" name="target" value="imgur">
 				</form>
@@ -97,7 +97,7 @@ $inputId = $_POST['id'];
 	<?php else: ?>
 		<div class="show_info danger">
 			<h3><?php echo $lang['410']; ?></h3>
-			<p><?php echo $lang['411']; ?></p>
+			<p class="description"><?php echo $lang['411']; ?></p>
 		</div>
 		<?php exit(); endif; ?>
 
@@ -117,7 +117,6 @@ $inputId = $_POST['id'];
 		<div class="sk-circle11 sk-child"></div>
 		<div class="sk-circle12 sk-child"></div>
 	</div>
-
 </div>
 
 <script type="text/javascript">

@@ -1,11 +1,17 @@
-$top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
+$top_header_bg: "../../img/hero_img/polygon_pat.png";
 
 .secondery_nav_color {
 	background : #161a1b;
 }
 
 .addon_secondery_nav {
-	background : rgba(45, 45, 45, 0.8);
+	//background : linear-gradient(rgba(0, 0, 0, 0.16), rgba(29, 29, 29, 0.42), rgba(29, 29, 29, 0.64));
+  background: transparent;
+}
+
+.addon_browse_bg_color {
+  background      : #3F51B5 url($top_header_bg) fixed center center;
+  background-size : cover;
 }
 
 .addon_page_nav {
@@ -26,6 +32,82 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 		padding   : 20px;
 		max-width : 1200px;
 		margin    : 0px auto;
+		box-sizing: border-box;
+
+		.addon_similar_inline_wrap {
+			box-sizing: border-box;
+			float : left;
+
+			.inline_wrap{
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+				background: #2D2D2D;
+				padding: 15px;
+				box-sizing: border-box;
+				margin-top: 20px;
+
+				&.extra_info {
+					box-shadow: none;
+					background: none;
+					margin-top: 0px;
+					padding: 0px;
+
+					table{
+						width: 100%;
+						border-spacing: 0px;
+						margin-top: 20px;
+						border: 1px solid #333;
+						box-sizing: border-box;
+
+						tr {
+							&:nth-child(odd) {
+								background: rgba(255, 255, 255, 0.02);
+							}
+
+							td {
+								padding: 20px 10px;
+
+								&:nth-child(1) {
+									font-weight: 100;
+									color: #E0E0E0;
+									font-size: 15px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.col_2_1 {
+			.addon_similar_inline_wrap:nth-child(1) {
+				width: 65%;
+
+				.inline_wrap{
+					margin-right: 20px;
+				}
+
+				@media screen and (max-width : $break-medium) {
+					width : 100%;
+
+					.inline_wrap{
+						margin-right: 0px;
+					}
+				}
+			}
+
+			.addon_similar_inline_wrap:nth-child(2) {
+				width: 35%;
+
+				@media screen and (max-width : $break-medium) {
+					width : 100%;
+				}
+			}
+
+			&::after{
+				@include clearfix;
+			}
+		}
+
 
 		&.tags {
 			i {
@@ -51,6 +133,11 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 		}
 
 		&.header_links {
+			h2 {
+				box-shadow: none;
+				padding-left: 0px;
+			}
+
 			h3 {
 				display : inline-block;
 				&.colored {
@@ -58,29 +145,42 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 				}
 			}
 			p {
-				margin : 5px 0px;
+				margin : 5px 0px 5px 0px;
 				color  : #a5a5a5;
 			}
 			a {
 				padding       : 10px;
-				background    : rgba(255, 255, 255, 0.05);
+				background    : rgba(255, 255, 255, 0.06);
 				border-radius : 3px;
 				font-weight   : normal;
 				font-size     : 14px;
 				text-shadow   : 1px 0px 2px rgba(0, 0, 0, 0.33);
 				display       : inline-block;
-				margin        : 10px 0px 0px;
+				margin        : 10px 5px 0px 0px;
 				transition    : linear all .1s;
+				color : #fff0f0;
 
 				&:hover {
 					background      : $musicbee-color;
 					color           : #4e4e4e;
 					text-decoration : none;
 					font-weight     : normal;
+					text-shadow: none;
+				}
+
+				&.right{
+					margin        : 0px 0px 0px 10px;
+					float: right;
 				}
 
 			}
+
+			&::after{
+				@include clearfix;
+			}
 		}
+
+
 
 		h2 {
 			box-shadow     : inset 5px 0px 0px #ff9800;
@@ -105,8 +205,14 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 		}
 
 		&.heading_intro {
+			h2 {
+				display : inline-block;
+
+			}
+
 			p {
 				max-width : 750px;
+				color: rgba(255, 255, 255, 0.9);
 			}
 		}
 
@@ -230,12 +336,6 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 
 	&.alternate_bg {
 		background : #171717;
-
-		&.blue {
-			background      : #333 url($top_header_bg) fixed center center;
-			background-size : cover;
-			min-height      : 250px
-		}
 	}
 
 	&.addon_cat_header {
@@ -379,10 +479,9 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 }
 
 .general_info {
-	background          : #607d8b;
-	color               : #fff;
-	background-size     : cover;
-	background-position : 50% 50%;
+	color           : #fff;
+	background      : #607d8b no-repeat;
+	background-size : cover;
 
 	.general_info_color {
 		background : linear-gradient(to bottom, rgba(29, 29, 29, 0.65) 0, rgb(29, 29, 29) 100%);
@@ -402,6 +501,10 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 				margin        : 0px;
 				padding-right : 20px;
 				box-sizing    : border-box;
+
+				h2.title {
+					display : inline-block;
+				}
 
 				@media screen and(max-width : $break-small) {
 					width : 100%;
@@ -484,7 +587,7 @@ $top_header_bg: "../../img/hero_img/addon_header_bg.jpg";
 		.screenshot_wrapper {
 			height           : 180px;
 			background-size  : cover;
-			margin           : 10px 10px 10px 10px;
+			margin           : 10px 10px 10px 0px;
 			display          : block;
 			transition       : all linear .2s;
 			outline          : 2px solid rgba(35, 35, 35, 0);

@@ -67,6 +67,10 @@
 
 .sub_content_wrapper {
 
+	&.center {
+		margin: 0px auto;
+	}
+
 	.box_content {
 		margin     : 20px 10px 5px 10px;
 		box-shadow : 1px 2px 5px rgba(0, 0, 0, 0.18);
@@ -79,7 +83,7 @@
 		.info_table_wrap {
 			display    : block;
 			box-sizing : border-box;
-			padding    : 5px 20px;
+		  word-break: break-word;
 		}
 
 		.flat_info_bar {
@@ -94,14 +98,19 @@
 				margin     : 0px;
 				padding    : 10px;
 				padding    : 0px 15px 0px 15px;
-				box-shadow : inset -1px 0px 0px rgba(255, 255, 255, 0.25);
+				border-right: 1px solid rgba(255, 255, 255, 0.3);
 
 				@media screen and (max-width : $break-tiny) {
 					padding    : 10px;
 					padding    : 5px 15px 5px 15px;
-					box-shadow : inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+					border-right:  none;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 					width      : 100%;
 					background : rgba(64, 64, 64, 0.34);
+				}
+
+				&:nth-last-child(1) {
+					border: none;
 				}
 			}
 
@@ -191,6 +200,11 @@
 						width : 100%;
 					}
 
+				  &.wide {
+					width     : 100%;
+					margin: 0px 0px 10px;
+				  }
+
 					.description {
 						color  : #a9a9a9;
 						margin : 0px;
@@ -212,6 +226,12 @@
 					width     : 60%;
 					max-width : 60%;
 					height    : 100px;
+
+				  &.wide {
+					width     : 100%;
+					max-width : 100%;
+					height    : 200px;
+				  }
 
 					@media screen and (max-width : $break-tiny) {
 						width     : 100%;
@@ -247,23 +267,15 @@
 }
 
 .no_release_note {
-	display             : block;
-	padding             : 30px 20px;
-	background-size     : 120px;
-	border-radius       : 3px;
-	background-repeat   : no-repeat;
-	background-position : right -20px bottom -40px;
-
-	&::before {
-		content     : attr(data-no-release-text);
-		display     : block;
-		color       : #656565;
-		white-space : pre-line;
-	}
+	display         : block;
+	padding         : 30px 20px;
+	background-size : 120px;
+	border-radius   : 3px;
+	color: #333;
 }
 
 select#release_note_jump {
-	margin       : 4px 10px 4px 0px;
+  margin: 2px 5px;
 	color        : #fff;
 	border-color : rgba(255, 255, 255, 0.5);
 

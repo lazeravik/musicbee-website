@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 /**
@@ -19,7 +19,9 @@ $no_directaccess = true;
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Dashboard.php';
+require_once $link['root'].'classes/Help.php';
 include_once $link['root'].'includes/parsedown/Parsedown.php';
+include_once $link['root'].'includes/parsedown/ParsedownExtra.php';
 
 if(isset($_POST['submit'])) {
 
@@ -48,8 +50,9 @@ if(isset($_POST['submit'])) {
 
 			$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 			//load parsedown for markdown to html converter
-			$Parsedown = new Parsedown();
-			$readme_raw = $Parsedown->text($readme);
+			$ParsedownExtra = new ParsedownExtra();
+			$ParsedownExtra->setBreaksEnabled(true);
+			$readme_raw = $ParsedownExtra->text($readme);
 
 			//load and use html purifier for the readme notes.
 			$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
@@ -92,7 +95,7 @@ if(isset($_POST['submit'])) {
 	if($_POST['modify_type'] == "soft_delete") {
 
 		//You can not soft delete an addon that is already soft deleted
-		if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3") {
+		if($dashboard->getAddonStatus($_POST['record_id']) == "3") {
 			die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 		}
 
@@ -117,7 +120,7 @@ if(isset($_POST['submit'])) {
 	} elseif($_POST['modify_type'] == "update") {
 		if(validateInput()) {
 
-			if($dashboard->getAddonStatus($_POST['record_id'])['status'] == "3" && !$mb['user']['can_mod']) {
+			if($dashboard->getAddonStatus($_POST['record_id']) == "3" && !$mb['user']['can_mod']) {
 				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 			}
 
@@ -132,9 +135,10 @@ if(isset($_POST['submit'])) {
 
 				$readme = (isset($_POST['readme'])) ? $_POST['readme'] : "";
 				//load parsedown markup to html converter
-				$Parsedown = new Parsedown();
-				$Parsedown->setBreaksEnabled(true);
-				$readme_raw = $Parsedown->text($readme);
+				$ParsedownExtra = new ParsedownExtra();
+				$ParsedownExtra->setBreaksEnabled(true);
+				$readme_raw = $ParsedownExtra->text($readme);
+
 				//load and use html purifier for the readme notes.
 				$readme_html = Format::htmlSafeOutput($readme_raw); //purify the readme note html
 				//Phew.... all validations complete, now SUBMIT THE ADDON!
@@ -170,13 +174,80 @@ if(isset($_POST['submit'])) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
 		}
 
-		$dashboard = new Dashboard();
+		if(isset($_POST['setting_type'])){
+			if($_POST['setting_type'] == 'press'){
 
-		if($dashboard->saveSiteSetting()) {
-			exit('{"status": "1", "data": "'.$lang['dashboard_msg_10'].'", "callback_function": "setting_saved"}');
+				$press = (isset($_POST['press_content'])) ? $_POST['press_content'] : "";
+				//load parsedown markup to html converter
+				$ParsedownExtra = new ParsedownExtra();
+				$ParsedownExtra->setBreaksEnabled(true);
+				$press_raw = $ParsedownExtra->text($press);
+
+				//load and use html purifier for the readme notes.
+				$press_html = Format::htmlSafeOutput($press_raw); //purify the readme note html
+
+				$_POST['press_md'] = $press;
+				$_POST['press_html'] = $press_html;
+
+				$help = new Help();
+				if($help->saveEdit()) {
+					exit('{"status": "1", "data": "'.$lang['dashboard_msg_10'].'", "callback_function": "setting_saved"}');
+				} else {
+					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
+				}
+			} elseif ($_POST['setting_type'] == 'api'){
+
+				$api = (isset($_POST['api'])) ? $_POST['api'] : "";
+				//load parsedown markup to html converter
+				$ParsedownExtra = new ParsedownExtra();
+				$ParsedownExtra->setBreaksEnabled(true);
+				$api_raw = $ParsedownExtra->text($api);
+
+				//load and use html purifier for the readme notes.
+				$api_html = Format::htmlSafeOutput($api_raw); //purify the readme note html
+
+				$_POST['api_md'] = $api;
+				$_POST['api_html'] = $api_html;
+
+				$help = new Help();
+				if($help->saveEdit()) {
+					exit('{"status": "1", "data": "'.$lang['dashboard_msg_10'].'", "callback_function": "setting_saved"}');
+				} else {
+					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
+				}
+			} elseif ($_POST['setting_type'] == 'help'){
+
+				$faq = (isset($_POST['faq'])) ? $_POST['faq'] : "";
+				//load parsedown markup to html converter
+				$ParsedownExtra = new ParsedownExtra();
+				$ParsedownExtra->setBreaksEnabled(true);
+				$faq_raw = $ParsedownExtra->text($faq);
+
+				//load and use html purifier for the readme notes.
+				$faq_html = Format::htmlSafeOutput($faq_raw); //purify the readme note html
+
+				$_POST['faq_md'] = $faq;
+				$_POST['faq_html'] = $faq_html;
+
+				$help = new Help();
+				if($help->saveEdit()) {
+					exit('{"status": "1", "data": "'.$lang['dashboard_msg_10'].'", "callback_function": "setting_saved"}');
+				} else {
+					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
+				}
+			} else {
+				$dashboard = new Dashboard();
+				if($dashboard->saveSiteSetting()) {
+					exit('{"status": "1", "data": "'.$lang['dashboard_msg_10'].'", "callback_function": "setting_saved"}');
+				} else {
+					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
+				}
+			}
 		} else {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
 		}
+
+
 	}
 }
 

@@ -1,15 +1,19 @@
 <?php
 /**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from community members.
+ */
+
+/**
 * Store and gets download statistics for addons and musicbee downloads
 */
 class Stats
 {
-	private $addon_tbl = SITE_ADDON;
-	private $member_tbl = SITE_MEMBER_TBL;
-	private $likes_tbl = SITE_ADDON_LIKE;
-	private $download_stat_tbl = SITE_DOWNLOAD_STAT;
-	private $settings_tbl = SETTINGS;
-
 
 	public function addStat($stat)
 	{
@@ -65,6 +69,7 @@ class Stats
 				}
 			} catch (Exception $e) {}
 		}
+		return false;
 	}
 
 

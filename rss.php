@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 header("Content-Type: application/xml; charset=UTF-8");

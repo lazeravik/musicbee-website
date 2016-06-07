@@ -7,7 +7,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 class Search
 {
@@ -123,8 +123,10 @@ class Search
 	}
 
 
-	public function generateQuery($gen_type,$range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby) {
+	public function generateQuery($gen_type,$range, $offset, $placeholder, $search_array, $authorid, $status, $cat, $searchquery,$orderby)
+	{
 		global $db_info;
+		$search_sql='';
 
 		if($gen_type == "result") {
 			$search_sql = "SELECT

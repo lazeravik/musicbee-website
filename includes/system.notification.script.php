@@ -71,7 +71,7 @@
 		catch (e) {}
 
 		return false;
-	};
+	}
 
 	function copyError(element) {
 		var $temp = $("<input>");

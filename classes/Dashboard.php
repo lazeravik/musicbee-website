@@ -6,92 +6,106 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 /**
  * Handles Dashboard related stuff
  * @author : AvikB;
  *
- * @todo mention charset in htmlspecialchars()
  */
 class Dashboard
 {
+	/**
+	 * @return bool
+	 */
 	public function saveSiteSetting() {
 		global $connection,$db_info;
 
-		$showPgaeLoadTime = (isset($_POST['pageloadtime'])) ? 1 : 0;
-		$addonSubmissionOn = (isset($_POST['submission'])) ? 1 : 0;
-		$imgurUploadOn = (isset($_POST['imguron'])) ? 1 : 0;
-		$maxSubmitWithOutApproval = (isset($_POST['unapproved_addon_max'])) ? htmlspecialchars($_POST['unapproved_addon_max']) : 10;
-		$imgurClientID = $_POST['imgurClientID'];
-		$imgurClientSecret = $_POST['imgurClientSecret'];
-		$paypalDonationLink = htmlspecialchars($_POST['paypalDonationLink']);
-		$twitterLink = htmlspecialchars($_POST['twitterLink']);
-		$wikiaLink = htmlspecialchars($_POST['wikiaLink']);
-		$wishlistLink = htmlspecialchars($_POST['wishlistLink']);
-		$websiteApiLink = htmlspecialchars($_POST['websiteApiLink']);
-		$musicbeeApiLink = htmlspecialchars($_POST['musicbeeApiLink']);
-		$websiteBugLink = htmlspecialchars($_POST['websiteBugLink']);
-		$musicbeeBugLink = htmlspecialchars($_POST['musicbeeBugLink']);
-		$presskitLink = htmlspecialchars($_POST['presskitLink']);
-		$eliteRequirement = htmlspecialchars($_POST['eliteRequirement']);
-		$selfApprovalRequirement = htmlspecialchars($_POST['selfApprovalRequirement']);
-		$maximumAddonSubmissionPerDay = htmlspecialchars($_POST['maximumAddonSubmissionPerDay']);
+		if(isset($_POST['setting_type'])) {
 
-		$bindedVal = array(
-				$showPgaeLoadTime,
-				$addonSubmissionOn,
-				$imgurUploadOn,
-				$maxSubmitWithOutApproval,
-				$imgurClientID,
-				$imgurClientSecret,
-				$paypalDonationLink,
-				$twitterLink,
-				$wikiaLink,
-				$wishlistLink,
-				$websiteApiLink,
-				$musicbeeApiLink,
-				$websiteBugLink,
-				$musicbeeBugLink,
-				$presskitLink,
-				$eliteRequirement,
-				$selfApprovalRequirement,
-				$maximumAddonSubmissionPerDay,
-		);
+			if($_POST['setting_type'] == 'general') {
+				$showPgaeLoadTime               = (isset($_POST['pageloadtime'])) ? 1 : 0;
+				$addonSubmissionOn              = (isset($_POST['submission'])) ? 1 : 0;
+
+				$maxSubmitWithOutApproval       = (isset($_POST['unapproved_addon_max']))         ? htmlspecialchars($_POST['unapproved_addon_max'], ENT_NOQUOTES, 'UTF-8')           : 10;
+				$eliteRequirement               = (isset($_POST['eliteRequirement']))             ? htmlspecialchars($_POST['eliteRequirement'], ENT_NOQUOTES, 'UTF-8')               : 5;
+				$selfApprovalRequirement        = (isset($_POST['selfApprovalRequirement']))      ? htmlspecialchars($_POST['selfApprovalRequirement'], ENT_NOQUOTES, 'UTF-8')        : 3;
+				$maximumAddonSubmissionPerDay   = (isset($_POST['maximumAddonSubmissionPerDay'])) ? htmlspecialchars($_POST['maximumAddonSubmissionPerDay'], ENT_NOQUOTES, 'UTF-8')   : 10;
+
+				$imgurUploadOn                  = (isset($_POST['imguron'])) ? 1 : 0;
+				$imgurClientID                  = $_POST['imgurClientID'];
+				$imgurClientSecret              = $_POST['imgurClientSecret'];
+
+				$bindedVal = array(
+					$showPgaeLoadTime,
+					$addonSubmissionOn,
+					$imgurUploadOn,
+					$maxSubmitWithOutApproval,
+					$imgurClientID,
+					$imgurClientSecret,
+					$eliteRequirement,
+					$selfApprovalRequirement,
+					$maximumAddonSubmissionPerDay,
+				);
 
 
-		if(databaseConnection()) {
-			try {
 				$sql = "
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'showPgaeLoadTime';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'addonSubmissionOn';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurUploadOn';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maxSubmitWithOutApproval';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientID';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientSecret';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'paypalDonationLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'twitterLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wikiaLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wishlistLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteApiLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeApiLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteBugLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeBugLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'presskitLink';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'eliteRequirement';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'selfApprovalRequirement';
-						UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maximumAddonSubmissionPerDay';
-						";
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'showPgaeLoadTime';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'addonSubmissionOn';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurUploadOn';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maxSubmitWithOutApproval';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientID';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'imgurClientSecret';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'eliteRequirement';
+				  	UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'selfApprovalRequirement';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'maximumAddonSubmissionPerDay';
+					";
 
-				$statement = $connection->prepare($sql);
-				$statement->execute($bindedVal);
 
-				return true;
-			} catch(Exception $e) {
-				return false;
+			} elseif($_POST['setting_type'] == 'links') {
+				$paypalDonationLink             = htmlspecialchars($_POST['paypalDonationLink'], ENT_NOQUOTES, 'UTF-8');
+				$twitterLink                    = htmlspecialchars($_POST['twitterLink'], ENT_NOQUOTES, 'UTF-8');
+				$wikiaLink                      = htmlspecialchars($_POST['wikiaLink'], ENT_NOQUOTES, 'UTF-8');
+				$wishlistLink                   = htmlspecialchars($_POST['wishlistLink'], ENT_NOQUOTES, 'UTF-8');
+				$websiteBugLink                 = htmlspecialchars($_POST['websiteBugLink'], ENT_NOQUOTES, 'UTF-8');
+				$musicbeeBugLink                = htmlspecialchars($_POST['musicbeeBugLink'], ENT_NOQUOTES, 'UTF-8');
+
+				$bindedVal = array(
+					$paypalDonationLink,
+					$twitterLink,
+					$wikiaLink,
+					$wishlistLink,
+					$websiteBugLink,
+					$musicbeeBugLink,
+				);
+
+
+				$sql = "
+				    UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'paypalDonationLink';
+				    UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'twitterLink';
+				    UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wikiaLink';
+				    UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'wishlistLink';
+				    UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'websiteBugLink';
+					UPDATE {$db_info['settings_tbl']} SET value = ? WHERE {$db_info['settings_tbl']}.variable = 'musicbeeBugLink';
+				";
 			}
+
+
+			if(databaseConnection()) {
+				try {
+					$statement = $connection->prepare($sql);
+					$statement->execute($bindedVal);
+
+					return true;
+				} catch(Exception $e) {
+					return false;
+				}
+			}
+		} else {
+			return false;
 		}
+
 	}
 
 
@@ -193,7 +207,8 @@ class Dashboard
 		if(databaseConnection()) {
 			try {
 				if($type == "submit") {
-					$sql = "INSERT
+					$sql = <<<SQL
+							  INSERT
 								INTO {$db_info['addon_tbl']}
 							SET
 								ID_AUTHOR = :id_author,
@@ -213,9 +228,12 @@ class Dashboard
 								is_beta = :is_beta,
 								status = :status,
 								publish_date = :publish_date,
-								lastStatus_moderatedBy = :lastStatus_moderatedBy";
+								lastStatus_moderatedBy = :lastStatus_moderatedBy
+SQL;
+
 				} elseif($type == "update") {
-					$sql = "UPDATE
+					$sql = <<<SQL
+							UPDATE
 								{$db_info['addon_tbl']}
 							SET
 								tags = :tags,
@@ -236,7 +254,8 @@ class Dashboard
 								update_date = :update_date,
 								lastStatus_moderatedBy = :lastStatus_moderatedBy
 							WHERE
-								ID_ADDON = :addon_id";
+								ID_ADDON = :addon_id
+SQL;
 				}
 				$statement = $connection->prepare($sql);
 				if($type == "submit") {
@@ -263,6 +282,8 @@ class Dashboard
 				$statement->bindValue(':is_beta', $beta);
 				$statement->bindValue(':status', $status);
 				$statement->bindValue(':lastStatus_moderatedBy', $lastModeratedBy);
+
+
 				$statement->execute();
 			} catch(Exception $e) {
 				return false;
@@ -308,6 +329,7 @@ class Dashboard
 			} catch(Exception $e) {
 			}
 		}
+		return null;
 	}
 
 	public function getMostDownloadedAddonsByAuthor($author_id, $limit = 10) {
@@ -375,10 +397,16 @@ class Dashboard
 
 
 	/**
+	 * Get addon status code
+	 *
+	 * <p>0 = need approval</p>
+	 * <p>1 = approved</p>
+	 * <p>2 = rejected</p>
+	 * <p>3 = deleted</p>
+	 *
 	 * @param $addon_id
 	 *
-	 * @return bool
-	 * deletes an addon from database
+	 * @return string
 	 */
 	public function getAddonStatus($addon_id) {
 		global $connection,$db_info;
@@ -390,14 +418,13 @@ class Dashboard
 				$statement->execute();
 				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 				if(count($result) > 0) {
-					return $result[0]; //if record found then deletation failed, return false
+					return $result[0]['status'];
 				} else {
-					return null; //else we successfully deleted the addon
+					return null;
 				}
-			} catch(Exception $e) {
-
-			}
+			} catch(Exception $e) {}
 		}
+		return null;
 	}
 
 
@@ -694,7 +721,11 @@ class Dashboard
 				$statement->execute();
 				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-				return $result[0]['publisherCount'];
+				if($result != null) {
+					return $result[0]['publisherCount'];
+				} else {
+					return null;
+				}
 
 			} catch(Exception $e) {
 

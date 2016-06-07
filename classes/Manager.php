@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 /**
@@ -18,22 +18,22 @@ class Manager
 	public $errorMessage;
 
 	public function saveArchieveData($note_html) {
-		global $connection;
+		global $connection, $db_info;
 		if($_POST['save']) {
 			//validate appname, mbversion, and supported os from user input
 			//We wan't to add the data to all version table(this is the version archieve) first.
 			if($this->validateData($_POST['appname'], $_POST['ver'], $_POST['os'])) {
 				/* Cache the POST variiables */
-				$appname = $this->safeInput($_POST['appname']);
-				$ver = $this->removeSpace($this->safeInput($_POST['ver']));
-				$os = $this->safeInput($_POST['os']);
-				$ilink1 = (isset($_POST['ilink1'])) ? $this->removeSpace($this->safeInput($_POST['ilink1'])) : "";
-				$ilink2 = (isset($_POST['ilink2'])) ? $this->removeSpace($this->safeInput($_POST['ilink2'])) : "";
-				$ilink3 = (isset($_POST['ilink3'])) ? $this->removeSpace($this->safeInput($_POST['ilink3'])) : "";
-				$plink1 = (isset($_POST['plink1'])) ? $this->removeSpace($this->safeInput($_POST['plink1'])) : "";
+				$appname = Format::safeInput($_POST['appname']);
+				$ver = Format::removeSpace(Format::safeInput($_POST['ver']));
+				$os = Format::safeInput($_POST['os']);
+				$ilink1 = (isset($_POST['ilink1'])) ? Format::removeSpace(Format::safeInput($_POST['ilink1'])) : "";
+				$ilink2 = (isset($_POST['ilink2'])) ? Format::removeSpace(Format::safeInput($_POST['ilink2'])) : "";
+				$ilink3 = (isset($_POST['ilink3'])) ? Format::removeSpace(Format::safeInput($_POST['ilink3'])) : "";
+				$plink1 = (isset($_POST['plink1'])) ? Format::removeSpace(Format::safeInput($_POST['plink1'])) : "";
 				$note = (isset($_POST['note'])) ? $_POST['note'] : ""; // raw markdown format of the release note
 				$note_html = (isset($note_html)) ? $note_html : ""; // converted and purified html format
-				$message = (isset($_POST['message'])) ? $this->safeInput($_POST['message']) : "";
+				$message = (isset($_POST['message'])) ? Format::safeInput($_POST['message']) : "";
 				$major = (isset($_POST['major'])) ? 1 : 0;
 				$isnew = (isset($_POST['isnew'])) ? true : false; // if the entry is new then we INSERT data, else we UPDATE DATA
 				if($isnew) {
@@ -50,9 +50,9 @@ class Manager
 					if(databaseConnection()) {
 						try {
 							if($isnew) {
-								$sql = "INSERT INTO ".SITE_MB_ALL_VERSION_TBL." SET appname = :appname, version = :version, release_date = :date, supported_os = :os, major = :major, dashboard_availablity = :dashboard, release_note = :note, release_note_html = :note_html";
+								$sql = "INSERT INTO {$db_info['mb_all']} SET appname = :appname, version = :version, release_date = :date, supported_os = :os, major = :major, dashboard_availablity = :dashboard, release_note = :note, release_note_html = :note_html";
 							} else {
-								$sql = "UPDATE ".SITE_MB_ALL_VERSION_TBL." SET appname = :appname, version = :version, release_date = :date, supported_os = :os, major = :major, dashboard_availablity = :dashboard, release_note = :note, release_note_html = :note_html WHERE ID_ALLVERSIONS = :id_allversion";
+								$sql = "UPDATE {$db_info['mb_all']} SET appname = :appname, version = :version, release_date = :date, supported_os = :os, major = :major, dashboard_availablity = :dashboard, release_note = :note, release_note_html = :note_html WHERE ID_ALLVERSIONS = :id_allversion";
 							}
 							$statement = $connection->prepare($sql);
 							$statement->bindValue(':appname', $appname);
@@ -97,7 +97,10 @@ class Manager
 	 *
 	 * @return bool
 	 */
-	private function validateData($appname, $ver, $os) {
+	private function validateData($appname, $ver, $os)
+	{
+		global $lang;
+
 		if(!preg_match("/^[A-Za-z0-9._ ]{1,50}$/", $appname)) {
 			$this->errorMessage = $this->errorMessage.((!empty($this->errorMessage)) ? ' ,' : '').'App Name';
 		}
@@ -109,7 +112,7 @@ class Manager
 		}
 		// If the error message is not empty then generate a Message for the user
 		if(!empty($this->errorMessage)) {
-			$this->errorMessage = '<b>'.$this->errorMessage.'</b> contains some characters that can not be used';
+			$this->errorMessage = '<b>'.$this->errorMessage.'</b> '.$lang['character_cannot_use_error'];
 
 			return false; //data is invalid
 		}
@@ -117,45 +120,32 @@ class Manager
 		return true;
 	}
 
-	/**
-	 * @param $value
-	 *
-	 * @return null|string
-	 * Input sanitizer for specialcharacter and html tag escape
-	 */
-	private function safeInput($value) {
-		if(!empty($value)) {
-			$value = strip_tags($value);
-			$value = htmlspecialchars($value);
-			$value = str_replace("\\", "", $value);
-			$value = str_replace(array(
-					                     "\r\n",
-					                     "\r",
-					                     "\n",
-			                     ), "", $value); //remove new line breaks fom the string
-			return stripslashes($value);
+	private function validateVersion($ver)
+	{
+		global $lang;
+
+		if(!preg_match("/^[A-Za-z0-9. ]{1,50}$/", $ver)) {
+			$this->errorMessage = $this->errorMessage.((!empty($this->errorMessage)) ? ' ,' : '').'Version';
 		}
 
-		return null;
-	}
+		if(!empty($this->errorMessage)) {
+			$this->errorMessage = '<b>'.$this->errorMessage.'</b> '.$lang['character_cannot_use_error'];
 
-	private function removeSpace($value) {
-		if(!empty($value)) {
-			return str_replace(" ", "", $value);
+			return false; //data is invalid
 		}
-
-		return null;
+		return true;
 	}
+
 
 	private function saveOnServerDB($verid, $beta, $appname, $ver, $os, $ilink1, $ilink2, $ilink3, $plink1, $message, $date) {
-		global $connection;
+		global $connection,$db_info;
 		//Check if the entry exist in the DB or not, if exist then we want to update it, else create a new entry
 		if(databaseConnection()) {
 			//Execute the query
 			try {
 				//Check if the entry exist in the DB or not, if exist then we want to update it, else create a new entry
 				if($this->entryExistDB($verid, "current")) {
-					$sql = "UPDATE ".SITE_MB_CURRENT_VERSION_TBL." SET
+					$sql = "UPDATE {$db_info['mb_current']} SET
 							appname 		= :appname,
 							version 		= :version,
 							beta 			= :beta,
@@ -168,7 +158,7 @@ class Manager
 							PortableLink 	= :PortableLink
 							WHERE ID_VERSION = :verid";
 				} else {
-					$sql = "INSERT INTO ".SITE_MB_CURRENT_VERSION_TBL." SET
+					$sql = "INSERT INTO {$db_info['mb_current']} SET
 							ID_VERSION 		= :verid,
 							appname 		= :appname,
 							version 		= :version,
@@ -203,16 +193,23 @@ class Manager
 		}
 	}
 
+	/**
+	 * Checks if a MusicBee release entry exists or not.
+	 *
+	 * @param $verid    <p>MusicBee release version</p>
+	 * @param $type     <p>all | current</p>
+	 *
+	 * @return bool
+	 */
 	private function entryExistDB($verid, $type) {
-		global $connection;
+		global $connection,$db_info;
 		if(databaseConnection()) {
 			//Execute the query
 			try {
 				if($type == "all") {
-					$sql = "SELECT ID_ALLVERSIONS FROM ".SITE_MB_ALL_VERSION_TBL." WHERE ID_ALLVERSIONS = :verid";
-				}
-				if($type == "current") {
-					$sql = "SELECT ID_VERSION FROM ".SITE_MB_CURRENT_VERSION_TBL." WHERE ID_VERSION = :verid";
+					$sql = "SELECT ID_ALLVERSIONS FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :verid";
+				} else if($type == "current") {
+					$sql = "SELECT ID_VERSION FROM {$db_info['mb_current']} WHERE ID_VERSION = :verid";
 				}
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':verid', $verid);
@@ -230,19 +227,29 @@ class Manager
 		return false;
 	}
 
-	public function deleteRecord($record_id) {
-		global $connection;
-		$id = $this->removeSpace($this->safeInput($record_id)); // sanitize the input
-		if($this->entryExistDB($id, "all")) {
-			if(databaseConnection()) {
-				//Execute the query
+	/**
+	 * Delete saved MusicBee release record
+	 *
+	 * @param $record_id
+	 *
+	 * @return bool
+	 */
+	public function deleteRecord($record_id)
+	{
+		global $connection, $db_info, $lang;
+
+		$id = Format::removeSpace(Format::safeInput($record_id)); // sanitize the input
+		if($this->entryExistDB($id, "all"))
+		{
+			if(databaseConnection())
+			{
 				try {
-					$sql = "DELETE FROM ".SITE_MB_ALL_VERSION_TBL." WHERE ID_ALLVERSIONS = :id";
+					$sql = "DELETE FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :id";
 					$statement = $connection->prepare($sql);
 					$statement->bindValue(':id', $id);
 					$statement->execute();
 				} catch(Exception $e) {
-					$this->errorMessage = $this->errorMessage.$e;
+					$this->errorMessage = $e->getMessage();
 
 					return false;
 				}
@@ -250,12 +257,119 @@ class Manager
 				return true;
 			}
 		} else {
-			$this->errorMessage = $this->errorMessage.'The record does not exist!';
+			$this->errorMessage = $lang['record_not_exist'];
 
 			return false;
 		}
 
 		return false;
 	}
+
+	/**
+	 * Save Patch data to the Database
+	 *
+	 * @return bool
+	 */
+	public function savePatch()
+	{
+		global $lang, $mb, $db_info, $connection;
+		if (isset($_POST['ver']) && isset($_POST['link']))
+		{
+			$patchver = $_POST['ver'];
+			$link     = Format::removeSpace(Format::safeInput($_POST['link']));
+			$date     = date("F j, Y");
+
+			if ($this->validateVersion($patchver))
+			{
+				if($patchver > $mb['musicbee_download']['stable']['version'])
+				{
+					//if a previous patch exists then update else insert
+					if($mb['musicbee_download']['patch'] != null)
+					{
+						$sql = <<< SQL
+								UPDATE {$db_info['mb_current']}
+								SET
+									appname 		= 'NA',
+									version 		= :version,
+									release_date 	= :date,
+									DownloadLink 	= :DownloadLink,
+									supported_os 	= 'NA',
+									beta 			= 0
+								WHERE
+									ID_VERSION = 2
+SQL;
+					}
+					else
+					{
+						$sql = <<<SQL
+								INSERT INTO {$db_info['mb_current']}
+								SET
+									appname 		= 'NA',
+									version 		= :version,
+									beta 			= 0,
+									release_date 	= :date,
+									supported_os 	= 'NA',
+									DownloadLink 	= :DownloadLink,
+									ID_VERSION 		= 2
+SQL;
+					}
+					if(databaseConnection()) {
+						try
+						{
+							$statement = $connection->prepare($sql);
+							$statement->bindValue(':version', $patchver);
+							$statement->bindValue(':DownloadLink', $link);
+							$statement->bindValue(':date', $date);
+
+							$statement->execute();
+
+							return true;
+						} catch (Exception $e) {
+							$this->errorMessage = $e->getMessage();
+							return false;
+						}
+					}
+					return false;
+				}
+				else
+				{
+					$this->errorMessage = $this->errorMessage.$lang['ver_patch_desc'];
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		} else {
+			$this->errorMessage = $this->errorMessage.$lang['version&link_required'];
+			return false;
+		}
+	}
+
+	/**
+	 * Delete MusicBee Patch release
+	 *
+	 * @return bool
+	 */
+	public function deletePatch() {
+		global $connection,$db_info;
+
+			if(databaseConnection()) {
+				try {
+					$sql = "DELETE FROM {$db_info['mb_current']} WHERE ID_VERSION = 2";
+					$statement = $connection->prepare($sql);
+					$statement->execute();
+
+					return true;
+				} catch(Exception $e) {
+					$this->errorMessage = $this->errorMessage.$e;
+					return false;
+				}
+				return true;
+			}
+		return false;
+	}
+
 
 }

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ * Spelling mistakes and fixes from community members.
+ */
+
 $admin_only = true; //only for admins
 include_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'includes/admin.tasks.php';
@@ -98,8 +108,8 @@ if(count($allRecords) > 0 && is_array($allRecords)): ?>
 								<?php echo ($record['dashboard_availablity'] == 1) ? "Yes" : "No"; ?>
 							</td>
 							<td>
-								<?php echo ($record['major'] == 1) ? '<p class="small_info major">'.$lang['releasenote_5'].'</p>' : ''; ?>
-								<?php echo ($currentVersion[0]['version'] == $record['version']) ? '<p class="small_info active">'.$lang['releasenote_4'].'</p>' : ''; ?>
+								<?php echo ($record['major'] == 1) ? '<p class="small_info major">'.$lang['major_release'].'</p>' : ''; ?>
+								<?php echo ($currentVersion[0]['version'] == $record['version']) ? '<p class="small_info active">'.$lang['current_release'].'</p>' : ''; ?>
 							</td>
 							<td class="action_input">
 								<form id="<?php echo $record['ID_ALLVERSIONS']; ?>_delete" action="<?php echo $link['url']; ?>includes/admin.tasks.php" method="post" data-autosubmit>
@@ -111,7 +121,7 @@ if(count($allRecords) > 0 && is_array($allRecords)): ?>
 								</form>
 
 								<button class="btn btn_blue" type="submit" title="<?php echo $lang['dashboard_tooltip_2']; ?>" onclick="updateView(<?php echo $record['ID_ALLVERSIONS']; ?>);">
-										<?php echo $lang['dashboard_12']; ?>
+										<?php echo $lang['edit_icon']; ?>
 								</button>
 							</td>
 						</tr>
@@ -174,7 +184,7 @@ if(count($allRecords) > 0 && is_array($allRecords)): ?>
 				<h3>
 					<?php echo $lang['dashboard_err_18']; ?>
 				</h3>
-				<p class="description"><?php echo $lang['AP_NO_RECORD']; ?></p>
+				<p class="description"><?php echo $lang['no_record']; ?></p>
 			</div>
 		</div>
 	</div>

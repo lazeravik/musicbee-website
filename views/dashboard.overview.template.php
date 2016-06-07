@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 $no_guests = true; //kick off the guests
@@ -81,42 +81,30 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 				<h3><?php echo $lang['dashboard_4']; ?></h3>
 			</span>
 			<ul class="link_list">
+				<?php
+				if($mb['help']['help_links']['data'] != null) {
+					$dashboard_help_links = json_decode($mb['help']['help_links']['data'])->dashboard;
+
+					if ($dashboard_help_links != null):
+						foreach ($dashboard_help_links as $help_link): ?>
+
+							<li>
+								<a href="<?php echo $help_link->url; ?>"
+								   target="<?php echo isset($help_link->target) ? $help_link->target : ''; ?>"><?php echo $help_link->name; ?></a>
+							</li>
+
+						<?php endforeach;
+					endif;
+				}?>
+				<hr class="line"/>
+
 				<li>
-					<a href="<?php echo $link['devapi']; ?>">
+					<a href="<?php echo $link['api']; ?>" target="_blank">
 						<?php echo $lang['dashboard_links_1']; ?>
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo $link['help']; ?>">
-						<?php echo $lang['dashboard_links_7']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo $link['help']; ?>">
-						<?php echo $lang['dashboard_links_8']; ?>
-					</a>
-				</li>
-				<hr class="line"/>
-				<li>
-					<a href="<?php echo $link['help']; ?>">
-						<?php echo $lang['dashboard_links_2']; ?>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo $link['help']; ?>">
-						<?php echo $lang['dashboard_links_3']; ?>
-					</a>
-				</li>
-				<li>
-				</li>
-				<li>
-					<a href="<?php echo $link['help']; ?>">
-						<?php echo $lang['dashboard_links_4']; ?>
-					</a>
-				</li>
-				<hr class="line"/>
-				<li>
-					<a href="<?php echo $link['bugreport']; ?>" >
+					<a href="<?php echo $link['bugreport']; ?>" target="_blank">
 						<b><?php echo $lang['dashboard_links_5']; ?></b>
 					</a>
 				</li>
@@ -181,7 +169,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 												class="btn btn_red"
 												type="submit"
 												onclick="addonDelete()">
-											<?php echo $lang['dashboard_submit_btn_7']; ?>
+											<?php echo $lang['delete_icon']; ?>
 										</button>
 										<input
 												type="hidden"
@@ -202,7 +190,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 											class="btn btn_yellow"
 											type="submit"
 											onclick="addonReject()">
-											<?php echo $lang['dashboard_submit_btn_6']; ?>
+											<?php echo $lang['reject']; ?>
 										</button>
 										<input
 											type="hidden"
@@ -222,7 +210,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 											class="btn btn_blue"
 											type="submit"
 											onclick="addonApprove()">
-											<?php echo $lang['dashboard_submit_btn_5']; ?>
+											<?php echo $lang['approve']; ?>
 										</button>
 										<input
 											type="hidden"

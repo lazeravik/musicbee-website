@@ -6,12 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
- */
-
-/**
- * @todo ability to automatically update user rank to elite when submitted add-on exceeds defined limit
- * @todo ability to remove mod approval for addons when a user is trusted
+ * Spelling mistakes and fixes from community members.
  */
 
 //use microtime to get page loadtime
@@ -33,38 +28,42 @@ $secure = (isSecure())?'https://':'http://';
 //All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
 $link = array();
 
+$link['root'] = dirname(__FILE__) ."/";
 $link['url'] = $secure.$_SERVER['HTTP_HOST']."/";
-$link['root'] = $_SERVER['DOCUMENT_ROOT']."/";
+
+$link['favicon'] = $link['url']."favicon.ico";
+
 $link['download'] = $link['url'].'download/';
 $link['rss'] = $link['url'].'rss/';
 $link['home'] = $link['url'];
 $link['forum'] = $link['url'].'forum/';
-$link['admin']['admin-panel'] = $link['url'].'admin-panel/';
 $link['admin']['forum-panel'] = $link['forum'].'?action=admin';
 $link['login'] = $link['forum'].'?action=login';
 $link['support'] = $link['url'].'support/';
 $link['addon']['home'] = $link['url'].'addons/';
 $link['addon']['dashboard'] = $link['url'].'dashboard/';
 $link['help'] = $link['url'].'help/';
-$link['release-note'] = $link['url'].'release-note/';
-$link['press'] = $link['url'].'press/';
-$link['devapi'] = $link['url'].'api/';
+$link['faq'] = $link['help'].'faq/';
+$link['release-note'] = $link['help'].'release-note/';
+$link['press'] = $link['help'].'press/';
+$link['api'] = $link['help'].'api/';
 $link['bugreport'] = $link['url'].'bug/';
 $link['redirect'] = $link['url'].'out/';
-$link['404'] = $link['root']."error/404.php";
+$link['404'] = $link['root']."pages/error/404.php";
 $link['kb'] = $link['url'].'kb/';
+$link['credit'] = $link['help'].'credit/';
 
 //creates an array from the URI
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
 //Error code for knowledge base page
 $errorCode = array(
-		'ADMIN_ACCESS'      => '101',
-		'LOGIN_MUST'        => '102',
-		'FORUM_INTEGRATION' => '103',
-		'NOT_FOUND'         => '104',
-		'NO_DIRECT_ACCESS'  => '105',
-		'MOD_ACCESS'        => '106',
+	'ADMIN_ACCESS'      => '101',
+	'LOGIN_MUST'        => '102',
+	'FORUM_INTEGRATION' => '103',
+	'NOT_FOUND'         => '104',
+	'NO_DIRECT_ACCESS'  => '105',
+	'MOD_ACCESS'        => '106',
 );
 
 //SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
@@ -101,196 +100,237 @@ if(!empty($language)) {
 require_once $link['root'].'classes/Format.php';
 require_once $link['root'].'classes/Validation.php';
 require_once $link['root'].'setting.php';
-
+require_once $link['root'].'classes/Help.php';
 
 //Gets website setting !DO NOT REMOVE IT!
 $setting = getSetting();
-
 //Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
-if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img')) {
+if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img') && !strpos(currentUrl(), 'kb')) {
 	$_SESSION['login_url'] = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
 	$_SESSION['old_url'] = currentUrl();
+	$_SESSION['redirect'] = currentUrl();
 }
 
 $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $link['url'];
 
-//var_dump($_SESSION);
+// var_dump($_SESSION['redirect']);
 
 //Get user avatar or use the default avatar
 $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/usersmall.jpg';
 
 //Get the musicbee satble and beta release data from the API page
-$releaseData = json_decode(file_get_contents($link['url'].'api.get.php?type=json&action=release-info'));
+$releaseData['stable'] = getVersionInfo(0,'byCurrentVersion')[0];
+$releaseData['beta'] = getVersionInfo(1,'byCurrentVersion')[0];
+
 
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
-		'charset'        => 'UTF-8',
-		'user'           => array(
-				'id'              => $context['user']['id'],
-				'is_logged'       => $context['user']['is_logged'],
-				'is_guest'        => $context['user']['is_guest'],
-				'is_admin'        => $context['user']['is_admin'],
-				'is_mod'          => $context['user']['is_mod'],
-				'is_elite'        => false,
-				'is_newbie'       => false,
-				'rank_name'       => null,
-				'need_approval'   => true,
-				'can_mod'         => $context['user']['can_mod'],
-				'username'        => $context['user']['username'],
-				'email'           => $context['user']['email'],
-				'name'            => $context['user']['name'],
-				'messages'        => $context['user']['messages'],
-				'unread_messages' => $context['user']['unread_messages'],
-				'avatar'          => $user_avatar,
+	'website' => array(
+		'ver'           => '1.2.1',
+		'show_warning'  => false,
+		'github_link'   => 'https://github.com/Avik-B/mb_web/',
+	),
+	'charset'        => 'UTF-8',
+	'user'           => array(
+		'id'              => $context['user']['id'],
+		'is_logged'       => $context['user']['is_logged'],
+		'is_guest'        => $context['user']['is_guest'],
+		'is_admin'        => $context['user']['is_admin'],
+		'is_mod'          => $context['user']['is_mod'],
+		'is_elite'        => false,
+		'is_newbie'       => false,
+		'rank_name'       => null,
+		'need_approval'   => true,
+		'can_mod'         => $context['user']['can_mod'],
+		'username'        => $context['user']['username'],
+		'email'           => $context['user']['email'],
+		'name'            => $context['user']['name'],
+		'messages'        => $context['user']['messages'],
+		'unread_messages' => $context['user']['unread_messages'],
+		'avatar'          => $user_avatar,
+	),
+	'session_var'    => $context['session_var'],
+	'session_id'     => $context['session_id'],
+	'current_time'   => array(
+		'date'      => date("F j, Y"),
+		'date_time' => date("F j, Y, g:i a"),
+	),
+
+	'main_menu' => array(
+		'dashboard'       => array(
+			'title'       => $lang['dashboard'],
+			'href'        => $link['addon']['dashboard'],
+			'restriction' => 'login',
+			'sub_menu'    => array(),
 		),
-		'session_var'    => $context['session_var'],
-		'session_id'     => $context['session_id'],
-		'current_time'   => array(
-				'date'      => date("F j, Y"),
-				'date_time' => date("F j, Y, g:i a"),
+		'member-panel'    => array(
+			'title'       => '<img src="'.$user_avatar.'" class="user_avatar">',
+			'href'        => $link['forum'].'?action=profile',
+			'restriction' => 'login',
+			'sub_menu'    => array(
+				'user-profile' => array(
+					'title' => '<p class="user_info">'.sprintf($lang['hey_username'], $context['user']['username']).'</p>',
+				),
+				'line1'        => array('title' => $lang['line'],),
+				'admin-panel'  => array(
+					'title'       => $lang['web_admin'],
+					'href'        => $link['addon']['dashboard'].'#admin_setting',
+					'icon'        => $lang['20'],
+					'restriction' => 'admin',
+				),
+				'forum-admin'  => array(
+					'title'       => $lang['forum_admin'],
+					'href'        => $link['admin']['forum-panel'],
+					'icon'        => $lang['21'],
+					'restriction' => 'admin',
+				),
+				'line2'        => array('title' => $lang['line'],),
+				'sign-out'     => array(
+					'title' => $lang['sign_out'],
+					'href'  => $link['logout'],
+					'icon'  => $lang['23'],
+				),
+			),
+		),
+		'download'        => array(
+			'title'    => $lang['download'],
+			'href'     => $link['download'],
+			'sub_menu' => array(),
+		),
+		'add-ons'         => array(
+			'title'    => $lang['addons'],
+			'href'     => $link['addon']['home'],
+			'sub_menu' => array(
+				'1' => array(
+					'title' => $lang['skins'],
+					'href'  => $link['addon']['home']."s/?type=1",
+					'icon'  => $lang['24'],
+					'desc'  => $lang['description_1'],
+					'id'    => 1,
+				),
+				'2' => array(
+					'title' => $lang['plugins'],
+					'href'  => $link['addon']['home']."s/?type=2",
+					'icon'  => $lang['25'],
+					'desc'  => $lang['description_2'],
+					'id'    => 2,
+				),
+				'3' => array(
+					'title' => $lang['visualizer'],
+					'href'  => $link['addon']['home']."s/?type=3",
+					'icon'  => $lang['26'],
+					'desc'  => $lang['description_3'],
+					'id'    => 3,
+				),
+				'4' => array(
+					'title' => $lang['theater_mode'],
+					'href'  => $link['addon']['home']."s/?type=4",
+					'icon'  => $lang['28'],
+					'desc'  => $lang['description_5'],
+					'id'    => 4,
+				),
+				'5' => array(
+					'title' => $lang['misc'],
+					'href'  => $link['addon']['home']."s/?type=5",
+					'icon'  => $lang['29'],
+					'desc'  => $lang['description_6'],
+					'id'    => 5,
+				),
+			),
+		),
+		'forum'           => array(
+			'title'    => $lang['forum'],
+			'href'     => $link['forum'],
+			'sub_menu' => array(),
+		),
+		'help'            => array(
+			'title'    => $lang['help'],
+			'href'     => $link['faq'],
+			'sub_menu' => array(
+				'faq' => array(
+					'title' => $lang['faq'],
+					'href'  => $link['faq'],
+					'icon'  => $lang['faq_icon'],
+				),
+				'api' => array(
+					'title' => $lang['dev_api'],
+					'href'  => $link['api'],
+					'icon'  => $lang['code_icon'],
+				),
+				'line2'        => array('title' => $lang['line'],),
+				'release-note' => array(
+					'title' => $lang['release-note'],
+					'href'  => $link['release-note'],
+					'icon'  => $lang['note_icon'],
+				),
+				'press' => array(
+					'title' => $lang['press'],
+					'href'  => $link['press'],
+					'icon'  => $lang['press_icon'],
+				),
+				'line3'        => array('title' => $lang['line'],),
+				'bug' => array(
+					'title' => $lang['report_bug'],
+					'href'  => $link['bugreport'],
+					'icon'  => $lang['bug_icon'],
+					'hide'  => true,
+				),
+				'wiki' => array(
+					'title' => $lang['mb_wiki'],
+					'href'  => $setting['wikiaLink'],
+					'icon'  => $lang['wiki_icon'],
+					'target'=> '_blank',
+					'hide'  => true,
+				),
+			),
+		),
+	),
+
+	'musicbee_download' => array(
+		'stable' => array(
+			'appname'      => isset($releaseData['stable']['appname'])          ? $releaseData['stable']['appname'] : "NA",
+			'version'      => isset($releaseData['stable']['version'])          ? $releaseData['stable']['version'] : "NA",
+			'release_date' => isset($releaseData['stable']['release_date'])     ? $releaseData['stable']['release_date'] : "NA",
+			'supported_os' => isset($releaseData['stable']['supported_os'])     ? $releaseData['stable']['supported_os'] : "NA",
+			'download'     => array(
+				'available' => isset($releaseData['stable']['available'])       ? $releaseData['stable']['available'] : 0,
+				'installer' => array(
+					'link1' => isset($releaseData['stable']['DownloadLink'])    ? $releaseData['stable']['DownloadLink'] : "NA",
+					'link2' => isset($releaseData['stable']['MirrorLink1'])     ? $releaseData['stable']['MirrorLink1'] : null,
+					'link3' => isset($releaseData['stable']['MirrorLink2'])     ? $releaseData['stable']['MirrorLink2'] : null,
+				),
+				'portable'  => array(
+					'link1' => isset($releaseData['stable']['PortableLink'])    ? $releaseData['stable']['PortableLink'] : "NA",
+				),
+			),
 		),
 
-		'main_menu' => array(
-				'dashboard'       => array(
-						'title'       => $lang['9'],
-						'href'        => $link['addon']['dashboard'],
-						'restriction' => 'login',
-						'sub_menu'    => array(),
-				),
-				'member-panel'    => array(
-						'title'       => '<img src="'.$user_avatar.'" class="user_avatar">',
-						'href'        => $link['forum'].'?action=profile',
-						'restriction' => 'login',
-						'sub_menu'    => array(
-								'user-profile' => array(
-										'title' => '<p class="user_info">'.$lang['19'].$context['user']['username'].'</p>',
-								),
-								'line1'        => array('title' => $lang['line'],),
-								'admin-panel'  => array(
-										'title'       => $lang['7'],
-										'href'        => $link['addon']['dashboard'].'#mbrelease_view',
-										'icon'        => $lang['20'],
-										'restriction' => 'admin',
-								),
-								'forum-admin'  => array(
-										'title'       => $lang['8'],
-										'href'        => $link['admin']['forum-panel'],
-										'icon'        => $lang['21'],
-										'restriction' => 'admin',
-								),
-								'line2'        => array('title' => $lang['line'],),
-								'sign-out'     => array(
-										'title' => $lang['10'],
-										'href'  => $link['logout'],
-										'icon'  => $lang['23'],
-								),
-						),
-				),
-				'home'            => array(
-						'title'    => $lang['1'],
-						'href'     => $link['home'],
-						'sub_menu' => array(),
-				),
-				'download'        => array(
-						'title'    => $lang['2'],
-						'href'     => $link['download'],
-						'sub_menu' => array(),
-				),
-				'add-ons'         => array(
-						'title'    => $lang['3'],
-						'href'     => $link['addon']['home'],
-						'sub_menu' => array(
-								'1' => array(
-										'title' => $lang['11'],
-										'href'  => $link['addon']['home']."s/?type=1",
-										'icon'  => $lang['24'],
-										'desc'  => $lang['description_1'],
-										'id'    => 1,
-								),
-								'2' => array(
-										'title' => $lang['12'],
-										'href'  => $link['addon']['home']."s/?type=2",
-										'icon'  => $lang['25'],
-										'desc'  => $lang['description_2'],
-										'id'    => 2,
-								),
-								'3' => array(
-										'title' => $lang['13'],
-										'href'  => $link['addon']['home']."s/?type=3",
-										'icon'  => $lang['26'],
-										'desc'  => $lang['description_3'],
-										'id'    => 3,
-								),
-								'4' => array(
-										'title' => $lang['15'],
-										'href'  => $link['addon']['home']."s/?type=4",
-										'icon'  => $lang['28'],
-										'desc'  => $lang['description_5'],
-										'id'    => 4,
-								),
-								'5' => array(
-										'title' => $lang['16'],
-										'href'  => $link['addon']['home']."s/?type=5",
-										'icon'  => $lang['29'],
-										'desc'  => $lang['description_6'],
-										'id'    => 5,
-								),
-						),
-				),
-				'forum'           => array(
-						'title'    => $lang['4'],
-						'href'     => $link['forum'],
-						'sub_menu' => array(),
-				),
-				'help'            => array(
-						'title'    => $lang['5'],
-						'href'     => $link['help'],
-						'sub_menu' => array(),
-				),
+		'beta' => array(
+			'appname'      => isset($releaseData['beta']['appname'])            ? $releaseData['beta']['appname'] : "NA",
+			'version'      => isset($releaseData['beta']['version'])            ? $releaseData['beta']['version'] : "NA",
+			'release_date' => isset($releaseData['beta']['release_date'])       ? $releaseData['beta']['release_date'] : "NA",
+			'supported_os' => isset($releaseData['beta']['supported_os'])       ? $releaseData['beta']['supported_os'] : "NA",
+			'download'     => array(
+				'available' => isset($releaseData['beta']['available'])         ? $releaseData['beta']['available'] : 0,
+				'link1'     => isset($releaseData['beta']['DownloadLink'])      ? $releaseData['beta']['DownloadLink'] : "NA",
+			),
+			'message'      => isset($releaseData['beta']['message'])            ? $releaseData['beta']['message'] : null,
 		),
 
-		'musicbee_download' => array(
-				'stable' => array(
-						'appname'      => isset($releaseData[0]->appname) ? $releaseData[0]->appname : "NA",
-						'version'      => isset($releaseData[0]->version) ? $releaseData[0]->version : "NA",
-						'release_date' => isset($releaseData[0]->release_date) ? $releaseData[0]->release_date : "NA",
-						'supported_os' => isset($releaseData[0]->supported_os) ? $releaseData[0]->supported_os : "NA",
-						'download'     => array(
-								'available' => isset($releaseData[0]->available) ? $releaseData[0]->available : 0,
-								'installer' => array(
-										'link1' => isset($releaseData[0]->DownloadLink) ? $releaseData[0]->DownloadLink : "NA",
-										'link2' => isset($releaseData[0]->MirrorLink1) ? $releaseData[0]->MirrorLink1 : null,
-										'link3' => isset($releaseData[0]->MirrorLink2) ? $releaseData[0]->MirrorLink2 : null,
-								),
-								'portable'  => array(
-										'link1' => isset($releaseData[0]->PortableLink) ? $releaseData[0]->PortableLink : "NA",
-								),
+		'patch' => getVersionInfo(2, 'byCurrentVersion')[0],
+	),
 
-						),
-				),
+	'help' => Help::getHelp(),
 
-				'beta' => array(
-						'appname'      => isset($releaseData[1]->appname) ? $releaseData[1]->appname : "NA",
-						'version'      => isset($releaseData[1]->version) ? $releaseData[1]->version : "NA",
-						'release_date' => isset($releaseData[1]->release_date) ? $releaseData[1]->release_date : "NA",
-						'supported_os' => isset($releaseData[1]->supported_os) ? $releaseData[1]->supported_os : "NA",
-						'download'     => array(
-								'available' => isset($releaseData[1]->available) ? $releaseData[1]->available : 0,
-								'link1'     => isset($releaseData[1]->DownloadLink) ? $releaseData[1]->DownloadLink : "NA",
-						),
-						'message'      => isset($releaseData[1]->message) ? $releaseData[1]->message : null,
-				),
-		),
-
-		'view_range' => array(
-				'addon_view_range'         => 20,
-				'dashboard_all_view_range' => 20,
-				'release_all_view_range'   => 20,
-		),
+	'view_range' => array(
+		'addon_view_range'         => 20,
+		'dashboard_all_view_range' => 20,
+		'release_all_view_range'   => 20,
+	),
 );
 
-//var_dump($language);
+//var_dump($mb['musicbee_download']);
 
 
 /**
@@ -307,7 +347,7 @@ if(!$mb['user']['is_admin'] && !empty($admin_only)) {
 	}
 } elseif($mb['user']['is_guest'] && !empty($no_guests)) {
 	if(!empty($json_response)) {
-		die('{"status": "0", "data": "'.$lang['LOGIN_NEED'].'"}');
+		die('{"status": "0", "data": "'.$lang['err_login_required'].'"}');
 	} else {
 		header('Location: '.$link['kb'].'?code='.$errorCode['LOGIN_MUST']);
 	}
@@ -324,62 +364,9 @@ if(!empty($no_directaccess)) {
  * If the User has an account in forum but not for the dashboard then create one,
  * and set dashoard user info in session
  */
-if(!$mb['user']['is_guest']) {
-	require_once $link['root'].'classes/Member.php';
-	$memberData = new Member();
+require_once $link['root'].'classes/Member.php';
+$member = new Member();
 
-	//permission level 1 means the member is admin
-	//permission level 2 means the member is mod
-	//permission level 5 means the member is elite
-	//permission level 10 means the member is noob
-	if($mb['user']['is_admin']) {
-		$permission = 1;
-	} elseif($mb['user']['can_mod']) {
-
-		$permission = 2;
-	} else {
-		$permission = 10;
-	}
-
-	if($memberData->memberInfo($mb['user']['id'])['rank'] == null) {
-		//Create an Addon dashboard account for the user
-		if($memberData->createDashboardAccount($mb['user']['id'], $permission, $mb['user']['name'])) {
-			$userinfo = $memberData->memberInfo($mb['user']['id']);
-		} else {
-			//@todo: put some error feedback
-		}
-	} else {
-		//check if forum username updated,
-		$userinfo = $memberData->memberInfo($mb['user']['id']);
-
-		//Update the website name if the forum name is updated
-		if($userinfo['membername'] != $mb['user']['username']) {
-			if($memberData->updateDashboardAccount($mb['user']['id'], $mb['user']['username'])) {
-				$userinfo = $memberData->memberInfo($mb['user']['id']);
-			}
-		}
-	}
-
-	//Get total approved addon count of the user
-	$totalApprovedAddon = $memberData->getAddonCountByUser($mb['user']['id']);
-
-	//If the user is not an admin or mod but already reached elite requirement, make the user elite
-	if($totalApprovedAddon >= $setting['eliteRequirement'] && !$mb['user']['can_mod']) {
-		$permission = 5;
-	}
-
-	//If permission is not equal to rank then update the data and keep it in sync with the forum
-	if($userinfo['rank'] != $permission){
-		$memberData->updateUserRank($mb['user']['id'], $permission);
-	}
-
-	//Set the user ranks and permissions once we get it from database
-	$mb['user']['is_elite'] = ($userinfo['rank'] == 5) ? true : false;
-	$mb['user']['is_newbie'] = ($userinfo['rank'] == 10) ? true : false;
-	$mb['user']['rank_name'] = Validation::rankName($userinfo['rank']);
-	$mb['user']['total_approved_addon'] = $totalApprovedAddon;
-	$mb['user']['need_approval'] = ($mb['user']['total_approved_addon'] >= $setting['selfApprovalRequirement'] || $mb['user']['can_mod']) ? false : true;
-}
 
 ///page location variable starts here
 $mainmenu = $link['root'].'views/mainmenu.template.php';
@@ -387,7 +374,6 @@ $footer = $link['root'].'views/footer.template.php';
 
 
 $connection = null;
-
 /**
  * @return bool
  * Checks and creates database connection.
@@ -400,6 +386,9 @@ function databaseConnection() {
 	} else {
 		try {
 			$connection = new PDO('mysql:host='.DB_HOST.';dbname='.SITE_DB_NAME.';charset=utf8', SITE_DB_USER, SITE_DB_PASS);
+			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$connection->exec('set session sql_mode = traditional');
+			$connection->exec('set session innodb_strict_mode = on');
 
 			return true;
 		} catch(PDOException $e) {
@@ -432,18 +421,25 @@ function getVersionInfo($value, $type) {
 				$sql = "SELECT * FROM {$db_info['mb_all']} ORDER BY version DESC";
 			}
 			$statement = $connection->prepare($sql);
-			if($type != "byAllReleases") {
+
+			if($type != "byAllReleases")
 				$statement->bindValue(':value', $value);
-			}
+
 			$statement->execute();
 			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-			if(count($result) > 0) {
+
+			if(count($result) > 0)
+			{
 				return $result; //Get the availablity first 1= available, 0=already disabled
-			} else {
-				if($type == "byId") {
-					return $lang['AP_NO_RECORD'];
-				} //store the error message in the variable
-				elseif($type == "byVersion") {
+			}
+			else
+			{
+				if($type == "byId")
+				{
+					return $lang['no_record'];
+				}
+				elseif($type == "byVersion")
+				{
 					return null;
 				} //if we are checking using version we want to send null. since we use count() method for result
 			}
@@ -451,6 +447,7 @@ function getVersionInfo($value, $type) {
 			return "Something went wrong. ".$e; //store the error message in the variable
 		}
 	}
+	return null;
 }
 
 /**
@@ -519,8 +516,8 @@ function getLanguageFileName($lang) {
 
 function isSecure() {
 	return
-    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    || $_SERVER['SERVER_PORT'] == 443;
+		(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+		|| $_SERVER['SERVER_PORT'] == 443;
 }
 
 
@@ -532,8 +529,8 @@ function isSecure() {
  */
 function currentUrl() {
 	global $secure ;
-	
-	$pageURL = $secure.'://';
+
+	$pageURL = $secure;
 	if($_SERVER["SERVER_PORT"] != "80") {
 		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
 	} else {

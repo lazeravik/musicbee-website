@@ -1,11 +1,25 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+include_once $link['root'].'classes/Addon.php';
+
+if(isset($_POST['id'])) {
+	if (ctype_digit($_POST['id']) && isset($_POST['rate'])) {
+		$addon = new Addon();
+		$addon->rate();
+	}
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $addon_data['addon_title']; ?> for MusicBee</title>
+	<title><?php echo $addon_data['addon_title']; ?> - <?php echo $type_blob; ?> | <?php echo $lang['mb']; ?></title>
 	<meta name="description" content="<?php echo $addon_data['short_description']; ?>">
 	<!-- keyword meta tag is obsolete, google does not use it, but some
 	search engine still use it, so for legacy support it is included -->
 	<meta name="keywords" content="<?php echo implode(",", $addon_data['tags']); ?>, musicbee, customizable, skin, free, plugin, download">
+
+	<!-- Opensearch-->
+	<link rel="search" type="application/opensearchdescription+xml" href="<?php echo $link['url']; ?>opensearch.xml" title="<?php echo $lang['addon_opensearch_title']; ?>"/>
 
 	<!--include common meta tags and stylesheets -->
 	<?php include $link['root'].'includes/meta&styles.php'; ?>
@@ -43,6 +57,28 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 		</div>
 	</div>
 <?php else: ?>
+
+	<!-- Search engine schema starts -->
+	<div itemscope itemtype="http://schema.org/SoftwareApplication" style="display: none;">
+		<data itemprop="name"><?php echo $addon_data['addon_title']; ?></data>
+		<data itemprop="description"><?php echo $addon_data['short_description']; ?></data>
+		<data itemprop="dateModified"><?php echo $addon_data['update_date']; ?></data>
+		<data itemprop="datePublished"><?php echo $addon_data['publish_date']; ?></data>
+		<data itemprop="author"><?php echo $addon_data['membername']; ?></data>
+		<data itemprop="discussionUrl"><?php echo $addon_data['support_forum']; ?></data>
+		<data itemprop="keywords"><?php echo implode(",", $addon_data['tags']); ?></data>
+		<data itemprop="thumbnailUrl"><?php echo $addon_data['thumbnail']; ?></data>
+		<data itemprop="downloadUrl"><?php echo $link['redirect'].'?type=addon&id='.$addon_data['ID_ADDON'].'&r='.urlencode($addon_data['download_links']); ?></data>
+		<data itemprop="softwareVersion"><?php echo $addon_data['addon_version']; ?></data>
+		<data itemprop="softwareRequirements"><?php echo implode(", ", $addon_data['supported_mbversion']); ?></data>
+		<data itemprop="operatingSystem"><?php echo $mb['musicbee_download']['stable']['supported_os']; ?></data>
+		<data itemprop="applicationCategory"><?php echo $lang['addons']; ?></data>
+		<data itemprop="applicationSubCategory"><?php echo $type_blob; ?></data>
+		<data itemprop="applicationSuite"><?php echo $lang['mb']; ?></data>
+	</div>
+	<!-- Search engine schema ends -->
+
+
 	<div id="bg_image" class="general_info">
 		<!-- AddOn page navigation top menu -->
 		<div class="secondery_nav addon_secondery_nav addon_page_nav" id="secondery_nav">
@@ -55,22 +91,18 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 				<div class="general_info_text">
 					<h2 class="title">
 						<?php echo $addon_data['addon_title']; ?>
-						<?php if($addon_data['addon_version'] != null): ?>
-							<i class="general_info_addon_version"><?php echo htmlspecialchars($addon_data['addon_version'], ENT_QUOTES, "UTF-8"); ?></i>
-						<?php endif; ?>
-						<?php if($addon_data['is_beta'] == 1): ?>
-							<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
-						<?php endif; ?>
 					</h2>
+					<?php if($addon_data['addon_version'] != null): ?>
+						<i class="general_info_addon_version"><?php echo htmlspecialchars($addon_data['addon_version'], ENT_QUOTES, "UTF-8"); ?></i>
+					<?php endif; ?>
+					<?php if($addon_data['is_beta'] == 1): ?>
+						<p class="small_info beta"><?php echo $lang['addon_38']; ?></p>
+					<?php endif; ?>
+
 					<div class="general_info_addon_meta">
 						<p><?php echo $lang['addon_15']; ?>
-							<a href="<?php echo htmlspecialchars(addon_author_url_generator($addon_data['membername']), ENT_QUOTES, "UTF-8"); ?>"><?php echo $addon_data['membername']; ?></a>
+							<a href="<?php echo htmlspecialchars(addon_author_url_generator($addon_data['membername']), ENT_QUOTES, "UTF-8"); ?>"><b><?php echo $addon_data['membername']; ?></b></a>
 						</p>
-						<?php if(null != $addon_data['update_date']): ?>
-							<p><?php echo $lang['addon_16']; ?> <?php echo $addon_data['update_date']; ?></p>
-						<?php else: ?>
-							<p><?php echo $lang['addon_17']; ?> <?php echo $addon_data['publish_date']; ?></p>
-						<?php endif; ?>
 						<p>
 							<?php echo $lang['addon_36']; ?>
 							<b>
@@ -78,6 +110,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 							</b>
 						</p>
 					</div>
+
 					<p class="description"><?php echo $addon_data['short_description']; ?></p>
 				</div>
 				<div class="general_info_icon_wrap">
@@ -107,22 +140,23 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 
 
 					<?php if($addon_data['status'] != 2): ?>
-						<a href="<?php echo $link['redirect'].'?type=addon&id='.$addon_data['ID_ADDON'].'&r='.urlencode($addon_data['download_links']); ?>" class="btn btn_blue" target="_blank"><i class="fa fa-download"></i> <?php echo $lang['addon_18']; ?>
+						<a href="<?php echo $link['redirect'].'?type=addon&id='.$addon_data['ID_ADDON'].'&r='.urlencode($addon_data['download_links']); ?>" class="btn btn_blue" target="_blank">
+							<i class="fa fa-download"></i>&nbsp;&nbsp;<?php echo $lang['download']; ?>
 						</a>
 						<?php if(!empty(trim($addon_data['support_forum']))): ?>
 							<a href="<?php echo $addon_data['support_forum']; ?>" class="btn">
-								<i class="fa fa-support"></i><?php echo $lang['addon_19']; ?>
+								<i class="fa fa-support"></i>&nbsp;&nbsp;<?php echo $lang['support_forum']; ?>
 							</a>
 						<?php endif; ?>
 						<?php if(!empty(trim($addon_data['readme_content_html']))): ?>
 							<a href="#readme" class="btn btn_grey" onclick="gotoReadme(event);">
-								<i class="fa fa-info"></i><?php echo $lang['addon_20']; ?>
+								<i class="fa fa-info"></i>&nbsp;&nbsp;<?php echo $lang['see_readme']; ?>
 							</a>
 						<?php endif; ?>
 						<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn"
 						   onclick="rate('<?php echo $addon_data['ID_ADDON']; ?>')"
 						   data-like-count="<?php echo Format::number_format_suffix($addon_data['likesCount']); ?>">
-							<?php echo $lang['addon_25']; ?>
+							<?php echo $lang['like']; ?>
 						</a>
 					<?php endif; ?>
 				</div>
@@ -154,23 +188,99 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 	<!-- SLIDER ENDS-->
 
 
-	<?php if(!empty(trim($addon_data['readme_content_html']))): ?>
-		<!-- WORD FROM AUTHOR STARTS -->
-		<div class="addon_similar readme_markdown_bg" id="readme">
-			<div class="addon_similar_wrap readme_markdown_wrap">
-				<h2><?php echo $lang['addon_21']; ?></h2>
-				<div id="readme_markdown" class="markdownView dark">
-					<?php echo $addon_data['readme_content_html']; ?>
+
+	<!-- WORD FROM AUTHOR STARTS -->
+	<div class="addon_similar readme_markdown_bg" id="readme">
+		<div class="addon_similar_wrap readme_markdown_wrap col_2_1">
+
+			<?php if(!empty(trim($addon_data['readme_content_html']))): ?>
+				<div class="addon_similar_inline_wrap">
+					<div class="inline_wrap">
+						<h2><?php echo $lang['addon_21']; ?></h2>
+						<div id="readme_markdown" class="markdownView dark">
+							<?php echo $addon_data['readme_content_html']; ?>
+						</div>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<div class="addon_similar_inline_wrap">
+				<div class="inline_wrap extra_info">
+					<div id="readme_markdown" >
+						<table>
+							<tbody>
+							<tr>
+								<td>
+									<?php echo $lang['addon_10']; ?>
+								</td>
+								<td>
+									<?php echo $addon_data['addon_title']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<?php echo $lang['addon_9']; ?>
+								</td>
+								<td>
+									<?php echo $addon_data['membername']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<?php echo $lang['addon_8']; ?>
+								</td>
+								<td>
+									<?php echo $addon_data['addon_version']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<?php echo $lang['addon_11']; ?>
+								</td>
+								<td>
+									<?php echo $type_blob; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<?php echo $lang['addon_17']; ?>
+								</td>
+								<td>
+									<?php echo $addon_data['publish_date']; ?>
+								</td>
+							</tr>
+							<?php if(null != $addon_data['update_date']): ?>
+								<tr>
+									<td>
+										<?php echo $lang['addon_16']; ?>
+									</td>
+									<td>
+										<?php echo $addon_data['update_date']; ?>
+									</td>
+								</tr>
+							<?php endif; ?>
+							<tr>
+								<td>
+									<?php echo $lang['addon_36']; ?>
+								</td>
+								<td>
+									<?php echo implode(", ", $addon_data['supported_mbversion']); ?>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	<?php endif; ?>
+	</div>
+
 	<!-- WORD FROM AUTHOR ENDS-->
 	<!-- tags STARTS -->
 	<div class="addon_similar">
 		<div class="addon_similar_wrap tags">
 			<?php if(!empty($addon_data['tags'][0])): ?>
-				<?php echo $lang['addon_41']; ?>
+				<?php echo $lang['tags_icon']; ?>
 				<?php foreach($addon_data['tags'] as $tags): ?>
 					<a href="<?php echo $link['addon']['home'].'s/?q='.$tags; ?>"><?php echo $tags; ?></a>
 				<?php endforeach; endif; ?>
@@ -180,19 +290,18 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 	<!-- MORE FROM AUTHOR STARTS -->
 	<div class="addon_similar alternate_bg">
 		<div class="addon_similar_wrap">
-			<h2><?php echo $lang['addon_22'].$addon_data['membername']; ?></h2>
-			<?php
-			echo addon_result_view_generator($from_author);
-			?>
+			<h2><?php echo sprintf($lang['more_from_membername'],$addon_data['membername']); ?></h2>
+
+			<?php echo addon_result_view_generator($from_author); ?>
+
 			<div class="more_addon">
 				<a class="btn btn_wireframe btn_wireframe_blue" href="<?php echo addon_author_url_generator($addon_data['membername']); ?>">
-					<h3><?php echo $lang['addon_23']; ?></h3>
-					<p><?php echo $lang['addon_24']; ?><?php echo $addon_data['membername']; ?></p>
+					<?php echo sprintf($lang['show_all_from_membername'], $addon_data['membername']); ?>
 				</a>
 			</div>
 
-			<p class="license_attr"><?php echo $lang['addon_license_1']; ?>
-				<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>
+			<p class="license_attr"><?php echo $lang['addon_license']; ?>
+
 			</p>
 
 		</div>
@@ -218,7 +327,7 @@ include($footer);
 		 * If the user already liked the addon change the like button show that it is already liked.
 		 */
 		if ($addon_data['user']['already_liked'] == true): ?>
-		$('#like_count').html('<?php echo $lang['addon_30']; ?>');
+		$('#like_count').html('<?php echo $lang['liked']; ?>');
 		$('#like_count').addClass('btn_red');
 		<?php endif; ?>
 
@@ -242,15 +351,19 @@ include($footer);
 		});
 
 		/* Code blocks that do not have code type mentioned we will simply use "CODE" to display*/
-		$( "pre > code" ).not('[lang-rel]')
-				.each(function() {
-					$(this).attr('lang-rel', 'code');
-				});
-
-
+		$("pre > code").not('[lang-rel]')
+			.each(function () {
+				$(this).attr('lang-rel', 'code');
+			});
 
 		// Initialize code highlighting
 		hljs.initHighlightingOnLoad();
+
+		//add target="_blank" to each link element
+		$("#readme_markdown a").not('[target]')
+			.each(function () {
+				$(this).attr('target', '_blank');
+			});
 	});
 
 	function blurDo() {
@@ -275,10 +388,10 @@ include($footer);
 	function rate(id) {
 		hideNotification();
 		$.ajax({
-			url: "<?php echo $link['url']; ?>includes/addons.tasks.php",
+			url: "<?php echo currentUrl(); ?>",
 			cache: false,
 			type: "POST",
-			data: {id: "" + id + ""}
+			data: {id: "" + id + "", rate: "true"}
 		}).done(function (data) {
 			notificationCallback(data);
 		}).fail(function (jqXHR, textStatus, errorThrown) {
@@ -294,7 +407,7 @@ include($footer);
 		var current_love_count = parseInt($('#like_count').attr('data-like-count'));
 		var updated_love_count = current_love_count - 1;
 		$('#like_count').attr('data-like-count', updated_love_count);
-		$('#like_count').html('<?php echo $lang['addon_25']; ?>');
+		$('#like_count').html('<?php echo $lang['like']; ?>');
 		$('#like_count').removeClass('btn_red');
 	}
 
@@ -302,7 +415,7 @@ include($footer);
 		var current_love_count = parseInt($('#like_count').attr('data-like-count'));
 		var updated_love_count = current_love_count + 1;
 		$('#like_count').attr('data-like-count', updated_love_count);
-		$('#like_count').html('<?php echo $lang['addon_30']; ?>');
+		$('#like_count').html('<?php echo $lang['liked']; ?>');
 		$('#like_count').addClass('btn_red');
 	}
 

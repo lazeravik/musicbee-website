@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 ?>
@@ -38,14 +38,14 @@
 					<div class="box_content" >
 					<?php if (isset($url)) : ?>
 						<span class="show_info info_darkgrey custom">
-							<h3><?php echo $lang['redirect_1']; ?></h3>
-							<p class="description"><?php echo $lang['redirect_2']; ?></p>
-							<p class="description"><?php echo $lang['redirect_3']; ?> <a href="<?php echo $url; ?>"><?php echo $lang['redirect_4']; ?></a></p>
+							<h3><?php echo $lang['please_wait']; ?></h3>
+							<p class="description"><?php echo $lang['redirect_notice']; ?></p>
+							<p class="description"><?php echo sprintf($lang['click_here_redirect'], $url); ?></p>
 						</span>
       					
 					<?php else: ?>
 						<span class="show_info danger custom">
-							<h3><?php echo $lang['redirect_5']; ?></h3>
+							<h3><?php echo $lang['incorrect_url_param_err']; ?></h3>
 						</span>
 					<?php endif; ?>
 					</div>

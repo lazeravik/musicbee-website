@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 
@@ -16,10 +16,11 @@ require_once $link['root'].'classes/Dashboard.php';
 require_once $link['root'].'classes/Addon.php';
 
 //check if edit GET request is made, if not we don't want UNDEFINED ERROR to pop up! so define the variable
-if(isset($_GET['view'])) {
-	if($_GET['view'] == "update" && isset($_GET['id'])) {
+if(isset($_GET['view']))
+{
+	if($_GET['view'] == "update" && isset($_GET['id']))
+	{
 		$dashboard = new Dashboard();
-
 		$is_author = $dashboard->verifyAuthor($user_info['id'], $_GET['id']);
 
 		//verify if the author can modify it.... or if user is mod/admin allow
@@ -43,8 +44,8 @@ if(isset($_GET['view'])) {
 		$viewType = 2; //update mode
 
 		$addon = new Addon(); //create an instance of the addondashboard class
-		$data = $addon->getAddonInfo($_GET['id'])[0];
-		$screenshot_array = explode(",", $data['image_links']);
+		$data = $addon->getAddonData($_GET['id']);
+		$screenshot_array = $data['image_links'];
 
 	} else {
 		$viewType = 0; //submit mode
@@ -265,7 +266,7 @@ endif; ?>
 						       type="text"
 						       placeholder="eg. metro, modern, elegant"
 						       value="<?php if($viewType == 2) {
-							       echo $data['tags'];
+							       echo implode(',',$data['tags']);
 						       } ?>"/>
 
 					</li>
@@ -331,7 +332,7 @@ endif; ?>
 									id="add_button"
 									class="btn btn_blue"
 									title="<?php echo $lang['dashboard_tooltip_3']; ?>">
-								<?php echo $lang['dashboard_submit_btn_2']; ?>
+								<?php echo $lang['add_more_screenshot']; ?>
 							</button>
 						</label>
 
@@ -353,7 +354,7 @@ endif; ?>
 											<a href="javascript:void(0)"
 											   id="remove_button"
 											   class="btn remove_img_btn"
-											   title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['dashboard_submit_btn_3']; ?></a>
+											   title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['remove_icon']; ?></a>
 										<?php endif; ?>
 									</div>
 									<button
@@ -362,7 +363,7 @@ endif; ?>
 											id="upload_to_imgur"
 											class="btn btn_green"
 											title="<?php echo $lang['dashboard_tooltip_3']; ?>">
-										<?php echo $lang['dashboard_submit_btn_1']; ?>
+										<?php echo $lang['upload_icon']; ?>
 									</button>
 								</div>
 
@@ -381,7 +382,7 @@ endif; ?>
 												id="upload_to_imgur"
 												class="btn btn_green"
 												title="<?php echo $lang['dashboard_tooltip_3']; ?>">
-											<?php echo $lang['dashboard_submit_btn_1']; ?>
+											<?php echo $lang['upload_icon']; ?>
 										</button>
 									</div>
 								</div>
@@ -424,8 +425,7 @@ endif; ?>
 									} ?></textarea>
 						</div>
 						<p id="wmd-input_count" class="counter"></p>
-
-						<div id="wmd-preview" class="wmd-panel markdownView"></div>
+						<div id="wmd-preview" class="wmd-panel markdownView box"></div>
 					</li>
 				</ul>
 			</div>
@@ -513,7 +513,7 @@ endif; ?>
 				selectAll: false,
 				width: "none",
 			}<?php if ($viewType == 2): ?>,
-			"setSelects", [<?php echo $data['supported_mbversion']; ?>]
+			"setSelects", [<?php echo implode(',', $data['supported_mbversion_ids']); ?>]
 			<?php endif; ?>
 	);
 
@@ -596,7 +596,7 @@ endif; ?>
 			'minChars': 2,
 			'defaultText': 'add a tag',
 			'maxChars': 15,
-			'onChange': tag_limit_checker,
+			'onChange': tag_limit_checker
 		});
 	});
 
@@ -624,9 +624,9 @@ endif; ?>
 		var fieldHTML = '<div class="flex_input col_2">' +
 				'<div class="up_group">' +
 				'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
-				'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn" title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['dashboard_submit_btn_3']; ?></a>' +
+				'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn" title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['remove_icon']; ?></a>' +
 				'</div>' +
-				'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['dashboard_submit_btn_1']; ?></button>' +
+				'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['upload_icon']; ?></button>' +
 				'</div>';
 		if (wrapper.children().length < maxField) { //Check maximum number of input fields
 			$(wrapper).append(fieldHTML); // Add field html
@@ -656,23 +656,16 @@ endif; ?>
 		$('form[data-autosubmit][id=addon_submission]').autosubmit();
 	}
 
-	<?php if(isset($_GET['mod'])) { ?>
+
 
 	function submitted() {
-		window.location.hash = 'mod_all';
+		<?php if(isset($_GET['mod'])) { ?>
+			window.location.hash = 'mod_all';
+		<?php } elseif ($viewType == 2){ ?>
+			window.location.hash = 'dashboard_all';
+		<?php } else { ?>
+			var $generatedUrl = generatePageUrl(window.location.hash.replace('#', ''));
+			loadPageGet($generatedUrl, "action=submit_success");
+		<?php } ?>
 	}
-
-	<?php } elseif ($viewType == 2){ ?>
-
-	function submitted() {
-		window.location.hash = 'dashboard_all';
-	}
-
-	<?php } else { ?>
-
-	function submitted() {
-		var $generatedUrl = generatePageUrl(window.location.hash.replace('#', ''));
-		loadPageGet($generatedUrl, "action=submit_success");
-	}
-	<?php } ?>
 </script>

@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 $no_guests = true; //kick off the guests
@@ -92,7 +92,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 			</span>
 			<form id="search_filter" action="<?php echo $link['url']; ?>views/dashboard.all.template.php" method="get" data-autosubmit>
 			<span class="show_info info_silverwhite custom">
-				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)" >
+				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['search_your_submitted_addons']; ?>" onkeydown="searchEnter(event)" >
 				<input type="hidden" name="action" value="search">
 			</span>
 				<ul class="form">
@@ -203,7 +203,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 										type="submit"
 										title="<?php echo $lang['dashboard_tooltip_2']; ?>"
 										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);"
-										<?php echo $button_stat_text; ?>><?php echo $lang['dashboard_12']; ?></button>
+										<?php echo $button_stat_text; ?>><?php echo $lang['edit_icon']; ?></button>
 
 							</td>
 						</tr>
