@@ -293,6 +293,7 @@ class Manager
 									version 		= :version,
 									release_date 	= :date,
 									DownloadLink 	= :DownloadLink,
+									PortableLink 	= '',
 									supported_os 	= 'NA',
 									beta 			= 0
 								WHERE
@@ -310,6 +311,7 @@ SQL;
 									release_date 	= :date,
 									supported_os 	= 'NA',
 									DownloadLink 	= :DownloadLink,
+									PortableLink 	= '',
 									ID_VERSION 		= 2
 SQL;
 					}
