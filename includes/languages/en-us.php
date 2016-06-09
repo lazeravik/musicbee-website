@@ -59,7 +59,7 @@ $lang['29'] = '<i class="fa fa-ellipsis-h"></i>';
 $lang['description_1'] = 'Make MusicBee look the way you want';
 $lang['description_2'] = 'Add features/functionality to MusicBee';
 $lang['description_3'] = 'Get colorful visualizers for an eye pleasing experience';
-$lang['description_4'] = 'Equaliser presets are great way to make your music sound fresh';
+$lang['description_4'] = 'Equalizer presets are a great way to make your music sound fresh';
 $lang['description_5'] = 'Get a full theater mode experience for MusicBee';
 $lang['description_6'] = 'Other useful add-ons for enhancing your MusicBee experience';
 
@@ -79,26 +79,24 @@ $lang['addon_status_icon_5'] = '<i class="fa fa-frown-o"></i>';
 
 /* Index.php/Landing page or the Home page lang */
 $lang['home_title'] = 'MusicBee - The Ultimate Music Manager and Player';
-$lang['home_desc'] = 'The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find and play music files on your Windows computer, portable devices and on the web';
+$lang['home_desc'] = 'The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web';
 $lang['home_2'] = 'The Ultimate Music Manager and Player';
-$lang['home_3'] = 'MusicBee makes it easy to manage, find, and play music files on your computer. MusicBee also supports podcasts, web radio stations and Soundcloud integration';
-$lang['home_4'] = 'Get MusicBee, you will never go back and it\'s free!';
+$lang['home_3'] = 'MusicBee makes it easy to manage, find, and play music files on your computer. MusicBee also supports podcasts, web radio stations and SoundCloud integration';
+$lang['home_4'] = 'Get MusicBee, you will never go back. And it\'s free!';
 $lang['home_5'] = 'Download Now';
 $lang['home_6'] = 'Check out features';
 $lang['home_7'] = 'See the best of MusicBee';
 $lang['home_9'] = 'Simple, Powerful, and Fast';
-$lang['home_10'] = 'Play your music the way you want. Turn your computer into a music jukebox. Use auto tagging to cleanup your messy music library. Enjoy a great music experience with MusicBee.';
+$lang['home_10'] = 'Play your music the way you want. Turn your computer into a music jukebox. Use auto-tagging to clean up your messy music library. Enjoy a great music experience with MusicBee.';
 $lang['home_11'] = 'Sound Quality Matters';
-$lang['home_12'] = 'Whether you play your music on an audiophile setup or on a laptop, MusicBee is designed with features to fulfill all those needs.';
-$lang['home_13'] = 'Fine-tune the sound with the 10-band or 15-band Equaliser and DSP effects';
+$lang['home_12'] = 'Whether you play your music on an audiophile setup or on a laptop, MusicBee is designed with features to fulfill all your needs.';
+$lang['home_13'] = 'Fine-tune the sound with the 10-band or 15-band Equalizer and DSP effects';
 $lang['home_14'] = 'Utilize high-end audio cards with WASAPI and ASIO support';
-$lang['home_15'] = 'Listen to music without interruption with Gapless Playback';
-$lang['home_16'] = 'Get the most of MusicBee with our Quality Guide';
-$lang['home_17'] = 'Go to Quality Guide &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
+$lang['home_15'] = 'Listen to music without interruption with gapless playback';
 $lang['home_18'] = 'Beautiful Skins';
 $lang['home_19'] = 'Change the appearance of MusicBee by choosing from the included skins or download more from our Add-on section.<br/>Skins are a great way to personalize MusicBee to your liking.<br/><br/> You can also make your own skin and share it with others.';
 $lang['home_20'] = 'Sync with Devices';
-$lang['home_21'] = 'Sync your music collection with devices you use. MusicBee supports playlist and podcast syncing, even supports audio books with 2 way syncing.<br/>Convert format on the fly, if your device does not support certain format. <br/></br>You can also sync your Android and Windows Phone (8.1+) devices.';
+$lang['home_21'] = 'Sync your music collection with devices you use. MusicBee supports playlist and podcast syncing, even supports audio books with 2 way syncing.<br/>Convert formats on the fly if your device does not support certain formats. <br/></br>You can also sync your Android and Windows Phone (8.1+) devices.';
 $lang['home_22'] = 'Powerful Tagging tools';
 $lang['home_23'] = 'View and edit tags with the extensive Tag Editor and MusicBee\'s Tag Inspector. Create nearly unlimited possibilities with virtual tags. You can also manage duplicates and have your library and its structure automatically organized. Get song tags and lyrics from online sources. And much more!';
 $lang['home_24'] = 'Yes, even more ...';
@@ -109,15 +107,15 @@ $lang['home_28'] = 'Accurate CD ripping and file conversion';
 $lang['home_29'] = 'Get MusicBee and enhance your music experience';
 $lang['home_30'] = 'Submit';
 $lang['home_31'] = 'Groove Music Support';
-$lang['home_32'] = 'MusicBee has native support for Groove Music(formerly Xbox Music). You can stream directly from MusicBee, or add to your existing playlist, get song recommendation from vast catalog of Groove <br/><br/>Want to listen to a song before buy? You can listen to preview. ';
+$lang['home_32'] = 'MusicBee has native support for Groove Music (formerly Xbox Music.) You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. ';
 $lang['home_33'] = 'The Best.... rated by reviewers and users';
-$lang['home_34'] = 'MusicBee is rated one of the best Music player and organizer available for PC. It packs with features that will make you WOW. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today, you will never go back.';
+$lang['home_34'] = 'MusicBee is rated one of the best music managers and players available for Windows. It packs features that will WOW you. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today. You will never go back.';
 $lang['home_35'] = 'last.fm, CD Ripping, Tagging tools.... plus more!';
-$lang['home_36'] = 'MusicBee packs with a comprehensive set of features to make your music experience better. <br/><br/>Yet it is <b>one of the most lightweight player</b>, uses about 25-70 MB ram* with skins and add-ons, and packs all of these under 10 MB!';
+$lang['home_36'] = 'MusicBee packs a comprehensive set of features to make your music experience better. <br/><br/>Yet it is <b>one of the most lightweight player</b> using about 25-70 MB ram* with skins and add-ons, and packs all of these under 10 MB!';
 $lang['home_37'] = '<br/><br/>*Tested with MusicBee 3 with a library of 200 albums, sized around 3GB.';
-$lang['home_38'] = "Upmix stero to 5.1 surround sound, or resample track to lower bitrate";
-$lang['home_39'] = "Use logarithmic volume scaling or normalise volume streaming";
-$lang['home_40'] = "Even better, import winamp plugins and start listening to Music";
+$lang['home_38'] = "Upmix stereo to 5.1 surround sound, or resample track to lower bitrate";
+$lang['home_39'] = "Use logarithmic volume scaling or normalize volume streaming";
+$lang['home_40'] = "Even better, MusicBee supports some WinAmp plugins to enhance your music";
 
 
 
@@ -148,7 +146,7 @@ $lang['download_disabled_h'] = 'Downloads are disabled!';
 $lang['download_disabled_desc'] = 'Sorry for the inconvenience. This is probably temporary. Please check the forum or come back later.';
 
 $lang['latest_patch'] = 'Latest Patch';
-$lang['latest_patch_desc'] = 'Patches are much more frequent and contain bug fixes. You will need to have MusicBee installed first, before applying patch update.';
+$lang['latest_patch_desc'] = 'Patches are much more frequent and contain bug fixes. You will need to have MusicBee installed first before applying a patch update.';
 
 
 /**
@@ -183,12 +181,12 @@ $lang['go_to_home'] = 'Go to home &nbsp;<i class="fa fa-arrow-right"></i>';
 /*Add-on Dashboard*/
 $lang['dashboard_title'] = "MusicBee Add-on Dashboard";
 $lang['dashboard_infobar_title'] = "Dashboard";
-$lang['dashboard_infobar_desc'] = "Dashboard is your control center for managing your uploaded addons, moderation and more";
+$lang['dashboard_infobar_desc'] = "Dashboard is your control center for managing your uploaded add-ons, moderation and more";
 
 //dashboard > secondery menu
 $lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
 $lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
-$lang['dashboard_menu_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit add-on';
+$lang['dashboard_menu_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit an add-on';
 $lang['dashboard_menu_4'] = 'Moderate';
 $lang['musicbee_release'] = 'MusicBee Releases';
 $lang['dashboard_menu_6'] = 'Website Setting';
@@ -198,12 +196,12 @@ $lang['dashboard_0'] = 'Add-on Submitted';
 $lang['dashboard_1'] = 'Likes Received';
 $lang['dashboard_2'] = 'Needs Approval';
 $lang['dashboard_3'] = "Total Downloads";
-$lang['dashboard_4'] = '<i class="fa fa-tasks"></i>&nbsp;&nbsp;&nbsp;Things you can DO!';
-$lang['dashboard_5'] = '<i class="fa fa-area-chart"></i>&nbsp;&nbsp;Your Stats';
+$lang['dashboard_4'] = '<i class="fa fa-tasks"></i>&nbsp;&nbsp;&nbsp;Things you can do';
+$lang['dashboard_5'] = '<i class="fa fa-area-chart"></i>&nbsp;&nbsp;Your stats';
 $lang['dashboard_6'] = '<i class="fa fa-shield"></i>&nbsp;&nbsp;Addons waiting for approval';
-$lang['dashboard_7'] = 'You are seeing this because you are either a mod or admin';
-$lang['dashboard_8'] = '<i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Your top Add-ons';
-$lang['dashboard_9'] = '<i class="fa fa-sitemap"></i>&nbsp;&nbsp;&nbsp;Your most downloaded Add-ons';
+$lang['dashboard_7'] = 'You are seeing this because you are either a Moderator or Administrator';
+$lang['dashboard_8'] = '<i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Your top add-ons';
+$lang['dashboard_9'] = '<i class="fa fa-sitemap"></i>&nbsp;&nbsp;&nbsp;Your most downloaded add-ons';
 $lang['dashboard_10'] = '<i class="fa fa-filter"></i>&nbsp;&nbsp;Filter & Search your add-ons';
 $lang['dashboard_11'] = '<i class="fa fa-th"></i>&nbsp;&nbsp;Your published add-ons';
 $lang['edit_icon'] = '<i class="fa fa-pencil"></i>';
@@ -233,9 +231,9 @@ $lang['dashboard_record_th_7'] = 'Submitted by';
 $lang['dashboard_links_1'] = 'Get MusicBee API';
 $lang['dashboard_links_8'] = 'Essential skinning guide';
 $lang['dashboard_links_2'] = 'Best practices when submitting an add-on';
-$lang['dashboard_links_3'] = 'Learn about Dashboard!';
+$lang['dashboard_links_3'] = 'Learn about the Dashboard!';
 $lang['dashboard_links_4'] = 'How to update an add-on?';
-$lang['dashboard_links_5'] = 'Report bugs for dashbaord!';
+$lang['dashboard_links_5'] = 'Report bugs for the dashboard!';
 $lang['dashboard_links_6'] = '';
 //dashboard > submit
 $lang['dashboard_submit_1'] = '<i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;Add-on Submission';
@@ -254,20 +252,20 @@ $lang['dashboard_submit_header_11'] = 'Thumbnail *';
 $lang['dashboard_submit_header_12'] = 'Screenshots of your add-on *';
 $lang['dashboard_submit_header_13'] = 'Support & Discussion Forum Link';
 $lang['dashboard_submit_header_14'] = 'Readme Note';
-$lang['dashboard_submit_header_15'] = 'Add important note for user';
+$lang['dashboard_submit_header_15'] = 'Add any important notes for user';
 $lang['dashboard_submit_header_16'] = 'Add-on type *';
 $lang['dashboard_submit_header_17'] = 'Provide Extra info';
-$lang['dashboard_submit_header_18'] = 'Is this add-on beta?';
+$lang['dashboard_submit_header_18'] = 'Is this add-on a beta?';
 $lang['dashboard_submit_header_19'] = 'NOTE';
 
-$lang['dashboard_submit_desc_1'] = 'If your rank is newbie, you will need moderator approval. Also post your add-on on the forum first to get peoples attention';
-$lang['dashboard_submit_desc_2'] = 'You don\'t need admin/mod approval for updates, but malicious update can result permanent ban';
-$lang['dashboard_submit_desc_3'] = 'Only text and number is allowed. No HTML code or Markup/Markdown code is allowed.<br/>Also keep the description short, <b>Maximum Character limit is 600</b>';
-$lang['dashboard_submit_desc_4'] = 'Select the supported MusicBee version for your add-on. You can Multi-select by holding down <code>ctrl</code> and click.<br/>A preview will show you the selected info as well!';
-$lang['dashboard_submit_desc_7'] = 'If your add-on does not have a version, leave it blank';
-$lang['dashboard_submit_desc_5'] = 'You can provide a link from the web or upload an image directly to imgur.<br/>You can add upto 8 images.';
-$lang['dashboard_submit_desc_6'] = 'Create a thread in our forum if you haven\'t, or use an existing thread link';
-$lang['dashboard_submit_desc_7'] = 'Add any important things that you wan\'t user to be aware of';
+$lang['dashboard_submit_desc_1'] = 'If your rank is Newbie you will need Moderator approval. Also post your add-on on the forum first to get people\'s attention';
+$lang['dashboard_submit_desc_2'] = 'You don\'t need Administrator/Moderators approval for updates, but a malicious update can result in a permanent ban';
+$lang['dashboard_submit_desc_3'] = 'Only text and number is allowed. No HTML code or Markup/Markdown code is allowed.<br/>Also keep the description short, <b>The maximum character limit is 600</b>';
+$lang['dashboard_submit_desc_4'] = 'Select the supported MusicBee version for your add-on. You can multi-select by holding down <code>ctrl</code> and click.<br/>A preview will show you the selected info as well!';
+$lang['dashboard_submit_desc_7'] = 'If your add-on does not have a version leave it blank';
+$lang['dashboard_submit_desc_5'] = 'You can provide a link from the web or upload an image directly to imgur.<br/>You can add up to 8 images.';
+$lang['dashboard_submit_desc_6'] = 'Create a thread in our forum if you haven\'t already done so or use an existing thread link';
+$lang['dashboard_submit_desc_7'] = 'Add any important things that you want the user to be aware of';
 $lang['dashboard_submit_desc_8'] = 'Use Mediafire, Mega, Onedrive, Google Drive, Dropbox to upload your add-on';
 $lang['dashboard_submit_desc_9'] = 'A support/discussion forum link is required for a beta add-on';
 
@@ -275,46 +273,46 @@ $lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
 $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to imgur';
 
-$lang['dashboard_msg_1'] = 'Add-on Removed, contact mods/admin to restore it';
-$lang['dashboard_msg_2'] = 'Are you sure you want to remove this addon?\\n\\nyou can\'t modify it once it is added to delete queue!';
-$lang['dashboard_msg_3'] = 'This Add-on will Support:';
-$lang['dashboard_msg_4'] = 'You have reached maximum tag input, any more tag will be removed!';
-$lang['dashboard_msg_5'] = 'Your add-on is waiting to be reviewed by our Mods/Admin.';
-$lang['dashboard_msg_6'] = 'Since you are an Elite User or Mod your add-on is successfully submitted and available for public to download!';
-$lang['dashboard_msg_7'] = '<b>SUCCESSFULL:</b> Add-on successfully deleted!';
-$lang['dashboard_msg_8'] = '<b>SUCCESSFULL:</b> Add-on successfully added to delete queue! And will be automatically deleted';
-$lang['dashboard_msg_9'] = 'You can not View, download or edit deleted add-ons! contact admin/mods to undelete it first.';
-$lang['dashboard_msg_10'] = 'Setting successfully saved! You need to refresh the page to see the changes.';
-$lang['dashboard_msg_11'] = '<b>SUCCESSFULL:</b> Add-on submitted successfully!';
-$lang['dashboard_msg_12'] = '<b>SUCCESSFULL:</b> Add-on updated successfully!';
+$lang['dashboard_msg_1'] = 'Add-on Removed. Contact the Moderators/Administrator to restore it';
+$lang['dashboard_msg_2'] = 'Are you sure you want to remove this add-on?\\n\\nYou cannot modify it once it is added to delete queue!';
+$lang['dashboard_msg_3'] = 'This add-on will support:';
+$lang['dashboard_msg_4'] = 'You have reached maximum tag input. Any additional tags will be removed!';
+$lang['dashboard_msg_5'] = 'Your add-on is waiting to be reviewed by our Moderators/Administrator.';
+$lang['dashboard_msg_6'] = 'Since you are an Elite User or Moderator, your add-on is successfully submitted and available for download!';
+$lang['dashboard_msg_7'] = '<b>SUCCESSFUL:</b> Add-on successfully deleted!';
+$lang['dashboard_msg_8'] = '<b>SUCCESSFUL:</b> Add-on successfully added to delete queue and will be automatically deleted';
+$lang['dashboard_msg_9'] = 'You can not View, download, or edit deleted add-ons! Contact Administrator/Moderators to undelete it first.';
+$lang['dashboard_msg_10'] = 'Setting successfully saved! You will need to refresh the page to see the changes.';
+$lang['dashboard_msg_11'] = '<b>SUCCESSFUL:</b> Add-on submitted successfully!';
+$lang['dashboard_msg_12'] = '<b>SUCCESSFUL:</b> Add-on updated successfully!';
 $lang['dashboard_msg_13'] = 'You can edit submitted add-ons from other users, because you have permission to moderate';
-$lang['dashboard_msg_14'] = 'Are you sure you want to remove this addon?\\n\\nyou can undo this action.';
-$lang['dashboard_msg_15'] = 'Are you sure you want to delete this record?\\n\\nyou can\'t undo this action.';
+$lang['dashboard_msg_14'] = 'Are you sure you want to remove this add-on?\\n\\nYou can undo this action.';
+$lang['dashboard_msg_15'] = 'Are you sure you want to delete this record?\\n\\nYou cannot undo this action.';
 $lang['dashboard_msg_16'] = 'Record deleted';
 
-$lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum with the Error!<br/>';
+$lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum along with the error message!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
-$lang['json_err_copied'] = 'Copied to Clipboard!';
+$lang['json_err_copied'] = 'Copied to clipboard!';
 
 // dashboard > tasks > error
 $lang['dashboard_err_1'] = 'You don\'t have enough permission';
-$lang['dashboard_err_2'] = 'Can\'t find anything to show here!';
+$lang['dashboard_err_2'] = 'Cannot find anything to show here!';
 $lang['dashboard_err_3'] = 'There are no add-ons waiting for your approval';
-$lang['dashboard_err_4'] = '<b>ERROR:</b> The add-on type does not exists. Please choose a valid one';
-$lang['dashboard_err_5'] = '<b>ERROR:</b> An Add-on with similar name exists!';
-$lang['dashboard_err_6'] = '<b>ERROR:</b> The MusicBee version you are targeting does not exists!';
+$lang['dashboard_err_4'] = '<b>ERROR:</b> The add-on type does not exist. Please choose a valid add-on type.';
+$lang['dashboard_err_5'] = '<b>ERROR:</b> An add-on with a similar name exists!';
+$lang['dashboard_err_6'] = '<b>ERROR:</b> The MusicBee version you are targeting does not exist!';
 $lang['dashboard_err_7'] = '<b>ERROR:</b> Description exceeds character limit!';
-$lang['dashboard_err_8'] = '<b>ERROR:</b> Maximum 10 Tags are allowed! Please remove unnecessary tags.';
-$lang['dashboard_err_9'] = '<b>ERROR:</b> Readme Note exceeds character limit!';
-$lang['dashboard_err_10'] = '<b>ERROR:</b> There are more than 10 add-on that needs approval, before you can submit more!';
-$lang['dashboard_err_12'] = '<b>ERROR:</b> The Add-on is submitted by someone else.<br>You don\'t have enough permission to modify it!';
+$lang['dashboard_err_8'] = '<b>ERROR:</b> Maximum 10 tags are allowed! Please remove unnecessary tags.';
+$lang['dashboard_err_9'] = '<b>ERROR:</b> Readme note exceeds character limit!';
+$lang['dashboard_err_10'] = '<b>ERROR:</b> There are more than 10 add-ons that needs approval before you can submit more!';
+$lang['dashboard_err_12'] = '<b>ERROR:</b> The add-on is submitted by someone else.<br>You don\'t have enough permission to modify it!';
 $lang['dashboard_err_14'] = '<b>ERROR:</b> For some unknown reason the add-on could not be deleted. Please report this in forum.';
 $lang['dashboard_err_15'] = '<b>ERROR:</b> Bad request parameter.';
 $lang['dashboard_err_16'] = '<b>ERROR:</b> You must add a support/discussion forum link for a beta add-on!';
 $lang['dashboard_err_18'] = 'ERROR';
-$lang['dashboard_err_19'] = '<b>ERROR:</b> Website setting can\'t be saved!';
-$lang['dashboard_err_20'] = '<b>ERROR:</b> Dashboard submission is turned off. Contact admin/mod on the forum!';
-$lang['dashboard_err_21'] = 'You can not submit any new add-on! but you can still update your existing add-on.';
+$lang['dashboard_err_19'] = '<b>ERROR:</b> Website setting cannot be saved!';
+$lang['dashboard_err_20'] = '<b>ERROR:</b> Dashboard submission is turned off. Contact Administrator/Moderators on the forum!';
+$lang['dashboard_err_21'] = 'You can not submit any new add-ons but you can still update your existing add-ons.';
 
 $lang['dashboard_err_22'] = 'You have reached maximum submission limit for the day!';
 
@@ -324,12 +322,12 @@ $lang['dashboard_err_22'] = 'You have reached maximum submission limit for the d
 $lang['mod_1'] = 'Overall downloads';
 $lang['mod_2'] = 'Overall likes';
 $lang['mod_3'] = 'Waiting for approval';
-$lang['mod_4'] = 'Overall add-on submitted';
+$lang['mod_4'] = 'Overall add-ons submitted';
 $lang['mod_5'] = 'All Rejected add-ons';
 $lang['mod_6'] = 'Total soft deleted add-ons';
-$lang['mod_7'] = 'All add-on statistic';
+$lang['mod_7'] = 'All add-on statistics';
 $lang['mod_8'] = 'Add-on publishers & users';
-$lang['mod_9'] = 'Total registered User';
+$lang['mod_9'] = 'Total registered users';
 $lang['mod_10'] = 'Total add-on publishers';
 $lang['mod_11'] = 'Actions';
 $lang['mod_12'] = 'Undelete add-ons';
@@ -349,7 +347,7 @@ $lang['dashboard_admin_header_4'] = '<i class="fa fa-question-circle"></i>&nbsp;
 
 $lang['dashboard_admin_header_5'] = 'Show page load time in footer';
 $lang['dashboard_admin_header_6'] = 'Turn on/off add-on submission';
-$lang['dashboard_admin_header_7'] = 'Maximum unapproved add-on';
+$lang['dashboard_admin_header_7'] = 'Maximum unapproved add-ons';
 $lang['dashboard_admin_header_8'] = 'Turn on/off imgur upload';
 $lang['dashboard_admin_header_9'] = 'Imgur Client ID';
 $lang['dashboard_admin_header_10'] = 'Imgur Client Secret';
@@ -375,14 +373,14 @@ $lang['dashboard_admin_header_29'] = 'Press & Media Page content';
 
 
 $lang['dashboard_admin_desc_1'] = 'Shows page generation time in seconds';
-$lang['dashboard_admin_desc_2'] = 'If you disable the submission form, user won\'t be able to submit addons for the add-on page';
-$lang['dashboard_admin_desc_3'] = 'Maximum number of add-on user can submit for admin/mod approval, until those are approved they can\'t submit more';
-$lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, musicbee release form.';
-$lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be carefull when modifying. Don\'t change if you have doubts';
-$lang['dashboard_admin_desc_6'] = 'Limit how many add-on an user can submit per day. If the limit is reached the user won\'t be able to submit any more add-on for that day.';
+$lang['dashboard_admin_desc_2'] = 'If you disable the submission form, user won\'t be able to submit add-ons for the add-on page';
+$lang['dashboard_admin_desc_3'] = 'Maximum number of add-ons a user can submit for Administrator/Moderators approval. Until those are approved they cannot submit more';
+$lang['dashboard_admin_desc_4'] = 'Turning imgur upload off for the whole site including add-on form, MusicBee release form.';
+$lang['dashboard_admin_desc_5'] = 'Following settings will affect the whole site. So be careful when modifying. Don\'t change if you have doubts';
+$lang['dashboard_admin_desc_6'] = 'Limit how many add-ons a user can submit per day. If the limit is reached the user won\'t be able to submit any more add-ons for that day.';
 $lang['dashboard_admin_desc_7'] = 'Modify external links that can change over time. This will affect the whole site.';
 $lang['dashboard_admin_desc_8'] = 'Update the FAQ or modify the help links to wikia. This will affect the whole site.';
-$lang['dashboard_admin_desc_9'] = 'The links are JSON formatted. You can add or modify more links, use similir structure when adding new links. Make sure the JSON is valid otherwise it can produce fatal errors.<br/> <b>Only modify url, name, icon and target. DO NOT MODIFY ANYTHING ELSE!</b>';
+$lang['dashboard_admin_desc_9'] = 'The links are JSON formatted. You can add or modify more links, use similar structure when adding new links. Make sure the JSON is valid otherwise it can produce fatal errors.<br/> <b>Only modify url, name, icon and target. DO NOT MODIFY ANYTHING ELSE!</b>';
 $lang['dashboard_admin_desc_10'] = 'Update API page with latest API changes and links';
 $lang['dashboard_admin_desc_11'] = 'Update Press page contents';
 
@@ -414,7 +412,7 @@ $lang['mbr_btn_2'] = '<i class="fa fa-ban"></i>&nbsp;&nbsp; Disable';
 $lang['mbr_btn_5'] = '<i class="fa fa-check"></i>&nbsp;&nbsp; Enable';
 $lang['mbr_btn_3'] = 'New Beta Release';
 $lang['new_patch_release'] = 'Submit New Patch';
-$lang['patch_submission_desc'] = 'Patches are bug fix updates and much more frequent. For new feature and big updates please sumit new release instead of patch. <b>Patch releases are not persistent, You can not modify any previous patch release.</b>';
+$lang['patch_submission_desc'] = 'Patches are bug fix updates and much more frequent. For new features and big updates please submit new release instead of patch. <b>Patch releases are not persistent, You can not modify any previous patch release.</b>';
 $lang['ver_patch_desc'] = 'Make sure version is always higher than the current stable release. Since patch is incremental update it\'s version must be higher';
 
 $lang['patch_ver'] = 'Patch Version';
@@ -424,17 +422,17 @@ $lang['current_stable_version'] = 'Current Stable version:';
 $lang['latest_patch_version'] = 'Latest Patch version:';
 $lang['mb_patch'] = 'MusicBee Patch Info';
 
-$lang['no_record'] = 'We can\'t find anything to show! <i class="fa fa-frown-o"></i>';
+$lang['no_record'] = 'We cannot find anything to show! <i class="fa fa-frown-o"></i>';
 $lang['stable_release_disabled'] = 'Stable Release download is now disabled for users';
 $lang['stable_release_enabled'] = 'Stable Release download is now enabled for users';
 $lang['version_exists'] = 'This version already exists! Change/Update the version info';
 $lang['beta_release_disbled'] = 'Beta Release download is now disabled for users';
 $lang['beta_release_enabled'] = 'Beta Release download is now enabled for users';
-$lang['stable_release_saved_updated'] = 'Stable release data updated and added to archive successfully';
-$lang['new_mb_release_desc'] = 'Have a new MusicBee version? or beta release! maybe a patch, update any MusicBee site releated info here, everything will auto update';
+$lang['stable_release_saved_updated'] = 'Stable Release data updated and added to archive successfully';
+$lang['new_mb_release_desc'] = 'Have a new MusicBee version, or beta release? Maybe a patch? Update any MusicBee site-related info here. Everything will auto-update';
 $lang['deleted'] = 'Deleted!';
-$lang['beta_release_saved'] = 'Beta release data updated successfully';
-$lang['patch_saved'] = 'Patch Saved successfully!';
+$lang['beta_release_saved'] = 'Beta Release data updated successfully';
+$lang['patch_saved'] = 'Patch saved successfully!';
 $lang['character_cannot_use_error'] = 'contains some characters that can not be used';
 $lang['version&link_required'] = 'You must fill both Version and Download Link';
 
@@ -454,7 +452,7 @@ $lang['delete'] = 'Delete';
 
 $lang['mbr_submit_h_1'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit a new Release!';
 $lang['mbr_submit_h_2'] = 'All MusicBee releases';
-$lang['mbr_submit_h_2'] = 'Update existing Release';
+$lang['mbr_submit_h_2'] = 'Update existing release';
 
 $lang['mbr_lbl_1'] = 'Appname';
 $lang['mbr_lbl_2'] = 'Version';
@@ -468,7 +466,7 @@ $lang['mbr_lbl_9'] = 'Important Message for users';
 $lang['mbr_lbl_10'] = 'Is this MusicBee release a major one?';
 $lang['mbr_lbl_11'] = 'Available in Dashboard?';
 
-$lang['mbr_desc_1'] = 'If this musicbee release contains major changes mark it as major release. All major release will be included in Dashboard and can be targetted by Add-on Authors.';
+$lang['mbr_desc_1'] = 'If this MusicBee release contains major changes mark it as major release. All major releases will be included in Dashboard and can be targeted by Add-on Authors.';
 
 $lang['mbr_placeholder_1'] = 'eg. MusicBee 3';
 $lang['mbr_placeholder_2'] = 'eg. 3.0.5933';
@@ -483,7 +481,7 @@ $lang['mbr_btn_20'] = '<i class="fa fa-th"></i>&nbsp;&nbsp; View and edit MusicB
 /**
  * Addons download/search page
  */
-$lang['addon_license'] = 'Unless mentioned by the Author, all sdd-ons and Screenshots are licensed under<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
+$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
 
 $lang['addon_8'] = 'Version';
 $lang['addon_9'] = 'Author';
@@ -506,17 +504,17 @@ $lang['like'] = '<i class="fa fa-heart-o"></i>&nbsp;&nbsp; Like';
 $lang['liked'] = '<i class="fa fa-heart"></i>&nbsp;&nbsp; Liked!';
 
 $lang['invalid_addon_err'] = '<b>ERROR:</b> Add-on id is not valid! It must be a number';
-$lang['thank_you_check_more'] = '<b>Thank You</b> for rating. Check more from this author below';
+$lang['thank_you_check_more'] = '<b>Thank you</b> for rating. Check more from this author below';
 $lang['rating_removed'] = 'Your rating is removed!';
 $lang['rating_issue_err'] = 'Facing some problem with your rating status!';
 
 $lang['addon_31'] = 'Showing results for: ';
 $lang['addon_32'] = 'There is nothing yet! <i class="fa fa-frown-o"></i>';
-$lang['addon_33'] = 'You can request for an add-on on our forum, or you can create and submit one yourself';
+$lang['addon_33'] = 'You can submit a request for an add-on in our forum. Or you can create and submit one yourself.';
 $lang['addon_34'] = 'Be Careful!';
-$lang['addon_35'] = 'This add-on is not approved by admins yet!';
+$lang['addon_35'] = 'This add-on is not approved by Administrator/Moderators yet!';
 $lang['addon_38'] = 'beta';
-$lang['addon_39'] = 'This add-on has been rejected by Admin/Mods';
+$lang['addon_39'] = 'This add-on has been rejected by Administrator/Moderators';
 $lang['addon_40'] = 'You can not download rejected add-ons!';
 
 $lang['tags_icon'] = '<i class="fa fa-tags"></i> ';
@@ -524,7 +522,7 @@ $lang['search'] = 'Search ';
 $lang['addon_43'] = 'Member Rank';
 $lang['addon_44'] = 'Total uploaded add-ons by this member';
 
-$lang['addon_45'] = 'Add-ons are a great way to extend MusicBee\'s awesome capabailities. It does not matter if your are power user or using MusicBee just to listen to music add-ons will make your experience better.<br/><br/>Change how MusicBee looks or add a complete new twist with theater mode, it is all up to you.';
+$lang['addon_45'] = 'Add-ons are a great way to extend MusicBee\'s awesome capabilities. It does not matter if your are power user or using MusicBee just to listen to music. Add-ons will make your experience better.<br/><br/>Change how MusicBee looks or add a complete new twist with Theater Mode. It\'s all up to you.';
 $lang['addon_46'] = 'MusicBee Add-ons';
 $lang['addon_47'] = 'How to Install Add-ons';
 $lang['addon_48'] = 'Checkout our Community';
@@ -532,7 +530,7 @@ $lang['addon_50'] = 'Submit your Add-on';
 $lang['addon_51'] = 'Browse all';
 
 $lang['addon_52'] = 'Most Popular Add-ons';
-$lang['addon_53'] = '<h3 class="colored">Looking for Plugins? Want to extend Musicbee\'s functionality?</h3><p>Check out popular and essential plugins by category. 3rd party services, device syncing, or editing tags we have something for everything</p>';
+$lang['addon_53'] = '<h3 class="colored">Looking for Plugins? Want to extend Musicbee\'s functionality?</h3><p>Check out popular plugins by category. 3rd party services, device syncing, or editing tags. We have something for everyone.</p>';
 $lang['addon_54'] = 'Newly added Add-ons';
 $lang['addon_55'] = 'Recently Updated';
 $lang['addon_56'] = 'Browse all';
@@ -578,19 +576,19 @@ $lang['mb_related_bug'] = 'Report a MusicBee Bug!';
 $lang['read_careful_before_bugpost'] = 'Please read carefully before reporting any bugs!';
 
 $lang['mb_related_bug_description'] = <<<HTML
-<li><p>Make sure you <b>ALWAYS have the latest MusicBee version!</b> Get the latest version on the download page, or get the Beta to see if the problem persists.</p></li>
+<li><p>Make sure you <b>ALWAYS have the latest MusicBee version!</b> Get the latest version on the download page and then update with the latest patch.  Or get the Beta to see if the problem has been fixed.</p></li>
 <li><p>Provide detailed steps for reproducing the issue! <br/>If possible provide a GIF showing the steps.</p></li>
 <li><p>Provide the error log file. (<b>Help > Support > View Error Log</b>)</p></li>
 HTML;
 
-$lang['mb_bug_create_btn'] = 'Create a new Bug request &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
+$lang['mb_bug_create_btn'] = 'Create a new Bug Report &nbsp;&nbsp;<i class="fa fa-arrow-right"></i>';
 
 $lang['website_related_bug'] = 'Website related Bugs!';
 $lang['website_related_bug_description'] = <<<HTML
 <li><p>For critical security related issue, Go to the link below and post the issue, <b>DO NOT DISCLOSE THE PROCEDURE TO RECREATE THE ISSUE!</b></p></li>
-<li><p>For styling issue post it in the link below.</p></li>
-<li><p>Found any weird behaviour? or have a new idea or suggestion? Post in the link below!</p></li>
-<li><p>If possible please attatch screenshots showing the issue.</p></li>
+<li><p>For styling issues please post it in the link below.</p></li>
+<li><p>Found any weird behavior or have a new idea or suggestion? Please post in the link below!</p></li>
+<li><p>If possible please attach screenshots showing the issue.</p></li>
 HTML;
 
 $lang['bug_post_account_req'] = 'Go ahead and post bugs in the discussion thread. You will need a forum account.';
@@ -650,8 +648,8 @@ $lang['417'] = '<b>ERROR:</b> There\'s a Problem<br/>';
  */
 
 $lang['help_title'] = 'MusicBee help and FAQ';
-$lang['help_desc'] = 'Need help with MusicBee or just getting started! having trouble figuring out some feature or maybe you are lost, this is the right place for getting all your answer';
-$lang['help_popular_wiki_headline'] = 'Most Popular wiki posts';
+$lang['help_desc'] = 'Do you need help with MusicBee? Perhaps you\'re just getting started or having trouble figuring out a feature. This is the right place for getting all your answers';
+$lang['help_popular_wiki_headline'] = 'Most Popular Wiki posts';
 $lang['help_faq_headline'] = 'FAQ (Frequently Asked Question)';
 $lang['dev_guides'] = 'Help for Developers';
 $lang['user_help'] = 'Help for Users';
@@ -667,7 +665,7 @@ $lang['bug_icon'] = '<i class="fa fa-bug"></i>';
 /**
  * API page Title
  */
-$lang['api_desc'] = 'Get MusicBee API kit and create plugins or integrating 3rd party services into MusicBee! Available in C#, C++';
+$lang['api_desc'] = 'Get the MusicBee API kit and create plugins or integrating 3rd party services into MusicBee! Available in C#, C++';
 $lang['api_title'] = 'MusicBee API for developers';
 
 
@@ -677,8 +675,8 @@ $lang['api_title'] = 'MusicBee API for developers';
 /**
  * General Errors
  */
-$lang['no_js'] = 'Your browser does not support javascript(or disabled), please use a browser with
-			javascript or enable it.<br/>We need javascript to function properly, otherwise some things won\'t work properly.';
+$lang['no_js'] = 'Your browser does not support javascript (or it is disabled.) Please use a browser with
+			javascript or enable it.<br/>We need javascript to function properly otherwise some things won\'t work.';
 $lang['err_login_required'] = '<b>ERROR:</b> You must login first!';
 
 
