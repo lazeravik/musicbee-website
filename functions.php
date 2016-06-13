@@ -119,7 +119,7 @@ $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_RE
 //Get user avatar or use the default avatar
 $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']['href'] : $link['url'].'img/usersmall.jpg';
 
-//Get the musicbee satble and beta release data from the API page
+//Get the musicbee satble and beta release data
 $releaseData['stable'] = getVersionInfo(0,'byCurrentVersion')[0];
 $releaseData['beta'] = getVersionInfo(1,'byCurrentVersion')[0];
 
@@ -127,7 +127,7 @@ $releaseData['beta'] = getVersionInfo(1,'byCurrentVersion')[0];
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
 	'website' => array(
-		'ver'           => '1.2.1',
+		'ver'           => '1.2.3',
 		'show_warning'  => false,
 		'github_link'   => 'https://github.com/Avik-B/mb_web/',
 	),

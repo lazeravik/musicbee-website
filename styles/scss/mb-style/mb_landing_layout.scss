@@ -1,5 +1,6 @@
 $max_content_width : 1000px;
-$mb_top_bg_wireframe :   "../../../img/bg_teaser.svg";
+$mb_top_bg_wireframe :   "../../../img/hero_img/polygon_pat.png";
+$mb_top_bg :   "../../../img/hero_img/hero_top_bg-min.jpg";
 $mb_quality_bg :         "../../../img/hero_img/headphone.jpg";
 $mb_bottom_download_bg : "../../../img/hero_img/download_bg.jpg";
 
@@ -152,7 +153,8 @@ $mb_bottom_download_bg : "../../../img/hero_img/download_bg.jpg";
 }
 
 .mb_intro_top {
-  background : #15327b url($mb_top_bg_wireframe) fixed center center;
+  background : url($mb_top_bg_wireframe) fixed, url($mb_top_bg);
+  background-position: center center;
   background-size: cover;
 
   .overlay {

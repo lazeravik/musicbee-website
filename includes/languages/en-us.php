@@ -461,7 +461,7 @@ $lang['mbr_lbl_4'] = 'Installer Download Link';
 $lang['mbr_lbl_5'] = 'Installer Mirror 1';
 $lang['mbr_lbl_6'] = 'Installer Mirror 2';
 $lang['mbr_lbl_7'] = 'Portable Download Link';
-$lang['mbr_lbl_8'] = 'Release Note';
+$lang['mbr_lbl_8'] = 'Release Notes';
 $lang['mbr_lbl_9'] = 'Important Message for users';
 $lang['mbr_lbl_10'] = 'Is this MusicBee release a major one?';
 $lang['mbr_lbl_11'] = 'Available in Dashboard?';
@@ -530,7 +530,7 @@ $lang['addon_50'] = 'Submit your Add-on';
 $lang['addon_51'] = 'Browse all';
 
 $lang['addon_52'] = 'Most Popular Add-ons';
-$lang['addon_53'] = '<h3 class="colored">Looking for Plugins? Want to extend Musicbee\'s functionality?</h3><p>Check out popular plugins by category. 3rd party services, device syncing, or editing tags. We have something for everyone.</p>';
+$lang['addon_53'] = '<h3 class="colored">Looking for Plugins? Want to extend MusicBee\'s functionality?</h3><p>Check out popular plugins by category. 3rd party services, device syncing, or editing tags. We have something for everyone.</p>';
 $lang['addon_54'] = 'Newly added Add-ons';
 $lang['addon_55'] = 'Recently Updated';
 $lang['addon_56'] = 'Browse all';

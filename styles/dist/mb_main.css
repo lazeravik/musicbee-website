@@ -2478,213 +2478,214 @@ input.cmn-toggle-round-flat:checked + label:after {
 /*================================================================================================================*\
     page layout styles
 \*================================================================================================================*/
-/* line 6, ../scss/mb-style/mb_landing_layout.scss */
+/* line 7, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing {
   position: relative;
   overflow: hidden;
 }
-/* line 10, ../scss/mb-style/mb_landing_layout.scss */
+/* line 11, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content {
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
   padding: 100px 0px;
 }
-/* line 16, ../scss/mb-style/mb_landing_layout.scss */
+/* line 17, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top {
   width: 52%;
   text-align: left;
   color: #333;
 }
-/* line 22, ../scss/mb-style/mb_landing_layout.scss */
+/* line 23, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_black h1, .mb_landing .sub_content .hero_text_top .text_black h2, .mb_landing .sub_content .hero_text_top .text_black h3 {
   color: #333;
 }
-/* line 25, ../scss/mb-style/mb_landing_layout.scss */
+/* line 26, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_black h4 {
   color: #444;
 }
-/* line 28, ../scss/mb-style/mb_landing_layout.scss */
+/* line 29, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_black p.disclaimer {
   color: #9e9e9e;
 }
-/* line 34, ../scss/mb-style/mb_landing_layout.scss */
+/* line 35, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_white h1, .mb_landing .sub_content .hero_text_top .text_white h2, .mb_landing .sub_content .hero_text_top .text_white h3 {
   color: white;
 }
-/* line 37, ../scss/mb-style/mb_landing_layout.scss */
+/* line 38, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_white h4, .mb_landing .sub_content .hero_text_top .text_white p {
   color: rgba(255, 255, 255, 0.85);
 }
-/* line 40, ../scss/mb-style/mb_landing_layout.scss */
+/* line 41, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top .text_white p.disclaimer {
   color: rgba(255, 255, 255, 0.4);
 }
-/* line 45, ../scss/mb-style/mb_landing_layout.scss */
+/* line 46, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top h4 {
   margin-top: 20px;
 }
-/* line 48, ../scss/mb-style/mb_landing_layout.scss */
+/* line 49, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_text_top p.disclaimer {
   font-size: 12px;
 }
 @media screen and (max-width: 800px) {
-  /* line 16, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 17, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing .sub_content .hero_text_top {
     width: 100%;
   }
 }
-/* line 57, ../scss/mb-style/mb_landing_layout.scss */
+/* line 58, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_img_top {
   position: relative;
   float: left;
   width: 48%;
 }
-/* line 62, ../scss/mb-style/mb_landing_layout.scss */
+/* line 63, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_img_top .hero_img_wrapper {
   position: absolute;
   top: -100px;
 }
-/* line 66, ../scss/mb-style/mb_landing_layout.scss */
+/* line 67, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content .hero_img_top .hero_img_wrapper.hero_img_topmost_wrap {
   top: -10px;
 }
 @media screen and (max-width: 800px) {
-  /* line 57, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 58, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing .sub_content .hero_img_top {
     display: none;
   }
 }
-/* line 76, ../scss/mb-style/mb_landing_layout.scss */
+/* line 77, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content::after {
   content: "";
   clear: both;
   display: table;
 }
 @media screen and (max-width: 1200px) {
-  /* line 10, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 11, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing .sub_content {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
-/* line 86, ../scss/mb-style/mb_landing_layout.scss */
+/* line 87, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.alternate_landing_row_bg {
   background: rgba(0, 0, 0, 0.1);
 }
-/* line 90, ../scss/mb-style/mb_landing_layout.scss */
+/* line 91, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.bg_blue {
   background: #0078d7;
 }
-/* line 95, ../scss/mb-style/mb_landing_layout.scss */
+/* line 96, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_right .hero_img_wrapper {
   left: 50px;
 }
-/* line 98, ../scss/mb-style/mb_landing_layout.scss */
+/* line 99, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_right .hero_text_top {
   float: left;
 }
 @media screen and (max-width: 800px) {
-  /* line 98, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 99, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing.align_right .hero_text_top {
     float: none;
     text-align: center;
   }
 }
-/* line 109, ../scss/mb-style/mb_landing_layout.scss */
+/* line 110, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_left .hero_img_wrapper {
   right: 50px;
 }
-/* line 112, ../scss/mb-style/mb_landing_layout.scss */
+/* line 113, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_left .hero_text_top {
   float: right;
 }
 @media screen and (max-width: 800px) {
-  /* line 112, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 113, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing.align_left .hero_text_top {
     float: none;
     text-align: center;
   }
 }
-/* line 122, ../scss/mb-style/mb_landing_layout.scss */
+/* line 123, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_center .hero_img_top {
   width: inherit;
   text-align: center;
   float: none;
 }
-/* line 127, ../scss/mb-style/mb_landing_layout.scss */
+/* line 128, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_center .hero_img_top img {
   max-width: 100%;
 }
-/* line 134, ../scss/mb-style/mb_landing_layout.scss */
+/* line 135, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing.align_center .hero_text_top {
   text-align: center;
   width: inherit;
 }
-/* line 140, ../scss/mb-style/mb_landing_layout.scss */
+/* line 141, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content_bottom {
   background: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.65));
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.65));
 }
-/* line 143, ../scss/mb-style/mb_landing_layout.scss */
+/* line 144, ../scss/mb-style/mb_landing_layout.scss */
 .mb_landing .sub_content_bottom .sub_content {
   padding: 0px 0px 50px;
 }
 @media screen and (max-width: 1200px) {
-  /* line 143, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 144, ../scss/mb-style/mb_landing_layout.scss */
   .mb_landing .sub_content_bottom .sub_content {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
 
-/* line 154, ../scss/mb-style/mb_landing_layout.scss */
+/* line 155, ../scss/mb-style/mb_landing_layout.scss */
 .mb_intro_top {
-  background: #15327b url("../../../img/bg_teaser.svg") fixed center center;
+  background: url("../../../img/hero_img/polygon_pat.png") fixed, url("../../../img/hero_img/hero_top_bg-min.jpg");
+  background-position: center center;
   background-size: cover;
 }
-/* line 158, ../scss/mb-style/mb_landing_layout.scss */
+/* line 160, ../scss/mb-style/mb_landing_layout.scss */
 .mb_intro_top .overlay {
   background: -webkit-linear-gradient(315deg, rgba(42, 62, 78, 0.95), rgba(39, 68, 90, 0.74), rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58));
   background: linear-gradient(135deg, rgba(42, 62, 78, 0.95), rgba(39, 68, 90, 0.74), rgba(177, 101, 47, 0.53), rgba(123, 65, 14, 0.6), rgba(0, 0, 0, 0.58));
 }
-/* line 161, ../scss/mb-style/mb_landing_layout.scss */
+/* line 163, ../scss/mb-style/mb_landing_layout.scss */
 .mb_intro_top .overlay .sub_content {
   text-align: left;
 }
 @media screen and (max-width: 800px) {
-  /* line 161, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 163, ../scss/mb-style/mb_landing_layout.scss */
   .mb_intro_top .overlay .sub_content {
     text-align: center;
   }
 }
 
-/* line 170, ../scss/mb-style/mb_landing_layout.scss */
+/* line 172, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top {
   background: url("../../../img/hero_img/headphone.jpg") 50% 0 fixed, #0076db;
   background-size: cover;
 }
-/* line 174, ../scss/mb-style/mb_landing_layout.scss */
+/* line 176, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay {
   background: -webkit-linear-gradient(315deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
   background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
 }
-/* line 177, ../scss/mb-style/mb_landing_layout.scss */
+/* line 179, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content {
   padding: 50px 10px 50px;
 }
-/* line 180, ../scss/mb-style/mb_landing_layout.scss */
+/* line 182, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content.hero_buttons {
   padding: 0px 0px 50px;
 }
 @media screen and (max-width: 1200px) {
-  /* line 180, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 182, ../scss/mb-style/mb_landing_layout.scss */
   .mb_quality_top .overlay .sub_content.hero_buttons {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
-/* line 189, ../scss/mb-style/mb_landing_layout.scss */
+/* line 191, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content .feature_box {
   list-style: none;
   margin: 0px;
@@ -2697,22 +2698,22 @@ input.cmn-toggle-round-flat:checked + label:after {
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-/* line 196, ../scss/mb-style/mb_landing_layout.scss */
+/* line 198, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content .feature_box li {
   list-style: none;
   margin: 0px;
   padding: 0px;
   width: 33.33333333333333%;
 }
-/* line 202, ../scss/mb-style/mb_landing_layout.scss */
+/* line 204, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content .feature_box li p {
   margin: 10px;
 }
-/* line 205, ../scss/mb-style/mb_landing_layout.scss */
+/* line 207, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content .feature_box li p.feature_ico {
   font-size: 50px;
 }
-/* line 210, ../scss/mb-style/mb_landing_layout.scss */
+/* line 212, ../scss/mb-style/mb_landing_layout.scss */
 .mb_quality_top .overlay .sub_content .feature_box li div {
   background: rgba(255, 255, 255, 0.07);
   padding: 10px 5px 20px 5px;
@@ -2721,35 +2722,35 @@ input.cmn-toggle-round-flat:checked + label:after {
   border-radius: 3px;
 }
 @media screen and (max-width: 800px) {
-  /* line 210, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 212, ../scss/mb-style/mb_landing_layout.scss */
   .mb_quality_top .overlay .sub_content .feature_box li div {
     margin: 10px;
   }
 }
 @media screen and (max-width: 800px) {
-  /* line 196, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 198, ../scss/mb-style/mb_landing_layout.scss */
   .mb_quality_top .overlay .sub_content .feature_box li {
     width: 50%;
   }
 }
 @media screen and (max-width: 500px) {
-  /* line 196, ../scss/mb-style/mb_landing_layout.scss */
+  /* line 198, ../scss/mb-style/mb_landing_layout.scss */
   .mb_quality_top .overlay .sub_content .feature_box li {
     width: 100%;
   }
 }
 
-/* line 235, ../scss/mb-style/mb_landing_layout.scss */
+/* line 237, ../scss/mb-style/mb_landing_layout.scss */
 .mb_more_top {
   background: #0076db url("../../../img/hero_img/download_bg.jpg") fixed center center;
   background-size: cover;
 }
-/* line 239, ../scss/mb-style/mb_landing_layout.scss */
+/* line 241, ../scss/mb-style/mb_landing_layout.scss */
 .mb_more_top .overlay {
   background: -webkit-linear-gradient(315deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
   background: linear-gradient(135deg, rgba(52, 43, 66, 0.84), rgba(46, 62, 74, 0.91), rgba(0, 67, 255, 0.18));
 }
-/* line 242, ../scss/mb-style/mb_landing_layout.scss */
+/* line 244, ../scss/mb-style/mb_landing_layout.scss */
 .mb_more_top .overlay .sub_content {
   padding: 40px 20px 40px 20px;
 }
