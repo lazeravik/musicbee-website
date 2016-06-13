@@ -1,10 +1,8 @@
-# mb_web#### **MusicBee Website is created and maintained by AvikB**
+#### MusicBee Website is created and maintained by AvikB
 
  **A huge thanks to all the MusicBee community members for sharing their ideas and help me testing and proofreading the site** 
 
 ----------
-
-<a href="https://github.com/Avik-B/mb_web/" class="btn btn_blue"><i class="fa fa-github"></i>&nbsp; &nbsp;Go to Project Github page </a>
 
  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported, for details visit: https://creativecommons.org/licenses/by-sa/3.0/
 
