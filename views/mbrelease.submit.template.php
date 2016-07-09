@@ -6,19 +6,26 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 $json_response = true;
 $admin_only = true; //only admin
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 
-if(isset($_GET['stable'])) {
+if(isset($_GET['stable']))
+{
 	$release_type = "stable";
-
-} elseif(isset($_GET['beta'])) {
+}
+elseif(isset($_GET['beta']))
+{
 	$release_type = "beta";
-
-} elseif(isset($_GET['update']) && isset($_GET['id'])) {
+}
+elseif(isset($_GET['patch']))
+{
+	$release_type = "patch";
+}
+elseif(isset($_GET['update']) && isset($_GET['id']))
+{
 	$release_type = "update";
 	$id = $_GET['id'];
 	$data = getVersionInfo($id, "byId")[0]; //Request version info by ID
@@ -161,6 +168,87 @@ if(isset($_GET['stable'])) {
 		}
 	</script>
 
+<?php } elseif($release_type == 'patch') { ?>
+	<div class="main_content_wrapper col_2_1">
+		<div class="sub_content_wrapper">
+			<form action="<?php echo $link['url']; ?>includes/admin.tasks.php" method="post" id="release_submit" data-autosubmit>
+				<div class="box_content">
+				<span class="show_info custom">
+					<h3><?php echo $lang['new_patch_release']; ?></h3>
+					<p class="description"><?php echo $lang['patch_submission_desc']; ?></p>
+				</span>
+				</div>
+
+				<div class="box_content">
+					<span class="show_info info_silver custom"><?php echo $lang['appname_patch_desc']; ?></span>
+					<ul class="form">
+						<li>
+							<label for="appname">
+								<p><?php echo $lang['mbr_lbl_1']; ?></p>
+							</label>
+							<input type="text" value="<?php echo $mb['musicbee_download']['stable']['appname'];?>" id="appname" readonly/>
+						</li>
+						<li>
+							<label for="os">
+								<p><?php echo $lang['mbr_lbl_3']; ?></p>
+							</label>
+							<input type="text" value="<?php echo $mb['musicbee_download']['stable']['supported_os'];?>" id="os" readonly/>
+						</li>
+					</ul>
+				</div>
+
+				<div class="box_content">
+					<span class="show_info warning custom"><?php echo $lang['ver_patch_desc']; ?></span>
+					<ul class="form">
+						<li>
+							<label for="ver">
+								<p><?php echo $lang['patch_ver']; ?></p>
+								<p class="description">
+									<b><?php echo $lang['current_stable_version']; ?> </b><?php echo $mb['musicbee_download']['stable']['version'];?>
+
+									<?php if($mb['musicbee_download']['patch'] != null): ?>
+										<br>
+										<b><?php echo $lang['latest_patch_version']; ?> </b><?php echo $mb['musicbee_download']['patch']['version'];?>
+									<?php endif; ?>
+								</p>
+							</label>
+							<input type="text" name="ver" value="" id="ver" placeholder="<?php echo $lang['mbr_placeholder_2']; ?>"/>
+						</li>
+						<li>
+							<label for="link">
+								<p><?php echo $lang['download_link']; ?></p>
+							</label>
+							<input type="url/text" name="link" value="" id="link" placeholder="<?php echo $lang['mbr_placeholder_4']; ?>"/>
+						</li>
+				</div>
+
+				<div class="box_content">
+					<ul class="form">
+						<li>
+							<button class="btn btn_blue" type="submit" onclick="mb_submit()"><?php echo $lang['home_30']; ?></button>
+						</li>
+					</ul>
+				</div>
+
+
+				<input type="hidden" name="save" value="<?php echo $release_type; ?>"/>
+				<input type="hidden" name="isnew" value="true"/>
+			</form>
+		</div>
+	</div>
+	<div class="space medium"></div>
+
+	<script>
+		function mb_submit() {
+			$('form[data-autosubmit][id=release_submit]').autosubmit();
+		}
+
+		var go_to = function () {
+			window.location.hash = 'mbrelease_view';
+		}
+
+
+	</script>
 <?php } else { ?>
 	<!--suppress JSUnresolvedFunction -->
 	<div class="main_content_wrapper col_2_1">
@@ -301,6 +389,10 @@ if(isset($_GET['stable'])) {
 
 		function mb_submit() {
 			$('form[data-autosubmit][id=release_submit]').autosubmit();
+		}
+
+		var view_list = function () {
+			window.location.hash = 'mbrelease_all';
 		}
 
 

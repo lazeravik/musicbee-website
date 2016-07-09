@@ -1,0 +1,67 @@
+{
+  "dashboard":  [
+    {
+      "url": "http://musicbee.wikia.com/styling-guide",
+      "name": "Essential Skinning Guide",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/best-practices-submitting-addon",
+      "name": "Best practices when submitting an add-on",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/learn-about-dashboard",
+      "name": "Learn about Dashboard!",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/how-to-update-addon",
+      "name": "How to update an add-on?",
+      "target": "_blank"
+    }
+  ],
+  "user_help" : [
+    {
+      "url": "http://musicbee.wikia.com/how-to-install",
+      "name": "Installing MusicBee",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/setting-converters",
+      "name": "Setting up LAME encoder & others",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/player-modes",
+      "name": "Different player modes",
+      "target": "_blank"
+    }
+  ],
+  "top_help_popup" : [
+    {
+      "url": "http://musicbee.wikia.com/musicbee-anatomy",
+      "name": "Getting Started",
+      "icon": "<i class='fa fa-hand-o-right'></i>",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/customize-guide",
+      "name": "Customization Guide",
+      "icon": "<i class='fa fa-paint-brush'></i>",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/auto-organize",
+      "name": "Auto Organize Library",
+      "icon": "<i class='fa fa-sort-alpha-asc'></i>",
+      "target": "_blank"
+    },
+    {
+      "url": "http://musicbee.wikia.com/dev-guide",
+      "name": "Developer API Guide",
+      "icon": "<i class='fa fa-code'></i>",
+      "target": "_blank"
+    }
+  ]
+}

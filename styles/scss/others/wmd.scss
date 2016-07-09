@@ -23,22 +23,24 @@
 
 
 #wmd-preview {
-    background-color: #fff;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    margin: 10px auto;
-    display: block;
+	background-color: #fff;
+	padding: 50px 20px 10px 20px;
+	box-sizing: border-box;
+	margin: 10px auto;
+	display: block;
 	border: 1px solid #4CAF50;
+	position: relative;
 
     &::before {
-        content: "Preview";
-        background: #4CAF50;
-        color: #fff;
-        padding: 10px;
-        display: block;
-        margin-left: -20px;
-        margin-top: -10px;
-        margin-right: -20px;
+		content: "Preview";
+		background: #4CAF50;
+		color: #fff;
+		padding: 10px;
+		display: block;
+		top: 0px;
+		position: absolute;
+		left: 0px;
+		right: 0px;
     }
 }
 

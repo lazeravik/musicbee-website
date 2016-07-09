@@ -6,31 +6,36 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title><?php echo $lang['home_title']; ?></title>
 	<meta name="description" content="<?php echo $lang['home_desc']; ?>">
+
 	<!-- keyword meta tag is obsolete, google does not use it, but some
 	search engine still use it, so for legacy support it is included -->
 	<meta name="keywords" content="musicbee, music, player, ultimate, best, customizable, skin, free, plugin">
+
 	<!--include common meta tags and stylesheets -->
 	<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/meta&styles.php'; ?>
-	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/font.helper.php'; ?>
+
 	<!--Social network tags for facebook and twitter -->
-	<meta property="og:title" content="">
+	<meta property="og:title" content="<?php echo $lang['home_title']; ?>"/>
+	<meta property="og:url" content="<?php echo $link['url']; ?>"/>
 	<meta property="og:image" content="<?php echo $link['url']; ?>img/mb_big.png">
 	<meta property="og:description" content="<?php echo $lang['home_desc']; ?>">
+
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@MusicBeePlayer">
 	<meta name="twitter:title" content="MusicBee - Music Manager and Player">
 	<meta name="twitter:description" content="<?php echo $lang['home_desc']; ?>">
+
+	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
+	<?php include $link['root'].'includes/font.helper.php'; ?>
 </head>
 <body>
 <div id="indexBackground">
@@ -47,7 +52,6 @@
 						<section class="mb_landing align_right">
 							<div class="sub_content">
 								<div class="hero_text_top">
-									<!-- <h1 class="hero_title"><?php //echo $lang['home_1']; ?></h1> -->
 									<div class="text_wrapper text_white">
 										<h1><?php echo $lang['home_2']; ?></h1>
 										<h4><?php echo $lang['home_3']; ?></h4>
@@ -55,7 +59,7 @@
 								</div>
 								<div class="hero_img_top">
 									<div class="hero_img_wrapper hero_img_topmost_wrap">
-										<img src="<?php echo $link['url']; ?>img/hero-img-top-min.png">
+										<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-top-min.png">
 									</div>
 								</div>
 							</div>
@@ -64,7 +68,7 @@
 									<h4><?php echo $lang['home_4']; ?></h4>
 									<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_yellow">
 										<h3><?php echo $lang['home_5']; ?></h3>
-										<p><?php echo $lang['home_8']; ?> <?php echo $mb['musicbee_download']['stable']['supported_os']; ?></p>
+										<p><?php echo sprintf($lang['for_os'], $mb['musicbee_download']['stable']['supported_os']); ?></p>
 									</a>
 									<a class="btn btn_wireframe btn_wireframe_blue" onclick="$('html,body').animate({scrollTop: $('#simple_powerful').offset().top});" href="javascript:void(0)">
 										<h3><?php echo $lang['home_6']; ?></h3>
@@ -84,7 +88,7 @@
 							<h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>
 						</div>
 						<div class="hero_img_top">
-							<img src="<?php echo $link['url']; ?>img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
+							<img src="<?php echo $link['url']; ?>img/hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
 						</div>
 					</div>
 				</div>
@@ -122,10 +126,38 @@
 										<p><?php echo $lang['home_15']; ?></p>
 									</div>
 								</li>
+
+								<li>
+									<div data-sr="vFactor 0.2">
+										<p class="feature_ico">
+											<i class="fa fa-bullseye"></i>
+										</p>
+										<p>
+											<?php echo $lang['home_38']; ?>
+										</p>
+									</div>
+								</li>
+								<li>
+									<div data-sr="vFactor 0.2">
+										<p class="feature_ico">
+											<i class="fa fa-sort-amount-asc"></i>
+										</p>
+										<p><?php echo $lang['home_39']; ?></p>
+									</div>
+								</li>
+								<li>
+									<div data-sr="vFactor 0.2">
+										<p class="feature_ico">
+											<i class="fa fa-plug"></i>
+										</p>
+										<p><?php echo $lang['home_40']; ?></p>
+									</div>
+								</li>
 								<div id="clear"></div>
 							</ul>
 						</div>
 
+						<!--
 						<div class="sub_content_bottom">
 							<div class="sub_content hero_buttons">
 								<h4><?php echo $lang['home_16']; ?></h4>
@@ -134,6 +166,7 @@
 								</a>
 							</div>
 						</div>
+						-->
 					</div>
 				</div>
 
@@ -149,7 +182,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-skin-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-skin-min.png">
 							</div>
 						</div>
 					</div>
@@ -165,7 +198,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-sync-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-sync-min.png">
 							</div>
 						</div>
 					</div>
@@ -181,7 +214,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/hero-img-groove-min.png">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-groove-min.png">
 							</div>
 						</div>
 					</div>
@@ -198,7 +231,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
+								<img src="<?php echo $link['url']; ?>img/hero_img/mb_tag_feature.png">
 							</div>
 						</div>
 					</div>
@@ -214,7 +247,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['url']; ?>img/mb_tag_feature.jpg">
+								<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-review.png">
 							</div>
 						</div>
 					</div>
@@ -227,7 +260,7 @@
 							<h4><?php echo $lang['home_29']; ?></h4>
 							<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_blue">
 								<h3><?php echo $lang['home_5']; ?></h3>
-								<p><?php echo $lang['home_8']; ?> <?php echo $mb['musicbee_download']['stable']['supported_os']; ?></p>
+								<p><?php echo sprintf($lang['for_os'], $mb['musicbee_download']['stable']['supported_os']); ?></p>
 							</a>
 						</div>
 					</div>

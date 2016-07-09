@@ -42,11 +42,7 @@ MBEditor.wmdBase = function(){
 	var previewPollInterval = 500;
 	var pastePollInterval = 100;
 	
-	// The link and title for the help button
-	var helpLink = "http://wmd-editor.com/";
-	var helpHoverTitle = "WMD website";
-	var helpTarget = "_blank";
-	
+
 	// -------------------------------------------------------------------
 	//  END OF YOUR CHANGES
 	// -------------------------------------------------------------------
@@ -1699,8 +1695,11 @@ MBEditor.wmdBase = function(){
 				var prevTime = new Date().getTime();
 				
 				if (!md && markdownit) {
+					var classy = window.markdownItClassy;
+					var video = window.markdownItVideo;
 					var md = window.markdownit({
-						
+						breaks: false,
+						html: true,
 						langPrefix: '',
 						linkify: true, // Autoconvert URL-like text to links
 						highlight: function (str, lang) {
@@ -1717,6 +1716,9 @@ MBEditor.wmdBase = function(){
 							return ''; // use external default escaping
 						}
 					});
+					md.use(classy);
+					md.use(video);
+
 					text = md.render(text);
 				}
 				

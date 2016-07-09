@@ -1,7 +1,8 @@
 $max_content_width : 1000px;
-$mb_top_bg_wireframe : "../../img/bg_teaser.svg";
-$mb_quality_bg : "../../../img/headphone.jpg";
-$mb_bottom_download_bg : "../../../img/download_bg.jpg";
+$mb_top_bg_wireframe :   "../../../img/hero_img/polygon_pat.png";
+$mb_top_bg :   "../../../img/hero_img/hero_top_bg-min.jpg";
+$mb_quality_bg :         "../../../img/hero_img/headphone.jpg";
+$mb_bottom_download_bg : "../../../img/hero_img/download_bg.jpg";
 
 .mb_landing {
   position : relative;
@@ -152,7 +153,8 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
 }
 
 .mb_intro_top {
-  background : #15327b url($mb_top_bg_wireframe) fixed center center;
+  background : url($mb_top_bg_wireframe) fixed, url($mb_top_bg);
+  background-position: center center;
   background-size: cover;
 
   .overlay {
@@ -189,7 +191,7 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
       .feature_box {
         list-style : none;
         margin     : 0px;
-        padding    : 0px;
+        padding    : 50px 0px;
         display    : flex;
         flex-wrap  : wrap;
 
@@ -210,7 +212,7 @@ $mb_bottom_download_bg : "../../../img/download_bg.jpg";
           div {
             background    : rgba(255, 255, 255, 0.07);
             padding       : 10px 5px 20px 5px;
-            margin        : 50px 10px;
+            margin        : 10px 10px;
             box-sizing    : border-box;
             border-radius : 3px;
 

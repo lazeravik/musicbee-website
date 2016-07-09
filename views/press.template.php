@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 ?>
@@ -18,11 +18,11 @@
 
 	<!--include common meta tags and stylesheets -->
 	<?php /** @noinspection PhpIncludeInspection */
-	include $link['root'].'/includes/meta&styles.php'; ?>
+	include $link['root'].'includes/meta&styles.php'; ?>
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php /** @noinspection PhpIncludeInspection */
-	include $link['root'].'/includes/font.helper.php'; ?>
+	include $link['root'].'includes/font.helper.php'; ?>
 </head>
 <body>
 
@@ -35,30 +35,29 @@ include($mainmenu);
 
 <!-- BODY CONTENT -->
 <div id="main">
+	<div class="top_infobar help_bg_color" id="top_jump">
+		<div class="infobar_wrapper">
+			<div class="infobar_inner_wrapper">
+				<h2><?php echo $lang['press_1']; ?></h2>
+			</div>
+		</div>
+		<?php secondery_nav_generator('press'); ?>
+	</div>
+
+
 	<div id="main_panel">
-		<div class="main_content_wrapper col_2">
+		<div class="main_content_wrapper col_2_1">
 			<div class="sub_content_wrapper">
 				<div class="box_content">
-					<div class="show_info custom">
-						<h3><?php echo $lang['press_1']; ?></h3>
-						<p class="description"><?php echo $lang['press_2']; ?></p>
+					<div class="markdownView box">
+						<?php 
+						if($mb['help']['press_html']['data'] != null){
+							echo $mb['help']['press_html']['data']; 
+						} else {
+							echo '<h2>'.$lang['addon_32'].'</h2>';
+						}
+						?>
 					</div>
-					<div class="show_info custom info_silver">
-						<h3><?php echo $lang['press_5']; ?></h3>
-					</div>
-					<ul class="list">
-						<?php echo $lang['press_3']; ?>
-					</ul>
-					<hr class="line"/>
-					<ul class="list">
-						<p>
-							<?php echo $lang['press_4']; ?>
-						</p>
-						<a href="<?php echo $setting['presskitLink']; ?>" class="btn btn_blue">
-							<?php echo $lang['press_button_1']; ?>
-						</a>
-					</ul>
-
 				</div>
 			</div>
 		</div>
@@ -71,5 +70,15 @@ include($mainmenu);
 /** @noinspection PhpIncludeInspection */
 include($footer);
 ?>
+<script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
+<script>
+	$(document).ready(function () {
+		//add target="_blank" to each link element
+		$(".markdownView  a").not('[target]')
+			.each(function () {
+				$(this).attr('target', '_blank');
+			});
+	});
+</script>
 </body>
 </html>

@@ -8,6 +8,28 @@
  * Spelling mistakes and fixes from phred and other community memebers.
  */
 
+.bug_bg_color {
+	background: linear-gradient(135deg, #730606, #AF160A, #BF360C) no-repeat;
+	position: relative;
+
+	&::after {
+		content: "\f188";
+		font-family: FontAwesome;
+		position: absolute;
+		right: 70px;
+		font-size: 70px;
+		top: 20px;
+		color: rgba(255, 255, 255, 0.5);
+		transform: rotatez(-40deg);
+	}
+
+	@media screen and(max-width: $break-small){
+		&::after {
+			content : none;
+		}
+	}
+}
+
 .box_content {
 	ul.list{
 		padding: 10px 40px;
@@ -17,5 +39,9 @@
 		li {
 			list-style: circle;
 		}
+
+      @media screen and (max-width : $break-small) {
+        padding: 10px 10px;
+      }
 	}
 }

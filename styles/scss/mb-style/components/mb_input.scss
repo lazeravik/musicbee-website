@@ -34,6 +34,12 @@ input, textarea, select {
   &:focus {
     border: $input-border-focus;
   }
+
+  &[readonly] {
+	background: rgba(125, 125, 125, 0.11);
+	border-color: transparent;
+	color: #666;
+  }
 }
 
 select {

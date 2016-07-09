@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 ?>
@@ -14,12 +14,16 @@
 <html>
 <head>
 	<title><?php echo $lang['dashboard_title']; ?></title>
-	<!--include common meta tags and stylesheets -->
-	<?php include('./includes/meta&styles.php'); ?>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo $link['url']; ?>styles/animate.css">
+
+	<!--include common meta tags and stylesheets -->
+	<?php /** @noinspection PhpIncludeInspection */
+	include $link['root'].'includes/meta&styles.php'; ?>
+
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include('./includes/font.helper.php'); ?>
+	<?php /** @noinspection PhpIncludeInspection */
+	include $link['root'].'includes/font.helper.php'; ?>
 </head>
 <body>
 <!--IMPORTANT-->
@@ -70,15 +74,15 @@ include($mainmenu);
 					</li>
 					<?php if($mb['user']['is_admin']): ?>
 						<li>
-							<a class="btn addon_panel_btn" href="#mbrelease_view" data-href="mbrelease_view" title="<?php echo $mb['user']['rank_name']; ?>">
+							<a href="#mbrelease_view" data-href="mbrelease_view">
+								<i class="fa fa-download"></i>&nbsp;&nbsp; <?php echo $lang['musicbee_release']; ?>
+							</a>
+						</li>
+						<li>
+							<a href="#admin_setting" data-href="admin_setting" title="<?php echo $mb['user']['rank_name']; ?>">
 								<i class="fa fa-shield"></i>&nbsp;&nbsp; <?php echo $mb['user']['rank_name']; ?>
 							</a>
 							<ul class="nav_dropdown_sub">
-								<li>
-									<a href="#mbrelease_view" data-href="mbrelease_view">
-										<?php echo $lang['dashboard_menu_5']; ?>
-									</a>
-								</li>
 								<li>
 									<a href="#admin_setting" data-href="admin_setting">
 										<?php echo $lang['dashboard_menu_6']; ?>
@@ -107,6 +111,8 @@ include($footer);
 ?>
 
 <script src="<?php echo $link['url']; ?>scripts/jquery.sticky.min.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/markdown-it-classy.js"></script>
+<script src="<?php echo $link['url']; ?>scripts/markdown-it-video.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/markdown-it.min.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/highlight/highlight.pack.js"></script>
 <script src="<?php echo $link['url']; ?>scripts/markdownEditor.js"></script>

@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 $json_response = true;
@@ -28,11 +28,15 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 					<hr class="line"/>
 
 					<a href="#mbrelease_submit/stable" data-href="mbrelease_submit/stable">
-						<?php echo $lang['mbr_btn_1']; ?>
+						<i class="fa fa-plus"></i>&nbsp;&nbsp; <?php echo $lang['mbr_btn_1']; ?>
 					</a>
 
 					<a href="#mbrelease_submit/beta" data-href="mbrelease_submit/beta">
-						<?php echo $lang['mbr_btn_3']; ?>
+						<i class="fa fa-plus"></i>&nbsp;&nbsp; <?php echo $lang['mbr_btn_3']; ?>
+					</a>
+					<hr class="line">
+					<a href="#mbrelease_submit/patch" data-href="mbrelease_submit/patch">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp; <?php echo $lang['new_patch_release']; ?>
 					</a>
 				</li>
 			</ul>
@@ -104,6 +108,47 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 				</tbody>
 			</table>
 		</div>
+
+		<?php if($mb['musicbee_download']['patch'] != null): ?>
+		<div class="box_content" id="patch_record">
+			<div class="show_info info_silverwhite custom header">
+				<h3><?php echo $lang['mb_patch']; ?></h3>
+				<form id="delete_patch" action="<?php echo $link['url']; ?>includes/admin.tasks.php" method="post" data-autosubmit>
+					<button type="submit" class="btn btn_red" onclick="$('form[data-autosubmit][id=delete_patch]').autosubmit();">
+						<i class="fa fa-trash-o"></i>&nbsp;&nbsp; <?php echo $lang['delete']; ?>
+					</button>
+					<input type="hidden" name="delete" value="patch"/>
+				</form>
+			</div>
+			<table class="record">
+				<tbody>
+				<tr>
+					<td>
+						<?php echo $lang['mbr_th_2']; ?>
+					</td>
+					<td>
+						<?php echo $mb['musicbee_download']['patch']['version']; ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $lang['mbr_th_3']; ?>
+					</td>
+					<td>
+						<?php echo $mb['musicbee_download']['patch']['release_date']; ?>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+			<script>
+				var refresh = function () {
+					$("#patch_record").remove();
+				}
+			</script>
+		<?php endif; ?>
+
 		<div class="box_content">
 			<div class="show_info info_silver custom header">
 				<h3><?php echo $lang['mbr_h_2']; ?></h3>

@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 /**
@@ -18,39 +18,56 @@
 $admin_only = true; //only for admins
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Manager.php'; // Save and update the data on the database
-require_once $link['root'].'includes/languages/en-us.php'; //gets text descriptions for errors and success message
 include_once $link['root'].'includes/parsedown/Parsedown.php';
 
 /**
  * enable and disable downloads
  */
-if(isset($_POST['change_id'])) {
-	if($_POST['change_id'] == "stable_download_disable") {
+if(isset($_POST['change_id']))
+{
+	if($_POST['change_id'] == "stable_download_disable")
+	{
 		$id_version = 0;
-		if(empty($endMsg)) {
+		if(empty($endMsg))
+		{
 			//since the download is enabled we want to disable it.
-			if(setAvailablity(getAvavilability($id_version), $id_version)) {
-				if(getAvavilability($id_version) == 1) {
-					echo '{"status": "1", "data": "'.$lang['AP_SR_ENABLED'].'", "callback_function": "reload_view"}';
-				} else {
-					echo '{"status": "2", "data": "'.$lang['AP_SR_DISABLED'].'", "callback_function": "reload_view"}';
+			if(setAvailablity(getAvavilability($id_version), $id_version))
+			{
+				if(getAvavilability($id_version) == 1)
+				{
+					echo '{"status": "1", "data": "'.$lang['stable_release_enabled'].'", "callback_function": "reload_view"}';
 				}
-			} elseif(!empty($endMsg)) {
-				echo '{"status": "0", "data": "'.$endMsg.'"}';
+				else
+				{
+					echo '{"status": "2", "data": "'.$lang['stable_release_disabled'].'", "callback_function": "reload_view"}';
+				}
+			}
+			elseif(!empty($endMsg))
+			{
+				die('{"status": "0", "data": "'.$endMsg.'"}');
 			}
 		}
-	} elseif($_POST['change_id'] == "beta_download_disable") {
+	}
+	elseif($_POST['change_id'] == "beta_download_disable")
+	{
 		$id_version = 1;
-		if(empty($endMsg)) {
+		if(empty($endMsg))
+		{
 			//since the download is enabled we want to disable it.
-			if(setAvailablity(getAvavilability($id_version), $id_version)) {
-				if(getAvavilability($id_version) == 1) {
-					echo '{"status": "1", "data": "'.$lang['AP_BR_ENABLED'].'", "callback_function": "reload_view"}';
-				} else {
-					echo '{"status": "2", "data": "'.$lang['AP_BR_DISABLED'].'", "callback_function": "reload_view"}';
+			if(setAvailablity(getAvavilability($id_version), $id_version))
+			{
+				if(getAvavilability($id_version) == 1)
+				{
+					echo '{"status": "1", "data": "'.$lang['beta_release_enabled'].'", "callback_function": "reload_view"}';
 				}
-			} elseif(!empty($endMsg)) {
-				echo '{"status": "0", "data": "'.$endMsg.'"}';
+				else
+				{
+					echo '{"status": "2", "data": "'.$lang['beta_release_disbled'].'", "callback_function": "reload_view"}';
+				}
+			}
+			elseif(!empty($endMsg))
+			{
+				die('{"status": "0", "data": "'.$endMsg.'"}');
 			}
 		}
 	}
@@ -62,52 +79,90 @@ if(isset($_POST['change_id'])) {
 
 elseif(isset($_POST['save'])) {
 	$manager = new Manager(); //create an instance of the MANAGER class
-	$note_html = "";
-	if($_POST['save'] == "stable") {
-		//load parsedown markup to html converter
-		$Parsedown = new Parsedown();
-		$note_html_raw = $Parsedown->text($_POST['note']);
-		$note_html = Format::htmlSafeOutput($note_html_raw);
 
-		/**
-		 * If Download link 1 and portable link is assigned while also this entry is not new!
-		 * then we assume the admin is updating the CURRENT ACTIVE version and we want to update ALL the fields
-		 * incl download link fields, other wise we ONLY want to update other fields than download links.
-		 */
-		if(isset($_POST['ilink1'], $_POST['plink1']) && !isset($isnew)) {
-			$_POST['isCurrent'] = "true";
+	if($_POST['save'] == 'patch')
+	{
+		if($manager->savePatch())
+		{
+			exit('{"status": "1", "data": "'.$lang['patch_saved'].'", "callback_function": "go_to"}');
+		}
+		else
+		{
+			die('{"status": "0", "data": "'.$manager->errorMessage.'"}');
 		}
 	}
-	if(count(getVersionInfo($_POST['ver'], "byVersion")) == 0 || isset($_POST['id_allversion'])) {
-		if($manager->saveArchieveData($note_html)) {
-			if($_POST['save'] == "stable") {
-				echo '{"status": "1", "data": "'.$lang['AP_SR_SAVED_SUCCESS'].'", "callback_function": "view_list"}';
-			} elseif($_POST['save'] == "beta") {
-				echo '{"status": "1", "data": "'.$lang['AP_BR_SAVED_SUCCESS'].'"}';
+	else
+	{
+		$note_html = "";
+		if($_POST['save'] == "stable")
+		{
+			//load parsedown markup to html converter
+			$Parsedown = new Parsedown();
+			$note_html_raw = $Parsedown->text($_POST['note']);
+			$note_html = Format::htmlSafeOutput($note_html_raw);
+
+			/**
+			 * If Download link 1 and portable link is assigned while also this entry is not new!
+			 * then we assume the admin is updating the CURRENT ACTIVE version and we want to update ALL the fields
+			 * incl download link fields, other wise we ONLY want to update other fields than download links.
+			 */
+			if(isset($_POST['ilink1'], $_POST['plink1']) && !isset($isnew))
+			{
+				$_POST['isCurrent'] = "true";
 			}
-
-		} else {
-			echo '{"status": "0", "data": "'.$manager->errorMessage.'"}';
 		}
-	} else {
-		echo '{"status": "0", "data": "'.$lang['AP_SR_RECORD_EXIST'].'"}';
+		if(count(getVersionInfo($_POST['ver'], "byVersion")) == 0 || isset($_POST['id_allversion']))
+		{
+			if($manager->saveArchieveData($note_html))
+			{
+				if($_POST['save'] == "stable")
+				{
+					exit('{"status": "1", "data": "'.$lang['stable_release_saved_updated'].'", "callback_function": "view_list"}');
+				}
+				elseif($_POST['save'] == "beta")
+				{
+					exit('{"status": "1", "data": "'.$lang['beta_release_saved'].'"}');
+				}
+
+			}
+			else
+			{
+				die('{"status": "0", "data": "'.$manager->errorMessage.'"}');
+			}
+		} else {
+			die('{"status": "0", "data": "'.$lang['version_exists'].'"}');
+		}
 	}
+
+
 
 }
+elseif(isset($_POST['modify_type']))
+{
+	/**
+	 * Delete records. There is no serverside checking if the deleting version is the current one.
+	 * The client side delete button should be greyed out. BUT since the user HAS to be an admin we are not too strict on checking any fake delete request.
+	 * THOUGH maybe in future there will be a check
+	 */
 
-/**
- * Delete records. There is no serverside checking if the deleting version is the current one.
- * The client side delete button should be greyed out. BUT since the user HAS to be an admin we are not too strict on checking any fake delete request.
- * THOUGH maybe in future there will be a check
- */
-
-elseif(isset($_POST['modify_type'])) {
 	$manager = new Manager(); //create an instance of the MANAGER class
 	if($_POST['modify_type'] == "delete") {
 		if($manager->deleteRecord($_POST['record_id'])) {
-			echo '{"status": "1", "data": "'.$lang['AP_RECORD_DELETED'].'", "callback_function": "record_deleted"}';
+			exit('{"status": "1", "data": "'.$lang['deleted'].'", "callback_function": "record_deleted"}');
 		} else {
-			echo '{"status": "0", "data": "'.$manager->errorMessage.'"}';
+			die('{"status": "0", "data": "'.$manager->errorMessage.'"}');
+		}
+	}
+}
+elseif(isset($_POST['delete']))
+{
+	if($_POST['delete'] == 'patch')
+	{
+		$manager = new Manager();
+		if($manager->deletePatch()){
+			exit('{"status": "1", "data": "'.$lang['deleted'].'", "callback_function": "refresh"}');
+		} else {
+			die('{"status": "0", "data": "'.$manager->errorMessage.'"}');
 		}
 	}
 }
@@ -118,19 +173,23 @@ function getAvavilability($id_version) {
 
 	if(databaseConnection()) {
 		try {
-			$sql = "SELECT available FROM {$db_info['mb_current']} WHERE ID_VERSION= $id_version";
+			$sql = "SELECT available FROM {$db_info['mb_current']} WHERE ID_VERSION= :id_ver";
 			$statement = $connection->prepare($sql);
+			$statement->bindValue(':id_ver',$id_version);
 			$statement->execute();
 			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 			if(count($result) > 0) {
 				return $result[0]['available']; //Get the availablity first 1= available, 0=already disabled
 			} else {
-				$endMsg = $lang['AP_NO_RECORD']; //store the error message in the variable
+				$endMsg = $lang['no_record']; //store the error message in the variable
+				return false;
 			}
 		} catch(Exception $e) {
 			$endMsg = "Something went wrong. ".$e; //store the error message in the variable
+			return false;
 		}
 	}
+	return false;
 }
 
 /* Set the download availablity of the current and beta version*/
@@ -140,8 +199,10 @@ function setAvailablity($isAvailable, $id_version) {
 	$isAvailable = ($isAvailable == 1) ? "0" : "1";
 	if(databaseConnection()) {
 		try {
-			$sql = "UPDATE {$db_info['mb_current']} SET available = {$isAvailable} WHERE ID_VERSION= {$id_version}";
+			$sql = "UPDATE {$db_info['mb_current']} SET available = :availability WHERE ID_VERSION= :id_ver";
 			$statement = $connection->prepare($sql);
+			$statement->bindValue(':id_ver',$id_version);
+			$statement->bindValue(':availability',$isAvailable);
 			$statement->execute();
 		} catch(Exception $e) {
 			$endMsg = "Something went wrong. ".$e; //store the error message in the variable
@@ -165,7 +226,7 @@ function getAllVersion($offset = 0, $range = 40) {
 			if(count($result) > 0) {
 				return $result; //Get the availablity first 1= available, 0=already disabled
 			} else {
-				return $lang['AP_NO_RECORD']; //store the error message in the variable
+				return $lang['no_record']; //store the error message in the variable
 			}
 		} catch(Exception $e) {}
 	}

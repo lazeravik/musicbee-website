@@ -6,7 +6,7 @@
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from phred and other community memebers.
+ * Spelling mistakes and fixes from community members.
  */
 
 $json_response = true;
@@ -169,7 +169,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 										type="submit"
 										title="<?php echo $lang['dashboard_tooltip_2']; ?>"
 										onclick="loadEditView(<?php echo $addon['ID_ADDON']; ?>);">
-									<?php echo $lang['dashboard_12']; ?></button>
+									<?php echo $lang['edit_icon']; ?></button>
 
 								<?php if($addon['status'] == 0 || $addon['status'] == 1 ): ?>
 								<form id="addon_reject"
@@ -180,7 +180,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 											class="btn btn_yellow"
 											type="submit"
 											onclick="addonReject(<?php echo $addon['ID_ADDON']; ?>)">
-										<?php echo $lang['dashboard_submit_btn_6']; ?>
+										<?php echo $lang['reject']; ?>
 									</button>
 									<input
 											type="hidden"
@@ -204,9 +204,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 											type="submit"
 											onclick="addonApprove(<?php echo $addon['ID_ADDON']; ?>)">
 									<?php if($addon['status'] == 3){ ?>
-										<?php echo $lang['dashboard_submit_btn_8']; ?>
+										<?php echo $lang['undelete']; ?>
 									<?php }else{ ?>
-										<?php echo $lang['dashboard_submit_btn_5']; ?>
+										<?php echo $lang['approve']; ?>
 									<?php } ?>
 									</button>
 									<input
@@ -240,7 +240,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 		<div class="box_content">
 			<form id="search_filter" action="<?php echo $link['url']; ?>views/mod.all.template.php" method="get" data-autosubmit>
 			<span class="show_info info_silverwhite custom">
-				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['dashboard_13']; ?>" onkeydown="searchEnter(event)" value="<?php echo (isset($_GET['query']))?$_GET['query']: ''; ?>">
+				<input type="search" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="search filter_search dark" name="query" placeholder="<?php echo $lang['search_submitted_addons']; ?>" onkeydown="searchEnter(event)" value="<?php echo (isset($_GET['query']))?$_GET['query']: ''; ?>">
 				<input type="hidden" name="action" value="search">
 			</span>
 				<ul class="form">
