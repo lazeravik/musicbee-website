@@ -90,9 +90,44 @@ include($mainmenu);
 				<?php endif; ?>
 				<div id="clear"></div>
 			</div>
-			<div class="hero_img_top">
-				<div class="hero_img_wrapper hero_img_topmost_wrap">
-					<img src="<?php echo $link['url']; ?>img/hero_img/hero-img-download-min.png">
+			<div class="download_img_link_wrapper">
+				<div class="download_img_links">
+					<ul>
+						<li>
+							<a href="<?php echo $link['help']; ?>">
+								<i class="fa fa-graduation-cap learn"></i>
+								<h1><?php echo $lang['learn_features']; ?></h1>
+								<p><?php echo $lang['leanr_feature_desc']; ?></p>
+							</a>
+
+						</li>
+						<li>
+							<a href="<?php echo $link['addon']['home']; ?>">
+								<i class="fa fa-puzzle-piece plugin"></i>
+								<h1><?php echo $lang['get_skin']; ?></h1>
+								<p><?php echo $lang['get_skin_desc']; ?></p>
+							</a>
+
+						</li>
+						<li>
+							<a href="<?php echo $link['forum']; ?>">
+								<i class="fa fa-comments-o community"></i>
+								<h1><?php echo $lang['meet_community']; ?></h1>
+								<p><?php echo $lang['meet_community_desc']; ?></p>
+							</a>
+
+						</li>
+						<?php if(!empty($setting['paypalDonationLink'])): ?>
+						<li>
+							<a href="<?php echo $setting['paypalDonationLink']; ?>" target="_blank">
+								<i class="fa fa-heartbeat love"></i>
+								<h1><?php echo $lang['love_musicbee']; ?></h1>
+								<p><?php echo $lang['love_musicbee_desc']; ?></p>
+							</a>
+							<?php endif; ?>
+
+						</li>
+					</ul>
 				</div>
 			</div>
 			<div id="clear"></div>

@@ -2813,17 +2813,105 @@ input.cmn-toggle-round-flat:checked + label:after {
   }
 }
 /* line 58, ../scss/mb-style/mb_download.scss */
-.main_panel .content.mb_download_installer_bg .hero_img_top .hero_img_wrapper.hero_img_topmost_wrap {
-  top: 10px;
-  left: 50px;
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper {
+  float: left;
+  width: 60%;
 }
-/* line 64, ../scss/mb-style/mb_download.scss */
+/* line 63, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links h1 {
+  font-size: 20px;
+}
+/* line 67, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul {
+  list-style: none;
+  text-align: left;
+  padding: 50px;
+}
+/* line 72, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li {
+  padding: 20px 20px 20px 80px;
+  position: relative;
+  margin: 20px 10px;
+}
+/* line 77, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i {
+  position: absolute;
+  left: 0px;
+  top: 8px;
+  font-size: 40px;
+  color: #fff;
+  padding: 15px;
+  width: 35px;
+  height: 35px;
+}
+/* line 87, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i.learn {
+  color: #3ac5cc;
+}
+/* line 90, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i.plugin {
+  color: #a387cc;
+}
+/* line 93, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i.community {
+  color: #ffba69;
+}
+/* line 96, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i.love {
+  color: #cc4b61;
+}
+/* line 101, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a {
+  color: #333;
+}
+/* line 103, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a:hover {
+  text-decoration: none;
+}
+/* line 108, ../scss/mb-style/mb_download.scss */
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li:hover {
+  background: -webkit-linear-gradient(315deg, #2a3e4e, rgba(39, 68, 90, 0.62), rgba(103, 129, 202, 0.53), rgba(122, 0, 255, 0.18), transparent);
+  background: linear-gradient(135deg, #2a3e4e, rgba(39, 68, 90, 0.62), rgba(103, 129, 202, 0.53), rgba(122, 0, 255, 0.18), transparent);
+}
+@media screen and (max-width: 800px) {
+  /* line 58, ../scss/mb-style/mb_download.scss */
+  .main_panel .content.mb_download_installer_bg .download_img_link_wrapper {
+    width: 100%;
+  }
+  /* line 119, ../scss/mb-style/mb_download.scss */
+  .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul {
+    padding: 0px;
+  }
+  /* line 122, ../scss/mb-style/mb_download.scss */
+  .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li {
+    padding: 20px 20px 20px 80px;
+    position: relative;
+    margin: 0px;
+    float: left;
+    width: 50%;
+    display: block;
+    box-sizing: border-box;
+  }
+  /* line 132, ../scss/mb-style/mb_download.scss */
+  .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+@media screen and (max-width: 600px) {
+  /* line 142, ../scss/mb-style/mb_download.scss */
+  .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li {
+    width: 100%;
+  }
+}
+/* line 151, ../scss/mb-style/mb_download.scss */
 .main_panel .content.mb_beta_download_bg {
   position: relative;
   background-color: #c9c9c9;
   overflow: hidden;
 }
-/* line 69, ../scss/mb-style/mb_download.scss */
+/* line 156, ../scss/mb-style/mb_download.scss */
 .main_panel .content.mb_beta_download_bg .sub_content {
   padding: 40px 20px;
   text-align: left;
@@ -2831,15 +2919,15 @@ input.cmn-toggle-round-flat:checked + label:after {
   max-width: 1000px;
   margin: 0px auto;
 }
-/* line 76, ../scss/mb-style/mb_download.scss */
+/* line 163, ../scss/mb-style/mb_download.scss */
 .main_panel .content.mb_beta_download_bg .sub_content h3 {
   margin: 5px 0px 10px;
 }
-/* line 80, ../scss/mb-style/mb_download.scss */
+/* line 167, ../scss/mb-style/mb_download.scss */
 .main_panel .content.mb_beta_download_bg .sub_content p {
   margin: 5px 0px;
 }
-/* line 85, ../scss/mb-style/mb_download.scss */
+/* line 172, ../scss/mb-style/mb_download.scss */
 .main_panel .content.mb_beta_download_bg:after {
   content: "\f071";
   font-family: "FontAwesome";
@@ -2850,7 +2938,7 @@ input.cmn-toggle-round-flat:checked + label:after {
   color: rgba(255, 255, 255, 0.3);
 }
 @media screen and (max-width: 800px) {
-  /* line 96, ../scss/mb-style/mb_download.scss */
+  /* line 183, ../scss/mb-style/mb_download.scss */
   .main_panel .content.mb_beta_download_bg:after {
     content: none;
   }

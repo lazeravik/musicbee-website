@@ -148,6 +148,17 @@ $lang['download_disabled_desc'] = 'Sorry for the inconvenience. This is probably
 $lang['latest_patch'] = 'Latest Patch';
 $lang['latest_patch_desc'] = 'Patches are much more frequent and contain bug fixes. You will need to have MusicBee installed first before applying a patch update.';
 
+$lang['learn_features'] = 'Learn MusicBee features';
+$lang['leanr_feature_desc'] = 'Check our FAQ & Wiki or get help on forum';
+
+$lang['get_skin'] = 'Get Skins and Plugins';
+$lang['get_skin_desc'] = 'Check our Add-on for skins, plugins and more';
+
+$lang['meet_community'] = 'Meet MusicBee community';
+$lang['meet_community_desc'] = 'Join us on forum, follow us on twitter and share your experience';
+
+$lang['love_musicbee'] = 'Love MusicBee?';
+$lang['love_musicbee_desc'] = 'You can also support MusicBee with a voluntary donation';
 
 /**
  * footer
