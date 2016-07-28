@@ -269,7 +269,11 @@ function validateInput() {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_4'].'"}');
 		}
 
-		if(!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
+//		if(!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
+//			die('{"status": "0", "data": "'.$lang['dashboard_err_6'].'"}');
+//		}
+
+		if(!Validation::validateMusicBeeVersion($_POST['mbSupportedVer'])) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_6'].'"}');
 		}
 

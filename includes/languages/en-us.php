@@ -255,7 +255,7 @@ $lang['dashboard_submit_header_3'] = 'Title/Name of your Add-on *';
 $lang['dashboard_submit_header_4'] = 'Short Description about your Add-on *';
 $lang['dashboard_submit_header_5'] = 'Step 3. Download Links and Images';
 $lang['dashboard_submit_header_6'] = 'Step 4. Add Readme and more';
-$lang['dashboard_submit_header_7'] = 'Supported MusicBee Version *';
+$lang['dashboard_submit_header_7'] = 'Minimum Supported MusicBee Version *';
 $lang['dashboard_submit_header_8'] = 'Add-on Version';
 $lang['dashboard_submit_header_9'] = 'Add tags';
 $lang['dashboard_submit_header_10'] = 'Add-on download link *';
@@ -501,7 +501,7 @@ $lang['addon_11'] = 'Category';
 $lang['addon_15'] = 'by';
 $lang['addon_16'] = 'Updated on';
 $lang['addon_17'] = 'Published on';
-$lang['addon_36'] = 'Supports';
+$lang['addon_36'] = 'Supports Minimum';
 $lang['addon_37'] = 'Unknown MusicBee version';
 
 

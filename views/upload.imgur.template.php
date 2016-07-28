@@ -178,17 +178,6 @@ $inputId = $_POST['id'];
 		};
 	})(jQuery);
 
-	function uploadCallback(data) {
-		var obj = jQuery.parseJSON(data);
-		if (obj.status == 0) {
-			showNotification(obj.data, "red_color");
-		} else if (obj.status == 1) {
-			showNotification(obj.data, "green_color");
-			$('#<?php echo $inputId; ?>').val(obj.url);
-			$.modalBox.close();
-		}
-	}
-
 	var uploadsuccess = function (){
 		$('#<?php echo $inputId; ?>').val(obj.url);
 		$.modalBox.close();

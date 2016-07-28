@@ -173,7 +173,7 @@ class Addon
 						    {$db_info['addon_tbl']}
 						  WHERE
 						    {$db_info['addon_tbl']}.status = 1
-						  GROUP BY addons.ID_AUTHOR
+						  GROUP BY {$db_info['addon_tbl']}.ID_AUTHOR
 						) upload
 						ON
 						  upload.ID_AUTHOR = {$db_info['member_tbl']}.ID_MEMBER
@@ -188,9 +188,11 @@ class Addon
 			}
 			catch(Exception $e)
 			{
+				var_dump($e);
 				return null;
 			}
 		}
+		return null;
 	}
 
 	/**

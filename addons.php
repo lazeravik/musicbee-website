@@ -113,7 +113,7 @@ if (isset($_GET['id'])) {
 		{
 			$data['addon_data_new'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "publish_date DESC");
 			$data['addon_data_updated'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "update_date DESC");
-			$data['addon_data_like'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 8, "downloadCount DESC,likesCount DESC");
+			$data['addon_data_like'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 8, "downloadCount DESC, likesCount DESC", true);
 
 			$data['top_members'] = $addon->getTopMembers();
 		}

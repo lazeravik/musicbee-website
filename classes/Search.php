@@ -22,7 +22,7 @@ class Search
 	 *
 	 * @return mixed
 	 */
-	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20, $orderby = "ID_ADDON DESC") {
+	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20, $orderby = "ID_ADDON DESC",$skip_count = null) {
 		global $connection, $mb;
 		
 		//Create arrays for SQL value binding
@@ -101,25 +101,28 @@ class Search
 
 		if (databaseConnection ()) {
 			try {
-				//var_dump(showQuery($search_sql, $bindedVal));
-				//var_dump($bindedVal);
 
 				//Get the result data
 				$search_statement = $connection->prepare ($search_sql);
 				$search_statement->execute ($bindedVal);
-
-				//Get the total row count for pagination
-				$count_statement = $connection->prepare($row_count_sql);
-				$count_statement->execute ($bindedVal);
-
 				$data['result'] = $search_statement->fetchAll (PDO::FETCH_ASSOC);
-				$data['row_count'] = count($count_statement->fetchAll (PDO::FETCH_ASSOC));
+
+
+				if($skip_count == null) {
+					//Get the total row count for pagination
+					$count_statement = $connection->prepare($row_count_sql);
+					$count_statement->execute($bindedVal);
+					$data['row_count'] = count($count_statement->fetchAll(PDO::FETCH_ASSOC));
+				}
 
 				//return showQuery($search_sql, $bindedVal);
 				return $data;
 			} catch (Exception $e) {
+
+				var_dump($e);
 			}
 		}
+		return null;
 	}
 
 
