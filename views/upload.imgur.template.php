@@ -121,6 +121,7 @@ $inputId = $_POST['id'];
 
 <script type="text/javascript">
 	var img = $('#img_input');
+	var jsonReturn;
 
 	img.on('change', function (e) {
 		e.preventDefault();
@@ -152,7 +153,7 @@ $inputId = $_POST['id'];
 			contentType: false,
 			data: form.serializefiles()
 		}).done(function (data) {
-			console.log(data);
+			jsonReturn = validateJSON(data);
 			notificationCallback(data);
 		}).fail(function (jqXHR, textStatus, errorThrown) {
 			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
@@ -180,7 +181,7 @@ $inputId = $_POST['id'];
 	})(jQuery);
 
 	var uploadsuccess = function (){
-		$('#<?php echo $inputId; ?>').val(obj.url);
+		$('#<?php echo $inputId; ?>').val(jsonReturn.url);
 		$.modalBox.close();
 	}
 </script>
