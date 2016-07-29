@@ -152,6 +152,7 @@ $inputId = $_POST['id'];
 			contentType: false,
 			data: form.serializefiles()
 		}).done(function (data) {
+			console.log(data);
 			notificationCallback(data);
 		}).fail(function (jqXHR, textStatus, errorThrown) {
 			showNotification("<b style=\"text-transform: uppercase;\">" + textStatus + "</b> - " + errorThrown, "red_color");
