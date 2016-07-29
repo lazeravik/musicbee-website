@@ -449,7 +449,7 @@ $lang['version&link_required'] = 'You must fill both Version and Download Link';
 
 $lang['delete'] = 'Delete';
 
-
+$lang['err_current_release_delete'] = 'You can not delete current release, Submit a new release first and then delete it.';
 
 
 

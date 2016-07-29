@@ -373,5 +373,35 @@ SQL;
 		return false;
 	}
 
+	public function compareCurrentRelease($record_id)
+	{
+		global $connection,$db_info,$mb;
+
+		if(databaseConnection()){
+			try
+			{
+				$sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :id";
+				$statement = $connection->prepare($sql);
+				$statement->bindValue(':id', $record_id);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+				if(count($result)>0){
+					if($result[0]['version']==$mb['musicbee_download']['stable']['version']){
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+
+			} catch (Exception $e){
+				$this->errorMessage = $this->errorMessage.$e;
+				return true;
+			}
+		}
+		return true;
+	}
+
 
 }
