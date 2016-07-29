@@ -29,11 +29,12 @@ foreach ($memberContext as $user) {
 			"{username}"              => $user['username'],
 			"{pending_request_count}" => $pending_addon_count,
 			"{dashboard_link}"        => $link['addon']['dashboard'],
-			"{official_link}"         => $link['home']
+			"{official_link}"         => $link['home'],
+			"{subject}"               => $subject
 		);
 		if(MailManager::sendMail($user['email'], $from, "UTF-8", "text/html", $subject, $message, $bindedvalarray)) {
 			//put some logging function to monitor
-			echo "Mail delivered";
+			echo "Mail delivered to ".$user['username']."<br/>";
 		}
 		else {
 			//put some logging function to monitor
