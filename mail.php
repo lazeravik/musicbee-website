@@ -4,8 +4,7 @@ require_once $link['root'] . 'classes/MailManager.php';
 //Initalize Value
 $from = "noreply@getmusicbee.com";
 $pending_addon_count = 5;
-$dashboard_link = "";
-$official_link = "";
+
 //Clear any previously stored value
 $memberContext = null;
 

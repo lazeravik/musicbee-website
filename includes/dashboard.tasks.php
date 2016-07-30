@@ -30,7 +30,7 @@ if(isset($_POST['submit'])) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_20'].'"}');
 	}
 
-	//If Add-on submission is turned of show error
+	//If user already reached maximum submission limit/day show error
 	if(!canUserSubmitAnymoreToday()) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_22'].'"}');
 	}
@@ -59,6 +59,7 @@ if(isset($_POST['submit'])) {
 
 			//Phew.... all validations complete, now SUBMIT THE ADDON!
 			if($dashboard->submit($readme_html, "submit")) {
+				//@todo: Add an item to mail queue, and send it to admin
 				exit ('{"status": "1", "data": "'.$lang['dashboard_msg_11'].'", "callback_function": "submitted"}');
 			}
 		} else {
@@ -102,6 +103,7 @@ if(isset($_POST['submit'])) {
 		//Mod/Admin/addon author will be able to soft delete and addon
 		if($dashboard->verifyAuthor($mb['user']['id'], $_POST['record_id']) || $mb['user']['can_mod']) {
 			if($dashboard->updateAddonStatus($_POST['record_id'], "3", $mb['user']['id'])) {
+				//@todo: now that the item is deleted, check if it is added to mail queue, if true remove it.
 				exit('
 				{
 					"status": "1",
