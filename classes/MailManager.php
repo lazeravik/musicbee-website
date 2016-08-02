@@ -13,6 +13,7 @@ class MailManager
 		//now assign values to enclosed parameters in the message
 		$finalMsg = strtr($message, $bindedval);
 
+
 		try
 		{
 			if(mail($to, $subject, $finalMsg, $headers))
