@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{subject}</title>
+	<style media="all" type="text/css">
+		@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100);
+		.body{
+			text-align: left;
+		}
+		p,h2,h1,h3,h4{
+			font-family: "Roboto","Segoe UI",serif;
+			color: #fff;
+			font-weight: normal;
+		}
+
+	</style>
+</head>
+<body>
+<div class="body" style="display:block">
+	<div class="main" style="display: block; max-width:500px; margin: 60px auto; background: #333;">
+		<div class="wrapper" style="display: block; padding:20px;">
+			<img src="{official_link}img/musicbee.png">
+			<h2 style="font-weight: 100; color: #fff;">Hey {username}, <br>There are {pending_request_count} add-ons that need your approval.</h2>
+
+			<p>Go to dashboard and approve them, make sure to atleast check for the spam.</p>
+			<a href="{dashboard_link}" target="_blank" style="background: #2196F3;padding: 10px 20px;text-decoration: none;color: #fff;font-family: Roboto, Segoe UI, serif;margin: 10px 0px;display: inline-block;border-radius: 3px;">Go to Dashboard</a>
+			<hr>
+			<p class="footer" style="font-size: 12px">You are recieving this email becuase you are either Moderator or Admin on MusicBee forum/website.<br/>
+				Go to <a href="{official_link}" target="_blank" style="text-decoration: none;color: #99a9ff;font-family: Roboto, Segoe UI, serif;">MusicBee official website</a>
+			</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>
