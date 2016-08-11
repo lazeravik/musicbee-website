@@ -2,12 +2,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require_once $link['root'] . 'classes/MailManager.php';
 //Initalize Value
-$from = "noreply@getmusicbee.com";
+$from                = "noreply@getmusicbee.com";
 $pending_addon_count = 5;
-$dashboard_link = "";
-$official_link = "";
-//Clear any previously stored value
-$memberContext = null;
+$dashboard_link      = "";
+$official_link       = "";
+$memberContext       = null;	//Clear any previously stored value
 
 //Unfortunately we don't store user personal details such as email in website's database
 //so get them from SMF using user ID

@@ -122,6 +122,7 @@ if(isset($_POST['submit'])) {
 	} elseif($_POST['modify_type'] == "update") {
 		if(validateInput()) {
 
+			//If the addon is already soft deleted and the user is not an admin or mod die!!
 			if($dashboard->getAddonStatus($_POST['record_id']) == "3" && !$mb['user']['can_mod']) {
 				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 			}
