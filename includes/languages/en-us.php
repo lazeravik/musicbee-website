@@ -492,7 +492,7 @@ $lang['mbr_btn_20'] = '<i class="fa fa-th"></i>&nbsp;&nbsp; View and edit MusicB
 /**
  * Addons download/search page
  */
-$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
+$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
 
 $lang['addon_8'] = 'Version';
 $lang['addon_9'] = 'Author';
