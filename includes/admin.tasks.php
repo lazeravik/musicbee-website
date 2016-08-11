@@ -20,6 +20,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Manager.php'; // Save and update the data on the database
 include_once $link['root'].'includes/parsedown/Parsedown.php';
 
+
 /**
  * enable and disable downloads
  */

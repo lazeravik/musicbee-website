@@ -24,18 +24,18 @@ class Manager
 			//We wan't to add the data to all version table(this is the version archieve) first.
 			if($this->validateData($_POST['appname'], $_POST['ver'], $_POST['os'])) {
 				/* Cache the POST variiables */
-				$appname = Format::safeInput($_POST['appname']);
-				$ver = Format::removeSpace(Format::safeInput($_POST['ver']));
-				$os = Format::safeInput($_POST['os']);
-				$ilink1 = (isset($_POST['ilink1'])) ? Format::removeSpace(Format::safeInput($_POST['ilink1'])) : "";
-				$ilink2 = (isset($_POST['ilink2'])) ? Format::removeSpace(Format::safeInput($_POST['ilink2'])) : "";
-				$ilink3 = (isset($_POST['ilink3'])) ? Format::removeSpace(Format::safeInput($_POST['ilink3'])) : "";
-				$plink1 = (isset($_POST['plink1'])) ? Format::removeSpace(Format::safeInput($_POST['plink1'])) : "";
-				$note = (isset($_POST['note'])) ? $_POST['note'] : ""; // raw markdown format of the release note
+				$appname   = Format::safeInput($_POST['appname']);
+				$ver       = Format::removeSpace(Format::safeInput($_POST['ver']));
+				$os        = Format::safeInput($_POST['os']);
+				$ilink1    = (isset($_POST['ilink1'])) ? Format::removeSpace(Format::safeInput($_POST['ilink1'])) : "";
+				$ilink2    = (isset($_POST['ilink2'])) ? Format::removeSpace(Format::safeInput($_POST['ilink2'])) : "";
+				$ilink3    = (isset($_POST['ilink3'])) ? Format::removeSpace(Format::safeInput($_POST['ilink3'])) : "";
+				$plink1    = (isset($_POST['plink1'])) ? Format::removeSpace(Format::safeInput($_POST['plink1'])) : "";
+				$note      = (isset($_POST['note'])) ? $_POST['note'] : ""; // raw markdown format of the release note
 				$note_html = (isset($note_html)) ? $note_html : ""; // converted and purified html format
-				$message = (isset($_POST['message'])) ? Format::safeInput($_POST['message']) : "";
-				$major = (isset($_POST['major'])) ? 1 : 0;
-				$isnew = (isset($_POST['isnew'])) ? true : false; // if the entry is new then we INSERT data, else we UPDATE DATA
+				$message   = (isset($_POST['message'])) ? Format::safeInput($_POST['message']) : "";
+				$major     = (isset($_POST['major'])) ? 1 : 0;
+				$isnew     = (isset($_POST['isnew'])) ? true : false; // if the entry is new then we INSERT data, else we UPDATE DATA
 				if($isnew) {
 					$dashboard = $major;
 				} //if the release is major it will be automatically available for addon devs
@@ -76,9 +76,9 @@ class Manager
 				}
 
 				if($_POST['save'] == "stable" && isset($_POST['isCurrent'])) {
-					$this->saveOnServerDB(0, 0, $appname, $ver, $os, $ilink1, $ilink2, $ilink3, $plink1, $message, $date);
+					return $this->saveOnServerDB(0, 0, $appname, $ver, $os, $ilink1, $ilink2, $ilink3, $plink1, $message, $date);
 				} elseif($_POST['save'] == "beta") {
-					$this->saveOnServerDB(1, 1, $appname, $ver, $os, $ilink1, $ilink2, $ilink3, $plink1, $message, $date);
+					return $this->saveOnServerDB(1, 1, $appname, $ver, $os, $ilink1, $ilink2, $ilink3, $plink1, $message, $date);
 				}
 
 				return true;
@@ -187,8 +187,9 @@ class Manager
 
 				return true;
 			} catch(Exception $e) {
+				$this->errorMessage = $e;
+				return false;
 			}
-
 			return false;
 		}
 	}
