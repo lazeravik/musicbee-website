@@ -167,8 +167,10 @@ a:active, a:hover { outline: 0; }
 .small_info.deleted { background: #ff4e50; color: #fff; border: 1px solid #ff454a; }
 .small_info.rejected { background: #69c; color: #fff; border: 1px solid #5e8acc; }
 
+.dark_theme .search { background: url("../../img/search.png") no-repeat right 10px center; }
+
 .search { background: url("../../img/search.png") no-repeat right 10px center; }
-.search.small_search { margin: 2px 5px; width: 250px; border-color: rgba(255, 255, 255, 0.22); color: #fff; }
+.search.small_search { margin: 2px 5px; width: 250px; border-color: rgba(255, 255, 255, 0.22); color: #fff; padding-right: 35px; }
 .search.big_search { width: 100%; border-color: rgba(255, 255, 255, 0.1); color: #fff; padding: 15px 15px; font-size: 18px; font-weight: 100; }
 .search.filter_search { width: 100%; border-color: rgba(255, 255, 255, 0.22); color: #404040; padding: 10px 35px 10px 10px; font-size: 15px; margin: 0px 0px 0px; }
 .search:hover { border-color: rgba(255, 255, 255, 0.7); }
@@ -460,6 +462,8 @@ footer.footer_section .widget .widgetCommon ul.footer_list_menu a.btn { display:
 footer.footer_section .widget .widgetCommon ul.footer_list_menu .footer_donation { background: rgba(78, 65, 44, 0.69); padding: 10px 15px 5px; border: 1px solid rgba(255, 255, 255, 0.04); margin: 20px 0 10px; border-radius: 2px; }
 footer.footer_section .footer_credit_wrap { padding: 20px 0; display: block; margin: 0 auto; background: #403000; background: url("../../img/hive_pat.png"), -webkit-linear-gradient(315deg, #212121, #403000, #212121); background: url("../../img/hive_pat.png"), linear-gradient(135deg, #212121, #403000, #212121); font-size: 13px; box-shadow: inset 0 4px 0 rgba(255, 152, 0, 0.5); }
 footer.footer_section .footer_credit_wrap .footer_credit { max-width: 1200px; margin: 0px auto; display: block; padding: 0px; }
+footer.footer_section .footer_credit_wrap .footer_credit a.credit_link { color: #ffa92a; }
+footer.footer_section .footer_credit_wrap .footer_credit a.credit_link:hover { color: #ffffff; }
 footer.footer_section .footer_credit_wrap .footer_credit li { list-style: none; padding: 0px 25px; display: inline-block; }
 footer.footer_section .footer_credit_wrap .footer_credit li.right { float: right; }
 footer.footer_section .footer_credit_wrap .footer_credit p { color: rgba(255, 255, 255, 0.76); padding: 0px; margin: 2px; }
@@ -931,8 +935,11 @@ For light theme use xcode style
 \*================================================================================================================*/
 .fontsmooth-false { /** Forum Style Fix */ }
 .fontsmooth-false body { font-family: "Verdana", "Segoe UI", "sans-serif" !important; }
-.fontsmooth-false h1, .fontsmooth-false h2, .fontsmooth-false h3, .fontsmooth-false h4, .fontsmooth-false h5, .fontsmooth-false h6, .fontsmooth-false p { font-family: "Segoe UI", "sans-serif" !important; }
+.fontsmooth-false h1, .fontsmooth-false h2, .fontsmooth-false h3, .fontsmooth-false p { font-family: "Segoe UI", "sans-serif" !important; }
+.fontsmooth-false h4, .fontsmooth-false h5, .fontsmooth-false h6 { font-family: "Verdana", "Segoe UI", "sans-serif" !important; }
 .fontsmooth-false .show_info { font-family: "Segoe UI", "sans-serif" !important; }
 .fontsmooth-false input, .fontsmooth-false textarea, .fontsmooth-false select { font-family: "Segoe UI", "sans-serif" !important; }
 .fontsmooth-false .navigate_section ul li a { font-family: "Segoe UI", "sans-serif" !important; }
-.fontsmooth-false .smalltext, .fontsmooth-false tr.smalltext th { font-family: "Segoe UI", "sans-serif" !important; }
+.fontsmooth-false .smalltext, .fontsmooth-false tr.smalltext th { font-family: "Verdana", "Segoe UI", "sans-serif" !important; }
+.fontsmooth-false .stat_meter li p { font-family: "Verdana", "Segoe UI", "sans-serif" !important; }
+.fontsmooth-false p.stat_countlabel { font-family: "Verdana", "Segoe UI", "sans-serif" !important; }

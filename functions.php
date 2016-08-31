@@ -120,11 +120,10 @@ $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']
 $releaseData['stable'] = getVersionInfo(0,'byCurrentVersion')[0];
 $releaseData['beta']   = getVersionInfo(1,'byCurrentVersion')[0];
 
-
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
 	'website' => array(
-		'ver'           => '1.2.3',
+		'ver'           => '1.3.0',
 		'show_warning'  => false,
 		'github_link'   => 'https://github.com/Avik-B/mb_web/',
 	),
@@ -140,7 +139,7 @@ $mb = array(
 		'rank_name'       => null,
 		'need_approval'   => true,
 		'can_mod'         => $context['user']['can_mod'],
-		'username'        => $context['user']['username'],
+		'username'        => $context['user']['name'],
 		'email'           => $context['user']['email'],
 		'name'            => $context['user']['name'],
 		'messages'        => $context['user']['messages'],
@@ -167,7 +166,8 @@ $mb = array(
 			'restriction' => 'login',
 			'sub_menu'    => array(
 				'user-profile' => array(
-					'title' => '<p class="user_info">'.sprintf($lang['hey_username'], $context['user']['username']).'</p>',
+					'title' => ''.sprintf($lang['hey_username'], $context['user']['name']).'',
+					'href'        => $link['forum'].'?action=profile',
 				),
 				'line1'        => array('title' => $lang['line'],),
 				'admin-panel'  => array(

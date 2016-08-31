@@ -2,8 +2,11 @@
 	body {
   		font-family : $font-family-alt !important;
 	}
-	h1,h2,h3,h4,h5,h6,p{
+	h1,h2,h3,p{
 		font-family : $font-family-alt1 !important;
+	}
+	h4,h5,h6 {
+		font-family : $font-family-alt !important;
 	}
 	.show_info{
 		font-family : $font-family-alt1 !important;
@@ -20,6 +23,14 @@
 	}
 
 	.smalltext, tr.smalltext th{
-		font-family : $font-family-alt1 !important;
+		font-family : $font-family-alt !important;
+	}
+
+	.stat_meter li p {
+			font-family : $font-family-alt !important;
+	}
+
+	p.stat_countlabel {
+		font-family : $font-family-alt !important;
 	}
 }

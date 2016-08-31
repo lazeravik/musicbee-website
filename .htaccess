@@ -40,6 +40,10 @@ RewriteRule ^addons/([\w-]+)/$    addons.php?id=$1 [L]
 RewriteRule ^help/([\w-]+)/$    help.php?$1 [L]
 RewriteRule ^api/([\w.]+)/$    api.get.php?v=$1 [L]
 
+#old website to new website link redirect
+Redirect 301 /download.html /downloads
+Redirect 301 /help.html /help/faq
+Redirect 301 /features.html /#simple_powerful
 
 
 #use gzip compression to load faster
