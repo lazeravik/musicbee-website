@@ -122,7 +122,7 @@ $lang['home_40'] = "Even better, MusicBee supports some WinAmp plugins to enhanc
 /**
  * Download page
  */
-$lang['download_title'] = 'MusicBee - Downloads';
+$lang['download_title'] = 'Downloads';
 $lang['download_desc'] = 'Get MusicBee Installer executable or Portable and start enjoying MusicBee';
 
 $lang['download_header'] = 'Download MusicBee';
