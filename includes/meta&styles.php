@@ -14,6 +14,10 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/functions.php'; ?>
 <meta charset="<?php echo $mb['charset']; ?>">
 <meta name="language" content="<?php echo $language['name']; ?>">
 
+<?php if($mb['website']['is_test']): ?>
+<meta name="robots" content="noindex">
+<?php endif; ?>
+
 <!-- responsive mobile deivicew support -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

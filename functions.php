@@ -125,6 +125,7 @@ $mb = array(
 	'website' => array(
 		'ver'           => '1.3.0',
 		'show_warning'  => false,
+		'is_test'		=> false,
 		'github_link'   => 'https://github.com/Avik-B/mb_web/',
 	),
 	'charset'        => 'UTF-8',
