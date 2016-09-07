@@ -364,7 +364,7 @@ h4 { font-family: "Roboto", "Segoe UI", "sans-serif"; font-size: 17px; font-weig
 @media screen and (max-width: 731px) { .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub { height: auto; position: relative; opacity: 1; box-shadow: none; background: none; width: 100%; max-width: 100%; } }
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li { float: left; width: 100%; -webkit-transition: linear all 0.03s; transition: linear all 0.03s; }
 @media screen and (max-width: 731px) { .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li { margin-left: 50px; } }
-.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a { width: 100%; padding: 15px 15px; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; box-sizing: border-box; text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33); box-shadow: none; }
+.mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a { width: 100%; padding: 15px 15px; display: block; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; box-sizing: border-box; text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33); box-shadow: none; }
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a:hover { color: white; background: #ff9800; }
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li:hover { color: white; box-shadow: none; }
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub.dropdown_right { right: 0px; left: inherit; }
