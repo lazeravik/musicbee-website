@@ -15,4 +15,9 @@ $lang_filelist = array(
 				'name'     => 'english',
 				'meta'     => 'en-us',
 		),
+		'ru-ru'      => array(
+				'filename' => 'ru-ru.php',
+				'name'     => 'russian',
+				'meta'     => 'ru-ru',
+		),
 );
