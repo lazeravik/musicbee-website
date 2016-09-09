@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -344,8 +345,9 @@ $lang['mod_11'] = 'Actions';
 $lang['mod_12'] = 'Undelete add-ons';
 $lang['mod_13'] = 'All unapproved add-ons';
 $lang['mod_14'] = 'All rejected add-ons';
-
-
+$lang['transfer_ownership_btn'] = 'Transfer add-on ownership';
+$lang['transfer_ownership_header'] = 'Transfer add-on ownership from one user to another';
+$lang['transfer_step1'] = 'Step 1: Find the add-on you want to transfer ownership';
 
 /**
  * Dashboard Admin Panel

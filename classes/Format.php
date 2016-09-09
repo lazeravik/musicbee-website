@@ -279,4 +279,16 @@
 			return null;
 		}
 
+		public static function ImgurResizer($url, $size)
+		{
+			if(preg_match('/^https?\:\/\/i\.imgur\.com\//', $url)) {
+				$ext_pos = strrpos($url, '.'); // find position of the last dot, so where the extension starts
+				$thumb = substr($url, 0, $ext_pos).$size.substr($url, $ext_pos);
+			} else {
+				$thumb = $url;
+			}
+
+			return $thumb;
+		}
+
 	}

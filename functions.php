@@ -547,3 +547,12 @@ function currentUrl() {
 
 	return $pageURL;
 }
+
+
+function addonUrlGenerator($addon_data){
+	global $link, $mb;
+
+	$type_blob = (array_key_exists($addon_data['category'], $mb['main_menu']['add-ons']['sub_menu'])) ? $mb['main_menu']['add-ons']['sub_menu'][$addon_data['category']]['title'] : $addon_data['category'];
+	$addon_link = $link['addon']['home']. Format::Slug($type_blob). '/' . $addon_data['ID_ADDON'] . '/' . Format::Slug ($addon_data['addon_title']).'/';
+	return $addon_link;
+}
