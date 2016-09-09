@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 //use microtime to get page loadtime
@@ -128,7 +129,7 @@ $releaseData['beta']   = getVersionInfo(1,'byCurrentVersion')[0];
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
 	'website' => array(
-		'ver'           => '1.3.0',
+		'ver'           => '1.9.0',
 		'show_warning'  => false,
 		'is_test'		=> false,
 		'github_link'   => 'https://github.com/Avik-B/mb_web/',
