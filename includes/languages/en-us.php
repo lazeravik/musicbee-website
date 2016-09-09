@@ -163,7 +163,7 @@ $lang['love_musicbee_desc'] = 'You can also support MusicBee with a voluntary do
 /**
  * footer
  */
-$lang['get_latest_mb'] = 'Get the latest MusicBee';
+$lang['get_latest_mb'] = 'Get MusicBee';
 $lang['get_mb'] = 'Get %1$s';
 $lang['more'] = 'More';
 $lang['subscribe_rss'] = 'Subscribe to RSS';

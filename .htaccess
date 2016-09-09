@@ -2,6 +2,7 @@
 ErrorDocument 404 /pages/error/404.php
 
 #URL rewriter
+AddDefaultCharset UTF-8
 Options +FollowSymlinks
 RewriteEngine On
 
@@ -34,9 +35,9 @@ RewriteRule (.*)$ /$1/ [R=301,L]
 #if the url have addon in it and have 1 or 2 query then fireup this custom rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^addons/([\w-]+)/([\w]+)/(.*?)/$    addons.php?type=$1&id=$2&title=$3
-RewriteRule ^addons/([\w]+)/(.*?)/$    addons.php?id=$1&title=$2
-RewriteRule ^addons/([\w-]+)/$    addons.php?id=$1 [L]
+RewriteRule ^addons/([A-Яа-я-]+)/([\w]+)/(.*?)/$    addons.php?type=$1&id=$2&title=$3 [L,NE]
+RewriteRule ^addons/([A-Яа-я-]+)/(.*?)/$    addons.php?id=$1&title=$2 [L,NE]
+RewriteRule ^addons/([A-Яа-я-]+)/$    addons.php?id=$1 [L,NE]
 RewriteRule ^help/([\w-]+)/$    help.php?$1 [L]
 RewriteRule ^api/([\w.]+)/$    api.get.php?v=$1 [L]
 
