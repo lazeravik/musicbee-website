@@ -49,6 +49,7 @@ $link['redirect']             = $link['url'].'out/';
 $link['404']                  = $link['root']."pages/error/404.php";
 $link['kb']                   = $link['url'].'kb/';
 $link['credit']               = $link['help'].'credit/';
+$link['logout']               = $link['url'].'logout/';
 
 //creates an array from the URI
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
@@ -71,8 +72,6 @@ if(!isset($context)) {
 	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
 
-//Create the logout link..... THIS SHOULD NOT BE DECLARED BEFORE SSI.php SCRIPT!
-$link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
 
 //Language array
 $lang = array();
@@ -102,7 +101,13 @@ require_once $link['root'].'classes/Help.php';
 //Gets website setting !DO NOT REMOVE IT!
 $setting = getSetting();
 //Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
-if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img') && !strpos(currentUrl(), 'kb')) {
+if(!strpos(currentUrl(), 'login')
+	&& !strpos(currentUrl(), 'logout')
+	&& !strpos(currentUrl(), 'includes')
+	&& !strpos(currentUrl(), 'styles')
+	&& !strpos(currentUrl(), 'img')
+	&& !strpos(currentUrl(), 'kb'))
+{
 	$_SESSION['login_url']  = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
 	$_SESSION['old_url']    = currentUrl();
