@@ -288,7 +288,7 @@ function validateInput() {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_8'].$_POST['tag'].'"}');
 		}
 
-		if(!Validation::charLimit($_POST['readme'], 5000)) {
+		if(!Validation::charLimit($_POST['readme'], 15000)) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_9'].'"}');
 		}
 	} else {

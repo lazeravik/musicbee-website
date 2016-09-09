@@ -145,6 +145,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<?php echo $lang['dashboard_record_th_2']; ?>
 						</td>
 						<td>
+							<?php echo $lang['dashboard_3']; ?>
+						</td>
+						<td>
 							<?php echo $lang['dashboard_record_th_4']; ?>
 						</td>
 						<td>
@@ -164,6 +167,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							</td>
 							<td>
 								<?php echo Format::UnslugTxt ($mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']); ?>
+							</td>
+							<td>
+								<?php echo Format::number_format_suffix ($addon['downloadCount']); ?>
 							</td>
 							<td class="status">
 								<?php $status_array_each = Validation::getStatus($addon['status']); ?>

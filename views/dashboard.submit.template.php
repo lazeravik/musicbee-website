@@ -421,7 +421,7 @@ endif; ?>
 								<textarea
 										id="wmd-input"
 										name="readme"
-										onkeyup="$('#wmd-input_count').text(5000 - this.value.length+'/5000')"><?php if($viewType == 2) {
+										onkeyup="$('#wmd-input_count').text(5000 - this.value.length+'/15000')"><?php if($viewType == 2) {
 										echo $data['readme_content'];
 									} ?></textarea>
 						</div>
