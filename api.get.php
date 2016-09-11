@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
  *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -68,7 +69,20 @@ if(isset($params[3])) {
 					break;
 
 				case 'addon-search':
-					addonSearch();
+					addonSearchJson();
+					break;
+
+				default:
+					# code...
+					break;
+			}
+		}
+		else if ($url_params['type'] == "html")
+		{
+			//switch between actions
+			switch ($url_params['action']) {
+				case 'addon-search-autocomplete':
+					addonSearchAutoComplete();
 					break;
 
 				default:
@@ -77,8 +91,8 @@ if(isset($params[3])) {
 			}
 		}
 	}
-}
 
+}
 /**
  * Generate MusicBee beta, stable and patch release info
  */
@@ -91,6 +105,47 @@ function releaseInfo()
 /**
  * Search addons by search term, filter between addon type
  */
+
+function addonSearchJson()
+{
+	printJson(json_encode(addonSearch()));
+}
+
+function addonSearchAutoComplete()
+{
+	global $lang;
+	$searchData = addonSearch();
+
+
+	foreach ($searchData['addon_data']['result'] as $result)
+	{
+		$thumb = Format::ImgurResizer($result['thumbnail'],"s");
+		$title = $result['addon_title'];
+		$author = $lang['addon_15'].' '.$result['membername'];
+		$url = addonUrlGenerator($result);
+		$uid = md5($title.$author);
+
+		$html = <<<HTML
+<li id="$uid">
+	<ul>
+		<li>
+			<img src="$thumb">
+		</li>
+		<li>
+			<p class="title"><a href="$url">$title</a></p>
+			<p>$author</p>
+		</li>	
+	</ul>
+	
+</li>
+HTML;
+		echo $html;
+		//var_dump($result);
+	}
+
+	exit();
+}
+
 function addonSearch()
 {
 	global $url_params, $mb, $link;
@@ -141,7 +196,7 @@ function addonSearch()
 		$data['next_page_url'] = ($data['total_page']==$data['current_page'])? null : $data['page_url'].'&p='.($data['current_page']+1);
 
 
-		printJson(json_encode($data));
+		return $data;
 	}
 }
 

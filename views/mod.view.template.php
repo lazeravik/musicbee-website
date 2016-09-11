@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 $json_response = true;
@@ -50,6 +51,11 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 				<li>
 					<a href="#mod_all/action=search&status=2" data-href="mod_all/action=search&status=2">
 						<?php echo $lang['mod_14']; ?>
+					</a>
+				</li>
+				<li>
+					<a href="#mod_transfer" data-href="mod_transfer">
+						<?php echo $lang['transfer_ownership_btn']; ?>
 					</a>
 				</li>
 			</ul>
