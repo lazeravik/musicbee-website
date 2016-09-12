@@ -14,6 +14,12 @@
 if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
+include_once dirname(__FILE__).'/classes/Paths.php';
+//Language array
+$lang = array();
+$language;
+require_once $link['root'].'classes/Language.php';
+new Language();
 	
 	if(!isset($_GET['code'])) {
 		$h = 'No Error code defined!';
