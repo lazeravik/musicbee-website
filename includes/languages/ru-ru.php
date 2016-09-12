@@ -195,9 +195,9 @@ $lang['dashboard_infobar_title'] = "Панель управления";
 $lang['dashboard_infobar_desc'] = "Панель управления используется для контроля загруженных вами на сайт расширений, модерации и т.д.";
 
 //dashboard > secondery menu
-$lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
-$lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
-$lang['dashboard_menu_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit an add-on';
+$lang['dashboard_menu_1'] = 'Overview';
+$lang['dashboard_menu_2'] = 'View all add-ons';
+$lang['dashboard_menu_3'] = 'Submit an add-on';
 $lang['dashboard_menu_4'] = 'Модерировать';
 $lang['musicbee_release'] = 'Релизы MusicBee';
 $lang['dashboard_menu_6'] = 'Настройки сайта';
