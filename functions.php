@@ -24,33 +24,7 @@ if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-$secure = (isSecure())?'https://':'http://';
-
-//All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
-$link                         = array();
-$link['root']                 = dirname(__FILE__) ."/";
-$link['url']                  = $secure.$_SERVER['HTTP_HOST']."/";
-$link['favicon']              = $link['url']."favicon.ico";
-$link['download']             = $link['url'].'downloads/';
-$link['rss']                  = $link['url'].'rss/';
-$link['home']                 = $link['url'];
-$link['forum']                = $link['url'].'forum/';
-$link['admin']['forum-panel'] = $link['forum'].'?action=admin';
-$link['login']                = $link['forum'].'?action=login';
-$link['support']              = $link['url'].'support/';
-$link['addon']['home']        = $link['url'].'addons/';
-$link['addon']['dashboard']   = $link['url'].'dashboard/';
-$link['help']                 = $link['url'].'help/';
-$link['faq']                  = $link['help'].'faq/';
-$link['release-note']         = $link['help'].'release-note/';
-$link['press']                = $link['help'].'press/';
-$link['api']                  = $link['help'].'api/';
-$link['bugreport']            = $link['url'].'bug/';
-$link['redirect']             = $link['url'].'out/';
-$link['404']                  = $link['root']."pages/error/404.php";
-$link['kb']                   = $link['url'].'kb/';
-$link['credit']               = $link['help'].'credit/';
-$link['logout']               = $link['url'].'logout/';
+include_once dirname(__FILE__).'/classes/Paths.php';
 
 //creates an array from the URI
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
@@ -68,30 +42,16 @@ $errorCode = array(
 //SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
 require_once $link['root'].'forum/SSI.php';
 
+//Language array
+$lang = array();
+$language;
+require_once $link['root'].'classes/Language.php';
+new Language();
+
 //Forum integration is must, if it is not initialized before this then throw an error
 if(!isset($context)) {
 	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
-
-
-//Language array
-$lang = array();
-
-//List of all indexed language files
-require_once $link['root'].'includes/languages/lang.list.php';
-
-//Default language file. DO NOT REMOVE IT!
-include_once $link['root'].'includes/languages/en-us.php';
-
-//Default language is english
-$language = setLanguage();
-if(!empty($language)) {
-	if(file_exists($link['root'].'includes/languages/'.$language['filename']) && $language['meta'] != 'en-us') {
-		/** @noinspection PhpIncludeInspection */
-		include_once $link['root'].'includes/languages/'.$language['filename'];
-	}
-}
-
 
 //Load other classes and database login info
 require_once $link['root'].'classes/Format.php';
@@ -481,52 +441,6 @@ function getSetting() {
 }
 
 
-/**
- * Set language cookie and returns language file details
- *
- * @return mixed
- */
-function setLanguage() {
-	if(isset($_GET['lang'])) {
-		$language = getLanguageFileName($_GET['lang']);
-	} elseif(isset($_COOKIE['lang'])) {
-		$language = getLanguageFileName($_COOKIE['lang']);
-	} else {
-		$language = getLanguageFileName('en-us');
-	}
-
-	//Sets the language cookie for 30 days
-	setcookie('lang', $language['meta'], time() + 60 * 60 * 24 * 30, '/');
-
-	return $language;
-}
-
-
-/**
- * gets language file list & details from lang.list.php
- *
- * @param $lang
- *
- * @return mixed
- */
-function getLanguageFileName($lang) {
-	global $lang_filelist;
-
-	if(array_key_exists($lang, $lang_filelist)) {
-		return $lang_filelist[$lang];
-	}
-}
-
-/**
- * Check if the server has SSL or not
- * 
- * @return boolean
- */
-function isSecure() {
-	return
-		(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-		|| $_SERVER['SERVER_PORT'] == 443;
-}
 
 
 
