@@ -183,6 +183,10 @@ a {
   }
 }
 
+.dark_theme .search{
+  background : url("../../img/search.png") no-repeat right 10px center;
+}
+
 .search {
   background : url("../../img/search.png") no-repeat right 10px center;
 
@@ -191,6 +195,7 @@ a {
 	width        : 250px;
 	border-color : rgba(255, 255, 255, 0.22);
 	color        : #fff;
+  padding-right: 35px;
   }
 
   &.big_search {

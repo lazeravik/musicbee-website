@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 $link['url'] = 'http://'.$_SERVER['HTTP_HOST'].'/';
@@ -153,7 +154,7 @@ CREATE TABLE IF NOT EXISTS {$prefix}addons (
   `update_date` VARCHAR(45) NULL,
   `tags` VARCHAR(100) NULL COMMENT 'eg. metro, modern, dark',
   `short_description` MEDIUMTEXT NOT NULL,
-  `download_links` VARCHAR(200) NOT NULL COMMENT 'instead of relational database approach, using serialize arrays are better since every addons will have unique number of unique download links.',
+  `download_links` VARCHAR(2083) NOT NULL COMMENT 'instead of relational database approach, using serialize arrays are better since every addons will have unique number of unique download links.',
   `image_links` VARCHAR(5083) NOT NULL,
   `thumbnail` VARCHAR(2083) NOT NULL,
   `important_note` MEDIUMTEXT NULL,
@@ -185,10 +186,10 @@ CREATE TABLE IF NOT EXISTS {$prefix}current_version (
   `release_date` VARCHAR(45) NOT NULL,
   `message` MEDIUMTEXT NULL,
   `supported_os` VARCHAR(45) NOT NULL,
-  `DownloadLink` VARCHAR(80) NOT NULL,
-  `MirrorLink1` VARCHAR(80) NULL,
-  `MirrorLink2` VARCHAR(80) NULL,
-  `PortableLink` VARCHAR(80) NOT NULL,
+  `DownloadLink` VARCHAR(2083) NOT NULL,
+  `MirrorLink1` VARCHAR(2083) NULL,
+  `MirrorLink2` VARCHAR(2083) NULL,
+  `PortableLink` VARCHAR(2083) NOT NULL,
   `available` TINYINT(1) NULL DEFAULT 1,
   PRIMARY KEY (`ID_VERSION`),
   UNIQUE INDEX `ID_VERSION_UNIQUE` (`ID_VERSION` ASC))

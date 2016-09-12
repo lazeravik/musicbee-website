@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -19,6 +20,7 @@ $admin_only = true; //only for admins
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'].'classes/Manager.php'; // Save and update the data on the database
 include_once $link['root'].'includes/parsedown/Parsedown.php';
+
 
 /**
  * enable and disable downloads
@@ -139,14 +141,14 @@ elseif(isset($_POST['save'])) {
 }
 elseif(isset($_POST['modify_type']))
 {
-	/**
-	 * Delete records. There is no serverside checking if the deleting version is the current one.
-	 * The client side delete button should be greyed out. BUT since the user HAS to be an admin we are not too strict on checking any fake delete request.
-	 * THOUGH maybe in future there will be a check
-	 */
-
 	$manager = new Manager(); //create an instance of the MANAGER class
-	if($_POST['modify_type'] == "delete") {
+	if($_POST['modify_type'] == "delete")
+	{
+		//Check if the release is in use or not. If it is current release ask the admin to submit new release first beofre deleting it
+		if($manager->compareCurrentRelease($_POST['record_id'])){
+			die('{"status": "0", "data": "'.$lang['err_current_release_delete']."<br/>".$manager->errorMessage.'"}');
+		}
+
 		if($manager->deleteRecord($_POST['record_id'])) {
 			exit('{"status": "1", "data": "'.$lang['deleted'].'", "callback_function": "record_deleted"}');
 		} else {

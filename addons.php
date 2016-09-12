@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
@@ -113,7 +114,7 @@ if (isset($_GET['id'])) {
 		{
 			$data['addon_data_new'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "publish_date DESC");
 			$data['addon_data_updated'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 5, "update_date DESC");
-			$data['addon_data_like'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 8, "downloadCount DESC,likesCount DESC");
+			$data['addon_data_like'] = $search->searchAddons($searchinput['query'], $data['current_type'], '1', null, 0, 8, "downloadCount DESC, likesCount DESC", true);
 
 			$data['top_members'] = $addon->getTopMembers();
 		}
@@ -207,13 +208,12 @@ function top_member_result_generator($data)
  */
 function addon_result_view_generator($data)
 {
-	global $link, $lang, $mb;
+	global $lang;
 
 	if ($data != null) {
 		$result_view = '<ul class="addon_list_box">';
 		foreach ($data as $key => $addon_data) {
-			$type_blob = (array_key_exists($addon_data['category'], $mb['main_menu']['add-ons']['sub_menu'])) ? $mb['main_menu']['add-ons']['sub_menu'][$addon_data['category']]['title'] : $addon_data['category'];
-			$addon_link = $link['addon']['home']. Format::Slug($type_blob). '/' . $addon_data['ID_ADDON'] . '/' . Format::Slug ($addon_data['addon_title']).'/';
+			$addon_link = addonUrlGenerator($addon_data);
 			$addon_beta_markup = ($addon_data['is_beta']==1)?'<p class="small_info beta">'.$lang['addon_38'].'</p>': '';
 
 			$result_view .= '<li id ="' . $addon_data['ID_ADDON'] . '">

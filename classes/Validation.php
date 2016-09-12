@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -72,6 +73,26 @@ class Validation
 				} catch (Exception $e) {
 					return false;
 				}
+			}
+			return true;
+		}
+	}
+
+	public static function validateMusicBeeVersion($mbversions)
+	{
+		global $connection, $db_info;
+		if (databaseConnection()) {
+			try {
+				$sql = "SELECT ID_ALLVERSIONS FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :id";
+				$statement = $connection->prepare($sql);
+				$statement->bindValue(':id', $mbversions);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+				if (count($result) != 1) {
+					return false;
+				}
+			} catch (Exception $e) {
+				return false;
 			}
 			return true;
 		}

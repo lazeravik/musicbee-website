@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 //use microtime to get page loadtime
@@ -23,35 +24,7 @@ if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-$secure = (isSecure())?'https://':'http://';
-
-//All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
-$link = array();
-
-$link['root'] = dirname(__FILE__) ."/";
-$link['url'] = $secure.$_SERVER['HTTP_HOST']."/";
-
-$link['favicon'] = $link['url']."favicon.ico";
-
-$link['download'] = $link['url'].'download/';
-$link['rss'] = $link['url'].'rss/';
-$link['home'] = $link['url'];
-$link['forum'] = $link['url'].'forum/';
-$link['admin']['forum-panel'] = $link['forum'].'?action=admin';
-$link['login'] = $link['forum'].'?action=login';
-$link['support'] = $link['url'].'support/';
-$link['addon']['home'] = $link['url'].'addons/';
-$link['addon']['dashboard'] = $link['url'].'dashboard/';
-$link['help'] = $link['url'].'help/';
-$link['faq'] = $link['help'].'faq/';
-$link['release-note'] = $link['help'].'release-note/';
-$link['press'] = $link['help'].'press/';
-$link['api'] = $link['help'].'api/';
-$link['bugreport'] = $link['url'].'bug/';
-$link['redirect'] = $link['url'].'out/';
-$link['404'] = $link['root']."pages/error/404.php";
-$link['kb'] = $link['url'].'kb/';
-$link['credit'] = $link['help'].'credit/';
+include_once dirname(__FILE__).'/classes/Paths.php';
 
 //creates an array from the URI
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
@@ -69,32 +42,16 @@ $errorCode = array(
 //SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
 require_once $link['root'].'forum/SSI.php';
 
+//Language array
+$lang = array();
+$language;
+require_once $link['root'].'classes/Language.php';
+new Language();
+
 //Forum integration is must, if it is not initialized before this then throw an error
 if(!isset($context)) {
 	header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
-
-//Create the logout link..... THIS SHOULD NOT BE DECLARED BEFORE SSI.php SCRIPT!
-$link['logout'] = $link['forum'].'index.php?action=logout;'.$context['session_var'].'='.$context['session_id'];
-
-//Language array
-$lang = array();
-
-//List of all indexed language files
-require_once $link['root'].'includes/languages/lang.list.php';
-
-//Default language file. DO NOT REMOVE IT!
-include_once $link['root'].'includes/languages/en-us.php';
-
-//Default language is english
-$language = setLanguage();
-if(!empty($language)) {
-	if(file_exists($link['root'].'includes/languages/'.$language['filename']) && $language['meta'] != 'en-us') {
-		/** @noinspection PhpIncludeInspection */
-		include_once $link['root'].'includes/languages/'.$language['filename'];
-	}
-}
-
 
 //Load other classes and database login info
 require_once $link['root'].'classes/Format.php';
@@ -105,11 +62,17 @@ require_once $link['root'].'classes/Help.php';
 //Gets website setting !DO NOT REMOVE IT!
 $setting = getSetting();
 //Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
-if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img') && !strpos(currentUrl(), 'kb')) {
-	$_SESSION['login_url'] = currentUrl();
+if(!strpos(currentUrl(), 'login')
+	&& !strpos(currentUrl(), 'logout')
+	&& !strpos(currentUrl(), 'includes')
+	&& !strpos(currentUrl(), 'styles')
+	&& !strpos(currentUrl(), 'img')
+	&& !strpos(currentUrl(), 'kb'))
+{
+	$_SESSION['login_url']  = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
-	$_SESSION['old_url'] = currentUrl();
-	$_SESSION['redirect'] = currentUrl();
+	$_SESSION['old_url']    = currentUrl();
+	$_SESSION['redirect']   = currentUrl();
 }
 
 $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $link['url'];
@@ -121,14 +84,14 @@ $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']
 
 //Get the musicbee satble and beta release data
 $releaseData['stable'] = getVersionInfo(0,'byCurrentVersion')[0];
-$releaseData['beta'] = getVersionInfo(1,'byCurrentVersion')[0];
-
+$releaseData['beta']   = getVersionInfo(1,'byCurrentVersion')[0];
 
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
 	'website' => array(
-		'ver'           => '1.2.3',
+		'ver'           => '1.9.0',
 		'show_warning'  => false,
+		'is_test'		=> false,
 		'github_link'   => 'https://github.com/Avik-B/mb_web/',
 	),
 	'charset'        => 'UTF-8',
@@ -143,7 +106,7 @@ $mb = array(
 		'rank_name'       => null,
 		'need_approval'   => true,
 		'can_mod'         => $context['user']['can_mod'],
-		'username'        => $context['user']['username'],
+		'username'        => $context['user']['name'],
 		'email'           => $context['user']['email'],
 		'name'            => $context['user']['name'],
 		'messages'        => $context['user']['messages'],
@@ -170,7 +133,8 @@ $mb = array(
 			'restriction' => 'login',
 			'sub_menu'    => array(
 				'user-profile' => array(
-					'title' => '<p class="user_info">'.sprintf($lang['hey_username'], $context['user']['username']).'</p>',
+					'title' => ''.sprintf($lang['hey_username'], $context['user']['name']).'',
+					'href'        => $link['forum'].'?action=profile',
 				),
 				'line1'        => array('title' => $lang['line'],),
 				'admin-panel'  => array(
@@ -477,48 +441,6 @@ function getSetting() {
 }
 
 
-/**
- * Set language cookie and returns language file details
- *
- * @return mixed
- */
-function setLanguage() {
-	if(isset($_GET['lang'])) {
-		$language = getLanguageFileName($_GET['lang']);
-	} elseif(isset($_COOKIE['lang'])) {
-		$language = getLanguageFileName($_COOKIE['lang']);
-	} else {
-		$language = getLanguageFileName('en-us');
-	}
-
-	//Sets the language cookie for 30 days
-	setcookie('lang', $language['meta'], time() + 60 * 60 * 24 * 30, '/');
-
-	return $language;
-}
-
-
-/**
- * gets language file list & details from lang.list.php
- *
- * @param $lang
- *
- * @return mixed
- */
-function getLanguageFileName($lang) {
-	global $lang_filelist;
-
-	if(array_key_exists($lang, $lang_filelist)) {
-		return $lang_filelist[$lang];
-	}
-}
-
-
-function isSecure() {
-	return
-		(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-		|| $_SERVER['SERVER_PORT'] == 443;
-}
 
 
 
@@ -541,35 +463,10 @@ function currentUrl() {
 }
 
 
-/**
- * ONLY FOR DEVELOPMENT PURPOSE
- * Shows the parsed mysql query with value
- *
- * @param $query
- * @param $params
- *
- * @return mixed
- */
-function showQuery($query, $params) {
-	$keys = array();
-	$values = array();
+function addonUrlGenerator($addon_data){
+	global $link, $mb;
 
-	# build a regular expression for each parameter
-	foreach($params as $key => $value) {
-		if(is_string($key)) {
-			$keys[] = '/:'.$key.'/';
-		} else {
-			$keys[] = '/[?]/';
-		}
-
-		if(is_numeric($value)) {
-			$values[] = intval($value);
-		} else {
-			$values[] = '"'.$value.'"';
-		}
-	}
-
-	$query = preg_replace($keys, $values, $query, 1, $count);
-
-	return $query;
+	$type_blob = (array_key_exists($addon_data['category'], $mb['main_menu']['add-ons']['sub_menu'])) ? $mb['main_menu']['add-ons']['sub_menu'][$addon_data['category']]['title'] : $addon_data['category'];
+	$addon_link = $link['addon']['home']. Format::Slug($type_blob). '/' . $addon_data['ID_ADDON'] . '/' . Format::Slug ($addon_data['addon_title']).'/';
+	return $addon_link;
 }

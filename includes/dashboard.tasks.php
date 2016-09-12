@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -30,7 +31,7 @@ if(isset($_POST['submit'])) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_20'].'"}');
 	}
 
-	//If Add-on submission is turned of show error
+	//If user already reached maximum submission limit/day show error
 	if(!canUserSubmitAnymoreToday()) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_22'].'"}');
 	}
@@ -59,6 +60,7 @@ if(isset($_POST['submit'])) {
 
 			//Phew.... all validations complete, now SUBMIT THE ADDON!
 			if($dashboard->submit($readme_html, "submit")) {
+				//@todo: Add an item to mail queue, and send it to admin
 				exit ('{"status": "1", "data": "'.$lang['dashboard_msg_11'].'", "callback_function": "submitted"}');
 			}
 		} else {
@@ -102,6 +104,7 @@ if(isset($_POST['submit'])) {
 		//Mod/Admin/addon author will be able to soft delete and addon
 		if($dashboard->verifyAuthor($mb['user']['id'], $_POST['record_id']) || $mb['user']['can_mod']) {
 			if($dashboard->updateAddonStatus($_POST['record_id'], "3", $mb['user']['id'])) {
+				//@todo: now that the item is deleted, check if it is added to mail queue, if true remove it.
 				exit('
 				{
 					"status": "1",
@@ -120,6 +123,7 @@ if(isset($_POST['submit'])) {
 	} elseif($_POST['modify_type'] == "update") {
 		if(validateInput()) {
 
+			//If the addon is already soft deleted and the user is not an admin or mod die!!
 			if($dashboard->getAddonStatus($_POST['record_id']) == "3" && !$mb['user']['can_mod']) {
 				die('{"status": "0", "data": "'.$lang['dashboard_msg_9'].'"}');
 			}
@@ -269,7 +273,11 @@ function validateInput() {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_4'].'"}');
 		}
 
-		if(!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
+//		if(!Validation::validateMusicBeeVersions(explode(",", $_POST['mbSupportedVer']))) {
+//			die('{"status": "0", "data": "'.$lang['dashboard_err_6'].'"}');
+//		}
+
+		if(!Validation::validateMusicBeeVersion($_POST['mbSupportedVer'])) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_6'].'"}');
 		}
 
@@ -281,7 +289,7 @@ function validateInput() {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_8'].$_POST['tag'].'"}');
 		}
 
-		if(!Validation::charLimit($_POST['readme'], 5000)) {
+		if(!Validation::charLimit($_POST['readme'], 15000)) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_9'].'"}');
 		}
 	} else {

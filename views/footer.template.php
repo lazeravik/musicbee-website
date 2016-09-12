@@ -78,7 +78,7 @@
 	<div class="footer_credit_wrap">
 		<ul class="footer_credit">
 			<li>
-				<p><a href="<?php echo $link['credit']; ?>"><?php echo $lang['site_built_with_love']; ?></a> &nbsp;&nbsp;|&nbsp;&nbsp; v<?php echo $mb['website']['ver']; ?></p>
+				<p><a href="<?php echo $link['credit']; ?>" class="credit_link"><?php echo $lang['site_built_with_love']; ?></a> &nbsp;&nbsp;|&nbsp;&nbsp; v<?php echo $mb['website']['ver']; ?></p>
 				<p id="copyright"><?php echo $lang['musicbee_copyright']; ?></p>
 				<?php
 				$endScriptTime = microtime(true);

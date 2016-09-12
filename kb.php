@@ -1,18 +1,25 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 //Start a new session if no session detected..... WARNING! IT REQUIRES PHP 5.4 OR LATER
 if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
+include_once dirname(__FILE__).'/classes/Paths.php';
+//Language array
+$lang = array();
+$language;
+require_once $link['root'].'classes/Language.php';
+new Language();
 	
 	if(!isset($_GET['code'])) {
 		$h = 'No Error code defined!';

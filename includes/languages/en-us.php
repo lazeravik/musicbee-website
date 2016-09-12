@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -107,7 +108,7 @@ $lang['home_28'] = 'Accurate CD ripping and file conversion';
 $lang['home_29'] = 'Get MusicBee and enhance your music experience';
 $lang['home_30'] = 'Submit';
 $lang['home_31'] = 'Groove Music Support';
-$lang['home_32'] = 'MusicBee has native support for Groove Music (formerly Xbox Music.) You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. ';
+$lang['home_32'] = 'MusicBee has native support for Groove Music (formerly Xbox Music). You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. ';
 $lang['home_33'] = 'The Best.... rated by reviewers and users';
 $lang['home_34'] = 'MusicBee is rated one of the best music managers and players available for Windows. It packs features that will WOW you. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today. You will never go back.';
 $lang['home_35'] = 'last.fm, CD Ripping, Tagging tools.... plus more!';
@@ -122,7 +123,7 @@ $lang['home_40'] = "Even better, MusicBee supports some WinAmp plugins to enhanc
 /**
  * Download page
  */
-$lang['download_title'] = 'MusicBee - Downloads';
+$lang['download_title'] = 'Downloads';
 $lang['download_desc'] = 'Get MusicBee Installer executable or Portable and start enjoying MusicBee';
 
 $lang['download_header'] = 'Download MusicBee';
@@ -163,7 +164,7 @@ $lang['love_musicbee_desc'] = 'You can also support MusicBee with a voluntary do
 /**
  * footer
  */
-$lang['get_latest_mb'] = 'Get the latest MusicBee';
+$lang['get_latest_mb'] = 'Get MusicBee';
 $lang['get_mb'] = 'Get %1$s';
 $lang['more'] = 'More';
 $lang['subscribe_rss'] = 'Subscribe to RSS';
@@ -255,7 +256,7 @@ $lang['dashboard_submit_header_3'] = 'Title/Name of your Add-on *';
 $lang['dashboard_submit_header_4'] = 'Short Description about your Add-on *';
 $lang['dashboard_submit_header_5'] = 'Step 3. Download Links and Images';
 $lang['dashboard_submit_header_6'] = 'Step 4. Add Readme and more';
-$lang['dashboard_submit_header_7'] = 'Supported MusicBee Version *';
+$lang['dashboard_submit_header_7'] = 'Minimum Supported MusicBee Version *';
 $lang['dashboard_submit_header_8'] = 'Add-on Version';
 $lang['dashboard_submit_header_9'] = 'Add tags';
 $lang['dashboard_submit_header_10'] = 'Add-on download link *';
@@ -344,8 +345,9 @@ $lang['mod_11'] = 'Actions';
 $lang['mod_12'] = 'Undelete add-ons';
 $lang['mod_13'] = 'All unapproved add-ons';
 $lang['mod_14'] = 'All rejected add-ons';
-
-
+$lang['transfer_ownership_btn'] = 'Transfer add-on ownership';
+$lang['transfer_ownership_header'] = 'Transfer add-on ownership from one user to another';
+$lang['transfer_step1'] = 'Step 1: Find the add-on you want to transfer ownership';
 
 /**
  * Dashboard Admin Panel
@@ -449,7 +451,7 @@ $lang['version&link_required'] = 'You must fill both Version and Download Link';
 
 $lang['delete'] = 'Delete';
 
-
+$lang['err_current_release_delete'] = 'You can not delete current release, Submit a new release first and then delete it.';
 
 
 
@@ -492,7 +494,7 @@ $lang['mbr_btn_20'] = '<i class="fa fa-th"></i>&nbsp;&nbsp; View and edit MusicB
 /**
  * Addons download/search page
  */
-$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
+$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
 
 $lang['addon_8'] = 'Version';
 $lang['addon_9'] = 'Author';
@@ -501,7 +503,7 @@ $lang['addon_11'] = 'Category';
 $lang['addon_15'] = 'by';
 $lang['addon_16'] = 'Updated on';
 $lang['addon_17'] = 'Published on';
-$lang['addon_36'] = 'Supports';
+$lang['addon_36'] = 'Supports Minimum';
 $lang['addon_37'] = 'Unknown MusicBee version';
 
 
@@ -661,6 +663,8 @@ $lang['417'] = '<b>ERROR:</b> There\'s a Problem<br/>';
 $lang['help_title'] = 'MusicBee help and FAQ';
 $lang['help_desc'] = 'Do you need help with MusicBee? Perhaps you\'re just getting started or having trouble figuring out a feature. This is the right place for getting all your answers';
 $lang['help_popular_wiki_headline'] = 'Most Popular Wiki posts';
+$lang['help_mostviewed_wiki_headline'] = 'Most Viewed Wiki Articles';
+$lang['help_new_wiki_headline'] = 'New Wiki Articles';
 $lang['help_faq_headline'] = 'FAQ (Frequently Asked Question)';
 $lang['dev_guides'] = 'Help for Developers';
 $lang['user_help'] = 'Help for Users';

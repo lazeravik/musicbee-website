@@ -104,6 +104,14 @@ footer.footer_section {
 	  display: block;
 	  padding: 0px;
 
+		a.credit_link {
+			color: #ffa92a;
+
+			&:hover {
+				    color: #ffffff;
+			}
+		}
+
 	  li{
 		list-style: none;
 		padding: 0px 25px;
