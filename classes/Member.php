@@ -161,7 +161,7 @@ class Member
 	 *
 	 * @return null
 	 */
-	public function memberInfo($user_id) {
+	public static function memberInfo($user_id) {
 		global $connection, $db_info;
 
 		if(databaseConnection()) {

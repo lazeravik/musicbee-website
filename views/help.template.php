@@ -78,7 +78,7 @@ include($mainmenu);
 				<div class="show_info custom info_silver">
 					<h3><?php echo $lang['help_faq_headline']; ?></h3>
 				</div>
-				<div class="markdownView box faq">
+				<div id="faq-view" class="markdownView box faq">
 					<?php 
 					$html = file_get_contents($mb['help']['help_api_link']['data']);
 						echo Format::htmlSafeOutput($html); 

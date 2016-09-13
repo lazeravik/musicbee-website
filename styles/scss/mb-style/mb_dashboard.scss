@@ -109,10 +109,23 @@
 			width: 100%;
 			background: #fff;
 
+			&.selected {
+				position: relative;
+			}
+
 			& > li{
 				display: flex;
 				flex-wrap: wrap;
 				border-bottom: 1px solid #eee;
+
+				&.active {
+					background: rgb(255, 204, 102);
+
+
+					&:hover {
+						background: rgb(255, 204, 102);
+					}
+				}
 
 				ul{
 					display: flex;

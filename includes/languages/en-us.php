@@ -355,6 +355,15 @@ $lang['mod_14'] = 'All rejected add-ons';
 $lang['transfer_ownership_btn'] = 'Transfer add-on ownership';
 $lang['transfer_ownership_header'] = 'Transfer add-on ownership from one user to another';
 $lang['transfer_step1'] = 'Step 1: Find the add-on you want to transfer ownership';
+$lang['transfer_step2'] = 'Step 2: Find the User to Transfer the rights to';
+
+$lang['transfer_success_done'] = 'The add-on right is successfully transferred!';
+
+$lang['transfer_err_unknown'] = 'Oops, we can\'t transfer the rights! something went wrong!';
+$lang['transfer_err_invalid_data'] = 'Please provide correct data';
+$lang['transfer_err_user_notexists'] = 'The user does not exist!';
+
+
 
 /**
  * Dashboard Admin Panel

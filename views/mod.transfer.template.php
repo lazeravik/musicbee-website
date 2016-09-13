@@ -21,7 +21,7 @@ $search = new Search();
 $dashboard = new Dashboard();
 
 ?>
-<div class="main_content_wrapper col_1">
+<div class="main_content_wrapper col_2">
 	<div class="sub_content_wrapper">
 		<div class="box_content">
 			<div class="show_info custom">
@@ -31,14 +31,10 @@ $dashboard = new Dashboard();
 				</p>
 			</div>
 		</div>
-
-		<div class="main_content_wrapper col_2">
-			<div class="sub_content_wrapper">
 				<div class="box_content">
 					<div class="show_info info_silverwhite custom">
 						<h3><?php echo $lang['transfer_step1']; ?></h3>
 					</div>
-					<form id="search_filter" action="<?php echo $link['url']; ?>views/dashboard.all.template.php" method="get" data-autosubmit>
 						<span class="show_info info_silverwhite custom search_container">
 							<input type="search"
 							       id="search_box"
@@ -53,14 +49,41 @@ $dashboard = new Dashboard();
 							<div class="search_list_wrapper">
 								<ul id="search_list" class="search_list"></ul>
 							</div>
-
 						</span>
-					</form>
 				</div>
+
+			<form action="<?php echo $link['url']; ?>includes/dashboard.tasks.php" method="post" id="addon_transfer" data-autosubmit>
+				<div class="box_content" id="step2_box" style="display:none">
+					<div class="show_info info_silverwhite custom">
+						<h3><?php echo $lang['transfer_step2']; ?></h3>
+					</div>
+						<span class="show_info info_silverwhite custom search_container">
+							<input type="search"
+							       id="search_box_user"
+							       spellcheck="false"
+							       autocomplete="off"
+							       autocorrect="off"
+							       class="search filter_search dark"
+							       name="user_id"
+							       placeholder="Enter user id" required="true">
+							       <input id="id_field" type="hidden" name="addon_id" value="">
+							       <input type="hidden" name="addon_transfer" value="true">
+						</span>
+				</div>
+				<div class="box_content" id="final_step_box" style="display:none">
+					<ul class="form">
+						<li>
+							<button class="btn btn_blue"
+							        type="submit"
+							        onclick="saveEdit()"><?php echo $lang['home_30']; ?></button>
+						</li>
+					</ul>
+				</div>
+			</form>
+			<div class="space medium"></div>
 			</div>
 		</div>
-	</div>
-</div>
+
 
 <script>
 	function autoComplete() {
@@ -84,10 +107,30 @@ $dashboard = new Dashboard();
 	}
 
 	// set_item : this function will be executed when we select an item
-	function set_item(item) {
-		// change input value
-		$('#search_box').val(item);
-		// hide proposition list
-		$('#search_list').hide();
+	function set_item(uid, event) {
+		event.preventDefault();
+		event.stopImmediatePropagation(); //This will stop the form submit twice
+		var item = $("#"+uid);
+		$("#"+uid +" button").remove();
+		$("#search_box").remove();
+		$("#search_list").html(item);
+		$("#search_list").addClass("selected");
+		item.addClass("active");
+
+		var addon_id = $("#"+uid+" input[name=addon_id]");
+		$("#id_field").val(addon_id.val());
+		
+		$("#step2_box").show();
+		$("#final_step_box").show();
 	}
+
+	function saveEdit() {
+		$('form[data-autosubmit][id=addon_transfer]').autosubmit();
+	}
+
+	var transfer_success = function() {
+		var dataUrl =window.location.hash.replace('#', '');
+		loadUpdatePage(dataUrl);
+	}
+
 </script>

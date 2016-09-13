@@ -170,6 +170,27 @@ if(isset($_POST['submit'])) {
 	} else {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_15'].'"}');
 	}
+} elseif(isset($_POST['addon_transfer'])) {
+	if(!$mb['user']['can_mod']) {
+		die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
+	}
+
+	if(!(isset($_POST['addon_id']) && isset($_POST['user_id']))){
+		die('{"status": "0", "data": "'.$lang['transfer_err_invalid_data'].'"}');
+	}
+
+	if(Member::memberInfo($_POST['user_id']) == null){
+		die('{"status": "0", "data": "'.$lang['transfer_err_user_notexists'].'"}');
+	}
+
+	$dashboard = new Dashboard();
+	if($dashboard->transferAddonRights($_POST['user_id'], $_POST['addon_id'])) {
+		//@todo: send an email to both perticipant to let them know
+		exit('{"status": "1", "data": "'.$lang['transfer_success_done'].'", "callback_function": "transfer_success"}');
+	} else {
+		die('{"status": "0", "data": "'.$lang['transfer_err_unknown'].'"}');
+	}
+
 } elseif(isset($_POST['site_setting'])) {
 	if($_POST['site_setting'] == "true") {
 

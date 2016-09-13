@@ -128,15 +128,18 @@ function addonSearchAutoComplete()
 		$html = <<<HTML
 <li id="$uid">
 	<ul>
+		<input type="hidden" name="addon_id" value="{$result['ID_ADDON']}">
 		<li>
 			<img src="$thumb">
 		</li>
 		<li>
 			<p class="title"><a href="$url">$title</a></p>
 			<p>$author</p>
-		</li>	
+		</li>
+		<li>
+		<button class="btn btn_blue" onclick="set_item('$uid', event); event.preventDefault();">Select</button>
+		</li>
 	</ul>
-	
 </li>
 HTML;
 		echo $html;

@@ -294,6 +294,30 @@ SQL;
 		}
 	}
 
+	public function transferAddonRights($new_author_id, $addon_id)
+	{
+		global $connection, $db_info;
+		if(databaseConnection()) {
+			try {
+					$sql = <<<SQL
+							UPDATE
+								{$db_info['addon_tbl']}
+							SET
+								ID_AUTHOR = :id_author
+							WHERE
+								ID_ADDON = :addon_id
+SQL;
+				$statement = $connection->prepare($sql);
+				$statement->bindValue(':id_author', $new_author_id);
+				$statement->bindValue(':addon_id', $addon_id);
+				$statement->execute();
+			} catch (Exception $e){
+				return false;
+			}
+			return true;
+		}
+	}
+
 	public function getTopVotedAddonsByAuthor($author_id, $limit = 10) {
 		global $connection, $db_info;
 
