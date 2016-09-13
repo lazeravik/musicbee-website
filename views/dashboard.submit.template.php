@@ -223,14 +223,15 @@ endif; ?>
 						       name="mbSupportedVer"
 						       type="hidden"
 						       value=""/>
-						<select id="multipleVer"
-						        multiple="multiple"
-						        on>
+						<select id="multipleVer">
 							<?php
 							foreach(getVersionInfo(0, "byAllReleases") as $ver) {
 								if($ver['dashboard_availablity'] == 1) {
-									if($ver['ID_ALLVERSIONS'] == $data['supported_mbversion']) {
-										$selected_mb_text = "selected";
+									if($viewType == 2){
+										if($ver['ID_ALLVERSIONS'] == $data['supported_mbversion'])
+											$selected_mb_text = "selected";
+										else
+											$selected_mb_text = "";
 									} else {
 										$selected_mb_text = ""; //if not matched then remove the selected text
 									}
@@ -508,9 +509,11 @@ endif; ?>
 <script type="text/javascript">
 
 	//Multiple Musicbee version selection diologue initializer
+	
 	$('#multipleVer').multipleSelect({
 				placeholder: "Select targetted MusicBee Version",
 				selectAll: false,
+				single: true,
 				width: "none",
 			}<?php if ($viewType == 2): ?>,
 			"setSelects", [<?php echo implode(',', $data['supported_mbversion_ids']); ?>]
@@ -565,27 +568,27 @@ endif; ?>
 	}
 
 	
-	$("#multipleVer").change(addVer);
-	function addVer() {
-		var $selectedVer = "";
-		var $selectedVerId = "";
-		$("#multipleVer > option:selected").each(function (index, el) {
-			if ($selectedVer == "") {
-				$selectedVer = el.text;
-				$selectedVerId = el.value;
-			} else {
-				$selectedVer = $selectedVer + ", " + el.text;
-				$selectedVerId = $selectedVerId + "," + el.value;
-			}
-		});
-		$('#mbSupportedVer').val($selectedVerId);
-		if ($selectedVer != "") {
-			$('#mbVerFeedback').show();
-			$('#mbVerFeedback').html('<?php echo $lang['dashboard_msg_3'];?> <b>' + $selectedVer + '</b>');
-		} else {
-			$('#mbVerFeedback').hide();
-		}
-	}
+	 $("#multipleVer").change(addVer);
+	 function addVer() {
+		 var $selectedVer = "";
+		 var $selectedVerId = "";
+		 $("#multipleVer > option:selected").each(function (index, el) {
+			 if ($selectedVer == "") {
+				 $selectedVer = el.text;
+				 $selectedVerId = el.value;
+			 } else {
+				 $selectedVer = $selectedVer + ", " + el.text;
+				 $selectedVerId = $selectedVerId + "," + el.value;
+			 }
+		 });
+		 $('#mbSupportedVer').val($selectedVerId);
+		 if ($selectedVer != "") {
+			 $('#mbVerFeedback').show();
+			 $('#mbVerFeedback').html('<?php echo $lang['dashboard_msg_3'];?> <b>' + $selectedVer + '</b>');
+		 } else {
+			 $('#mbVerFeedback').hide();
+		 }
+	 }
 
 	//Tag Input initializer
 	$(function () {

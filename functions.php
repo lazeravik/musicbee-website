@@ -26,32 +26,29 @@ if(session_status() == PHP_SESSION_NONE) {
 $secure = (isSecure())?'https://':'http://';
 
 //All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
-$link = array();
-
-$link['root'] = dirname(__FILE__) ."/";
-$link['url'] = $secure.$_SERVER['HTTP_HOST']."/";
-
-$link['favicon'] = $link['url']."favicon.ico";
-
-$link['download'] = $link['url'].'download/';
-$link['rss'] = $link['url'].'rss/';
-$link['home'] = $link['url'];
-$link['forum'] = $link['url'].'forum/';
+$link                         = array();
+$link['root']                 = dirname(__FILE__) ."/";
+$link['url']                  = $secure.$_SERVER['HTTP_HOST']."/";
+$link['favicon']              = $link['url']."favicon.ico";
+$link['download']             = $link['url'].'download/';
+$link['rss']                  = $link['url'].'rss/';
+$link['home']                 = $link['url'];
+$link['forum']                = $link['url'].'forum/';
 $link['admin']['forum-panel'] = $link['forum'].'?action=admin';
-$link['login'] = $link['forum'].'?action=login';
-$link['support'] = $link['url'].'support/';
-$link['addon']['home'] = $link['url'].'addons/';
-$link['addon']['dashboard'] = $link['url'].'dashboard/';
-$link['help'] = $link['url'].'help/';
-$link['faq'] = $link['help'].'faq/';
-$link['release-note'] = $link['help'].'release-note/';
-$link['press'] = $link['help'].'press/';
-$link['api'] = $link['help'].'api/';
-$link['bugreport'] = $link['url'].'bug/';
-$link['redirect'] = $link['url'].'out/';
-$link['404'] = $link['root']."pages/error/404.php";
-$link['kb'] = $link['url'].'kb/';
-$link['credit'] = $link['help'].'credit/';
+$link['login']                = $link['forum'].'?action=login';
+$link['support']              = $link['url'].'support/';
+$link['addon']['home']        = $link['url'].'addons/';
+$link['addon']['dashboard']   = $link['url'].'dashboard/';
+$link['help']                 = $link['url'].'help/';
+$link['faq']                  = $link['help'].'faq/';
+$link['release-note']         = $link['help'].'release-note/';
+$link['press']                = $link['help'].'press/';
+$link['api']                  = $link['help'].'api/';
+$link['bugreport']            = $link['url'].'bug/';
+$link['redirect']             = $link['url'].'out/';
+$link['404']                  = $link['root']."pages/error/404.php";
+$link['kb']                   = $link['url'].'kb/';
+$link['credit']               = $link['help'].'credit/';
 
 //creates an array from the URI
 $params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
@@ -106,10 +103,10 @@ require_once $link['root'].'classes/Help.php';
 $setting = getSetting();
 //Save current page url into session for login/logout redirect............ well it does not work anyway! could be a SMF Bug.
 if(!strpos(currentUrl(), 'login') && !strpos(currentUrl(), 'includes') && !strpos(currentUrl(), 'styles') && !strpos(currentUrl(), 'img') && !strpos(currentUrl(), 'kb')) {
-	$_SESSION['login_url'] = currentUrl();
+	$_SESSION['login_url']  = currentUrl();
 	$_SESSION['logout_url'] = currentUrl();
-	$_SESSION['old_url'] = currentUrl();
-	$_SESSION['redirect'] = currentUrl();
+	$_SESSION['old_url']    = currentUrl();
+	$_SESSION['redirect']   = currentUrl();
 }
 
 $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $link['url'];
@@ -121,7 +118,7 @@ $user_avatar = ($context['user']['avatar'] != null) ? $context['user']['avatar']
 
 //Get the musicbee satble and beta release data
 $releaseData['stable'] = getVersionInfo(0,'byCurrentVersion')[0];
-$releaseData['beta'] = getVersionInfo(1,'byCurrentVersion')[0];
+$releaseData['beta']   = getVersionInfo(1,'byCurrentVersion')[0];
 
 
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
@@ -513,7 +510,11 @@ function getLanguageFileName($lang) {
 	}
 }
 
-
+/**
+ * Check if the server has SSL or not
+ * 
+ * @return boolean
+ */
 function isSecure() {
 	return
 		(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
@@ -538,38 +539,4 @@ function currentUrl() {
 	}
 
 	return $pageURL;
-}
-
-
-/**
- * ONLY FOR DEVELOPMENT PURPOSE
- * Shows the parsed mysql query with value
- *
- * @param $query
- * @param $params
- *
- * @return mixed
- */
-function showQuery($query, $params) {
-	$keys = array();
-	$values = array();
-
-	# build a regular expression for each parameter
-	foreach($params as $key => $value) {
-		if(is_string($key)) {
-			$keys[] = '/:'.$key.'/';
-		} else {
-			$keys[] = '/[?]/';
-		}
-
-		if(is_numeric($value)) {
-			$values[] = intval($value);
-		} else {
-			$values[] = '"'.$value.'"';
-		}
-	}
-
-	$query = preg_replace($keys, $values, $query, 1, $count);
-
-	return $query;
 }

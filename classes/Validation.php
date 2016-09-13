@@ -77,6 +77,26 @@ class Validation
 		}
 	}
 
+	public static function validateMusicBeeVersion($mbversions)
+	{
+		global $connection, $db_info;
+		if (databaseConnection()) {
+			try {
+				$sql = "SELECT ID_ALLVERSIONS FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS = :id";
+				$statement = $connection->prepare($sql);
+				$statement->bindValue(':id', $mbversions);
+				$statement->execute();
+				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+				if (count($result) != 1) {
+					return false;
+				}
+			} catch (Exception $e) {
+				return false;
+			}
+			return true;
+		}
+	}
+
 
 	public static function getStatus($id)
 	{

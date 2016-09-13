@@ -138,7 +138,90 @@ include($mainmenu);
 				<div class="show_info custom info_silver">
 					<h3><?php echo $lang['help_popular_wiki_headline']; ?></h3>
 				</div>
+					<ul class="link_list">
+					<?php
+					try
+					{
+						$content = file_get_contents($setting['wikiaLink']."/api/v1/Articles/Popular?limit=10");
+
+						if($content != null && $setting['wikiaLink'] != null)
+						{
+							$content = json_decode($content, true);
+							foreach ($content['items'] as $wiki_item)
+							{
+					?>
+								<li>
+									<a href="<?php echo $setting['wikiaLink'].$wiki_item['url']; ?>"
+									   target="_blank"><?php echo $wiki_item['title']; ?></a>
+								</li>
+					<?php
+							}
+						}
+					} catch (Exception $e){}
+					?>
+					</ul>
 			</div>
+
+
+			<div class="box_content">
+				<div class="show_info custom info_silver">
+					<h3><?php echo $lang['help_mostviewed_wiki_headline']; ?></h3>
+				</div>
+				<ul class="link_list">
+					<?php
+					try
+					{
+						$content = file_get_contents($setting['wikiaLink']."/api/v1/Articles/Top?limit=10");
+
+						if($content != null && $setting['wikiaLink'] != null)
+						{
+							$content = json_decode($content, true);
+							foreach ($content['items'] as $wiki_item)
+							{
+								?>
+								<li>
+									<a href="<?php echo $setting['wikiaLink'].$wiki_item['url']; ?>"
+									   target="_blank"><?php echo $wiki_item['title']; ?></a>
+								</li>
+								<?php
+							}
+						}
+					} catch (Exception $e){}
+					?>
+				</ul>
+			</div>
+
+
+			<div class="box_content">
+				<div class="show_info custom info_silver">
+					<h3><?php echo $lang['help_new_wiki_headline']; ?></h3>
+				</div>
+				<ul class="link_list">
+					<?php
+					try
+					{
+						$content = file_get_contents($setting['wikiaLink']."/api/v1/Articles/New?limit=20&minArticleQuality=10");
+
+						if($content != null && $setting['wikiaLink'] != null)
+						{
+							$content = json_decode($content, true);
+							foreach ($content['items'] as $wiki_item)
+							{
+								?>
+								<li>
+									<a href="<?php echo $setting['wikiaLink'].$wiki_item['url']; ?>"
+									   target="_blank"><?php echo $wiki_item['title']; ?></a>
+								</li>
+								<?php
+							}
+						}
+					} catch (Exception $e){}
+					?>
+				</ul>
+			</div>
+
+
+
 		</div>
 
 	</div>

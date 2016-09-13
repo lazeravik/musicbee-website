@@ -255,7 +255,7 @@ $lang['dashboard_submit_header_3'] = 'Title/Name of your Add-on *';
 $lang['dashboard_submit_header_4'] = 'Short Description about your Add-on *';
 $lang['dashboard_submit_header_5'] = 'Step 3. Download Links and Images';
 $lang['dashboard_submit_header_6'] = 'Step 4. Add Readme and more';
-$lang['dashboard_submit_header_7'] = 'Supported MusicBee Version *';
+$lang['dashboard_submit_header_7'] = 'Minimum Supported MusicBee Version *';
 $lang['dashboard_submit_header_8'] = 'Add-on Version';
 $lang['dashboard_submit_header_9'] = 'Add tags';
 $lang['dashboard_submit_header_10'] = 'Add-on download link *';
@@ -449,7 +449,7 @@ $lang['version&link_required'] = 'You must fill both Version and Download Link';
 
 $lang['delete'] = 'Delete';
 
-
+$lang['err_current_release_delete'] = 'You can not delete current release, Submit a new release first and then delete it.';
 
 
 
@@ -492,7 +492,7 @@ $lang['mbr_btn_20'] = '<i class="fa fa-th"></i>&nbsp;&nbsp; View and edit MusicB
 /**
  * Addons download/search page
  */
-$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
+$lang['addon_license'] = 'Unless mentioned by the Author, all add-ons and screenshots are licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">cc by-sa 3.0</a>';
 
 $lang['addon_8'] = 'Version';
 $lang['addon_9'] = 'Author';
@@ -501,7 +501,7 @@ $lang['addon_11'] = 'Category';
 $lang['addon_15'] = 'by';
 $lang['addon_16'] = 'Updated on';
 $lang['addon_17'] = 'Published on';
-$lang['addon_36'] = 'Supports';
+$lang['addon_36'] = 'Supports Minimum';
 $lang['addon_37'] = 'Unknown MusicBee version';
 
 
@@ -661,6 +661,8 @@ $lang['417'] = '<b>ERROR:</b> There\'s a Problem<br/>';
 $lang['help_title'] = 'MusicBee help and FAQ';
 $lang['help_desc'] = 'Do you need help with MusicBee? Perhaps you\'re just getting started or having trouble figuring out a feature. This is the right place for getting all your answers';
 $lang['help_popular_wiki_headline'] = 'Most Popular Wiki posts';
+$lang['help_mostviewed_wiki_headline'] = 'Most Viewed Wiki Articles';
+$lang['help_new_wiki_headline'] = 'New Wiki Articles';
 $lang['help_faq_headline'] = 'FAQ (Frequently Asked Question)';
 $lang['dev_guides'] = 'Help for Developers';
 $lang['user_help'] = 'Help for Users';
