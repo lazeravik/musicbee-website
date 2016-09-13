@@ -81,7 +81,7 @@ include($mainmenu);
 				<div class="markdownView box faq">
 					<?php 
 					$html = file_get_contents($mb['help']['help_api_link']['data']);
-						echo $html; 
+						echo Format::htmlSafeOutput($html); 
 					?>
 				</div>
 			</div>
