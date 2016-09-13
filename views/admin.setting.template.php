@@ -174,7 +174,7 @@ include $link['root'].'classes/Dashboard.php';
 					</p>
 				</div>
 				<div class="box_content">
-				<ul class="form">
+					<ul class="form">
 						<li>
 							<label for="faqApiLink">
 								<p>API Link for FAQ Page</p>
