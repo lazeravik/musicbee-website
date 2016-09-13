@@ -1,0 +1,97 @@
+#wmd-button-bar 
+{
+	width: 100%;
+	background-color: #fff; 
+
+    #wmd-button-row {
+        .editor_btn {
+            padding: 15px 15px;
+
+            &:hover {
+                background: $musicbee-color;
+            }
+        }
+    }
+}
+
+#wmd-input 
+{ 
+	min-height: 250px;
+	width: 100%;
+  min-width: 100%;
+}
+
+
+#wmd-preview {
+	background-color: #fff;
+	padding: 50px 20px 10px 20px;
+	box-sizing: border-box;
+	margin: 10px auto;
+	display: block;
+	border: 1px solid #4CAF50;
+	position: relative;
+
+    &::before {
+		content: "Preview";
+		background: #4CAF50;
+		color: #fff;
+		padding: 10px;
+		display: block;
+		top: 0px;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+    }
+}
+
+
+#wmd-button-row,.wmd-button-row {
+    position: relative;
+    padding: 0px;
+    background: #F7F7F7;
+    display: flex;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 0px;
+    border-left: 1px solid;
+    border-color: #D7D7D7;
+  overflow: auto;
+}
+
+.wmd-spacer
+{
+	width: 1px; 
+	height: 20px; 
+	margin-left: 14px;
+	position: absolute;
+	background-color: Silver;
+	display: inline-block; 
+	list-style: none;
+}
+
+.wmd-button > a
+{
+	width: 20px; 
+	height: 20px; 
+	margin-left: 5px;
+	margin-right: 5px;
+	position: absolute;
+	display: inline-block; 
+}
+
+
+.wmd-prompt-background
+{
+	background-color: Black;
+}
+
+.wmd-prompt-dialog {
+    border: 0px solid #333;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+
+    input[type=button] {
+        border: none;
+    }
+}

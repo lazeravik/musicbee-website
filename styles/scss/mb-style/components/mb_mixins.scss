@@ -1,0 +1,10 @@
+@mixin font_family_normal {
+	font-family : $font-family;
+}
+
+
+@mixin clearfix {
+	content: "";
+	clear:both;
+	display: table;
+}

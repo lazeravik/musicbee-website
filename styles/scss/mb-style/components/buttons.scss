@@ -1,0 +1,165 @@
+
+.btn {
+	text-decoration : none;
+	background      : #515151;
+	color           : #fff;
+	padding         : 10px 20px;
+	margin          : 5px 5px 5px 0px;
+	box-sizing      : border-box;
+	display         : inline-block;
+	border-radius   : 0px;
+	outline         : none;
+	box-shadow      : 0px 1px 2px rgba(0, 0, 0, 0.28);
+	min-width       : 90px;
+	transition      : all 0.1s linear 0s;
+	border          : 0px;
+	cursor          : pointer;
+	font-family     : $font-family;
+
+	&:hover {
+		text-decoration : none;
+		background      : #6e6e6e;
+	}
+
+	&:active {
+		text-decoration : none;
+		background      : #333;
+	}
+
+	&:focus {
+		outline : 3px solid rgba(130, 130, 130, 0.5);
+	}
+
+	&.btn_blacknwhite {
+		background : #515151;
+		color      : #fff;
+
+		&:hover {
+			background : #fff;
+			color      : #474747;
+		}
+	}
+
+	&.btn_blue {
+		background : #2196f3;
+		color      : #fff;
+
+		&:hover {
+			background : #1583da;
+		}
+	}
+
+	&.btn_green {
+		color      : #fff;
+		background : #4caf50;
+
+		&:hover {
+			background : #3b923f;
+		}
+	}
+
+	&.btn_yellow {
+		background : #e6803b;
+		color      : #fff;
+
+		&:hover {
+			background : #c65e19;
+		}
+	}
+
+	&.btn_red {
+		background : #f44336;
+		color      : #fff;
+
+		&:hover {
+			background : #f45c51;
+		}
+	}
+
+	&.btn_download {
+		text-transform : uppercase;
+		font-weight    : bold;
+		font-size      : 14px;
+	}
+
+	&.btn_wireframe {
+		margin        : 5px;
+		border        : 1px solid;
+		padding       : 10px 15px;
+		border-radius : 3px;
+		transition    : linear all .15s;
+		display       : inline-block;
+
+		&:hover {
+			text-decoration : none;
+			border          : 1px solid;
+		}
+
+		h3 {
+			margin : 5px 0px;
+		}
+
+		p {
+			margin : 5px 0px;
+		}
+
+		&.btn_wireframe_blue {
+			background   : rgba(0, 41, 255, 0.03);
+			border-color : #03a9f4;
+			color        : #03a9f4;
+
+			&:hover {
+				background   : #03a9f4;
+				border-color : #2196f3;
+				color        : white;
+			}
+		}
+
+		&.btn_wireframe_yellow {
+			background   : rgba(255, 191, 0, 0.03);
+			border-color : #ff9800;
+			color        : #da0;
+
+			&:hover {
+				background   : #e08600;
+				border-color : #ffa828;
+				color        : white;
+
+			}
+		}
+
+	}
+	&.small_btn {
+		padding : 5px;
+		margin  : -4px 0px 0px 0px;
+	}
+
+	&:disabled {
+		background : #ababab;
+		box-shadow : none;
+
+		&:hover {
+			background : #ababab;
+			box-shadow : none;
+		}
+	}
+}
+
+.hero_buttons {
+	.btn {
+		&.btn_wireframe {
+			margin : 15px 10px 5px 0px;
+		}
+	}
+}
+
+.like_btn {
+	padding-right : 0px;
+
+	&::after {
+		content    : attr(data-like-count);
+		background : rgba(0, 0, 0, 0.24);
+		padding    : 10px 15px;
+		margin     : 0 0 0 10px;
+	}
+}
