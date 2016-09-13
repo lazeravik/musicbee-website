@@ -67,11 +67,9 @@ include($mainmenu);
 
 										</a>
 									</li>
-
-								<?php endforeach;
+						<?php endforeach;
 							endif;
 						} ?>
-
 					</ul>
 				</div>
 			</div>
@@ -81,7 +79,10 @@ include($mainmenu);
 					<h3><?php echo $lang['help_faq_headline']; ?></h3>
 				</div>
 				<div class="markdownView box faq">
-					<?php echo $mb['help']['faq_html']['data']; ?>
+					<?php 
+					$html = file_get_contents($mb['help']['help_api_link']['data']);
+						echo $html; 
+					?>
 				</div>
 			</div>
 

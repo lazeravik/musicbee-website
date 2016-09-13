@@ -103,3 +103,19 @@
 		}
 	}
 }
+
+.markdownView {
+	#toctitle {
+		display: none;
+	}
+
+	.editsection {
+		a {
+		    font-size: 12px;
+		    background: #f1f1f1;
+		    padding: 2px 10px;
+		    border-radius: 10px;
+		    border: 1px solid #ded9d1;
+		}
+	}
+}

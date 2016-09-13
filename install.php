@@ -307,8 +307,7 @@ INSERT INTO {$prefix}settings (`variable`, `value`) VALUES ('selfApprovalRequire
 INSERT INTO {$prefix}settings (`variable`, `value`) VALUES ('maximumAddonSubmissionPerDay', '20');
 
 INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('help_links', 'json', '');
-INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('faq_md', 'markdown', '');
-INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('faq_html', 'html', '');
+INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('help_api_link', 'link', 'http://musicbee.wikia.com/index.php?action=render&title=FAQ');
 INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('api_md', 'markdown', '');
 INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('api_html', 'html', '');
 INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('press_md', 'markdown', '');

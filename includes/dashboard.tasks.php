@@ -219,7 +219,7 @@ if(isset($_POST['submit'])) {
 				} else {
 					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
 				}
-			} elseif ($_POST['setting_type'] == 'help'){
+			} elseif ($_POST['setting_type'] == 'help') {
 
 				$faq = (isset($_POST['faq'])) ? $_POST['faq'] : "";
 				//load parsedown markup to html converter
