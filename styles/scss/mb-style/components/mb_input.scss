@@ -1,0 +1,50 @@
+/** Input variables common for all input fields */
+$input-font-size : 12px;
+$input-font-family : $font-family;
+$input-font-color : #333;
+$input-outline : none;
+$input-border-radius : 0;
+$input-border: 2px solid #d7d7d7;
+$input-border-hover: 2px solid $musicbee-color;
+$input-border-active: 2px solid #333;
+$input-border-focus: 2px solid #333;
+$input-padding : 10px;
+$input-transition : linear all .15s;
+
+
+
+/** Scss syntax starts here */
+input, textarea, select {
+  @include font_family_normal;
+  font-size   : $font-size;
+  color       : $font-color;
+  max-width   : 100%;
+  padding     : $input-padding;
+  outline     : $input-outline;
+  box-sizing  : border-box;
+  transition: $input-transition;
+  border-radius: $input-border-radius;
+  border      : $input-border;
+  &:hover {
+    border: $input-border-hover;
+  }
+  &:active {
+    border: $input-border-active;
+  }
+  &:focus {
+    border: $input-border-focus;
+  }
+
+  &[readonly] {
+	background: rgba(125, 125, 125, 0.11);
+	border-color: transparent;
+	color: #666;
+  }
+}
+
+select {
+  background: url("../../img/select-arrows.svg") no-repeat right 10px center;
+  padding-right: 20px;
+  -webkit-appearance   : none;
+  -moz-appearance      : none;
+}
