@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -107,7 +108,7 @@ $lang['home_28'] = 'Accurate CD ripping and file conversion';
 $lang['home_29'] = 'Get MusicBee and enhance your music experience';
 $lang['home_30'] = 'Submit';
 $lang['home_31'] = 'Groove Music Support';
-$lang['home_32'] = 'MusicBee has native support for Groove Music (formerly Xbox Music.) You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. ';
+$lang['home_32'] = 'MusicBee has native support for Groove Music (formerly Xbox Music). You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. ';
 $lang['home_33'] = 'The Best.... rated by reviewers and users';
 $lang['home_34'] = 'MusicBee is rated one of the best music managers and players available for Windows. It packs features that will WOW you. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today. You will never go back.';
 $lang['home_35'] = 'last.fm, CD Ripping, Tagging tools.... plus more!';
@@ -122,7 +123,7 @@ $lang['home_40'] = "Even better, MusicBee supports some WinAmp plugins to enhanc
 /**
  * Download page
  */
-$lang['download_title'] = 'MusicBee - Downloads';
+$lang['download_title'] = 'Downloads';
 $lang['download_desc'] = 'Get MusicBee Installer executable or Portable and start enjoying MusicBee';
 
 $lang['download_header'] = 'Download MusicBee';
@@ -163,7 +164,7 @@ $lang['love_musicbee_desc'] = 'You can also support MusicBee with a voluntary do
 /**
  * footer
  */
-$lang['get_latest_mb'] = 'Get the latest MusicBee';
+$lang['get_latest_mb'] = 'Get MusicBee';
 $lang['get_mb'] = 'Get %1$s';
 $lang['more'] = 'More';
 $lang['subscribe_rss'] = 'Subscribe to RSS';
@@ -195,9 +196,9 @@ $lang['dashboard_infobar_title'] = "Dashboard";
 $lang['dashboard_infobar_desc'] = "Dashboard is your control center for managing your uploaded add-ons, moderation and more";
 
 //dashboard > secondery menu
-$lang['dashboard_menu_1'] = '<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Overview';
-$lang['dashboard_menu_2'] = '<i class="fa fa-bars"></i>&nbsp;&nbsp; View all add-ons';
-$lang['dashboard_menu_3'] = '<i class="fa fa-plus"></i>&nbsp;&nbsp; Submit an add-on';
+$lang['dashboard_menu_1'] = 'Overview';
+$lang['dashboard_menu_2'] = 'View all add-ons';
+$lang['dashboard_menu_3'] = 'Submit an add-on';
 $lang['dashboard_menu_4'] = 'Moderate';
 $lang['musicbee_release'] = 'MusicBee Releases';
 $lang['dashboard_menu_6'] = 'Website Setting';
@@ -220,7 +221,7 @@ $lang['upload_icon'] = '<i class="fa fa-upload"></i>';
 $lang['remove_icon'] = '<i class="fa fa-remove"></i>';
 $lang['delete_icon'] = '<i class="fa fa-trash"></i>';
 
-$lang['add_more_screenshot'] = '<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Add more screenshots';
+$lang['add_more_screenshot'] = 'Add more screenshots';
 $lang['dashboard_submit_btn_4'] = ' Remove this screenshot';
 $lang['approve'] = 'Approve';
 $lang['reject'] = 'Reject';
@@ -280,6 +281,10 @@ $lang['dashboard_submit_desc_7'] = 'Add any important things that you want the u
 $lang['dashboard_submit_desc_8'] = 'Use Mediafire, Mega, Onedrive, Google Drive, Dropbox to upload your add-on';
 $lang['dashboard_submit_desc_9'] = 'A support/discussion forum link is required for a beta add-on';
 
+$lang['input_placeholder_tag'] = 'Add a tag';
+$lang['input_placeholder_eg'] = 'eg. %1$s';
+
+
 $lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
 $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to imgur';
@@ -300,6 +305,9 @@ $lang['dashboard_msg_13'] = 'You can edit submitted add-ons from other users, be
 $lang['dashboard_msg_14'] = 'Are you sure you want to remove this add-on?\\n\\nYou can undo this action.';
 $lang['dashboard_msg_15'] = 'Are you sure you want to delete this record?\\n\\nYou cannot undo this action.';
 $lang['dashboard_msg_16'] = 'Record deleted';
+
+$lang['beta_dropdown_yes'] = 'Yes';
+$lang['beta_dropdown_no'] = 'No';
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum along with the error message!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
@@ -344,8 +352,9 @@ $lang['mod_11'] = 'Actions';
 $lang['mod_12'] = 'Undelete add-ons';
 $lang['mod_13'] = 'All unapproved add-ons';
 $lang['mod_14'] = 'All rejected add-ons';
-
-
+$lang['transfer_ownership_btn'] = 'Transfer add-on ownership';
+$lang['transfer_ownership_header'] = 'Transfer add-on ownership from one user to another';
+$lang['transfer_step1'] = 'Step 1: Find the add-on you want to transfer ownership';
 
 /**
  * Dashboard Admin Panel
@@ -694,3 +703,24 @@ $lang['err_login_required'] = '<b>ERROR:</b> You must login first!';
 
 
 
+/**
+ * Knowledge Base errors
+ */
+$lang['no_err_code_define'] = 'No Error code defined!';
+$lang['no_err_code_define_desc'] = 'Something is terribly wrong! No error code detected!';
+
+$lang['need_login_first'] = 'You need to login first!';
+$lang['need_login_first_desc'] = 'Hey there! you are not logged in. If you don\'t have an account go ahead and create one';
+
+
+$lang['not_allowed'] = 'You are not allowed';
+$lang['not_allowed_desc'] = 'You don\'t have enough permission to view/modify the content. Only Admins are allowed.';
+
+$lang['no_forum_intg'] = 'No forum integration detected';
+$lang['no_forum_intg_desc'] = 'This website requires SMF forum integration to work properly. Forum must be in <code>www.website.com/forum/</code> directory.<br/> You can change the forum directory by modifying <code>functions.php</code> file and change the <code>SSI.php</code> file location';
+
+$lang['not_found_err'] = 'Not Found';
+$lang['not_found_err_desc'] = 'Can not found what you are looking for!';
+
+$lang['no_direct_access'] = 'Direct access not allowed';
+$lang['no_direct_access_desc'] = 'No direct access is allowed.';

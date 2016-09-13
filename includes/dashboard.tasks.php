@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -218,7 +219,7 @@ if(isset($_POST['submit'])) {
 				} else {
 					die('{"status": "0", "data": "'.$lang['dashboard_err_19'].'"}');
 				}
-			} elseif ($_POST['setting_type'] == 'help'){
+			} elseif ($_POST['setting_type'] == 'help') {
 
 				$faq = (isset($_POST['faq'])) ? $_POST['faq'] : "";
 				//load parsedown markup to html converter
@@ -288,7 +289,7 @@ function validateInput() {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_8'].$_POST['tag'].'"}');
 		}
 
-		if(!Validation::charLimit($_POST['readme'], 5000)) {
+		if(!Validation::charLimit($_POST['readme'], 15000)) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_9'].'"}');
 		}
 	} else {

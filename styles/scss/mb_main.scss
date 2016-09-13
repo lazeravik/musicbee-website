@@ -1,0 +1,56 @@
+/**
+ * Copyright (c) AvikB, some rights reserved.
+ * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ *
+ */
+/*================================================================================================================*\\
+   load roboto from google font api
+\*================================================================================================================*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100);
+@import "mb-style/components/mb_variables";
+@import "mb-style/components/mb_mixins";
+/*================================================================================================================*\\
+    Normalize for better crossbrowser consistency
+\*================================================================================================================*/
+@import "others/normalize";
+@import "others/common";
+@import "others/animation";
+@import "mb-style/components/select";
+/*================================================================================================================*\\
+    Style for input fields such as buttons, links, checkboxes etc
+\*================================================================================================================*/
+@import "mb-style/components/mb_input";
+@import "mb-style/components/buttons";
+@import "mb-style/components/headers";
+/*================================================================================================================*\\
+    Main Menu Style
+\*================================================================================================================*/
+@import "mb-style/mb_menu";
+@import "mb-style/mb_footer";
+@import "others/modal";
+@import "others/toggle";
+/*================================================================================================================*\\
+    page layout styles
+\*================================================================================================================*/
+@import "mb-style/mb_landing_layout";
+@import "mb-style/mb_download";
+@import "mb-style/mb_releasenote";
+@import "mb-style/mb_addon";
+@import "mb-style/mb_dashboard";
+@import "mb-style/mb_bug";
+@import "mb-style/mb_help";
+/*================================================================================================================*\\
+    Codes highlighting
+\*================================================================================================================*/
+@import "others/highlight";
+@import "others/markdown";
+@import "others/wmd";
+
+/*================================================================================================================*\\
+    Font smoothing Fix for font smooth disabled pc
+\*================================================================================================================*/
+@import "mb-style/mb_fontfix";

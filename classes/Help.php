@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 /**
@@ -21,18 +22,15 @@ class Help
 
 		if($_POST['setting_type'] == 'help') {
 			$help_links_json = (isset($_POST['help_links'])) ? $_POST['help_links'] : null;
-			$help_faq_md = $_POST['faq_md'];
-			$help_faq_html = $_POST['faq_html'];
+			$help_api_link = $_POST['faqApiLink'];
 
 			$bindedVal = array(
 				$help_links_json,
-				$help_faq_md,
-				$help_faq_html,
+				$help_api_link,
 			);
 
 			$sql = "UPDATE {$db_info['help']} SET data = ? WHERE {$db_info['help']}.variable = 'help_links';
- 					UPDATE {$db_info['help']} SET data = ? WHERE {$db_info['help']}.variable = 'faq_md';
- 					UPDATE {$db_info['help']} SET data = ? WHERE {$db_info['help']}.variable = 'faq_html';
+ 					UPDATE {$db_info['help']} SET data = ? WHERE {$db_info['help']}.variable = 'help_api_link';
  				";
 		} elseif ($_POST['setting_type'] == 'api') {
 			$api_md = $_POST['api_md'];

@@ -1,4 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
+ *  
+ * @Contributors:
+ * Created by AvikB for noncommercial MusicBee project.
+ *  Spelling mistakes and fixes from community members.
+ *
+ */
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 include_once $link['root'].'classes/Addon.php';
 
@@ -114,7 +125,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 					<p class="description"><?php echo $addon_data['short_description']; ?></p>
 				</div>
 				<div class="general_info_icon_wrap">
-					<div class="general_info_icon" style='background-image: url("<?php echo htmlspecialchars($addon_data['thumbnail'], ENT_QUOTES, "UTF-8"); ?>");'></div>
+					<div class="general_info_icon" style='background-image: url("<?php echo htmlspecialchars(Format::ImgurResizer($addon_data['thumbnail'], "m"), ENT_QUOTES, "UTF-8"); ?>");'></div>
 				</div>
 				<?php if(!empty(trim($addon_data['important_note']))): ?>
 					<div class="general_info_sidenote">
@@ -171,14 +182,8 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 			<ul id="screenshot_all">
 				<?php
 				foreach($addon_data['image_links'] as $key => $img) {
-					if(preg_match('/^https?\:\/\/i\.imgur\.com\//', $img)) {
-						$ext_pos = strrpos($img, '.'); // find position of the last dot, so where the extension starts
-						$thumb = substr($img, 0, $ext_pos).'m'.substr($img, $ext_pos);
-					} else {
-						$thumb = $img;
-					}
 					echo '<a class="screenshot_zoom_click" href="', htmlspecialchars($img, ENT_QUOTES, "UTF-8"), '">
-						<div class="screenshot_wrapper" style=\'background-image:url("'.htmlspecialchars($thumb, ENT_QUOTES, "UTF-8").'")\'></div>
+						<div class="screenshot_wrapper" style=\'background-image:url("'.htmlspecialchars(Format::ImgurResizer($img, "m"), ENT_QUOTES, "UTF-8").'")\'></div>
 					</a>';
 				}
 				?>

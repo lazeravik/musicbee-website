@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 $json_response = true;
@@ -175,18 +176,10 @@ include $link['root'].'classes/Dashboard.php';
 				<div class="box_content">
 					<ul class="form">
 						<li>
-							<label for="wmd-input" class="wide">
-								<p><?php echo $lang['dashboard_admin_header_25']; ?></p>
+							<label for="faqApiLink">
+								<p>API Link for FAQ Page</p>
 							</label>
-							<div id="wmd-editor" class="wmd-panel">
-								<div id="wmd-button-bar"></div>
-								<textarea
-									id="wmd-input"
-									name="faq"
-									onkeyup="$('#wmd-input_count').text(5000 - this.value.length+'/5000')"><?php echo $mb['help']['faq_md']['data']; ?></textarea>
-							</div>
-							<p id="wmd-input_count" class="counter"></p>
-							<div id="wmd-preview" class="wmd-panel markdownView box"></div>
+							<input type="text" id="faqApiLink" name="faqApiLink" value="http://musicbee.wikia.com/index.php?action=render&title=FAQ">
 						</li>
 					</ul>
 				</div>
@@ -204,13 +197,6 @@ include $link['root'].'classes/Dashboard.php';
 				</div>
 
 				<input type="hidden" name="setting_type" value="help"/>
-				<script>
-					$(document).ready(function () {
-						//Markdown editor load
-						MBEditor.wmdBase();
-						MBEditor.Util.startEditor();
-					});
-				</script>
 			<?php else: ?>
 
 				<div class="box_content">

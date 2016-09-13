@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 ?>
@@ -49,14 +50,14 @@ include($mainmenu);
 					<a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a>
 				</li>
 				<li>
-					<a href="#dashboard_overview" data-href="dashboard_overview"><?php echo $lang['dashboard_menu_1']; ?></a>
+					<a href="#dashboard_overview" data-href="dashboard_overview"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;<?php echo $lang['dashboard_menu_1']; ?></a>
 				</li>
 				<li>
-					<a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['dashboard_menu_2']; ?>
+					<a href="#dashboard_all" data-href="dashboard_all"><i class="fa fa-bars"></i>&nbsp;&nbsp; <?php echo $lang['dashboard_menu_2']; ?>
 					</a>
 				</li>
 				<li>
-					<a href="#dashboard_submit" data-href="dashboard_submit"><?php echo $lang['dashboard_menu_3']; ?>
+					<a href="#dashboard_submit" data-href="dashboard_submit"><i class="fa fa-plus"></i>&nbsp;&nbsp; <?php echo $lang['dashboard_menu_3']; ?>
 					</a>
 				</li>
 

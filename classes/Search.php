@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 class Search
 {
@@ -211,8 +212,26 @@ class Search
 					 		ELSE 2
 					 	END), addon_title ASC";
 		} else {
-			$search_sql .= "GROUP BY {$db_info['addon_tbl']}.ID_ADDON
-					ORDER BY {$orderby}";
+			$search_sql .= "GROUP BY {$db_info['addon_tbl']}.ID_ADDON ";
+			/**
+			 * If the order by contains the term "date" then we want to convert the date string to Date format
+			 * otherwise pass it as it is
+			 */
+			if(strpos($orderby, "date")){
+				$orderby_array = explode(" ", $orderby);
+				$orderby_first = $orderby_array[0];
+				$orderby_second = $orderby_array[1];
+	
+				if($orderby_first == "publish_date"){
+					$search_sql .= "ORDER BY STR_TO_DATE({$orderby_first}, '%M %d,%Y') {$orderby_second}";
+				}
+				elseif($orderby_first == "update_date")
+				{
+					$search_sql .= "ORDER BY STR_TO_DATE({$orderby_first}, '%M %d,%Y, %h:%i %p') {$orderby_second}";
+				}
+			} else {
+				$search_sql .= "ORDER BY {$orderby}";
+			}
 		}
 
 		//store search SQL query without any limit for page count

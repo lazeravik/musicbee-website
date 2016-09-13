@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 
@@ -254,7 +255,7 @@ endif; ?>
 						<input id="addonver"
 						       name="addonver"
 						       type="text/number"
-						       placeholder="eg. 1.0"
+						       placeholder="<?php echo sprintf($lang['input_placeholder_eg'], '1.0'); ?>"
 						       value="<?php echo ($viewType == 2) ? $data['addon_version'] : ''; ?>"/>
 
 					</li>
@@ -265,7 +266,6 @@ endif; ?>
 						<input id="tag"
 						       name="tag"
 						       type="text"
-						       placeholder="eg. metro, modern, elegant"
 						       value="<?php if($viewType == 2) {
 							       echo implode(',',$data['tags']);
 						       } ?>"/>
@@ -309,7 +309,7 @@ endif; ?>
 								       value="<?php if($viewType == 2) {
 									       echo $data['thumbnail'];
 								       } ?>"
-								       placeholder="eg. http://i.imgur.com/sdfsdf43gh5.jpg"/>
+								       placeholder="<?php echo sprintf($lang['input_placeholder_eg'], 'http://i.imgur.com/sdfsdf43gh5.jpg'); ?>"/>
 								<button
 										type="button"
 										onclick="showUpModal('thumb','img')"
@@ -332,7 +332,7 @@ endif; ?>
 									type="button"
 									id="add_button"
 									class="btn btn_blue"
-									title="<?php echo $lang['dashboard_tooltip_3']; ?>">
+									title="<?php echo $lang['dashboard_tooltip_3']; ?>"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;
 								<?php echo $lang['add_more_screenshot']; ?>
 							</button>
 						</label>
@@ -349,7 +349,7 @@ endif; ?>
 										       type="text"
 										       name="screenshot_links[]"
 										       value="<?php echo $screenshots; ?>"
-										       placeholder="eg. http://i.imgur.com/<?php echo $rand_container_id; ?>.jpg"/>
+										       placeholder="<?php echo sprintf($lang['input_placeholder_eg'], 'http://i.imgur.com/'.$rand_container_id.'.jpg'); ?>"/>
 
 										<?php if($key != 0): ?>
 											<a href="javascript:void(0)"
@@ -375,7 +375,7 @@ endif; ?>
 										       type="text"
 										       name="screenshot_links[]"
 										       value=""
-										       placeholder="eg. http://i.imgur.com/vfda54huk.jpg"/>
+										       placeholder="<?php echo sprintf($lang['input_placeholder_eg'], 'http://i.imgur.com/vfda54huk.jpg'); ?>"/>
 
 										<button
 												type="button"
@@ -421,7 +421,7 @@ endif; ?>
 								<textarea
 										id="wmd-input"
 										name="readme"
-										onkeyup="$('#wmd-input_count').text(5000 - this.value.length+'/5000')"><?php if($viewType == 2) {
+										onkeyup="$('#wmd-input_count').text(5000 - this.value.length+'/15000')"><?php if($viewType == 2) {
 										echo $data['readme_content'];
 									} ?></textarea>
 						</div>
@@ -475,12 +475,12 @@ endif; ?>
 							<p class="description"><?php echo $lang['dashboard_submit_desc_9']; ?></p>
 						</label>
 						<select name="beta" id="beta">
-							<option value="0">No</option>
+							<option value="0"><?php echo $lang['beta_dropdown_no']; ?></option>
 							<option value="1" <?php if($viewType == 2) {
 								if($data['is_beta'] == 1) {
 									echo 'selected';
 								}
-							} ?>>Yes
+							} ?>><?php echo $lang['beta_dropdown_yes']; ?>
 							</option>
 						</select>
 					</li>
@@ -597,7 +597,7 @@ endif; ?>
 			'height': 'auto',
 			'interactive': true,
 			'minChars': 2,
-			'defaultText': 'add a tag',
+			'defaultText': '<?php echo $lang['input_placeholder_tag']; ?>',
 			'maxChars': 15,
 			'onChange': tag_limit_checker
 		});
@@ -626,7 +626,7 @@ endif; ?>
 		var randPlaceholder = "http://i.imgur.com/" + randomId;
 		var fieldHTML = '<div class="flex_input col_2">' +
 				'<div class="up_group">' +
-				'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="eg. ' + randPlaceholder + '.jpg" required/>' +
+				'<input id="' + randomId + '" type="text" name="screenshot_links[]" value="" placeholder="<?php echo sprintf($lang['input_placeholder_eg'], '\'+randPlaceholder+\''); ?>.jpg" required/>' +
 				'<a href="javascript:void(0)" id="remove_button" class="btn remove_img_btn" title="<?php echo $lang['dashboard_submit_btn_4']; ?>"><?php echo $lang['remove_icon']; ?></a>' +
 				'</div>' +
 				'<button onclick="showUpModal(\'' + randomId + '\',\'img\')" id="upload_to_imgur" class="btn btn_green" title="<?php echo $lang['dashboard_tooltip_3']; ?>"><?php echo $lang['upload_icon']; ?></button>' +

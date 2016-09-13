@@ -1,12 +1,13 @@
 <?php
 	/**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
@@ -276,6 +277,18 @@
 				return $data;
 			}
 			return null;
+		}
+
+		public static function ImgurResizer($url, $size)
+		{
+			if(preg_match('/^https?\:\/\/i\.imgur\.com\//', $url)) {
+				$ext_pos = strrpos($url, '.'); // find position of the last dot, so where the extension starts
+				$thumb = substr($url, 0, $ext_pos).$size.substr($url, $ext_pos);
+			} else {
+				$thumb = $url;
+			}
+
+			return $thumb;
 		}
 
 	}

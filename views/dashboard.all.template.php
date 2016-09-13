@@ -1,12 +1,13 @@
 <?php
 /**
- * Copyright (c) AvikB, some rights reserved.
- * Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
+ * Copyright (c) 2016 AvikB, some rights reserved.
+ *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
+ *  
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
- * Spelling mistakes and fixes from community members.
+ *  Spelling mistakes and fixes from community members.
+ *
  */
 
 $no_guests = true; //kick off the guests
@@ -145,6 +146,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							<?php echo $lang['dashboard_record_th_2']; ?>
 						</td>
 						<td>
+							<?php echo $lang['dashboard_3']; ?>
+						</td>
+						<td>
 							<?php echo $lang['dashboard_record_th_4']; ?>
 						</td>
 						<td>
@@ -164,6 +168,9 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							</td>
 							<td>
 								<?php echo Format::UnslugTxt ($mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']); ?>
+							</td>
+							<td>
+								<?php echo Format::number_format_suffix ($addon['downloadCount']); ?>
 							</td>
 							<td class="status">
 								<?php $status_array_each = Validation::getStatus($addon['status']); ?>

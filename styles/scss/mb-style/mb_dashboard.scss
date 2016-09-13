@@ -1,0 +1,158 @@
+.record {
+	width          : 100%;
+	border-spacing : 0px;
+
+	tr {
+		&:nth-child(2n+1) {
+			background : rgba(0, 0, 0, 0.03);
+		}
+		td {
+			padding        : 10px 15px;
+			border-spacing : 0px;
+			//width: 80%;
+
+			&.action_input {
+				display        : flex;
+				flex-direction : row-reverse;
+
+				.btn {
+					padding   : 5px 10px;
+					min-width : inherit;
+				}
+			}
+
+			&.status {
+				width : 15%;
+			}
+		}
+
+		&.record_removed {
+			background : #d45b53;
+			color      : #fff;
+
+			td {
+				p {
+					margin : 10px;
+				}
+			}
+		}
+	}
+
+	thead {
+		tr {
+			td {
+				font-weight    : bold;
+				text-transform : uppercase;
+				color          : #616161;
+			}
+
+			&:nth-child(1) {
+				background : #fff;
+			}
+		}
+	}
+
+}
+
+.link_list {
+	padding : 0px;
+	margin  : 0px;
+	li {
+		list-style : none;
+
+		a {
+			padding : 15px 15px;
+			display : block;
+
+			&:hover {
+				background      : #eee;
+				text-decoration : none;
+			}
+		}
+	}
+}
+
+.form {
+	#mbVerFeedback {
+		width : 100%;
+	}
+	.counter {
+		text-align : right;
+		width      : 100%;
+	}
+	.ms-parent {
+		width : 60%;
+
+		@media screen and (max-width : $break-tiny) {
+			width : 100%;
+		}
+	}
+
+	.tagsinput {
+		@media screen and (max-width : $break-tiny) {
+			width : 100%;
+		}
+	}
+}
+
+.search_container {
+	.search_list_wrapper {
+		position: relative;
+		ul,li{
+			list-style: none;
+			padding: 0px;
+			margin:0px;
+		}
+		& > ul.search_list{
+			box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.36);
+			position: absolute;
+			width: 100%;
+			background: #fff;
+
+			& > li{
+				display: flex;
+				flex-wrap: wrap;
+				border-bottom: 1px solid #eee;
+
+				ul{
+					display: flex;
+					flex-wrap: wrap;
+
+					li{
+						display: block;
+						padding: 5px 0px 5px 15px;
+
+						p{
+							padding: 2px;
+							margin: 0px;
+
+							&.title{
+								font-weight: bold;
+								font-size: 16px;
+								text-transform: capitalize;
+							}
+						}
+
+						img {
+							height:50px;
+							width: auto;
+						}
+					}
+				}
+
+				&:hover{
+					background: #f3f3f3;
+				}
+			}
+
+
+		}
+
+	}
+}
+
+@media screen and(max-width : $break-small) {
+	.side_links {
+		display : none;
+	}
+}
