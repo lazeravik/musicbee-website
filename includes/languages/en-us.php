@@ -221,7 +221,7 @@ $lang['upload_icon'] = '<i class="fa fa-upload"></i>';
 $lang['remove_icon'] = '<i class="fa fa-remove"></i>';
 $lang['delete_icon'] = '<i class="fa fa-trash"></i>';
 
-$lang['add_more_screenshot'] = '<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Add more screenshots';
+$lang['add_more_screenshot'] = 'Add more screenshots';
 $lang['dashboard_submit_btn_4'] = ' Remove this screenshot';
 $lang['approve'] = 'Approve';
 $lang['reject'] = 'Reject';
@@ -281,6 +281,10 @@ $lang['dashboard_submit_desc_7'] = 'Add any important things that you want the u
 $lang['dashboard_submit_desc_8'] = 'Use Mediafire, Mega, Onedrive, Google Drive, Dropbox to upload your add-on';
 $lang['dashboard_submit_desc_9'] = 'A support/discussion forum link is required for a beta add-on';
 
+$lang['input_placeholder_tag'] = 'Add a tag';
+$lang['input_placeholder_eg'] = 'eg. %1$s';
+
+
 $lang['dashboard_tooltip_1'] = 'Remove this add-on';
 $lang['dashboard_tooltip_2'] = 'Edit or update the record';
 $lang['dashboard_tooltip_3'] = 'Choose an image from your computer and upload to imgur';
@@ -301,6 +305,9 @@ $lang['dashboard_msg_13'] = 'You can edit submitted add-ons from other users, be
 $lang['dashboard_msg_14'] = 'Are you sure you want to remove this add-on?\\n\\nYou can undo this action.';
 $lang['dashboard_msg_15'] = 'Are you sure you want to delete this record?\\n\\nYou cannot undo this action.';
 $lang['dashboard_msg_16'] = 'Record deleted';
+
+$lang['beta_dropdown_yes'] = 'Yes';
+$lang['beta_dropdown_no'] = 'No';
 
 $lang['json_err_invalid'] = '<b>ERROR</b>: The response data is invalid or corrupted!<br/> Post this issue on the forum along with the error message!<br/>';
 $lang['json_err_copy_btn'] = 'Copy Error';
@@ -696,3 +703,24 @@ $lang['err_login_required'] = '<b>ERROR:</b> You must login first!';
 
 
 
+/**
+ * Knowledge Base errors
+ */
+$lang['no_err_code_define'] = 'No Error code defined!';
+$lang['no_err_code_define_desc'] = 'Something is terribly wrong! No error code detected!';
+
+$lang['need_login_first'] = 'You need to login first!';
+$lang['need_login_first_desc'] = 'Hey there! you are not logged in. If you don\'t have an account go ahead and create one';
+
+
+$lang['not_allowed'] = 'You are not allowed';
+$lang['not_allowed_desc'] = 'You don\'t have enough permission to view/modify the content. Only Admins are allowed.';
+
+$lang['no_forum_intg'] = 'No forum integration detected';
+$lang['no_forum_intg_desc'] = 'This website requires SMF forum integration to work properly. Forum must be in <code>www.website.com/forum/</code> directory.<br/> You can change the forum directory by modifying <code>functions.php</code> file and change the <code>SSI.php</code> file location';
+
+$lang['not_found_err'] = 'Not Found';
+$lang['not_found_err_desc'] = 'Can not found what you are looking for!';
+
+$lang['no_direct_access'] = 'Direct access not allowed';
+$lang['no_direct_access_desc'] = 'No direct access is allowed.';

@@ -42,3 +42,9 @@ function GetRootDir()
 {
 	return __DIR__ ."/../";
 }
+
+function GetStyleDir()
+{
+	global $link;
+	return $link['url'].'styles/';
+}

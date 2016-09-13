@@ -136,9 +136,9 @@ $lang['download_h_beta_desc'] ='Бета версия находится в ак
 $lang['download_h_portable'] = 'Портативная редакция';
 $lang['download_h_portable_desc'] ='Эта редакция может быть установлена в любую папку на компьютере, например, на не системный диск или флешку';
 
-$lang['download_get_installer'] = '<i class="fa fa-download"></i> Get MusicBee Installer';
-$lang['download_get_portable'] = '<i class="fa fa-download"></i> Get MusicBee Portable';
-$lang['download_get_beta'] = '<i class="fa fa-warning"></i> Get MusicBee Beta';
+$lang['download_get_installer'] = '<i class="fa fa-download"></i> Скачать дистрибутив MusicBee';
+$lang['download_get_portable'] = '<i class="fa fa-download"></i> Скачать портативный MusicBee';
+$lang['download_get_beta'] = '<i class="fa fa-warning"></i> Скачать бета версию MusicBee';
 $lang['download_mirror1'] = 'Зеркало 1';
 $lang['download_mirror2'] = 'Зеркало 2';
 
@@ -220,7 +220,7 @@ $lang['upload_icon'] = '<i class="fa fa-upload"></i>';
 $lang['remove_icon'] = '<i class="fa fa-remove"></i>';
 $lang['delete_icon'] = '<i class="fa fa-trash"></i>';
 
-$lang['add_more_screenshot'] = '<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Add more screenshots';
+$lang['add_more_screenshot'] = 'Add more screenshots';
 $lang['dashboard_submit_btn_4'] = 'Удалить этот снимок экрана';
 $lang['approve'] = 'Утвердить';
 $lang['reject'] = 'Отклонить';
@@ -280,6 +280,11 @@ $lang['dashboard_submit_desc_7'] = 'Напишите все важные зам�
 $lang['dashboard_submit_desc_8'] = 'Загрузите ваше расширение на один из Mediafire, Mega, Onedrive, Google Drive или Dropbox';
 $lang['dashboard_submit_desc_9'] = 'Ссылка на техподдержку или тему на форуме для бета версий необходима';
 
+ 
+$lang['input_placeholder_tag'] = 'Add a tag';  
+$lang['input_placeholder_eg'] = 'eg. %1$s';  
+ 
+ 
 $lang['dashboard_tooltip_1'] = 'Удалить это расширение';
 $lang['dashboard_tooltip_2'] = 'Редактировать или обновить расширение';
 $lang['dashboard_tooltip_3'] = 'Выберите изображение на вашем компьютере и загрузите его на imgur';
@@ -300,6 +305,9 @@ $lang['dashboard_msg_13'] = 'Вы можете редактировать рас
 $lang['dashboard_msg_14'] = 'Вы уверены, что хотите удалить это расширение?\\n\\nЭто действие можно будет отменить.';
 $lang['dashboard_msg_15'] = 'Вы уверены, что хотите удалить эту запись?\\n\\nЭто действие нельзя будет отменить.';
 $lang['dashboard_msg_16'] = 'Запись удалена';
+
+$lang['beta_dropdown_yes'] = 'Yes';  
+$lang['beta_dropdown_no'] = 'No';  
 
 $lang['json_err_invalid'] = '<b>ОШИБКА</b>: Возвращенные данные ошибочны или повреждены!<br/>Напишите об этом на форуме и приведите сообщение об ошибке!<br/>';
 $lang['json_err_copy_btn'] = 'Ошибка копирования';
@@ -689,3 +697,30 @@ $lang['api_title'] = 'API плеера MusicBe для разработчиков
  */
 $lang['no_js'] = 'Ваш браузер не поддерживает javascript (или эта поддержка отключена). Пожалуйста, используйте браузер с поддержкой javascript или включите ее.<br/>Нам нужен javascript для правильной работы сайта, иначе многие функции сайта не будут работать.';
 $lang['err_login_required'] = '<b>ОШИБКА:</b> Сначала войдите на сайт!';
+
+
+
+
+
+
+/**  
+ * Knowledge Base errors  
+ */  
+$lang['no_err_code_define'] = 'No Error code defined!';  
+$lang['no_err_code_define_desc'] = 'Something is terribly wrong! No error code detected!';  
+ 
+$lang['need_login_first'] = 'You need to login first!';  
+$lang['need_login_first_desc'] = 'Hey there! you are not logged in. If you don\'t have an account go ahead and create one';  
+ 
+ 
+$lang['not_allowed'] = 'You are not allowed';  
+$lang['not_allowed_desc'] = 'You don\'t have enough permission to view/modify the content. Only Admins are allowed.';  
+ 
+$lang['no_forum_intg'] = 'No forum integration detected';  
+$lang['no_forum_intg_desc'] = 'This website requires SMF forum integration to work properly. Forum must be in <code>www.website.com/forum/</code> directory.<br/> You can change the forum directory by modifying <code>functions.php</code> file and change the <code>SSI.php</code> file location';  
+ 
+$lang['not_found_err'] = 'Not Found';  
+$lang['not_found_err_desc'] = 'Can not found what you are looking for!';  
+ 
+$lang['no_direct_access'] = 'Direct access not allowed';  
+$lang['no_direct_access_desc'] = 'No direct access is allowed.';  
