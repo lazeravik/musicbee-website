@@ -3,7 +3,7 @@
  * Copyright (c) 2016 AvikB, some rights reserved.
  *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *  
+ *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
  *  Spelling mistakes and fixes from community members.
@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
 		parse_str (str_replace ("?", "", $params[3]), $url_params);
 
 		//Just to be safe, we will check if the url contains type and order parameter otherwise initialize the default value for them
-		$url_params['type'] = isset($url_params['type']) ? $url_params['type'] : "all";
+		$url_params['type'] = isset($url_params['type']) ? Format::htmlSafeOutput($url_params['type']) : "all";
 
 		//get the addon type,result order,if any search query from the get request
 		$data['type'] = Format::UnslugTxt (htmlspecialchars ($url_params['type'], ENT_QUOTES, "UTF-8"));
@@ -75,7 +75,7 @@ if (isset($_GET['id'])) {
 		}
 
 		$addon_type = Format::Slug ($data['type']);
-		$data['current_type'] = ($url_params['type']=="all")? null : $url_params['type'];
+		$data['current_type'] = ($url_params['type']=="all")? null : Format::htmlSafeOutput($url_params['type']);
 
 
 		if (isset($url_params['p']))
