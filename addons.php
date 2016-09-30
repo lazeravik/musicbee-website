@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
 		$url_params['type'] = isset($url_params['type']) ? htmlspecialchars(Format::htmlSafeOutput($url_params['type']), ENT_QUOTES, "UTF-8")  : "all";
 
 		//get the addon type,result order,if any search query from the get request
-		$data['type'] = Format::UnslugTxt (htmlspecialchars ($url_params['type'], ENT_QUOTES, "UTF-8"));
+		$data['type'] = Format::UnslugTxt ($url_params['type']);
 
 		$data['is_overview'] = isset($url_params['overview'])? true : false;
 
