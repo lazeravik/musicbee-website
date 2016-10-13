@@ -328,7 +328,7 @@ SQL;
 	return false;
 }
 ?>
-<!
+
 <!doctype html>
 <html>
 <head>
