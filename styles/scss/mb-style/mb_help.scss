@@ -105,7 +105,7 @@
 }
 
 .markdownView {
-	&#faq-view div:first-child {
+	&.faq> div:first-of-type {
 		display: none;
 	}
 
