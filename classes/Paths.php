@@ -12,6 +12,7 @@ $link['home']                 = $link['url'];
 $link['forum']                = $link['url'].'forum/';
 $link['admin']['forum-panel'] = $link['forum'].'?action=admin';
 $link['login']                = $link['forum'].'?action=login';
+$link['register']             = $link['forum'].'?action=register';
 $link['support']              = $link['url'].'support/';
 $link['addon']['home']        = $link['url'].'addons/';
 $link['addon']['dashboard']   = $link['url'].'dashboard/';

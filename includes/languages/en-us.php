@@ -39,6 +39,7 @@ $lang['visualizer'] = 'Visualizer';
 $lang['equalizer'] = 'Equalizer';
 $lang['theater_mode'] = 'Theater Mode';
 $lang['misc'] = 'Misc';
+$lang['register'] = 'Register';
 
 /**
  * MainMenu Icons

@@ -237,6 +237,10 @@ a {
 	  border-color : #333;
 	}
   }
+
+  &.no_icon {
+    background : none;
+  }
 }
 
 .notify {

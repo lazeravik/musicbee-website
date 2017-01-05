@@ -21,31 +21,38 @@ $language;
 require_once $link['root'].'classes/Language.php';
 new Language();
 	
-	if(!isset($_GET['code'])) {
+	if(isset($_GET['code']))
+	{
+		if($_GET['code'] == '102'){
+			$h = $lang['need_login_first'];
+			$desc = $lang['need_login_first_desc'];
+		}else if($_GET['code'] == '101'){
+			$h = $lang['not_allowed'];
+			$desc = $lang['not_allowed_desc'];
+		}else if($_GET['code'] == '103'){
+			$h = $lang['no_forum_intg'];
+			$desc = $lang['no_forum_intg_desc'];
+		}else if($_GET['code'] == '104'){
+			$h = $lang['not_found_err'];
+			$desc = $lang['not_found_err_desc'];
+		}else if($_GET['code'] == '105'){
+			$h = $lang['no_direct_access'];
+			$desc = $lang['no_direct_access_desc'];
+		}else if($_GET['code'] == '106'){
+			$h = $lang['not_allowed'];
+			$desc = $lang['not_allowed_desc'];
+		} else {
+			$h = $lang['no_err_code_define'];
+			$desc = $lang['no_err_code_define_desc'];
+		}
+	}
+	else
+	{
 		$h = $lang['no_err_code_define'];
 		$desc = $lang['no_err_code_define_desc'];
-	}else if($_GET['code'] == '102'){
-		$h = $lang['need_login_first'];
-		$desc = $lang['need_login_first_desc'];
-	}else if($_GET['code'] == '101'){
-		$h = $lang['not_allowed'];
-		$desc = $lang['not_allowed_desc'];
-	}else if($_GET['code'] == '103'){
-		$h = $lang['no_forum_intg'];
-		$desc = $lang['no_forum_intg_desc'];
-	}else if($_GET['code'] == '104'){
-		$h = $lang['not_found_err'];
-		$desc = $lang['not_found_err_desc'];
-	}else if($_GET['code'] == '105'){
-		$h = $lang['no_direct_access'];
-		$desc = $lang['no_direct_access_desc'];
-	}else if($_GET['code'] == '106'){
-		$h = $lang['not_allowed'];
-		$desc = $lang['not_allowed_desc'];
 	}
 
-
-$errorcode = (isset($_GET['code']))?$_GET['code']:'010';
+$errorcode = (isset($_GET['code']))? htmlspecialchars(trim($_GET['code'])):'010';
 $styleDir = GetStyleDir();
 $html = <<<HTML
 <!doctype html>

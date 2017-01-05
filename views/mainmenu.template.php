@@ -111,15 +111,18 @@ function printMenuItems($menuArray){
 					   class="secondery_nav_menu_button"
 					   title="Messages: <?php echo $mb['user']['unread_messages'], ' ', $mb['user']['unread_messages'] == 1 ? $txt['newmessages0'] : $txt['newmessages1'], ', total ', $mb['user']['messages']; ?>">
 						<?php if ($mb['user']['unread_messages'] > 0): ?>
-							<span class="message_new"><?php echo $mb['user']['unread_messages']; ?></span>
+							<span class="message_new"><i class="fa fa-envelope-open-o">&nbsp;&nbsp; </i><?php echo $mb['user']['unread_messages']; ?></span>
 						<?php else: ?>
-							<span class="message_no"><i class="fa fa-bell-o"></i></span>
+							<span class="message_no"><i class="fa fa-envelope-o"></i></span>
 						<?php endif; ?>
 					</a>
 				</li>
 			<?php else: ?>
 				<li>
 					<a href="<?php echo $link['login']; ?>"><i class="fa fa-user"></i>&nbsp; <?php echo $lang['login']; ?></a>
+				</li>
+				<li>
+					<a href="<?php echo $link['register']; ?>"><?php echo $lang['register']; ?></a>
 				</li>
 			<?php endif; ?>
 

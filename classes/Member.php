@@ -268,9 +268,28 @@ class Member
 		}
 		return null;
 	}
-
-
-
+	
+	
+	public static function SearchUsernames($usernameSearchTerm)
+	{
+		global $connection, $db_info;
+		
+		if($usernameSearchTerm != null){
+			if(databaseConnection()) {
+				try {
+					$sql = "SELECT * FROM {$db_info['member_tbl']}
+								WHERE
+									membername LIKE ?";
+					$statement = $connection->prepare($sql);
+					$statement->execute(array("%".$usernameSearchTerm."%"));
+					return $statement->fetchAll (PDO::FETCH_ASSOC);
+				} catch(Exception $e) {
+					return false;
+				}
+				return true;
+			}
+		}
+	}
 
 
 

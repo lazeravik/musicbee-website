@@ -637,6 +637,9 @@ a:active, a:hover {
 .search.dark:focus {
   border-color: #333;
 }
+.search.no_icon {
+  background: none;
+}
 
 .notify {
   max-width: 100%;
@@ -1268,6 +1271,15 @@ select {
   background: rgba(0, 0, 0, 0.24);
   padding: 10px 15px;
   margin: 0 0 0 10px;
+}
+
+.select_popup {
+  position: absolute;
+  right: 0px;
+  border-radius: 999px;
+  min-width: inherit;
+  margin: 5px;
+  padding: 10px 14px;
 }
 
 h1 {

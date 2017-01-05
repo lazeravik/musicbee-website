@@ -12,7 +12,10 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require_once $link['root'] . 'classes/Stats.php';
 
-parse_str(str_replace("?", "", $params[2]),$url_params); 
+//Creates an array from the URI without using lowercase
+$params_raw = explode("/", $_SERVER['REQUEST_URI']);
+
+parse_str(str_replace("?", "", $params_raw[2]),$url_params); 
 
 
 if (isset($url_params['type']) && isset($url_params['id']) && isset($url_params['r'])) {

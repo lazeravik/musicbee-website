@@ -44,7 +44,7 @@ $dashboard = new Dashboard();
 							       class="search filter_search dark"
 							       name="query"
 							       placeholder="<?php echo $lang['search_submitted_addons']; ?>"
-							       onkeyup="autoComplete()">
+							       onkeyup="autoCompleteAddonlist()">
 							<input type="hidden" name="action" value="search">
 							<div class="search_list_wrapper">
 								<ul id="search_list" class="search_list"></ul>
@@ -58,16 +58,21 @@ $dashboard = new Dashboard();
 						<h3><?php echo $lang['transfer_step2']; ?></h3>
 					</div>
 						<span class="show_info info_silverwhite custom search_container">
-							<input type="search"
+							<input type="text"
 							       id="search_box_user"
 							       spellcheck="false"
 							       autocomplete="off"
 							       autocorrect="off"
-							       class="search filter_search dark"
-							       name="user_id"
-							       placeholder="Enter user id" required="true">
+							       class="search filter_search dark no_icon"
+							       name="user_id_query"
+							       onkeyup="autoCompleteUserlist()"
+							       placeholder="Search by username" required="true">
 							       <input id="id_field" type="hidden" name="addon_id" value="">
+									<input id="id_field_user" type="hidden" name="user_id" value="">
 							       <input type="hidden" name="addon_transfer" value="true">
+							<div class="search_list_wrapper">
+								<ul id="user_search_list" class="search_list"></ul>
+							</div>
 						</span>
 				</div>
 				<div class="box_content" id="final_step_box" style="display:none">
@@ -86,7 +91,27 @@ $dashboard = new Dashboard();
 
 
 <script>
-	function autoComplete() {
+	function autoCompleteUserlist() {
+		var min_length = 2; // min caracters to display the autocomplete
+		var keyword = $('#search_box_user').val();
+		if (keyword.length >= min_length)
+		{
+			$.ajax({
+				url: '<?php echo $link['url']; ?>api/1.0/?type=html&action=user-search-autocomplete&search='+keyword,
+				type: 'GET',
+				//data: {keyword:keyword},
+				success:function(data)
+				{
+					$('#user_search_list').show();
+					$('#user_search_list').html(data);
+				}
+			});
+		} else {
+			$('#user_search_list').hide();
+		}
+	}
+	
+	function autoCompleteAddonlist() {
 		var min_length = 2; // min caracters to display the autocomplete
 		var keyword = $('#search_box').val();
 		if (keyword.length >= min_length)
@@ -121,6 +146,23 @@ $dashboard = new Dashboard();
 		$("#id_field").val(addon_id.val());
 		
 		$("#step2_box").show();
+	}
+	
+	// set_item : this function will be executed when we select an item
+	function set_user(uid, event) {
+		event.preventDefault();
+		event.stopImmediatePropagation(); //This will stop the form submit twice
+		var item = $("#"+uid);
+		$("#"+uid +" button").remove();
+		$("#search_box_user").remove();
+		$("#user_search_list").html(item);
+		$("#user_search_list").addClass("selected");
+		item.addClass("active");
+		
+		var user_id = $("#"+uid+" input[name=user_id]");
+		$("#id_field_user").val(user_id.val());
+		
+
 		$("#final_step_box").show();
 	}
 

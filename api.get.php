@@ -40,6 +40,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
 require_once $link['root'] . 'classes/Addon.php';
 require_once $link['root'] . 'classes/Search.php';
+require_once $link['root'] . 'classes/Member.php';
 
 const default_result_limit = 5;
 const max_result_limit = 20;
@@ -84,6 +85,9 @@ if(isset($params[3])) {
 				case 'addon-search-autocomplete':
 					addonSearchAutoComplete();
 					break;
+				case 'user-search-autocomplete':
+					userSearchAutoComplete();
+					break;
 
 				default:
 					# code...
@@ -109,6 +113,44 @@ function releaseInfo()
 function addonSearchJson()
 {
 	printJson(json_encode(addonSearch()));
+}
+
+function userSearchAutoComplete()
+{
+	global $lang, $url_params, $link, $memberContext;
+	$searchData = Member::SearchUsernames($url_params['search']);
+	
+	foreach ($searchData as $member)
+	{
+		loadMemberData($member['ID_MEMBER']);
+		loadMemberContext($member['ID_MEMBER']);
+		$avatar_url = ($memberContext[$member['ID_MEMBER']]['avatar']['href'])? $memberContext[$member['ID_MEMBER']]['avatar']['href']: $link['url']."img/usersmall.jpg";
+		
+		//$thumb = Format::ImgurResizer($member['thumbnail'],"s");
+		$username = $member['membername'];
+		$uid = md5($username);
+		
+		$html = <<<HTML
+<li id="$uid">
+	<ul>
+		<input type="hidden" name="user_id" value="{$member['ID_MEMBER']}">
+		<li>
+			<img src="$avatar_url">
+		</li>
+		<li>
+			<p class="title">$username</p>
+		</li>
+		<li>
+		<button class="select_popup btn btn_blue" onclick="set_user('$uid', event); event.preventDefault();"><i class="fa fa-check"></i></button>
+		</li>
+	</ul>
+</li>
+HTML;
+		echo $html;
+		//var_dump($result);
+	}
+	
+	exit();
 }
 
 function addonSearchAutoComplete()
@@ -137,7 +179,7 @@ function addonSearchAutoComplete()
 			<p>$author</p>
 		</li>
 		<li>
-		<button class="btn btn_blue" onclick="set_item('$uid', event); event.preventDefault();">Select</button>
+		<button class="select_popup btn btn_blue" onclick="set_item('$uid', event); event.preventDefault();"><i class="fa fa-check"></i></button>
 		</li>
 	</ul>
 </li>
