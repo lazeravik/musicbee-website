@@ -24,6 +24,7 @@ require_once $link['root'].'classes/Help.php';
 include_once $link['root'].'includes/parsedown/Parsedown.php';
 include_once $link['root'].'includes/parsedown/ParsedownExtra.php';
 
+//Addon submission check
 if(isset($_POST['submit'])) {
 
 	//If Add-on submission is turned of show error
@@ -67,7 +68,9 @@ if(isset($_POST['submit'])) {
 			die('{"status": "0", "data": "'.$lang['dashboard_err_5'].'"}');
 		}
 	}
-} elseif(isset($_POST['modify_type'])) {
+}
+//Addon modification after it is submitted
+elseif(isset($_POST['modify_type'])) {
 	$dashboard = new Dashboard();
 
 	//permanent delete will delete the addon forever!
@@ -94,7 +97,7 @@ if(isset($_POST['submit'])) {
 	}
 
 	//Soft delete won't delete it, but put it in to be deleted list, it will be deleted whenever the delete script executes!
-	if($_POST['modify_type'] == "soft_delete") {
+	else if($_POST['modify_type'] == "soft_delete") {
 
 		//You can not soft delete an addon that is already soft deleted
 		if($dashboard->getAddonStatus($_POST['record_id']) == "3") {
@@ -120,7 +123,10 @@ if(isset($_POST['submit'])) {
 			//throw error if the author is different than the submitter itself
 			die('{"status": "0", "data": "'.$lang['dashboard_err_12'].'"}');
 		}
-	} elseif($_POST['modify_type'] == "update") {
+	}
+	
+	//Update addon conetnts
+	else if($_POST['modify_type'] == "update") {
 		if(validateInput()) {
 
 			//If the addon is already soft deleted and the user is not an admin or mod die!!
@@ -157,7 +163,10 @@ if(isset($_POST['submit'])) {
 		//$_POST['modify_type'] contain unknown title! DIEEEEEE!!!! ^_^
 		die('{"status": "0", "data": "'.$lang['dashboard_err_15'].'"}');
 	}
-} elseif(isset($_POST['addon_approve'])) {
+}
+
+//Update addon status such as approve
+elseif(isset($_POST['addon_approve'])) {
 	if(!$mb['user']['can_mod']) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
 	}
@@ -170,12 +179,19 @@ if(isset($_POST['submit'])) {
 	} else {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_15'].'"}');
 	}
-} elseif(isset($_POST['addon_transfer'])) {
+}
+
+//Transfer addon ownership to other users
+elseif(isset($_POST['addon_transfer'])) {
 	if(!$mb['user']['can_mod']) {
 		die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
 	}
-
+	
 	if(!(isset($_POST['addon_id']) && isset($_POST['user_id']))){
+		die('{"status": "0", "data": "'.$lang['transfer_err_invalid_data'].'"}');
+	}
+	
+	if(empty($_POST['addon_id']) || empty($_POST['user_id'])){
 		die('{"status": "0", "data": "'.$lang['transfer_err_invalid_data'].'"}');
 	}
 

@@ -26,6 +26,14 @@
 			$purifier = new HTMLPurifier($config);
 			return $purifier->purify($html); //purify html from any xss attack
 		}
+		
+		/**
+		 * Since PHP does not have any clmap function we can use this custom one :)
+		 */
+		public static function Clamp($CurrentVal, $Max, $Min)
+		{
+			return max($Min, min($Max, $CurrentVal));
+		}
 
 
 		/**

@@ -270,25 +270,30 @@ class Member
 	}
 	
 	
-	public static function SearchUsernames($usernameSearchTerm)
+	public static function SearchUsernames($usernameSearchTerm, $resultlimit=5)
 	{
 		global $connection, $db_info;
 		
 		if($usernameSearchTerm != null){
+			
 			if(databaseConnection()) {
 				try {
-					$sql = "SELECT * FROM {$db_info['member_tbl']}
+					$sql = "SELECT * FROM {$db_info['member_tbl']} 
 								WHERE
-									membername LIKE ?";
+									membername LIKE :searchTerm 
+								LIMIT :resultlimit";
 					$statement = $connection->prepare($sql);
-					$statement->execute(array("%".$usernameSearchTerm."%"));
+					$statement->bindValue(":searchTerm", '%'.$usernameSearchTerm.'%');
+					$statement->bindValue(":resultlimit", (int)trim($resultlimit), PDO::PARAM_INT);
+					$statement->execute();
 					return $statement->fetchAll (PDO::FETCH_ASSOC);
 				} catch(Exception $e) {
 					return false;
 				}
-				return true;
 			}
 		}
+		
+		return false;
 	}
 
 

@@ -117,18 +117,21 @@ function addonSearchJson()
 
 function userSearchAutoComplete()
 {
-	global $lang, $url_params, $link, $memberContext;
-	$searchData = Member::SearchUsernames($url_params['search']);
+	global $url_params, $link, $memberContext;
+	
+	$resultLimit = Format::Clamp(isset($url_params['limit'])?$url_params['limit']:20, 30,0);
+	$searchData = Member::SearchUsernames($url_params['search'], $resultLimit);
+	
+	if(!$searchData) return;
 	
 	foreach ($searchData as $member)
 	{
 		loadMemberData($member['ID_MEMBER']);
 		loadMemberContext($member['ID_MEMBER']);
 		$avatar_url = ($memberContext[$member['ID_MEMBER']]['avatar']['href'])? $memberContext[$member['ID_MEMBER']]['avatar']['href']: $link['url']."img/usersmall.jpg";
-		
-		//$thumb = Format::ImgurResizer($member['thumbnail'],"s");
 		$username = $member['membername'];
 		$uid = md5($username);
+		$email = $memberContext[$member['ID_MEMBER']]['email'];
 		
 		$html = <<<HTML
 <li id="$uid">
@@ -139,6 +142,7 @@ function userSearchAutoComplete()
 		</li>
 		<li>
 			<p class="title">$username</p>
+			<p>$email</p>
 		</li>
 		<li>
 		<button class="select_popup btn btn_blue" onclick="set_user('$uid', event); event.preventDefault();"><i class="fa fa-check"></i></button>

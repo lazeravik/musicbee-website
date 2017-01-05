@@ -172,3 +172,28 @@
     margin: 5px;
     padding: 10px 14px;
 }
+
+.search_btn_inline {
+	position: absolute;
+	right: 15px;
+	top: 7px;
+	background: transparent;
+	color: #fff;
+	border: 0px;
+	font-size: 20px;
+	outline:none;
+	
+	&:hover{
+		border: 0px;
+		color: #ff9800;
+	}
+	
+	&:focus{
+		border:0px;
+	}
+	
+	@media screen and(max-width : $break-primary-nav) {
+		right: 20px;
+		top: 12px;
+	}
+}

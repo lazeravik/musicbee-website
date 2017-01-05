@@ -355,6 +355,8 @@ $lang['mod_13'] = 'All unapproved add-ons';
 $lang['mod_14'] = 'All rejected add-ons';
 $lang['transfer_ownership_btn'] = 'Transfer add-on ownership';
 $lang['transfer_ownership_header'] = 'Transfer add-on ownership from one user to another';
+$lang['transfer_ownership_desc'] = 'When you transfer ownership from one person to another, the original author will lose all control over the add-on';
+$lang['search_by_username'] = 'Search by username';
 $lang['transfer_step1'] = 'Step 1: Find the add-on you want to transfer ownership';
 $lang['transfer_step2'] = 'Step 2: Find the User to Transfer the rights to';
 

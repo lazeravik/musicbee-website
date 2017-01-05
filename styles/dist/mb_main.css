@@ -1282,6 +1282,30 @@ select {
   padding: 10px 14px;
 }
 
+.search_btn_inline {
+  position: absolute;
+  right: 15px;
+  top: 7px;
+  background: transparent;
+  color: #fff;
+  border: 0px;
+  font-size: 20px;
+  outline: none;
+}
+.search_btn_inline:hover {
+  border: 0px;
+  color: #ff9800;
+}
+.search_btn_inline:focus {
+  border: 0px;
+}
+@media screen and (max-width: 731px) {
+  .search_btn_inline {
+    right: 20px;
+    top: 12px;
+  }
+}
+
 h1 {
   font-family: "Roboto", "Segoe UI", "sans-serif";
   font-size: 35px;
@@ -3514,6 +3538,7 @@ select#release_note_jump option {
   position: absolute;
   width: 100%;
   background: #fff;
+  z-index: 60;
 }
 .search_container .search_list_wrapper > ul.search_list.selected {
   position: relative;

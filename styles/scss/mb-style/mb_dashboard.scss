@@ -108,6 +108,7 @@
 			position: absolute;
 			width: 100%;
 			background: #fff;
+			z-index: 60;
 
 			&.selected {
 				position: relative;

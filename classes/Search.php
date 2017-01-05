@@ -26,6 +26,9 @@ class Search
 	public function searchAddons($searchquery, $cat_input = null, $status_input = 1, $authorid = null, $offset=0, $range=20, $orderby = "ID_ADDON DESC",$skip_count = null) {
 		global $connection, $mb;
 		
+		//validate the input data
+		if(!(is_int($offset) && is_int($range))) return false;
+		
 		//Create arrays for SQL value binding
 		if ($cat_input == null) {
 			$cat_array = array_keys ($mb['main_menu']['add-ons']['sub_menu']);

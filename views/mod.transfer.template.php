@@ -27,7 +27,7 @@ $dashboard = new Dashboard();
 			<div class="show_info custom">
 				<h3><?php echo $lang['transfer_ownership_header']; ?></h3>
 				<p class="description">
-					When you transfer ownership from one person to another, the original author will lose all control over the add-on
+					<?php echo $lang['transfer_ownership_desc']; ?>
 				</p>
 			</div>
 		</div>
@@ -66,7 +66,7 @@ $dashboard = new Dashboard();
 							       class="search filter_search dark no_icon"
 							       name="user_id_query"
 							       onkeyup="autoCompleteUserlist()"
-							       placeholder="Search by username" required="true">
+							       placeholder="<?php echo $lang['search_by_username']; ?>" required="true">
 							       <input id="id_field" type="hidden" name="addon_id" value="">
 									<input id="id_field_user" type="hidden" name="user_id" value="">
 							       <input type="hidden" name="addon_transfer" value="true">
@@ -97,7 +97,7 @@ $dashboard = new Dashboard();
 		if (keyword.length >= min_length)
 		{
 			$.ajax({
-				url: '<?php echo $link['url']; ?>api/1.0/?type=html&action=user-search-autocomplete&search='+keyword,
+				url: '<?php echo $link['url']; ?>api/1.0/?type=html&action=user-search-autocomplete&limit=1&search='+keyword,
 				type: 'GET',
 				//data: {keyword:keyword},
 				success:function(data)
