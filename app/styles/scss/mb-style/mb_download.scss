@@ -1,0 +1,189 @@
+$stable_release_bg : rgb(240, 240, 240);
+$beta_release_bg : rgb(201, 201, 201);
+
+.main_panel {
+	.content {
+		padding: 0px;
+		position: relative;
+		margin: 0px;
+		height: auto;
+
+		&.mb_download_installer_bg {
+			position: relative;
+			overflow: hidden;
+			background: $stable_release_bg;
+
+			.sub_content {
+				padding: 40px 20px;
+				text-align: center;
+				color: rgb(30, 30, 30);
+				max-width: 1000px;
+				margin: 0px auto;
+
+				h3 {
+					margin: 5px 0px 10px;
+				}
+
+				p {
+					margin: 5px 0px;
+				}
+
+				.installer_panel_wrapper {
+					display: block;
+					width: 40%;
+					margin: 30px 0px 0px;
+					float: left;
+
+					.installer_layer_wrapper {
+						text-align: left;
+						display: block;
+						padding: 10px;
+					}
+
+					.installer_non_portable {
+						background: rgb(0, 120, 255);
+						color: rgb(255, 255, 255);
+					}
+
+					.mb_portable_download_bg {
+						background: rgba(0, 0, 0, 0.22);
+					}
+
+					@media screen and(max-width: $break-small){
+						width: 100%;
+					}
+				}
+			}
+
+			.download_img_link_wrapper{
+				float: left;
+				width: 60%;
+
+				.download_img_links{
+					h1{
+						font-size: 20px;
+					}
+
+					ul{
+						list-style: none;
+						text-align: left;
+						padding: 50px;
+
+						li {
+							padding: 20px 20px 20px 80px;
+							position: relative;
+							margin: 20px 10px;
+
+							i{
+								position: absolute;
+								left: 0px;
+								top: 8px;
+								font-size: 40px;
+								color: #fff;
+								padding:15px;
+								width:35px;
+								height: 35px;
+
+								&.learn {
+									color: #3ac5cc;
+								}
+								&.plugin {
+									color: #a387cc;
+								}
+								&.community {
+									color: #ffba69;
+								}
+								&.love {
+									color: #cc4b61;
+								}
+							}
+
+							a{
+								color: #333;
+								&:hover{
+									text-decoration: none;
+								}
+							}
+
+							&:hover{
+								background: linear-gradient(135deg, rgb(42, 62, 78), rgba(39, 68, 90, 0.62), rgba(103, 129, 202, 0.53), rgba(122, 0, 255, 0.18), rgba(0, 0, 0, 0));
+							}
+						}
+					}
+				}
+
+				@media screen and(max-width: $break-small){
+					width: 100%;
+
+					.download_img_links{
+						ul{
+							padding: 0px;
+
+							li {
+								padding: 20px 20px 20px 80px;
+								position: relative;
+								margin: 0px;
+								float: left;
+								width: 50%;
+								display: block;
+								box-sizing: border-box;
+							}
+
+							&::after{
+								@include clearfix;
+							}
+						}
+					}
+				}
+
+				@media screen and(max-width: $break-tiny){
+					.download_img_links{
+						ul{
+							li {
+								width: 100%;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.mb_beta_download_bg {
+			position: relative;
+			background-color: $beta_release_bg;
+			overflow: hidden;
+
+			.sub_content {
+				padding: 40px 20px;
+				text-align: left;
+				color: rgb(53, 53, 53);
+				max-width: 1000px;
+				margin: 0px auto;
+
+				h3 {
+					margin: 5px 0px 10px;
+				}
+
+				p {
+					margin: 5px 0px;
+				}
+			}
+
+			&:after {
+				content: "\f071";
+				font-family: "FontAwesome";
+				top: -10px;
+				right: -100px;
+				position: absolute;
+				font-size: 350px;
+				color: rgba(255, 255, 255, 0.3);
+			}
+
+			@media screen and(max-width: $break-small){
+				&:after {
+					content : none;
+				}
+			}
+		}
+	}
+}

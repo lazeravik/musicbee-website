@@ -1,0 +1,285 @@
+.main_content_wrapper {
+	display    : flex;
+	min-height : 400px;
+	max-width  : 1200px;
+	margin     : 0px auto;
+	flex-wrap  : wrap;
+
+	&.col_1_2 {
+		.sub_content_wrapper:nth-child(1) {
+			width : 33.33333333333333%;
+
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+		.sub_content_wrapper:nth-child(2) {
+			width : 66.66666666666667%;
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+	}
+
+	&.col_2_1 {
+		.sub_content_wrapper:nth-child(1) {
+			width : 66.66666666666667%;
+
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+		.sub_content_wrapper:nth-child(2) {
+			width : 33.33333333333333%;
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+	}
+
+	&.col_1 {
+		.sub_content_wrapper {
+			width : 100%;
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+	}
+
+	&.col_2 {
+		.sub_content_wrapper {
+			width : 50%;
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+	}
+
+	&.col_3 {
+		.sub_content_wrapper {
+			width : 33.33333333333333%;
+			@media screen and (max-width : $break-small) {
+				width : 100%;
+			}
+		}
+	}
+}
+
+.sub_content_wrapper {
+
+	&.center {
+		margin: 0px auto;
+	}
+
+	.box_content {
+		margin     : 20px 10px 5px 10px;
+		box-shadow : 1px 2px 5px rgba(0, 0, 0, 0.18);
+		background : #fff;
+
+		.info_text {
+			padding : 20px;
+		}
+
+		.info_table_wrap {
+			display    : block;
+			box-sizing : border-box;
+		  word-break: break-word;
+		}
+
+		.flat_info_bar {
+			list-style : none;
+			margin     : 0px;
+			padding    : 0px;
+			display    : flex;
+			flex-wrap  : wrap;
+
+			li {
+				list-style : none;
+				margin     : 0px;
+				padding    : 10px;
+				padding    : 0px 15px 0px 15px;
+				border-right: 1px solid rgba(255, 255, 255, 0.3);
+
+				@media screen and (max-width : $break-tiny) {
+					padding    : 10px;
+					padding    : 5px 15px 5px 15px;
+					border-right:  none;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+					width      : 100%;
+					background : rgba(64, 64, 64, 0.34);
+				}
+
+				&:nth-last-child(1) {
+					border: none;
+				}
+			}
+
+			&::after {
+				@include clearfix;
+			}
+		}
+		.message {
+			text-align : center;
+			padding    : 20px 10px;
+		}
+
+		ul.form {
+			padding : 10px 20px;
+			margin  : 0px;
+
+			.link_input {
+				width : 60%;
+				@media screen and (max-width : $break-tiny) {
+					width : 100%;
+				}
+
+				.flex_input {
+					display   : flex;
+					flex-wrap : wrap;
+					margin    : 0px 0px 5px 0px;
+
+					&.col_3 {
+
+					}
+
+					&.col_2 {
+						.up_group {
+							position : relative;
+							width    : 80%;
+
+							input {
+								width         : 100%;
+								padding-right : 40px;
+							}
+						}
+						input {
+							width : 80%;
+						}
+
+						.btn {
+							width  : 20%;
+							margin : 0px;
+
+							&.remove_img_btn {
+								position   : absolute;
+								right      : 0px;
+								top 	   : 0px;
+								background : none;
+								color      : #7b7b7b;
+								box-shadow : none;
+								width      : initial;
+								padding    : 5px 10px;
+								margin     : 6px 4px;
+
+								&:hover {
+									background : #eee;
+								}
+							}
+						}
+					}
+
+					.btn {
+						min-width : inherit;
+						margin    : 0px 0px 0px 5px;
+					}
+				}
+			}
+
+			li {
+				list-style : none;
+				display    : flex;
+				flex-wrap  : wrap;
+				padding    : 10px 0px;
+
+				label {
+					width         : 40%;
+					padding-right : 10px;
+					box-sizing    : border-box;
+
+					@media screen and (max-width : $break-tiny) {
+						width : 100%;
+					}
+
+				  &.wide {
+					width     : 100%;
+					margin: 0px 0px 10px;
+				  }
+
+					.description {
+						color  : #a9a9a9;
+						margin : 0px;
+					}
+				}
+
+				.right_toogle {
+					width: 60%;
+					display: flex;
+					flex-direction: row-reverse;
+					align-items: center;
+
+					label {
+						width : 60px;
+					}
+				}
+
+				textarea {
+					width     : 60%;
+					max-width : 60%;
+					height    : 100px;
+
+				  &.wide {
+					width     : 100%;
+					max-width : 100%;
+					height    : 200px;
+				  }
+
+					@media screen and (max-width : $break-tiny) {
+						width     : 100%;
+						max-width : 100%;
+					}
+				}
+
+				input, select {
+					width      : 60%;
+					align-self : center;
+
+					@media screen and (max-width : $break-tiny) {
+						width : 100%;
+					}
+				}
+			}
+		}
+
+		&::after {
+			@include clearfix;
+		}
+	}
+}
+
+.release_note_info {
+	@media screen and (max-width : $break-tiny) {
+		padding : 0px;
+
+		&::before {
+			content : none;
+		}
+	}
+}
+
+.no_release_note {
+	display         : block;
+	padding         : 30px 20px;
+	background-size : 120px;
+	border-radius   : 3px;
+	color: #333;
+}
+
+select#release_note_jump {
+  margin: 2px 5px;
+	color        : #fff;
+	border-color : rgba(255, 255, 255, 0.5);
+
+	option {
+		color : #333;
+	}
+}
