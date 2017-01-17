@@ -45,7 +45,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<a href="#dashboard_all" data-href="dashboard_all"><?php echo $lang['dashboard_0']; ?></a>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix (count ($stat['total_addon_submitted'])); ?>
+						<?php echo Format::numberFormatSuffix (count ($stat['total_addon_submitted'])); ?>
 					</td>
 				</tr>
 				<tr>
@@ -53,7 +53,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<?php echo $lang['dashboard_2']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix ($stat['total_unapproved_addon']); ?>
+						<?php echo Format::numberFormatSuffix ($stat['total_unapproved_addon']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +61,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<?php echo $lang['dashboard_1']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix ($stat['total_likes']); ?>
+						<?php echo Format::numberFormatSuffix ($stat['total_likes']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -69,7 +69,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<?php echo $lang['dashboard_3']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix ($stat['total_download']); ?>
+						<?php echo Format::numberFormatSuffix ($stat['total_download']); ?>
 					</td>
 				</tr>
 				</tbody>
@@ -148,7 +148,7 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 						<?php foreach ($stat['unapproved_addons'] as $key => $addon): ?>
 							<tr>
 								<td>
-									<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
+									<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::slug ($addon['addon_title']); ?>"
 									   target="_blank"
 									   title="View this addon"><?php echo $addon['addon_title']; ?></a>
 								</td>
@@ -256,14 +256,14 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 					<?php foreach ($stat['top_voted_addon'] as $key => $addon): ?>
 						<tr>
 							<td>
-								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
+								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::slug ($addon['addon_title']); ?>"
 								   target="_blank"><?php echo $addon['addon_title']; ?></a>
 							</td>
 							<td>
 								<?php echo $mb['main_menu']['add-ons']['sub_menu'][$addon['category']]['title']; ?>
 							</td>
 							<td>
-								<?php echo Format::number_format_suffix ($addon['likesCount']); ?>
+								<?php echo Format::numberFormatSuffix ($addon['likesCount']); ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -293,11 +293,11 @@ $stat['unapproved_addons'] = array_slice ($dashboard->getAllUnApprovedAddons (),
 					<?php foreach ($stat['top_downloaded_addon'] as $key => $addon): ?>
 						<tr>
 							<td>
-								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::Slug ($addon['addon_title']); ?>"
+								<a href="<?php echo $link['addon']['home'] . $addon['ID_ADDON'] . "/" . Format::slug ($addon['addon_title']); ?>"
 								   target="_blank"><?php echo $addon['addon_title']; ?></a>
 							</td>
 							<td>
-								<?php echo Format::number_format_suffix ($addon['downloadCount']); ?>
+								<?php echo Format::numberFormatSuffix ($addon['downloadCount']); ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>

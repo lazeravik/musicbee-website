@@ -22,12 +22,12 @@
 	<meta name="keywords" content="musicbee, music, player, ultimate, best, customizable, skin, free, plugin">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $_SERVER['DOCUMENT_ROOT'] . '/app/includes/meta&styles.php'; ?>
+	<?php include $link['incl-dir'] . 'meta&styles.php'; ?>
 
 	<!--Social network tags for facebook and twitter -->
 	<meta property="og:title" content="<?php echo $lang['home_title']; ?>"/>
 	<meta property="og:url" content="<?php echo $link['url']; ?>"/>
-	<meta property="og:image" content="<?php GetImageDir(); ?>mb_big.png">
+	<meta property="og:image" content="<?php $link['style-dir']; ?>mb_big.png">
 	<meta property="og:description" content="<?php echo $lang['home_desc']; ?>">
 
 	<meta name="twitter:card" content="summary">
@@ -36,7 +36,7 @@
 	<meta name="twitter:description" content="<?php echo $lang['home_desc']; ?>">
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $link['root'].'includes/font.helper.php'; ?>
+	<?php include $link['incl-dir'].'font.helper.php'; ?>
 </head>
 <body>
 <div id="indexBackground">
@@ -60,7 +60,7 @@
 								</div>
 								<div class="hero_img_top">
 									<div class="hero_img_wrapper hero_img_topmost_wrap">
-										<img src="<?php echo GetImageDir(); ?>hero_img/hero-img-top-min.png">
+										<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-top-min.png">
 									</div>
 								</div>
 							</div>
@@ -89,7 +89,7 @@
 							<h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>
 						</div>
 						<div class="hero_img_top">
-							<img src="<?php echo GetImageDir(); ?>hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
+							<img src="<?php echo $link['img-dir']; ?>hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
 						</div>
 					</div>
 				</div>
@@ -183,7 +183,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo GetImageDir(); ?>hero_img/hero-img-skin-min.png">
+								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-skin-min.png">
 							</div>
 						</div>
 					</div>
@@ -199,7 +199,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo GetImageDir(); ?>hero_img/hero-img-sync-min.png">
+								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-sync-min.png">
 							</div>
 						</div>
 					</div>
@@ -215,7 +215,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo GetImageDir(); ?>hero_img/hero-img-groove-min.png">
+								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-groove-min.png">
 							</div>
 						</div>
 					</div>
@@ -232,7 +232,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo GetImageDir(); ?>hero_img/mb_tag_feature.png">
+								<img src="<?php echo $link['img-dir']; ?>hero_img/mb_tag_feature.png">
 							</div>
 						</div>
 					</div>
@@ -248,7 +248,7 @@
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo GetImageDir(); ?>hero_img/hero-img-review.png">
+								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-review.png">
 							</div>
 						</div>
 					</div>
@@ -275,9 +275,9 @@
 <?php
 include($footer);
 ?>
-<script src="<?php echo GetScriptDir(); ?>scrollReveal.min.js"></script>
-<script src="<?php echo GetScriptDir(); ?>jquery.sticky.min.js"></script>
-<script src="<?php echo GetScriptDir(); ?>mb_common.js"></script>
+<script src="<?php echo $link['js-dir']; ?>scrollReveal.min.js"></script>
+<script src="<?php echo $link['js-dir']; ?>jquery.sticky.min.js"></script>
+<script src="<?php echo $link['js-dir']; ?>mb_common.js"></script>
 <script type="text/javascript">
 	//initialize scroll reveal
 	var hero_title_reveal = {

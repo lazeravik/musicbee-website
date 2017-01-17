@@ -33,9 +33,9 @@ if (isset($_GET['id'])) {
 		}
 
 		//checks the url parameter and try to match the addon title, if the addon id matches but not the title, then do a 301 redirect
-		if (count ($params) <= 3 && (urldecode($params[2]) != Format::Slug ($addon_data['addon_title']) || urldecode($params[0]) != Format::Slug($type_blob)))
+		if (count ($params) <= 3 && (urldecode($params[2]) != Format::slug ($addon_data['addon_title']) || urldecode($params[0]) != Format::slug($type_blob)))
 		{
-			header ("Location: " . $link['addon']['home']. Format::Slug($type_blob) .'/'. $addon_data['ID_ADDON'] . "/" . Format::Slug ($addon_data['addon_title']) . "/", 301);
+			header ("Location: " . $link['addon']['home']. Format::slug($type_blob) .'/'. $addon_data['ID_ADDON'] . "/" . Format::slug ($addon_data['addon_title']) . "/", 301);
 		}
 
 		$from_author = $addon->getAddonListByMember ($addon_data['ID_AUTHOR'], 5);
@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
 		$url_params['type'] = isset($url_params['type']) ? htmlspecialchars(Format::htmlSafeOutput($url_params['type']), ENT_QUOTES, "UTF-8")  : "all";
 
 		//get the addon type,result order,if any search query from the get request
-		$data['type'] = Format::UnslugTxt ($url_params['type']);
+		$data['type'] = Format::unslugTxt ($url_params['type']);
 
 		$data['is_overview'] = isset($url_params['overview'])? true : false;
 
@@ -74,7 +74,7 @@ if (isset($_GET['id'])) {
 			$searchinput['query'] = "";
 		}
 
-		$addon_type = Format::Slug ($data['type']);
+		$addon_type = Format::slug ($data['type']);
 		$data['current_type'] = ($url_params['type']=="all")? null : $url_params['type'];
 
 
@@ -185,7 +185,7 @@ function top_member_result_generator($data)
 			$result .= '<li><img class="avatar" src="'.$avatar_url.'"/>
 							<div class="info">
 							<a href ="'.addon_author_url_generator($member['membername']).'">
-								<p class="membername">'.$member['membername'].'<i title="'.$lang['addon_44'].'">'.Format::number_format_suffix($member['addonUploads']).'</i></p></a>
+								<p class="membername">'.$member['membername'].'<i title="'.$lang['addon_44'].'">'.Format::numberFormatSuffix($member['addonUploads']).'</i></p></a>
 								'.$rank.'
 							</div>
 						</li>';
@@ -220,7 +220,7 @@ function addon_result_view_generator($data)
 			<div class="addon_list_box_wrapper">
 				<a href="' . $addon_link . '">
 					<div class="thumb_more" style=\'background-image:url("' . htmlspecialchars($addon_data['thumbnail'], ENT_QUOTES, "UTF-8") . '")\'></div>
-					<div class="love"><i class="fa fa-heart"></i><p class="love_count">' . Format::number_format_suffix($addon_data['likesCount']) . '</p></div>
+					<div class="love"><i class="fa fa-heart"></i><p class="love_count">' . Format::numberFormatSuffix($addon_data['likesCount']) . '</p></div>
 					'.$addon_beta_markup.'
 				</a>
 				<div class="addon_list_box_info">
@@ -283,7 +283,7 @@ function addon_secondery_nav_generator($addon_type) {
 	$data = '<ul class="left">
 	<li class="expand"><a href="javascript:void(0)" onclick="expand_second_menu()"><i class="fa fa-bars"></i></a></li>';
 
-	if (Format::Slug ($addon_type) == "all" && empty($searchinput['query'])) {
+	if (Format::slug ($addon_type) == "all" && empty($searchinput['query'])) {
 		$data .= '<li><a href="' . $link['addon']['home'] . 's/?type=all&overview" class="active_menu_link">' . $lang['all'] . '</a></li>';
 	} else {
 		$data .= '<li><a href="' . $link['addon']['home'] . 's/?type=all&overview" >' . $lang['all'] . '</a></li>';

@@ -125,7 +125,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 					<p class="description"><?php echo $addon_data['short_description']; ?></p>
 				</div>
 				<div class="general_info_icon_wrap">
-					<div class="general_info_icon" style='background-image: url("<?php echo htmlspecialchars(Format::ImgurResizer($addon_data['thumbnail'], "m"), ENT_QUOTES, "UTF-8"); ?>");'></div>
+					<div class="general_info_icon" style='background-image: url("<?php echo htmlspecialchars(Format::imgurResizer($addon_data['thumbnail'], "m"), ENT_QUOTES, "UTF-8"); ?>");'></div>
 				</div>
 				<?php if(!empty(trim($addon_data['important_note']))): ?>
 					<div class="general_info_sidenote">
@@ -166,7 +166,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 						<?php endif; ?>
 						<a id="like_count" href="javascript:void(0)" class="btn btn_yellow like_btn"
 						   onclick="rate('<?php echo $addon_data['ID_ADDON']; ?>')"
-						   data-like-count="<?php echo Format::number_format_suffix($addon_data['likesCount']); ?>">
+						   data-like-count="<?php echo Format::numberFormatSuffix($addon_data['likesCount']); ?>">
 							<?php echo $lang['like']; ?>
 						</a>
 					<?php endif; ?>
@@ -183,7 +183,7 @@ if($addon_data['status'] == "3" && !$mb['user']['can_mod']): ?>
 				<?php
 				foreach($addon_data['image_links'] as $key => $img) {
 					echo '<a class="screenshot_zoom_click" href="', htmlspecialchars($img, ENT_QUOTES, "UTF-8"), '">
-						<div class="screenshot_wrapper" style=\'background-image:url("'.htmlspecialchars(Format::ImgurResizer($img, "m"), ENT_QUOTES, "UTF-8").'")\'></div>
+						<div class="screenshot_wrapper" style=\'background-image:url("'.htmlspecialchars(Format::imgurResizer($img, "m"), ENT_QUOTES, "UTF-8").'")\'></div>
 					</a>';
 				}
 				?>

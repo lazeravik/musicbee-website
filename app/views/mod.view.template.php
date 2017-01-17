@@ -74,7 +74,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_9']; ?>
 					</td>
 					<td title="<?php echo $stat['total_members']; ?>">
-						<?php echo Format::number_format_suffix($stat['total_members']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_members']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -82,7 +82,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_10']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_addon_publisher']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_addon_publisher']); ?>
 					</td>
 				</tr>
 				</tbody>
@@ -100,7 +100,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<a href="#mod_all" data-href="mod_all"><?php echo $lang['mod_4']; ?></a>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_addon']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_addon']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -108,7 +108,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_2']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_likes']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_likes']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +116,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_1']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_download']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_download']); ?>
 					</td>
 				</tr>
 				</tbody>
@@ -130,7 +130,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_3']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_unapproved_addon']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_unapproved_addon']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -138,7 +138,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_5']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_rejected_addon']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_rejected_addon']); ?>
 					</td>
 				</tr>
 				<tr>
@@ -146,7 +146,7 @@ $stat['total_addon_publisher'] = $dashboard->getAllAddonPublisherCount();
 						<?php echo $lang['mod_6']; ?>
 					</td>
 					<td>
-						<?php echo Format::number_format_suffix($stat['total_softdeleted_addon']); ?>
+						<?php echo Format::numberFormatSuffix($stat['total_softdeleted_addon']); ?>
 					</td>
 				</tr>
 				</tbody>

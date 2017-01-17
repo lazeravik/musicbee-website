@@ -46,64 +46,59 @@ const default_result_limit = 5;
 const max_result_limit = 20;
 
 
-if(isset($params[3])) {
-	//remove the ? sign from the string and convert the url paramenter into an array
-	parse_str (str_replace ("?", "", $params[3]), $url_params);
+if (isset($params[3])) {
+    //remove the ? sign from the string and convert the url paramenter into an array
+    parse_str(str_replace("?", "", $params[3]), $url_params);
 
-	if (isset($url_params['type']) && isset($url_params['action']))
-	{
-		//if the request is for JSON then intialize json parsing
-		if ($url_params['type'] == "json")
-		{
-			//switch between actions
-			switch ($url_params['action']) {
-				case 'release-info':
-					releaseInfo();
-					break;
+    if (isset($url_params['type']) && isset($url_params['action'])) {
+        //if the request is for JSON then intialize json parsing
+        if ($url_params['type'] == "json") {
+            //switch between actions
+            switch ($url_params['action']) {
+                case 'release-info':
+                    releaseInfo();
+                    break;
 
-				case 'addon-info':
-					addonInfo();
-					break;
+                case 'addon-info':
+                    addonInfo();
+                    break;
 
-				case 'addon-list':
-					addonList();
-					break;
+                case 'addon-list':
+                    addonList();
+                    break;
 
-				case 'addon-search':
-					addonSearchJson();
-					break;
+                case 'addon-search':
+                    addonSearchJson();
+                    break;
 
-				default:
-					# code...
-					break;
-			}
-		}
-		else if ($url_params['type'] == "html")
-		{
-			//switch between actions
-			switch ($url_params['action']) {
-				case 'addon-search-autocomplete':
-					addonSearchAutoComplete();
-					break;
-				case 'user-search-autocomplete':
-					userSearchAutoComplete();
-					break;
+                default:
+                    # code...
+                    break;
+            }
+        } elseif ($url_params['type'] == "html") {
+            //switch between actions
+            switch ($url_params['action']) {
+                case 'addon-search-autocomplete':
+                    addonSearchAutoComplete();
+                    break;
+                case 'user-search-autocomplete':
+                    userSearchAutoComplete();
+                    break;
 
-				default:
-					# code...
-					break;
-			}
-		}
-	}
-
+                default:
+                    # code...
+                    break;
+            }
+        }
+    }
 }
 /**
  * Generate MusicBee beta, stable and patch release info
  */
 function releaseInfo()
 {
-	global $mb;
-	printJson(json_encode($mb['musicbee_download']));
+    global $mb;
+    printJson(json_encode($mb['musicbee_download']));
 }
 
 /**
@@ -112,28 +107,29 @@ function releaseInfo()
 
 function addonSearchJson()
 {
-	printJson(json_encode(addonSearch()));
+    printJson(json_encode(addonSearch()));
 }
 
 function userSearchAutoComplete()
 {
-	global $url_params, $link, $memberContext;
+    global $url_params, $link, $memberContext;
 
-	$resultLimit = Format::Clamp(isset($url_params['limit'])?$url_params['limit']:20, 30,0);
-	$searchData = Member::SearchUsernames($url_params['search'], $resultLimit);
+    $resultLimit = Format::clamp(isset($url_params['limit'])?$url_params['limit']:20, 30, 0);
+    $searchData = Member::SearchUsernames($url_params['search'], $resultLimit);
 
-	if(!$searchData) return;
+    if (!$searchData) {
+        return;
+    }
 
-	foreach ($searchData as $member)
-	{
-		loadMemberData($member['ID_MEMBER']);
-		loadMemberContext($member['ID_MEMBER']);
-		$avatar_url = ($memberContext[$member['ID_MEMBER']]['avatar']['href'])? $memberContext[$member['ID_MEMBER']]['avatar']['href']: GetImageDir()."usersmall.jpg";
-		$username = $member['membername'];
-		$uid = md5($username);
-		$email = $memberContext[$member['ID_MEMBER']]['email'];
+    foreach ($searchData as $member) {
+        loadMemberData($member['ID_MEMBER']);
+        loadMemberContext($member['ID_MEMBER']);
+        $avatar_url = ($memberContext[$member['ID_MEMBER']]['avatar']['href'])? $memberContext[$member['ID_MEMBER']]['avatar']['href']: GetImageDir()."usersmall.jpg";
+        $username = $member['membername'];
+        $uid = md5($username);
+        $email = $memberContext[$member['ID_MEMBER']]['email'];
 
-		$html = <<<HTML
+        $html = <<<HTML
 <li id="$uid">
 	<ul>
 		<input type="hidden" name="user_id" value="{$member['ID_MEMBER']}">
@@ -150,28 +146,27 @@ function userSearchAutoComplete()
 	</ul>
 </li>
 HTML;
-		echo $html;
-		//var_dump($result);
-	}
+        echo $html;
+        //var_dump($result);
+    }
 
-	exit();
+    exit();
 }
 
 function addonSearchAutoComplete()
 {
-	global $lang;
-	$searchData = addonSearch();
+    global $lang;
+    $searchData = addonSearch();
 
 
-	foreach ($searchData['addon_data']['result'] as $result)
-	{
-		$thumb = Format::ImgurResizer($result['thumbnail'],"s");
-		$title = $result['addon_title'];
-		$author = $lang['addon_15'].' '.$result['membername'];
-		$url = addonUrlGenerator($result);
-		$uid = md5($title.$author);
+    foreach ($searchData['addon_data']['result'] as $result) {
+        $thumb = Format::imgurResizer($result['thumbnail'], "s");
+        $title = $result['addon_title'];
+        $author = $lang['addon_15'].' '.$result['membername'];
+        $url = addonUrlGenerator($result);
+        $uid = md5($title.$author);
 
-		$html = <<<HTML
+        $html = <<<HTML
 <li id="$uid">
 	<ul>
 		<input type="hidden" name="addon_id" value="{$result['ID_ADDON']}">
@@ -188,65 +183,58 @@ function addonSearchAutoComplete()
 	</ul>
 </li>
 HTML;
-		echo $html;
-		//var_dump($result);
-	}
+        echo $html;
+        //var_dump($result);
+    }
 
-	exit();
+    exit();
 }
 
 function addonSearch()
 {
-	global $url_params, $mb, $link;
+    global $url_params, $mb, $link;
 
-	$limit = (isset($url_params['limit']))?checkResultLimit($url_params['limit']): $mb['view_range']['addon_view_range'];
+    $limit = (isset($url_params['limit']))?checkResultLimit($url_params['limit']): $mb['view_range']['addon_view_range'];
 
-	if(isset($url_params['search']))
-	{
-		if(isset($url_params['cat'])){
-			if($url_params['cat'] == 'all'){
-				$url_params['cat'] = null;
-			}
-		} else {
-			$url_params['cat'] = null;
-		}
+    if (isset($url_params['search'])) {
+        if (isset($url_params['cat'])) {
+            if ($url_params['cat'] == 'all') {
+                $url_params['cat'] = null;
+            }
+        } else {
+            $url_params['cat'] = null;
+        }
 
-		if (isset($url_params['page']))
-		{
-			if(is_int($url_params['page']) || ctype_digit($url_params['page']))
-			{
-				$offset = ($url_params['page'] - 1) * $limit;
-				$data['current_page'] = $url_params['page'];
-			}
-			else
-			{
-				$offset = 0;
-				$data['current_page'] = 1;
-			}
-		}
-		else
-		{
-			$offset = 0;
-			$data['current_page'] = 1;
-		}
+        if (isset($url_params['page'])) {
+            if (is_int($url_params['page']) || ctype_digit($url_params['page'])) {
+                $offset = ($url_params['page'] - 1) * $limit;
+                $data['current_page'] = $url_params['page'];
+            } else {
+                $offset = 0;
+                $data['current_page'] = 1;
+            }
+        } else {
+            $offset = 0;
+            $data['current_page'] = 1;
+        }
 
-		$searchinput['query'] = (!empty($url_params['search']))? htmlspecialchars(trim($url_params['search']), ENT_QUOTES, "UTF-8"): '';
+        $searchinput['query'] = (!empty($url_params['search']))? htmlspecialchars(trim($url_params['search']), ENT_QUOTES, "UTF-8"): '';
 
-		$search = new Search();
+        $search = new Search();
 
-		//get all the addon filtered by category/query and other
-		$data['addon_data'] = $search->searchAddons($searchinput['query'],$url_params['cat'],'1', null, $offset, $limit);
+        //get all the addon filtered by category/query and other
+        $data['addon_data'] = $search->searchAddons($searchinput['query'], $url_params['cat'], '1', null, $offset, $limit);
 
-		//Calculate total number of page required
-		$data['total_page'] = ceil ($data['addon_data']['row_count'] / $limit);
+        //Calculate total number of page required
+        $data['total_page'] = ceil($data['addon_data']['row_count'] / $limit);
 
-		$data['page_url'] = $link['addon']['home'] . "s/?q=" . urlencode ($searchinput['query']) . "&type=" . $url_params['cat'];
-		$data['prev_page_url'] = ($data['current_page']==1)? null : $data['page_url'].'&p='.($data['current_page']-1);
-		$data['next_page_url'] = ($data['total_page']==$data['current_page'])? null : $data['page_url'].'&p='.($data['current_page']+1);
+        $data['page_url'] = $link['addon']['home'] . "s/?q=" . urlencode($searchinput['query']) . "&type=" . $url_params['cat'];
+        $data['prev_page_url'] = ($data['current_page']==1)? null : $data['page_url'].'&p='.($data['current_page']-1);
+        $data['next_page_url'] = ($data['total_page']==$data['current_page'])? null : $data['page_url'].'&p='.($data['current_page']+1);
 
 
-		return $data;
-	}
+        return $data;
+    }
 }
 
 /**
@@ -254,17 +242,16 @@ function addonSearch()
  */
 function addonList()
 {
-	global $url_params;
+    global $url_params;
 
-	if(isset($url_params['authorid']))
-	{
-		$addon = new Addon();
-		$limit = (isset($url_params['limit']))? checkResultLimit($url_params['limit']) : default_result_limit;
+    if (isset($url_params['authorid'])) {
+        $addon = new Addon();
+        $limit = (isset($url_params['limit']))? checkResultLimit($url_params['limit']) : default_result_limit;
 
-		$data = $addon->getAddonListByMember ($url_params['authorid'], $limit);
+        $data = $addon->getAddonListByMember($url_params['authorid'], $limit);
 
-		printJson(json_encode($data));
-	}
+        printJson(json_encode($data));
+    }
 }
 
 /**
@@ -272,28 +259,25 @@ function addonList()
  */
 function addonInfo()
 {
-	global $url_params;
+    global $url_params;
 
-	if(isset($url_params['id']))
-	{
-		$addon = new Addon();
-		$addon_data = $addon->getAddonData($url_params['id']);
+    if (isset($url_params['id'])) {
+        $addon = new Addon();
+        $addon_data = $addon->getAddonData($url_params['id']);
 
-		printJson(json_encode($addon_data));
-	}
+        printJson(json_encode($addon_data));
+    }
 }
 
 function checkResultLimit($limit)
 {
-	if(ctype_digit($limit))
-	{
-		if($limit > max_result_limit)
-		{
-			return max_result_limit;
-		}
-	}
+    if (ctype_digit($limit)) {
+        if ($limit > max_result_limit) {
+            return max_result_limit;
+        }
+    }
 
-	return default_result_limit;
+    return default_result_limit;
 }
 
 /**
@@ -302,6 +286,6 @@ function checkResultLimit($limit)
  */
 function printJson($encodedData)
 {
-	header('Content-Type: application/json');
-	print_r($encodedData);
+    header('Content-Type: application/json');
+    print_r($encodedData);
 }

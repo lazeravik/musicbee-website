@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit bootstrap="./vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailures="false"
+         syntaxCheck="false"
+>
+    <php>
+        <server name='HTTP_HOST' value='http://musicbee.local' />
+        <server name='SERVER_PORT' value='80' />
+    </php>
+    <testsuites>
+        <testsuite name="unit tests!">
+            <directory>
+                ./tests/
+            </directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

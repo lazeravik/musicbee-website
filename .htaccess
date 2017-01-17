@@ -1,12 +1,17 @@
 #Custom Status Error page
-ErrorDocument 404 /pages/error/404.php
+ErrorDocument 404 /app/pages/error/404.php
 
 #URL rewriter
 AddDefaultCharset UTF-8
 Options +FollowSymlinks
 RewriteEngine On
-RewriteBase /app/
 
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^install/$    installer/install.php?v=$1 [L]
+
+RewriteBase /app/
 DirectoryIndex app/index.php
 
 #do not perform rewrite in the following directory

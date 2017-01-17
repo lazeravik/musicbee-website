@@ -23,8 +23,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/app/functions.php'; ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Load external stylesheets and scripts -->
-<link rel="stylesheet" type="text/css" href="<?php echo GetStyleDir(); ?>dist/mb_main.css?<?php echo $mb['website']['ver']; ?>">
-<link rel="stylesheet" href="<?php echo GetStyleDir(); ?>font-awesome.min.css?4.5.0">
+<link rel="stylesheet" type="text/css" href="<?php echo $link['style-dir']; ?>dist/mb_main.css?<?php echo $mb['website']['ver']; ?>">
+<link rel="stylesheet" href="<?php echo $link['style-dir']; ?>font-awesome.min.css?4.5.0">
 <link rel="alternate" href="<?php echo $link['url']; ?>rss.xml" title="MusicBee updates" type="application/rss+xml"/>
 <link rel="help" href="<?php echo $link['faq']; ?>"/>
 

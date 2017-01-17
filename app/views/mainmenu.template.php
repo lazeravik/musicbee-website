@@ -44,7 +44,7 @@ function printMenuItems($menuArray){
 				<a href="javascript:void(0)" ><i class="fa fa-bars"></i></a>
 			</li>
 			<li class="logo">
-				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo GetImageDir(); ?>musicbee.png">MusicBee</a>
+				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo $link['img-dir']; ?>musicbee.png">MusicBee</a>
 			</li>
 			<?php
 			foreach ($mb['main_menu'] as $key => $menu_item)

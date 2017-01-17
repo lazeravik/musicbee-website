@@ -173,7 +173,7 @@ endif; ?>
 										$type_selection_text = "selected";
 									}
 								}
-								echo "<option value=\"".Format::Slug($menu_addon['id'])."\" ".$type_selection_text.">".$menu_addon['title']."</option>";
+								echo "<option value=\"".Format::slug($menu_addon['id'])."\" ".$type_selection_text.">".$menu_addon['title']."</option>";
 							}
 							?>
 						</select>

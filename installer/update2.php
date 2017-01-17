@@ -43,37 +43,6 @@ function checkConnection(){
 	}
 }
 
-// function updateTables(){
-// 	global $connection;
-
-// 	$db = SITE_DB_NAME;
-// 	$prefix = SITE_DB_PREFIX;
-// 	$sql = <<<SQL
-// SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-// SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-// SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
-// USE {$db} ;
-
-
-// SET SQL_MODE=@OLD_SQL_MODE;
-// SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-// SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-// SQL;
-
-// 	if(checkConnection()) {
-// 		try {
-// 			$statement = $connection->prepare($sql);
-// 			$statement->execute();
-
-// 			return true;
-// 		} catch(Exception $e) {
-// 			return false;
-// 		}
-// 	}
-// 	return false;
-// }
-
 
 function updateData(){
 	global $connection;
@@ -84,6 +53,12 @@ function updateData(){
 	$sql = <<<SQL
 
 USE {$db};
+
+ALTER TABLE {$prefix}`current_version`
+  DROP `appname`,
+  DROP `beta`,
+  DROP `release_date`,
+  DROP `supported_os`;
 
 DELETE FROM {$prefix}help WHERE variable = 'faq_md';
 DELETE FROM {$prefix}help WHERE variable = 'faq_html';

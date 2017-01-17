@@ -119,7 +119,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 					<?php foreach($resultdata['result'] as $key => $addon): ?>
 						<tr id="<?php echo $addon['ID_ADDON']; ?>_record" class="<?php echo ($addon['status'] == "3") ? "deleted" : ""; ?>">
 							<td>
-								<a href="<?php echo $link['addon']['home'].$addon['ID_ADDON']."/".Format::Slug($addon['addon_title']); ?>"
+								<a href="<?php echo $link['addon']['home'].$addon['ID_ADDON']."/".Format::slug($addon['addon_title']); ?>"
 								   target="_blank"
 								   title="View this addon"><?php echo $addon['addon_title']; ?><?php if($addon['is_beta'] == 1): ?>&nbsp;
 										<p class="small_info beta"><?php echo $lang['addon_38']; ?></p><?php endif; ?>
@@ -133,7 +133,7 @@ function dashboard_result_pagination_generator($page_total, $current_pagenum) {
 							</td>
 							<td class="status">
 								<?php $status_array_each = Validation::getStatus($addon['status']); ?>
-								<p class="small_info <?php echo Format::Slug($status_array_each['text']); ?>">
+								<p class="small_info <?php echo Format::slug($status_array_each['text']); ?>">
 									<?php echo $status_array_each['icon'].' '.$status_array_each['text']; ?>
 								</p>
 

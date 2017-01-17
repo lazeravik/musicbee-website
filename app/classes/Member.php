@@ -138,7 +138,7 @@ class Member
 				$statement = $connection->prepare($sql);
 				$statement->bindValue(':id', $user_id);
 				$statement->bindValue(':permission', $user_rankid);
-				$statement->bindValue(':name', Format::my_numeric2character($user_name));
+				$statement->bindValue(':name', Format::numeric2character($user_name));
 				$statement->execute();
 			} catch(Exception $e) {
 				return false;
@@ -203,7 +203,7 @@ class Member
 								WHERE
 									ID_MEMBER = :user_id";
 				$statement = $connection->prepare($sql);
-				$statement->bindValue(':name', Format::my_numeric2character($user_name));
+				$statement->bindValue(':name', Format::numeric2character($user_name));
 				$statement->bindValue(':user_id', $user_id);
 				$statement->execute();
 			} catch(Exception $e) {

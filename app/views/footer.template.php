@@ -92,7 +92,7 @@
 				<select class="lang_selector" id="lang_selector">
 					<?php
 					foreach($lang_filelist as $key => $lang_file) {
-						echo '<option value="'.$lang_file['meta'].'" ',($language['meta']==$lang_file['meta'])?'selected':'','>'.Format::UnslugTxt($lang_file['name']).' ('.$lang_file['meta'].')</option>';
+						echo '<option value="'.$lang_file['meta'].'" ',($language['meta']==$lang_file['meta'])?'selected':'','>'.Format::unslugTxt($lang_file['name']).' ('.$lang_file['meta'].')</option>';
 
 					}
 					?>
@@ -108,9 +108,9 @@
 	}
 </script>
 <?php if(empty($jquery_preloaded)): ?>
-	<script src="<?php echo GetScriptDir(); ?>jquery-2.1.4.min.js"></script>
+	<script src="<?php echo $link['js-dir']; ?>jquery-2.1.4.min.js"></script>
 <?php endif; ?>
-<script src="<?php echo GetScriptDir(); ?>menu.navigation.js"></script>
+<script src="<?php echo $link['js-dir']; ?>menu.navigation.js"></script>
 
 
 <!-- Footer Ends-->

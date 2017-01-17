@@ -3,55 +3,55 @@
  * Copyright (c) 2016 AvikB, some rights reserved.
  *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
  *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *  
+ *
  * @Contributors:
  * Created by AvikB for noncommercial MusicBee project.
  *  Spelling mistakes and fixes from community members.
- *
  */
 
 $link['url'] = 'http://'.$_SERVER['HTTP_HOST'].'/';
 
-if(isset($_GET['step']) && isset($_POST['submitted'])){
-	if($_GET['step']==1){
-		if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['database']) && isset($_POST['host']) && isset($_POST['action'])){
-			if(empty($_POST['username']) || empty($_POST['database']) || empty($_POST['host']) || empty($_POST['action'])){
-				die(generateJson("please make sure you fill all the boxes", 0, ""));
-			} else {
-				if ($_POST['action']=="dbcheck"){
-					if(checkConnection()){
-						if(saveDatabaseDetails()) {
-							exit(generateJson("✅ Conncetion to the Database is established.<br>Please wait while we set up the database...", 1, "install_tables", true));
-						} else {
-							die(generateJson("✖ Setting can't be saved! Make sure you have write permission", 0, ""));
-						}
-					} else {
-						die(generateJson("✖ please make sure username, password, database is valid!", 0, ""));
-					}
-				} elseif ($_POST['action']=="install_tbl"){
-					//ok, everything seems to be fine, it is time to install the tables
-					if(installTables()){
-						exit(generateJson("✅ Database Tables successfully created.<br>Please wait while we add some initial data...", 1, "install_data", true));
-					} else {
-						die(generateJson("❌ Oops, something went wrong.", 0, ""));
-					}
-				} elseif ($_POST['action']=="install_data"){
-					if(installData()){
-						exit(generateJson("✅ Initial data successfully added", 1, "install_finished", true));
-					} else {
-						die(generateJson("❌ Can not enter any data!", 0, ""));
-					}
-				}
-			}
-		} else {
-			die(generateJson("❌ please make sure you fill all the boxes", 0, ""));
-		}
+if (isset($_GET['step']) && isset($_POST['submitted'])) {
+    if ($_GET['step']==1) {
+        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['database']) && isset($_POST['host']) && isset($_POST['action'])) {
+            if (empty($_POST['username']) || empty($_POST['database']) || empty($_POST['host']) || empty($_POST['action'])) {
+                die(generateJson("please make sure you fill all the boxes", 0, ""));
+            } else {
+                if ($_POST['action']=="dbcheck") {
+                    if (checkConnection()) {
+                        if (saveDatabaseDetails()) {
+                            exit(generateJson("✅ Conncetion to the Database is established.<br>Please wait while we set up the database...", 1, "install_tables", true));
+                        } else {
+                            die(generateJson("✖ Setting can't be saved! Make sure you have write permission", 0, ""));
+                        }
+                    } else {
+                        die(generateJson("✖ please make sure username, password, database is valid!", 0, ""));
+                    }
+                } elseif ($_POST['action']=="install_tbl") {
+                    //ok, everything seems to be fine, it is time to install the tables
+                    if (installTables()) {
+                        exit(generateJson("✅ Database Tables successfully created.<br>Please wait while we add some initial data...", 1, "install_data", true));
+                    } else {
+                        die(generateJson("❌ Oops, something went wrong.", 0, ""));
+                    }
+                } elseif ($_POST['action']=="install_data") {
+                    if (installData()) {
+                        exit(generateJson("✅ Initial data successfully added", 1, "install_finished", true));
+                    } else {
+                        die(generateJson("❌ Can not enter any data!", 0, ""));
+                    }
+                }
+            }
+        } else {
+            die(generateJson("❌ please make sure you fill all the boxes", 0, ""));
+        }
 
-		return null;
-	} else{
-		return null;
-	}
+        return null;
+    } else {
+        return null;
+    }
 }
+
 
 
 /**
@@ -59,74 +59,74 @@ if(isset($_GET['step']) && isset($_POST['submitted'])){
  *
  * @return bool
  */
-function saveDatabaseDetails(){
-	$settingArray = file(dirname(__FILE__) . '/setting.php');
+function saveDatabaseDetails()
+{
+    $settingArray = file(dirname(__FILE__) . '/app/setting.php');
 
-	$settingArray[9] = "define('DB_HOST', '{$_POST['host']}');\n";
-	$settingArray[10] = "define('SITE_DB_NAME', '{$_POST['database']}');\n";
-	$settingArray[11] = "define('SITE_DB_USER', '{$_POST['username']}');\n";
-	$settingArray[12] = "define('SITE_DB_PASS', '{$_POST['password']}');\n";
-	$settingArray[13] = "define('SITE_DB_PREFIX', '{$_POST['prefix']}');\n\n";
+    $settingArray[9] = "define('DB_HOST', '{$_POST['host']}');\n";
+    $settingArray[10] = "define('SITE_DB_NAME', '{$_POST['database']}');\n";
+    $settingArray[11] = "define('SITE_DB_USER', '{$_POST['username']}');\n";
+    $settingArray[12] = "define('SITE_DB_PASS', '{$_POST['password']}');\n";
+    $settingArray[13] = "define('SITE_DB_PREFIX', '{$_POST['prefix']}');\n\n";
 
-	$settingString = '';
-	for ($i = 0, $n = count($settingArray); $i < $n; $i++)
-	{
-		$settingString .= rtrim($settingArray[$i]) . "\n";
-	}
+    $settingString = '';
+    for ($i = 0, $n = count($settingArray); $i < $n; $i++) {
+        $settingString .= rtrim($settingArray[$i]) . "\n";
+    }
 
-	try
-	{
-		//open the setting file stream
-		$fp = fopen(dirname(__FILE__) . '/setting.php', 'r+');
+    try {
+        //open the setting file stream
+        $fp = fopen(dirname(__FILE__) . '/app/setting.php', 'r+');
 
-		//write the content to the file
-		fwrite($fp, $settingString);
+        //write the content to the file
+        fwrite($fp, $settingString);
 
-		//close the file stream
-		fclose($fp);
-		return true;
-	}
-	catch(Exception $e)
-	{
-		return false;
-	}
+        //close the file stream
+        fclose($fp);
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
 }
 
 $connection = null;
-function checkConnection(){
-	global $connection;
+function checkConnection()
+{
+    global $connection;
 
-	//if connection already exists
-	if($connection != null) {
-		return true;
-	} else {
-		try {
-			$connection = new PDO('mysql:host='. $_POST['host'] .';dbname='. $_POST['database'] . ';charset=utf8', $_POST['username'], $_POST['password']);
-			return true;
-		} catch(PDOException $e) {
-			return false;
-		}
-	}
+    //if connection already exists
+    if ($connection != null) {
+        return true;
+    } else {
+        try {
+            $connection = new PDO('mysql:host='. $_POST['host'] .';dbname='. $_POST['database'] . ';charset=utf8', $_POST['username'], $_POST['password']);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 
 /**
- * @param string $message   message to display, html is allowed
- * @param int $status       status code, 0=error, 1=success
+ * @param string                             $message message to display, html is allowed
+ * @param int                                $status  status code, 0=error, 1=success
  * @param $callback         callback function
- * @param bool $append      if the message appeend or clear
+ * @param bool                               $append  if the message appeend or clear
  * @return string
  */
-function generateJson($message = '', $status = 1, $callback, $append = false){
-	$generatedJson = '{"status":"'.$status.'", "message":"'.$message.'", "callback": "'.$callback.'", "append": "'.$append.'" }';
-	return $generatedJson;
+function generateJson($message = '', $status = 1, $callback, $append = false)
+{
+    $generatedJson = '{"status":"'.$status.'", "message":"'.$message.'", "callback": "'.$callback.'", "append": "'.$append.'" }';
+    return $generatedJson;
 }
 
-function installTables(){
-	global $connection;
+function installTables()
+{
+    global $connection;
 
-	$db = $_POST['database'];
-	$prefix = $_POST['prefix'];
-	$sql = <<<SQL
+    $db = $_POST['database'];
+    $prefix = $_POST['prefix'];
+    $sql = <<<SQL
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -267,26 +267,27 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 SQL;
 
-	if(checkConnection()) {
-		try {
-			$statement = $connection->prepare($sql);
-			$statement->execute();
+    if (checkConnection()) {
+        try {
+            $statement = $connection->prepare($sql);
+            $statement->execute();
 
-			return true;
-		} catch(Exception $e) {
-			return false;
-		}
-	}
-	return false;
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    return false;
 }
 
 
-function installData(){
-	global $connection;
+function installData()
+{
+    global $connection;
 
-	$db = $_POST['database'];
-	$prefix = $_POST['prefix'];
-	$sql = <<<SQL
+    $db = $_POST['database'];
+    $prefix = $_POST['prefix'];
+    $sql = <<<SQL
 
 USE {$db};
 
@@ -315,18 +316,19 @@ INSERT INTO {$prefix}help (`variable`, `data_type`, `data`) VALUES ('press_html'
 
 SQL;
 
-	if(checkConnection()) {
-		try {
-			$statement = $connection->prepare($sql);
-			$statement->execute();
+    if (checkConnection()) {
+        try {
+            $statement = $connection->prepare($sql);
+            $statement->execute();
 
-			return true;
-		} catch(Exception $e) {
-			return false;
-		}
-	}
-	return false;
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    return false;
 }
+
 ?>
 
 <!doctype html>
@@ -334,9 +336,9 @@ SQL;
 <head>
 	<meta charset="UTF-8">
 	<title>MusicBee Website Installation Setup</title>
-	<link rel="stylesheet" href="<?php echo $link['url']; ?>styles/dist/mb_main.css?1.0">
+	<link rel="stylesheet" href="<?php echo $link['url']; ?>app/styles/dist/mb_main.css?1.0">
 
-	<script src="<?php echo $link['url']; ?>scripts/jquery-2.1.4.min.js"></script>
+	<script src="<?php echo $link['url']; ?>app/scripts/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 <div class="top_infobar " id="top_jump">
@@ -350,8 +352,8 @@ SQL;
 <div class="main_content_wrapper col_2_1">
 	<div class="sub_content_wrapper">
 
-		<?php if(isset($_GET['step'])): ?>
-		<?php if($_GET['step']==1): ?>
+    <?php if (isset($_GET['step'])) : ?>
+    <?php if ($_GET['step']==1) : ?>
 		<div class="box_content">
 			<span class="show_info custom">
 				<h3>Step 1</h3>
@@ -419,18 +421,18 @@ SQL;
 				install_tables = function(){
 					$("#action").attr("value","install_tbl");
 					$('#submit').click();
-				}
+				};
 
 				install_data = function(){
 					$("#action").attr("value","install_data").delay(100);
 					$('#submit').click();
-				}
+				};
 
 				install_finished = function(){
 					window.location = "?step=2";
-				}
+				};
 			</script>
-			<?php elseif($_GET['step']==2): ?>
+    <?php elseif ($_GET['step']==2) : ?>
 				<div class="box_content">
 					<span class="show_info custom">
 						<h3>Congratualtion</h3>
@@ -453,9 +455,10 @@ SQL;
 					</ul>
 
 				</div>
-			<?php endif; ?>
+    <?php 
+endif; ?>
 
-			<?php else: ?>
+    <?php else: ?>
 
 				<div class="box_content">
 					<span class="show_info custom">
@@ -480,20 +483,22 @@ SQL;
 				</div>
 				<div class="box_content">
 
-					<?php if(phpversion() > 5.3): ?>
+        <?php if (phpversion() > 5.3) : ?>
 						<ul class="form">
 							<button class="btn btn_blue" type="submit" onclick="next()">Continue</button>
 						</ul>
-					<?php else: ?>
+        <?php else: ?>
 						<p class="show_info info_red custom">You will need atleast PHP 5.4 to continue.</p>
-					<?php endif; ?>
+        <?php 
+endif; ?>
 				</div>
 				<script>
 					function next() {
 						window.location = "?step=1";
 					}
 				</script>
-			<?php endif; ?>
+    <?php 
+endif; ?>
 
 
 	</div>
@@ -526,8 +531,8 @@ SQL;
 	var obj;
 	function generateResult(data){
 		obj = validateJSON(data);
-		if (obj != false) {
-			if(obj.append == true) {
+		if (obj !== false) {
+			if(obj.append === true) {
 				$('#result').append(obj.message+'<br>');
 			} else {
 				$('#result').html(obj.message);
@@ -559,6 +564,7 @@ SQL;
 
 	//create and call the function by it's name
 	function callback(function_name) {
+		/*jslint evil: true */
 		new Function("return " + function_name + "()")();
 	}
 
@@ -566,4 +572,3 @@ SQL;
 </script>
 </body>
 </html>
-
