@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MusicBee Website 2.0\n"
+"POT-Creation-Date: 2017-01-21 12:57+0530\n"
+"PO-Revision-Date: 2017-01-21 12:58+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bn_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;gettext\n"
+"X-Poedit-SearchPath-0: functions.php\n"
+"X-Poedit-SearchPath-1: index.php\n"
+"X-Poedit-SearchPath-2: views/header.template.php\n"
+
+#: functions.php:134
+msgid "Dashboard"
+msgstr "ড্যাশবোর্ড"
+
+#: functions.php:145
+#, php-format
+msgid "Hey, %1$s"
+msgstr ""
+
+#: functions.php:150
+msgid "Web Admin"
+msgstr ""
+
+#: functions.php:156
+msgid "Forum Admin"
+msgstr ""
+
+#: functions.php:163
+msgid "Sign Out"
+msgstr ""
+
+#: index.php:26
+msgid "Hello world!"
+msgstr "ওহে বিশ্ব!"
+
+#: index.php:28
+#, php-format
+msgid "oh my %1$s "
+msgstr "%1$s আহারে"
+
+#: views/header.template.php:36
+msgid "Musicbee"
+msgstr ""

@@ -13,9 +13,9 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/app/includes/html-purifier/HTMLPurifier.auto.php'; //load html purifier
 class Format
 {
-    public static function htmlSafeOutput($html)
+    public static function htmlSafeOutput($html, $htmlpurifierConfig)
     {
-        $config = HTMLPurifier_Config::createDefault();
+        $config = $htmlpurifierConfig;
         $config->set('HTML.AllowedElements', array(
                          'code', 'p',  'a',  'img',  'div',  'pre',
             'table',  'thead',  'tbody',  'td',  'tr',
@@ -85,32 +85,8 @@ class Format
         . $suffixes[$suffixIndex];
     }
 
-    /**
-         * @param array $val
-         *
-         * @return string
-         */
-    public static function safeSqlArray($val)
-    {
-        return join(',', array_fill(0, count($val), '?'));
-    }
 
-    public static function safeSqlArrayFullText($val)
-    {
-        return join(' ', array_fill(0, count($val), '?'));
-    }
-
-    public static function safeSqlSearchArray($string)
-    {
-        return explode(' ', trim($string));
-    }
-
-    public static function createSqlArrayParam($string)
-    {
-        return explode(',', trim($string));
-    }
-
-        /* Converts any HTML-entities into characters */
+    /* Converts any HTML-entities into characters */
     public static function numeric2character($t)
     {
         $convmap = array(0x0, 0x2FFFF, 0, 0xFFFF);

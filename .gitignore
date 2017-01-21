@@ -1,5 +1,5 @@
 /forum
-/setting.php
+/vendor/.git
 
 
 # Created by https://www.gitignore.io/api/git,phpstorm,sublimetext
@@ -70,3 +70,4 @@ bh_unicode_properties.cache
 # Sublime-github package stores a github token in this file
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
+bower_components/

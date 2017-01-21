@@ -33,7 +33,7 @@ if(isset($_POST['id'])) {
 	<link rel="search" type="application/opensearchdescription+xml" href="<?php echo $link['url']; ?>opensearch.xml" title="<?php echo $lang['addon_opensearch_title']; ?>"/>
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $link['root'].'includes/meta&styles.php'; ?>
+	<?php include $link['root'].'includes/header.template.php'; ?>
 
 	<link rel="stylesheet" href="<?php echo GetStyleDir(); ?>magnific-popup.css">
 	<!-- Used for slider animation -->

@@ -18,7 +18,7 @@
 	<meta name="description" content="<?php echo $lang['bug_desc']; ?>">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $link['root'].'includes/meta&styles.php'; ?>
+	<?php include $link['root'].'includes/header.template.php'; ?>
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $link['root'].'includes/font.helper.php'; ?>

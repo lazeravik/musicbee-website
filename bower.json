@@ -1,0 +1,17 @@
+{
+    "name": 		"musicbee-website",
+    "version": 		"1.9",
+    "install": {
+		"path": {
+          "css": 	"app/styles",
+          "js": 	"app/scripts",
+          "scss": 	"app/styles/scss",
+          "eot": 	"app/styles/fonts",
+          "svg": 	"app/styles/fonts",
+          "ttf": 	"app/styles/fonts",
+          "woff":	"app/styles/fonts",
+          "woff2":	"app/styles/fonts",
+          "otf":	"app/styles/fonts"
+        }
+    }
+}

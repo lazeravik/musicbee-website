@@ -12,4 +12,15 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/app/functions.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/index.template.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/header.template.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/mainmenu.template.php';
+?>
+
+<ul>
+    <li><a href="<?php echo $link['url']; ?>en/asdfd">english</a></li>
+    <li><a href="<?php echo $link['url']; ?>ru/asdfd">russian</a></li>
+    <li><a href="<?php echo $link['url']; ?>bn/asdfd">bengali</a></li>
+</ul>
+
+</body>
+</html>

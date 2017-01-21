@@ -32,7 +32,7 @@ $data['html_safe'] = Format::htmlSafeOutput($data['html_raw']); //purify the rea
 
 	<!--include common meta tags and stylesheets -->
 	<?php /** @noinspection PhpIncludeInspection */
-	include $link['root'].'includes/meta&styles.php'; ?>
+	include $link['root'].'includes/header.template.php'; ?>
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php /** @noinspection PhpIncludeInspection */

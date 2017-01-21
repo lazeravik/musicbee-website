@@ -23,7 +23,7 @@ $type_blob = (array_key_exists($data['type'], $mb['main_menu']['add-ons']['sub_m
 	<meta name="keywords" content="addons, plugins, skins, theater mode, musicbee, music, player, unltimate, best, customizable, skin, free, plugin, download">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $link['root'].'includes/meta&styles.php'; ?>
+	<?php include $link['root'].'includes/header.template.php'; ?>
 
 	<!-- Opensearch-->
 	<link rel="search" type="application/opensearchdescription+xml" href="<?php echo $link['url']; ?>opensearch.xml" title="<?php echo $lang['addon_opensearch_title']; ?>" />

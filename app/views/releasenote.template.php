@@ -23,7 +23,7 @@ $releasenoteData = getVersionInfo(0, "byAllReleases");
 	<meta name="description" content="<?php echo $lang['releasenote_desc']; ?>">
 
 	<!--include common meta tags and stylesheets -->
-	<?php include $link['root'].'includes/meta&styles.php'; ?>
+	<?php include $link['root'].'includes/header.template.php'; ?>
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php include $link['root'].'includes/font.helper.php'; ?>
 </head>

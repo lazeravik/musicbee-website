@@ -1,5 +1,6 @@
 $footer_background : #333333;
 $footer_foreground : #eeeeee;
+$footer-pattern: "../img/hive_pat.png";
 
 footer.footer_section {
   background: $footer_background;
@@ -94,7 +95,7 @@ footer.footer_section {
 	display: block;
 	margin: 0 auto;
 	background: #403000;
-	background: url("../../img/hive_pat.png"), linear-gradient(135deg, #212121, #403000, #212121);
+	background: url($footer-pattern), linear-gradient(135deg, #212121, #403000, #212121);
 	font-size: 13px;
 	box-shadow: inset 0 4px 0 rgba(255, 152, 0, 0.5);
 

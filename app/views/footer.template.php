@@ -108,7 +108,7 @@
 	}
 </script>
 <?php if(empty($jquery_preloaded)): ?>
-	<script src="<?php echo $link['js-dir']; ?>jquery-2.1.4.min.js"></script>
+	<script src="<?php echo $link['js-dir']; ?>jquery/jquery.js"></script>
 <?php endif; ?>
 <script src="<?php echo $link['js-dir']; ?>menu.navigation.js"></script>
 

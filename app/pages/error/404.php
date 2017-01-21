@@ -11,19 +11,15 @@
  */
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/app/functions.php';
+
+$title          = $lang['404_page_not_found'];
+$description    = "";
+$keywords       = "";
+$isFontHelperDisabled = false;
+
+include_once $link['view-dir'] . 'header.template.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $lang['404_page_not_found']; ?></title>
 
-	<!--include common meta tags and stylesheets -->
-	<?php include $link['root'].'includes/meta&styles.php'; ?>
-
-	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $link['root'].'includes/font.helper.php'; ?>
-</head>
-<body>
 <!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
 <?php
 include($mainmenu);

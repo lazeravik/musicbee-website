@@ -10,36 +10,31 @@
  *
  */
 
+/**
+ * Declare the properties for this page
+ */
+$title          = $lang['home_title'];
+$description    = $lang['home_desc'];
+$keywords       = "music, player, ultimate, best, customizable, skin, free, plugin";
+$isFontHelperDisabled = false;
+$socialMetaTags = <<<HTML
+	    <!--Social network tags for facebook and twitter -->
+	    <meta property="og:title" content="{$lang['home_title']}"/>
+	    <meta property="og:url" content="{$link['url']}"/>
+	    <meta property="og:image" content="{$link['img-dir']}mb_big.png">
+	    <meta property="og:description" content="{$lang['home_desc']}">
+        
+	    <meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@MusicBeePlayer">
+	    <meta name="twitter:title" content="MusicBee - Music Manager and Player">
+	    <meta name="twitter:description" content="{$lang['home_desc']}">
+HTML;
+
+
+include_once $link['view-dir'] . 'header.template.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $lang['home_title']; ?></title>
-	<meta name="description" content="<?php echo $lang['home_desc']; ?>">
 
-	<!-- keyword meta tag is obsolete, google does not use it, but some
-	search engine still use it, so for legacy support it is included -->
-	<meta name="keywords" content="musicbee, music, player, ultimate, best, customizable, skin, free, plugin">
 
-	<!--include common meta tags and stylesheets -->
-	<?php include $link['incl-dir'] . 'meta&styles.php'; ?>
-
-	<!--Social network tags for facebook and twitter -->
-	<meta property="og:title" content="<?php echo $lang['home_title']; ?>"/>
-	<meta property="og:url" content="<?php echo $link['url']; ?>"/>
-	<meta property="og:image" content="<?php $link['style-dir']; ?>mb_big.png">
-	<meta property="og:description" content="<?php echo $lang['home_desc']; ?>">
-
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@MusicBeePlayer">
-	<meta name="twitter:title" content="MusicBee - Music Manager and Player">
-	<meta name="twitter:description" content="<?php echo $lang['home_desc']; ?>">
-
-	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
-	<?php include $link['incl-dir'].'font.helper.php'; ?>
-</head>
-<body>
-<div id="indexBackground">
 	<div id="wrapper">
 		<!-- BODY CONTENT -->
 		<div id="main">
@@ -47,9 +42,9 @@
 				<div class="mb_landing_overlay mb_intro_top">
 					<div class="overlay">
 						<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
-						<?php
-						include($mainmenu);
-						?>
+        <?php
+        include_once $mainmenu;
+        ?>
 						<section class="mb_landing align_right">
 							<div class="sub_content">
 								<div class="hero_text_top">
@@ -71,7 +66,12 @@
 										<h3><?php echo $lang['home_5']; ?></h3>
 										<p><?php echo sprintf($lang['for_os'], $mb['musicbee_download']['stable']['supported_os']); ?></p>
 									</a>
-									<a class="btn btn_wireframe btn_wireframe_blue" onclick="$('html,body').animate({scrollTop: $('#simple_powerful').offset().top});" href="javascript:void(0)">
+									<a
+                                        id="feature_scroll"
+                                        class="btn btn_wireframe btn_wireframe_blue"
+                                        href="javascript:void(0)"
+                                    >
+
 										<h3><?php echo $lang['home_6']; ?></h3>
 										<p><?php echo $lang['home_7']; ?></p>
 									</a>
@@ -107,7 +107,7 @@
 											<i class="fa fa-sliders"></i>
 										</p>
 										<p>
-											<?php echo $lang['home_13']; ?>
+            <?php echo $lang['home_13']; ?>
 										</p>
 									</div>
 								</li>
@@ -134,7 +134,7 @@
 											<i class="fa fa-bullseye"></i>
 										</p>
 										<p>
-											<?php echo $lang['home_38']; ?>
+            <?php echo $lang['home_38']; ?>
 										</p>
 									</div>
 								</li>
@@ -269,13 +269,13 @@
 			</div>
 		</div>
 	</div>
-</div>
+
 <!--IMPORTANT-->
 <!-- INCLUDE THE FOOTER AT THE END -->
 <?php
-include($footer);
+include_once $footer;
 ?>
-<script src="<?php echo $link['js-dir']; ?>scrollReveal.min.js"></script>
+<script src="<?php echo $link['js-dir']; ?>scrollreveal/scrollreveal.js"></script>
 <script src="<?php echo $link['js-dir']; ?>jquery.sticky.min.js"></script>
 <script src="<?php echo $link['js-dir']; ?>mb_common.js"></script>
 <script type="text/javascript">
@@ -311,12 +311,12 @@ include($footer);
 		scale    : 1
 	};
 	var hero_img = {
-		origin   : "right",
-		distance : "30px",
-		viewFactor : "0.5",
+		origin   : "bottom",
+		distance : "50px",
+		viewFactor: "0.1",
 		duration : 1000,
-		delay    : 50,
-		scale    : .9,
+		delay    : 400,
+		scale    : 0,
 		mobile   : false
 	};
 
@@ -326,6 +326,10 @@ include($footer);
 			.reveal('.hero_buttons', download)
 			.reveal('img', img)
 			.reveal('.hero_img_top img', hero_img);
+
+	$("#feature_scroll").click(function () {
+        $('html,body').animate({scrollTop: $('#simple_powerful').offset().top});
+    });
 
 
 	$primary_nav_break = 801;

@@ -19,7 +19,7 @@
 
 	<!--include common meta tags and stylesheets -->
 	<?php
-	include $link['root'].'includes/meta&styles.php'; ?>
+	include $link['root'].'includes/header.template.php'; ?>
 
 	<!--roboto is messed up when clearfont is disabled this makes sure that it looks great -->
 	<?php

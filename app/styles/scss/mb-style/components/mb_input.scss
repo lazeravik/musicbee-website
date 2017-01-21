@@ -10,7 +10,7 @@ $input-border-active: 2px solid #333;
 $input-border-focus: 2px solid #333;
 $input-padding : 10px;
 $input-transition : linear all .15s;
-
+$select-arrow : "../img/select-arrows.svg";
 
 
 /** Scss syntax starts here */
@@ -43,7 +43,7 @@ input, textarea, select {
 }
 
 select {
-  background: url("../../img/select-arrows.svg") no-repeat right 10px center;
+  background: url($select-arrow) no-repeat right 10px center;
   padding-right: 20px;
   -webkit-appearance   : none;
   -moz-appearance      : none;

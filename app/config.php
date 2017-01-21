@@ -9,7 +9,7 @@ $link                         = array();
 $link['root']                 = cfg::getRootDir().'/app/';
 $link['url']                  = cfg::getHttpUrl();
 $link['app-url']              = $link['url'].'app/';
-$link['favicon']              = $link['url']."favicon.ico";
+$link['favicon']              = $link['url']."app/favicon.ico";
 $link['download']             = $link['url'].'downloads/';
 $link['rss']                  = $link['url'].'rss/';
 $link['home']                 = $link['url'];
@@ -35,7 +35,8 @@ $link['style-dir']            = cfg::getStyleDir();
 $link['img-dir']              = cfg::getImageDir();
 $link['js-dir']               = cfg::getScriptDir();
 $link['incl-dir']             = $link['root'].'includes/';
-
+$link['view-dir']             = $link['root']. 'views/';
+$link['locale-dir']           = $link['root']. 'locale/';
 
 $db_info = array();
 $db_info['host']              = 'localhost';
@@ -51,3 +52,5 @@ $db_info['settings_tbl']      = $db_info['db_prefix'].'settings';
 $db_info['mb_all']            = $db_info['db_prefix'].'allversions';
 $db_info['mb_current']        = $db_info['db_prefix'].'current_version';
 $db_info['help']              = $db_info['db_prefix'].'help';
+
+$setting['default-lang']      = 'en_US';

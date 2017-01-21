@@ -13,16 +13,16 @@ class databaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(true, db::isDatabaseConnected(), "Database connection is working properly!");
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function test_musicbeerelease_stable()
-    {
-        $this->expectException(
-            MBReleaseManager::getMusicBeeRelease(
-                "uselessstuff",
-                db::getDatabaseConnection()
-            )
-        );
-    }
+//    /**
+//     * @expectedException InvalidArgumentException
+//     */
+//    public function test_musicbeerelease_stable()
+//    {
+////        $this->expectException(
+////            MBReleaseManager::getMusicBeeRelease(
+////                "this_should_throw_exception",
+////                db::getDatabaseConnection()
+////            )
+////        );
+//    }
 }

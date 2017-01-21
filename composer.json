@@ -4,5 +4,9 @@
       "app/classes",
 	  "app/libraries"
     ]
+  },
+  "require": {
+    "phpmailer/phpmailer": "^5.2",
+    "ezyang/htmlpurifier": "^4.8"
   }
 }

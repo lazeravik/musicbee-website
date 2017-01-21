@@ -13,21 +13,30 @@
 //use microtime to get page loadtime
 $startScriptTime = microtime(true);
 
-
+if(defined('MB_FUNC')) {
+    return true;
+}
+define('MB_FUNC', 'COMMON_FUNCTION');
 
 //Start a new session if no session detected..... WARNING! IT REQUIRES PHP 5.4 OR LATER
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/app/config.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/forum/SSI.php';
 
-use App\Lib\Language as lang;
+include_once $_SERVER['DOCUMENT_ROOT'].'/app/config.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/forum/SSI.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/app/locale/lang.list.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/app/libraries/gettext/gettext.inc.php';
+
+use App\Lib\Utility\Route;
+use App\Lib\Utility\Router;
+use App\Lib\Utility\LanguageManager;
+//use App\Lib\Language as lang;
 
 //creates an array from the URI
-$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
+//$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
 
 //Error code for knowledge base page
 $errorCode = array(
@@ -41,23 +50,27 @@ $errorCode = array(
 
 //SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
 
+$router = new Router();
+$router->addRoute(new Route("/"));
+$router->addRoute(new Route("/downloads/"));
+$router->addRoute(new Route("/help/"));
+$router->route();
 
 //Language array
-$lang = array();
-new lang();
+//$lang = array();
+//new lang();
 
+$locale = LanguageManager::getRequestedLanguage($router->getLanguageRoute(), $langList);
+LanguageManager::setLanguage($locale);
 
 //Forum integration is must, if it is not initialized before this then throw an error
 if (!isset($context)) {
     header('Location: '.$link['kb'].'?code='.$errorCode['FORUM_INTEGRATION']);
 }
 
-//Load other classes and database login info
-require_once $link['root'].'setting.php';
-
 
 //Gets website setting !DO NOT REMOVE IT!
-$setting = getSetting();
+$setting = null;
 
 //Save current page url into session for login/logout redirect............
 //well it does not work anyway! could be a SMF Bug.
@@ -79,8 +92,8 @@ $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_RE
 $user_avatar = $context['user']['avatar'] != null ? $context['user']['avatar']['href'] : $link['img-dir'].'usersmall.jpg';
 
 //Get the musicbee satble and beta release data
-$releaseData['stable'] = getVersionInfo(0, 'byCurrentVersion')[0];
-$releaseData['beta']   = getVersionInfo(1, 'byCurrentVersion')[0];
+//$releaseData['stable'] = getVersionInfo(0, 'byCurrentVersion')[0];
+//$releaseData['beta']   = getVersionInfo(1, 'byCurrentVersion')[0];
 
 //Contains EVERYTHING in single multidimensional array! DO NOT REMOVE IT!
 $mb = array(
@@ -118,7 +131,7 @@ $mb = array(
 
     'main_menu' => array(
         'dashboard'       => array(
-            'title'       => $lang['dashboard'],
+            'title'       => __("Dashboard"),
             'href'        => $link['addon']['dashboard'],
             'restriction' => 'login',
             'sub_menu'    => array(),
@@ -129,117 +142,117 @@ $mb = array(
             'restriction' => 'login',
             'sub_menu'    => array(
                 'user-profile' => array(
-                    'title' => ''.sprintf($lang['hey_username'], $context['user']['name']).'',
+                    'title' => ''.sprintf(__('Hey, %1$s'), $context['user']['name']).'',
                     'href'        => $link['forum'].'?action=profile',
                 ),
-                'line1'        => array('title' => $lang['line'],),
+                'line1'        => array('title' => "<hr class=\"line\"/>",),
                 'admin-panel'  => array(
-                    'title'       => $lang['web_admin'],
+                    'title'       => __("Web Admin"),
                     'href'        => $link['addon']['dashboard'].'#admin_setting',
-                    'icon'        => $lang['20'],
+                    'icon'        => "<i class=\"fa fa-desktop\"></i>",
                     'restriction' => 'admin',
                 ),
                 'forum-admin'  => array(
-                    'title'       => $lang['forum_admin'],
+                    'title'       => __("Forum Admin"),
                     'href'        => $link['admin']['forum-panel'],
-                    'icon'        => $lang['21'],
+                    'icon'        => "<i class=\"fa fa-comments\"></i>",
                     'restriction' => 'admin',
                 ),
-                'line2'        => array('title' => $lang['line'],),
+                'line2'        => array('title' => "<hr class=\"line\"/>",),
                 'sign-out'     => array(
-                    'title' => $lang['sign_out'],
+                    'title' => __("Sign Out"),
                     'href'  => $link['logout'],
-                    'icon'  => $lang['23'],
+                    'icon'  => "<i class=\"fa fa-sign-out\"></i>",
                 ),
             ),
         ),
         'download'        => array(
-            'title'    => $lang['download'],
+            'title'    => __("Download"),
             'href'     => $link['download'],
             'sub_menu' => array(),
         ),
         'add-ons'         => array(
-            'title'    => $lang['addons'],
+            'title'    => __("Add-ons"),
             'href'     => $link['addon']['home'],
             'sub_menu' => array(
                 '1' => array(
-                    'title' => $lang['skins'],
+                    'title' => __("Skins"),
                     'href'  => $link['addon']['home']."s/?type=1",
-                    'icon'  => $lang['24'],
-                    'desc'  => $lang['description_1'],
+                    'icon'  => "<i class=\"fa fa-paint-brush\"></i>",
+                    'desc'  => __("Make MusicBee look the way you want"),
                     'id'    => 1,
                 ),
                 '2' => array(
-                    'title' => $lang['plugins'],
+                    'title' => __("Plugins"),
                     'href'  => $link['addon']['home']."s/?type=2",
-                    'icon'  => $lang['25'],
-                    'desc'  => $lang['description_2'],
+                    'icon'  => "<i class=\"fa fa-plug\"></i>",
+                    'desc'  => __("Add features/functionality to MusicBee"),
                     'id'    => 2,
                 ),
                 '3' => array(
-                    'title' => $lang['visualizer'],
+                    'title' => __("Visualizer"),
                     'href'  => $link['addon']['home']."s/?type=3",
-                    'icon'  => $lang['26'],
-                    'desc'  => $lang['description_3'],
+                    'icon'  => "<i class=\"fa fa-bar-chart\"></i>",
+                    'desc'  => __("Get colorful visualizers for an eye pleasing experience"),
                     'id'    => 3,
                 ),
                 '4' => array(
-                    'title' => $lang['theater_mode'],
+                    'title' => __("Theater Mode"),
                     'href'  => $link['addon']['home']."s/?type=4",
-                    'icon'  => $lang['28'],
-                    'desc'  => $lang['description_5'],
+                    'icon'  => "<i class=\"fa fa-arrows-alt\"></i>",
+                    'desc'  => __("Get a full theater mode experience for MusicBee"),
                     'id'    => 4,
                 ),
                 '5' => array(
-                    'title' => $lang['misc'],
+                    'title' => __("Misc"),
                     'href'  => $link['addon']['home']."s/?type=5",
-                    'icon'  => $lang['29'],
-                    'desc'  => $lang['description_6'],
+                    'icon'  => "<i class=\"fa fa-ellipsis-h\"></i>",
+                    'desc'  => __("Other useful add-ons for enhancing your MusicBee experience"),
                     'id'    => 5,
                 ),
             ),
         ),
         'forum'           => array(
-            'title'    => $lang['forum'],
+            'title'    => __("Forum"),
             'href'     => $link['forum'],
             'sub_menu' => array(),
         ),
         'help'            => array(
-            'title'    => $lang['help'],
+            'title'    => __("Help"),
             'href'     => $link['faq'],
             'sub_menu' => array(
                 'faq' => array(
-                    'title' => $lang['faq'],
+                    'title' => __("FAQ & Help"),
                     'href'  => $link['faq'],
-                    'icon'  => $lang['faq_icon'],
+                    'icon'  => "<i class=\"fa fa-question\"></i>",
                 ),
                 'api' => array(
-                    'title' => $lang['dev_api'],
+                    'title' => __("Developer API"),
                     'href'  => $link['api'],
-                    'icon'  => $lang['code_icon'],
+                    'icon'  => "<i class=\"fa fa-code\"></i>",
                 ),
-                'line2'        => array('title' => $lang['line'],),
+                'line2'        => array('title' => "<hr class=\"line\"/>",),
                 'release-note' => array(
-                    'title' => $lang['release-note'],
+                    'title' => __("Release Notes"),
                     'href'  => $link['release-note'],
-                    'icon'  => $lang['note_icon'],
+                    'icon'  => "<i class=\"fa fa-sticky-note-o\"></i>",
                 ),
                 'press' => array(
-                    'title' => $lang['press'],
+                    'title' => __("Press & Media"),
                     'href'  => $link['press'],
-                    'icon'  => $lang['press_icon'],
+                    'icon'  => "<i class=\"fa fa-bullhorn\"></i>",
                 ),
-                'line3'        => array('title' => $lang['line'],),
+                'line3'        => array('title' => "<hr class=\"line\"/>",),
                 'bug' => array(
-                    'title' => $lang['report_bug'],
+                    'title' => __("Report a bug"),
                     'href'  => $link['bugreport'],
-                    'icon'  => $lang['bug_icon'],
+                    'icon'  => "<i class=\"fa fa-bug\"></i>",
                     'hide'  => true,
                 ),
                 'wiki' => array(
-                    'title' => $lang['mb_wiki'],
+                    'title' => __("MusicBee Wiki"),
                     'href'  => $setting['wikiaLink'],
-                    'icon'  => $lang['wiki_icon'],
+                    'icon'  => "<i class=\"fa fa-wikipedia-w\"></i>",
                     'target'=> '_blank',
                     'hide'  => true,
                 ),
@@ -278,10 +291,10 @@ $mb = array(
             'message'      => isset($releaseData['beta']['message'])        ? $releaseData['beta']['message'] : null,
         ),
 
-        'patch' => getVersionInfo(2, 'byCurrentVersion')[0],
+        //'patch' => getVersionInfo(2, 'byCurrentVersion')[0],
     ),
 
-    'help' => Help::getHelp(),
+    //'help' => Help::getHelp(),
 
     'view_range' => array(
         'addon_view_range'         => 20,
@@ -297,21 +310,21 @@ $mb = array(
  * Maybe we don't wan't anyone except admin to see this, show error to anyone else. Or maybe
  * this is only available for logged in users. No guest is allowed kicked them to error page
  */
-if (!$mb['user']['is_admin'] && !empty($admin_only)) {
-    header('Location: '.$link['kb'].'?code='.$errorCode['ADMIN_ACCESS']);
-} elseif (!$mb['user']['can_mod'] && !empty($mod_only)) {
-    if (!empty($json_response)) {
-        die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
-    } else {
-        header('Location: '.$link['kb'].'?code='.$errorCode['MOD_ACCESS']);
-    }
-} elseif ($mb['user']['is_guest'] && !empty($no_guests)) {
-    if (!empty($json_response)) {
-        die('{"status": "0", "data": "'.$lang['err_login_required'].'"}');
-    } else {
-        header('Location: '.$link['kb'].'?code='.$errorCode['LOGIN_MUST']);
-    }
-}
+//if (!$mb['user']['is_admin'] && !empty($admin_only)) {
+//    header('Location: '.$link['kb'].'?code='.$errorCode['ADMIN_ACCESS']);
+//} elseif (!$mb['user']['can_mod'] && !empty($mod_only)) {
+//    if (!empty($json_response)) {
+//        die('{"status": "0", "data": "'.$lang['dashboard_err_1'].'"}');
+//    } else {
+//        header('Location: '.$link['kb'].'?code='.$errorCode['MOD_ACCESS']);
+//    }
+//} elseif ($mb['user']['is_guest'] && !empty($no_guests)) {
+//    if (!empty($json_response)) {
+//        die('{"status": "0", "data": "'.$lang['err_login_required'].'"}');
+//    } else {
+//        header('Location: '.$link['kb'].'?code='.$errorCode['LOGIN_MUST']);
+//    }
+//}
 
 //if $no_directaccess is set, no direct access is allowed
 if (!empty($no_directaccess)) {
@@ -324,8 +337,7 @@ if (!empty($no_directaccess)) {
  * If the User has an account in forum but not for the dashboard then create one,
  * and set dashoard user info in session
  */
-require_once $link['root'].'classes/Member.php';
-$member = new Member();
+//$member = new Member();
 
 
 ///page location variable starts here
@@ -334,36 +346,36 @@ $footer = $link['root'].'views/footer.template.php';
 
 
 $connection = null;
-/**
- * @return bool
- * Checks and creates database connection.
- */
-function databaseConnection()
-{
-    global $connection;
-    //if connection already exists
-    if ($connection != null) {
-        return true;
-    } else {
-        try {
-            $connection = new PDO(
-                'mysql:host='.DB_HOST.';
-                dbname='.SITE_DB_NAME.';
-                charset=utf8',
-                SITE_DB_USER,
-                SITE_DB_PASS
-            );
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $connection->exec('set session sql_mode = traditional');
-            $connection->exec('set session innodb_strict_mode = on');
-
-            return true;
-        } catch (PDOException $e) {
-        }
-    }
-
-    return false;
-}
+///**
+// * @return bool
+// * Checks and creates database connection.
+// */
+//function databaseConnection()
+//{
+//    global $connection;
+//    //if connection already exists
+//    if ($connection != null) {
+//        return true;
+//    } else {
+//        try {
+//            $connection = new PDO(
+//                'mysql:host='.DB_HOST.';
+//                dbname='.SITE_DB_NAME.';
+//                charset=utf8',
+//                SITE_DB_USER,
+//                SITE_DB_PASS
+//            );
+//            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//            $connection->exec('set session sql_mode = traditional');
+//            $connection->exec('set session innodb_strict_mode = on');
+//
+//            return true;
+//        } catch (PDOException $e) {
+//        }
+//    }
+//
+//    return false;
+//}
 
 
 /**
@@ -374,72 +386,72 @@ function databaseConnection()
  *
  * @return null|string
  */
-function getVersionInfo($value, $type)
-{
-    global $connection, $lang, $db_info;
-    if (databaseConnection()) {
-        try {
-            if ($type == "byId") {
-                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS=:value";
-            } elseif ($type == "byVersion") {
-                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE version=:value";
-            } elseif ($type == "byCurrentVersion") {
-                $sql = "SELECT * FROM {$db_info['mb_current']} WHERE ID_VERSION=:value";
-            } elseif ($type == "byAllReleases") {
-                $sql = "SELECT * FROM {$db_info['mb_all']} ORDER BY version DESC";
-            }
-            $statement = $connection->prepare($sql);
-
-            if ($type != "byAllReleases") {
-                $statement->bindValue(':value', $value);
-            }
-
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            if (count($result) > 0) {
-                return $result; //Get the availablity first 1= available, 0=already disabled
-            } else {
-                if ($type == "byId") {
-                    return $lang['no_record'];
-                } elseif ($type == "byVersion") {
-                    return null;
-                } //if we are checking using version we want to send null. since we use count() method for result
-            }
-        } catch (Exception $e) {
-            return "Something went wrong. ".$e; //store the error message in the variable
-        }
-    }
-    return null;
-}
-
-/**
- * Get all Website setting
- *
- * @return array
- */
-function getSetting()
-{
-    global $connection, $db_info;
-
-    if (databaseConnection()) {
-        try {
-            $sql = "SELECT * FROM {$db_info['settings_tbl']}";
-            $statement = $connection->prepare($sql);
-            $statement->execute();
-            $result = array_map('reset', array_map('reset', $statement->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC)));
-
-            $result['showPgaeLoadTime'] = ($result['showPgaeLoadTime'] == 1) ? true : false;
-            $result['addonSubmissionOn'] = ($result['addonSubmissionOn'] == 1) ? true : false;
-            $result['imgurUploadOn'] = ($result['imgurUploadOn'] == 1) ? true : false;
-
-
-            return $result;
-        } catch (Exception $e) {
-        }
-    }
-}
-
+//function getVersionInfo($value, $type)
+//{
+//    global $connection, $lang, $db_info;
+//    if (databaseConnection()) {
+//        try {
+//            if ($type == "byId") {
+//                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS=:value";
+//            } elseif ($type == "byVersion") {
+//                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE version=:value";
+//            } elseif ($type == "byCurrentVersion") {
+//                $sql = "SELECT * FROM {$db_info['mb_current']} WHERE ID_VERSION=:value";
+//            } elseif ($type == "byAllReleases") {
+//                $sql = "SELECT * FROM {$db_info['mb_all']} ORDER BY version DESC";
+//            }
+//            $statement = $connection->prepare($sql);
+//
+//            if ($type != "byAllReleases") {
+//                $statement->bindValue(':value', $value);
+//            }
+//
+//            $statement->execute();
+//            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+//
+//            if (count($result) > 0) {
+//                return $result; //Get the availablity first 1= available, 0=already disabled
+//            } else {
+//                if ($type == "byId") {
+//                    return $lang['no_record'];
+//                } elseif ($type == "byVersion") {
+//                    return null;
+//                } //if we are checking using version we want to send null. since we use count() method for result
+//            }
+//        } catch (Exception $e) {
+//            return "Something went wrong. ".$e; //store the error message in the variable
+//        }
+//    }
+//    return null;
+//}
+//
+///**
+// * Get all Website setting
+// *
+// * @return array
+// */
+//function getSetting()
+//{
+//    global $connection, $db_info;
+//
+//    if (databaseConnection()) {
+//        try {
+//            $sql = "SELECT * FROM {$db_info['settings_tbl']}";
+//            $statement = $connection->prepare($sql);
+//            $statement->execute();
+//            $result = array_map('reset', array_map('reset', $statement->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC)));
+//
+//            $result['showPgaeLoadTime'] = ($result['showPgaeLoadTime'] == 1) ? true : false;
+//            $result['addonSubmissionOn'] = ($result['addonSubmissionOn'] == 1) ? true : false;
+//            $result['imgurUploadOn'] = ($result['imgurUploadOn'] == 1) ? true : false;
+//
+//
+//            return $result;
+//        } catch (Exception $e) {
+//        }
+//    }
+//}
+//
 
 
 
