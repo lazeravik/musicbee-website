@@ -10,17 +10,29 @@
  *
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/app/functions.php';
+include_once '../forum/SSI.php';
+include_once '../vendor/autoload.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/header.template.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/mainmenu.template.php';
-?>
+/**
+ * load i18n gettext module and language list
+ */
+include_once 'locale/lang.list.php';
+require_once 'libraries/gettext/gettext.inc.php';
 
-<ul>
-    <li><a href="<?php echo $link['url']; ?>en/asdfd">english</a></li>
-    <li><a href="<?php echo $link['url']; ?>ru/asdfd">russian</a></li>
-    <li><a href="<?php echo $link['url']; ?>bn/asdfd">bengali</a></li>
-</ul>
+/**
+ * Load website and database configuration
+ */
+include_once 'config/paths.php';
+include_once 'config/dbconfig.php';
+include_once 'config/menuconfig.php';
+include_once 'config/settings.php';
 
-</body>
-</html>
+use App\Lib\Bootstrap;
+use App\Lib\Utility\Route;
+use App\Lib\Utility\Router;
+use App\Lib\Utility\LanguageManager;
+use App\Lib\Utility\Config as cfg;
+use App\Lib\Utility\Session;
+
+$langManager = new LanguageManager();
+$app = new Bootstrap($langManager);

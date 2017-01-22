@@ -10,8 +10,6 @@
  *
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/functions.php'; ?>
-<?php
 
 function printMenuItems($menuArray){
 	echo "<li>";
@@ -44,7 +42,7 @@ function printMenuItems($menuArray){
 				<a href="javascript:void(0)" ><i class="fa fa-bars"></i></a>
 			</li>
 			<li class="logo">
-				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo $link['img-dir']; ?>musicbee.png">MusicBee</a>
+				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo $link['img-dir']; ?>musicbee.png"><?php echo __("MusicBee"); ?></a>
 			</li>
 			<?php
 			foreach ($mb['main_menu'] as $key => $menu_item)
@@ -133,7 +131,7 @@ function printMenuItems($menuArray){
 	<p class="show_info info_red"><?php echo $lang['no_js']; ?></p>
 </noscript>
 <?php
-if(file_exists($link['root'].'install.php') && $mb['website']['show_warning']){
+if(file_exists($link['root'].'installer/install.php') && $mb['website']['show_warning']){
 	echo '<p class="show_info info_red"><b>SECURITY WARNING!</b><br> please delete <code>install.php</code> file from the directory.</p>';
 }
 

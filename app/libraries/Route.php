@@ -22,13 +22,23 @@ namespace App\Lib\Utility;
 class Route
 {
     private $url;
-    public function __construct($urlParam)
+    private $method;
+    public function __construct($urlParam, $method)
     {
         $this->url = $urlParam;
+
+        if(!empty($method)) {
+            $this->method = $method;
+        }
     }
 
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
     }
 }

@@ -14,23 +14,29 @@ namespace App\Lib\Utility;
 
 class LanguageManager
 {
-    private static $langList;
+    private $langList;
+    private $languageRoute;
+
+
+    public function init($languageRoute, $langList)
+    {
+        $this->langList = $langList;
+        $this->languageRoute = $languageRoute;
+    }
 
     /**
      * Get the language to load for the current page
-     * @param $languageRoute
-     * @param $langList
      * @return string
+     * @internal param $languageRoute
+     * @internal param $langList
      */
-    public static function getRequestedLanguage($languageRoute, $langList)
+    public function getRequestedLanguage()
     {
         global $setting;
 
-        self::$langList = $langList;
-        $langMatch = self::matchLanguage($languageRoute);
-
-        if($langMatch == "/"){
-            if(isset($_COOKIE['language'])){
+        $langMatch = $this->matchLanguage();
+        if ($langMatch == "/") {
+            if (isset($_COOKIE['language'])) {
                 return $_COOKIE['language'];
             } else {
                 return $setting['default-lang'];
@@ -44,7 +50,7 @@ class LanguageManager
      * Set domain language and charset
      * @param $locale
      */
-    public static function setLanguage($locale)
+    public function setLanguage($locale)
     {
         global $link;
         $encoding = 'UTF-8';
@@ -53,46 +59,68 @@ class LanguageManager
         T_bind_textdomain_codeset($locale, $encoding);
         T_textdomain($locale);
 
-        self::setLanguageCookie($locale);
+        $this->setLanguageCookie($locale);
     }
 
     /**
      * @param $locale
      * @return bool
      */
-    public static function setLanguageCookie($locale)
+    public function setLanguageCookie($locale)
     {
-        //$_COOKIE['language'] = $locale;
         return setcookie("language", $locale, time() + 60 * 60 * 24 * 30, '/');
     }
 
     /**
      * Get the matched language from language list for loading
-     * @param $languageRoute
      * @return string
+     * @internal param $languageRoute
      */
-    public static function matchLanguage($languageRoute)
+    public function matchLanguage()
     {
         $match = null;
-        if ($languageRoute == null) {
+
+        if ($this->languageRoute == null) {
             return "/";
-        } elseif (strlen($languageRoute) == 2) {
-            if (array_key_exists($languageRoute, self::$langList)) {
-                $match = self::$langList[$languageRoute][0];
-            }
+        } elseif (strlen($this->languageRoute) == 2) {
+            $match = $this->getFromLanguageArrayKey();
         } else {
-            foreach (self::$langList as $lang) {
-                if (strtolower($languageRoute) == strtolower($lang[0])) {
-                    $match = $lang[0];
-                }
-            }
+            $match = $this->getFromLanguageArrayItem();
         }
 
-        if ($languageRoute != null && $match == null) {
+        if ($this->languageRoute != null && $match == null) {
             return "/";
         } else {
             return $match;
         }
     }
 
+    /**
+     * Get the language proper name if it exists in lang.lists.php file
+     * @return null | string
+     */
+    public function getFromLanguageArrayItem()
+    {
+        foreach ($this->langList as $lang) {
+            if (strtolower($this->languageRoute) == strtolower($lang[0])) {
+                return $lang[0];
+            }
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Get the proper language name if only the array key matches!
+     * @return null | string
+     */
+    public function getFromLanguageArrayKey()
+    {
+        if (array_key_exists($this->languageRoute, $this->langList)) {
+            return $this->langList[$this->languageRoute][0];
+        }
+
+        return null;
+    }
 }

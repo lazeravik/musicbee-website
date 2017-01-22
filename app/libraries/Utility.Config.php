@@ -41,16 +41,33 @@ class Config
 
     public static function getStyleDir()
     {
-        return self::getHttpUrl().'app/styles/';
+        return self::getHttpUrl().'public/styles/';
     }
 
     public static function getScriptDir()
     {
-        return self::getHttpUrl().'app/scripts/';
+        return self::getHttpUrl().'public/scripts/';
     }
 
     public static function getImageDir()
     {
-        return self::getHttpUrl().'app/img/';
+        return self::getHttpUrl().'public/img/';
+    }
+
+    /**
+     * Gets the current page URL
+     *
+     * @return string
+     */
+    public static function currentUrl()
+    {
+        $pageURL = self::isSecure()?"https://":"http://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+        } else {
+            $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        }
+
+        return $pageURL;
     }
 }

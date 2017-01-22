@@ -9,34 +9,28 @@
  *  Spelling mistakes and fixes from community members.
  *
  */
-
+exit();
 //use microtime to get page loadtime
 $startScriptTime = microtime(true);
 
-if(defined('MB_FUNC')) {
-    return true;
-}
-define('MB_FUNC', 'COMMON_FUNCTION');
 
-//Start a new session if no session detected..... WARNING! IT REQUIRES PHP 5.4 OR LATER
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+global $langList, $link, $locale;
 
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/app/config.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/forum/SSI.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/app/locale/lang.list.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/libraries/gettext/gettext.inc.php';
+include_once '../forum/SSI.php';
+include_once '../vendor/autoload.php';
+include_once 'locale/lang.list.php';
+include_once 'config/paths.php';
+include_once 'config/dbconfig.php';
+require_once 'libraries/gettext/gettext.inc.php';
 
 use App\Lib\Utility\Route;
 use App\Lib\Utility\Router;
 use App\Lib\Utility\LanguageManager;
-//use App\Lib\Language as lang;
+use App\Lib\Utility\Config as cfg;
+use App\Lib\Utility\Session;
 
-//creates an array from the URI
-//$params = array_map('strtolower', explode("/", $_SERVER['REQUEST_URI']));
+Session::init();
 
 //Error code for knowledge base page
 $errorCode = array(
@@ -48,20 +42,35 @@ $errorCode = array(
     'MOD_ACCESS'        => '106',
 );
 
-//SMF SSI.php for forum integration. This is the core of the site's authentication. DO NOT REMOVE IT!
-
 $router = new Router();
-$router->addRoute(new Route("/"));
-$router->addRoute(new Route("/downloads/"));
-$router->addRoute(new Route("/help/"));
+$router->addRoute(new Route("/", "Home"));
+$router->addRoute(new Route("/downloads", "Downloads"));
+$router->addRoute(new Route("/help/awesome", function(){printf('hello!');
+
+}));
+//Perform the routing!
 $router->route();
 
-//Language array
-//$lang = array();
-//new lang();
 
-$locale = LanguageManager::getRequestedLanguage($router->getLanguageRoute(), $langList);
+/**
+ * Change language on request and set cookie
+ */
+LanguageManager::init($router->getLanguageParamFromUrl(), $langList);
+$locale = LanguageManager::getRequestedLanguage();
 LanguageManager::setLanguage($locale);
+
+if (LanguageManager::matchLanguage() == "/" ||
+    strtolower(LanguageManager::getFromLanguageArrayItem()) == "") {
+    $urltoRedirect = $link['url'] .
+        $router->generateUrlWithLangParam(
+        $locale,
+        LanguageManager::getFromLanguageArrayKey()
+    );
+    // 301 Moved Permanently to a localized url
+    header('Location: '.$urltoRedirect, true, 301);
+}
+
+
 
 //Forum integration is must, if it is not initialized before this then throw an error
 if (!isset($context)) {
@@ -74,22 +83,23 @@ $setting = null;
 
 //Save current page url into session for login/logout redirect............
 //well it does not work anyway! could be a SMF Bug.
-if (!strpos(currentUrl(), 'login')
-    && !strpos(currentUrl(), 'logout')
-    && !strpos(currentUrl(), 'includes')
-    && !strpos(currentUrl(), 'styles')
-    && !strpos(currentUrl(), 'img')
-    && !strpos(currentUrl(), 'kb')) {
-    $_SESSION['login_url']  = currentUrl();
-    $_SESSION['logout_url'] = currentUrl();
-    $_SESSION['old_url']    = currentUrl();
-    $_SESSION['redirect']   = currentUrl();
+if (!strpos(cfg::currentUrl(), 'login')
+    && !strpos(cfg::currentUrl(), 'logout')
+    && !strpos(cfg::currentUrl(), 'includes')
+    && !strpos(cfg::currentUrl(), 'styles')
+    && !strpos(cfg::currentUrl(), 'img')
+    && !strpos(cfg::currentUrl(), 'kb')) {
+    $_SESSION['login_url']  = cfg::currentUrl();
+    $_SESSION['logout_url'] = cfg::currentUrl();
+    $_SESSION['old_url']    = cfg::currentUrl();
+    $_SESSION['redirect']   = cfg::currentUrl();
 }
 
 $_SESSION['previous_page'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $link['url'];
 
 //Get user avatar or use the default avatar
-$user_avatar = $context['user']['avatar'] != null ? $context['user']['avatar']['href'] : $link['img-dir'].'usersmall.jpg';
+$user_avatar = $context['user']['avatar'] != null ? $context['user']['avatar']['href']
+                                                  : $link['img-dir'].'usersmall.jpg';
 
 //Get the musicbee satble and beta release data
 //$releaseData['stable'] = getVersionInfo(0, 'byCurrentVersion')[0];
@@ -340,90 +350,8 @@ if (!empty($no_directaccess)) {
 //$member = new Member();
 
 
-///page location variable starts here
-$mainmenu = $link['root'].'views/mainmenu.template.php';
-$footer = $link['root'].'views/footer.template.php';
 
 
-$connection = null;
-///**
-// * @return bool
-// * Checks and creates database connection.
-// */
-//function databaseConnection()
-//{
-//    global $connection;
-//    //if connection already exists
-//    if ($connection != null) {
-//        return true;
-//    } else {
-//        try {
-//            $connection = new PDO(
-//                'mysql:host='.DB_HOST.';
-//                dbname='.SITE_DB_NAME.';
-//                charset=utf8',
-//                SITE_DB_USER,
-//                SITE_DB_PASS
-//            );
-//            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            $connection->exec('set session sql_mode = traditional');
-//            $connection->exec('set session innodb_strict_mode = on');
-//
-//            return true;
-//        } catch (PDOException $e) {
-//        }
-//    }
-//
-//    return false;
-//}
-
-
-/**
- * MusicBee stable and beta release Info
- *
- * @param $value
- * @param $type
- *
- * @return null|string
- */
-//function getVersionInfo($value, $type)
-//{
-//    global $connection, $lang, $db_info;
-//    if (databaseConnection()) {
-//        try {
-//            if ($type == "byId") {
-//                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE ID_ALLVERSIONS=:value";
-//            } elseif ($type == "byVersion") {
-//                $sql = "SELECT * FROM {$db_info['mb_all']} WHERE version=:value";
-//            } elseif ($type == "byCurrentVersion") {
-//                $sql = "SELECT * FROM {$db_info['mb_current']} WHERE ID_VERSION=:value";
-//            } elseif ($type == "byAllReleases") {
-//                $sql = "SELECT * FROM {$db_info['mb_all']} ORDER BY version DESC";
-//            }
-//            $statement = $connection->prepare($sql);
-//
-//            if ($type != "byAllReleases") {
-//                $statement->bindValue(':value', $value);
-//            }
-//
-//            $statement->execute();
-//            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//            if (count($result) > 0) {
-//                return $result; //Get the availablity first 1= available, 0=already disabled
-//            } else {
-//                if ($type == "byId") {
-//                    return $lang['no_record'];
-//                } elseif ($type == "byVersion") {
-//                    return null;
-//                } //if we are checking using version we want to send null. since we use count() method for result
-//            }
-//        } catch (Exception $e) {
-//            return "Something went wrong. ".$e; //store the error message in the variable
-//        }
-//    }
-//    return null;
-//}
 //
 ///**
 // * Get all Website setting
@@ -455,25 +383,6 @@ $connection = null;
 
 
 
-
-/**
- * Gets the current page URL
- *
- * @return string
- */
-function currentUrl()
-{
-    global $secure ;
-
-    $pageURL = $secure;
-    if ($_SERVER["SERVER_PORT"] != "80") {
-        $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-    } else {
-        $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-    }
-
-    return $pageURL;
-}
 
 
 function addonUrlGenerator($addon_data)

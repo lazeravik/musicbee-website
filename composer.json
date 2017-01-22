@@ -2,7 +2,8 @@
   "autoload":{
     "classmap": [
       "app/classes",
-	  "app/libraries"
+	  "app/libraries",
+      "app/controllers"
     ]
   },
   "require": {

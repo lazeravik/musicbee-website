@@ -10,24 +10,25 @@
  *
  */
 
+
 /**
  * Declare the properties for this page
  */
-$title          = $lang['home_title'];
-$description    = $lang['home_desc'];
-$keywords       = "music, player, ultimate, best, customizable, skin, free, plugin";
+$title          = __("MusicBee - The Ultimate Music Manager and Player");
+$description    = __("The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web");
+$keywords       = __("music, player, ultimate, best, customizable, skin, free, plugin");
 $isFontHelperDisabled = false;
 $socialMetaTags = <<<HTML
 	    <!--Social network tags for facebook and twitter -->
-	    <meta property="og:title" content="{$lang['home_title']}"/>
+	    <meta property="og:title" content="{$title}"/>
 	    <meta property="og:url" content="{$link['url']}"/>
 	    <meta property="og:image" content="{$link['img-dir']}mb_big.png">
-	    <meta property="og:description" content="{$lang['home_desc']}">
+	    <meta property="og:description" content="{$description}">
         
 	    <meta name="twitter:card" content="summary">
 	    <meta name="twitter:site" content="@MusicBeePlayer">
 	    <meta name="twitter:title" content="MusicBee - Music Manager and Player">
-	    <meta name="twitter:description" content="{$lang['home_desc']}">
+	    <meta name="twitter:description" content="{$description}">
 HTML;
 
 
