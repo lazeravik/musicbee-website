@@ -21,7 +21,7 @@ include_once '../forum/SSI.php';
 include_once '../vendor/autoload.php';
 include_once 'locale/lang.list.php';
 include_once 'config/paths.php';
-include_once 'config/dbconfig.php';
+include_once 'config/database.php';
 require_once 'libraries/gettext/gettext.inc.php';
 
 use App\Lib\Utility\Route;

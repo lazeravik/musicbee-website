@@ -14,7 +14,7 @@ namespace App\Lib;
 
 use App\Lib\Utility\Enum;
 
-class MBReleaseManager
+class MBReleaseManager extends Database
 {
     protected static $dbcon;
 
@@ -44,7 +44,7 @@ class MBReleaseManager
                 return self::getFormattedRelease(self::getPatchRelease());
                 break;
             default:
-                return new \Exception("Wrong release type", 100);
+                return new \Exception("Wrong data type", 100);
                 break;
         }
 

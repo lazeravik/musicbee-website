@@ -16,23 +16,21 @@ use App\Lib\Utility\Router;
 use App\Lib\Utility\LanguageManager;
 use App\Lib\Utility\Config as cfg;
 use App\Lib\Utility\Session;
+use App\Lib\ForumHook;
+use App\Lib\MBReleaseManager;
 
 class Bootstrap
 {
     private $router;
-    private $languageManager;
-    private $locale;
 
-    public function __construct(LanguageManager $languageManager)
+    public function __construct(Router $newRouter)
     {
         //Initialize session if not already started
         Session::init();
 
-        $this->router = new Router();
-        $this->initRouter($this->router);
 
-        $this->languageManager = $languageManager;
-        $this->rewriteUrlWithLanuageCode();
+        $this->router = $newRouter;
+        $this->initRouter($this->router);
     }
 
     /**
@@ -43,47 +41,7 @@ class Bootstrap
     {
         $router->addRoute(new Route("/", "Home"));
         $router->addRoute(new Route("/downloads", "Downloads"));
-        $router->addRoute(new Route("/help/awesome", function(){ printf('hello!'); }));
         $router->route();
-    }
-
-    /**
-     * setup language and add lang code to the url and redirect to the new url
-     */
-    public function rewriteUrlWithLanuageCode()
-    {
-        global $link;
-
-        /**
-         * Change language on request and set cookie
-         */
-        $this->languageManager->init(
-            $this->router->getLanguageParamFromUrl(),
-            $this->getLanguageList()
-        );
-        $this->locale = $this->languageManager->getRequestedLanguage();
-        $this->languageManager->setLanguage($this->locale);
-
-        if ($this->languageManager->matchLanguage() == "/" ||
-            strtolower($this->languageManager->getFromLanguageArrayItem()) == "") {
-            $urltoRedirect = $link['url'] .
-                $this->router->generateUrlWithLangParam(
-                    $this->locale,
-                    $this->languageManager->getFromLanguageArrayKey()
-                );
-            // 301 Moved Permanently to a localized url
-            $this->redirectToUrl($urltoRedirect, 301);
-        }
-    }
-
-    /**
-     * Redirect to a specific url
-     * @param $urlToRedirect
-     * @param $responseCode
-     */
-    public function redirectToUrl($urlToRedirect, $responseCode)
-    {
-        header('Location: '.$urlToRedirect, true, $responseCode);
     }
 
     /**

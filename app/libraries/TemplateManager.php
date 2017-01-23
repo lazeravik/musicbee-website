@@ -12,53 +12,44 @@
 
 namespace App\Lib;
 
+use App\Lib\Utility\Template;
 
 class TemplateManager
 {
-    public static function getTitle()
-    {
-        global $title;
-        return $title;
-    }
+    private static $template;
 
-    public static function getDescription()
+    /**
+     * Set the template instance initially for future use
+     * @param Template $template
+     * @return \InvalidArgumentException
+     */
+    public static function setTemplate(Template $template)
     {
-        global $description;
-        return $description;
-    }
-
-    public static function getKeywords()
-    {
-        global $keywords;
-        return $keywords;
-    }
-
-    public static function getSocialMetaTags()
-    {
-        global $socialMetaTags;
-
-        if(!empty($socialMetaTags)) {
-            return $socialMetaTags;
+        if (empty($template) || !$template instanceof Template) {
+            return new \InvalidArgumentException("Template is not valid!");
         }
-        return "";
+
+        self::$template = $template;
     }
 
-    public static function isFontHelperDisabled()
+    /**
+     * Gets data from array that is assigned inside template
+     * @param $variableName
+     * @return \InvalidArgumentException|null|string
+     */
+    public static function getData($variableName)
     {
-        global $isFontHelperDisabled;
-
-        if(!empty($isFontHelperDisabled)) {
-            return (bool)$isFontHelperDisabled;
+        if (empty($variableName) || empty(self::$template)) {
+            return new \InvalidArgumentException("Data Variable name can not be empty!");
         }
-    }
 
-    public static function getStyleSheets()
-    {
-        global $styleSheets;
 
-        if(!empty($styleSheets)){
-            return $styleSheets;
+        $data = self::$template->getData($variableName);
+        if (!empty($data)) {
+            return self::$template->getData($variableName);
+        } else {
+            return null;
         }
-        return "";
+
     }
 }

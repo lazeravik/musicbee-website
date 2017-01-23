@@ -10,6 +10,9 @@
  *
  */
 
+use App\Lib\ForumHook;
+$context = ForumHook::getHookContext();
+
 $menu =  array(
     'dashboard'       => array(
         'title'       => __("Dashboard"),
@@ -18,8 +21,8 @@ $menu =  array(
         'sub_menu'    => array(),
     ),
     'member-panel'    => array(
-        'title'       => '<img src="'.!empty($context['user']['avatar']['href'])?
-            : $link['img-dir'].'usersmall.jpg'.'" class="user_avatar">',
+        'title'       => '<img src="'.$context['user']['avatar'].'" class="user_avatar">',
+
         'href'        => $link['forum'].'?action=profile',
         'restriction' => 'login',
         'sub_menu'    => array(

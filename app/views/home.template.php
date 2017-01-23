@@ -10,29 +10,44 @@
  *
  */
 
-
 /**
  * Declare the properties for this page
  */
-$title          = __("MusicBee - The Ultimate Music Manager and Player");
-$description    = __("The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web");
-$keywords       = __("music, player, ultimate, best, customizable, skin, free, plugin");
-$isFontHelperDisabled = false;
-$socialMetaTags = <<<HTML
-	    <!--Social network tags for facebook and twitter -->
-	    <meta property="og:title" content="{$title}"/>
-	    <meta property="og:url" content="{$link['url']}"/>
-	    <meta property="og:image" content="{$link['img-dir']}mb_big.png">
-	    <meta property="og:description" content="{$description}">
+
+use App\Lib\Utility\Template;
+
+$headerTemplate = new Template("header");
+$headerTemplate->setDataArray(
+    "title",
+    __("MusicBee - The Ultimate Music Manager and Player")
+);
+$headerTemplate->setDataArray(
+    "description",
+    __("The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web")
+);
+$headerTemplate->setDataArray(
+    "keywords",
+    __("music, player, ultimate, best, customizable, skin, free, plugin")
+);
+$headerTemplate->setDataArray("isFontHelperDisabled", false);
+
+$headerTemplate->setDataArray(
+    "socialTags",
+    <<<HTML
+  	    <!--Social network tags for facebook and twitter -->
+	    <meta property="og:title"           content="{$headerTemplate->getData('title')}"/>
+	    <meta property="og:url"             content="{$link['url']}"/>
+	    <meta property="og:image"           content="{$link['img-dir']}mb_big.png">
+	    <meta property="og:description"     content="{$headerTemplate->getData('description')}">
         
-	    <meta name="twitter:card" content="summary">
-	    <meta name="twitter:site" content="@MusicBeePlayer">
-	    <meta name="twitter:title" content="MusicBee - Music Manager and Player">
-	    <meta name="twitter:description" content="{$description}">
-HTML;
+	    <meta name="twitter:card"           content="summary">
+	    <meta name="twitter:site"           content="@MusicBeePlayer">
+	    <meta name="twitter:title"          content="{$headerTemplate->getData('title')}">
+	    <meta name="twitter:description"    content="{$headerTemplate->getData('description')}">  
+HTML
+);
 
-
-include_once $link['view-dir'] . 'header.template.php';
+$headerTemplate->render();
 ?>
 
 
@@ -44,14 +59,14 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="overlay">
 						<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
         <?php
-        include_once $mainmenu;
+        include_once 'views/mainmenu.template.php';
         ?>
 						<section class="mb_landing align_right">
 							<div class="sub_content">
 								<div class="hero_text_top">
 									<div class="text_wrapper text_white">
-										<h1><?php echo $lang['home_2']; ?></h1>
-										<h4><?php echo $lang['home_3']; ?></h4>
+										<h1><?php echo __("The Ultimate Music Manager and Player"); ?></h1>
+										<h4><?php echo __("MusicBee makes it easy to manage, find, and play music files on your computer. MusicBee also supports podcasts, web radio stations and SoundCloud integration"); ?></h4>
 									</div>
 								</div>
 								<div class="hero_img_top">
@@ -62,19 +77,18 @@ include_once $link['view-dir'] . 'header.template.php';
 							</div>
 							<div class="sub_content_bottom">
 								<div class="sub_content hero_buttons">
-									<h4><?php echo $lang['home_4']; ?></h4>
+									<h4><?php echo __("Get MusicBee, you will never go back. And it's free!"); ?></h4>
 									<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_yellow">
-										<h3><?php echo $lang['home_5']; ?></h3>
-										<p><?php echo sprintf($lang['for_os'], $mb['musicbee_download']['stable']['supported_os']); ?></p>
+										<h3><?php echo __("Download Now"); ?></h3>
+										<p><?php echo sprintf(__("For %1\$s"), $mb['musicbee_download']['stable']['supported_os']); ?></p>
 									</a>
 									<a
                                         id="feature_scroll"
                                         class="btn btn_wireframe btn_wireframe_blue"
                                         href="javascript:void(0)"
                                     >
-
-										<h3><?php echo $lang['home_6']; ?></h3>
-										<p><?php echo $lang['home_7']; ?></p>
+										<h3><?php echo __("Check out features"); ?></h3>
+										<p><?php echo __("See the best of MusicBee"); ?></p>
 									</a>
 								</div>
 							</div>
@@ -86,8 +100,8 @@ include_once $link['view-dir'] . 'header.template.php';
 				<div class="mb_landing align_center" >
 					<div class="sub_content" id="simple_powerful">
 						<div class="hero_text_top text_black">
-							<h2 data-sr="enter top"><?php echo $lang['home_9']; ?></h2>
-							<h4 data-sr="enter bottom"><?php echo $lang['home_10']; ?></h4>
+							<h2 data-sr="enter top"><?php echo __("Simple, Powerful, and Fast"); ?></h2>
+							<h4 data-sr="enter bottom"><?php echo __("Play your music the way you want. Turn your computer into a music jukebox. Use auto-tagging to clean up your messy music library. Enjoy a great music experience with MusicBee."); ?></h4>
 						</div>
 						<div class="hero_img_top">
 							<img src="<?php echo $link['img-dir']; ?>hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
@@ -98,8 +112,8 @@ include_once $link['view-dir'] . 'header.template.php';
 				<div class="mb_quality_top mb_landing align_center">
 					<div class="mb_landing overlay">
 						<div class="sub_content">
-							<h2 data-sr='move 24px'><?php echo $lang['home_11']; ?></h2>
-							<h4 data-sr="enter bottom"><?php echo $lang['home_12']; ?></h4>
+							<h2 data-sr='move 24px'><?php echo __("Sound Quality Matters"); ?></h2>
+							<h4 data-sr="enter bottom"><?php echo __("Whether you play your music on an audiophile setup or on a laptop, MusicBee is designed with features to fulfill all your needs."); ?></h4>
 
 							<ul class="feature_box">
 								<li>
@@ -108,7 +122,7 @@ include_once $link['view-dir'] . 'header.template.php';
 											<i class="fa fa-sliders"></i>
 										</p>
 										<p>
-            <?php echo $lang['home_13']; ?>
+            <?php echo __("Fine-tune the sound with the 10-band or 15-band Equalizer and DSP effects"); ?>
 										</p>
 									</div>
 								</li>
@@ -117,7 +131,7 @@ include_once $link['view-dir'] . 'header.template.php';
 										<p class="feature_ico">
 											<i class="fa fa-headphones"></i>
 										</p>
-										<p><?php echo $lang['home_14']; ?></p>
+										<p><?php echo __("Utilize high-end audio cards with WASAPI and ASIO support"); ?></p>
 									</div>
 								</li>
 								<li>
@@ -125,7 +139,7 @@ include_once $link['view-dir'] . 'header.template.php';
 										<p class="feature_ico">
 											<i class="fa fa-play"></i>
 										</p>
-										<p><?php echo $lang['home_15']; ?></p>
+										<p><?php echo __("Listen to music without interruption with gapless playback"); ?></p>
 									</div>
 								</li>
 
@@ -135,7 +149,7 @@ include_once $link['view-dir'] . 'header.template.php';
 											<i class="fa fa-bullseye"></i>
 										</p>
 										<p>
-            <?php echo $lang['home_38']; ?>
+            <?php echo __("Upmix stereo to 5.1 surround sound, or resample track to lower bitrate"); ?>
 										</p>
 									</div>
 								</li>
@@ -144,7 +158,7 @@ include_once $link['view-dir'] . 'header.template.php';
 										<p class="feature_ico">
 											<i class="fa fa-sort-amount-asc"></i>
 										</p>
-										<p><?php echo $lang['home_39']; ?></p>
+										<p><?php echo __("Use logarithmic volume scaling or normalize volume streaming"); ?></p>
 									</div>
 								</li>
 								<li>
@@ -152,23 +166,12 @@ include_once $link['view-dir'] . 'header.template.php';
 										<p class="feature_ico">
 											<i class="fa fa-plug"></i>
 										</p>
-										<p><?php echo $lang['home_40']; ?></p>
+										<p><?php echo __("Even better, MusicBee supports some WinAmp plugins to enhance your music"); ?></p>
 									</div>
 								</li>
 								<div id="clear"></div>
 							</ul>
 						</div>
-
-						<!--
-						<div class="sub_content_bottom">
-							<div class="sub_content hero_buttons">
-								<h4><?php echo $lang['home_16']; ?></h4>
-								<a href="" class="btn btn_wireframe btn_wireframe_blue">
-									<h3><?php echo $lang['home_17']; ?></h3>
-								</a>
-							</div>
-						</div>
-						-->
 					</div>
 				</div>
 
@@ -178,8 +181,8 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="sub_content">
 						<div class="hero_text_top">
 							<div class="text_wrapper text_black">
-								<h1><?php echo $lang['home_18']; ?></h1>
-								<h4><?php echo $lang['home_19']; ?></h4>
+								<h1><?php echo __("Beautiful Skins"); ?></h1>
+								<h4><?php echo __("Change the appearance of MusicBee by choosing from the included skins or download more from our Add-on section.<br/>Skins are a great way to personalize MusicBee to your liking.<br/><br/> You can also make your own skin and share it with others."); ?></h4>
 							</div>
 						</div>
 						<div class="hero_img_top">
@@ -194,8 +197,8 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="sub_content">
 						<div class="hero_text_top">
 							<div class="text_wrapper text_black">
-								<h1><?php echo $lang['home_20']; ?></h1>
-								<h4><?php echo $lang['home_21']; ?></h4>
+								<h1><?php echo __("Sync with Devices"); ?></h1>
+								<h4><?php echo __("Sync your music collection with devices you use. MusicBee supports playlist and podcast syncing, even supports audio books with 2 way syncing.<br/>Convert formats on the fly if your device does not support certain formats. <br/><br/>You can also sync your Android and Windows Phone (8.1+) devices."); ?></h4>
 							</div>
 						</div>
 						<div class="hero_img_top">
@@ -210,8 +213,8 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="sub_content">
 						<div class="hero_text_top">
 							<div class="text_wrapper text_white">
-								<h1><?php echo $lang['home_31']; ?></h1>
-								<h4><?php echo $lang['home_32']; ?></h4>
+								<h1><?php echo __("Groove Music Support"); ?></h1>
+								<h4><?php echo __("MusicBee has native support for Groove Music (formerly Xbox Music). You can stream directly from MusicBee or add to your existing playlist, get song recommendations from the vast Groove catalog.<br/><br/>Want to listen to a song before buy? You can listen to preview. "); ?></h4>
 							</div>
 						</div>
 						<div class="hero_img_top">
@@ -226,9 +229,9 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="sub_content">
 						<div class="hero_text_top">
 							<div class="text_wrapper text_black">
-								<h1><?php echo $lang['home_35']; ?></h1>
-								<h4><?php echo $lang['home_36']; ?></h4>
-								<p class="disclaimer"><?php echo $lang['home_37']; ?></p>
+								<h1><?php echo __("last.fm, CD Ripping, Tagging tools.... plus more!"); ?></h1>
+								<h4><?php echo __("MusicBee packs a comprehensive set of features to make your music experience better. <br/><br/>Yet it is <b>one of the most lightweight player</b> using about 25-70 MB ram* with skins and add-ons, and packs all of these under 10 MB!"); ?></h4>
+								<p class="disclaimer"><?php echo __("<br/><br/>*Tested with MusicBee 3 with a library of 200 albums, sized around 3GB."); ?></p>
 							</div>
 						</div>
 						<div class="hero_img_top">
@@ -243,8 +246,8 @@ include_once $link['view-dir'] . 'header.template.php';
 					<div class="sub_content">
 						<div class="hero_text_top">
 							<div class="text_wrapper text_black">
-								<h1><?php echo $lang['home_33']; ?></h1>
-								<h4><?php echo $lang['home_34']; ?></h4>
+								<h1><?php echo __("The Best.... rated by reviewers and users"); ?></h1>
+								<h4><?php echo __("MusicBee is rated one of the best music managers and players available for Windows. It packs features that will WOW you. <br/><br/>We have a dedicated thread for users to share their experience or check reviews from trusted sources.<br/><br/>Start using MusicBee today. You will never go back."); ?></h4>
 							</div>
 						</div>
 						<div class="hero_img_top">
@@ -259,10 +262,10 @@ include_once $link['view-dir'] . 'header.template.php';
 				<div class="mb_more_top mb_landing_overlay align_center">
 					<div class="overlay">
 						<div class="sub_content">
-							<h4><?php echo $lang['home_29']; ?></h4>
+							<h4><?php echo __("Get MusicBee and enhance your music experience"); ?></h4>
 							<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_blue">
-								<h3><?php echo $lang['home_5']; ?></h3>
-								<p><?php echo sprintf($lang['for_os'], $mb['musicbee_download']['stable']['supported_os']); ?></p>
+								<h3><?php echo __("Download Now"); ?></h3>
+								<p><?php echo sprintf(__("For %1\$s"), $mb['musicbee_download']['stable']['supported_os']); ?></p>
 							</a>
 						</div>
 					</div>
@@ -274,7 +277,7 @@ include_once $link['view-dir'] . 'header.template.php';
 <!--IMPORTANT-->
 <!-- INCLUDE THE FOOTER AT THE END -->
 <?php
-include_once $footer;
+//include_once $footer;
 ?>
 <script src="<?php echo $link['js-dir']; ?>scrollreveal/scrollreveal.js"></script>
 <script src="<?php echo $link['js-dir']; ?>jquery.sticky.min.js"></script>

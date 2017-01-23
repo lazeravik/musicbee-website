@@ -16,8 +16,5 @@ use App\Lib\Model;
 
 class Home_model extends Model
 {
-    function __construct()
-    {
-        echo "home model!";
-    }
+    function __construct(){}
 }

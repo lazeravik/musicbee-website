@@ -42,6 +42,7 @@ $link['logout']               = $link['url'].'logout/';
 $link['incl-dir']             = $link['root'].'includes/';
 $link['view-dir']             = $link['root']. 'views/';
 $link['locale-dir']           = $link['root']. 'locale/';
+$link['model-dir']            = $link['root']. 'model/';
 
 //public directory
 $link['style-dir']            = cfg::getStyleDir();

@@ -13,18 +13,31 @@
 
 namespace App\Lib;
 
-
 class Controller
 {
+
     protected $view;
     protected $model;
-    public function __construct(){}
-    public function index(){}
-
-    public function loadModel($modelName)
+    protected $data;
+    public function __construct()
     {
-        $file = 'model/' . $modelName . '_model.php';
-        if(file_exists($file)) {
+    }
+    public function index()
+    {
+    }
+    public function getData()
+    {
+    }
+    public function setData()
+    {
+    }
+
+    public function model($modelName)
+    {
+        global $link;
+
+        $file = $link['model-dir'] . $modelName . '_model.php';
+        if (file_exists($file)) {
             require_once $file;
 
             $namespace = "App\\Lib\\Model\\".$modelName."_model";

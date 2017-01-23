@@ -12,17 +12,27 @@
 
 namespace App\Lib;
 
+use App\Lib\Utility\LanguageManager;
+
 class View
 {
     public function __construct()
     {
     }
 
-    public function renderView($templateName)
+    /**
+     * Render the view to the screen
+     * @param $templateName
+     * @param $data
+     * @throws \Exception
+     */
+    public function renderView($templateName, $data)
     {
-        global $link, $mb, $locale, $mainmenu, $footer;
+        global $link, $context, $title, $description, $keywords,
+               $isFontHelperDisabled, $socialMetaTags, $setting, $menu;
 
-        $file = "views/$templateName.template.php";
+        $context = ForumHook::getHookContext();
+        $file = $link['view-dir']."$templateName.template.php";
         if (file_exists($file)) {
             require_once $file;
         } else {

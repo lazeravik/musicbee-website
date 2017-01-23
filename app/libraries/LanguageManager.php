@@ -14,14 +14,14 @@ namespace App\Lib\Utility;
 
 class LanguageManager
 {
-    private $langList;
-    private $languageRoute;
+    private static $langList;
+    private static $languageRoute;
+    private static $locale;
 
-
-    public function init($languageRoute, $langList)
+    public static function init($languageRoute, $langList)
     {
-        $this->langList = $langList;
-        $this->languageRoute = $languageRoute;
+       self::$langList = $langList;
+       self::$languageRoute = $languageRoute;
     }
 
     /**
@@ -30,11 +30,11 @@ class LanguageManager
      * @internal param $languageRoute
      * @internal param $langList
      */
-    public function getRequestedLanguage()
+    public static function getRequestedLanguage()
     {
         global $setting;
 
-        $langMatch = $this->matchLanguage();
+        $langMatch =self::matchLanguage();
         if ($langMatch == "/") {
             if (isset($_COOKIE['language'])) {
                 return $_COOKIE['language'];
@@ -48,25 +48,27 @@ class LanguageManager
 
     /**
      * Set domain language and charset
-     * @param $locale
+     * @param $localeParam
      */
-    public function setLanguage($locale)
+    public static function setLanguage($localeParam)
     {
         global $link;
-        $encoding = 'UTF-8';
-        T_setlocale(LC_MESSAGES, $locale);
-        T_bindtextdomain($locale, $link['locale-dir']);
-        T_bind_textdomain_codeset($locale, $encoding);
-        T_textdomain($locale);
 
-        $this->setLanguageCookie($locale);
+        $encoding = 'UTF-8';
+        T_setlocale(LC_MESSAGES, $localeParam);
+        T_bindtextdomain($localeParam, $link['locale-dir']);
+        T_bind_textdomain_codeset($localeParam, $encoding);
+        T_textdomain($localeParam);
+
+        self::setLocale($localeParam);
+        self::setLanguageCookie($localeParam);
     }
 
     /**
      * @param $locale
      * @return bool
      */
-    public function setLanguageCookie($locale)
+    public static function setLanguageCookie($locale)
     {
         return setcookie("language", $locale, time() + 60 * 60 * 24 * 30, '/');
     }
@@ -76,19 +78,19 @@ class LanguageManager
      * @return string
      * @internal param $languageRoute
      */
-    public function matchLanguage()
+    public static function matchLanguage()
     {
         $match = null;
 
-        if ($this->languageRoute == null) {
+        if (self::$languageRoute == null) {
             return "/";
-        } elseif (strlen($this->languageRoute) == 2) {
-            $match = $this->getFromLanguageArrayKey();
+        } elseif (strlen(self::$languageRoute) == 2) {
+            $match =self::getFromLanguageArrayKey();
         } else {
-            $match = $this->getFromLanguageArrayItem();
+            $match =self::getFromLanguageArrayItem();
         }
 
-        if ($this->languageRoute != null && $match == null) {
+        if (self::$languageRoute != null && $match == null) {
             return "/";
         } else {
             return $match;
@@ -99,10 +101,10 @@ class LanguageManager
      * Get the language proper name if it exists in lang.lists.php file
      * @return null | string
      */
-    public function getFromLanguageArrayItem()
+    public static function getFromLanguageArrayItem()
     {
-        foreach ($this->langList as $lang) {
-            if (strtolower($this->languageRoute) == strtolower($lang[0])) {
+        foreach (self::$langList as $lang) {
+            if (strtolower(self::$languageRoute) == strtolower($lang[0])) {
                 return $lang[0];
             }
         }
@@ -115,12 +117,53 @@ class LanguageManager
      * Get the proper language name if only the array key matches!
      * @return null | string
      */
-    public function getFromLanguageArrayKey()
+    public static function getFromLanguageArrayKey()
     {
-        if (array_key_exists($this->languageRoute, $this->langList)) {
-            return $this->langList[$this->languageRoute][0];
+        if (array_key_exists(self::$languageRoute,self::$langList)) {
+            return self::$langList[self::$languageRoute][0];
         }
 
         return null;
+    }
+
+    /**
+     * Redirects user from a non localized url to a localized one!
+     * @param Router $router
+     * @internal param $localeParam
+     */
+    public static function redirectToUrlWithLanuageCode(Router $router)
+    {
+        global $link;
+        self::$locale = self::getRequestedLanguage();
+
+        self::setLanguage(self::$locale);
+
+        if (self::matchLanguage() == "/" ||
+            strtolower(self::getFromLanguageArrayItem()) == "") {
+            $urltoRedirect = $link['url'] .
+                $router->generateUrlWithLangParam(
+                    self::$locale,
+                    self::getFromLanguageArrayKey()
+                );
+            // 301 Moved Permanently to a localized url
+            header('Location: '.$urltoRedirect, true, 301);
+        }
+    }
+
+    /**
+     * Set website locale
+     * @param $locale
+     */
+    private static function setLocale($locale){
+        self::$locale = $locale;
+    }
+
+    /**
+     * Get website locale
+     * @return string
+     */
+    public static function getLocale()
+    {
+        return self::$locale;
     }
 }

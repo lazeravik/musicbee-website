@@ -10,7 +10,6 @@
  *
  */
 
-
 function printMenuItems($menuArray){
 	echo "<li>";
 	if (!empty($menuArray['href'])) {
@@ -45,7 +44,7 @@ function printMenuItems($menuArray){
 				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo $link['img-dir']; ?>musicbee.png"><?php echo __("MusicBee"); ?></a>
 			</li>
 			<?php
-			foreach ($mb['main_menu'] as $key => $menu_item)
+			foreach ($menu as $key => $menu_item)
 			{
 				if (!isset($menu_item['restriction']))
 				{
@@ -57,7 +56,7 @@ function printMenuItems($menuArray){
 						{
 							if (isset($sub_item['restriction']))
 							{
-								if ($sub_item['restriction'] == 'admin' && $mb['user']['is_admin'])
+								if ($sub_item['restriction'] == 'admin' && $context['user']['is_admin'])
 								{
 									printMenuItems($sub_item);
 								}
@@ -75,9 +74,9 @@ function printMenuItems($menuArray){
 			?>
 		</ul>
 		<ul class="menu_position menu_right">
-			<?php if (!$mb['user']['is_guest']): ?>
+			<?php if (!$context['user']['is_guest']): ?>
 				<?php
-				foreach ($mb['main_menu'] as $key => $logged_menu_item) {
+				foreach ($menu as $key => $logged_menu_item) {
 					if (isset($logged_menu_item['restriction'])) {
 						echo '<li class="'. $key .'">
 								<a href="' . $logged_menu_item['href'] .'">' . $logged_menu_item['title'] .'</a>';
@@ -88,7 +87,7 @@ function printMenuItems($menuArray){
 							{
 								if (isset($sub_item['restriction']))
 								{
-									if ($sub_item['restriction'] == 'admin' && $mb['user']['is_admin'])
+									if ($sub_item['restriction'] == 'admin' && $context['user']['is_admin'])
 									{
 										printMenuItems($sub_item);
 									}
@@ -107,9 +106,9 @@ function printMenuItems($menuArray){
 				<li class="message_count">
 					<a href="<?php echo $link['forum']; ?>?action=pm"
 					   class="secondery_nav_menu_button"
-					   title="Messages: <?php echo $mb['user']['unread_messages'], ' ', $mb['user']['unread_messages'] == 1 ? $txt['newmessages0'] : $txt['newmessages1'], ', total ', $mb['user']['messages']; ?>">
-						<?php if ($mb['user']['unread_messages'] > 0): ?>
-							<span class="message_new"><i class="fa fa-envelope-open-o">&nbsp;&nbsp; </i><?php echo $mb['user']['unread_messages']; ?></span>
+					   title="Messages: <?php echo $context['user']['unread_messages']; ?>">
+						<?php if ($context['user']['unread_messages'] > 0): ?>
+							<span class="message_new"><i class="fa fa-envelope-open-o">&nbsp;&nbsp; </i><?php echo $context['user']['unread_messages']; ?></span>
 						<?php else: ?>
 							<span class="message_no"><i class="fa fa-envelope-o"></i></span>
 						<?php endif; ?>
@@ -117,10 +116,10 @@ function printMenuItems($menuArray){
 				</li>
 			<?php else: ?>
 				<li>
-					<a href="<?php echo $link['login']; ?>"><i class="fa fa-user"></i>&nbsp; <?php echo $lang['login']; ?></a>
+					<a href="<?php echo $link['login']; ?>"><i class="fa fa-user"></i>&nbsp; <?php echo __("Login"); ?></a>
 				</li>
 				<li>
-					<a href="<?php echo $link['register']; ?>"><?php echo $lang['register']; ?></a>
+					<a href="<?php echo $link['register']; ?>"><?php echo __("Register"); ?></a>
 				</li>
 			<?php endif; ?>
 
@@ -128,11 +127,11 @@ function printMenuItems($menuArray){
 	</div>
 </nav>
 <noscript>
-	<p class="show_info info_red"><?php echo $lang['no_js']; ?></p>
+	<p class="show_info info_red"><?php echo __("Your browser does not support javascript (or it is disabled). Please use a browser with javascript or enable it.<br/>We need javascript to function properly otherwise some things won't work."); ?></p>
 </noscript>
 <?php
 if(file_exists($link['root'].'installer/install.php') && $mb['website']['show_warning']){
-	echo '<p class="show_info info_red"><b>SECURITY WARNING!</b><br> please delete <code>install.php</code> file from the directory.</p>';
+	echo '<p class="show_info info_red"><?php echo __("<b>SECURITY WARNING!</b><br> please delete <code>install.php</code> file from the directory"); ?></p>';
 }
 
 ?>

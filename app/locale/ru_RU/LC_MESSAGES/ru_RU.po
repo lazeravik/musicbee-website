@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MusicBee Website 2.0\n"
-"POT-Creation-Date: 2017-01-21 13:42+0530\n"
-"PO-Revision-Date: 2017-01-21 14:49+0530\n"
+"POT-Creation-Date: 2017-01-23 03:16+0530\n"
+"PO-Revision-Date: 2017-01-23 03:16+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -14,109 +14,360 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-KeywordsList: __\n"
-"X-Poedit-SearchPath-0: functions.php\n"
-"X-Poedit-SearchPath-1: index.php\n"
+"X-Poedit-SearchPath-0: views/home.template.php\n"
+"X-Poedit-SearchPath-1: config/menuconfig.php\n"
+"X-Poedit-SearchPath-2: views/mainmenu.template.php\n"
 
-#: functions.php:134
+#: config/menuconfig.php:18
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: functions.php:145
+#: config/menuconfig.php:30
 #, php-format
 msgid "Hey, %1$s"
 msgstr "Эй, %1$s"
 
-#: functions.php:150
+#: config/menuconfig.php:35
 msgid "Web Admin"
 msgstr "Администратор сайта"
 
-#: functions.php:156
+#: config/menuconfig.php:41
 msgid "Forum Admin"
 msgstr "Администратор форума"
 
-#: functions.php:163
+#: config/menuconfig.php:48
 msgid "Sign Out"
 msgstr "Выйти"
 
-#: functions.php:170
+#: config/menuconfig.php:55
 msgid "Download"
 msgstr "Скачать"
 
-#: functions.php:175
+#: config/menuconfig.php:60
 msgid "Add-ons"
 msgstr "Расширения"
 
-#: functions.php:179
+#: config/menuconfig.php:64
 msgid "Skins"
 msgstr "Оформления"
 
-#: functions.php:182
+#: config/menuconfig.php:67
 msgid "Make MusicBee look the way you want"
 msgstr "Сделайте, чтобы MusicBee выглядел, как вы хотите"
 
-#: functions.php:186
+#: config/menuconfig.php:71
 msgid "Plugins"
 msgstr "Плагины"
 
-#: functions.php:189
+#: config/menuconfig.php:74
 msgid "Add features/functionality to MusicBee"
 msgstr "Добавьте новый функционал к MusicBee"
 
-#: functions.php:193
+#: config/menuconfig.php:78
 msgid "Visualizer"
 msgstr "Визуализатор"
 
-#: functions.php:196
+#: config/menuconfig.php:81
 msgid "Get colorful visualizers for an eye pleasing experience"
 msgstr "Настройте визуализатор и порадуйте свои глаза"
 
-#: functions.php:200
+#: config/menuconfig.php:85
 msgid "Theater Mode"
 msgstr "Режим театра"
 
-#: functions.php:203
+#: config/menuconfig.php:88
 msgid "Get a full theater mode experience for MusicBee"
 msgstr "Скачайте разнообразные настройки для режима театра"
 
-#: functions.php:207
+#: config/menuconfig.php:92
 msgid "Misc"
 msgstr "Разное"
 
-#: functions.php:210
+#: config/menuconfig.php:95
 msgid "Other useful add-ons for enhancing your MusicBee experience"
 msgstr "Другие полезные дополнения для MusicBee"
 
-#: functions.php:216
+#: config/menuconfig.php:101
 msgid "Forum"
 msgstr "Форум"
 
-#: functions.php:221
+#: config/menuconfig.php:106
 msgid "Help"
 msgstr "Справка"
 
-#: functions.php:225
+#: config/menuconfig.php:110
 msgid "FAQ & Help"
 msgstr "FAQ & Справка"
 
-#: functions.php:230
+#: config/menuconfig.php:115
 msgid "Developer API"
 msgstr "API для разработчиков плагинов"
 
-#: functions.php:236
+#: config/menuconfig.php:121
 msgid "Release Notes"
 msgstr "Примечания к релизу"
 
-#: functions.php:241
+#: config/menuconfig.php:126
 msgid "Press & Media"
 msgstr "Интернет и СМИ"
 
-#: functions.php:247
+#: config/menuconfig.php:132
 msgid "Report a bug"
 msgstr "Сообщите об ошибке"
 
-#: functions.php:253
+#: config/menuconfig.php:138
 msgid "MusicBee Wiki"
 msgstr "Wiki-сайт MusicBee"
+
+#: views/home.template.php:22
+msgid "MusicBee - The Ultimate Music Manager and Player"
+msgstr "MusicBee - превосходный музыкальный менеджер и плеер"
+
+#: views/home.template.php:26
+msgid ""
+"The Ultimate Music Manager and Player. MusicBee makes it easy to organize, "
+"find, and play music files on your Windows computer, portable devices and on "
+"the web"
+msgstr ""
+"Превосходный музыкальный менеджер и плеер. MusicBee позволяет легко "
+"организовывать, искать и проигрывать музыку на компьютере под управлением "
+"Windows, мобильных устройствах и в Интернете"
+
+#: views/home.template.php:30
+msgid "music, player, ultimate, best, customizable, skin, free, plugin"
+msgstr ""
+"музыка, плеер, высшее, самое лучшее, настраиваемый, кожа, свободный, плагин"
+
+#: views/home.template.php:68
+msgid "The Ultimate Music Manager and Player"
+msgstr "Превосходный музыкальный менеджер и плеер"
+
+#: views/home.template.php:69
+msgid ""
+"MusicBee makes it easy to manage, find, and play music files on your "
+"computer. MusicBee also supports podcasts, web radio stations and SoundCloud "
+"integration"
+msgstr ""
+"Превосходный музыкальный менеджер и плеер. MusicBee позволяет легко "
+"организовывать, искать и проигрывать музыку на компьютере под управлением "
+"Windows. Также MusicBee поддерживает работу с подкастами, сетевые "
+"радиостанции и работу с сервисом SoundCloud"
+
+#: views/home.template.php:80
+msgid "Get MusicBee, you will never go back. And it's free!"
+msgstr ""
+"Скачайте MusicBee и вы никогда не вернетесь к предыдущему плееру. <br/>И, "
+"да, это бесплатно!"
+
+#: views/home.template.php:82 views/home.template.php:267
+msgid "Download Now"
+msgstr "Скачать"
+
+#: views/home.template.php:83 views/home.template.php:268
+#, php-format
+msgid "For %1$s"
+msgstr "Для %1$s"
+
+#: views/home.template.php:90
+msgid "Check out features"
+msgstr "Узнать о возможностях MusicBee"
+
+#: views/home.template.php:91
+msgid "See the best of MusicBee"
+msgstr "Лучшее из возможностей MusicBee"
+
+#: views/home.template.php:103
+msgid "Simple, Powerful, and Fast"
+msgstr "Просто, быстро и впечатляюще"
+
+#: views/home.template.php:104
+msgid ""
+"Play your music the way you want. Turn your computer into a music jukebox. "
+"Use auto-tagging to clean up your messy music library. Enjoy a great music "
+"experience with MusicBee."
+msgstr ""
+"Проигрывайте музыку так, как -вам- удобно. Превратите свой компьютер в "
+"музыкальный аппарат. Автоматически ищите теги в Интернете. И получайте "
+"удовольствие."
+
+#: views/home.template.php:115
+msgid "Sound Quality Matters"
+msgstr "Качество звука -имеет- значение"
+
+#: views/home.template.php:116
+msgid ""
+"Whether you play your music on an audiophile setup or on a laptop, MusicBee "
+"is designed with features to fulfill all your needs."
+msgstr ""
+"Не важно слушаете ли вы музыку на ноутбуке или на Hi-End технике, MusicBee "
+"предоставит вам все возможности, которые вам только могут понадобиться."
+
+#: views/home.template.php:125
+msgid ""
+"Fine-tune the sound with the 10-band or 15-band Equalizer and DSP effects"
+msgstr ""
+"Улучшите звук с помощью 10 или 15 полосного эквалайзера или  DSP-эффектов"
+
+#: views/home.template.php:134
+msgid "Utilize high-end audio cards with WASAPI and ASIO support"
+msgstr ""
+"Эффективно используйте High-End звуковые карты, задействуя режимы WASAPI или "
+"ASIO"
+
+#: views/home.template.php:142
+msgid "Listen to music without interruption with gapless playback"
+msgstr ""
+"Слушайте музыку без пауз между песнями с помощью, даже если в конце или в "
+"начале песни есть тишина"
+
+#: views/home.template.php:152
+msgid "Upmix stereo to 5.1 surround sound, or resample track to lower bitrate"
+msgstr ""
+"Преобразовывайте стерео звук в формат 5.1 или уменьшайте битрейт на лету"
+
+#: views/home.template.php:161
+msgid "Use logarithmic volume scaling or normalize volume streaming"
+msgstr ""
+"Используйте логарифмическую регулировку громкости или динамически "
+"нормализуйте потоковый звук из Интернета"
+
+#: views/home.template.php:169
+msgid ""
+"Even better, MusicBee supports some WinAmp plugins to enhance your music"
+msgstr "Да, даже больше - MusicBee поддерживает некоторые плагины для WinAmp"
+
+#: views/home.template.php:184
+msgid "Beautiful Skins"
+msgstr "Отличные оформления (скины)"
+
+#: views/home.template.php:185
+msgid ""
+"Change the appearance of MusicBee by choosing from the included skins or "
+"download more from our Add-on section.<br/>Skins are a great way to "
+"personalize MusicBee to your liking.<br/><br/> You can also make your own "
+"skin and share it with others."
+msgstr ""
+"Измените внешний вид MusicBee, используя поставляемые с MusicBee оформления "
+"или скачайте другие оформления из раздела \"Расширения\".<br/>Оформления - "
+"это прекрасный способ настроить MusicBee под себя.<br/><br/> Также вы можете "
+"создать свое собственное оформление и поделиться им с другими."
+
+#: views/home.template.php:200
+msgid "Sync with Devices"
+msgstr "Синхронизируйте MusicBee с мобильными устройствами"
+
+#: views/home.template.php:201
+msgid ""
+"Sync your music collection with devices you use. MusicBee supports playlist "
+"and podcast syncing, even supports audio books with 2 way syncing.<br/"
+">Convert formats on the fly if your device does not support certain formats. "
+"<br/><br/>You can also sync your Android and Windows Phone (8.1+) devices."
+msgstr ""
+"Синхронизируйте вашу музыку с мобильными устройствами. Также MusicBee "
+"поддерживает синхронизацию плейлистов, подкастов, даже аудиокниг. Для "
+"некоторых устройств поддерживается даже двухсторонняя синхронизация.<br/"
+">Конвертируйте музыку из одного формата в другой прямо при синхронизации и "
+"только при необходимости, если ваше устройство не поддерживает исходный "
+"формат."
+
+#: views/home.template.php:216
+msgid "Groove Music Support"
+msgstr "Поддержка сервиса Groove Music"
+
+#: views/home.template.php:217
+msgid ""
+"MusicBee has native support for Groove Music (formerly Xbox Music). You can "
+"stream directly from MusicBee or add to your existing playlist, get song "
+"recommendations from the vast Groove catalog.<br/><br/>Want to listen to a "
+"song before buy? You can listen to preview. "
+msgstr ""
+"MusicBee имеет встроенную поддержку сервиса Groove Music (ранее известного "
+"как Xbox Music). Вы можете прослушивать вашу музыку, хранящуюся на сервисе, "
+"прямо в MusicBee или получить советы сервиса по тому, какая еще музыка вам "
+"может понравиться.<br/><br/>Хотите прослушать песню перед покупкой? И это "
+"можно."
+
+#: views/home.template.php:232
+msgid "last.fm, CD Ripping, Tagging tools.... plus more!"
+msgstr ""
+"Поддержка last.fm, оцифровка CD-дисков, инструменты для работы с тегами... и "
+"это далеко не все!"
+
+#: views/home.template.php:233
+msgid ""
+"MusicBee packs a comprehensive set of features to make your music experience "
+"better. <br/><br/>Yet it is <b>one of the most lightweight player</b> using "
+"about 25-70 MB ram* with skins and add-ons, and packs all of these under 10 "
+"MB!"
+msgstr ""
+"MusicBee предоставит вам невероятные возможности. <br/><br/>И еще: это "
+"<b>один из самых легковесных музыкальных плееров</b>, он использует всего "
+"лишь около 25-70 МБ памяти*, и дистрибутив занимает меньше 10 МБ!"
+
+#: views/home.template.php:234
+msgid ""
+"<br/><br/>*Tested with MusicBee 3 with a library of 200 albums, sized around "
+"3GB."
+msgstr ""
+"<br/><br/>*Проверялось на MusicBee 3 с фонотекой из 200 альбомов размером "
+"около 3ГБ."
+
+#: views/home.template.php:249
+msgid "The Best.... rated by reviewers and users"
+msgstr ""
+"MusicBee оценен, как лучший плеер многими обозревателями и пользователями"
+
+#: views/home.template.php:250
+msgid ""
+"MusicBee is rated one of the best music managers and players available for "
+"Windows. It packs features that will WOW you. <br/><br/>We have a dedicated "
+"thread for users to share their experience or check reviews from trusted "
+"sources.<br/><br/>Start using MusicBee today. You will never go back."
+msgstr ""
+"MusicBee оценен, как лучший плеер и менеджер музыки для Windows многими "
+"обозревателями и пользователями. Многие возможности вызовут у вас восхищение "
+"и удивление.<br/><br/>Нам даже пришлось завести отдельную тему на форуме, в "
+"которой пользователи выражаю свою благодарность разработчику (да, MusicBee "
+"разрабатывает только один человек).<br/><br/>Начните использовать MusicBee "
+"сегодня и вы никогда не вернетесь к своему предыдущему плееру."
+
+#: views/home.template.php:265
+msgid "Get MusicBee and enhance your music experience"
+msgstr "Скачайте MusicBee и улучшите свою музыкальную жизнь"
+
+#: views/mainmenu.template.php:44
+msgid "MusicBee"
+msgstr ""
+
+#: views/mainmenu.template.php:119
+msgid "Login"
+msgstr "Войти"
+
+#: views/mainmenu.template.php:122
+msgid "Register"
+msgstr "Регистрация"
+
+#: views/mainmenu.template.php:130
+msgid ""
+"Your browser does not support javascript (or it is disabled). Please use a "
+"browser with javascript or enable it.<br/>We need javascript to function "
+"properly otherwise some things won't work."
+msgstr ""
+"Ваш браузер не поддерживает javascript (или эта поддержка отключена). "
+"Пожалуйста, используйте браузер с поддержкой javascript или включите ее.<br/"
+">Нам нужен javascript для правильной работы сайта, иначе многие функции "
+"сайта не будут работать."
+
+#~ msgid ""
+#~ "Your browser does not support javascript (or it is disabled.) Please use "
+#~ "a browser with\n"
+#~ "\t\t\tjavascript or enable it.<br/>We need javascript to function "
+#~ "properly otherwise some things won't work."
+#~ msgstr ""
+#~ "Ваш браузер не поддерживает javascript (или эта поддержка отключена). "
+#~ "Пожалуйста, используйте браузер с поддержкой javascript или включите ее."
+#~ "<br/>Нам нужен javascript для правильной работы сайта, иначе многие "
+#~ "функции сайта не будут работать."
 
 #~ msgid "Hello world!"
 #~ msgstr "Привет мир!"

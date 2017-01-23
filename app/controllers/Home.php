@@ -12,7 +12,6 @@
 
 namespace App\Controllers;
 
-
 use App\Lib\Controller;
 use App\Lib\View;
 use App\Lib\Model;
@@ -26,8 +25,13 @@ class Home extends Controller
 
     public function index()
     {
+        //create the model!
+        $this->model("Home");
+
+        $data = null;
+
+        //Create view
         $this->view = new View();
-        //@todo: accept parameters for template name!
-        $this->view->renderView("index");
+        $this->view->renderView("home", $data);
     }
 }
