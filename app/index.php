@@ -12,11 +12,15 @@
 
 require_once '../vendor/autoload.php';
 
+
 /**
  * load i18n gettext module and language list
  */
 require_once 'locale/lang.list.php';
 require_once 'libraries/gettext/gettext.inc.php';
+
+//Initialize session if not already started
+App\Lib\Utility\Session::init();
 
 /**
  * Load website and database configuration
@@ -33,11 +37,11 @@ use App\Lib\Utility\Config as cfg;
 use App\Lib\Utility\Session;
 use App\Lib\ForumHook;
 
-
 /**
  * Url routing initialize
  */
 $router = new Router();
+
 /**
  * Setup localization, cookies and redirect to proper localized url!
  */

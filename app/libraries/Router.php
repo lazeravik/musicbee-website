@@ -82,7 +82,7 @@ class Router
             ? new $controllerNamespace($model)
             : null;
 
-        if(class_exists($viewNamespace)) {
+        if (class_exists($viewNamespace)) {
             $view = new $viewNamespace($model, new Template($this->mvcName));
             $view->render();
         } else {
@@ -158,7 +158,7 @@ class Router
      * Get the url without language codes such as: en_us, ru_ru etc
      * @return string
      */
-    private function getUrlWithoutLanguageParam()
+    public function getUrlWithoutLanguageParam()
     {
         $urlGetParamArray = self::getParamFromUrl();
         if (is_array($urlGetParamArray)) {

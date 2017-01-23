@@ -20,8 +20,8 @@ class LanguageManager
 
     public static function init($languageRoute, $langList)
     {
-       self::$langList = $langList;
-       self::$languageRoute = $languageRoute;
+        self::$langList = $langList;
+        self::$languageRoute = $languageRoute;
     }
 
     /**
@@ -57,6 +57,7 @@ class LanguageManager
         T_textdomain($localeParam);
 
         self::setLocale($localeParam);
+        self::setSession($localeParam);
         self::setLanguageCookie($localeParam);
     }
 
@@ -115,7 +116,7 @@ class LanguageManager
      */
     public static function getFromLanguageArrayKey()
     {
-        if (array_key_exists(self::$languageRoute,self::$langList)) {
+        if (array_key_exists(self::$languageRoute, self::$langList)) {
             return self::$langList[self::$languageRoute][0];
         }
 
@@ -135,7 +136,8 @@ class LanguageManager
 
         if (self::matchLanguage() == "/" ||
             strtolower(self::getFromLanguageArrayItem()) == "") {
-            $urltoRedirect = path('url') .
+            var_dump($router->getUrlWithoutLanguageParam());
+            $urltoRedirect = path('url-nolang') .
                 $router->generateUrlWithLangParam(
                     self::$locale,
                     self::getFromLanguageArrayKey()
@@ -149,7 +151,8 @@ class LanguageManager
      * Set website locale
      * @param $locale
      */
-    private static function setLocale($locale){
+    private static function setLocale($locale)
+    {
         self::$locale = $locale;
     }
 
@@ -160,5 +163,10 @@ class LanguageManager
     public static function getLocale()
     {
         return self::$locale;
+    }
+
+    private static function setSession($localeParam)
+    {
+        $_SESSION['language'] = strtolower($localeParam);
     }
 }

@@ -10,12 +10,6 @@
  *
  */
 
-/**
- * Created by PhpStorm.
- * User: Avik
- * Date: 17-01-2017
- * Time: 12:13 AM
- */
 
 namespace App\Lib\Utility;
 
@@ -32,6 +26,12 @@ class Config
     {
         $httpStat = self::isSecure()?"https":"http";
         return $httpStat."://".$_SERVER['HTTP_HOST']."/";
+    }
+
+    public static function getHttpUrlWithLangCode()
+    {
+        $langCode = !empty($_SESSION['language'])? $_SESSION['language']."/" : "";
+        return self::getHttpUrl().strtolower($langCode);
     }
 
     public static function getRootDir()

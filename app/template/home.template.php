@@ -263,7 +263,7 @@ $data = $template->getData("releasedata");
 							<h4><?php echo __("Get MusicBee and enhance your music experience"); ?></h4>
 							<a href="<?php echo path('download'); ?>" class="btn btn_wireframe btn_wireframe_blue">
 								<h3><?php echo __("Download Now"); ?></h3>
-								<p><?php echo sprintf(__("For %1\$s"),  $data['supported_os']); ?></p>
+								<p><?php echo sprintf(__("For %1\$s"), $data['supported_os']); ?></p>
 							</a>
 						</div>
 					</div>

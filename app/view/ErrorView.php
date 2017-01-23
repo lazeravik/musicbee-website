@@ -20,8 +20,6 @@ class ErrorView extends View
 {
     public function render()
     {
-        //$this->template->setData("releasedata", $this->model->getReleasedata());
         $this->template->render();
-
     }
 }

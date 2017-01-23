@@ -15,7 +15,6 @@ use App\Lib\Utility\Route;
 use App\Lib\Utility\Router;
 use App\Lib\Utility\LanguageManager;
 use App\Lib\Utility\Config as cfg;
-use App\Lib\Utility\Session;
 use App\Lib\ForumHook;
 use App\Lib\MBReleaseManager;
 
@@ -25,10 +24,6 @@ class Bootstrap
 
     public function __construct(Router $newRouter)
     {
-        //Initialize session if not already started
-        Session::init();
-
-
         $this->router = $newRouter;
         $this->initRouter($this->router);
     }

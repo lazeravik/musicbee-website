@@ -42,6 +42,7 @@ if ($setting['is_test']) :
         <meta name="robots" content="noindex">
 HTML;
 endif;
+
 $musicbee = __("Musicbee");
     $html .= <<<HTML
 

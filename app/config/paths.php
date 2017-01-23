@@ -12,11 +12,13 @@
 
 use App\Lib\Utility\Config as cfg;
 
-function path($pathname = null) {
+function path($pathname = null)
+{
     //All links defined here. MODIFY IT WHEN FOLDER/SITE STRUCTURE CHANGES!
     $link                         = array();
     $link['root']                 = cfg::getRootDir().'/app/';
-    $link['url']                  = cfg::getHttpUrl();
+    $link['url-nolang']           = cfg::getHttpUrl();
+    $link['url']                  = cfg::getHttpUrlWithLangCode();
     $link['app-url']              = $link['url'].'app/';
     $link['favicon']              = $link['url']."app/favicon.ico";
     $link['download']             = $link['url'].'downloads/';
@@ -36,7 +38,6 @@ function path($pathname = null) {
     $link['api']                  = $link['help'].'api/';
     $link['bugreport']            = $link['url'].'bug/';
     $link['redirect']             = $link['url'].'out/';
-    $link['404']                  = $link['root']."pages/error/404.php";
     $link['kb']                   = $link['url'].'kb/';
     $link['credit']               = $link['help'].'credit/';
     $link['logout']               = $link['url'].'logout/';
@@ -45,18 +46,14 @@ function path($pathname = null) {
     $link['locale-dir']           = $link['root']. 'locale/';
     $link['model-dir']            = $link['root']. 'model/';
 
-//public directory
+    //public directory
     $link['style-dir']            = cfg::getStyleDir();
     $link['img-dir']              = cfg::getImageDir();
     $link['js-dir']               = cfg::getScriptDir();
 
-///page location variable starts here
-    $mainmenu = $link['template-dir'].'mainmenu.template.php';
-    $footer = $link['template-dir'].'footer.template.php';
 
-
-    if($pathname != null){
-        if(!empty($link[$pathname])){
+    if ($pathname != null) {
+        if (!empty($link[$pathname])) {
             return $link[$pathname];
         }
     }

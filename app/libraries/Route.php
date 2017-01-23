@@ -27,7 +27,7 @@ class Route
     {
         $this->url = $urlParam;
 
-        if(!empty($method)) {
+        if (!empty($method)) {
             $this->method = $method;
         }
     }
