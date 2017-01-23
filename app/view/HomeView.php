@@ -10,11 +10,18 @@
  *
  */
 
+namespace App\View;
 
-namespace App\Lib\Model;
-use App\Lib\Model;
 
-class Home_model extends Model
+use App\Lib\View;
+use App\Lib\ForumHook;
+
+class HomeView extends View
 {
-    function __construct(){}
+    public function render()
+    {
+        $this->template->setData("releasedata", $this->model->getReleasedata());
+        $this->template->render();
+
+    }
 }

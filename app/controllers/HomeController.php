@@ -13,25 +13,17 @@
 namespace App\Controllers;
 
 use App\Lib\Controller;
+use App\Lib\MBRelease;
+use App\Lib\MBReleaseType;
 use App\Lib\View;
 use App\Lib\Model;
+use App\Lib\MBReleaseManager;
 
-class Home extends Controller
+class HomeController extends Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function index()
     {
-        //create the model!
-        $this->model("Home");
-
-        $data = null;
-
-        //Create view
-        $this->view = new View();
-        $this->view->renderView("home", $data);
     }
+
+
 }

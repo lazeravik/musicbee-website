@@ -16,22 +16,20 @@ use App\Lib\Utility\Enum;
 
 class MBReleaseManager extends Database
 {
-    protected static $dbcon;
-
     /**
      * Get Musicbee release by type such STABLE, BETA, PATCH
-     * @param $releaseType  (MBReleaseType enum)
-     * @param $dbcon        (Database connection)
+     * @param $releaseType (MBReleaseType enum)
      * @return MBRelease|\Exception
      * @throws \Exception
+     * @internal param $dbcon (Database connection)
      */
-    public static function getMusicBeeRelease($releaseType, $dbcon)
+    public static function getMusicBeeRelease($releaseType)
     {
-        if ($dbcon === null) {
-            throw new \Exception("No Connection to database!", 000);
+        if (!self::isDatabaseConnected()) {
+            if (self::getDatabaseConnection() === null) {
+                throw new \Exception("No Connection to database!", 000);
+            }
         }
-
-        self::$dbcon = $dbcon;
 
         switch ($releaseType) {
             case MBReleaseType::STABLE:
@@ -111,7 +109,7 @@ class MBReleaseManager extends Database
        ON {$db_info['mb_all']}.version = {$db_info['mb_current']}.version
   WHERE ID_VERSION = 0
 SQL;
-            $statement = self::$dbcon->prepare($sql);
+            $statement = self::getDatabaseConnection()->prepare($sql);
             $statement->execute();
 
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -136,7 +134,7 @@ SQL;
     ON {$db_info['mb_all']}.version = {$db_info['mb_current']}.version
   WHERE ID_VERSION = 1
 SQL;
-            $statement = self::$dbcon->prepare($sql);
+            $statement = self::getDatabaseConnection()->prepare($sql);
             $statement->execute();
 
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -159,7 +157,7 @@ SQL;
   SELECT * FROM {$db_info['mb_current']} 
   WHERE ID_VERSION = 2
 SQL;
-            $statement = self::$dbcon->prepare($sql);
+            $statement = self::getDatabaseConnection()->prepare($sql);
             $statement->execute();
 
             return $statement->fetchAll(\PDO::FETCH_ASSOC);

@@ -10,6 +10,7 @@
  *
  */
 
+$link = path();
 function printMenuItems($menuArray){
 	echo "<li>";
 	if (!empty($menuArray['href'])) {
@@ -44,7 +45,7 @@ function printMenuItems($menuArray){
 				<a href="<?php echo $link['url']; ?>" ><img src="<?php echo $link['img-dir']; ?>musicbee.png"><?php echo __("MusicBee"); ?></a>
 			</li>
 			<?php
-			foreach ($menu as $key => $menu_item)
+			foreach (menu() as $key => $menu_item)
 			{
 				if (!isset($menu_item['restriction']))
 				{
@@ -56,7 +57,7 @@ function printMenuItems($menuArray){
 						{
 							if (isset($sub_item['restriction']))
 							{
-								if ($sub_item['restriction'] == 'admin' && $context['user']['is_admin'])
+								if ($sub_item['restriction'] == 'admin' && forumhook()['user']['is_admin'])
 								{
 									printMenuItems($sub_item);
 								}
@@ -74,7 +75,7 @@ function printMenuItems($menuArray){
 			?>
 		</ul>
 		<ul class="menu_position menu_right">
-			<?php if (!$context['user']['is_guest']): ?>
+			<?php if (!forumhook()['user']['is_guest']): ?>
 				<?php
 				foreach ($menu as $key => $logged_menu_item) {
 					if (isset($logged_menu_item['restriction'])) {
@@ -87,7 +88,7 @@ function printMenuItems($menuArray){
 							{
 								if (isset($sub_item['restriction']))
 								{
-									if ($sub_item['restriction'] == 'admin' && $context['user']['is_admin'])
+									if ($sub_item['restriction'] == 'admin' && forumhook()['user']['is_admin'])
 									{
 										printMenuItems($sub_item);
 									}
@@ -106,9 +107,9 @@ function printMenuItems($menuArray){
 				<li class="message_count">
 					<a href="<?php echo $link['forum']; ?>?action=pm"
 					   class="secondery_nav_menu_button"
-					   title="Messages: <?php echo $context['user']['unread_messages']; ?>">
-						<?php if ($context['user']['unread_messages'] > 0): ?>
-							<span class="message_new"><i class="fa fa-envelope-open-o">&nbsp;&nbsp; </i><?php echo $context['user']['unread_messages']; ?></span>
+					   title="Messages: <?php echo forumhook()['user']['unread_messages']; ?>">
+						<?php if (forumhook()['user']['unread_messages'] > 0): ?>
+							<span class="message_new"><i class="fa fa-envelope-open-o">&nbsp;&nbsp; </i><?php echo forumhook()['user']['unread_messages']; ?></span>
 						<?php else: ?>
 							<span class="message_no"><i class="fa fa-envelope-o"></i></span>
 						<?php endif; ?>

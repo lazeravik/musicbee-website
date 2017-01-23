@@ -32,14 +32,12 @@ class LanguageManager
      */
     public static function getRequestedLanguage()
     {
-        global $setting;
-
         $langMatch =self::matchLanguage();
         if ($langMatch == "/") {
             if (isset($_COOKIE['language'])) {
                 return $_COOKIE['language'];
             } else {
-                return $setting['default-lang'];
+                return setting('default-lang');
             }
         } else {
             return $langMatch;
@@ -52,11 +50,9 @@ class LanguageManager
      */
     public static function setLanguage($localeParam)
     {
-        global $link;
-
         $encoding = 'UTF-8';
         T_setlocale(LC_MESSAGES, $localeParam);
-        T_bindtextdomain($localeParam, $link['locale-dir']);
+        T_bindtextdomain($localeParam, path('locale-dir'));
         T_bind_textdomain_codeset($localeParam, $encoding);
         T_textdomain($localeParam);
 
@@ -133,14 +129,13 @@ class LanguageManager
      */
     public static function redirectToUrlWithLanuageCode(Router $router)
     {
-        global $link;
         self::$locale = self::getRequestedLanguage();
 
         self::setLanguage(self::$locale);
 
         if (self::matchLanguage() == "/" ||
             strtolower(self::getFromLanguageArrayItem()) == "") {
-            $urltoRedirect = $link['url'] .
+            $urltoRedirect = path('url') .
                 $router->generateUrlWithLangParam(
                     self::$locale,
                     self::getFromLanguageArrayKey()

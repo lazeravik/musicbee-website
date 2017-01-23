@@ -21,9 +21,9 @@ require_once 'libraries/gettext/gettext.inc.php';
 /**
  * Load website and database configuration
  */
+require_once 'config/config.php';
 require_once 'config/paths.php';
 require_once 'config/database.php';
-require_once 'config/settings.php';
 
 use App\Lib\Bootstrap;
 use App\Lib\Utility\Route;

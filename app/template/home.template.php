@@ -10,36 +10,33 @@
  *
  */
 
-/**
- * Declare the properties for this page
- */
 
 use App\Lib\Utility\Template;
 
 $headerTemplate = new Template("header");
-$headerTemplate->setDataArray(
+$headerTemplate->setData(
     "title",
     __("MusicBee - The Ultimate Music Manager and Player")
 );
-$headerTemplate->setDataArray(
+$headerTemplate->setData(
     "description",
     __("The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web")
 );
-$headerTemplate->setDataArray(
+$headerTemplate->setData(
     "keywords",
     __("music, player, ultimate, best, customizable, skin, free, plugin")
 );
-$headerTemplate->setDataArray("isFontHelperDisabled", false);
+$headerTemplate->setData("isFontHelperDisabled", false);
 
-$headerTemplate->setDataArray(
+$link = path();
+$headerTemplate->setData(
     "socialTags",
     <<<HTML
   	    <!--Social network tags for facebook and twitter -->
 	    <meta property="og:title"           content="{$headerTemplate->getData('title')}"/>
 	    <meta property="og:url"             content="{$link['url']}"/>
 	    <meta property="og:image"           content="{$link['img-dir']}mb_big.png">
-	    <meta property="og:description"     content="{$headerTemplate->getData('description')}">
-        
+	    <meta property="og:description"     content="{$headerTemplate->getData('description')}">   
 	    <meta name="twitter:card"           content="summary">
 	    <meta name="twitter:site"           content="@MusicBeePlayer">
 	    <meta name="twitter:title"          content="{$headerTemplate->getData('title')}">
@@ -48,9 +45,10 @@ HTML
 );
 
 $headerTemplate->render();
+
+
+$data = $template->getData("releasedata");
 ?>
-
-
 	<div id="wrapper">
 		<!-- BODY CONTENT -->
 		<div id="main">
@@ -59,7 +57,7 @@ $headerTemplate->render();
 					<div class="overlay">
 						<!-- INCLUDE MAIN MENU FOR BASIC NAVIGATION -->
         <?php
-        include_once 'views/mainmenu.template.php';
+        include_once path('template-dir').'mainmenu.template.php';
         ?>
 						<section class="mb_landing align_right">
 							<div class="sub_content">
@@ -71,16 +69,16 @@ $headerTemplate->render();
 								</div>
 								<div class="hero_img_top">
 									<div class="hero_img_wrapper hero_img_topmost_wrap">
-										<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-top-min.png">
+										<img src="<?php echo path('img-dir'); ?>hero_img/hero-img-top-min.png">
 									</div>
 								</div>
 							</div>
 							<div class="sub_content_bottom">
 								<div class="sub_content hero_buttons">
 									<h4><?php echo __("Get MusicBee, you will never go back. And it's free!"); ?></h4>
-									<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_yellow">
+									<a href="<?php echo path('download'); ?>" class="btn btn_wireframe btn_wireframe_yellow">
 										<h3><?php echo __("Download Now"); ?></h3>
-										<p><?php echo sprintf(__("For %1\$s"), $mb['musicbee_download']['stable']['supported_os']); ?></p>
+										<p><?php echo sprintf(__("For %1\$s"), $data['supported_os']); ?></p>
 									</a>
 									<a
                                         id="feature_scroll"
@@ -104,7 +102,7 @@ $headerTemplate->render();
 							<h4 data-sr="enter bottom"><?php echo __("Play your music the way you want. Turn your computer into a music jukebox. Use auto-tagging to clean up your messy music library. Enjoy a great music experience with MusicBee."); ?></h4>
 						</div>
 						<div class="hero_img_top">
-							<img src="<?php echo $link['img-dir']; ?>hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
+							<img src="<?php echo path('img-dir'); ?>hero_img/mb-hero-interface-min.png" data-sr="vFactor 0.2">
 						</div>
 					</div>
 				</div>
@@ -187,7 +185,7 @@ $headerTemplate->render();
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-skin-min.png">
+								<img src="<?php echo path('img-dir'); ?>hero_img/hero-img-skin-min.png">
 							</div>
 						</div>
 					</div>
@@ -203,7 +201,7 @@ $headerTemplate->render();
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-sync-min.png">
+								<img src="<?php echo path('img-dir'); ?>hero_img/hero-img-sync-min.png">
 							</div>
 						</div>
 					</div>
@@ -219,7 +217,7 @@ $headerTemplate->render();
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-groove-min.png">
+								<img src="<?php echo path('img-dir'); ?>hero_img/hero-img-groove-min.png">
 							</div>
 						</div>
 					</div>
@@ -236,7 +234,7 @@ $headerTemplate->render();
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['img-dir']; ?>hero_img/mb_tag_feature.png">
+								<img src="<?php echo path('img-dir'); ?>hero_img/mb_tag_feature.png">
 							</div>
 						</div>
 					</div>
@@ -252,7 +250,7 @@ $headerTemplate->render();
 						</div>
 						<div class="hero_img_top">
 							<div class="hero_img_wrapper">
-								<img src="<?php echo $link['img-dir']; ?>hero_img/hero-img-review.png">
+								<img src="<?php echo path('img-dir'); ?>hero_img/hero-img-review.png">
 							</div>
 						</div>
 					</div>
@@ -263,9 +261,9 @@ $headerTemplate->render();
 					<div class="overlay">
 						<div class="sub_content">
 							<h4><?php echo __("Get MusicBee and enhance your music experience"); ?></h4>
-							<a href="<?php echo $link['download']; ?>" class="btn btn_wireframe btn_wireframe_blue">
+							<a href="<?php echo path('download'); ?>" class="btn btn_wireframe btn_wireframe_blue">
 								<h3><?php echo __("Download Now"); ?></h3>
-								<p><?php echo sprintf(__("For %1\$s"), $mb['musicbee_download']['stable']['supported_os']); ?></p>
+								<p><?php echo sprintf(__("For %1\$s"),  $data['supported_os']); ?></p>
 							</a>
 						</div>
 					</div>
@@ -279,9 +277,9 @@ $headerTemplate->render();
 <?php
 //include_once $footer;
 ?>
-<script src="<?php echo $link['js-dir']; ?>scrollreveal/scrollreveal.js"></script>
-<script src="<?php echo $link['js-dir']; ?>jquery.sticky.min.js"></script>
-<script src="<?php echo $link['js-dir']; ?>mb_common.js"></script>
+<script src="<?php echo path('js-dir'); ?>scrollreveal/scrollreveal.js"></script>
+<script src="<?php echo path('js-dir'); ?>jquery.sticky.min.js"></script>
+<script src="<?php echo path('js-dir'); ?>mb_common.js"></script>
 <script type="text/javascript">
 	//initialize scroll reveal
 	var hero_title_reveal = {

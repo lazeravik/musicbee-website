@@ -24,7 +24,7 @@ class Template
      */
     public function __construct($templateName)
     {
-        $this->templateName = $templateName;
+        $this->templateName = strtolower($templateName);
     }
 
     /**
@@ -32,7 +32,7 @@ class Template
      * @param $variable
      * @param $data
      */
-    public function setDataArray($variable, $data)
+    public function setData($variable, $data)
     {
         $this->dataArray[$variable] = $data;
     }
@@ -42,10 +42,10 @@ class Template
      */
     public function render()
     {
-        global $link,$setting;
-
-        $template = $this;
-        $file = $link['view-dir'].$this->templateName.'.template.php';
+        $setting    = setting();
+        $link       = path();
+        $template   = $this;
+        $file       = path('template-dir').$this->templateName.'.template.php';
 
         if (file_exists($file)) {
             include_once $file;

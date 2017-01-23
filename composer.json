@@ -3,7 +3,9 @@
     "classmap": [
       "app/classes",
 	  "app/libraries",
-      "app/controllers"
+      "app/controllers",
+	  "app/model",
+	  "app/view"
     ]
   },
   "require": {

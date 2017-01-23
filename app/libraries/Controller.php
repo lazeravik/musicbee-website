@@ -15,12 +15,10 @@ namespace App\Lib;
 
 class Controller
 {
-
-    protected $view;
     protected $model;
-    protected $data;
-    public function __construct()
+    public function __construct(Model $model)
     {
+        $this->modle = $model;
     }
     public function index()
     {
@@ -32,16 +30,4 @@ class Controller
     {
     }
 
-    public function model($modelName)
-    {
-        global $link;
-
-        $file = $link['model-dir'] . $modelName . '_model.php';
-        if (file_exists($file)) {
-            require_once $file;
-
-            $namespace = "App\\Lib\\Model\\".$modelName."_model";
-            $this->model = new $namespace();
-        }
-    }
 }

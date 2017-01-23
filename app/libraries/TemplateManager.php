@@ -43,7 +43,6 @@ class TemplateManager
             return new \InvalidArgumentException("Data Variable name can not be empty!");
         }
 
-
         $data = self::$template->getData($variableName);
         if (!empty($data)) {
             return self::$template->getData($variableName);

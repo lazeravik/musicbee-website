@@ -10,22 +10,18 @@
  *
  */
 
-namespace App\Lib;
+namespace App\View;
 
-use App\Lib\Utility\LanguageManager;
-use App\Lib\Utility\Template;
-use App\Lib\Model;
 
-class View
+use App\Lib\View;
+use App\Lib\ForumHook;
+
+class ErrorView extends View
 {
-    protected $model;
-    protected $template;
-
-    public function __construct(Model $model = null, Template $template)
+    public function render()
     {
-        $this->model    = $model;
-        $this->template = $template;
-    }
+        //$this->template->setData("releasedata", $this->model->getReleasedata());
+        $this->template->render();
 
-    public function render(){}
+    }
 }

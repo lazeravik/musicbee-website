@@ -26,7 +26,7 @@ class Router
 {
     protected $urlRoutes = [];
     protected $methods   = [];
-    protected $controller;
+    protected $mvcName;
 
     /**
      * Add new routes to the route list
@@ -47,18 +47,11 @@ class Router
         foreach ($this->urlRoutes as $key => $url) {
             if (preg_match("#^$urlGetParam$#", $url)) {
                 if (isset($this->methods[$key])) {
-                    $this->controller = $this->methods[$key];
-
-                    if (is_string($this->controller)) {
-                        $this->controller = "App\\Controllers\\$this->controller";
-                        $this->controller = new $this->controller();
-
-                        if (method_exists($this->controller, "index")) {
-                            $this->controller->index();
-                        }
-
+                    $this->mvcName = $this->methods[$key];
+                    if (is_string($this->mvcName)) {
+                        $this->createMVC();
                     } else {
-                        call_user_func($this->controller);
+                        call_user_func($this->mvcName);
                     }
                     return true;
                 } else {
@@ -67,7 +60,45 @@ class Router
             }
         }
 
-        echo "not found!";
+        $this->loadErrorPage();
+        return false;
+    }
+
+    /**
+     * create the requested view and controller. the controller will
+     * instantiate the model and pass it on to the view
+     */
+    public function createMVC()
+    {
+        # First create the model!
+        $modelNamespace         = "App\\Lib\\Model\\{$this->mvcName}Model";
+        $controllerNamespace    = "App\\Controllers\\{$this->mvcName}Controller";
+        $viewNamespace          = "App\\View\\{$this->mvcName}View";
+
+        $model = (class_exists($modelNamespace))
+            ? new $modelNamespace()
+            : null;
+        $controller = (class_exists($controllerNamespace) && $model != null)
+            ? new $controllerNamespace($model)
+            : null;
+
+        if(class_exists($viewNamespace)) {
+            $view = new $viewNamespace($model, new Template($this->mvcName));
+            $view->render();
+        } else {
+            $this->loadErrorPage();
+        }
+    }
+
+    /**
+     * Load 404 error page if the requested page does not exists
+     */
+    public function loadErrorPage()
+    {
+        $this->mvcName = "Error";
+        $viewNamespace = "App\\View\\{$this->mvcName}View";
+        $view = new $viewNamespace(null, new Template($this->mvcName));
+        $view->render();
     }
 
     /**

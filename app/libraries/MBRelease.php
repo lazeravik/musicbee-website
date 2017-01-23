@@ -38,6 +38,7 @@ class MBRelease
      * @param $downloads
      * @param $supported_os
      * @param $message
+     * @param $misc
      */
     public function __construct(
         $release_version,
