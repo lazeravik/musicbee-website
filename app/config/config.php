@@ -17,7 +17,7 @@ function setting($settingName = null)
 {
     $setting['default-lang']    = 'en_US';
     $setting['charset']         = 'utf-8';
-    $setting['ver']             = '1.9.5';
+    $setting['version']         = '1.9.5';
     $setting['show_warning']    = false;
     $setting['is_test'	]	    = true;
     $setting['github_link' ]    = 'https://github.com/Avik-B/musicbee-website';

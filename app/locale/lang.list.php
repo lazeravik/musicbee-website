@@ -16,8 +16,5 @@ $langList = [
     ],
     "ru" => [
         "ru_RU",
-    ],
-    "bn" => [
-        "bn_IN",
     ]
 ];

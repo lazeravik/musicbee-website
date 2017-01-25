@@ -43,9 +43,9 @@ if ($setting['is_test']) :
 HTML;
 endif;
 
-$musicbee = __("Musicbee");
     $html .= <<<HTML
 
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <!-- responsive mobile deivicew support -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         

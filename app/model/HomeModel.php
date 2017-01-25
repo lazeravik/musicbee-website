@@ -23,11 +23,21 @@ class HomeModel extends Model
     public function getReleasedata()
     {
         $data = MBReleaseManager::getMusicBeeRelease(MBReleaseType::STABLE);
-        return [
-            "name"          => $data->getName(),
-            "version"       => $data->getVersion(),
-            "supported_os"  => $data->getSupportedOs(),
-            "download_link" => $data->getDownloadLinks(),
-        ];
+
+        if(is_a($data, "Exception")) {
+            return [
+                "name"          => "NA",
+                "version"       => "NA",
+                "supported_os"  => "NA",
+                "download_link" => "NA",
+            ];
+        } else {
+            return [
+                "name" => $data->getName(),
+                "version" => $data->getVersion(),
+                "supported_os" => $data->getSupportedOs(),
+                "download_link" => $data->getDownloadLinks(),
+            ];
+        }
     }
 }

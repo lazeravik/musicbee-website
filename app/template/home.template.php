@@ -20,7 +20,7 @@ $headerTemplate->setData(
 );
 $headerTemplate->setData(
     "description",
-    __("The Ultimate Music Manager and Player. MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web")
+    __("MusicBee makes it easy to organize, find, and play music files on your Windows computer, portable devices and on the web")
 );
 $headerTemplate->setData(
     "keywords",
@@ -35,7 +35,7 @@ $headerTemplate->setData(
   	    <!--Social network tags for facebook and twitter -->
 	    <meta property="og:title"           content="{$headerTemplate->getData('title')}"/>
 	    <meta property="og:url"             content="{$link['url']}"/>
-	    <meta property="og:image"           content="{$link['img-dir']}mb_big.png">
+	    <meta property="og:image"           content="{$link['img-dir']}hero_img/mb-hero-interface-min.png">
 	    <meta property="og:description"     content="{$headerTemplate->getData('description')}">   
 	    <meta name="twitter:card"           content="summary">
 	    <meta name="twitter:site"           content="@MusicBeePlayer">

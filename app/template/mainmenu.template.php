@@ -77,7 +77,7 @@ function printMenuItems($menuArray){
 		<ul class="menu_position menu_right">
 			<?php if (!forumhook()['user']['is_guest']): ?>
 				<?php
-				foreach ($menu as $key => $logged_menu_item) {
+				foreach (menu() as $key => $logged_menu_item) {
 					if (isset($logged_menu_item['restriction'])) {
 						echo '<li class="'. $key .'">
 								<a href="' . $logged_menu_item['href'] .'">' . $logged_menu_item['title'] .'</a>';

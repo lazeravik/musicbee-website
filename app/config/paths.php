@@ -24,7 +24,7 @@ function path($pathname = null)
     $link['download']             = $link['url'].'downloads/';
     $link['rss']                  = $link['url'].'rss/';
     $link['home']                 = $link['url'];
-    $link['forum']                = $link['url'].'forum/';
+    $link['forum']                = $link['url-nolang'].'forum/';
     $link['admin']['forum-panel'] = $link['forum'].'?action=admin';
     $link['login']                = $link['forum'].'?action=login';
     $link['register']             = $link['forum'].'?action=register';
@@ -42,9 +42,10 @@ function path($pathname = null)
     $link['credit']               = $link['help'].'credit/';
     $link['logout']               = $link['url'].'logout/';
     $link['incl-dir']             = $link['root'].'includes/';
-    $link['template-dir']         = $link['root']. 'template/';
+    $link['template-dir']         = $link['root']. 'view/templates/';
     $link['locale-dir']           = $link['root']. 'locale/';
     $link['model-dir']            = $link['root']. 'model/';
+    $link['view-dir']             = $link['root']. 'view/';
 
     //public directory
     $link['style-dir']            = cfg::getStyleDir();

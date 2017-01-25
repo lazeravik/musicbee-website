@@ -10,6 +10,7 @@
   },
   "require": {
     "phpmailer/phpmailer": "^5.2",
-    "ezyang/htmlpurifier": "^4.8"
+    "ezyang/htmlpurifier": "^4.8",
+	"level-2/transphporm": "^1.1"
   }
 }

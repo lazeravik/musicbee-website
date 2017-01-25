@@ -34,7 +34,6 @@ use App\Lib\Utility\Route;
 use App\Lib\Utility\Router;
 use App\Lib\Utility\LanguageManager;
 use App\Lib\Utility\Config as cfg;
-use App\Lib\Utility\Session;
 use App\Lib\ForumHook;
 
 /**

@@ -1,0 +1,30 @@
+@import "styles.tss";
+
+main {
+    content: template("../templates/home.html");
+}
+
+menu {
+    content: template("../templates/mainmenu.html")
+}
+
+/*h4[lang="hero-text-desc"] {*/
+    /*content: __();*/
+/*}*/
+
+/*a#hero-download-btn h3 {*/
+    /*content: gettext("Download Now");*/
+/*}*/
+
+
+[data-gettext] {
+    content: __();
+}
+
+[data-gettext-content] {
+    content: __();
+}
+
+[data-gettext-content] {
+    content: __vsprintf("inserted", "awesome", 42);
+}

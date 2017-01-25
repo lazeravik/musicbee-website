@@ -42,6 +42,7 @@ class Template
      */
     public function render()
     {
+        var_dump($this->templateName);
         $setting    = setting();
         $link       = path();
         $template   = $this;
