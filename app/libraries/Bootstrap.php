@@ -39,13 +39,4 @@ class Bootstrap
         $router->route();
     }
 
-    /**
-     * Get the list of available language from locale/lang.list.php
-     * @return array
-     */
-    public function getLanguageList()
-    {
-        global $langList;
-        return $langList;
-    }
 }

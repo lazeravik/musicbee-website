@@ -155,6 +155,7 @@ $info_bar_max_width : 1200px;
 
           i.fa {
             align-self : center;
+            width: 25px;
           }
 
           &:hover {
@@ -216,8 +217,9 @@ $info_bar_max_width : 1200px;
             a {
               width       : 100%;
               padding     : 15px 15px;
-              display     : block;
+              display     : flex;
               flex-wrap   : wrap;
+              flex-flow   : row;
               box-sizing  : border-box;
               text-shadow : 1px 0px 2px rgba(0, 0, 0, 0.33);
               box-shadow  : none;

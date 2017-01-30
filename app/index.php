@@ -28,6 +28,7 @@ App\Lib\Utility\Session::init();
 require_once 'config/config.php';
 require_once 'config/paths.php';
 require_once 'config/database.php';
+require_once 'config/release.php';
 
 use App\Lib\Bootstrap;
 use App\Lib\Utility\Route;
@@ -44,14 +45,18 @@ $router = new Router();
 /**
  * Setup localization, cookies and redirect to proper localized url!
  */
-LanguageManager::init($router->getLanguageParamFromUrl(), $langList);
+LanguageManager::init($router->getLanguageParamFromUrl(), getLangList());
 LanguageManager::redirectToUrlWithLanuageCode($router);
 
 /**
  * Load in menu config after localization is done.
  * Load everything else that contans __() after localization
  */
+require_once 'locale/langArray.php';
 require_once 'config/menuconfig.php';
+require_once 'view/layout/menulayout.php';
+require_once 'view/layout/footerlayout.php';
+
 
 /**
  * It is time to init bootstrap. This will load the MVC framework

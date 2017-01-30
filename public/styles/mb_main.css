@@ -1508,6 +1508,7 @@ h4 {
   -webkit-align-self: center;
       -ms-flex-item-align: center;
           align-self: center;
+  width: 25px;
 }
 .mainmenu .menu_wrapper .menu_position li a:hover {
   background: none;
@@ -1569,10 +1570,16 @@ h4 {
 .mainmenu .menu_wrapper .menu_position li .nav_dropdown_sub li a {
   width: 100%;
   padding: 15px 15px;
-  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
+  -webkit-flex-flow: row;
+      -ms-flex-flow: row;
+          flex-flow: row;
   box-sizing: border-box;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.33);
   box-shadow: none;

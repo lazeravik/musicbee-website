@@ -10,11 +10,16 @@
  *
  */
 
-$langList = [
-    "en" => [
-        "en_US",
-    ],
-    "ru" => [
-        "ru_RU",
-    ]
-];
+function getLangList()
+{
+    $langList = [
+        "en" => [
+            "en_US",
+        ],
+        "ru" => [
+            "ru_RU",
+        ]
+    ];
+
+    return $langList;
+}

@@ -1,7 +1,7 @@
 link[id="maincss"]:attr(href) {
-    content: data(path("style-dir")), "mb_main.css?", data(setting("version"))
+    content: path("style-dir"), "mb_main.css?"
 }
 
 link[id="font-awesome"]:attr(href) {
-    content: data(path("style-dir")), "font-awesome-bower/font-awesome.css?4.7.0"
+    content: path("style-dir"), "font-awesome-bower/font-awesome.css?4.7.0"
 }

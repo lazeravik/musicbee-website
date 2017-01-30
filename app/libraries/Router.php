@@ -25,7 +25,7 @@ use App\Lib\Utility\Route;
 class Router
 {
     protected $urlRoutes = [];
-    protected $methods   = [];
+    protected $methods = [];
     protected $mvcName;
 
     /**
@@ -35,7 +35,6 @@ class Router
     public function addRoute(Route $newRoute)
     {
         $this->urlRoutes[] = trim($newRoute->getUrl(), "/");
-
         if (!empty($newRoute->getMethod())) {
             $this->methods[] = $newRoute->getMethod();
         }
@@ -44,10 +43,13 @@ class Router
     public function route()
     {
         $urlGetParam = trim($this->getUrlWithoutLanguageParam(), "/");
+
+        var_dump($urlGetParam);
         foreach ($this->urlRoutes as $key => $url) {
             if (preg_match("#^$urlGetParam$#", $url)) {
                 if (isset($this->methods[$key])) {
                     $this->mvcName = $this->methods[$key];
+                    var_dump($this->mvcName);
                     if (is_string($this->mvcName)) {
                         $this->createMVC();
                     } else {
@@ -70,10 +72,9 @@ class Router
      */
     public function createMVC()
     {
-        # First create the model!
-        $modelNamespace         = "App\\Lib\\Model\\{$this->mvcName}Model";
-        $controllerNamespace    = "App\\Controllers\\{$this->mvcName}Controller";
-        $viewNamespace          = "App\\View\\{$this->mvcName}View";
+        $modelNamespace = "App\\Lib\\Model\\{$this->mvcName}Model";
+        $controllerNamespace = "App\\Controllers\\{$this->mvcName}Controller";
+        $viewNamespace = "App\\View\\{$this->mvcName}View";
 
         $model = (class_exists($modelNamespace))
             ? new $modelNamespace()
@@ -95,6 +96,7 @@ class Router
      */
     public function loadErrorPage()
     {
+        var_dump("404");
         $this->mvcName = "Error";
         $viewNamespace = "App\\View\\{$this->mvcName}View";
         $view = new $viewNamespace(null, new Template($this->mvcName));

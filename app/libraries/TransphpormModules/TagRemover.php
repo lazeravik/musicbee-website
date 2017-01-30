@@ -54,6 +54,8 @@ class TagRemover
             "",
             $txt
         );
+
+        $txt = trim(str_replace("&#13;","",str_replace("&gt;","",$txt)));
         return $txt;
     }
 }

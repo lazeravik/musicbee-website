@@ -12,129 +12,130 @@
 
 function menu()
 {
+    global $lang;
     $link = path();
     $menu = array(
         'dashboard' => array(
-            'title' => __("Dashboard"),
+            'title' => $lang['dashboard'],
             'href' => $link['addon']['dashboard'],
             'restriction' => 'login',
             'sub_menu' => array(),
         ),
         'member-panel' => array(
-            'title' => '<img src="' . forumhook()['user']['avatar'] . '" class="user_avatar">',
+            'title' => '<img src="' . forumhook()['user']['avatar'] . '" class="user_avatar" />',
             'href' => $link['forum'] . '?action=profile',
             'restriction' => 'login',
             'sub_menu' => array(
                 'user-profile' => array(
-                    'title' => '' . sprintf(__('Hey, %1$s'), forumhook()['user']['name']) . '',
+                    'title' => '' . sprintf($lang['hey_username'], forumhook()['user']['name']) . '',
                     'href' => $link['forum'] . '?action=profile',
                 ),
                 'line1' => array('title' => "<hr class=\"line\"/>",),
                 'admin-panel' => array(
-                    'title' => __("Web Admin"),
+                    'title' => $lang['web_admin'],
                     'href' => $link['addon']['dashboard'] . '#admin_setting',
                     'icon' => "<i class=\"fa fa-desktop\"></i>",
                     'restriction' => 'admin',
                 ),
                 'forum-admin' => array(
-                    'title' => __("Forum Admin"),
+                    'title' => $lang['forum_admin'],
                     'href' => $link['admin']['forum-panel'],
                     'icon' => "<i class=\"fa fa-comments\"></i>",
                     'restriction' => 'admin',
                 ),
                 'line2' => array('title' => "<hr class=\"line\"/>",),
                 'sign-out' => array(
-                    'title' => __("Sign Out"),
+                    'title' => $lang['sign_out'],
                     'href' => $link['logout'],
                     'icon' => "<i class=\"fa fa-sign-out\"></i>",
                 ),
             ),
         ),
         'download' => array(
-            'title' => __("Download"),
+            'title' => $lang['download'],
             'href' => $link['download'],
             'sub_menu' => array(),
         ),
         'add-ons' => array(
-            'title' => __("Add-ons"),
+            'title' => $lang['addons'],
             'href' => $link['addon']['home'],
             'sub_menu' => array(
                 '1' => array(
-                    'title' => __("Skins"),
+                    'title' => $lang['skins'],
                     'href' => $link['addon']['home'] . "s/?type=1",
                     'icon' => "<i class=\"fa fa-paint-brush\"></i>",
-                    'desc' => __("Make MusicBee look the way you want"),
+                    'desc' => $lang['skin_description'],
                     'id' => 1,
                 ),
                 '2' => array(
-                    'title' => __("Plugins"),
+                    'title' => $lang['plugins'],
                     'href' => $link['addon']['home'] . "s/?type=2",
                     'icon' => "<i class=\"fa fa-plug\"></i>",
-                    'desc' => __("Add features/functionality to MusicBee"),
+                    'desc' => $lang['plugin_description'],
                     'id' => 2,
                 ),
                 '3' => array(
-                    'title' => __("Visualizer"),
+                    'title' => $lang['visualizer'],
                     'href' => $link['addon']['home'] . "s/?type=3",
                     'icon' => "<i class=\"fa fa-bar-chart\"></i>",
-                    'desc' => __("Get colorful visualizers for an eye pleasing experience"),
+                    'desc' => $lang['visualizer_description'],
                     'id' => 3,
                 ),
                 '4' => array(
-                    'title' => __("Theater Mode"),
+                    'title' => $lang['theater_mode'],
                     'href' => $link['addon']['home'] . "s/?type=4",
                     'icon' => "<i class=\"fa fa-arrows-alt\"></i>",
-                    'desc' => __("Get a full theater mode experience for MusicBee"),
+                    'desc' => $lang['theater_description'],
                     'id' => 4,
                 ),
                 '5' => array(
-                    'title' => __("Misc"),
+                    'title' => $lang['misc'],
                     'href' => $link['addon']['home'] . "s/?type=5",
                     'icon' => "<i class=\"fa fa-ellipsis-h\"></i>",
-                    'desc' => __("Other useful add-ons for enhancing your MusicBee experience"),
+                    'desc' => $lang['misc_description'],
                     'id' => 5,
                 ),
             ),
         ),
         'forum' => array(
-            'title' => __("Forum"),
+            'title' => $lang['forum'],
             'href' => $link['forum'],
             'sub_menu' => array(),
         ),
         'help' => array(
-            'title' => __("Help"),
+            'title' => $lang['help'],
             'href' => $link['faq'],
             'sub_menu' => array(
                 'faq' => array(
-                    'title' => __("FAQ & Help"),
+                    'title' => $lang['faq'],
                     'href' => $link['faq'],
                     'icon' => "<i class=\"fa fa-question\"></i>",
                 ),
                 'api' => array(
-                    'title' => __("Developer API"),
+                    'title' => $lang['dev_api'],
                     'href' => $link['api'],
                     'icon' => "<i class=\"fa fa-code\"></i>",
                 ),
                 'line2' => array('title' => "<hr class=\"line\"/>",),
                 'release-note' => array(
-                    'title' => __("Release Notes"),
+                    'title' => $lang['releasenote'],
                     'href' => $link['release-note'],
                     'icon' => "<i class=\"fa fa-sticky-note-o\"></i>",
                 ),
                 'press' => array(
-                    'title' => __("Press & Media"),
+                    'title' => $lang['press'],
                     'href' => $link['press'],
                     'icon' => "<i class=\"fa fa-bullhorn\"></i>",
                 ),
                 'line3' => array('title' => "<hr class=\"line\"/>",),
                 'bug' => array(
-                    'title' => __("Report a bug"),
+                    'title' => $lang['report_bug'],
                     'href' => $link['bugreport'],
                     'icon' => "<i class=\"fa fa-bug\"></i>",
                     'hide' => true,
                 ),
                 'wiki' => array(
-                    'title' => __("MusicBee Wiki"),
+                    'title' => $lang['mb_wiki'],
                     'href' => !empty($link['wiki']) ?: null,
                     'icon' => "<i class=\"fa fa-wikipedia-w\"></i>",
                     'target' => '_blank',
@@ -146,3 +147,5 @@ function menu()
 
     return $menu;
 }
+
+

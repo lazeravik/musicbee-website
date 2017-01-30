@@ -1,17 +1,10 @@
 <?php
-/**
- * Copyright (c) 2016 AvikB, some rights reserved.
- *  Copyright under Creative Commons Attribution-ShareAlike 3.0 Unported,
- *  for details visit: https://creativecommons.org/licenses/by-sa/3.0/
- *
- * @Contributors:
- * Created by AvikB for noncommercial MusicBee project.
- *  Spelling mistakes and fixes from community members.
- *
- */
+
 
 function getMenuHtml()
 {
+    global $lang;
+
     $link = path();
     $menuhtml = "";
     $menuhtml .= <<<HTML
@@ -94,7 +87,7 @@ HTML;
     } else {
         $menuhtml .= <<<HTML
      <li>
-         <a href="{$link['login']}"><i class="fa fa-user"></i> {$lang["login"]} ?></a>
+         <a href="{$link['login']}"><i class="fa fa-user"></i> {$lang["login"]}</a>
      </li>
      <li>
          <a href="{$link['register']}">{$lang["register"]}</a>
@@ -110,11 +103,11 @@ HTML;
 </noscript>
 HTML;
 
-    if (file_exists($link['root'] . 'installer/install.php') && $mb['website']['show_warning']) {
-        $menuhtml .= <<<HTML
-<p class="show_info info_red">{$lang["security_warning"]}</p>
-HTML;
-    }
+//    if (file_exists($link['root'] . 'installer/install.php') && $mb['website']['show_warning']) {
+//        $menuhtml .= <<<HTML
+//<p class="show_info info_red">{$lang["security_warning"]}</p>
+//HTML;
+//    }
 
     return $menuhtml;
 }
