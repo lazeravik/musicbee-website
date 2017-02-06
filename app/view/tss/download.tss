@@ -1,0 +1,59 @@
+@import "styles.tss";
+main { content: template("../templates/download.html"); }
+
+link[rel="shortcut icon"]:attr(href) {
+    content: append_path(href, "root");
+}
+
+[data-gettext] {
+    content: __();
+}
+
+menu {
+    content: data(menu);
+    content-mode: replace;
+    format: html;
+}
+
+footer {
+    content: data(footer);
+    content-mode: replace;
+    format: html;
+}
+
+p[data-gettext-id="download-os"] {
+    content: __sprintf(data(release.supported_os));
+}
+
+h2[data-gettext-id="stable-release-name"] {
+    content: data(release.name);
+}
+
+p[data-gettext-id="stable-release-date"] {
+    content: __sprintf(data(release.release_date));
+}
+
+a[data-gettext-id="changelog-btn"]:attr(href) {
+    content: path("release-note");
+}
+
+a[id="link1"]:attr(href) {
+    content: data(release.download_link.installer[0]);
+}
+
+a[id="link2"]:attr(href) {
+    content: data(release.download_link.installer[1]);
+}
+
+a[id="link3"]:attr(href) {
+    content: data(release.download_link.installer[2]);
+}
+
+a[id="plink1"]:attr(href) {
+    content: data(release.download_link.portable[0]);
+}
+
+div[id="stable-disable-msg"][data(release.download_link.available)="1"],
+section[id="stable-download"][data(release.download_link.available)="0"]{
+    display :  none;
+}

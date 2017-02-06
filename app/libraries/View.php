@@ -12,20 +12,34 @@
 
 namespace App\Lib;
 
-use App\Lib\Utility\LanguageManager;
-use App\Lib\Utility\Template;
-use App\Lib\Model;
+use App\Transphporm\Module\PathModule;
+use Transphporm\Builder;
+use App\Transphporm\Module\GetTextModule;
+use App\Transphporm\Module\SprintfModule;
 
 class View
 {
     protected $model;
-    protected $template;
+    protected $layout_xml;
 
-    public function __construct(Model $model = null, Template $template)
+    public function __construct(Model $model = null)
     {
-        $this->model    = $model;
-        $this->template = $template;
+        $this->model        = $model;
+        $this->layout_xml   = path("view-dir") . "templates/layout.html";
     }
 
     public function render(){}
+
+    protected function buildTemplate($data, $tss)
+    {
+        $tss = path("view-dir") . "tss/{$tss}";
+
+        $page_tpl = new Builder($this->layout_xml, $tss);
+        $page_tpl->loadModule(new GetTextModule());
+        $page_tpl->loadModule(new SprintfModule());
+        $page_tpl->loadModule(new PathModule());
+        $out = $page_tpl->output($data)->body;
+
+        return $out;
+    }
 }

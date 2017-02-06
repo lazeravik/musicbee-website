@@ -1,23 +1,21 @@
 #Custom Status Error page
-ErrorDocument 404 /app/pages/error/404.php
+#ErrorDocument 404 /app/pages/error/404.php
 
 #URL rewriter
 AddDefaultCharset UTF-8
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteBase /app/
-DirectoryIndex app/index.php
-
 #do not perform rewrite in the following directory
 RewriteRule ^sqlbuddy - [L,NC] #only for dev purpose
+RewriteRule ^forum - [L,NC]
+
+RewriteBase /app/
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-
-
-RewriteRule ^(.*) index.php?param=$1 [NC]
+RewriteRule ^(.*)$ index.php?param=$1 [NC]
 
 
 # browser requests PHP
@@ -26,7 +24,7 @@ RewriteRule ^/?(.*)\.php$ /$1 [QSA,L,R=301]
 
 # check to see if the request is for a PHP file:
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^/?(.*)$ /$1.php [L]
+RewriteRule ^/?(.*)$ /$1.php [QSA,L]
 
 ##if the requested file is not valid then add a .php extension and look for it and load it
 #RewriteCond %{REQUEST_FILENAME} !-d

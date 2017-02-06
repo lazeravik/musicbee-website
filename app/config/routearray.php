@@ -6,11 +6,13 @@ function getRoutes() {
             'url'           => '/',
             'controller'    => 'HomeController',
             'view'          => 'HomeView',
+            'model'         => 'HomeModel',
         ],
         [
             'url'           => '/downloads',
             'controller'    => 'DownloadController',
             'view'          => 'DownloadView',
+            'model'         => 'DownloadModel',
         ],
     ];
 

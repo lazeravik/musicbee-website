@@ -2037,6 +2037,9 @@ footer.footer_section .widget .widgetCommon ul, footer.footer_section .widget .w
 footer.footer_section .widget .widgetCommon ul li.line, footer.footer_section .widget .widgetCommon ol li.line {
   margin: 15px 0px;
 }
+footer.footer_section .widget .widgetCommon ul li i, footer.footer_section .widget .widgetCommon ol li i {
+  width: 20px;
+}
 footer.footer_section .widget .widgetCommon ul.footer_list_menu a {
   color: #eeeeee;
   padding: 10px 0;

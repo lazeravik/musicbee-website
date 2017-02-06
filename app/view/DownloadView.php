@@ -10,14 +10,22 @@
  *
  */
 
-namespace App\Controllers;
+namespace App\View;
 
-use App\Lib\Controller;
+use App\Lib\View;
 
-class HomeController extends Controller
+class DownloadView extends View
 {
-    public function index()
+    public function render()
     {
-    }
 
+        var_dump(getPatchData());
+        $data = [
+            "menu" => getMenuHtml(),
+            "footer" => getFooterHtml(),
+            "release" => getStableReleasedata(),
+        ];
+
+        echo $this->buildTemplate($data, "download.tss");
+    }
 }

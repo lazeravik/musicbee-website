@@ -142,8 +142,8 @@ class LanguageManager
                     self::$locale,
                     self::getFromLanguageArrayKey()
                 );
-            // 301 Moved Permanently to a localized url
-            header('Location: '.$urltoRedirect, true, 301);
+            // Move to a localized url
+            header('Location: '.$urltoRedirect, true, 303);
         }
     }
 

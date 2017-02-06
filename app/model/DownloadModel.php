@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Controllers;
 
-use App\Lib\Controller;
+namespace App\Lib\Model;
+use App\Lib\MBReleaseManager;
+use App\Lib\MBReleaseType;
+use App\Lib\Model;
 
-class HomeController extends Controller
+class DownloadModel extends Model
 {
-    public function index()
-    {
-    }
+    public function __construct(){}
 
 }

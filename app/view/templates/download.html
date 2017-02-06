@@ -1,0 +1,123 @@
+<menu></menu>
+<div class="main_panel">
+    <div class=" mb_landing  content mb_download_installer_bg">
+        <div class="sub_content">
+            <h2 data-gettext="true"><?= __("Download MusicBee"); ?></h2>
+            <h4 data-gettext="true"><?= __("Start enjoying your music experience with MusicBee!"); ?></h4>
+            <div class="installer_panel_wrapper">
+                <div class="installer_layer_wrapper">
+                    <h2 data-gettext="true" data-gettext-id="stable-release-name">MusicBee 3.1</h2>
+                    <p data-gettext="true" data-gettext-id="stable-release-date"><?= __("Released on %s"); ?></p>
+                    <p data-gettext="true" data-gettext-id="download-os"><?= __("For %s"); ?></p>
+                    <p><a data-gettext-id="changelog-btn" href="release-note"
+                          data-gettext="true"><?= __("Release Notes"); ?></a></p>
+                </div>
+                <section id="stable-download">
+                    <div class="installer_layer_wrapper installer_non_portable">
+                        <h3 data-gettext="true"><?= __("Installer Edition"); ?></h3>
+                        <p data-gettext="true"><?= __("This edition will install MusicBee on your Windows system drive"); ?></p>
+                        <a id="link1" href="" target="_blank" class="btn btn_blacknwhite btn_download">
+                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Get MusicBee Installer"); ?></span>
+                        </a>
+                        <br/>
+                        <a id="link2" href="" target="_blank" class="btn btn_blacknwhite btn_download">
+                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Mirror 1"); ?></span>
+                        </a>
+                        <a id="link3" href="" target="_blank" class="btn btn_blacknwhite btn_download">
+                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Mirror 2"); ?></span>
+                        </a>
+                    </div>
+
+                    <div class="installer_layer_wrapper mb_portable_download_bg">
+                        <h3 data-gettext="true"><?= __("Portable Edition"); ?></h3>
+                        <p data-gettext="true"><?= __("This edition can be installed in other locations, such as another partition or USB drive"); ?></p>
+                        <a id="plink1" href=""
+                           target="_blank" class="btn btn_blacknwhite btn_download">
+                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Get MusicBee Portable"); ?></span>
+                        </a>
+                    </div>
+
+                    <?php if($mb['musicbee_download']['patch'] != null): ?>
+                    <div class="space micro"></div>
+                    <div class="installer_layer_wrapper mb_portable_download_bg">
+                        <h3 data-gettext="true"><?= __("Latest Patch"); ?></h3>
+                        <p data-gettext="true"><?= __("Version %s"); ?></p>
+                        <p data-gettext="true"><?= __("Released on %s"); ?></p>
+                        <hr class="line">
+                        <p data-gettext="true"><?= __("Patches are much more frequent and contain bug fixes. You will need to have MusicBee installed first before applying a patch update."); ?></p>
+                        <a id="pathlink" href="" target="_blank"
+                           class="btn btn_blacknwhite btn_download"
+                           data-gettext="true">
+                            <?= __("Download"); ?>
+                        </a>
+                    </div>
+                </section>
+                    <div class="space micro"></div>
+                    <div id="stable-disable-msg" class="installer_layer_wrapper installer_non_portable">
+                        <h3 data-gettext="true"><?= __("Downloads are disabled!"); ?></h3>
+                        <p class="show_info" data-gettext="true">
+                            <?= __("Sorry for the inconvenience. This is probably temporary. Please check the forum or come back later."); ?>
+                        </p>
+                    </div>
+
+            </div>
+            <div class="download_img_link_wrapper">
+                <div class="download_img_links">
+                    <ul>
+                        <li>
+                            <a id="help-link" href="">
+                                <i class="fa fa-graduation-cap learn"></i>
+                                <h1 data-gettext="true"><?= __("Learn MusicBee features"); ?></h1>
+                                <p data-gettext="true"><?= __("Check our FAQ & Wiki or get help on forum"); ?></p>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a id="addon-link" href="">
+                                <i class="fa fa-puzzle-piece plugin"></i>
+                                <h1 data-gettext="true"><?= __("Get Skins and Plugins"); ?></h1>
+                                <p data-gettext="true"><?= __("Check our Add-on for skins, plugins and more"); ?></p>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a id="forum-link" href="">
+                                <i class="fa fa-comments-o community"></i>
+                                <h1 data-gettext="true"><?= __("Meet MusicBee community"); ?></h1>
+                                <p data-gettext="true"><?= __("Join us on forum, follow us on twitter and share your experience"); ?></p>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a id="donation-link" href="" target="_blank">
+                                <i class="fa fa-heartbeat love"></i>
+                                <h1 data-gettext="true"><?= __("Love MusicBee?"); ?></h1>
+                                <p data-gettext="true"><?= __("You can also support MusicBee with a voluntary donation"); ?></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="content mb_beta_download_bg" id="beta">
+        <div class="sub_content">
+            <h2 data-gettext="true"><?= __("MusicBee Beta"); ?></h2>
+            <h4><b data-gettext="true"><?= __("The beta version is under active development and is not the current stable version. It is intended for anyone interested in trying the latest features or bug fixes. You should regularly check the forum for updates."); ?></b></h4>
+            <p data-gettext="true"><?= __("Version %s"); ?></p>
+            <p data-gettext="true"><?= __("Released on %s"); ?></p>
+            <p data-gettext="true"><?= __("For %s"); ?></p>
+            <br/>
+			<p id="beta-msg" class="show_info">This is a beta message!</p>
+            <a id="beta-link" href="" target="_blank"
+               class="btn btn_blacknwhite btn_download">
+                <i class="fa fa-warning"></i> <span data-gettext="true"><?= __("Get MusicBee Beta"); ?></span>
+            </a>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="space tiny"></div>
+    <?php endif; ?>
+</div>

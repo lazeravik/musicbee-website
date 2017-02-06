@@ -46,6 +46,7 @@ function path($pathname = null)
     $link['locale-dir']           = $link['root']. 'locale/';
     $link['model-dir']            = $link['root']. 'model/';
     $link['view-dir']             = $link['root']. 'view/';
+    $link['controller-dir']       = $link['root']. 'controllers/';
 
     //public directory
     $link['style-dir']            = cfg::getStyleDir();

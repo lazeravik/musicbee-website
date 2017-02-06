@@ -29,39 +29,14 @@ a[data-gettext-id="download-btn"]:attr(href){
 content: path("download");
 }
 
-h4[data-gettext-id="hero-text1"]{
+h4[data-gettext-id="hero-text"]{
 content: __();
 format: html;
 }
 
-h4[data-gettext-id="hero-text2"]{
-content: __();
-format: html;
-}
-
-h4[data-gettext-id="hero-text3"]{
-content: __();
-format: html;
-}
-
-h4[data-gettext-id="hero-text4"]{
-content: __();
-format: html;
-}
-
-h4[data-gettext-id="hero-text5"]{
-content: __();
-format: html;
-}
 
 img[data-url="http"]:attr(src) {
 content: append_path(src, "img-dir");
 }
 
 
-[data-gettext]:attr(data-gettext) {
-    display: none;
-}
-[data-gettext-id]:attr(data-gettext-id) {
-    display: none;
-}

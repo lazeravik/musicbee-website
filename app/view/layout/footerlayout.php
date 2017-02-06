@@ -25,14 +25,11 @@ $footerhtml = <<<HTML
                 <li>{$mbVersion}</li>
                 <li>{$mbSupportedOs}</li>
                 <li>{$mbReleaseDate}</li>
-
                 <li class="line"></li>
-
                 <li>{$lang['get_notified_new_release']}</li>
-
                 <li>
                     <a href="{$link['rss']}" class="btn btn_yellow" target="_blank">
-                        <i class="fa fa-rss"></i> {$lang['subscribe_rss']}
+                        <i class="fa fa-rss"></i>{$lang['subscribe_rss']}
                     </a>
                 </li>
             </ul>
@@ -76,6 +73,7 @@ $footerhtml .= <<<HTML
                     <a href="{$link['press']}"><i class="fa fa-bullhorn"></i>{$lang['press']}</a>
                 </li>
 HTML;
+
 if(!empty($setting['paypalDonationLink'])) {
 $footerhtml .= <<<HTML
                 <ul class="footer_donation" >

@@ -29,6 +29,7 @@ require_once 'config/config.php';
 require_once 'config/paths.php';
 require_once 'config/database.php';
 require_once 'config/release.php';
+require_once 'config/routearray.php';
 
 use App\Lib\Bootstrap;
 use App\Lib\Utility\Route;

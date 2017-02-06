@@ -27,6 +27,7 @@ class Router
     protected $urlRoutes = [];
     protected $methods = [];
     protected $mvcName;
+    protected $urlParamArray;
 
     /**
      * Add new routes to the route list
@@ -43,38 +44,58 @@ class Router
     public function route()
     {
         $urlGetParam = trim($this->getUrlWithoutLanguageParam(), "/");
+        $this->urlParamArray = explode("/",$urlGetParam);
+        $routeArray = getRoutes();
 
-        var_dump($urlGetParam);
-        foreach ($this->urlRoutes as $key => $url) {
-            if (preg_match("#^$urlGetParam$#", $url)) {
-                if (isset($this->methods[$key])) {
-                    $this->mvcName = $this->methods[$key];
-                    var_dump($this->mvcName);
-                    if (is_string($this->mvcName)) {
-                        $this->createMVC();
-                    } else {
-                        call_user_func($this->mvcName);
-                    }
-                    return true;
-                } else {
-                    throw new \Exception("Requested method is not found!");
-                }
+        foreach ($routeArray as $route) {
+            $url = '/'.$urlGetParam;
+            if($url == $route['url']){
+                $this->createModelViewController($route['model'], $route['view'], $route['controller']);
+                return true;
             }
+            //todo: add call_user_func if no MVC is found!
         }
-
         $this->loadErrorPage();
         return false;
+
+//        foreach ($this->urlRoutes as $key => $url) {
+//            if (preg_match("#^$urlGetParam$#", $url)) {
+//                if (isset($this->methods[$key])) {
+//                    $this->mvcName = $this->methods[$key];
+//                    if (is_string($this->mvcName)) {
+//                        $this->createMVC();
+//                    } else {
+//                        call_user_func($this->mvcName);
+//                    }
+//                    return true;
+//                } else {
+//                    throw new \Exception("Requested method is not found!");
+//                }
+//            }
+//        }
+//
+//        $this->loadErrorPage();
+//        return false;
     }
+
 
     /**
      * create the requested view and controller. the controller will
      * instantiate the model and pass it on to the view
+     * @param null $model
+     * @param null $view
+     * @param null $controller
      */
-    public function createMVC()
+    public function createModelViewController($model = null, $view = null, $controller = null)
     {
-        $modelNamespace = "App\\Lib\\Model\\{$this->mvcName}Model";
-        $controllerNamespace = "App\\Controllers\\{$this->mvcName}Controller";
-        $viewNamespace = "App\\View\\{$this->mvcName}View";
+        if($model == null || $view == null || $controller == null){
+            die("MVC is not defined properly!");
+        }
+
+        //Define the namespaces for MVC
+        $modelNamespace = "App\\Lib\\Model\\{$model}";
+        $controllerNamespace = "App\\Controllers\\{$controller}";
+        $viewNamespace = "App\\View\\{$view}";
 
         $model = (class_exists($modelNamespace))
             ? new $modelNamespace()
@@ -84,24 +105,18 @@ class Router
             : null;
 
         if (class_exists($viewNamespace)) {
-            $view = new $viewNamespace($model, new Template($this->mvcName));
+            $view = new $viewNamespace($model);
             $view->render();
         } else {
             $this->loadErrorPage();
         }
     }
 
-    /**
-     * Load 404 error page if the requested page does not exists
-     */
     public function loadErrorPage()
     {
-        var_dump("404");
-        $this->mvcName = "Error";
-        $viewNamespace = "App\\View\\{$this->mvcName}View";
-        $view = new $viewNamespace(null, new Template($this->mvcName));
-        $view->render();
+        var_dump("404 Error");
     }
+
 
     /**
      * get language code from url parameter
