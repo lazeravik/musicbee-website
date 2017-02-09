@@ -18,12 +18,12 @@ class DownloadView extends View
 {
     public function render()
     {
-
-        var_dump(getPatchData());
         $data = [
-            "menu" => getMenuHtml(),
-            "footer" => getFooterHtml(),
-            "release" => getStableReleasedata(),
+            "menu"      => getMenuHtml(),
+            "footer"    => getFooterHtml(),
+            "release"   => getStableReleasedata(),
+            "beta"      => getBetaReleasedata(),
+            "patch"     => getPatchData(),
         ];
 
         echo $this->buildTemplate($data, "download.tss");

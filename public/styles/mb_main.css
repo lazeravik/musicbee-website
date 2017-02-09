@@ -2505,9 +2505,21 @@ input.cmn-toggle-round-flat:checked + label:after {
   padding: 50px;
 }
 .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li {
-  padding: 20px 20px 20px 80px;
   position: relative;
   margin: 20px 10px;
+}
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a {
+  padding: 20px 20px 20px 80px;
+  color: #333;
+  display: block;
+  -webkit-transition: linear all .1s;
+          transition: linear all .1s;
+  background: none;
+}
+.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a:hover {
+  text-decoration: none;
+  background: #e6e6e6;
+  box-shadow: -5px 0px #ff9800;
 }
 .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i {
   position: absolute;
@@ -2531,25 +2543,24 @@ input.cmn-toggle-round-flat:checked + label:after {
 .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li i.love {
   color: #cc4b61;
 }
-.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a {
-  color: #333;
-}
-.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li a:hover {
-  text-decoration: none;
-}
-.main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li:hover {
-  background: -webkit-linear-gradient(315deg, #2a3e4e, rgba(39, 68, 90, 0.62), rgba(103, 129, 202, 0.53), rgba(122, 0, 255, 0.18), transparent);
-  background: linear-gradient(135deg, #2a3e4e, rgba(39, 68, 90, 0.62), rgba(103, 129, 202, 0.53), rgba(122, 0, 255, 0.18), transparent);
-}
 @media screen and (max-width: 800px) {
   .main_panel .content.mb_download_installer_bg .download_img_link_wrapper {
     width: 100%;
   }
   .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
     padding: 0px;
   }
   .main_panel .content.mb_download_installer_bg .download_img_link_wrapper .download_img_links ul li {
-    padding: 20px 20px 20px 80px;
     position: relative;
     margin: 0px;
     float: left;
@@ -4293,5 +4304,3 @@ For light theme use xcode style
 .fontsmooth-false p.stat_countlabel {
   font-family: "Verdana", "Segoe UI", "sans-serif" !important;
 }
-
-/*# sourceMappingURL=mb_main.css.map */

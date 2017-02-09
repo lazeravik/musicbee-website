@@ -100,4 +100,9 @@ class MBRelease
     {
         return $this->download_links;
     }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
 }

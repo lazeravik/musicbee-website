@@ -6,7 +6,7 @@
             <h4 data-gettext="true"><?= __("Start enjoying your music experience with MusicBee!"); ?></h4>
             <div class="installer_panel_wrapper">
                 <div class="installer_layer_wrapper">
-                    <h2 data-gettext="true" data-gettext-id="stable-release-name">MusicBee 3.1</h2>
+                    <h2 data-gettext="true" data-gettext-id="stable-release-name"><?= __("MusicBee %s"); ?></h2>
                     <p data-gettext="true" data-gettext-id="stable-release-date"><?= __("Released on %s"); ?></p>
                     <p data-gettext="true" data-gettext-id="download-os"><?= __("For %s"); ?></p>
                     <p><a data-gettext-id="changelog-btn" href="release-note"
@@ -21,10 +21,10 @@
                         </a>
                         <br/>
                         <a id="link2" href="" target="_blank" class="btn btn_blacknwhite btn_download">
-                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Mirror 1"); ?></span>
+                            <span data-gettext="true"><?= __("Mirror 1"); ?></span>
                         </a>
                         <a id="link3" href="" target="_blank" class="btn btn_blacknwhite btn_download">
-                            <i class="fa fa-download"></i> <span data-gettext="true"><?= __("Mirror 2"); ?></span>
+                            <span data-gettext="true"><?= __("Mirror 2"); ?></span>
                         </a>
                     </div>
 
@@ -37,15 +37,13 @@
                         </a>
                     </div>
 
-                    <?php if($mb['musicbee_download']['patch'] != null): ?>
                     <div class="space micro"></div>
                     <div class="installer_layer_wrapper mb_portable_download_bg">
                         <h3 data-gettext="true"><?= __("Latest Patch"); ?></h3>
-                        <p data-gettext="true"><?= __("Version %s"); ?></p>
-                        <p data-gettext="true"><?= __("Released on %s"); ?></p>
+                        <p data-gettext-id="patch-version" data-gettext="true"><?= __("Version %s"); ?></p>
                         <hr class="line">
                         <p data-gettext="true"><?= __("Patches are much more frequent and contain bug fixes. You will need to have MusicBee installed first before applying a patch update."); ?></p>
-                        <a id="pathlink" href="" target="_blank"
+                        <a data-gettext-id="patch-link" href="" target="_blank"
                            class="btn btn_blacknwhite btn_download"
                            data-gettext="true">
                             <?= __("Download"); ?>
@@ -106,18 +104,16 @@
         <div class="sub_content">
             <h2 data-gettext="true"><?= __("MusicBee Beta"); ?></h2>
             <h4><b data-gettext="true"><?= __("The beta version is under active development and is not the current stable version. It is intended for anyone interested in trying the latest features or bug fixes. You should regularly check the forum for updates."); ?></b></h4>
-            <p data-gettext="true"><?= __("Version %s"); ?></p>
-            <p data-gettext="true"><?= __("Released on %s"); ?></p>
-            <p data-gettext="true"><?= __("For %s"); ?></p>
+            <p data-gettext-id="beta-version"       data-gettext="true"><?= __("Version %s"); ?></p>
+            <p data-gettext-id="beta-release-date"  data-gettext="true"><?= __("Released on %s"); ?></p>
+            <p data-gettext-id="beta-supported-os"  data-gettext="true"><?= __("For %s"); ?></p>
             <br/>
-			<p id="beta-msg" class="show_info">This is a beta message!</p>
-            <a id="beta-link" href="" target="_blank"
+			<p data-gettext-id="beta-msg" class="show_info">This is a beta message!</p>
+            <a data-gettext-id="beta-link" href="" target="_blank"
                class="btn btn_blacknwhite btn_download">
                 <i class="fa fa-warning"></i> <span data-gettext="true"><?= __("Get MusicBee Beta"); ?></span>
             </a>
         </div>
     </div>
-    <?php else: ?>
-    <div class="space tiny"></div>
-    <?php endif; ?>
+    <div data-gettext-id="space-no-beta" class="space tiny"></div>
 </div>

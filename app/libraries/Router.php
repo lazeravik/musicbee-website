@@ -50,6 +50,8 @@ class Router
         foreach ($routeArray as $route) {
             $url = '/'.$urlGetParam;
             if($url == $route['url']){
+                //validate controller
+                $route['controller'] = isset($route['controller'])?:null;
                 $this->createModelViewController($route['model'], $route['view'], $route['controller']);
                 return true;
             }
@@ -88,7 +90,7 @@ class Router
      */
     public function createModelViewController($model = null, $view = null, $controller = null)
     {
-        if($model == null || $view == null || $controller == null){
+        if($model == null || $view == null){
             die("MVC is not defined properly!");
         }
 

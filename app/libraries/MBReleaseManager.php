@@ -74,21 +74,21 @@ class MBReleaseManager extends Database
         ];
 
         $misc = [
-            "is_beta"                   => (bool)$releasedata['beta'],
-            "is_available_in_dashboard" => (bool)$releasedata['dashboard_availablity'],
-            "is_major"                  => (bool)$releasedata['major'],
-            "release_note"              => $releasedata['release_note'],
-            "release_note_html"         => $releasedata['release_note_html'],
+            "is_beta"                   => (bool)(isset($releasedata['beta'])?:null),
+            "is_available_in_dashboard" => (bool)(isset($releasedata['dashboard_availablity'])?:null),
+            "is_major"                  => (bool)(isset($releasedata['major'])?:null),
+            "release_note"              => (isset($releasedata['release_note'])? $releasedata['release_note'] :null),
+            "release_note_html"         => (isset($releasedata['release_note_html'])? $releasedata['release_note_html'] :null),
         ];
 
 
         return new MBRelease(
-            $releasedata['version'],
-            $releasedata['appname'],
-            $releasedata['release_date'],
+            (isset($releasedata['version'])?$releasedata['version']:null),
+            (isset($releasedata['appname'])?$releasedata['appname']:null),
+            (isset($releasedata['release_date'])?$releasedata['release_date']:null),
             $download,
-            $releasedata['supported_os'],
-            $releasedata['message'],
+            (isset($releasedata['supported_os'])?$releasedata['supported_os']:null),
+            (isset($releasedata['message'])?$releasedata['message']:null),
             $misc
         );
     }
