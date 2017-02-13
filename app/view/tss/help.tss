@@ -1,0 +1,32 @@
+@import "styles.tss";
+main { content: template("../templates/help.html"); }
+
+
+[data-gettext] {
+    content: __();
+}
+
+menu {
+    content: data(menu);
+    content-mode: replace;
+    format: html;
+}
+
+footer {
+    content: data(footer);
+    content-mode: replace;
+    format: html;
+}
+
+title[data-gettext="true"] {
+    content: data(meta.title);
+}
+
+meta[name="description"]:attr(content) {
+    content: data(meta.desc);
+}
+
+div[id="faq-view"] {
+    content: data(page.content);
+    format: html;
+}

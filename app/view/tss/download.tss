@@ -1,10 +1,6 @@
 @import "styles.tss";
 main { content: template("../templates/download.html"); }
 
-link[rel="shortcut icon"]:attr(href) {
-    content: append_path(href, "root");
-}
-
 [data-gettext] {
     content: __();
 }
@@ -19,6 +15,14 @@ footer {
     content: data(footer);
     content-mode: replace;
     format: html;
+}
+
+title[data-gettext="true"] {
+    content: data(meta.title);
+}
+
+meta[name="description"]:attr(content) {
+    content: data(meta.desc);
 }
 
 p[data-gettext-id="download-os"] {
@@ -92,4 +96,21 @@ div[id="beta"][data(beta.name)=""],
 div[id="beta"][data(beta.download_link.available)="0"],
 p[data-gettext-id="beta-msg"][data(beta.message)=""]{
     display: none;
+}
+
+
+a[data-gettext-id="help-link"]:attr(href){
+    content: path("help");
+}
+
+a[data-gettext-id="addon-link"]:attr(href){
+    content: path("addon").home;
+}
+
+a[data-gettext-id="forum-link"]:attr(href){
+    content: path("forum");
+}
+
+a[data-gettext-id="donation-link"]:attr(href){
+    content: path("donation-link");
 }

@@ -1,9 +1,6 @@
 @import "styles.tss";
 main { content: template("../templates/home.html"); }
 
-link[rel="shortcut icon"]:attr(href) {
-    content: append_path(href, "root");
-}
 
 [data-gettext] {
 content: __();

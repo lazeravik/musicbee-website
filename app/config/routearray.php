@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Route defination example:
+ *      [
+ *          'url'           => '/',
+ *          'view'          => 'view-php-file-name',
+ *          'model'         => 'model-php-file-name',
+ *      ],
+ *
+ * @return array
+ */
 function getRoutes() {
     $route = [
         [
@@ -10,8 +20,12 @@ function getRoutes() {
         [
             'url'           => '/downloads',
             'view'          => 'DownloadView',
-            'model'         => 'DownloadModel',
         ],
+        [
+            'url'           => '/help',
+            'view'          => 'HelpView',
+            'model'         => 'HelpModel',
+        ]
     ];
 
     return $route;

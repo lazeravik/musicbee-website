@@ -24,22 +24,8 @@ use App\Lib\Utility\Route;
 
 class Router
 {
-    protected $urlRoutes = [];
-    protected $methods = [];
-    protected $mvcName;
     protected $urlParamArray;
 
-    /**
-     * Add new routes to the route list
-     * @param \App\Lib\Utility\Route $newRoute
-     */
-    public function addRoute(Route $newRoute)
-    {
-        $this->urlRoutes[] = trim($newRoute->getUrl(), "/");
-        if (!empty($newRoute->getMethod())) {
-            $this->methods[] = $newRoute->getMethod();
-        }
-    }
 
     public function route()
     {
@@ -51,7 +37,8 @@ class Router
             $url = '/'.$urlGetParam;
             if($url == $route['url']){
                 //validate controller
-                $route['controller'] = isset($route['controller'])?:null;
+                $route['controller'] = isset($route['controller'])? $route['controller'] :null;
+                $route['model']      = isset($route['model'])? $route['model']: null;
                 $this->createModelViewController($route['model'], $route['view'], $route['controller']);
                 return true;
             }
@@ -59,25 +46,6 @@ class Router
         }
         $this->loadErrorPage();
         return false;
-
-//        foreach ($this->urlRoutes as $key => $url) {
-//            if (preg_match("#^$urlGetParam$#", $url)) {
-//                if (isset($this->methods[$key])) {
-//                    $this->mvcName = $this->methods[$key];
-//                    if (is_string($this->mvcName)) {
-//                        $this->createMVC();
-//                    } else {
-//                        call_user_func($this->mvcName);
-//                    }
-//                    return true;
-//                } else {
-//                    throw new \Exception("Requested method is not found!");
-//                }
-//            }
-//        }
-//
-//        $this->loadErrorPage();
-//        return false;
     }
 
 
@@ -90,7 +58,8 @@ class Router
      */
     public function createModelViewController($model = null, $view = null, $controller = null)
     {
-        if($model == null || $view == null){
+        //if model and controller is not defined that most likely it is a static page
+        if($view == null){
             die("MVC is not defined properly!");
         }
 

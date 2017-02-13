@@ -20,6 +20,6 @@ class ErrorView extends View
 {
     public function render()
     {
-        $this->template->render();
+
     }
 }

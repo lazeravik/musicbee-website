@@ -1,5 +1,19 @@
 <?php
 
+function lang($lang_key = null){
+    global $lang;
+
+    if($lang_key != null){
+        if(isset($lang[$lang_key])){
+            return $lang[$lang_key];
+        } else {
+            return null;
+        }
+    }
+
+    return $lang;
+}
+
 $lang["musicbee"] = __("MusicBee");
 $lang["login"] = __("Login");
 $lang["register"] = __("Register");
@@ -52,3 +66,9 @@ $lang['mb_wiki'] = __('MusicBee Wiki');
 $lang['version_number'] = __('Version %s');
 $lang['released_on_date'] = __('Released on %s');
 $lang['for_os'] = __('For %s');
+
+$lang['download_page_title'] = __("Downloads");
+$lang['download_page_desc'] = __("Get MusicBee Installer executable or Portable and start enjoying MusicBee");
+
+$lang['help_page_title'] = __("MusicBee help and FAQ");
+$lang['help_page_desc'] = __("Do you need help with MusicBee? Perhaps you're just getting started or having trouble figuring out a feature. This is the right place for getting all your answers");

@@ -104,11 +104,11 @@ function menu()
         ),
         'help' => array(
             'title' => $lang['help'],
-            'href' => $link['faq'],
+            'href' => $link['help'],
             'sub_menu' => array(
                 'faq' => array(
                     'title' => $lang['faq'],
-                    'href' => $link['faq'],
+                    'href' => $link['help'],
                     'icon' => "<i class=\"fa fa-question\"></i>",
                 ),
                 'api' => array(

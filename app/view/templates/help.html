@@ -1,0 +1,107 @@
+<menu></menu>
+<div id="main_panel">
+    <div class="main_content_wrapper col_2_1">
+        <div class="sub_content_wrapper">
+
+            <div class="box_content">
+                <div class="show_info custom">
+                    <ul class="grid col_2">
+                        <li>
+                            <a href="" target="">
+                                <div>
+                                    <?php echo $help_link->icon; ?>
+                                    <p><?php echo $help_link->name; ?></p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box_content" id="faq">
+                <div class="show_info custom info_silver">
+                    <h3 data-gettext="true"><?= __("FAQ (Frequently Asked Question)"); ?></h3>
+                </div>
+                <div id="faq-view" class="markdownView box faq">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sub_content_wrapper">
+
+            <div class="box_content">
+                <div class="show_info custom info_silver">
+                    <h3><?php echo $lang['user_help']; ?></h3>
+                </div>
+                <ul class="link_list">
+
+                    <li>
+                        <a href="<?php echo $help_link->url; ?>"
+                           target="<?php echo isset($help_link->target) ? $help_link->target : ''; ?>">
+                            <?php echo $help_link->name; ?>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="box_content">
+                <div class="show_info custom info_silver">
+                    <h3><?php echo $lang['dev_guides']; ?></h3>
+                </div>
+                <ul class="link_list">
+                    <li>
+                        <a href="<?php echo $help_link->url; ?>"
+                           target="<?php echo isset($help_link->target) ? $help_link->target : ''; ?>">
+                            <?php echo $help_link->name; ?>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="box_content">
+                <div class="show_info custom info_silver">
+                    <h3><?php echo $lang['help_popular_wiki_headline']; ?></h3>
+                </div>
+                <ul class="link_list">
+                    <li>
+                        <a href="<?php echo $setting['wikiaLink'].$wiki_item['url']; ?>"
+                           target="_blank"><?php echo $wiki_item['title']; ?></a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="box_content">
+                <div class="show_info custom info_silver">
+                    <h3><?php echo $lang['help_mostviewed_wiki_headline']; ?></h3>
+                </div>
+                <ul class="link_list">
+                    <li>
+                        <a href=""
+                           target="_blank"><?php echo $wiki_item['title']; ?></a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="box_content">
+                <div class="show_info custom info_silver">
+                    <h3><?php echo $lang['help_new_wiki_headline']; ?></h3>
+                </div>
+                <ul class="link_list">
+                    <li>
+                        <a href="" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+<div class="space medium"></div>

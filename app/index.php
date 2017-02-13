@@ -26,17 +26,17 @@ App\Lib\Utility\Session::init();
  * Load website and database configuration
  */
 require_once 'config/config.php';
-require_once 'config/paths.php';
 require_once 'config/database.php';
+require_once 'config/paths.php';
 require_once 'config/release.php';
 require_once 'config/routearray.php';
 
 use App\Lib\Bootstrap;
-use App\Lib\Utility\Route;
 use App\Lib\Utility\Router;
 use App\Lib\Utility\LanguageManager;
 use App\Lib\Utility\Config as cfg;
 use App\Lib\ForumHook;
+use App\Lib\Settings;
 
 /**
  * Url routing initialize

@@ -32,7 +32,6 @@ function path($pathname = null)
     $link['addon']['home']        = $link['url'].'addons/';
     $link['addon']['dashboard']   = $link['url'].'dashboard/';
     $link['help']                 = $link['url'].'help/';
-    $link['faq']                  = $link['url'].'faq/';
     $link['release-note']         = $link['url'].'release-note/';
     $link['press']                = $link['url'].'press/';
     $link['api']                  = $link['url'].'api/';
@@ -58,6 +57,8 @@ function path($pathname = null)
         if (!empty($link[$pathname])) {
             return $link[$pathname];
         }
+
+        return null;
     }
 
     return $link;

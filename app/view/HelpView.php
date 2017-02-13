@@ -14,22 +14,23 @@ namespace App\View;
 
 use App\Lib\View;
 
-class DownloadView extends View
+class HelpView extends View
 {
     public function render()
     {
         $data = [
-            "menu"      => getMenuHtml(),
-            "footer"    => getFooterHtml(),
-            "release"   => getStableReleasedata(),
-            "beta"      => getBetaReleasedata(),
-            "patch"     => getPatchData(),
+            "menu" => getMenuHtml(),
+            "footer" => getFooterHtml(),
             "meta" => [
-                "title" => lang("download_page_title"),
-                "desc" => lang("download_page_desc"),
+                "title" => lang("help_page_title"),
+                "desc" => lang("help_page_desc"),
+            ],
+
+            "page" => [
+                "content"   => $this->getModel()->getHelpPageContent(),
             ],
         ];
 
-        echo $this->buildTemplate($data, "download.tss");
+        echo $this->buildTemplate($data, "help.tss");
     }
 }

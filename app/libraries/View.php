@@ -42,4 +42,9 @@ class View
 
         return $out;
     }
+
+    protected function getModel()
+    {
+        return $this->model;
+    }
 }

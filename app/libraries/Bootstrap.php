@@ -34,8 +34,6 @@ class Bootstrap
      */
     public function initRouter(Router $router)
     {
-        $router->addRoute(new Route("/", "Home"));
-        $router->addRoute(new Route("/downloads", "Downloads"));
         $router->route();
     }
 

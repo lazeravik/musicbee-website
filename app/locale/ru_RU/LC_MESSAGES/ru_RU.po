@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MusicBee Website 2.0\n"
-"POT-Creation-Date: 2017-01-29 23:21+0530\n"
-"PO-Revision-Date: 2017-01-29 23:21+0530\n"
+"POT-Creation-Date: 2017-02-13 22:00+0530\n"
+"PO-Revision-Date: 2017-02-13 22:15+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -18,108 +18,108 @@ msgstr ""
 "X-Poedit-SearchPath-1: view/templates\n"
 "X-Poedit-SearchPath-2: locale/langArray.php\n"
 
-#: locale/langArray.php:3
+#: locale/langArray.php:17
 msgid "MusicBee"
 msgstr ""
 
-#: locale/langArray.php:4 locale/langArray.php:14
+#: locale/langArray.php:18 locale/langArray.php:28
 msgid "Login"
 msgstr "Войти"
 
-#: locale/langArray.php:5 locale/langArray.php:23
+#: locale/langArray.php:19 locale/langArray.php:37
 msgid "Register"
 msgstr "Регистрация"
 
-#: locale/langArray.php:6
+#: locale/langArray.php:20 view/templates/download.html:49
 msgid "Download"
 msgstr "Скачать"
 
-#: locale/langArray.php:7
+#: locale/langArray.php:21
 msgid "Add-ons"
 msgstr "Расширения"
 
-#: locale/langArray.php:8
+#: locale/langArray.php:22
 msgid "Forum"
 msgstr "Форум"
 
-#: locale/langArray.php:9
+#: locale/langArray.php:23
 msgid "Help"
 msgstr "Справка"
 
-#: locale/langArray.php:10
+#: locale/langArray.php:24
 msgid "Web Admin"
 msgstr "Администратор сайта"
 
-#: locale/langArray.php:11
+#: locale/langArray.php:25
 msgid "Forum Admin"
 msgstr "Администратор форума"
 
-#: locale/langArray.php:12
+#: locale/langArray.php:26
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: locale/langArray.php:13
+#: locale/langArray.php:27
 msgid "Sign Out"
 msgstr "Выйти"
 
-#: locale/langArray.php:15
+#: locale/langArray.php:29
 #, php-format
 msgid "Hey, %1$s"
 msgstr "Эй, %1$s"
 
-#: locale/langArray.php:16
+#: locale/langArray.php:30
 msgid "All"
 msgstr "Все"
 
-#: locale/langArray.php:17
+#: locale/langArray.php:31
 msgid "Skins"
 msgstr "Оформления"
 
-#: locale/langArray.php:18
+#: locale/langArray.php:32
 msgid "Plugins"
 msgstr "Плагины"
 
-#: locale/langArray.php:19
+#: locale/langArray.php:33
 msgid "Visualizer"
 msgstr "Визуализатор"
 
-#: locale/langArray.php:20
+#: locale/langArray.php:34
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: locale/langArray.php:21
+#: locale/langArray.php:35
 msgid "Theater Mode"
 msgstr "Режим театра"
 
-#: locale/langArray.php:22
+#: locale/langArray.php:36
 msgid "Misc"
 msgstr "Разное"
 
-#: locale/langArray.php:24
+#: locale/langArray.php:38
 msgid "Release Note"
 msgstr "Примечания к релизу"
 
-#: locale/langArray.php:26
+#: locale/langArray.php:40
 msgid "Make MusicBee look the way you want"
 msgstr "Сделайте, чтобы MusicBee выглядел, как вы хотите"
 
-#: locale/langArray.php:27
+#: locale/langArray.php:41
 msgid "Add features/functionality to MusicBee"
 msgstr "Добавьте новый функционал к MusicBee"
 
-#: locale/langArray.php:28
+#: locale/langArray.php:42
 msgid "Get colorful visualizers for an eye pleasing experience"
 msgstr "Настройте визуализатор и порадуйте свои глаза"
 
-#: locale/langArray.php:29
+#: locale/langArray.php:43
 msgid "Get a full theater mode experience for MusicBee"
 msgstr "Скачайте разнообразные настройки для режима театра"
 
-#: locale/langArray.php:30
+#: locale/langArray.php:44
 msgid "Other useful add-ons for enhancing your MusicBee experience"
 msgstr "Другие полезные дополнения для MusicBee"
 
-#: locale/langArray.php:33
+#: locale/langArray.php:47
 msgid ""
 "Your browser does not support javascript (or it is disabled). Please use a "
 "browser with javascript or enable it.<br/>We need javascript to function "
@@ -130,58 +130,58 @@ msgstr ""
 ">Нам нужен javascript для правильной работы сайта, иначе многие функции "
 "сайта не будут работать."
 
-#: locale/langArray.php:34
+#: locale/langArray.php:48
 msgid ""
 "<b>SECURITY WARNING!</b><br>Please delete <code>install.php</code> file from "
 "the directory"
 msgstr ""
 
-#: locale/langArray.php:35
+#: locale/langArray.php:49
 #, php-format
 msgid "Get %s"
 msgstr "Получить %s"
 
-#: locale/langArray.php:36
+#: locale/langArray.php:50
 msgid "Get MusicBee"
 msgstr "Скачайте последнюю версию MusicBee"
 
-#: locale/langArray.php:37
+#: locale/langArray.php:51
 msgid "More"
 msgstr "Еще"
 
-#: locale/langArray.php:38
+#: locale/langArray.php:52
 msgid "Subscribe to RSS"
 msgstr "Подпишитесь на ленту RSS"
 
-#: locale/langArray.php:39
+#: locale/langArray.php:53
 msgid "Developer API"
 msgstr "API для разработчиков плагинов"
 
-#: locale/langArray.php:40
+#: locale/langArray.php:54
 msgid "Want to get notified of new releases?"
 msgstr "Хотите получать сообщения о новых версиях MusicBee?"
 
-#: locale/langArray.php:41
+#: locale/langArray.php:55
 msgid "Report a bug"
 msgstr "Сообщите об ошибке"
 
-#: locale/langArray.php:42
+#: locale/langArray.php:56
 msgid "Add-ons for MusicBee"
 msgstr "Расширения для MusicBee"
 
-#: locale/langArray.php:43
+#: locale/langArray.php:57
 msgid "Support MusicBee with a voluntary donation"
 msgstr "Поддержите разработку MusicBee добровольным пожервованием"
 
-#: locale/langArray.php:44
+#: locale/langArray.php:58
 msgid "Donate with Paypal"
 msgstr "Пожертвовать любую сумму с помощью Paypal"
 
-#: locale/langArray.php:45
+#: locale/langArray.php:59
 msgid "Add a new feature to the Wishlist"
 msgstr "Добавьте свое пожелание в \\'Список желаний\\'"
 
-#: locale/langArray.php:46
+#: locale/langArray.php:60
 msgid ""
 "Site built with <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> for "
 "the community"
@@ -189,42 +189,204 @@ msgstr ""
 "Сайт сделан с <i class=\"fa fa-heart\" style=\"color: #F44336;\"></i> для "
 "сообщества MusicBee"
 
-#: locale/langArray.php:47
+#: locale/langArray.php:61
 #, php-format
 msgid "Copyright &copy; Steven Mayall 2008-%s, All Rights Reserved."
 msgstr "Copyright &copy; Steven Mayall 2008-%s, все права сохранены."
 
-#: locale/langArray.php:48
+#: locale/langArray.php:62
 msgid "Press & Media"
 msgstr "Интернет и СМИ"
 
-#: locale/langArray.php:49
+#: locale/langArray.php:63
 msgid "Twitter"
 msgstr ""
 
-#: locale/langArray.php:50
+#: locale/langArray.php:64
 msgid "FAQ & Help"
 msgstr "FAQ и Справка"
 
-#: locale/langArray.php:51
+#: locale/langArray.php:65
 msgid "MusicBee Wiki"
 msgstr "Wiki-сайт MusicBee"
 
-#: locale/langArray.php:52
+#: locale/langArray.php:66 view/templates/download.html:43
+#: view/templates/download.html:107
 #, php-format
 msgid "Version %s"
-msgstr ""
+msgstr "Версия %s"
 
-#: locale/langArray.php:53
+#: locale/langArray.php:67 view/templates/download.html:10
+#: view/templates/download.html:108
 #, php-format
 msgid "Released on %s"
-msgstr ""
+msgstr "Дата выпуска %s"
 
-#: locale/langArray.php:54 view/templates/home.html:24
+#: locale/langArray.php:68 view/templates/download.html:11
+#: view/templates/download.html:109 view/templates/home.html:24
 #: view/templates/home.html:212
 #, php-format
 msgid "For %s"
 msgstr "Для %s"
+
+#: locale/langArray.php:70
+msgid "Downloads"
+msgstr "Скачать MusicBee"
+
+#: locale/langArray.php:71
+msgid ""
+"Get MusicBee Installer executable or Portable and start enjoying MusicBee"
+msgstr ""
+"Скачайте установщик MusicBee или портативную версию MusicBee и начните "
+"использовать этот плеер"
+
+#: locale/langArray.php:73
+msgid "MusicBee help and FAQ"
+msgstr "Справка MusicBee и FAQ"
+
+#: locale/langArray.php:74
+msgid ""
+"Do you need help with MusicBee? Perhaps you're just getting started or "
+"having trouble figuring out a feature. This is the right place for getting "
+"all your answers"
+msgstr ""
+
+#: view/templates/download.html:5
+msgid "Download MusicBee"
+msgstr "Скачать MusicBee"
+
+#: view/templates/download.html:6
+msgid "Start enjoying your music experience with MusicBee!"
+msgstr "Получайте настоящее удовольствие от использования MusicBee!"
+
+#: view/templates/download.html:9
+#, php-format
+msgid "MusicBee %s"
+msgstr ""
+
+#: view/templates/download.html:13
+msgid "Release Notes"
+msgstr "Примечания к релизу"
+
+#: view/templates/download.html:17
+msgid "Installer Edition"
+msgstr "Обычная редакция"
+
+#: view/templates/download.html:18
+msgid "This edition will install MusicBee on your Windows system drive"
+msgstr "Эта редакция установит MusicBee на системный диск Windows"
+
+#: view/templates/download.html:20
+msgid "Get MusicBee Installer"
+msgstr "Скачать дистрибутив MusicBee"
+
+#: view/templates/download.html:24
+msgid "Mirror 1"
+msgstr "Зеркало 1"
+
+#: view/templates/download.html:27
+msgid "Mirror 2"
+msgstr "Зеркало 2"
+
+#: view/templates/download.html:32
+msgid "Portable Edition"
+msgstr "Портативная редакция"
+
+#: view/templates/download.html:33
+msgid ""
+"This edition can be installed in other locations, such as another partition "
+"or USB drive"
+msgstr ""
+"Эта редакция может быть установлена в любую папку на компьютере, например, "
+"на не системный диск или флешку"
+
+#: view/templates/download.html:36
+msgid "Get MusicBee Portable"
+msgstr "Скачать портативный MusicBee"
+
+#: view/templates/download.html:42
+msgid "Latest Patch"
+msgstr "Последний патч"
+
+#: view/templates/download.html:45
+msgid ""
+"Patches are much more frequent and contain bug fixes. You will need to have "
+"MusicBee installed first before applying a patch update."
+msgstr ""
+"Патчи выпускаются очень часто (иногда несколько раз в день) и содержат "
+"только исправления ошибок. Для применения патча MusicBee должен быть уже "
+"установлен."
+
+#: view/templates/download.html:55
+msgid "Downloads are disabled!"
+msgstr "Загрузки отключены!"
+
+#: view/templates/download.html:57
+msgid ""
+"Sorry for the inconvenience. This is probably temporary. Please check the "
+"forum or come back later."
+msgstr ""
+"Извините за неудобства. Скорее всего, это временные проблемы. Проверьте нет "
+"ли информации об этом на форуме или посетите наш сайт позже."
+
+#: view/templates/download.html:68
+msgid "Learn MusicBee features"
+msgstr "Узнайте больше о возможностях MusicBee"
+
+#: view/templates/download.html:69
+msgid "Check our FAQ and Wiki or get help on forum"
+msgstr "Прочитайте наш FAQ и Wiki или попросите помощи на форуме"
+
+#: view/templates/download.html:76
+msgid "Get Skins and Plugins"
+msgstr "Скачайте оформления и плагины"
+
+#: view/templates/download.html:77
+msgid "Check our Add-on for skins, plugins and more"
+msgstr "Загляните в раздел 'Расширения' за оформлениями, плагинами и прочим"
+
+#: view/templates/download.html:84
+msgid "Meet MusicBee community"
+msgstr "Встречайте сообщество MusicBee"
+
+#: view/templates/download.html:85
+msgid "Join us on forum, follow us on twitter and share your experience"
+msgstr ""
+"Присоединяйтесь к нам на форуме, следите за нами в твиттере и делитесь "
+"впечатлениями с другими"
+
+#: view/templates/download.html:92
+msgid "Love MusicBee?"
+msgstr "Понравился MusicBee?"
+
+#: view/templates/download.html:93
+msgid "You can also support MusicBee with a voluntary donation"
+msgstr ""
+"Вы можете сделать добровольное пожертвование, чтобы поддержать разработку "
+"MusicBee"
+
+#: view/templates/download.html:105
+msgid "MusicBee Beta"
+msgstr "Бета версия MusicBee"
+
+#: view/templates/download.html:106
+msgid ""
+"The beta version is under active development and is not the current stable "
+"version. It is intended for anyone interested in trying the latest features "
+"or bug fixes. You should regularly check the forum for updates."
+msgstr ""
+"Бета версия находится в активной разработке и не является текущей стабильной "
+"версией. Она предназначена людей, интересующихся новейшим функционалом или "
+"последними исправлениями ошибок. Если вы будете использовать бета версию, то "
+"рекомендуется регулярно проверять форум на наличие обновлений."
+
+#: view/templates/download.html:114
+msgid "Get MusicBee Beta"
+msgstr "Скачать бета версию MusicBee"
+
+#: view/templates/help.html:23
+msgid "FAQ (Frequently Asked Question)"
+msgstr "FAQ (часто задаваемые вопросы)"
 
 #: view/templates/home.html:8 view/templates/layout.html:6
 msgid "MusicBee - The Ultimate Music Manager and Player"
@@ -417,11 +579,11 @@ msgstr ""
 msgid "Get MusicBee and enhance your music experience"
 msgstr "Скачайте MusicBee и улучшите свою музыкальную жизнь"
 
+#~ msgid "Check our FAQ & Wiki or get help on forum"
+#~ msgstr "Прочитайте наш FAQ и Wiki или попросите помощи на форуме"
+
 #~ msgid "Copyright  Steven Mayall 2008-%s, All Rights Reserved."
 #~ msgstr "Copyright  Steven Mayall 2008-%s, все права сохранены."
-
-#~ msgid "Release Notes"
-#~ msgstr "Примечания к релизу"
 
 #~ msgid "Title goes %s here %s asfsef%d"
 #~ msgstr "Название идет%s %s здесь asfsef%d"
