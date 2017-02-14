@@ -26,7 +26,125 @@ meta[name="description"]:attr(content) {
     content: data(meta.desc);
 }
 
+/**
+* Main FAQ and Help comtent
+*/
 div[id="faq-view"] {
     content: data(page.content);
     format: html;
+}
+
+/**
+* Sidebar user help links
+*/
+ul[id="sidebar_userhelp"] li{
+    repeat: data(page.sidebar_userhelp);
+}
+
+ul[id="sidebar_userhelp"] li a:attr(href) {
+    content: iteration(url);
+}
+
+ul[id="sidebar_userhelp"] li a:attr(target) {
+    content: iteration(target);
+}
+
+ul[id="sidebar_userhelp"] li a {
+content: iteration(name);
+}
+
+
+/**
+* Sidebar developer help links
+*/
+ul[id="sidebar_devhelp"] li{
+    repeat: data(page.sidebar_devhelp);
+}
+
+ul[id="sidebar_devhelp"] li a:attr(href) {
+    content: iteration(url);
+}
+
+ul[id="sidebar_devhelp"] li a:attr(target) {
+    content: iteration(target);
+}
+
+ul[id="sidebar_devhelp"] li a {
+    content: iteration(name);
+}
+
+
+/**
+* Sidebar wikia popular help links
+*/
+ul[id="sidebar_wiki_popular"] li{
+    repeat: data(page.sidebar_wiki_popular);
+}
+
+ul[id="sidebar_wiki_popular"] li a:attr(href) {
+    content: iteration(url);
+}
+
+
+ul[id="sidebar_wiki_popular"] li a {
+    content: iteration(title);
+}
+
+/**
+* Sidebar wikia most viewed help links
+*/
+ul[id="sidebar_wiki_viewed"] li{
+    repeat: data(page.sidebar_wiki_viewed);
+}
+
+ul[id="sidebar_wiki_viewed"] li a:attr(href) {
+    content: iteration(url);
+}
+
+
+ul[id="sidebar_wiki_viewed"] li a {
+    content: iteration(title);
+}
+
+
+/**
+* Sidebar wikia new article links
+*/
+ul[id="sidebar_wiki_new"] li{
+    repeat: data(page.sidebar_wiki_new);
+}
+
+ul[id="sidebar_wiki_new"] li a:attr(href) {
+    content: iteration(url);
+}
+
+
+ul[id="sidebar_wiki_new"] li a {
+    content: iteration(title);
+}
+
+
+
+/**
+* Topup help palette links
+*/
+ul[id="top_help_palette"] li{
+    repeat: data(page.top_help_palette);
+}
+
+ul[id="top_help_palette"] li a:attr(href) {
+    content: iteration(url);
+}
+
+ul[id="top_help_palette"] li a:attr(target) {
+    content: iteration(target);
+}
+
+ul[id="top_help_palette"] li span {
+    content: iteration(icon);
+    format: html;
+}
+
+ul[id="top_help_palette"] li p {
+    content: iteration(name);
 }

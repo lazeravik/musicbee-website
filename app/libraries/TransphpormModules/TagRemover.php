@@ -30,27 +30,22 @@ class TagRemover
          * replace tag starts with: <?= __(
          */
         $txt = str_replace(
-            "= __(\"",
+            " _(\"",
             "",
             $string
-        );
-        $txt = str_replace(
-            "__(\"",
-            "",
-            $txt
         );
 
         /**
          * replace tags ends with: ); ?>
          */
         $txt = str_replace(
-            "\"); ?>",
+            "\") ?>",
             "",
             $txt
         );
 
         $txt = str_replace(
-            "\"); ?",
+            "\") ?",
             "",
             $txt
         );

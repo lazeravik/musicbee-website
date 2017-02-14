@@ -72,3 +72,10 @@ $lang['download_page_desc'] = __("Get MusicBee Installer executable or Portable 
 
 $lang['help_page_title'] = __("MusicBee help and FAQ");
 $lang['help_page_desc'] = __("Do you need help with MusicBee? Perhaps you're just getting started or having trouble figuring out a feature. This is the right place for getting all your answers");
+
+$lang['wikia_content_get_err'] = __("ERROR: Can not get content from WIKIA");
+
+
+
+
+

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MusicBee Website 2.0\n"
-"POT-Creation-Date: 2017-02-13 22:00+0530\n"
-"PO-Revision-Date: 2017-02-13 22:15+0530\n"
+"POT-Creation-Date: 2017-02-14 18:52+0530\n"
+"PO-Revision-Date: 2017-02-14 18:53+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -250,6 +250,12 @@ msgid ""
 "having trouble figuring out a feature. This is the right place for getting "
 "all your answers"
 msgstr ""
+"Вам нужна помощь? Возможно, вы просто новичок или изучаете какую-нибудь "
+"новую функцию MusicBee. Это подходящая страница, чтобы получить ответы"
+
+#: locale/langArray.php:76
+msgid "ERROR: Can not get content from WIKIA"
+msgstr ""
 
 #: view/templates/download.html:5
 msgid "Download MusicBee"
@@ -387,6 +393,26 @@ msgstr "Скачать бета версию MusicBee"
 #: view/templates/help.html:23
 msgid "FAQ (Frequently Asked Question)"
 msgstr "FAQ (часто задаваемые вопросы)"
+
+#: view/templates/help.html:34
+msgid "Help for Users"
+msgstr "Справка для пользователей"
+
+#: view/templates/help.html:46
+msgid "Help for Developers"
+msgstr "Справка для разработчиков"
+
+#: view/templates/help.html:57
+msgid "Most Popular Wiki posts"
+msgstr "Наиболее популярные страницы на Wiki-сайте"
+
+#: view/templates/help.html:69
+msgid "Most Viewed Wiki Articles"
+msgstr "Статьи, которые читают больше всего на Wiki-сайте"
+
+#: view/templates/help.html:81
+msgid "New Wiki Articles"
+msgstr "Новые статьи на Wiki-сайте"
 
 #: view/templates/home.html:8 view/templates/layout.html:6
 msgid "MusicBee - The Ultimate Music Manager and Player"

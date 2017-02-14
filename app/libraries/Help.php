@@ -14,6 +14,9 @@
  * Handles Help pages and help links related stuff
  * @author : AvikB;
  */
+
+namespace App\Lib;
+
 class Help
 {
 	public function saveEdit()
@@ -72,15 +75,16 @@ class Help
 		return false;
 	}
 
-	public static function getHelp()
+	public function getHelp()
 	{
-		global $connection, $db_info;
-		if(databaseConnection()) {
+		global $db_info;
+
+		if(Database::isDatabaseConnected()) {
 			try {
 				$sql = "SELECT * FROM {$db_info['help']}";
-				$statement = $connection->prepare($sql);
+				$statement = Database::getDatabaseConnection()->prepare($sql);
 				$statement->execute();
-				$result = array_map('reset',  $statement->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC));
+				$result = array_map('reset',  $statement->fetchAll(\PDO::FETCH_GROUP | \PDO::FETCH_ASSOC));
 				if(count($result) > 0) {
 					return $result;
 				} else {

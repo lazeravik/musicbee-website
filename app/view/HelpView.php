@@ -18,16 +18,25 @@ class HelpView extends View
 {
     public function render()
     {
+        $model = $this->getModel();
+
         $data = [
-            "menu" => getMenuHtml(),
-            "footer" => getFooterHtml(),
-            "meta" => [
-                "title" => lang("help_page_title"),
-                "desc" => lang("help_page_desc"),
-            ],
+            "menu"      => getMenuHtml(),
+            "footer"    => getFooterHtml(),
+            "meta"      =>
+                [
+                    "title" => lang("help_page_title"),
+                    "desc" => lang("help_page_desc"),
+                ],
 
             "page" => [
-                "content"   => $this->getModel()->getHelpPageContent(),
+                "content"               =>$model->getHelpPageContent(),
+                "sidebar_userhelp"      =>$model->getSidebarUserHelp(),
+                "sidebar_devhelp"       =>$model->getSidebarDevHelp(),
+                "sidebar_wiki_popular"  =>$model->getWikiaPopularPosts(),
+                "sidebar_wiki_viewed"   =>$model->getWikiaMostViewedPosts(),
+                "sidebar_wiki_new"      =>$model->getWikiaNewPosts(),
+                "top_help_palette"      =>$model->getTopHelpPalette(),
             ],
         ];
 

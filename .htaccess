@@ -47,3 +47,4 @@ RewriteRule ^/?(.*)$ /$1.php [QSA,L]
 #Redirect 301 /help.html /help/faq
 #Redirect 301 /release_notes.html /help/release-note
 #Redirect 301 /features.html /#simple_powerful
+
