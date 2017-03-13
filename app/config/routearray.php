@@ -25,6 +25,20 @@ function getRoutes() {
             'url'           => '/help',
             'view'          => 'HelpView',
             'model'         => 'HelpModel',
+        ],
+        [
+            'url'           => '/credit',
+            'view'          => 'CreditView',
+        ],
+        [
+            'url'           => '/api',
+            'view'          => 'ApiView',
+            'model'         => 'ApiModel',
+        ],
+        [
+            'url'           => '/release-note',
+            'view'          => 'ReleasenoteView',
+            'model'         => 'ReleasenoteModel',
         ]
     ];
 

@@ -75,7 +75,12 @@ $lang['help_page_desc'] = __("Do you need help with MusicBee? Perhaps you're jus
 
 $lang['wikia_content_get_err'] = __("ERROR: Can not get content from WIKIA");
 
+$lang['credit_page_title'] = __("Website Credits & Licenses");
+$lang['credit_page_desc']  = __("See the people involved in MusicBee website");
+
+$lang['api_page_title'] = __("MusicBee API for developers");
+$lang['api_page_desc']  = __("Get the MusicBee API kit and create plugins or integrating 3rd party services into MusicBee! Available in C#, C++");
 
 
-
-
+$lang['releasenote_page_title'] = __("MusicBee - Release Notes");
+$lang['releasenote_page_desc']  = __("Release Notes/Change Logs for MusicBee, See the changes made throughout MusicBee's journey");

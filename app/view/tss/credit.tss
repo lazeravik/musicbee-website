@@ -1,0 +1,36 @@
+@import "styles.tss";
+main { content: template("../templates/credit.html"); }
+
+
+[data-gettext] {
+    content: __();
+}
+
+menu {
+    content: data(menu);
+    content-mode: replace;
+    format: html;
+}
+
+footer {
+    content: data(footer);
+    content-mode: replace;
+    format: html;
+}
+
+title[data-gettext="true"] {
+    content: data(meta.title);
+}
+
+meta[name="description"]:attr(content) {
+    content: data(meta.desc);
+}
+
+
+a[id="github_link"]:attr(href){
+    content: data(githublink);
+}
+
+span[id="webver"]{
+    content: data(webver);
+}

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MusicBee Website 2.0\n"
-"POT-Creation-Date: 2017-02-14 18:52+0530\n"
-"PO-Revision-Date: 2017-02-14 18:53+0530\n"
+"POT-Creation-Date: 2017-03-11 21:33+0530\n"
+"PO-Revision-Date: 2017-03-11 21:34+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -255,6 +255,24 @@ msgstr ""
 
 #: locale/langArray.php:76
 msgid "ERROR: Can not get content from WIKIA"
+msgstr ""
+
+#: locale/langArray.php:78
+msgid "Website Credits & Licenses"
+msgstr ""
+
+#: locale/langArray.php:79
+msgid "See the people involved in MusicBee website"
+msgstr ""
+
+#: locale/langArray.php:83
+msgid "MusicBee API for developers"
+msgstr ""
+
+#: locale/langArray.php:84
+msgid ""
+"Get the MusicBee API kit and create plugins or integrating 3rd party "
+"services into MusicBee! Available in C#, C++"
 msgstr ""
 
 #: view/templates/download.html:5
@@ -512,16 +530,15 @@ msgstr "Отличные оформления (скины)"
 
 #: view/templates/home.html:127
 msgid ""
-"<div>Change the appearance of MusicBee by choosing from the included skins "
-"or download more from our Add-on section.<br/>Skins are a great way to "
-"personalize MusicBee to your liking. You can also make your own skin and "
-"share it with others.</div>"
+"Change the appearance of MusicBee by choosing from the included skins or "
+"download more from our Add-on section. <br/>Skins are a great way to "
+"personalize MusicBee to your liking.<br/><br/>You can also make your own "
+"skin and share it with others."
 msgstr ""
-"<div>Измените внешний вид MusicBee, используя поставляемые с MusicBee "
-"оформления или скачайте другие оформления из раздела \"Расширения\".<br/"
-">Оформления - это прекрасный способ настроить MusicBee под себя.<br/><br/> "
-"Также вы можете создать свое собственное оформление и поделиться им с "
-"другими.</div>"
+"Измените внешний вид MusicBee, используя поставляемые с MusicBee оформления "
+"или скачайте другие оформления из раздела \"Расширения\".<br/>Оформления - "
+"это прекрасный способ настроить MusicBee под себя.<br/><br/> Также вы можете "
+"создать свое собственное оформление и поделиться им с другими."
 
 #: view/templates/home.html:142
 msgid "Sync with Devices"
@@ -605,11 +622,26 @@ msgstr ""
 msgid "Get MusicBee and enhance your music experience"
 msgstr "Скачайте MusicBee и улучшите свою музыкальную жизнь"
 
-#~ msgid "Check our FAQ & Wiki or get help on forum"
-#~ msgstr "Прочитайте наш FAQ и Wiki или попросите помощи на форуме"
+#~ msgid ""
+#~ "Change the appearance of MusicBee by choosing from the included skins or "
+#~ "download more from our Add-on section. <br>Skins are a great way to "
+#~ "personalize MusicBee to your liking.<br><br>You can also make your own "
+#~ "skin and share it with others."
+#~ msgstr ""
+#~ "Измените внешний вид MusicBee, используя поставляемые с MusicBee "
+#~ "оформления или скачайте другие оформления из раздела \"Расширения\"."
+#~ "<br>Оформления - это прекрасный способ настроить MusicBee под себя."
+#~ "<br><br> Также вы можете создать свое собственное оформление и поделиться "
+#~ "им с другими."
 
-#~ msgid "Copyright  Steven Mayall 2008-%s, All Rights Reserved."
-#~ msgstr "Copyright  Steven Mayall 2008-%s, все права сохранены."
-
-#~ msgid "Title goes %s here %s asfsef%d"
-#~ msgstr "Название идет%s %s здесь asfsef%d"
+#~ msgid ""
+#~ "Change the appearance of MusicBee by choosing from the included skins or "
+#~ "download more from our Add-on section.<br>Skins are a great way to "
+#~ "personalize MusicBee to your liking. You can also make your own skin and "
+#~ "share it with others."
+#~ msgstr ""
+#~ "Измените внешний вид MusicBee, используя поставляемые с MusicBee "
+#~ "оформления или скачайте другие оформления из раздела \"Расширения\"."
+#~ "<br>Оформления - это прекрасный способ настроить MusicBee под себя.<br/"
+#~ "><br/> Также вы можете создать свое собственное оформление и поделиться "
+#~ "им с другими."

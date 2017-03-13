@@ -1,0 +1,64 @@
+@import "styles.tss";
+main { content: template("../templates/releasenote.html"); }
+
+
+[data-gettext] {
+    content: __();
+}
+
+menu {
+    content: data(menu);
+    content-mode: replace;
+    format: html;
+}
+
+footer {
+    content: data(footer);
+    content-mode: replace;
+    format: html;
+}
+
+title[data-gettext="true"] {
+    content: data(meta.title);
+}
+
+meta[name="description"]:attr(content) {
+    content: data(meta.desc);
+}
+
+script[data-url="http"]:attr(src) {
+    content: append_path(src, "js-dir");
+}
+
+#release-note > div {
+    repeat: data(page.releasenote);
+}
+
+#release-note > div >div{
+    content: iteration(page.releasenote.release_note_html);
+    format:html;
+}
+
+#release-note > div ul > li:nth-child(1){
+    content: iteration(page.releasenote.appname);
+}
+
+#release-note > div ul > li:nth-child(2){
+    content: __sprintf(iteration(page.releasenote.version));
+}
+
+#release-note > div ul > li:nth-child(3){
+    content: __sprintf(iteration(page.releasenote.release_date));
+}
+
+#release-note > div ul > li:nth-child(4){
+    content: __sprintf(iteration(page.releasenote.supported_os));
+}
+
+#release-note > div ul > li:nth-child(6)[iteration(page.releasenote.major) = "0"]{
+    display:none;
+}
+
+#release-note > div[data(page.releasenote)=""]{
+    display: none;
+}
